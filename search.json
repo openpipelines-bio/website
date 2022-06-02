@@ -25,6 +25,6 @@
     "href": "architecture.html#decisions-to-make",
     "title": "Architecture",
     "section": "Decisions (to make)",
-    "text": "Decisions (to make)\n\nTry to avoid pipeline metromaps (Example). Instead, multiple pipelines using a different subset or ordering of the same components can be implemented to suit the needs of any particular requirement.\nDivision of labour:\n\nCZ Biohub: Ingestion (GEX, Multiome, Cite-seq, …?)\nJanssen: Split, Concat, Merge, Conversion, GEX USS, GEX MSS\nHelmholtz: Integration\nAll: Intepretation (depending on the specific needs)\nTBD: ADT, ATAC, RNAV, VDJ, …?\n\nReporting\nInteractive (sub)-workflows"
+    "text": "Decisions (to make)\n\nTry to avoid pipeline metromaps (Example). Instead, multiple pipelines using a different subset or ordering of the same components can be implemented to suit the needs of any particular requirement.\nDivision of labour:\n\nCZ Biohub: Ingestion (GEX, Multiome, Cite-seq, …?)\nJanssen: Split, Concat, Merge, Conversion, GEX USS, GEX MSS\nHelmholtz: Integration\nAll: Intepretation (depending on the specific needs)\nTBD: ADT, ATAC, RNAV, VDJ, …?\n\nReporting\nInteractive (sub)-workflows\nLearn from openproblems.bio benchmarks."
   }
 ]
