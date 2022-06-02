@@ -297,3 +297,5 @@ This is what we did a time ago and it has the drawback that it could make everyt
 * Reporting
 
 * Interactive (sub)-workflows
+
+* Learn from [openproblems.bio](https://openproblems.bio/) benchmarks.
