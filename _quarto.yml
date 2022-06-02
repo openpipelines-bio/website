@@ -1,0 +1,19 @@
+project:
+  type: website
+
+website:
+  title: "OpenPipelines"
+  navbar:
+    background: primary
+    left:
+      - index.qmd
+      - architecture.qmd
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+
+
