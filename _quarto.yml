@@ -8,6 +8,12 @@ website:
     left:
       - index.qmd
       - architecture.qmd
+    right:
+      - text: Source Code
+        url: https://github.com/openpipelines-bio/openpipeline
+  page-footer: "Copyright 2022, OpenPipelines-bio"
+  repo-url: https://github.com/openpipelines-bio/openpipeline-web
+  repo-actions: [edit, issue] 
 
 format:
   html:
