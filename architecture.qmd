@@ -46,48 +46,6 @@ flowchart LR
 
 
 
-## Decisions (to make)
-
-* Try to avoid pipeline metromaps ([Example](https://github.com/nf-core/rnaseq/blob/master/docs/images/nf-core-rnaseq_metro_map_grey.png)). Instead, multiple pipelines using a different subset or ordering of the same components can be implemented to suit the needs of any particular requirement.
-
-* Division of responsibilities:
-
-:::{.column-page}
-
-```{mermaid}
-%%| label: fig-resp
-%%| fig-cap: Division of responsibilities.
-
-flowchart LR
-  Ingestion[/Ingestion/]
-  Preproc1[/Unimodal\nsingle-sample\nprocessing/]
-  Preproc2[/Unimodal\nmulti-sample\nprocessing/]
-  Integration[/Integration/]
-  Interpretation[/Interpretation/]
-  Conversion[/Conversion/]
-
-  Raw --- Ingestion --> Split[/Split/] --> Preproc1 --> Concat[/Concat/] --> Preproc2 --> Merge[/Merge/] --> Integration --> Interpretation --> Conversion --> Dataset
-
-  Ingestion -.-|"CZ Biohub"| Ingestion
-  Split -.-|"Janssen"| Split
-  Preproc1 -.-|"Janssen"| Preproc1
-  Concat -.-|"Janssen"| Concat
-  Preproc2 -.-|"Janssen"| Preproc2
-  Merge -.-|"Janssen"| Merge
-  Integration -.-|"Helmholtz"| Integration
-  Interpretation -.-|"All\n(depends on\nspecific needs)"| Interpretation
-  Conversion -.-|"Janssen"| Conversion
-
-  linkStyle 10,11,12,13,14,15,16,17,18 stroke:#fff,stroke-width:0px;
-```
-
-:::
-
-<!-- conversion pipeline? -->
-
-
-
-
 
 
 ## Use cases
@@ -321,3 +279,21 @@ Purpose: Take different dataset annotations and combine them together into a sin
 :::{.callout-note}
 This is what we did a time ago and it has the drawback that it could make everything very slow. We might need to be able to aggregate diffs before adding them to the final object.
 :::
+
+
+
+
+## Decisions (to make)
+
+* Try to avoid pipeline metromaps ([Example](https://github.com/nf-core/rnaseq/blob/master/docs/images/nf-core-rnaseq_metro_map_grey.png)). Instead, multiple pipelines using a different subset or ordering of the same components can be implemented to suit the needs of any particular requirement.
+
+* Division of labour:
+  - CZ Biohub: `Ingestion` (GEX, Multiome, Cite-seq, ...?)
+  - Janssen: `Split`, `Concat`, `Merge`, `Conversion`, `GEX USS`, `GEX MSS`
+  - Helmholtz: `Integration`
+  - All: `Intepretation` (depending on the specific needs)
+  - TBD: `ADT`, `ATAC`, `RNAV`, `VDJ`, ...?
+
+* Reporting
+
+* Interactive (sub)-workflows
