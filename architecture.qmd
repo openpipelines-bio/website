@@ -17,15 +17,17 @@ flowchart LR
   Ingestion[/Ingestion/]
   Preproc1[/Unimodal\nsingle-sample\nprocessing/]
   Preproc2[/Unimodal\nmulti-sample\nprocessing/]
+  Concat[/Concatenating\nSamples/]
+  Merge[/Merging\nmodes/]
   Integration[/Integration/]
   Interpretation[/Interpretation/]
   Conversion[/Conversion/]
 
-  Raw --- Ingestion --> Split[/Split/] --> Preproc1 --> Concat[/Concat/] --> Preproc2 --> Merge[/Merge/] --> Integration --> Interpretation --> Conversion --> Dataset
+  Raw --- Ingestion --> Split[/Split/] --> Preproc1 --> Concat --> Preproc2 --> Merge --> Integration --> Interpretation --> Conversion --> Dataset
 
   Ingestion -.-|"- Demux.\n- Mapping"| Ingestion
   Preproc1 -.-|"- Count QC\n- Doublet calling\n- Ambient RNA\n- Gatekeeper"| Preproc1
-  Preproc2 -.-|"- Normalisation\n- Feature filtering\n- Feature selection\n- Batch correction?\n- Dim. red.?"| Preproc2
+  Preproc2 -.-|"- Normalisation\n- Feature annotation\n- Feature selection\n- Batch correction?\n- Dim. red.?"| Preproc2
   Integration -.-|"- Dim. red.\n- Data integration"| Integration
   Interpretation -.-|"- Clustering\n- Cell typing\n- GRN\n- ..."| Interpretation
 
@@ -62,13 +64,13 @@ In these use-cases, `Interpretation`, `Conversion` and `Dataset` are omitted bec
 
 ```{mermaid}
 %%| label: fig-example1
-%%| fig-cap: "Example of how the concat and merges work.  \nGEX: Gene-expression. USS: Unimodal single-sample processing. UMS: Unimodal multi-sample processing."
+%%| fig-cap: "Example of how the concatenation and merges work.  \nGEX: Gene-expression. USS: Unimodal single-sample processing. UMS: Unimodal multi-sample processing."
 
 flowchart LR
 
   Raw1[Sample 1] --- Ingestion1[/Ingestion/] --> Split1[/Split/] --> GEX1[GEX 1]
   GEX1 --> ProcGEX1[/USS GEX/]
-  ProcGEX1 --- ConcatGEX[/Concat/] --> GEX[Combined\nGEX]
+  ProcGEX1 --- ConcatGEX[/Concatenating\nSamples/] --> GEX[Combined\nGEX]
   GEX --> ProcGEX[/UMS GEX/]
   ProcGEX --- Merge[/Merge/] --> Integration[/Integration/] --> Downstream[/.../]
 
@@ -85,7 +87,7 @@ flowchart LR
 
 ```{mermaid}
 %%| label: fig-example2
-%%| fig-cap: "Example of how the concat and merges work.  \nGEX: Gene-expression. ADT: Antibody-Derived Tags. RNAV: RNA Velocity. USS: Unimodal single-sample processing. UMS: Unimodal multi-sample processing."
+%%| fig-cap: "Example of how the concatenation and merges work.  \nGEX: Gene-expression. ADT: Antibody-Derived Tags. RNAV: RNA Velocity. USS: Unimodal single-sample processing. UMS: Unimodal multi-sample processing."
 
 flowchart LR
 
@@ -93,9 +95,9 @@ flowchart LR
   GEX1 --> ProcGEX1[/USS GEX/]
   ADT1 --> ProcADT1[/USS ADT/]
   RNAV1 --> ProcRNAV1[/USS RNAV/]
-  ProcGEX1 --- ConcatGEX[/Concat/] --> GEX[Combined\nGEX]
-  ProcADT1 --- ConcatADT[/Concat/] --> ADT[Combined\nADT]
-  ProcRNAV1 --- ConcatRNAV[/Concat/] --> RNAV[Combined\nRNAV]
+  ProcGEX1 --- ConcatGEX[/Concatenating\nSamples/] --> GEX[Combined\nGEX]
+  ProcADT1 --- ConcatADT[/Concatenating\nSamples/] --> ADT[Combined\nADT]
+  ProcRNAV1 --- ConcatRNAV[/Concatenating\nSamples/] --> RNAV[Combined\nRNAV]
   GEX --> ProcGEX[/UMS GEX/]
   ADT --> ProcADT[/UMS ADT/]
   RNAV --> ProcRNAV[/UMS RNAV/]
@@ -112,7 +114,7 @@ flowchart LR
 
 ```{mermaid}
 %%| label: fig-example3
-%%| fig-cap: "Example of how the concat and merges work.  \nGEX: Gene-expression. USS: Unimodal single-sample processing. UMS: Unimodal multi-sample processing."
+%%| fig-cap: "Example of how the concatenation and merges work.  \nGEX: Gene-expression. USS: Unimodal single-sample processing. UMS: Unimodal multi-sample processing."
 
 flowchart LR
 
@@ -122,7 +124,7 @@ flowchart LR
   GEX1 --> ProcGEX1[/USS GEX/]
   GEX2 --> ProcGEX2[/USS GEX/]
   GEX3 --> ProcGEX3[/USS GEX/]
-  ProcGEX1 & ProcGEX2 & ProcGEX3 --- ConcatGEX[/Concat/] --> GEX[Combined\nGEX]
+  ProcGEX1 & ProcGEX2 & ProcGEX3 --- ConcatGEX[/Concatenating\nSamples/] --> GEX[Combined\nGEX]
   GEX --> ProcGEX[/UMS GEX/]
   ProcGEX --- Merge[/Merge/] --> Integration[/Integration/] --> Downstream[/.../]
 
@@ -148,8 +150,8 @@ flowchart LR
   ADT1 --> ProcADT1[/USS ADT/]
   GEX2 --> ProcGEX2[/USS GEX/]
   ADT2 --> ProcADT2[/USS ADT/]
-  ProcGEX1 & ProcGEX2 --- ConcatGEX[/Concat/] --> GEX[Combined\nGEX]
-  ProcADT1 & ProcADT2 --- ConcatADT[/Concat/] --> ADT[Combined\nADT]
+  ProcGEX1 & ProcGEX2 --- ConcatGEX[/Concatenating\nSamples/] --> GEX[Combined\nGEX]
+  ProcADT1 & ProcADT2 --- ConcatADT[/Concatenating\nSamples/] --> ADT[Combined\nADT]
   GEX --> ProcGEX[/UMS GEX/]
   ADT --> ProcADT[/UMS ADT/]
   ProcGEX & ProcADT --- Merge[/Merge/] --> Integration[/Integration/] --> Downstream[/.../]
@@ -236,7 +238,7 @@ flowchart LR
   Processed["Processed\ncounts<sup>*</sup>"]
   Normalised["Normalised\ncounts<sup>†</sup>"]
 
-  Step1[/"Feature filtering"/]
+  Step1[/"Feature annotation"/]
   Step2[/"Batch correction?"/]
   Step3[/"Normalisation"/]
   Step4[/"Feature selection"/]
@@ -289,7 +291,7 @@ This is what we did a time ago and it has the drawback that it could make everyt
 
 * Division of labour:
   - CZ Biohub: `Ingestion` (GEX, Multiome, Cite-seq, ...?)
-  - Janssen: `Split`, `Concat`, `Merge`, `Conversion`, `GEX USS`, `GEX MSS`
+  - Janssen: `Split`, `Concatenating samples`, `Merging modes`, `Conversion`, `GEX USS`, `GEX MSS`
   - Helmholtz: `Integration`
   - All: `Intepretation` (depending on the specific needs)
   - TBD: `ADT`, `ATAC`, `RNAV`, `VDJ`, ...?
