@@ -5,7 +5,7 @@ title: Architecture
 
 ## Pipeline architecture overview
 
-:::{.column-page}
+:::{.column-screen-inset-shaded}
 
 ```{mermaid}
 %%| label: fig-architecture
@@ -60,7 +60,7 @@ In these use-cases, `Interpretation`, `Conversion` and `Dataset` are omitted bec
 
 ### A single unimodal sample
 
-:::{.column-page}
+:::{.column-screen-inset-shaded}
 
 ```{mermaid}
 %%| label: fig-example1
@@ -83,7 +83,7 @@ flowchart LR
 ### A single multimodal sample
 
 
-:::{.column-page}
+:::{.column-screen-inset-shaded}
 
 ```{mermaid}
 %%| label: fig-example2
@@ -110,7 +110,7 @@ flowchart LR
 
 ### Multiple unimodal samples
 
-:::{.column-page}
+:::{.column-screen-inset-shaded}
 
 ```{mermaid}
 %%| label: fig-example3
@@ -136,7 +136,7 @@ flowchart LR
 
 ### Multiple multimodal samples
 
-:::{.column-page}
+:::{.column-screen-inset-shaded}
 
 ```{mermaid}
 %%| label: fig-example4
@@ -166,7 +166,7 @@ flowchart LR
 
 Purpose: Convert raw sequencing data or count tables into MuData data for further processing. 
 
-:::{.column-page}
+:::{.column-screen-inset-shaded}
 
 ```{mermaid}
 %%| label: fig-ingestion
@@ -203,7 +203,7 @@ flowchart LR
 
 Purpose: Per modality fitering pipelines are available to select true from false cells. 
 
-:::{.column-page}
+:::{.column-screen-inset-shaded}
 
 ```{mermaid}
 %%| label: fig-sspreproc
@@ -228,7 +228,7 @@ flowchart LR
 
 Purpose: ... .
 
-:::{.column-page}
+:::{.column-screen-inset-shaded}
 
 ```{mermaid}
 %%| label: fig-mspreproc
@@ -254,7 +254,7 @@ flowchart LR
 
 Purpose: Performs an integration pipeline for single cell data based on a single or multiple modalities. 
 
-:::{.column-page}
+:::{.column-screen-inset-shaded}
 
 ```{mermaid}
 %%| label: fig-integration
