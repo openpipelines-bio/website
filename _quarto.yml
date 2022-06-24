@@ -3,7 +3,10 @@ project:
 
 website:
   title: "OpenPipelines"
+  image: "openpipelines.png"
   navbar:
+    logo: "openpipelines.png"
+    title: false
     background: primary
     left:
       - index.qmd
