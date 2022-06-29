@@ -7,20 +7,27 @@ website:
   navbar:
     logo: "openpipelines.png"
     title: false
-    background: primary
     left:
       - index.qmd
-      - architecture.qmd
+      - text: Architecture
+        menu: 
+          - architecture/index.qmd
+          - architecture/use-cases.qmd
+      - text: Contribute
+        menu:
+          - contribute/index.qmd
     right:
       - text: Source Code
         url: https://github.com/openpipelines-bio/openpipeline
   page-footer: "Copyright 2022, OpenPipelines-bio"
   repo-url: https://github.com/openpipelines-bio/openpipeline-web
   repo-actions: [edit, issue] 
+  preview:
+    port: 4200
 
 format:
   html:
-    theme: cosmo
+    theme: simplex
     css: styles.css
     toc: true
 

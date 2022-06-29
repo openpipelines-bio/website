@@ -1,0 +1,53 @@
+---
+title: Developers Guide
+---
+
+
+## Branching strategy
+
+
+```{mermaid}
+%%{init: { 'logLevel': 'debug', 'theme': 'default'} } }%%
+gitGraph
+  commit id: "initial commit"
+  branch main_build
+  commit id: "CI build"
+  checkout main
+  commit
+  checkout main_build
+  merge main
+  checkout main
+  branch feature_a
+  branch feature_b
+  checkout feature_a
+  commit
+  commit
+  checkout main
+  commit id: "#release 0.1" type: HIGHLIGHT
+  checkout main_build
+  merge main
+  checkout main
+  branch release
+  commit tag: "0.1"
+  checkout main
+  commit
+  checkout feature_b
+  commit
+  commit
+  checkout feature_a
+  commit
+  checkout main
+  merge feature_a
+  checkout main_build
+  merge main
+  checkout main
+  checkout feature_b
+  commit
+  checkout main
+  merge feature_b
+  checkout main_build
+  merge main
+  checkout release
+  merge main tag: "0.2"
+```
+
