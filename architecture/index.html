@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.617">
+<meta name="generator" content="quarto-0.9.629">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>OpenPipelines - Architecture</title>
+<title>OpenPipelines - Overview</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -18,22 +18,22 @@ ul.task-list{list-style: none;}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -53,12 +53,12 @@ ul.task-list{list-style: none;}
     "search-submit-button-title": "Submit"
   }
 }</script>
-<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -67,8 +67,8 @@ ul.task-list{list-style: none;}
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <a class="navbar-brand" href="./index.html">
-    <img src="./openpipelines.png" alt="">
+      <a class="navbar-brand" href="../index.html">
+    <img src="../openpipelines.png" alt="">
   </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
@@ -76,11 +76,30 @@ ul.task-list{list-style: none;}
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html">About</a>
+    <a class="nav-link" href="../index.html">About</a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="./architecture.html" aria-current="page">Architecture</a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-architecture" role="button" data-bs-toggle="dropdown" aria-expanded="false">Architecture</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-architecture">    
+        <li>
+    <a class="dropdown-item" href="../architecture/index.html">
+ <span class="dropdown-text">Overview</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../architecture/use-cases.html">
+ <span class="dropdown-text">Use-cases</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-contribute" role="button" data-bs-toggle="dropdown" aria-expanded="false">Contribute</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-contribute">    
+        <li>
+    <a class="dropdown-item" href="../contribute/index.html">
+ <span class="dropdown-text">Developers Guide</span></a>
+  </li>  
+    </ul>
+  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
@@ -101,15 +120,7 @@ ul.task-list{list-style: none;}
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#pipeline-architecture-overview" id="toc-pipeline-architecture-overview" class="nav-link active" data-scroll-target="#pipeline-architecture-overview">Pipeline architecture overview</a></li>
-  <li><a href="#use-cases" id="toc-use-cases" class="nav-link" data-scroll-target="#use-cases">Use cases</a>
-  <ul class="collapse">
-  <li><a href="#a-single-unimodal-sample" id="toc-a-single-unimodal-sample" class="nav-link" data-scroll-target="#a-single-unimodal-sample">A single unimodal sample</a></li>
-  <li><a href="#a-single-multimodal-sample" id="toc-a-single-multimodal-sample" class="nav-link" data-scroll-target="#a-single-multimodal-sample">A single multimodal sample</a></li>
-  <li><a href="#multiple-unimodal-samples" id="toc-multiple-unimodal-samples" class="nav-link" data-scroll-target="#multiple-unimodal-samples">Multiple unimodal samples</a></li>
-  <li><a href="#multiple-multimodal-samples" id="toc-multiple-multimodal-samples" class="nav-link" data-scroll-target="#multiple-multimodal-samples">Multiple multimodal samples</a></li>
-  </ul></li>
-  <li><a href="#subworkflows" id="toc-subworkflows" class="nav-link" data-scroll-target="#subworkflows">Subworkflows</a>
+  <li><a href="#subworkflows" id="toc-subworkflows" class="nav-link active" data-scroll-target="#subworkflows">Subworkflows</a>
   <ul class="collapse">
   <li><a href="#ingestion" id="toc-ingestion" class="nav-link" data-scroll-target="#ingestion">Ingestion</a></li>
   <li><a href="#single-sample-preproc" id="toc-single-sample-preproc" class="nav-link" data-scroll-target="#single-sample-preproc">Single-sample unimodal processing</a></li>
@@ -117,16 +128,15 @@ ul.task-list{list-style: none;}
   <li><a href="#integration" id="toc-integration" class="nav-link" data-scroll-target="#integration">Integration</a></li>
   <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation</a></li>
   </ul></li>
-  <li><a href="#decisions-to-make" id="toc-decisions-to-make" class="nav-link" data-scroll-target="#decisions-to-make">Decisions (to make)</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/openpipeline-web/edit/main/architecture.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/openpipeline-web/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/openpipeline-web/edit/main/architecture/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/openpipeline-web/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Architecture</h1>
+<h1 class="title">Overview</h1>
 </div>
 
 
@@ -140,8 +150,7 @@ ul.task-list{list-style: none;}
 
 </header>
 
-<section id="pipeline-architecture-overview" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="pipeline-architecture-overview">Pipeline architecture overview</h2>
+<p>The single-cell workflow is comprised of multiple (standalone) subworkflows.</p>
 <div class="column-screen-inset-shaded">
 <div class="cell">
 <div class="cell-output-display">
@@ -189,155 +198,6 @@ ul.task-list{list-style: none;}
 </div>
 </div>
 </div>
-</section>
-<section id="use-cases" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="use-cases">Use cases</h2>
-<div class="callout-note callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>In these use-cases, <code>Interpretation</code>, <code>Conversion</code> and <code>Dataset</code> are omitted because they are the same in every use case.</p>
-</div>
-</div>
-<section id="a-single-unimodal-sample" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="a-single-unimodal-sample">A single unimodal sample</h3>
-<div class="column-screen-inset-shaded">
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-example1" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p>
-</p><pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-2">flowchart LR
-
-  Raw1[Sample 1] --- Ingestion1[/Ingestion/] --&gt; Split1[/Split/] --&gt; GEX1[GEX 1]
-  GEX1 --&gt; ProcGEX1[/USS GEX/]
-  ProcGEX1 --- ConcatGEX[/Concatenating\nSamples/] --&gt; GEX[Combined\nGEX]
-  GEX --&gt; ProcGEX[/UMS GEX/]
-  ProcGEX --- Merge[/Merge/] --&gt; Integration[/Integration/] --&gt; Downstream[/.../]
-
-</pre>
-<div id="mermaid-tooltip-2" class="mermaidTooltip">
-
-</div>
-<p></p>
-<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 2: Example of how the concatenation and merges work.<br>
-GEX: Gene-expression. USS: Unimodal single-sample processing. UMS: Unimodal multi-sample processing.</figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="a-single-multimodal-sample" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="a-single-multimodal-sample">A single multimodal sample</h3>
-<div class="column-screen-inset-shaded">
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-example2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p>
-</p><pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-3">flowchart LR
-
-  Raw1[Sample 1] --- Ingestion1[/Ingestion/] --&gt; Split1[/Split/] --&gt; GEX1[GEX 1] &amp; ADT1[ADT 1] &amp; RNAV1[RNAV 1]
-  GEX1 --&gt; ProcGEX1[/USS GEX/]
-  ADT1 --&gt; ProcADT1[/USS ADT/]
-  RNAV1 --&gt; ProcRNAV1[/USS RNAV/]
-  ProcGEX1 --- ConcatGEX[/Concatenating\nSamples/] --&gt; GEX[Combined\nGEX]
-  ProcADT1 --- ConcatADT[/Concatenating\nSamples/] --&gt; ADT[Combined\nADT]
-  ProcRNAV1 --- ConcatRNAV[/Concatenating\nSamples/] --&gt; RNAV[Combined\nRNAV]
-  GEX --&gt; ProcGEX[/UMS GEX/]
-  ADT --&gt; ProcADT[/UMS ADT/]
-  RNAV --&gt; ProcRNAV[/UMS RNAV/]
-  ProcGEX &amp; ProcADT &amp; ProcRNAV--- Merge[/Merge/] --&gt; Integration[/Integration/] --&gt; Downstream[/.../]
-
-</pre>
-<div id="mermaid-tooltip-3" class="mermaidTooltip">
-
-</div>
-<p></p>
-<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 3: Example of how the concatenation and merges work.<br>
-GEX: Gene-expression. ADT: Antibody-Derived Tags. RNAV: RNA Velocity. USS: Unimodal single-sample processing. UMS: Unimodal multi-sample processing.</figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="multiple-unimodal-samples" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="multiple-unimodal-samples">Multiple unimodal samples</h3>
-<div class="column-screen-inset-shaded">
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-example3" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p>
-</p><pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-4">flowchart LR
-
-  Raw1[Sample 1] --- Ingestion1[/Ingestion/] --&gt; Split1[/Split/] --&gt; GEX1[GEX 1]
-  Raw2[Sample 2] --- Ingestion2[/Ingestion/] --&gt; Split2[/Split/] --&gt; GEX2[GEX 2]
-  Raw3[Sample 3] --- Ingestion3[/Ingestion/] --&gt; Split3[/Split/] --&gt; GEX3[GEX 3]
-  GEX1 --&gt; ProcGEX1[/USS GEX/]
-  GEX2 --&gt; ProcGEX2[/USS GEX/]
-  GEX3 --&gt; ProcGEX3[/USS GEX/]
-  ProcGEX1 &amp; ProcGEX2 &amp; ProcGEX3 --- ConcatGEX[/Concatenating\nSamples/] --&gt; GEX[Combined\nGEX]
-  GEX --&gt; ProcGEX[/UMS GEX/]
-  ProcGEX --- Merge[/Merge/] --&gt; Integration[/Integration/] --&gt; Downstream[/.../]
-
-</pre>
-<div id="mermaid-tooltip-4" class="mermaidTooltip">
-
-</div>
-<p></p>
-<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 4: Example of how the concatenation and merges work.<br>
-GEX: Gene-expression. USS: Unimodal single-sample processing. UMS: Unimodal multi-sample processing.</figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="multiple-multimodal-samples" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="multiple-multimodal-samples">Multiple multimodal samples</h3>
-<div class="column-screen-inset-shaded">
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-example4" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p>
-</p><pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-5">flowchart LR
-
-  Raw1[Sample 1] --- Ingestion1[/Ingestion/] --&gt; Split1[/Split/] --&gt; GEX1[GEX 1] &amp; ADT1[ADT 1]
-  Raw2[Sample 2] --- Ingestion2[/Ingestion/] --&gt; Split2[/Split/] --&gt; GEX2[GEX 2] &amp; ADT2[ADT 2]
-  GEX1 --&gt; ProcGEX1[/USS GEX/]
-  ADT1 --&gt; ProcADT1[/USS ADT/]
-  GEX2 --&gt; ProcGEX2[/USS GEX/]
-  ADT2 --&gt; ProcADT2[/USS ADT/]
-  ProcGEX1 &amp; ProcGEX2 --- ConcatGEX[/Concatenating\nSamples/] --&gt; GEX[Combined\nGEX]
-  ProcADT1 &amp; ProcADT2 --- ConcatADT[/Concatenating\nSamples/] --&gt; ADT[Combined\nADT]
-  GEX --&gt; ProcGEX[/UMS GEX/]
-  ADT --&gt; ProcADT[/UMS ADT/]
-  ProcGEX &amp; ProcADT --- Merge[/Merge/] --&gt; Integration[/Integration/] --&gt; Downstream[/.../]
-
-</pre>
-<div id="mermaid-tooltip-5" class="mermaidTooltip">
-
-</div>
-<p></p>
-<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 5: Example of how the concat and merges work.<br>
-GEX: Gene-expression. ADT: Antibody-Derived Tags. USS: Unimodal single-sample processing. UMS: Unimodal multi-sample processing.</figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</section>
-</section>
 <section id="subworkflows" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="subworkflows">Subworkflows</h2>
 <section id="ingestion" class="level3 page-columns page-full">
@@ -349,7 +209,7 @@ GEX: Gene-expression. ADT: Antibody-Derived Tags. USS: Unimodal single-sample pr
 <div id="fig-ingestion" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p>
-</p><pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-6">flowchart LR
+</p><pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-2">flowchart LR
 
   BCL["BCL<sup>*</sup>"]
   Fastq["Fastq<sup>*</sup>"]
@@ -373,11 +233,11 @@ GEX: Gene-expression. ADT: Antibody-Derived Tags. USS: Unimodal single-sample pr
 
   linkStyle 7,8,9,10,11 stroke:#fff,stroke-width:0px,text-align:left;
 </pre>
-<div id="mermaid-tooltip-6" class="mermaidTooltip">
+<div id="mermaid-tooltip-2" class="mermaidTooltip">
 
 </div>
 <p></p>
-<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 6: Ingestion pipeline.<br>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 2: Ingestion pipeline.<br>
 <code>*</code>: Possible entry points.<br>
 <code>†</code>: Output file(s)</figcaption><p></p>
 </figure>
@@ -395,7 +255,7 @@ GEX: Gene-expression. ADT: Antibody-Derived Tags. USS: Unimodal single-sample pr
 <div id="fig-sspreproc" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p>
-</p><pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-7">flowchart LR
+</p><pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-3">flowchart LR
 
   RawCounts["Raw counts<sup>*</sup>"]
   Processed["Processed\ncounts<sup>†</sup>"]
@@ -406,11 +266,11 @@ GEX: Gene-expression. ADT: Antibody-Derived Tags. USS: Unimodal single-sample pr
   
   RawCounts --&gt; Step1 --&gt; Step2 --&gt; Step3 --&gt; Processed
 </pre>
-<div id="mermaid-tooltip-7" class="mermaidTooltip">
+<div id="mermaid-tooltip-3" class="mermaidTooltip">
 
 </div>
 <p></p>
-<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 7: Single-sample processing pipeline.<br>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 3: Single-sample processing pipeline.<br>
 <code>*</code>: Possible entry points.<br>
 <code>†</code>: Output file(s)</figcaption><p></p>
 </figure>
@@ -428,7 +288,7 @@ GEX: Gene-expression. ADT: Antibody-Derived Tags. USS: Unimodal single-sample pr
 <div id="fig-mspreproc" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p>
-</p><pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-8">flowchart LR
+</p><pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-4">flowchart LR
 
   Processed["Processed\ncounts<sup>*</sup>"]
   Normalised["Normalised\ncounts<sup>†</sup>"]
@@ -440,11 +300,11 @@ GEX: Gene-expression. ADT: Antibody-Derived Tags. USS: Unimodal single-sample pr
 
   Processed --&gt; Step1 --&gt; Step2 --&gt; Step3 --&gt; Step4 --&gt; Normalised
 </pre>
-<div id="mermaid-tooltip-8" class="mermaidTooltip">
+<div id="mermaid-tooltip-4" class="mermaidTooltip">
 
 </div>
 <p></p>
-<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 8: Multi-sample processing pipeline.<br>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 4: Multi-sample processing pipeline.<br>
 <code>*</code>: Possible entry points.<br>
 <code>†</code>: Output file(s)</figcaption><p></p>
 </figure>
@@ -462,7 +322,7 @@ GEX: Gene-expression. ADT: Antibody-Derived Tags. USS: Unimodal single-sample pr
 <div id="fig-integration" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p>
-</p><pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-9">flowchart LR
+</p><pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-5">flowchart LR
 
   Normalised["Normalised\ncounts<sup>*</sup>"]
   Integrated["Integrated\ndata<sup>†</sup>"]
@@ -472,11 +332,11 @@ GEX: Gene-expression. ADT: Antibody-Derived Tags. USS: Unimodal single-sample pr
   
   Normalised --&gt; Step1 --&gt; Step2 --&gt; Integrated
 </pre>
-<div id="mermaid-tooltip-9" class="mermaidTooltip">
+<div id="mermaid-tooltip-5" class="mermaidTooltip">
 
 </div>
 <p></p>
-<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 9: Integration pipeline.<br>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 5: Integration pipeline.<br>
 <code>*</code>: Possible entry points.<br>
 <code>†</code>: Output file(s)</figcaption><p></p>
 </figure>
@@ -501,26 +361,9 @@ Note
 <p>This is what we did a time ago and it has the drawback that it could make everything very slow. We might need to be able to aggregate diffs before adding them to the final object.</p>
 </div>
 </div>
-</section>
-</section>
-<section id="decisions-to-make" class="level2">
-<h2 class="anchored" data-anchor-id="decisions-to-make">Decisions (to make)</h2>
-<ul>
-<li><p>Try to avoid pipeline metromaps (<a href="https://github.com/nf-core/rnaseq/blob/master/docs/images/nf-core-rnaseq_metro_map_grey.png">Example</a>). Instead, multiple pipelines using a different subset or ordering of the same components can be implemented to suit the needs of any particular requirement.</p></li>
-<li><p>Division of labour:</p>
-<ul>
-<li>CZ Biohub: <code>Ingestion</code> (GEX, Multiome, Cite-seq, …?)</li>
-<li>Janssen: <code>Split</code>, <code>Concatenating samples</code>, <code>Merging modes</code>, <code>Conversion</code>, <code>GEX USS</code>, <code>GEX MSS</code></li>
-<li>Helmholtz: <code>Integration</code></li>
-<li>All: <code>Intepretation</code> (depending on the specific needs)</li>
-<li>TBD: <code>ADT</code>, <code>ATAC</code>, <code>RNAV</code>, <code>VDJ</code>, …?</li>
-</ul></li>
-<li><p>Reporting</p></li>
-<li><p>Interactive (sub)-workflows</p></li>
-<li><p>Learn from <a href="https://openproblems.bio/">openproblems.bio</a> benchmarks.</p></li>
-</ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

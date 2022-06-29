@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.629">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>OpenPipelines - Use-cases</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../index.html">
+    <img src="../openpipelines.png" alt="">
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html">About</a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-architecture" role="button" data-bs-toggle="dropdown" aria-expanded="false">Architecture</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-architecture">    
+        <li>
+    <a class="dropdown-item" href="../architecture/index.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../architecture/use-cases.html">
+ <span class="dropdown-text">Use-cases</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-contribute" role="button" data-bs-toggle="dropdown" aria-expanded="false">Contribute</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-contribute">    
+        <li>
+    <a class="dropdown-item" href="../contribute/index.html">
+ <span class="dropdown-text">Developers Guide</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/openpipelines-bio/openpipeline">Source Code</a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#a-single-unimodal-sample" id="toc-a-single-unimodal-sample" class="nav-link active" data-scroll-target="#a-single-unimodal-sample">A single unimodal sample</a></li>
+  <li><a href="#a-single-multimodal-sample" id="toc-a-single-multimodal-sample" class="nav-link" data-scroll-target="#a-single-multimodal-sample">A single multimodal sample</a></li>
+  <li><a href="#multiple-unimodal-samples" id="toc-multiple-unimodal-samples" class="nav-link" data-scroll-target="#multiple-unimodal-samples">Multiple unimodal samples</a></li>
+  <li><a href="#multiple-multimodal-samples" id="toc-multiple-multimodal-samples" class="nav-link" data-scroll-target="#multiple-multimodal-samples">Multiple multimodal samples</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/openpipeline-web/edit/main/architecture/use-cases.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/openpipeline-web/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Use-cases</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In these use-cases, <code>Interpretation</code>, <code>Conversion</code> and <code>Dataset</code> are omitted because they are the same in every use case.</p>
+</div>
+</div>
+<section id="a-single-unimodal-sample" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="a-single-unimodal-sample">A single unimodal sample</h3>
+<div class="column-screen-inset-shaded">
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-example1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p>
+</p><pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-1">flowchart LR
+
+  Raw1[Sample 1] --- Ingestion1[/Ingestion/] --&gt; Split1[/Split/] --&gt; GEX1[GEX 1]
+  GEX1 --&gt; ProcGEX1[/USS GEX/]
+  ProcGEX1 --- ConcatGEX[/Concatenating\nSamples/] --&gt; GEX[Combined\nGEX]
+  GEX --&gt; ProcGEX[/UMS GEX/]
+  ProcGEX --- Merge[/Merge/] --&gt; Integration[/Integration/] --&gt; Downstream[/.../]
+
+</pre>
+<div id="mermaid-tooltip-1" class="mermaidTooltip">
+
+</div>
+<p></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 1: Example of how the concatenation and merges work.<br>
+GEX: Gene-expression. USS: Unimodal single-sample processing. UMS: Unimodal multi-sample processing.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="a-single-multimodal-sample" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="a-single-multimodal-sample">A single multimodal sample</h3>
+<div class="column-screen-inset-shaded">
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-example2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p>
+</p><pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-2">flowchart LR
+
+  Raw1[Sample 1] --- Ingestion1[/Ingestion/] --&gt; Split1[/Split/] --&gt; GEX1[GEX 1] &amp; ADT1[ADT 1] &amp; RNAV1[RNAV 1]
+  GEX1 --&gt; ProcGEX1[/USS GEX/]
+  ADT1 --&gt; ProcADT1[/USS ADT/]
+  RNAV1 --&gt; ProcRNAV1[/USS RNAV/]
+  ProcGEX1 --- ConcatGEX[/Concatenating\nSamples/] --&gt; GEX[Combined\nGEX]
+  ProcADT1 --- ConcatADT[/Concatenating\nSamples/] --&gt; ADT[Combined\nADT]
+  ProcRNAV1 --- ConcatRNAV[/Concatenating\nSamples/] --&gt; RNAV[Combined\nRNAV]
+  GEX --&gt; ProcGEX[/UMS GEX/]
+  ADT --&gt; ProcADT[/UMS ADT/]
+  RNAV --&gt; ProcRNAV[/UMS RNAV/]
+  ProcGEX &amp; ProcADT &amp; ProcRNAV--- Merge[/Merge/] --&gt; Integration[/Integration/] --&gt; Downstream[/.../]
+
+</pre>
+<div id="mermaid-tooltip-2" class="mermaidTooltip">
+
+</div>
+<p></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 2: Example of how the concatenation and merges work.<br>
+GEX: Gene-expression. ADT: Antibody-Derived Tags. RNAV: RNA Velocity. USS: Unimodal single-sample processing. UMS: Unimodal multi-sample processing.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="multiple-unimodal-samples" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="multiple-unimodal-samples">Multiple unimodal samples</h3>
+<div class="column-screen-inset-shaded">
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-example3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p>
+</p><pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-3">flowchart LR
+
+  Raw1[Sample 1] --- Ingestion1[/Ingestion/] --&gt; Split1[/Split/] --&gt; GEX1[GEX 1]
+  Raw2[Sample 2] --- Ingestion2[/Ingestion/] --&gt; Split2[/Split/] --&gt; GEX2[GEX 2]
+  Raw3[Sample 3] --- Ingestion3[/Ingestion/] --&gt; Split3[/Split/] --&gt; GEX3[GEX 3]
+  GEX1 --&gt; ProcGEX1[/USS GEX/]
+  GEX2 --&gt; ProcGEX2[/USS GEX/]
+  GEX3 --&gt; ProcGEX3[/USS GEX/]
+  ProcGEX1 &amp; ProcGEX2 &amp; ProcGEX3 --- ConcatGEX[/Concatenating\nSamples/] --&gt; GEX[Combined\nGEX]
+  GEX --&gt; ProcGEX[/UMS GEX/]
+  ProcGEX --- Merge[/Merge/] --&gt; Integration[/Integration/] --&gt; Downstream[/.../]
+
+</pre>
+<div id="mermaid-tooltip-3" class="mermaidTooltip">
+
+</div>
+<p></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 3: Example of how the concatenation and merges work.<br>
+GEX: Gene-expression. USS: Unimodal single-sample processing. UMS: Unimodal multi-sample processing.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="multiple-multimodal-samples" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="multiple-multimodal-samples">Multiple multimodal samples</h3>
+<div class="column-screen-inset-shaded">
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-example4" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p>
+</p><pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-4">flowchart LR
+
+  Raw1[Sample 1] --- Ingestion1[/Ingestion/] --&gt; Split1[/Split/] --&gt; GEX1[GEX 1] &amp; ADT1[ADT 1]
+  Raw2[Sample 2] --- Ingestion2[/Ingestion/] --&gt; Split2[/Split/] --&gt; GEX2[GEX 2] &amp; ADT2[ADT 2]
+  GEX1 --&gt; ProcGEX1[/USS GEX/]
+  ADT1 --&gt; ProcADT1[/USS ADT/]
+  GEX2 --&gt; ProcGEX2[/USS GEX/]
+  ADT2 --&gt; ProcADT2[/USS ADT/]
+  ProcGEX1 &amp; ProcGEX2 --- ConcatGEX[/Concatenating\nSamples/] --&gt; GEX[Combined\nGEX]
+  ProcADT1 &amp; ProcADT2 --- ConcatADT[/Concatenating\nSamples/] --&gt; ADT[Combined\nADT]
+  GEX --&gt; ProcGEX[/UMS GEX/]
+  ADT --&gt; ProcADT[/UMS ADT/]
+  ProcGEX &amp; ProcADT --- Merge[/Merge/] --&gt; Integration[/Integration/] --&gt; Downstream[/.../]
+
+</pre>
+<div id="mermaid-tooltip-4" class="mermaidTooltip">
+
+</div>
+<p></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 4: Example of how the concat and merges work.<br>
+GEX: Gene-expression. ADT: Antibody-Derived Tags. USS: Unimodal single-sample processing. UMS: Unimodal multi-sample processing.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Copyright 2022, OpenPipelines-bio</div>
+  </div>
+</footer>
+
+
+
+</body></html>
