@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.655">
+<meta name="generator" content="quarto-0.9.658">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -189,7 +189,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#download-example-files" id="toc-download-example-files" class="nav-link active" data-scroll-target="#download-example-files">Download example files</a></li>
+  <li><a href="#pipeline-arguments" id="toc-pipeline-arguments" class="nav-link active" data-scroll-target="#pipeline-arguments">Pipeline arguments</a></li>
+  <li><a href="#table-of-arguments" id="toc-table-of-arguments" class="nav-link" data-scroll-target="#table-of-arguments">Table of arguments</a></li>
+  <li><a href="#download-example-files" id="toc-download-example-files" class="nav-link" data-scroll-target="#download-example-files">Download example files</a></li>
   <li><a href="#download-reference" id="toc-download-reference" class="nav-link" data-scroll-target="#download-reference">Download reference</a></li>
   <li><a href="#creating-the-param-file" id="toc-creating-the-param-file" class="nav-link" data-scroll-target="#creating-the-param-file">Creating the param file</a></li>
   <li><a href="#creating-additional-config-settings" id="toc-creating-additional-config-settings" class="nav-link" data-scroll-target="#creating-additional-config-settings">Creating additional config settings</a></li>
@@ -217,12 +219,143 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
+<section id="pipeline-arguments" class="level2">
+<h2 class="anchored" data-anchor-id="pipeline-arguments">Pipeline arguments</h2>
+<p>Run the following command to see the available pipeline arguments.</p>
+<pre><code>nextflow \
+  run openpipelines-bio/openpipeline -r main_build \
+  -main-script target/nextflow/mapping/bd_rhapsody_wta/main.nf \
+  --help</code></pre>
+</section>
+<section id="table-of-arguments" class="level2">
+<h2 class="anchored" data-anchor-id="table-of-arguments">Table of arguments</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 3%">
+<col style="width: 89%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">name</th>
+<th style="text-align: left;">type</th>
+<th style="text-align: left;">description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">input</td>
+<td style="text-align: left;"><code>file</code></td>
+<td style="text-align: left;">Path to your read files in the FASTQ.GZ format. You may specify as many R1/R2 read pairs as you want.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">reference_genome</td>
+<td style="text-align: left;"><code>file</code></td>
+<td style="text-align: left;">Path to STAR index as a tar.gz file.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">transcriptome_annotation</td>
+<td style="text-align: left;"><code>file</code></td>
+<td style="text-align: left;">Path to GTF annotation file.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">abseq_reference</td>
+<td style="text-align: left;"><code>file</code></td>
+<td style="text-align: left;">Path to the AbSeq reference file in FASTA format. Only needed if BD AbSeq Ab-Oligos are used.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">supplemental_reference</td>
+<td style="text-align: left;"><code>file</code></td>
+<td style="text-align: left;">Path to the supplemental reference file in FASTA format. Only needed if there are additional transgene sequences used in the experiment.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">output</td>
+<td style="text-align: left;"><code>file</code></td>
+<td style="text-align: left;">Output folder. Output still needs to be processed further.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">putative_cell_call</td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">Specify the dataset to be used for putative cell calling. For putative cell calling using an AbSeq dataset, please provide an AbSeq_Reference fasta file above.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">exact_cell_count</td>
+<td style="text-align: left;"><code>integer</code></td>
+<td style="text-align: left;">Exact cell count - Set a specific number (&gt;=1) of cells as putative, based on those with the highest error-corrected read count</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">disable_putative_calling</td>
+<td style="text-align: left;"><code>boolean_true</code></td>
+<td style="text-align: left;">Disable Refined Putative Cell Calling - Determine putative cells using only the basic algorithm (minimum second derivative along the cumulative reads curve). The refined algorithm attempts to remove false positives and recover false negatives, but may not be ideal for certain complex mixtures of cell types. Does not apply if Exact Cell Count is set.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">subsample</td>
+<td style="text-align: left;"><code>double</code></td>
+<td style="text-align: left;">A number &gt;1 or fraction (0 &lt; n &lt; 1) to indicate the number or percentage of reads to subsample.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">subsample_seed</td>
+<td style="text-align: left;"><code>integer</code></td>
+<td style="text-align: left;">A seed for replicating a previous subsampled run.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sample_tags_version</td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">Specify if multiplexed run.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tag_names</td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">Tag_Names (optional) - Specify the tag number followed by ‘-’ and the desired sample name to appear in Sample_Tag_Metrics.csv. Do not use the special characters: &amp;, (), [], {}, &lt;&gt;, ?, |</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">vdj_version</td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">Specify if VDJ run.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">run_name</td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">Specify a run name to use as the output file base name. Use only letters, numbers, or hyphens. Do not use special characters or spaces.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">parallel</td>
+<td style="text-align: left;"><code>boolean</code></td>
+<td style="text-align: left;">Run jobs in parallel.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">timestamps</td>
+<td style="text-align: left;"><code>boolean_true</code></td>
+<td style="text-align: left;">Add timestamps to the errors, warnings, and notifications.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">override_min_ram</td>
+<td style="text-align: left;"><code>integer</code></td>
+<td style="text-align: left;">Override the minimum RAM requirements specified in the CWL (in GB).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">override_min_cores</td>
+<td style="text-align: left;"><code>integer</code></td>
+<td style="text-align: left;">Override the minimum cores requirements specified in the CWL.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">dryrun</td>
+<td style="text-align: left;"><code>boolean_true</code></td>
+<td style="text-align: left;">If true, the output directory will only contain the CWL input files, but the pipeline itself will not be executed.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
 <section id="download-example-files" class="level2">
 <h2 class="anchored" data-anchor-id="download-example-files">Download example files</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> raw</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="st">"http://bd-rhapsody-public.s3.amazonaws.com/Rhapsody-Demo-Data-Inputs/12WTA-ABC-SMK-EB-5kJRT.tar"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvf</span> <span class="st">"12WTA-ABC-SMK-EB-5kJRT.tar"</span> <span class="at">-C</span> <span class="st">"raw/"</span> <span class="at">--strip-components</span><span class="op">=</span>1</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">ll</span> <span class="at">-h</span> raw</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> raw</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="st">"http://bd-rhapsody-public.s3.amazonaws.com/Rhapsody-Demo-Data-Inputs/12WTA-ABC-SMK-EB-5kJRT.tar"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvf</span> <span class="st">"12WTA-ABC-SMK-EB-5kJRT.tar"</span> <span class="at">-C</span> <span class="st">"raw/"</span> <span class="at">--strip-components</span><span class="op">=</span>1</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">ll</span> <span class="at">-h</span> raw</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>-rw-------. 1 rcannood rcannood 6.2G Jun  3 20:50 12ABC_S1_L432_R1_001.fastq.gz
 -rw-------. 1 rcannood rcannood 4.8G Jun  3 20:53 12ABC_S1_L432_R2_001.fastq.gz
 -rw-------. 1 rcannood rcannood 257M Jun  3 20:51 12SMK_S1_L432_R1_001.fastq.gz
@@ -247,10 +380,10 @@ Warning
 </section>
 <section id="download-reference" class="level2">
 <h2 class="anchored" data-anchor-id="download-reference">Download reference</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> reference</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="st">"https://bd-rhapsody-public.s3.amazonaws.com/Rhapsody-WTA/GRCh38-PhiX-gencodev29/GRCh38-PhiX-gencodev29-20181205.tar.gz"</span> <span class="at">-O</span> <span class="st">"reference/GRCh38-PhiX-gencodev29-20181205.tar.gz"</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="st">"https://bd-rhapsody-public.s3.amazonaws.com/Rhapsody-WTA/GRCh38-PhiX-gencodev29/gencodev29-20181205.gtf"</span> <span class="at">-O</span> <span class="st">"reference/gencodev29-20181205.gtf"</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">ll</span> <span class="at">-h</span> reference</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> reference</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="st">"https://bd-rhapsody-public.s3.amazonaws.com/Rhapsody-WTA/GRCh38-PhiX-gencodev29/GRCh38-PhiX-gencodev29-20181205.tar.gz"</span> <span class="at">-O</span> <span class="st">"reference/GRCh38-PhiX-gencodev29-20181205.tar.gz"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="st">"https://bd-rhapsody-public.s3.amazonaws.com/Rhapsody-WTA/GRCh38-PhiX-gencodev29/gencodev29-20181205.gtf"</span> <span class="at">-O</span> <span class="st">"reference/gencodev29-20181205.gtf"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">ll</span> <span class="at">-h</span> reference</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>-rw-------. 1 rcannood rcannood 1.1G Jun  3 20:30 gencodev29-20181205.gtf
 -rw-------. 1 rcannood rcannood  25G Jun  3 20:45 GRCh38-PhiX-gencodev29-20181205.tar.gz</code></pre>
 <div class="callout-warning callout callout-style-default callout-captioned">
@@ -270,57 +403,57 @@ Warning
 <section id="creating-the-param-file" class="level2">
 <h2 class="anchored" data-anchor-id="creating-the-param-file">Creating the param file</h2>
 <p>Contents of <code>params.yaml</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">param_list</span><span class="kw">:</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> </span><span class="st">"SMK"</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">run_name</span><span class="kw">:</span><span class="at"> </span><span class="st">"SMK"</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">output</span><span class="kw">:</span><span class="at"> </span><span class="st">"SMK"</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> </span><span class="st">"raw/12SMK_S1_L432_R[12]_001.fastq.gz"</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> </span><span class="st">"ABC"</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">run_name</span><span class="kw">:</span><span class="at"> </span><span class="st">"ABC"</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">output</span><span class="kw">:</span><span class="at"> </span><span class="st">"ABC"</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> </span><span class="st">"raw/12ABC_S1_L432_R[12]_001.fastq.gz"</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> </span><span class="st">"WTA"</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">run_name</span><span class="kw">:</span><span class="at"> </span><span class="st">"WTA"</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">output</span><span class="kw">:</span><span class="at"> </span><span class="st">"WTA"</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> </span><span class="st">"raw/12WTA_S1_L432_R[12]_001.fastq.gz"</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">abseq_reference</span><span class="kw">:</span><span class="at"> </span><span class="st">"raw/BDAbSeq_ImmuneDiscoveryPanel.fasta"</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">reference_genome</span><span class="kw">:</span><span class="at"> </span><span class="st">"reference/GRCh38-PhiX-gencodev29-20181205.tar.gz"</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="fu">transcriptome_annotation</span><span class="kw">:</span><span class="at"> </span><span class="st">"reference/gencodev29-20181205.gtf"</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="fu">publish_dir</span><span class="kw">:</span><span class="at"> </span><span class="st">"output/"</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_tags_version</span><span class="kw">:</span><span class="at"> </span><span class="st">"hs"</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="fu">tag_names</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"1-Jurkat"</span><span class="kw">,</span><span class="at"> </span><span class="st">"2-Ramos"</span><span class="kw">,</span><span class="at"> </span><span class="st">"3-THP1"</span><span class="kw">]</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="fu">putative_cell_call</span><span class="kw">:</span><span class="at"> </span><span class="st">"mRNA"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">param_list</span><span class="kw">:</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> </span><span class="st">"SMK"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">run_name</span><span class="kw">:</span><span class="at"> </span><span class="st">"SMK"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">output</span><span class="kw">:</span><span class="at"> </span><span class="st">"SMK"</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> </span><span class="st">"raw/12SMK_S1_L432_R[12]_001.fastq.gz"</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> </span><span class="st">"ABC"</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">run_name</span><span class="kw">:</span><span class="at"> </span><span class="st">"ABC"</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">output</span><span class="kw">:</span><span class="at"> </span><span class="st">"ABC"</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> </span><span class="st">"raw/12ABC_S1_L432_R[12]_001.fastq.gz"</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> </span><span class="st">"WTA"</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">run_name</span><span class="kw">:</span><span class="at"> </span><span class="st">"WTA"</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">output</span><span class="kw">:</span><span class="at"> </span><span class="st">"WTA"</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> </span><span class="st">"raw/12WTA_S1_L432_R[12]_001.fastq.gz"</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">abseq_reference</span><span class="kw">:</span><span class="at"> </span><span class="st">"raw/BDAbSeq_ImmuneDiscoveryPanel.fasta"</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="fu">reference_genome</span><span class="kw">:</span><span class="at"> </span><span class="st">"reference/GRCh38-PhiX-gencodev29-20181205.tar.gz"</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="fu">transcriptome_annotation</span><span class="kw">:</span><span class="at"> </span><span class="st">"reference/gencodev29-20181205.gtf"</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="fu">publish_dir</span><span class="kw">:</span><span class="at"> </span><span class="st">"output/"</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_tags_version</span><span class="kw">:</span><span class="at"> </span><span class="st">"hs"</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="fu">tag_names</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"1-Jurkat"</span><span class="kw">,</span><span class="at"> </span><span class="st">"2-Ramos"</span><span class="kw">,</span><span class="at"> </span><span class="st">"3-THP1"</span><span class="kw">]</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="fu">putative_cell_call</span><span class="kw">:</span><span class="at"> </span><span class="st">"mRNA"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="creating-additional-config-settings" class="level2">
 <h2 class="anchored" data-anchor-id="creating-additional-config-settings">Creating additional config settings</h2>
 <p>Contents of <code>nextflow.config</code>:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// define memory and cpu constraints</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>process <span class="op">{</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  withLabel<span class="op">:</span> highmem <span class="op">{</span> memory <span class="op">=</span> <span class="fl">60.G</span>b <span class="op">}</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  withLabel<span class="op">:</span> highcpu <span class="op">{</span> cpus <span class="op">=</span> <span class="dv">30</span> <span class="op">}</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">// do not stop on error</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>process<span class="op">.</span>errorStrategy <span class="op">=</span> <span class="st">'ignore'</span> </span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">// set default container</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>process<span class="op">.</span>container <span class="op">=</span> <span class="st">'nextflow/bash:latest'</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">// temp dir needs at least 500GB free disk space</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>docker<span class="op">.</span>temp <span class="op">=</span> <span class="st">"./temp/"</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">// use docker</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>docker<span class="op">.</span>enabled <span class="op">=</span> <span class="kw">true</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// define memory and cpu constraints</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>process <span class="op">{</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  withLabel<span class="op">:</span> highmem <span class="op">{</span> memory <span class="op">=</span> <span class="fl">60.G</span>b <span class="op">}</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  withLabel<span class="op">:</span> highcpu <span class="op">{</span> cpus <span class="op">=</span> <span class="dv">30</span> <span class="op">}</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">// do not stop on error</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>process<span class="op">.</span>errorStrategy <span class="op">=</span> <span class="st">'ignore'</span> </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">// set default container</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>process<span class="op">.</span>container <span class="op">=</span> <span class="st">'nextflow/bash:latest'</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">// temp dir needs at least 500GB free disk space</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>docker<span class="op">.</span>temp <span class="op">=</span> <span class="st">"/tmp"</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">// use docker</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>docker<span class="op">.</span>enabled <span class="op">=</span> <span class="kw">true</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="starting-a-bd-rhapsody-run" class="level2">
 <h2 class="anchored" data-anchor-id="starting-a-bd-rhapsody-run">Starting a BD Rhapsody run</h2>
 <p>Contents of <code>run.sh</code>:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> <span class="dt">\</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  run openpipelines-bio/openpipeline <span class="at">-r</span> main_build <span class="dt">\</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> target/nextflow/mapping/bd_rhapsody_wta/main.nf <span class="dt">\</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">-resume</span> <span class="at">-latest</span> <span class="dt">\</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">-params-file</span> params.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> <span class="dt">\</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  run openpipelines-bio/openpipeline <span class="at">-r</span> main_build <span class="dt">\</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> target/nextflow/mapping/bd_rhapsody_wta/main.nf <span class="dt">\</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">-resume</span> <span class="at">-latest</span> <span class="dt">\</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">-params-file</span> params.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="output" class="level2">
 <h2 class="anchored" data-anchor-id="output">Output</h2>
