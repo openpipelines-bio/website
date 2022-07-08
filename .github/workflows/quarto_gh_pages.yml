@@ -6,52 +6,83 @@ on:
   # to be able to trigger a manual build
   workflow_dispatch:
 
-name: Render and deploy
+name: Render project
 
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
+
+    env:
+      RENV_PATHS_ROOT: ~/.local/share/renv
+
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install Quarto
-        uses: quarto-dev/quarto-actions/install-quarto@v1
-        with:
-          # To install LaTeX to build PDF book 
-          tinytex: true 
-          # uncomment below and fill to pin a version
-          # version: 0.9.105
+      - name: Replace Docker with podman
+        run: |
+          echo 'shopt -s expand_aliases' >> ~/.bash_profile
+          echo 'alias docker=podman' >> ~/.bash_profile
 
-      # Install any computing dependency you may need, usually either python and Jupyter or R
-      # More specific examples will be shared on quarto-dev/quarto-actions project
-      
+      - name: Check podman
+        shell: bash -l {0}  
+        run: |
+          docker -v
+
       - uses: r-lib/actions/setup-r@v2
         with:
           r-version: "4.1"
           use-public-rspm: true
 
+      # - uses: actions/setup-python@v3
+      #   with:
+      #     python-version: "3.10"
+
+      - name: Install Nextflow
+        env:
+            CAPSULE_LOG: none
+            NXF_VER: "22.04.0"
+        run: |
+          mkdir /tmp/nextflow
+          cd /tmp/nextflow
+          wget -qO- get.nextflow.io | bash
+          sudo ln -s /tmp/nextflow/nextflow /usr/local/bin/nextflow
+          nextflow -version
+      
       - name: Install Viash
         run: |
           wget https://github.com/viash-io/viash/releases/download/0.5.14/viash -O /usr/local/bin/viash
           chmod +x /usr/local/bin/viash
           viash -v
 
+      - name: Install dependencies
+        run: |
+          Rscript -e 'renv::restore()'
+
       - name: Install R dependencies
         run: |
-          Rscript -e 'install.packages(c("purrr", "yaml", "tibble", "jsonlite", "knitr"))'
+          Rscript -e 'install.packages(c("readr", "rmarkdown"))'
 
-      - name: Render book to all format
-        # Add any command line argument needed
+      # - name: Install Py dependencies
+      #   run: |
+      #     source renv/python/virtualenvs/renv-python-3.8/bin/activate
+      #     pip install pandas nbformat jupyter
+          
+      - name: Install Quarto
+        uses: quarto-dev/quarto-actions/install-quarto@v1
+        with:
+          tinytex: true 
+
+      - name: Render book to all formats
+        shell: bash -l {0}  
         run: |
+          source renv/python/virtualenvs/renv-python-3.8/bin/activate
+          docker -v # check whether podman is correctly detected
           quarto render
 
       - name: Deploy 🚀
-        # only deploy when push to main
         if: github.event_name != 'pull_request'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          # The branch the action should deploy to.
           branch: gh-pages
-          # The folder the action should deploy. Adapt if you changed in Quarto config
           folder: _site
           

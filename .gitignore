@@ -1,2 +1,11 @@
+.Rproj.user
+.DS_Store
+.Rhistoryt
+.Rhistory
 /.quarto/
+/.venv/
+/.condaenv/
+*_cache/
+/env/
+
 _site
