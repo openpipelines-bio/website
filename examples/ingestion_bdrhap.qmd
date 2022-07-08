@@ -1,0 +1,151 @@
+---
+title: "BD Rhapsody WTA"
+---
+
+## Download example files
+
+
+```sh
+mkdir raw
+wget "http://bd-rhapsody-public.s3.amazonaws.com/Rhapsody-Demo-Data-Inputs/12WTA-ABC-SMK-EB-5kJRT.tar"
+tar -xvf "12WTA-ABC-SMK-EB-5kJRT.tar" -C "raw/" --strip-components=1
+ll -h raw
+```
+
+    -rw-------. 1 rcannood rcannood 6.2G Jun  3 20:50 12ABC_S1_L432_R1_001.fastq.gz
+    -rw-------. 1 rcannood rcannood 4.8G Jun  3 20:53 12ABC_S1_L432_R2_001.fastq.gz
+    -rw-------. 1 rcannood rcannood 257M Jun  3 20:51 12SMK_S1_L432_R1_001.fastq.gz
+    -rw-------. 1 rcannood rcannood 145M Jun  3 20:51 12SMK_S1_L432_R2_001.fastq.gz
+    -rw-------. 1 rcannood rcannood  16G Jun  3 20:51 12WTA_S1_L432_R1_001.fastq.gz
+    -rw-------. 1 rcannood rcannood  20G Jun  3 20:53 12WTA_S1_L432_R2_001.fastq.gz
+    -rw-------. 1 rcannood rcannood 2.4K Jun  3 00:04 BDAbSeq_ImmuneDiscoveryPanel.fasta
+
+:::{.callout-warning}
+This file is 45GB in size, so it might take a while to download.
+:::
+
+Unfortunately, the protocol for dataset is not (yet) described on the [BD Rhapsody Demo Datasets website](https://scomix.bd.com/hc/en-us/articles/360034192672-Rhapsody-WTA-Demo-Datasets). However it seems these samples contain 5k cells from the Jurkat, Ramos and THP1 cell lines mixed in a 1:1:1 ratio, where one sample was tagged with the Whole Transcriptome Amplification (WTA) kit, one with the Single-Cell Multiplexing Kit (SMK), and one with the Antibody-specific BarCode (ABC) kit.
+
+## Download reference
+
+```sh
+mkdir reference
+wget "https://bd-rhapsody-public.s3.amazonaws.com/Rhapsody-WTA/GRCh38-PhiX-gencodev29/GRCh38-PhiX-gencodev29-20181205.tar.gz" -O "reference/GRCh38-PhiX-gencodev29-20181205.tar.gz"
+wget "https://bd-rhapsody-public.s3.amazonaws.com/Rhapsody-WTA/GRCh38-PhiX-gencodev29/gencodev29-20181205.gtf" -O "reference/gencodev29-20181205.gtf"
+ll -h reference
+```
+
+    -rw-------. 1 rcannood rcannood 1.1G Jun  3 20:30 gencodev29-20181205.gtf
+    -rw-------. 1 rcannood rcannood  25G Jun  3 20:45 GRCh38-PhiX-gencodev29-20181205.tar.gz
+
+:::{.callout-warning}
+This reference is already quite old. You might want to build a new version. We might include a pipeline for this in the future.
+:::
+
+
+## Creating the param file
+Contents of `params.yaml`:
+```yaml
+param_list:
+- id: "SMK"
+  run_name: "SMK"
+  output: "SMK"
+  input: "raw/12SMK_S1_L432_R[12]_001.fastq.gz"
+- id: "ABC"
+  run_name: "ABC"
+  output: "ABC"
+  input: "raw/12ABC_S1_L432_R[12]_001.fastq.gz"
+- id: "WTA"
+  run_name: "WTA"
+  output: "WTA"
+  input: "raw/12WTA_S1_L432_R[12]_001.fastq.gz"
+abseq_reference: "raw/BDAbSeq_ImmuneDiscoveryPanel.fasta"
+reference_genome: "reference/GRCh38-PhiX-gencodev29-20181205.tar.gz"
+transcriptome_annotation: "reference/gencodev29-20181205.gtf"
+publish_dir: "output/"
+sample_tags_version: "hs"
+tag_names: ["1-Jurkat", "2-Ramos", "3-THP1"]
+putative_cell_call: "mRNA"
+```
+
+## Creating additional config settings
+Contents of `nextflow.config`:
+```groovy
+// define memory and cpu constraints
+process {
+  withLabel: highmem { memory = 60Gb }
+  withLabel: highcpu { cpus = 30 }
+}
+
+// do not stop on error
+process.errorStrategy = 'ignore' 
+
+// set default container (required by Nextflow)
+process.container = 'nextflow/bash:latest'
+
+// temp dir needs at least 500GB free disk space
+docker.temp = "./temp/"
+
+// use docker
+docker.enabled = true
+```
+
+## Starting a BD Rhapsody run
+
+Contents of `run.sh`:
+```bash
+#!/bin/bash
+nextflow \
+  run openpipelines-bio/openpipeline -r main_build \
+  -main-script target/nextflow/mapping/bd_rhapsody_wta/main.nf \
+  -resume -latest \
+  -params-file params.yaml
+```
+
+## Output
+
+    output
+    ├── ABC
+    │   ├── ABC_Bioproduct_Stats.csv
+    │   ├── ABC_DBEC_MolsPerCell.csv
+    │   ├── ABC_DBEC_MolsPerCell_Unfiltered.csv.gz
+    │   ├── ABC_DBEC_ReadsPerCell.csv
+    │   ├── ABC_DBEC_ReadsPerCell_Unfiltered.csv.gz
+    │   ├── ABC_Expression_Data.st
+    │   ├── ABC_Expression_Data_Unfiltered.st.gz
+    │   ├── ABC_final.BAM
+    │   ├── ABC_final.BAM.bai
+    │   ├── ABC_Metrics_Summary.csv
+    │   ├── ABC_RSEC_MolsPerCell.csv
+    │   ├── ABC_RSEC_MolsPerCell_Unfiltered.csv.gz
+    │   ├── ABC_RSEC_ReadsPerCell.csv
+    │   ├── ABC_RSEC_ReadsPerCell_Unfiltered.csv.gz
+    │   └── config.yml
+    ├── SMK
+    │   ├── Combined_SMK_Expression_Data.st
+    │   ├── Combined_SMK_final.BAM
+    │   ├── Combined_SMK_final.BAM.bai
+    │   ├── Combined_SMK_RSEC_MolsPerCell.csv
+    │   ├── Combined_SMK_RSEC_ReadsPerCell.csv
+    │   ├── config.yml
+    │   ├── SMK_Bioproduct_Stats.csv
+    │   ├── SMK_Expression_Data_Unfiltered.st.gz
+    │   ├── SMK_Metrics_Summary.csv
+    │   ├── SMK_Multiplet_and_Undetermined.zip
+    │   ├── SMK_RSEC_MolsPerCell_Unfiltered.csv.gz
+    │   ├── SMK_RSEC_ReadsPerCell_Unfiltered.csv.gz
+    │   ├── SMK_Sample_Tag_Calls.csv
+    │   ├── SMK_Sample_Tag_Metrics.csv
+    │   └── SMK_Sample_Tag_ReadsPerCell.csv
+    └── WTA
+        ├── config.yml
+        ├── WTA_Bioproduct_Stats.csv
+        ├── WTA_Expression_Data.st
+        ├── WTA_Expression_Data_Unfiltered.st.gz
+        ├── WTA_final.BAM
+        ├── WTA_final.BAM.bai
+        ├── WTA_Metrics_Summary.csv
+        ├── WTA_RSEC_MolsPerCell.csv
+        ├── WTA_RSEC_MolsPerCell_Unfiltered.csv.gz
+        ├── WTA_RSEC_ReadsPerCell.csv
+        └── WTA_RSEC_ReadsPerCell_Unfiltered.csv.gz
