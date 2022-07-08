@@ -25,7 +25,7 @@
     "href": "examples/ingestion_bdrhap.html#creating-additional-config-settings",
     "title": "BD Rhapsody WTA",
     "section": "Creating additional config settings",
-    "text": "Creating additional config settings\nContents of nextflow.config:\n// define memory and cpu constraints\nprocess {\n  withLabel: highmem { memory = 60Gb }\n  withLabel: highcpu { cpus = 30 }\n}\n\n// do not stop on error\nprocess.errorStrategy = 'ignore' \n\n// set default container (required by Nextflow)\nprocess.container = 'nextflow/bash:latest'\n\n// temp dir needs at least 500GB free disk space\ndocker.temp = \"./temp/\"\n\n// use docker\ndocker.enabled = true"
+    "text": "Creating additional config settings\nContents of nextflow.config:\n// define memory and cpu constraints\nprocess {\n  withLabel: highmem { memory = 60.Gb }\n  withLabel: highcpu { cpus = 30 }\n}\n\n// do not stop on error\nprocess.errorStrategy = 'ignore' \n\n// set default container\nprocess.container = 'nextflow/bash:latest'\n\n// temp dir needs at least 500GB free disk space\ndocker.temp = \"./temp/\"\n\n// use docker\ndocker.enabled = true"
   },
   {
     "objectID": "examples/ingestion_bdrhap.html#starting-a-bd-rhapsody-run",
