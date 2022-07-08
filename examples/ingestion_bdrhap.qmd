@@ -73,14 +73,14 @@ Contents of `nextflow.config`:
 ```groovy
 // define memory and cpu constraints
 process {
-  withLabel: highmem { memory = 60Gb }
+  withLabel: highmem { memory = 60.Gb }
   withLabel: highcpu { cpus = 30 }
 }
 
 // do not stop on error
 process.errorStrategy = 'ignore' 
 
-// set default container (required by Nextflow)
+// set default container
 process.container = 'nextflow/bash:latest'
 
 // temp dir needs at least 500GB free disk space
