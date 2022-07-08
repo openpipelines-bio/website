@@ -1,5 +1,47 @@
 [
   {
+    "objectID": "examples/ingestion_bdrhap.html",
+    "href": "examples/ingestion_bdrhap.html",
+    "title": "BD Rhapsody WTA",
+    "section": "",
+    "text": "mkdir raw\nwget \"http://bd-rhapsody-public.s3.amazonaws.com/Rhapsody-Demo-Data-Inputs/12WTA-ABC-SMK-EB-5kJRT.tar\"\ntar -xvf \"12WTA-ABC-SMK-EB-5kJRT.tar\" -C \"raw/\" --strip-components=1\nll -h raw\n-rw-------. 1 rcannood rcannood 6.2G Jun  3 20:50 12ABC_S1_L432_R1_001.fastq.gz\n-rw-------. 1 rcannood rcannood 4.8G Jun  3 20:53 12ABC_S1_L432_R2_001.fastq.gz\n-rw-------. 1 rcannood rcannood 257M Jun  3 20:51 12SMK_S1_L432_R1_001.fastq.gz\n-rw-------. 1 rcannood rcannood 145M Jun  3 20:51 12SMK_S1_L432_R2_001.fastq.gz\n-rw-------. 1 rcannood rcannood  16G Jun  3 20:51 12WTA_S1_L432_R1_001.fastq.gz\n-rw-------. 1 rcannood rcannood  20G Jun  3 20:53 12WTA_S1_L432_R2_001.fastq.gz\n-rw-------. 1 rcannood rcannood 2.4K Jun  3 00:04 BDAbSeq_ImmuneDiscoveryPanel.fasta\n\n\n\n\n\n\nWarning\n\n\n\nThis file is 45GB in size, so it might take a while to download.\n\n\nUnfortunately, the protocol for dataset is not (yet) described on the BD Rhapsody Demo Datasets website. However it seems these samples contain 5k cells from the Jurkat, Ramos and THP1 cell lines mixed in a 1:1:1 ratio, where one sample was tagged with the Whole Transcriptome Amplification (WTA) kit, one with the Single-Cell Multiplexing Kit (SMK), and one with the Antibody-specific BarCode (ABC) kit."
+  },
+  {
+    "objectID": "examples/ingestion_bdrhap.html#download-reference",
+    "href": "examples/ingestion_bdrhap.html#download-reference",
+    "title": "BD Rhapsody WTA",
+    "section": "Download reference",
+    "text": "Download reference\nmkdir reference\nwget \"https://bd-rhapsody-public.s3.amazonaws.com/Rhapsody-WTA/GRCh38-PhiX-gencodev29/GRCh38-PhiX-gencodev29-20181205.tar.gz\" -O \"reference/GRCh38-PhiX-gencodev29-20181205.tar.gz\"\nwget \"https://bd-rhapsody-public.s3.amazonaws.com/Rhapsody-WTA/GRCh38-PhiX-gencodev29/gencodev29-20181205.gtf\" -O \"reference/gencodev29-20181205.gtf\"\nll -h reference\n-rw-------. 1 rcannood rcannood 1.1G Jun  3 20:30 gencodev29-20181205.gtf\n-rw-------. 1 rcannood rcannood  25G Jun  3 20:45 GRCh38-PhiX-gencodev29-20181205.tar.gz\n\n\n\n\n\n\nWarning\n\n\n\nThis reference is already quite old. You might want to build a new version. We might include a pipeline for this in the future."
+  },
+  {
+    "objectID": "examples/ingestion_bdrhap.html#creating-the-param-file",
+    "href": "examples/ingestion_bdrhap.html#creating-the-param-file",
+    "title": "BD Rhapsody WTA",
+    "section": "Creating the param file",
+    "text": "Creating the param file\nContents of params.yaml:\nparam_list:\n- id: \"SMK\"\n  run_name: \"SMK\"\n  output: \"SMK\"\n  input: \"raw/12SMK_S1_L432_R[12]_001.fastq.gz\"\n- id: \"ABC\"\n  run_name: \"ABC\"\n  output: \"ABC\"\n  input: \"raw/12ABC_S1_L432_R[12]_001.fastq.gz\"\n- id: \"WTA\"\n  run_name: \"WTA\"\n  output: \"WTA\"\n  input: \"raw/12WTA_S1_L432_R[12]_001.fastq.gz\"\nabseq_reference: \"raw/BDAbSeq_ImmuneDiscoveryPanel.fasta\"\nreference_genome: \"reference/GRCh38-PhiX-gencodev29-20181205.tar.gz\"\ntranscriptome_annotation: \"reference/gencodev29-20181205.gtf\"\npublish_dir: \"output/\"\nsample_tags_version: \"hs\"\ntag_names: [\"1-Jurkat\", \"2-Ramos\", \"3-THP1\"]\nputative_cell_call: \"mRNA\""
+  },
+  {
+    "objectID": "examples/ingestion_bdrhap.html#creating-additional-config-settings",
+    "href": "examples/ingestion_bdrhap.html#creating-additional-config-settings",
+    "title": "BD Rhapsody WTA",
+    "section": "Creating additional config settings",
+    "text": "Creating additional config settings\nContents of nextflow.config:\n// define memory and cpu constraints\nprocess {\n  withLabel: highmem { memory = 60Gb }\n  withLabel: highcpu { cpus = 30 }\n}\n\n// do not stop on error\nprocess.errorStrategy = 'ignore' \n\n// set default container (required by Nextflow)\nprocess.container = 'nextflow/bash:latest'\n\n// temp dir needs at least 500GB free disk space\ndocker.temp = \"./temp/\"\n\n// use docker\ndocker.enabled = true"
+  },
+  {
+    "objectID": "examples/ingestion_bdrhap.html#starting-a-bd-rhapsody-run",
+    "href": "examples/ingestion_bdrhap.html#starting-a-bd-rhapsody-run",
+    "title": "BD Rhapsody WTA",
+    "section": "Starting a BD Rhapsody run",
+    "text": "Starting a BD Rhapsody run\nContents of run.sh:\n#!/bin/bash\nnextflow \\\n  run openpipelines-bio/openpipeline -r main_build \\\n  -main-script target/nextflow/mapping/bd_rhapsody_wta/main.nf \\\n  -resume -latest \\\n  -params-file params.yaml"
+  },
+  {
+    "objectID": "examples/ingestion_bdrhap.html#output",
+    "href": "examples/ingestion_bdrhap.html#output",
+    "title": "BD Rhapsody WTA",
+    "section": "Output",
+    "text": "Output\noutput\n├── ABC\n│   ├── ABC_Bioproduct_Stats.csv\n│   ├── ABC_DBEC_MolsPerCell.csv\n│   ├── ABC_DBEC_MolsPerCell_Unfiltered.csv.gz\n│   ├── ABC_DBEC_ReadsPerCell.csv\n│   ├── ABC_DBEC_ReadsPerCell_Unfiltered.csv.gz\n│   ├── ABC_Expression_Data.st\n│   ├── ABC_Expression_Data_Unfiltered.st.gz\n│   ├── ABC_final.BAM\n│   ├── ABC_final.BAM.bai\n│   ├── ABC_Metrics_Summary.csv\n│   ├── ABC_RSEC_MolsPerCell.csv\n│   ├── ABC_RSEC_MolsPerCell_Unfiltered.csv.gz\n│   ├── ABC_RSEC_ReadsPerCell.csv\n│   ├── ABC_RSEC_ReadsPerCell_Unfiltered.csv.gz\n│   └── config.yml\n├── SMK\n│   ├── Combined_SMK_Expression_Data.st\n│   ├── Combined_SMK_final.BAM\n│   ├── Combined_SMK_final.BAM.bai\n│   ├── Combined_SMK_RSEC_MolsPerCell.csv\n│   ├── Combined_SMK_RSEC_ReadsPerCell.csv\n│   ├── config.yml\n│   ├── SMK_Bioproduct_Stats.csv\n│   ├── SMK_Expression_Data_Unfiltered.st.gz\n│   ├── SMK_Metrics_Summary.csv\n│   ├── SMK_Multiplet_and_Undetermined.zip\n│   ├── SMK_RSEC_MolsPerCell_Unfiltered.csv.gz\n│   ├── SMK_RSEC_ReadsPerCell_Unfiltered.csv.gz\n│   ├── SMK_Sample_Tag_Calls.csv\n│   ├── SMK_Sample_Tag_Metrics.csv\n│   └── SMK_Sample_Tag_ReadsPerCell.csv\n└── WTA\n    ├── config.yml\n    ├── WTA_Bioproduct_Stats.csv\n    ├── WTA_Expression_Data.st\n    ├── WTA_Expression_Data_Unfiltered.st.gz\n    ├── WTA_final.BAM\n    ├── WTA_final.BAM.bai\n    ├── WTA_Metrics_Summary.csv\n    ├── WTA_RSEC_MolsPerCell.csv\n    ├── WTA_RSEC_MolsPerCell_Unfiltered.csv.gz\n    ├── WTA_RSEC_ReadsPerCell.csv\n    └── WTA_RSEC_ReadsPerCell_Unfiltered.csv.gz"
+  },
+  {
     "objectID": "architecture/use-cases.html",
     "href": "architecture/use-cases.html",
     "title": "Use-cases",
