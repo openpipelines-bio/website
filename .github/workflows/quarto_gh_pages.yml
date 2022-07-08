@@ -38,7 +38,7 @@ jobs:
 
       - name: Install R dependencies
         run: |
-          Rscript -e 'install.packages(c("purrr", "yaml", "tibble"))'
+          Rscript -e 'install.packages(c("purrr", "yaml", "tibble", "jsonlite", "knitr"))'
 
       - name: Render book to all format
         # Add any command line argument needed
