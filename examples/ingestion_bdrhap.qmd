@@ -2,6 +2,34 @@
 title: "BD Rhapsody WTA"
 ---
 
+## Pipeline arguments
+
+Run the following command to see the available pipeline arguments.
+```
+nextflow \
+  run openpipelines-bio/openpipeline -r main_build \
+  -main-script target/nextflow/mapping/bd_rhapsody_wta/main.nf \
+  --help
+```
+
+## Table of arguments
+
+```{r echo=FALSE}
+library(purrr)
+uri <- "https://raw.githubusercontent.com/openpipelines-bio/openpipeline/main/src/mapping/bd_rhapsody_wta/config.vsh.yaml"
+out <- system(paste0("viash config view ", uri), intern = TRUE)
+config <- yaml::yaml.load(out)
+arguments <- c(config$functionality$inputs, config$functionality$outputs, config$functionality$arguments)
+tib <- map_df(arguments, function(arg) {
+  tibble::tibble(
+    name = gsub("-*", "", arg$name),
+    type = paste0("`", ifelse(is.na(arg$type), "file", arg$type), "`"),
+    description = gsub("\n", " ", arg$description)
+  )
+})
+knitr::kable(tib)
+```
+
 ## Download example files
 
 
@@ -84,7 +112,7 @@ process.errorStrategy = 'ignore'
 process.container = 'nextflow/bash:latest'
 
 // temp dir needs at least 500GB free disk space
-docker.temp = "./temp/"
+docker.temp = "/tmp"
 
 // use docker
 docker.enabled = true
