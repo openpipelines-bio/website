@@ -17,8 +17,7 @@ website:
         menu:
           - examples/ingestion_bdrhap.qmd
       - text: Contribute
-        menu:
-          - contribute/index.qmd
+        href: contribute/index.qmd
     right:
       - text: Source Code
         url: https://github.com/openpipelines-bio/openpipeline
