@@ -40,10 +40,13 @@ Building an individual component can still be useful, for example when debugging
 ```bash
 ./bin/viash build ./src/filter/do_filter/config.vsh.yaml -o ./target/native/filter/do_filter/ -p native
 ```
+## Implementing pipelines
+
+
 
 ## Running pipelines
 ### Running pipelines from the CLI
-
+After [building the components](#building-components) 
 ```bash
 bin/nextflow run . \
   -main-script workflows/integration/multimodal_integration/main.nf \
@@ -150,3 +153,6 @@ gitGraph
   merge main tag: "0.2"
 ```
 
+The develoment version of openpipelines is available on the `main` branch. This is where all new code should be merged into by creating a pull request. 
+Once a pull request has been approved and merged, Github Actions CI will automatically build all components (creating the `target` directory) and push the result to the `main_build` branch.
+In essence, the `main_build` branch is a copy of the `main` branch, but also containing the build components. Once it is time to create a openpipelines release, the Github CI release workflow is manually triggered, the components on the `main` branch will be build and tested. Then, the result will be pushed to the `release` branch and the integration tests will be run. If all tests succeeded, a new github tag and release can be created manually from the `release` branch.
