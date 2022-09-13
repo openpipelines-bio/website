@@ -1,0 +1,21 @@
+
+---
+title: "do_filter"
+---
+
+## Pipeline arguments
+
+nextflow run \
+https://github.com/openpipelines-bio/openpipeline.git -r main_build \
+-main-script target/nextflow/filter/do_filter/main.nf \
+--help
+
+## Table of arguments
+
+| name         | type   | description                                              |
+|:-------------|:-------|:---------------------------------------------------------|
+| --input      | file   | Input h5mu file                                          |
+| --modality   | string |                                                          |
+| --obs_filter | string | Which .obs columns to use to filter the observations by. |
+| --var_filter | string | Which .var columns to use to filter the observations by. |
+| --output     | file   | Output h5mu file.                                        |

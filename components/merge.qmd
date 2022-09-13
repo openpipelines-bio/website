@@ -1,0 +1,19 @@
+
+---
+title: "merge"
+---
+
+## Pipeline arguments
+
+nextflow run \
+https://github.com/openpipelines-bio/openpipeline.git -r main_build \
+-main-script target/nextflow/integrate/merge/main.nf \
+--help
+
+## Table of arguments
+
+| name          | type   | description                                                       |
+|:--------------|:-------|:------------------------------------------------------------------|
+| --input       | file   | Paths to the single-modality .h5mu files that need to be combined |
+| --output      | file   | Path to the output file.                                          |
+| --compression | string | The compression format to be used on the final h5mu object.       |

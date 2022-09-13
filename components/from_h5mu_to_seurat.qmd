@@ -1,0 +1,18 @@
+
+---
+title: "from_h5mu_to_seurat"
+---
+
+## Pipeline arguments
+
+nextflow run \
+https://github.com/openpipelines-bio/openpipeline.git -r main_build \
+-main-script target/nextflow/convert/from_h5mu_to_seurat/main.nf \
+--help
+
+## Table of arguments
+
+| name     | type   | description        |
+|:---------|:-------|:-------------------|
+| --input  | file   | Input h5mu file    |
+| --output | file   | Output Seurat file |

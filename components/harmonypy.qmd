@@ -1,0 +1,23 @@
+
+---
+title: "harmonypy"
+---
+
+## Pipeline arguments
+
+nextflow run \
+https://github.com/openpipelines-bio/openpipeline.git -r main_build \
+-main-script target/nextflow/integrate/harmonypy/main.nf \
+--help
+
+## Table of arguments
+
+| name             | type   | description                                                                                                                                                                           |
+|:-----------------|:-------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| --input          | file   | Input h5mu file                                                                                                                                                                       |
+| --output         | file   | Output h5mu file.                                                                                                                                                                     |
+| --modality       | string |                                                                                                                                                                                       |
+| --obsm_input     | string | Which .obsm slot to use as a starting PCA embedding.                                                                                                                                  |
+| --obsm_output    | string | In which .obsm slot to store the resulting integrated embedding.                                                                                                                      |
+| --theta          | double | Diversity clustering penalty parameter. Specify for each variable in group.by.vars. theta=0 does not encourage any diversity. Larger values of theta result in more diverse clusters. |
+| --obs_covariates | string | The .obs field(s) that define the covariate(s) to regress out.                                                                                                                        |

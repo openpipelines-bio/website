@@ -1,0 +1,19 @@
+
+---
+title: "download_file"
+---
+
+## Pipeline arguments
+
+nextflow run \
+https://github.com/openpipelines-bio/openpipeline.git -r main_build \
+-main-script target/nextflow/download/download_file/main.nf \
+--help
+
+## Table of arguments
+
+| name      | type         | description                 |
+|:----------|:-------------|:----------------------------|
+| --input   | string       | URL to a file to download.  |
+| --output  | file         | Path where to store output. |
+| --verbose | boolean_true | Increase verbosity          |

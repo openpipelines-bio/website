@@ -1,0 +1,23 @@
+
+---
+title: "bcl2fastq"
+---
+
+## Pipeline arguments
+
+nextflow run \
+https://github.com/openpipelines-bio/openpipeline.git -r main_build \
+-main-script target/nextflow/demux/bcl2fastq/main.nf \
+--help
+
+## Table of arguments
+
+| name               | type         | description                                 |
+|:-------------------|:-------------|:--------------------------------------------|
+| --input            | file         | Input run directory                         |
+| --sample_sheet     | file         | Pointer to the sample sheet                 |
+| --output           | file         | Output directory containig fastq files      |
+| --separate_reports | boolean_true | Should reports be stored in a separate dir. |
+|                    |              | Should be used with the --reports argument. |
+| --reports          | file         | Reports directory                           |
+| --ignore_missing   | boolean_true |                                             |

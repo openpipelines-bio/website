@@ -1,0 +1,19 @@
+
+---
+title: "fastqc"
+---
+
+## Pipeline arguments
+
+nextflow run \
+https://github.com/openpipelines-bio/openpipeline.git -r main_build \
+-main-script target/nextflow/qc/fastqc/main.nf \
+--help
+
+## Table of arguments
+
+| name     | type   | description                                                        |
+|:---------|:-------|:-------------------------------------------------------------------|
+| --mode   | string | The mode in which the component works. Can be either files or dir. |
+| --input  | file   | Directory containing input fastq files.                            |
+| --output | file   | Output directory to write reports to.                              |

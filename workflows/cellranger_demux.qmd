@@ -1,0 +1,21 @@
+
+---
+title: "cellranger_demux"
+---
+
+## Pipeline arguments
+
+nextflow run \
+https://github.com/openpipelines-bio/openpipeline.git -r main_build \
+-main-script workflows/ingestion/cellranger_demux/main.nf \
+--help
+
+## Table of arguments
+
+| name           | type    | description                                           |
+|:---------------|:--------|:------------------------------------------------------|
+| --id           | string  | ID of the sample.                                     |
+| --input        | file    | A BCL directory.                                      |
+| --sample_sheet | file    | The sample sheet for the samples to be demultiplexed. |
+| --cores        | integer | Set max cores the pipeline may request at one time.   |
+| --memory       | integer | Set max GB the pipeline may request at one time.      |

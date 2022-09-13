@@ -1,0 +1,27 @@
+
+---
+title: "scanorama"
+---
+
+## Pipeline arguments
+
+nextflow run \
+https://github.com/openpipelines-bio/openpipeline.git -r main_build \
+-main-script target/nextflow/integrate/scanorama/main.nf \
+--help
+
+## Table of arguments
+
+| name          | type    | description                                                                                                                                                                 |
+|:--------------|:--------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| --input       | file    | Input h5mu file                                                                                                                                                             |
+| --modality    | string  |                                                                                                                                                                             |
+| --output      | file    | Output .h5mu file                                                                                                                                                           |
+| --obs_batch   | string  | Column name discriminating between your batches.                                                                                                                            |
+| --obsm_input  | string  | Basis obsm slot to run scanorama on.                                                                                                                                        |
+| --obsm_output | string  | The name of the field in adata.obsm where the integrated embeddings will be stored after running this function. Defaults to X_scanorama.                                    |
+| --knn         | integer | Number of nearest neighbors to use for matching.                                                                                                                            |
+| --batch_size  | integer | The batch size used in the alignment vector computation. Useful when integrating very large (>100k samples) datasets. Set to large value that runs within available memory. |
+| --sigma       | double  | Correction smoothing parameter on Gaussian kernel.                                                                                                                          |
+| --approx      | boolean | Use approximate nearest neighbors with Python annoy; greatly speeds up matching runtime.                                                                                    |
+| --alpha       | double  | Alignment score minimum cutoff                                                                                                                                              |

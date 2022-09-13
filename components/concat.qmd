@@ -1,0 +1,28 @@
+
+---
+title: "concat"
+---
+
+## Pipeline arguments
+
+nextflow run \
+https://github.com/openpipelines-bio/openpipeline.git -r main_build \
+-main-script target/nextflow/integrate/concat/main.nf \
+--help
+
+## Table of arguments
+
+| name              | type   | description                                                                                                         |
+|:------------------|:-------|:--------------------------------------------------------------------------------------------------------------------|
+| --input           | file   | Paths to the different samples to be concatenated.                                                                  |
+| --sample_names    | string | Names of the different samples that have to be concatenated. Must be of same length as `--input`.                   |
+| --output          | file   |                                                                                                                     |
+| --obs_sample_name | string | Name of the .obs key under which to add the sample names.                                                           |
+| --compression     | string | The compression format to be used on the final h5mu object.                                                         |
+| --other_axis_mode | string | How to handle the merging of other axis (var, obs, ...).                                                            |
+|                   |        |  - None: keep no data                                                                                               |
+|                   |        |  - same: only keep elements of the matrices which are the same in each of the samples                               |
+|                   |        |  - unique: only keep elements for which there is only 1 possible value (1 value that can occur in multiple samples) |
+|                   |        |  - first: keep the annotation from the first sample                                                                 |
+|                   |        |  - only: keep elements that show up in only one of the objects (1 unique element in only 1 sample)                  |
+|                   |        |  - move: identical to 'same', but moving the conflicting values to .varm or .obsm                                   |

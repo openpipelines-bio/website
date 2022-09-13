@@ -1,0 +1,22 @@
+
+---
+title: "filter_10xh5"
+---
+
+## Pipeline arguments
+
+nextflow run \
+https://github.com/openpipelines-bio/openpipeline.git -r main_build \
+-main-script target/nextflow/process_10xh5/filter_10xh5/main.nf \
+--help
+
+## Table of arguments
+
+| name                 | type         | description                                            |
+|:---------------------|:-------------|:-------------------------------------------------------|
+| --input              | string       | An h5 file from the 10x genomics website.              |
+| --output             | file         | Output h5 file.                                        |
+| --min_library_size   | integer      | Minimum library size.                                  |
+| --min_cells_per_gene | integer      | Minimum number of cells per gene.                      |
+| --keep_feature_types | string       | Specify which feature types will never be filtered out |
+| --verbose            | boolean_true | Increase verbosity                                     |

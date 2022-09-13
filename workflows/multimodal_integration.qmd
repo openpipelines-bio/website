@@ -1,0 +1,21 @@
+
+---
+title: "multimodal_integration"
+---
+
+## Pipeline arguments
+
+nextflow run \
+https://github.com/openpipelines-bio/openpipeline.git -r main_build \
+-main-script workflows/integration/multimodal_integration/main.nf \
+--help
+
+## Table of arguments
+
+| name             | type   | description                                                                           |
+|:-----------------|:-------|:--------------------------------------------------------------------------------------|
+| --id             | string | ID of the sample.                                                                     |
+| --input          | file   | Path to the sample.                                                                   |
+| --output         | file   | Destination path to the output.                                                       |
+| --layer          | string | use specified layer for expression values instead of the .X object from the modality. |
+| --obs_covariates | string | The .obs field(s) that define the covariate(s) to regress out.                        |

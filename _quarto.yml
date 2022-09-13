@@ -19,6 +19,13 @@ website:
       - text: Contribute
         menu:
           - contribute/index.qmd
+      - text: Components
+        menu: 
+          - components/*.qmd
+      - text: Workflows
+        menu:
+          - workflows/*.qmd
+
     right:
       - text: Source Code
         url: https://github.com/openpipelines-bio/openpipeline

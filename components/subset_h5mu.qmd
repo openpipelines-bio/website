@@ -1,0 +1,19 @@
+
+---
+title: "subset_h5mu"
+---
+
+## Pipeline arguments
+
+nextflow run \
+https://github.com/openpipelines-bio/openpipeline.git -r main_build \
+-main-script target/nextflow/filter/subset_h5mu/main.nf \
+--help
+
+## Table of arguments
+
+| name                     | type    | description                                               |
+|:-------------------------|:--------|:----------------------------------------------------------|
+| --input                  | file    | Input h5mu file                                           |
+| --output                 | file    | Output h5mu file.                                         |
+| --number_of_observations | integer | Number of observations to be selected from the h5mu file. |

@@ -1,0 +1,27 @@
+
+---
+title: "filter_with_scrublet"
+---
+
+## Pipeline arguments
+
+nextflow run \
+https://github.com/openpipelines-bio/openpipeline.git -r main_build \
+-main-script target/nextflow/filter/filter_with_scrublet/main.nf \
+--help
+
+## Table of arguments
+
+| name                          | type         | description                                                                                                                                                                            |
+|:------------------------------|:-------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| --input                       | file         | Input h5mu file                                                                                                                                                                        |
+| --modality                    | string       |                                                                                                                                                                                        |
+| --output                      | file         | Output h5mu file.                                                                                                                                                                      |
+| --obs_name_filter             | string       | In which .obs slot to store a boolean array corresponding to which observations should be filtered out.                                                                                |
+| --do_subset                   | boolean_true | Whether to subset before storing the output.                                                                                                                                           |
+| --obs_name_doublet_score      | string       | Name of the doublet scores column in the obs slot of the returned object.                                                                                                              |
+| --min_counts                  | integer      | The number of minimal UMI counts per cell that have to be present for initial cell detection.                                                                                          |
+| --min_cells                   | integer      | The number of cells in which UMIs for a gene were detected.                                                                                                                            |
+| --min_gene_variablity_percent | double       | Used for gene filtering prior to PCA. Keep the most highly variable genes (in the top min_gene_variability_pctl percentile), as measured by the v-statistic [Klein et al., Cell 2015]. |
+| --num_pca_components          | integer      | Number of principal components to use during PCA dimensionality reduction.                                                                                                             |
+| --distance_metric             | string       | The distance metric used for computing similarities.                                                                                                                                   |

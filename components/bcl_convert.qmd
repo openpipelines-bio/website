@@ -1,0 +1,23 @@
+
+---
+title: "bcl_convert"
+---
+
+## Pipeline arguments
+
+nextflow run \
+https://github.com/openpipelines-bio/openpipeline.git -r main_build \
+-main-script target/nextflow/demux/bcl_convert/main.nf \
+--help
+
+## Table of arguments
+
+| name               | type         | description                                                       |
+|:-------------------|:-------------|:------------------------------------------------------------------|
+| --input            | file         | Input run directory                                               |
+| --sample_sheet     | file         | Pointer to the sample sheet                                       |
+| --output           | file         | Output directory containig fastq files                            |
+| --separate_reports | boolean_true | Should reports be stored in a separate dir.                       |
+|                    |              | Should be used with the --reports argument.                       |
+| --reports          | file         | Reports directory                                                 |
+| --test_mode        | boolean      | Should bcl-convert be run in test mode (using --first-tile-only)? |

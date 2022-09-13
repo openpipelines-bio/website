@@ -1,0 +1,36 @@
+
+---
+title: "cellranger_count"
+---
+
+## Pipeline arguments
+
+nextflow run \
+https://github.com/openpipelines-bio/openpipeline.git -r main_build \
+-main-script target/nextflow/mapping/cellranger_count/main.nf \
+--help
+
+## Table of arguments
+
+| name                 | type    | description                                                                                                                     |
+|:---------------------|:--------|:--------------------------------------------------------------------------------------------------------------------------------|
+| --input              | file    | The folder with fastq.gz files to align.                                                                                        |
+| --reference          | file    | The path to reference tar.gz file.                                                                                              |
+| --output             | file    | The folder to store the alignment results.                                                                                      |
+| --expect_cells       | integer | Expected number of recovered cells, used as input to cell calling algorithm.                                                    |
+| --chemistry          | string  | Assay configuration.                                                                                                            |
+|                      |         | - auto: autodetect mode                                                                                                         |
+|                      |         | - threeprime: Single Cell 3'                                                                                                    |
+|                      |         | - fiveprime: Single Cell 5'                                                                                                     |
+|                      |         | - SC3Pv1: Single Cell 3' v1                                                                                                     |
+|                      |         | - SC3Pv2: Single Cell 3' v2                                                                                                     |
+|                      |         | - SC3Pv3: Single Cell 3' v3                                                                                                     |
+|                      |         | - SC3Pv3LT: Single Cell 3' v3 LT                                                                                                |
+|                      |         | - SC3Pv3HT: Single Cell 3' v3 HT                                                                                                |
+|                      |         | - SC5P-PE: Single Cell 5' paired-end                                                                                            |
+|                      |         | - SC5P-R2: Single Cell 5' R2-only                                                                                               |
+|                      |         | - SC-FB: Single Cell Antibody-only 3' v2 or 5'                                                                                  |
+|                      |         | See https://kb.10xgenomics.com/hc/en-us/articles/115003764132-How-does-Cell-Ranger-auto-detect-chemistry- for more information. |
+| --secondary_analysis | boolean | Whether or not to run the secondary analysis e.g. clustering.                                                                   |
+| --generate_bam       | boolean | Whether to generate a BAM file.                                                                                                 |
+| --include_introns    | boolean | Include intronic reads in count (default=true unless --target-panel is specified in which case default=false)                   |

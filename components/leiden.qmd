@@ -1,0 +1,22 @@
+
+---
+title: "leiden"
+---
+
+## Pipeline arguments
+
+nextflow run \
+https://github.com/openpipelines-bio/openpipeline.git -r main_build \
+-main-script target/nextflow/cluster/leiden/main.nf \
+--help
+
+## Table of arguments
+
+| name                  | type   | description                                                                                          |
+|:----------------------|:-------|:-----------------------------------------------------------------------------------------------------|
+| --input               | file   | Input file.                                                                                          |
+| --modality            | string |                                                                                                      |
+| --obsp_connectivities | string | In which .obsp slot the neighbor connectivities can be found.                                        |
+| --output              | file   | Output file.                                                                                         |
+| --obs_name            | string | Name of the .obs key under which to add the cluster labels.                                          |
+| --resolution          | double | A parameter value controlling the coarseness of the clustering. Higher values lead to more clusters. |

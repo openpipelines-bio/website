@@ -1,0 +1,18 @@
+
+---
+title: "run_cirrocumulus"
+---
+
+## Pipeline arguments
+
+nextflow run \
+https://github.com/openpipelines-bio/openpipeline.git -r main_build \
+-main-script target/nextflow/interactive/run_cirrocumulus/main.nf \
+--help
+
+## Table of arguments
+
+| name    | type   | description        |
+|:--------|:-------|:-------------------|
+| --input | file   | Directory to mount |
+| --port  | string | Port to use        |

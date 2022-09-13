@@ -1,0 +1,19 @@
+
+---
+title: "split_modalities"
+---
+
+## Pipeline arguments
+
+nextflow run \
+https://github.com/openpipelines-bio/openpipeline.git -r main_build \
+-main-script target/nextflow/split/split_modalities/main.nf \
+--help
+
+## Table of arguments
+
+| name          | type   | description                                                 |
+|:--------------|:-------|:------------------------------------------------------------|
+| --input       | file   | Path to a single .hm5u file                                 |
+| --output      | file   |                                                             |
+| --compression | string | The compression format to be used on the final h5mu object. |

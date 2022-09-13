@@ -1,0 +1,19 @@
+
+---
+title: "from_h5ad_to_h5mu"
+---
+
+## Pipeline arguments
+
+nextflow run \
+https://github.com/openpipelines-bio/openpipeline.git -r main_build \
+-main-script target/nextflow/convert/from_h5ad_to_h5mu/main.nf \
+--help
+
+## Table of arguments
+
+| name       | type   | description       |
+|:-----------|:-------|:------------------|
+| --input    | file   | Input h5ad files  |
+| --modality | string |                   |
+| --output   | file   | Output muon file. |
