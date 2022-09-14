@@ -13,20 +13,17 @@ website:
         menu: 
           - architecture/index.qmd
           - architecture/use-cases.qmd
-      - text: Examples
-        menu:
-          - examples/ingestion_bdrhap.qmd
       - text: Contribute
         menu:
           - contribute/index.qmd
+      - workflows/index.qmd
+
     right:
       - text: Source Code
         url: https://github.com/openpipelines-bio/openpipeline
   page-footer: "Copyright 2022, OpenPipelines-bio"
   repo-url: https://github.com/openpipelines-bio/openpipeline-web
   repo-actions: [edit, issue] 
-  preview:
-    port: 4200
 
 format:
   html:

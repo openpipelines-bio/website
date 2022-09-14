@@ -1,0 +1,31 @@
+---
+title: scale
+---
+
+Scale data to unit variance and zero mean.
+
+
+## Argument help
+
+Run the following command to view the module's help page:
+```bash
+nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/transform/scale/main.nf --help
+```
+
+### Arguments
+
+
+
+:::{.column-body-outset}
+|Name            |Description                                                                               |Attributes                             |
+|:---------------|:-----------------------------------------------------------------------------------------|:--------------------------------------|
+|`--input`       |Input h5mu file.                                                                          |file, required, example: "input.h5mu"  |
+|`--modality`    |List of modalities to process.                                                            |string, default: "rna"                 |
+|`--max_value`   |Clip (truncate) to this value after scaling. Does not clip by default.                    |double                                 |
+|`--zero_center` |If False, omit zero-centering variables, which allows to handle sparse input efficiently. |boolean, default: TRUE                 |
+|`--output`      |Output h5mu file.                                                                         |file, required, default: "output.h5mu" |
+:::
+
+## Authors
+
+ * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (maintainer)
