@@ -1,0 +1,32 @@
+---
+title: demux
+---
+
+Convert bcl files to fastq files using bcl2fastq, bcl-convert or cellranger mkfastq
+
+
+## Argument help
+
+Run the following command to view the workflow's help page:
+```bash
+nextflow run openpipelines-bio/openpipeline -r main_build -main-script /home/rcannood/workspace/jnj/openpipeline/workflows/ingestion/demux/main.nf --help
+```
+
+### Arguments
+
+
+
+:::{.column-body-outset}
+|Name               |Description                                                    |Attributes                         |
+|:------------------|:--------------------------------------------------------------|:----------------------------------|
+|`--id`             |ID of the sample.                                              |string, required, example: "foo"   |
+|`--input`          |Input run directory                                            |file, required, example: "bcl_dir" |
+|`--sample_sheet`   |Pointer to the sample sheet                                    |file, required, example: "bcl_dir" |
+|`--demultiplexer`  |The multiplexer to use, one of bclconvert or mkfastq           |string, example: "bclconvert"      |
+|`--ignore_missing` |Should the demultiplexer ignore missing entities (filter, ...) |boolean                            |
+:::
+
+## Authors
+
+ * Toni Verbeiren [{{< fa brands github >}}](https://github.com/tverbeiren) (author, maintainer)
+ * Marijke Van Moerbeke [{{< fa brands orcid >}}](https://orcid.org/0000-0002-3097-5621) (author)

@@ -1,0 +1,28 @@
+---
+title: from_h5ad_to_h5mu
+---
+
+Converts a single layer h5ad file into a single muon object
+
+
+## Argument help
+
+Run the following command to view the module's help page:
+```bash
+nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/convert/from_h5ad_to_h5mu/main.nf --help
+```
+
+### Arguments
+
+
+
+:::{.column-body-outset}
+|Name       |Description       |Attributes                            |
+|:----------|:-----------------|:-------------------------------------|
+|`--input`  |Input h5ad files  |file, required, default: "input.h5ad" |
+|`--output` |Output muon file. |file, default: "output.h5mu"          |
+:::
+
+## Authors
+
+ * Dries De Maeyer  (maintainer)
