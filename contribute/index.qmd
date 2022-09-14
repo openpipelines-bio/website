@@ -2,10 +2,112 @@
 title: Developers Guide
 ---
 
+## Getting started
+Openpipelines is being developed in Viash and Nextflow. If you are unfamiliar with either one of these platforms, you can check out their respective documentations [here](https://viash.io/guides/getting_started/introduction/) and [here](https://www.nextflow.io/docs/latest/index.html). To start contributing to openpipelines, you will need at least a working version of Java 11, OpenJDK 11, or a later version (up to Java 18). Additionally, by using [Docker](https://www.docker.com/), you can build and test pipeline components and pipelines without needing to manually install dependencies for these components on your machine.
+
+Viash and Nextflow can be installed by following the guides in the documentation for both of these tools. However, openpipelines provides a setup script that downloads the binaries for the versions that openpipelines is currently using. First, fork the openpipelines GitHub repository [here](https://github.com/openpipelines-bio/openpipeline/fork). If you are unfamiliar with this process, please check out the corresponding [Github documentation](https://docs.github.com/en/github/getting-started-with-github/quickstart/fork-a-repo). Next, you can clone your fork and install Viash and Nextflow in the `bin` folder.
+
+```bash
+git clone https://github.com/YOUR-USER-NAME/openpipeline.git
+cd openpipeline
+./bin/init
+```
+
+## Directory structure
+The root of the repository contains three main folders:
+
+1. `bin`, which contains the `viash` and `nextflow` binairies,
+2. `src`, which contains the source code for individual components,
+3. the `workflows` folder containing the implementations of the pipelines (combining one or more components).
+4. (optionally) the `target` folder 
+
+Each subfolder from `src` contains a Viash [namespace](https://viash.io/guides/projects/namespaces/), a logical grouping of pipeline components that perform a similar function. Within each namespace, subfolders designate individual pipeline components. For example `./src/convert/from_bdrhap_to_h5ad` contains the implementation for a component `from_bdrhap_to_h5ad` which is grouped together with other components such as `from_10xmtx_to_h5mu` into a namespace `convert`. In a similar manner as grouping components into `namespaces`, pipelines are grouped together into folders. However, these are not component namespaces and as such do not interact with `viash ns` commands (see below).
+
+The `bin` directory contains the Viash and Nextflow binaries and scripts. As will become apparent later on, Viash not only provides commands to perform operations on individual components, but also on groups of components in a namespace and all components in a project. As a rule of thumb, the basic Viash commands with a space (like `./bin/viash test`) are designated for running commands on individual components, while `ns` commands are (`./bin/viash ns test`) are for namespaces. Additionally, the Viash underscore (`_`) commands (like `./bin/viash_test`) are derived from the `ns` commands, but have defaults set for some of the most common configuration options like the docker registry used for the project, the docker organisation name, and the tag. Generally, an underscore command will be used instead of its `ns` sibling.
+
+When cloning a fresh repository, there will be no `target` folder present. This is because the target folder will only be created after components have been build. 
+
+## Building components
+When running or [testing individual components](#running-component-unittests), it is not necessary to execute an extra command to run the build step, `viash test` and `viash run` will build the component on the fly. However, before integrating components into a pipeline, you will need to build the components. More specifically, openpipelines uses Nextflow to combine components into pipelines, so we need to have at least the components build for `nextflow` platform as target. The easiest method to build the components is to use:
+
+```bash
+./bin/viash_build
+```
+After using `./bin/viash_build`, the target folder will be populated with three subfolders, corresponding to the build platforms that viash supports: `native`, `docker` and `nextflow`. In contrast to `./bin/viash build`, `viash_build` will use all of the platforms defined in each of the components configuration instead of the first one. Keep in mind that running `./bin/viash_build` will not always cause a component to be re-build completely. Caching mechanisms in the docker platform for example will make sure only components for which alterations have been made will be build, significantly reducing build times. In summary, using `./bin/viash_build` makes sure that the latest build of components are available before starting to integrate them in pipelines.
+
+Building an individual component can still be useful, for example when debugging a component for which the build fails or if you want to create a standalone executable for a component to execute it without the need to use `viash`. To build an individual component, `./bin/viash build` can be used. Note that the default build directory of this viash base command is `output`, which is not the location where build components will be imported from when integrating them in pipelines. Using the `--output` argument, you can set it to any directory you want, for example:
+
+```bash
+./bin/viash build ./src/filter/do_filter/config.vsh.yaml -o ./target/native/filter/do_filter/ -p native
+```
+## Implementing pipelines
+
+
+
+## Running pipelines
+### Running pipelines from the CLI
+After [building the components](#building-components) 
+```bash
+bin/nextflow run . \
+  -main-script workflows/integration/multimodal_integration/main.nf \
+  -profile docker \
+  -resume 
+  --publish_dir foo/
+  --input "bar"
+  --output "test.txt"
+```
+
+### Running pipelines from nf-tower
+
+
+## Running tests
+
+### Fetching the test data.
+The input data that is needed to run the tests will need to be downloaded from the openpipelines Amazon AWS s3 bucket first.
+To do so, the `download/sync_test_resource` component can be used, which will download the data to the correct location (`resources_test`) by default.
+
+```bash
+./bin/viash run ./src/download/sync_test_resources/config.vsh.yaml -p docker -- --input s3://openpipelines-data
+```
+
+Or, if you do not want to use Docker and have `aws-cli` tools installed natively:
+```bash
+./bin/viash run ./src/download/sync_test_resources/config.vsh.yaml -p native -- --input s3://openpipelines-data
+```
+
+### Running component unittests
+To build and run tests for individual component that you are working on, use [viash test](https://viash.io/api/commands/test/) with the `config.vsh.yaml` of the component you would like to test. 
+For example:
+
+```bash
+./bin/viash test ./src/convert/from_10xh5_to_h5mu/config.vsh.yaml
+```
+Keep in mind that when no platform is passed to `viash test`, it will use the first platform that is specified in the config, which is `docker` for most of the components in openpipelines. Use `-p native` for example if you do not want to use docker.
+
+It is also possible to execute the tests for all components in each namespace using `./bin/viash_test` (note the underscore instead of a space).
+
+```bash
+./bin/viash_test
+```
+
+### Integration tests
+Individual integration tests can be run by using the `integration_test.sh` scripts for a pipeline, located next to the `main.nf` in the `workflows` folder.
+
+```bash
+./workflows/ingestion/cellranger_demux/integration_test.sh
+```
+
+Running all integration tests is also possible using a helper script that can be found at `workflows/test/integration_test.sh`. Using this script requires a working `R` installation with [tidyverse](https://www.tidyverse.org/packages/) installed. However, as pipelines are implemented by combining individual components 
+
+```bash
+./workflows/test/integration_test.sh
+```
+
+## Bug reports
+Issues with Openpipelines are being tracked on [Github](https://github.com/openpipelines-bio/openpipeline/issues).
+In order for an issue to be fixed in a timely manner, creating a complete and reproducable is essential. 
 
 ## Branching strategy
-
-
 ```{mermaid}
 %%{init: { 'logLevel': 'debug', 'theme': 'default'} } }%%
 gitGraph
@@ -51,3 +153,6 @@ gitGraph
   merge main tag: "0.2"
 ```
 
+The develoment version of openpipelines is available on the `main` branch. This is where all new code should be merged into by creating a pull request. 
+Once a pull request has been approved and merged, Github Actions CI will automatically build all components (creating the `target` directory) and push the result to the `main_build` branch.
+In essence, the `main_build` branch is a copy of the `main` branch, but also containing the build components. Once it is time to create a openpipelines release, the Github CI release workflow is manually triggered, the components on the `main` branch will be build and tested. Then, the result will be pushed to the `release` branch and the integration tests will be run. If all tests succeeded, a new github tag and release can be created manually from the `release` branch.
