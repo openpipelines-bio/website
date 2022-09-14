@@ -1,3 +1,9 @@
 ---
 title: "About"
 ---
+
+Breakthroughs in single-cell genomics have been made possible by the simultaneous advancement of experimental and computational technologies. While experimental techniques standardize quickly, computational analysis pipelines are more challenging to compare and thus vary. Analysis platforms such as Seurat and Scanpy have facilitated pipeline building and introduced basic quality standards. Furthermore, we have made first attempts at standardizing workflows for scRNA-seq to bridge the language-gap between these platforms and their users.
+
+However, as new analysis methods are being proposed at an increasing rate, and novel multi-omic sequencing technologies are becoming commonplace, there is an urgent need for new analysis standards for single-cell (multi-)omics data. 
+
+OpenPipelines are best-practice workflows for single-cell single- and multi-omics data. To ensure these workflows are accessible to non-experts and can be deployed in a fast and reproducible way, we will build these into reproducible, modular, and updatable best-practice analysis pipelines using industry-standard workflow tools, high-performance versions of popular methods, and an interoperable, language-independent framework.
