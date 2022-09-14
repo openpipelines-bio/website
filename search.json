@@ -1,66 +1,1263 @@
 [
   {
-    "objectID": "examples/ingestion_bdrhap.html",
-    "href": "examples/ingestion_bdrhap.html",
-    "title": "BD Rhapsody WTA",
+    "objectID": "workflows/module_filter_filter_with_hvg.html",
+    "href": "workflows/module_filter_filter_with_hvg.html",
+    "title": "filter_with_hvg",
     "section": "",
-    "text": "Run the following command to see the available pipeline arguments.\nnextflow \\\n  run openpipelines-bio/openpipeline -r main_build \\\n  -main-script target/nextflow/mapping/bd_rhapsody_wta/main.nf \\\n  --help"
+    "text": "Annotate highly variable genes [Satija15] [Zheng17] [Stuart19].\nExpects logarithmized data, except when flavor=‘seurat_v3’ in which count data is expected.\nDepending on flavor, this reproduces the R-implementations of Seurat [Satija15], Cell Ranger [Zheng17], and Seurat v3 [Stuart19].\nFor the dispersion-based methods ([Satija15] and [Zheng17]), the normalized dispersion is obtained by scaling with the mean and standard deviation of the dispersions for genes falling into a given bin for mean expression of genes. This means that for each bin of mean expression, highly variable genes are selected.\nFor [Stuart19], a normalized variance for each gene is computed. First, the data are standardized (i.e., z-score normalization per feature) with a regularized standard deviation. Next, the normalized variance is computed as the variance of each gene after the transformation. Genes are ranked by the normalized variance."
   },
   {
-    "objectID": "examples/ingestion_bdrhap.html#table-of-arguments",
-    "href": "examples/ingestion_bdrhap.html#table-of-arguments",
-    "title": "BD Rhapsody WTA",
-    "section": "Table of arguments",
-    "text": "Table of arguments\n\n\n\n\n\n\n\n\n\n\nname\ntype\ndescription\n\n\n\n\ninput\nfile\nPath to your read files in the FASTQ.GZ format. You may specify as many R1/R2 read pairs as you want.\n\n\nreference_genome\nfile\nPath to STAR index as a tar.gz file.\n\n\ntranscriptome_annotation\nfile\nPath to GTF annotation file.\n\n\nabseq_reference\nfile\nPath to the AbSeq reference file in FASTA format. Only needed if BD AbSeq Ab-Oligos are used.\n\n\nsupplemental_reference\nfile\nPath to the supplemental reference file in FASTA format. Only needed if there are additional transgene sequences used in the experiment.\n\n\noutput\nfile\nOutput folder. Output still needs to be processed further.\n\n\nputative_cell_call\nstring\nSpecify the dataset to be used for putative cell calling. For putative cell calling using an AbSeq dataset, please provide an AbSeq_Reference fasta file above.\n\n\nexact_cell_count\ninteger\nExact cell count - Set a specific number (>=1) of cells as putative, based on those with the highest error-corrected read count\n\n\ndisable_putative_calling\nboolean_true\nDisable Refined Putative Cell Calling - Determine putative cells using only the basic algorithm (minimum second derivative along the cumulative reads curve). The refined algorithm attempts to remove false positives and recover false negatives, but may not be ideal for certain complex mixtures of cell types. Does not apply if Exact Cell Count is set.\n\n\nsubsample\ndouble\nA number >1 or fraction (0 < n < 1) to indicate the number or percentage of reads to subsample.\n\n\nsubsample_seed\ninteger\nA seed for replicating a previous subsampled run.\n\n\nsample_tags_version\nstring\nSpecify if multiplexed run.\n\n\ntag_names\nstring\nTag_Names (optional) - Specify the tag number followed by ‘-’ and the desired sample name to appear in Sample_Tag_Metrics.csv. Do not use the special characters: &, (), [], {}, <>, ?, |\n\n\nvdj_version\nstring\nSpecify if VDJ run.\n\n\nrun_name\nstring\nSpecify a run name to use as the output file base name. Use only letters, numbers, or hyphens. Do not use special characters or spaces.\n\n\nparallel\nboolean\nRun jobs in parallel.\n\n\ntimestamps\nboolean_true\nAdd timestamps to the errors, warnings, and notifications.\n\n\noverride_min_ram\ninteger\nOverride the minimum RAM requirements specified in the CWL (in GB).\n\n\noverride_min_cores\ninteger\nOverride the minimum cores requirements specified in the CWL.\n\n\ndryrun\nboolean_true\nIf true, the output directory will only contain the CWL input files, but the pipeline itself will not be executed."
+    "objectID": "workflows/module_filter_filter_with_hvg.html#argument-help",
+    "href": "workflows/module_filter_filter_with_hvg.html#argument-help",
+    "title": "filter_with_hvg",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/filter/filter_with_hvg/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput h5mu file\nfile, required, example: “input.h5mu”\n\n\n--layer\nuse adata.layers[layer] for expression values instead of adata.X.\nstring\n\n\n--output\nOutput h5mu file.\nfile, example: “output.h5mu”\n\n\n--var_name_filter\nIn which .var slot to store a boolean array corresponding to which observations should be filtered out.\nstring, default: “filter_with_hvg”\n\n\n--varm_name\nIn which .varm slot to store additional metadata.\nstring, default: “hvg”\n\n\n--do_subset\nWhether to subset before storing the output.\nboolean_true\n\n\n--flavor\nChoose the flavor for identifying highly variable genes. For the dispersion based methods in their default workflows, Seurat passes the cutoffs whereas Cell Ranger passes n_top_genes.\nstring, default: “seurat”\n\n\n--n_top_genes\nNumber of highly-variable genes to keep. Mandatory if flavor=‘seurat_v3’.\ninteger\n\n\n--min_mean\nIf n_top_genes is defined, this and all other cutoffs for the means and the normalized dispersions are ignored. Ignored if flavor=‘seurat_v3’.\ndouble, default: 0.0125\n\n\n--max_mean\nIf n_top_genes is defined, this and all other cutoffs for the means and the normalized dispersions are ignored. Ignored if flavor=‘seurat_v3’.\ndouble, default: 3\n\n\n--min_disp\nIf n_top_genes is defined, this and all other cutoffs for the means and the normalized dispersions are ignored. Ignored if flavor=‘seurat_v3’.\ndouble, default: 0.5\n\n\n--max_disp\nIf n_top_genes is defined, this and all other cutoffs for the means and the normalized dispersions are ignored. Ignored if flavor=‘seurat_v3’. Default is +inf.\ndouble\n\n\n--span\nThe fraction of the data (cells) used when estimating the variance in the loess model fit if flavor=‘seurat_v3’.\ndouble, default: 0.3\n\n\n--n_bins\nNumber of bins for binning the mean gene expression. Normalization is done with respect to each bin. If just a single gene falls into a bin, the normalized dispersion is artificially set to 1.\ninteger, default: 20\n\n\n--obs_batch_key\nIf specified, highly-variable genes are selected within each batch separately and merged. This simple process avoids the selection of batch-specific genes and acts as a lightweight batch correction method. For all flavors, genes are first sorted by how many batches they are a HVG. For dispersion-based flavors ties are broken by normalized dispersion. If flavor = ‘seurat_v3’, ties are broken by the median (across batches) rank based on within-batch normalized variance.\nstring"
   },
   {
-    "objectID": "examples/ingestion_bdrhap.html#download-example-files",
-    "href": "examples/ingestion_bdrhap.html#download-example-files",
-    "title": "BD Rhapsody WTA",
-    "section": "Download example files",
-    "text": "Download example files\nmkdir raw\nwget \"http://bd-rhapsody-public.s3.amazonaws.com/Rhapsody-Demo-Data-Inputs/12WTA-ABC-SMK-EB-5kJRT.tar\"\ntar -xvf \"12WTA-ABC-SMK-EB-5kJRT.tar\" -C \"raw/\" --strip-components=1\nll -h raw\n-rw-------. 1 rcannood rcannood 6.2G Jun  3 20:50 12ABC_S1_L432_R1_001.fastq.gz\n-rw-------. 1 rcannood rcannood 4.8G Jun  3 20:53 12ABC_S1_L432_R2_001.fastq.gz\n-rw-------. 1 rcannood rcannood 257M Jun  3 20:51 12SMK_S1_L432_R1_001.fastq.gz\n-rw-------. 1 rcannood rcannood 145M Jun  3 20:51 12SMK_S1_L432_R2_001.fastq.gz\n-rw-------. 1 rcannood rcannood  16G Jun  3 20:51 12WTA_S1_L432_R1_001.fastq.gz\n-rw-------. 1 rcannood rcannood  20G Jun  3 20:53 12WTA_S1_L432_R2_001.fastq.gz\n-rw-------. 1 rcannood rcannood 2.4K Jun  3 00:04 BDAbSeq_ImmuneDiscoveryPanel.fasta\n\n\n\n\n\n\nWarning\n\n\n\nThis file is 45GB in size, so it might take a while to download.\n\n\nUnfortunately, the protocol for dataset is not (yet) described on the BD Rhapsody Demo Datasets website. However it seems these samples contain 5k cells from the Jurkat, Ramos and THP1 cell lines mixed in a 1:1:1 ratio, where one sample was tagged with the Whole Transcriptome Amplification (WTA) kit, one with the Single-Cell Multiplexing Kit (SMK), and one with the Antibody-specific BarCode (ABC) kit."
+    "objectID": "workflows/module_filter_filter_with_hvg.html#authors",
+    "href": "workflows/module_filter_filter_with_hvg.html#authors",
+    "title": "filter_with_hvg",
+    "section": "Authors",
+    "text": "Authors\n\nDries De Maeyer (contributor)\nRobrecht Cannoodt   (maintainer, contributor)"
   },
   {
-    "objectID": "examples/ingestion_bdrhap.html#download-reference",
-    "href": "examples/ingestion_bdrhap.html#download-reference",
-    "title": "BD Rhapsody WTA",
-    "section": "Download reference",
-    "text": "Download reference\nmkdir reference\nwget \"https://bd-rhapsody-public.s3.amazonaws.com/Rhapsody-WTA/GRCh38-PhiX-gencodev29/GRCh38-PhiX-gencodev29-20181205.tar.gz\" -O \"reference/GRCh38-PhiX-gencodev29-20181205.tar.gz\"\nwget \"https://bd-rhapsody-public.s3.amazonaws.com/Rhapsody-WTA/GRCh38-PhiX-gencodev29/gencodev29-20181205.gtf\" -O \"reference/gencodev29-20181205.gtf\"\nll -h reference\n-rw-------. 1 rcannood rcannood 1.1G Jun  3 20:30 gencodev29-20181205.gtf\n-rw-------. 1 rcannood rcannood  25G Jun  3 20:45 GRCh38-PhiX-gencodev29-20181205.tar.gz\n\n\n\n\n\n\nWarning\n\n\n\nThis reference is already quite old. You might want to build a new version. We might include a pipeline for this in the future."
-  },
-  {
-    "objectID": "examples/ingestion_bdrhap.html#creating-the-param-file",
-    "href": "examples/ingestion_bdrhap.html#creating-the-param-file",
-    "title": "BD Rhapsody WTA",
-    "section": "Creating the param file",
-    "text": "Creating the param file\nContents of params.yaml:\nparam_list:\n- id: \"SMK\"\n  run_name: \"SMK\"\n  output: \"SMK\"\n  input: \"raw/12SMK_S1_L432_R[12]_001.fastq.gz\"\n- id: \"ABC\"\n  run_name: \"ABC\"\n  output: \"ABC\"\n  input: \"raw/12ABC_S1_L432_R[12]_001.fastq.gz\"\n- id: \"WTA\"\n  run_name: \"WTA\"\n  output: \"WTA\"\n  input: \"raw/12WTA_S1_L432_R[12]_001.fastq.gz\"\nabseq_reference: \"raw/BDAbSeq_ImmuneDiscoveryPanel.fasta\"\nreference_genome: \"reference/GRCh38-PhiX-gencodev29-20181205.tar.gz\"\ntranscriptome_annotation: \"reference/gencodev29-20181205.gtf\"\npublish_dir: \"output/\"\nsample_tags_version: \"hs\"\ntag_names: [\"1-Jurkat\", \"2-Ramos\", \"3-THP1\"]\nputative_cell_call: \"mRNA\""
-  },
-  {
-    "objectID": "examples/ingestion_bdrhap.html#creating-additional-config-settings",
-    "href": "examples/ingestion_bdrhap.html#creating-additional-config-settings",
-    "title": "BD Rhapsody WTA",
-    "section": "Creating additional config settings",
-    "text": "Creating additional config settings\nContents of nextflow.config:\n// define memory and cpu constraints\nprocess {\n  withLabel: highmem { memory = 60.Gb }\n  withLabel: highcpu { cpus = 30 }\n}\n\n// do not stop on error\nprocess.errorStrategy = 'ignore' \n\n// set default container\nprocess.container = 'nextflow/bash:latest'\n\n// temp dir needs at least 500GB free disk space\ndocker.temp = \"/tmp\"\n\n// use docker\ndocker.enabled = true"
-  },
-  {
-    "objectID": "examples/ingestion_bdrhap.html#starting-a-bd-rhapsody-run",
-    "href": "examples/ingestion_bdrhap.html#starting-a-bd-rhapsody-run",
-    "title": "BD Rhapsody WTA",
-    "section": "Starting a BD Rhapsody run",
-    "text": "Starting a BD Rhapsody run\nContents of run.sh:\n#!/bin/bash\nnextflow \\\n  run openpipelines-bio/openpipeline -r main_build \\\n  -main-script target/nextflow/mapping/bd_rhapsody_wta/main.nf \\\n  -resume -latest \\\n  -params-file params.yaml"
-  },
-  {
-    "objectID": "examples/ingestion_bdrhap.html#output",
-    "href": "examples/ingestion_bdrhap.html#output",
-    "title": "BD Rhapsody WTA",
-    "section": "Output",
-    "text": "Output\noutput\n├── ABC\n│   ├── ABC_Bioproduct_Stats.csv\n│   ├── ABC_DBEC_MolsPerCell.csv\n│   ├── ABC_DBEC_MolsPerCell_Unfiltered.csv.gz\n│   ├── ABC_DBEC_ReadsPerCell.csv\n│   ├── ABC_DBEC_ReadsPerCell_Unfiltered.csv.gz\n│   ├── ABC_Expression_Data.st\n│   ├── ABC_Expression_Data_Unfiltered.st.gz\n│   ├── ABC_final.BAM\n│   ├── ABC_final.BAM.bai\n│   ├── ABC_Metrics_Summary.csv\n│   ├── ABC_RSEC_MolsPerCell.csv\n│   ├── ABC_RSEC_MolsPerCell_Unfiltered.csv.gz\n│   ├── ABC_RSEC_ReadsPerCell.csv\n│   ├── ABC_RSEC_ReadsPerCell_Unfiltered.csv.gz\n│   └── config.yml\n├── SMK\n│   ├── Combined_SMK_Expression_Data.st\n│   ├── Combined_SMK_final.BAM\n│   ├── Combined_SMK_final.BAM.bai\n│   ├── Combined_SMK_RSEC_MolsPerCell.csv\n│   ├── Combined_SMK_RSEC_ReadsPerCell.csv\n│   ├── config.yml\n│   ├── SMK_Bioproduct_Stats.csv\n│   ├── SMK_Expression_Data_Unfiltered.st.gz\n│   ├── SMK_Metrics_Summary.csv\n│   ├── SMK_Multiplet_and_Undetermined.zip\n│   ├── SMK_RSEC_MolsPerCell_Unfiltered.csv.gz\n│   ├── SMK_RSEC_ReadsPerCell_Unfiltered.csv.gz\n│   ├── SMK_Sample_Tag_Calls.csv\n│   ├── SMK_Sample_Tag_Metrics.csv\n│   └── SMK_Sample_Tag_ReadsPerCell.csv\n└── WTA\n    ├── config.yml\n    ├── WTA_Bioproduct_Stats.csv\n    ├── WTA_Expression_Data.st\n    ├── WTA_Expression_Data_Unfiltered.st.gz\n    ├── WTA_final.BAM\n    ├── WTA_final.BAM.bai\n    ├── WTA_Metrics_Summary.csv\n    ├── WTA_RSEC_MolsPerCell.csv\n    ├── WTA_RSEC_MolsPerCell_Unfiltered.csv.gz\n    ├── WTA_RSEC_ReadsPerCell.csv\n    └── WTA_RSEC_ReadsPerCell_Unfiltered.csv.gz"
-  },
-  {
-    "objectID": "architecture/use-cases.html",
-    "href": "architecture/use-cases.html",
-    "title": "Use-cases",
+    "objectID": "workflows/module_download_download_file.html",
+    "href": "workflows/module_download_download_file.html",
+    "title": "download_file",
     "section": "",
-    "text": "A single unimodal sample\n\n\n\n\n\n\nflowchart LR\n\n  Raw1[Sample 1] --- Ingestion1[/Ingestion/] --> Split1[/Split/] --> GEX1[GEX 1]\n  GEX1 --> ProcGEX1[/USS GEX/]\n  ProcGEX1 --- ConcatGEX[/Concatenating\\nSamples/] --> GEX[Combined\\nGEX]\n  GEX --> ProcGEX[/UMS GEX/]\n  ProcGEX --- Merge[/Merge/] --> Integration[/Integration/] --> Downstream[/.../]\n\n\n\n\n\n\nFigure 1: Example of how the concatenation and merges work.\nGEX: Gene-expression. USS: Unimodal single-sample processing. UMS: Unimodal multi-sample processing.\n\n\n\n\n\n\n\nA single multimodal sample\n\n\n\n\n\n\nflowchart LR\n\n  Raw1[Sample 1] --- Ingestion1[/Ingestion/] --> Split1[/Split/] --> GEX1[GEX 1] & ADT1[ADT 1] & RNAV1[RNAV 1]\n  GEX1 --> ProcGEX1[/USS GEX/]\n  ADT1 --> ProcADT1[/USS ADT/]\n  RNAV1 --> ProcRNAV1[/USS RNAV/]\n  ProcGEX1 --- ConcatGEX[/Concatenating\\nSamples/] --> GEX[Combined\\nGEX]\n  ProcADT1 --- ConcatADT[/Concatenating\\nSamples/] --> ADT[Combined\\nADT]\n  ProcRNAV1 --- ConcatRNAV[/Concatenating\\nSamples/] --> RNAV[Combined\\nRNAV]\n  GEX --> ProcGEX[/UMS GEX/]\n  ADT --> ProcADT[/UMS ADT/]\n  RNAV --> ProcRNAV[/UMS RNAV/]\n  ProcGEX & ProcADT & ProcRNAV--- Merge[/Merge/] --> Integration[/Integration/] --> Downstream[/.../]\n\n\n\n\n\n\nFigure 2: Example of how the concatenation and merges work.\nGEX: Gene-expression. ADT: Antibody-Derived Tags. RNAV: RNA Velocity. USS: Unimodal single-sample processing. UMS: Unimodal multi-sample processing.\n\n\n\n\n\n\n\nMultiple unimodal samples\n\n\n\n\n\n\nflowchart LR\n\n  Raw1[Sample 1] --- Ingestion1[/Ingestion/] --> Split1[/Split/] --> GEX1[GEX 1]\n  Raw2[Sample 2] --- Ingestion2[/Ingestion/] --> Split2[/Split/] --> GEX2[GEX 2]\n  Raw3[Sample 3] --- Ingestion3[/Ingestion/] --> Split3[/Split/] --> GEX3[GEX 3]\n  GEX1 --> ProcGEX1[/USS GEX/]\n  GEX2 --> ProcGEX2[/USS GEX/]\n  GEX3 --> ProcGEX3[/USS GEX/]\n  ProcGEX1 & ProcGEX2 & ProcGEX3 --- ConcatGEX[/Concatenating\\nSamples/] --> GEX[Combined\\nGEX]\n  GEX --> ProcGEX[/UMS GEX/]\n  ProcGEX --- Merge[/Merge/] --> Integration[/Integration/] --> Downstream[/.../]\n\n\n\n\n\n\nFigure 3: Example of how the concatenation and merges work.\nGEX: Gene-expression. USS: Unimodal single-sample processing. UMS: Unimodal multi-sample processing.\n\n\n\n\n\n\n\nMultiple multimodal samples\n\n\n\n\n\n\nflowchart LR\n\n  Raw1[Sample 1] --- Ingestion1[/Ingestion/] --> Split1[/Split/] --> GEX1[GEX 1] & ADT1[ADT 1]\n  Raw2[Sample 2] --- Ingestion2[/Ingestion/] --> Split2[/Split/] --> GEX2[GEX 2] & ADT2[ADT 2]\n  GEX1 --> ProcGEX1[/USS GEX/]\n  ADT1 --> ProcADT1[/USS ADT/]\n  GEX2 --> ProcGEX2[/USS GEX/]\n  ADT2 --> ProcADT2[/USS ADT/]\n  ProcGEX1 & ProcGEX2 --- ConcatGEX[/Concatenating\\nSamples/] --> GEX[Combined\\nGEX]\n  ProcADT1 & ProcADT2 --- ConcatADT[/Concatenating\\nSamples/] --> ADT[Combined\\nADT]\n  GEX --> ProcGEX[/UMS GEX/]\n  ADT --> ProcADT[/UMS ADT/]\n  ProcGEX & ProcADT --- Merge[/Merge/] --> Integration[/Integration/] --> Downstream[/.../]\n\n\n\n\n\n\nFigure 4: Example of how the concat and merges work.\nGEX: Gene-expression. ADT: Antibody-Derived Tags. USS: Unimodal single-sample processing. UMS: Unimodal multi-sample processing."
+    "text": "Download a file."
+  },
+  {
+    "objectID": "workflows/module_download_download_file.html#argument-help",
+    "href": "workflows/module_download_download_file.html#argument-help",
+    "title": "download_file",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/download/download_file/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nURL to a file to download.\nstring, required, example: “https://cf.10xgenomics.com/samples/cell-exp/3.0.0/pbmc_1k_protein_v3/pbmc_1k_protein_v3_raw_feature_bc_matrix.h5”\n\n\n--output\nPath where to store output.\nfile, required, example: “pbmc_1k_protein_v3_raw_feature_bc_matrix.h5”\n\n\n--verbose\nIncrease verbosity\nboolean_true"
+  },
+  {
+    "objectID": "workflows/module_download_download_file.html#authors",
+    "href": "workflows/module_download_download_file.html#authors",
+    "title": "download_file",
+    "section": "Authors",
+    "text": "Authors\n\nRobrecht Cannoodt   (maintainer)"
+  },
+  {
+    "objectID": "workflows/workflow_ingestion_cellranger_demux.html",
+    "href": "workflows/workflow_ingestion_cellranger_demux.html",
+    "title": "cellranger_demux",
+    "section": "",
+    "text": "Cell Ranger demux pipeline."
+  },
+  {
+    "objectID": "workflows/workflow_ingestion_cellranger_demux.html#argument-help",
+    "href": "workflows/workflow_ingestion_cellranger_demux.html#argument-help",
+    "title": "cellranger_demux",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the workflow’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script /home/rcannood/workspace/jnj/openpipeline/workflows/ingestion/cellranger_demux/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--id\nID of the sample.\nstring, required, example: “foo”\n\n\n--input\nA BCL directory.\nfile, required, example: “/path/to/bcl”\n\n\n--sample_sheet\nThe sample sheet for the samples to be demultiplexed.\nfile, required, example: “sample_sheet.csv”\n\n\n--cores\nSet max cores the pipeline may request at one time.\ninteger, example: 2\n\n\n--memory\nSet max GB the pipeline may request at one time.\ninteger, example: 10"
+  },
+  {
+    "objectID": "workflows/workflow_ingestion_cellranger_demux.html#authors",
+    "href": "workflows/workflow_ingestion_cellranger_demux.html#authors",
+    "title": "cellranger_demux",
+    "section": "Authors",
+    "text": "Authors\n\nAngela Pisco   (author)\nSamuel D’Souza  (author)\nRobrecht Cannoodt   (author, maintainer)"
+  },
+  {
+    "objectID": "workflows/module_convert_from_velocyto_to_h5mu.html",
+    "href": "workflows/module_convert_from_velocyto_to_h5mu.html",
+    "title": "from_velocyto_to_h5mu",
+    "section": "",
+    "text": "Convert a velocyto .loom file to h5mu"
+  },
+  {
+    "objectID": "workflows/module_convert_from_velocyto_to_h5mu.html#argument-help",
+    "href": "workflows/module_convert_from_velocyto_to_h5mu.html#argument-help",
+    "title": "from_velocyto_to_h5mu",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/convert/from_velocyto_to_h5mu/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput velocyto .loom file.\nfile, required, example: “input.loom”\n\n\n--output\nOutput h5mu file.\nfile, example: “output.h5mu”"
+  },
+  {
+    "objectID": "workflows/module_convert_from_velocyto_to_h5mu.html#authors",
+    "href": "workflows/module_convert_from_velocyto_to_h5mu.html#authors",
+    "title": "from_velocyto_to_h5mu",
+    "section": "Authors",
+    "text": "Authors\n\nDries Schaumont   (maintainer)"
+  },
+  {
+    "objectID": "workflows/module_demux_cellranger_mkfastq.html",
+    "href": "workflows/module_demux_cellranger_mkfastq.html",
+    "title": "cellranger_mkfastq",
+    "section": "",
+    "text": "Demultiplex raw sequencing data"
+  },
+  {
+    "objectID": "workflows/module_demux_cellranger_mkfastq.html#argument-help",
+    "href": "workflows/module_demux_cellranger_mkfastq.html#argument-help",
+    "title": "cellranger_mkfastq",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/demux/cellranger_mkfastq/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nPath to the (untarred) BCL files. Expects ‘RunParameters.xml’ at ‘./’.\nfile, required, example: “/path/to/bcl”\n\n\n--sample_sheet\nThe path to the sample sheet.\nfile, required, example: “SampleSheet.csv”\n\n\n--output\nThe folder to store the demux results\nfile, required, default: “fastqs”, example: “/path/to/output”\n\n\n--separate_reports\nShould reports be stored in a separate dir. Should be used with the –reports argument.\nboolean_true\n\n\n--reports\nReports directory\nfile, default: “reports”, example: “reports_dir”\n\n\n--cores\nSet max cores the pipeline may request at one time.\ninteger, example: 2\n\n\n--memory\nSet max GB the pipeline may request at one time.\ninteger, example: 10"
+  },
+  {
+    "objectID": "workflows/module_demux_cellranger_mkfastq.html#authors",
+    "href": "workflows/module_demux_cellranger_mkfastq.html#authors",
+    "title": "cellranger_mkfastq",
+    "section": "Authors",
+    "text": "Authors\n\nAngela Pisco   (author)\nSamuel D’Souza  (author)\nRobrecht Cannoodt   (author, maintainer)"
+  },
+  {
+    "objectID": "workflows/module_report_mermaid.html",
+    "href": "workflows/module_report_mermaid.html",
+    "title": "mermaid",
+    "section": "",
+    "text": "Generates a network from mermaid code. See https://mermaid-js.github.io/mermaid/#/Tutorials. This component uses the external mermaid.ink service to generate visual networks."
+  },
+  {
+    "objectID": "workflows/module_report_mermaid.html#argument-help",
+    "href": "workflows/module_report_mermaid.html#argument-help",
+    "title": "mermaid",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/report/mermaid/main.nf --help\n\nArguments\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput directory\nfile, required\n\n\n--output\nGenerated network as output.\nfile, required\n\n\n--test\nThe test file to be executed\nfile, default: “test.py”"
+  },
+  {
+    "objectID": "workflows/module_report_mermaid.html#authors",
+    "href": "workflows/module_report_mermaid.html#authors",
+    "title": "mermaid",
+    "section": "Authors",
+    "text": "Authors\n\nDries De Maeyer (maintainer)"
+  },
+  {
+    "objectID": "workflows/module_dimred_umap.html",
+    "href": "workflows/module_dimred_umap.html",
+    "title": "umap",
+    "section": "",
+    "text": "UMAP (Uniform Manifold Approximation and Projection) is a manifold learning technique suitable for visualizing high-dimensional data. Besides tending to be faster than tSNE, it optimizes the embedding such that it best reflects the topology of the data, which we represent throughout Scanpy using a neighborhood graph. tSNE, by contrast, optimizes the distribution of nearest-neighbor distances in the embedding such that these best match the distribution of distances in the high-dimensional space. We use the implementation of umap-learn [McInnes18]. For a few comparisons of UMAP with tSNE, see this preprint."
+  },
+  {
+    "objectID": "workflows/module_dimred_umap.html#argument-help",
+    "href": "workflows/module_dimred_umap.html#argument-help",
+    "title": "umap",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/dimred/umap/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput h5mu file\nfile, required, example: “input.h5mu”\n\n\n--uns_neighbors\nThe .uns neighbors slot as output by the find_neighbors component.\nstring, default: “neighbors”\n\n\n--output\nOutput h5mu file.\nfile, required, example: “output.h5mu”\n\n\n--output_key\nThe pre/postfix under which to store the UMAP results.\nstring, default: “umap”\n\n\n--min_dist\nThe effective minimum distance between embedded points. Smaller values will result in a more clustered/clumped embedding where nearby points on the manifold are drawn closer together, while larger values will result on a more even dispersal of points. The value should be set relative to the spread value, which determines the scale at which embedded points will be spread out.\ndouble, default: 0.5\n\n\n--spread\nThe effective scale of embedded points. In combination with min_dist this determines how clustered/clumped the embedded points are.\ndouble, default: 1\n\n\n--num_components\nThe number of dimensions of the embedding.\ninteger, default: 2\n\n\n--max_iter\nThe number of iterations (epochs) of the optimization.\ninteger\n\n\n--alpha\nThe initial learning rate for the embedding optimization.\ndouble, default: 1\n\n\n--gamma\nWeighting applied to negative samples in low dimensional embedding optimization. Values higher than one will result in greater weight being given to negative samples.\ndouble, default: 1\n\n\n--negative_sample_rate\nThe number of negative edge/1-simplex samples to use per positive edge/1-simplex sample in optimizing the low dimensional embedding.\ninteger, default: 5\n\n\n--init_pos\nHow to initialize the low dimensional embedding. Called init in the original UMAP. Options are paga, spectral and random.\nstring, default: “spectral”"
+  },
+  {
+    "objectID": "workflows/module_dimred_umap.html#authors",
+    "href": "workflows/module_dimred_umap.html#authors",
+    "title": "umap",
+    "section": "Authors",
+    "text": "Authors\n\nDries De Maeyer (maintainer)"
+  },
+  {
+    "objectID": "workflows/module_interactive_run_cirrocumulus.html",
+    "href": "workflows/module_interactive_run_cirrocumulus.html",
+    "title": "run_cirrocumulus",
+    "section": "",
+    "text": "Run the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/interactive/run_cirrocumulus/main.nf --help\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nDirectory to mount\nfile, default: “.”\n\n\n--port\nPort to use\nstring, default: “5005”"
+  },
+  {
+    "objectID": "workflows/module_interactive_run_cirrocumulus.html#authors",
+    "href": "workflows/module_interactive_run_cirrocumulus.html#authors",
+    "title": "run_cirrocumulus",
+    "section": "Authors",
+    "text": "Authors"
+  },
+  {
+    "objectID": "workflows/module_integrate_concat.html",
+    "href": "workflows/module_integrate_concat.html",
+    "title": "concat",
+    "section": "",
+    "text": "Concatenates several uni-modal samples in .h5mu files into a single file."
+  },
+  {
+    "objectID": "workflows/module_integrate_concat.html#argument-help",
+    "href": "workflows/module_integrate_concat.html#argument-help",
+    "title": "concat",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/integrate/concat/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nPaths to the different samples to be concatenated.\nfile, required, example: “sample_paths”\n\n\n--sample_names\nNames of the different samples that have to be concatenated. Must be of same length as --input.\nstring, required, example: “sample_names”\n\n\n--obs_sample_name\nName of the .obs key under which to add the sample names.\nstring, default: “sample_id”\n\n\n--compression\nThe compression format to be used on the final h5mu object.\nstring, default: “gzip”\n\n\n--other_axis_mode\nHow to handle the merging of other axis (var, obs, …). - None: keep no data - same: only keep elements of the matrices which are the same in each of the samples - unique: only keep elements for which there is only 1 possible value (1 value that can occur in multiple samples) - first: keep the annotation from the first sample - only: keep elements that show up in only one of the objects (1 unique element in only 1 sample) - move: identical to ‘same’, but moving the conflicting values to .varm or .obsm\nstring, default: “move”"
+  },
+  {
+    "objectID": "workflows/module_integrate_concat.html#authors",
+    "href": "workflows/module_integrate_concat.html#authors",
+    "title": "concat",
+    "section": "Authors",
+    "text": "Authors\n\nDries Schaumont (maintainer)"
+  },
+  {
+    "objectID": "workflows/workflow_ingestion_bd_rhapsody.html",
+    "href": "workflows/workflow_ingestion_bd_rhapsody.html",
+    "title": "bd_rhapsody",
+    "section": "",
+    "text": "A wrapper for the BD Rhapsody Analysis CWL v1.10.1 pipeline.\nThe CWL pipeline file is obtained by cloning ‘https://bitbucket.org/CRSwDev/cwl/src/master/’ and removing all objects with class ‘DockerRequirement’ from the YML.\nThis pipeline can be used for a targeted analysis (with --mode targeted) or for a whole transcriptome analysis (with --mode wta).\nThe reference_genome and transcriptome_annotation files can be downloaded from these locations:"
+  },
+  {
+    "objectID": "workflows/workflow_ingestion_bd_rhapsody.html#argument-help",
+    "href": "workflows/workflow_ingestion_bd_rhapsody.html#argument-help",
+    "title": "bd_rhapsody",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the workflow’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script /home/rcannood/workspace/jnj/openpipeline/workflows/ingestion/bd_rhapsody/main.nf --help\n\nInputs\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--mode\nWhether to run a whole transcriptome analysis (WTA) or a targeted analysis.\nstring, required, example: “wta”\n\n\n--id\nID of the sample.\nstring, required, example: “foo”\n\n\n--input\nPath to your read files in the FASTQ.GZ format. You may specify as many R1/R2 read pairs as you want.\nfile, required, example: “input.fastq.gz”\n\n\n--reference\nRefence to map to. For --mode wta, this is the path to STAR index as a tar.gz file. For --mode targeted, this is the path to mRNA reference file for pre-designed, supplemental, or custom panel, in FASTA format\nfile, required, example: “reference_genome.tar.gz|reference.fasta”\n\n\n--transcriptome_annotation\nPath to GTF annotation file (only for --mode wta).\nfile, example: “transcriptome.gtf”\n\n\n--abseq_reference\nPath to the AbSeq reference file in FASTA format. Only needed if BD AbSeq Ab-Oligos are used.\nfile, example: “abseq_reference.fasta”\n\n\n--supplemental_reference\nPath to the supplemental reference file in FASTA format. Only needed if there are additional transgene sequences used in the experiment (only for --mode wta).\nfile, example: “supplemental_reference.fasta”\n\n\n--sample_prefix\nSpecify a run name to use as the output file base name. Use only letters, numbers, or hyphens. Do not use special characters or spaces.\nstring, default: “sample”\n\n\n\n\n\n\nOutputs\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--output\nOutput folder. Output still needs to be processed further.\nfile, required, example: “output_dir”\n\n\n\n\n\n\nPutative cell calling settings\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--putative_cell_call\nSpecify the dataset to be used for putative cell calling. For putative cell calling using an AbSeq dataset, please provide an AbSeq_Reference fasta file above.\nstring, example: “mRNA”\n\n\n--exact_cell_count\nExact cell count - Set a specific number (>=1) of cells as putative, based on those with the highest error-corrected read count\ninteger, example: 10000\n\n\n--disable_putative_calling\nDisable Refined Putative Cell Calling - Determine putative cells using only the basic algorithm (minimum second derivative along the cumulative reads curve). The refined algorithm attempts to remove false positives and recover false negatives, but may not be ideal for certain complex mixtures of cell types. Does not apply if Exact Cell Count is set.\nboolean_true\n\n\n\n\n\n\nSubsample arguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--subsample\nA number >1 or fraction (0 < n < 1) to indicate the number or percentage of reads to subsample.\ndouble, example: 0.01\n\n\n--subsample_seed\nA seed for replicating a previous subsampled run.\ninteger, example: 3445\n\n\n\n\n\n\nMultiplex arguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--sample_tags_version\nSpecify if multiplexed run.\nstring, example: “human”\n\n\n--tag_names\nTag_Names (optional) - Specify the tag number followed by ‘-’ and the desired sample name to appear in Sample_Tag_Metrics.csv. Do not use the special characters: &, (), [], {}, <>, ?, |\nstring, example: “4-mySample”, example: “9-myOtherSample”, example: “6-alsoThisSample”\n\n\n\n\n\n\nVDJ arguments\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--vdj_version\nSpecify if VDJ run.\nstring, example: “human”\n\n\n\n\n\n\nCWL-runner arguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--parallel\nRun jobs in parallel.\nboolean, default: TRUE\n\n\n--timestamps\nAdd timestamps to the errors, warnings, and notifications.\nboolean_true\n\n\n--dryrun\nIf true, the output directory will only contain the CWL input files, but the pipeline itself will not be executed.\nboolean_true"
+  },
+  {
+    "objectID": "workflows/workflow_ingestion_bd_rhapsody.html#authors",
+    "href": "workflows/workflow_ingestion_bd_rhapsody.html#authors",
+    "title": "bd_rhapsody",
+    "section": "Authors",
+    "text": "Authors\n\nRobrecht Cannoodt   (maintainer)"
+  },
+  {
+    "objectID": "workflows/module_transform_delete_layer.html",
+    "href": "workflows/module_transform_delete_layer.html",
+    "title": "delete_layer",
+    "section": "",
+    "text": "Delete an anndata layer from one or more modalities."
+  },
+  {
+    "objectID": "workflows/module_transform_delete_layer.html#argument-help",
+    "href": "workflows/module_transform_delete_layer.html#argument-help",
+    "title": "delete_layer",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/transform/delete_layer/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput h5mu file\nfile, required, example: “input.h5mu”\n\n\n--layer\nInput layer to remove\nstring, required\n\n\n--output\nOutput h5mu file.\nfile, required, default: “output.h5mu”\n\n\n--missing_ok\nDo not raise an error if the layer does not exist for all modalities.\nboolean_true"
+  },
+  {
+    "objectID": "workflows/module_transform_delete_layer.html#authors",
+    "href": "workflows/module_transform_delete_layer.html#authors",
+    "title": "delete_layer",
+    "section": "Authors",
+    "text": "Authors\n\nDries Schaumont (maintainer)"
+  },
+  {
+    "objectID": "workflows/workflow_process_rna_multisample.html",
+    "href": "workflows/workflow_process_rna_multisample.html",
+    "title": "multisample",
+    "section": "",
+    "text": "Processing unimodal multi-sample RNA transcriptomics data."
+  },
+  {
+    "objectID": "workflows/workflow_process_rna_multisample.html#argument-help",
+    "href": "workflows/workflow_process_rna_multisample.html#argument-help",
+    "title": "multisample",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the workflow’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script /home/rcannood/workspace/jnj/openpipeline/workflows/process_rna/multisample/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--id\nIDs of the sample.\nstring, required, example: “foo”\n\n\n--input\nPath to the samples.\nfile, required, example: “dataset.h5mu”\n\n\n--output\nDestination path to the output.\nfile, required, example: “output.h5mu”"
+  },
+  {
+    "objectID": "workflows/workflow_process_rna_multisample.html#authors",
+    "href": "workflows/workflow_process_rna_multisample.html#authors",
+    "title": "multisample",
+    "section": "Authors",
+    "text": "Authors\n\nDries De Maeyer (author)\nRobrecht Cannoodt   (author, maintainer)"
+  },
+  {
+    "objectID": "workflows/module_integrate_harmony.html",
+    "href": "workflows/module_integrate_harmony.html",
+    "title": "harmony",
+    "section": "",
+    "text": "Performs Harmony integration based as described in https://github.com/immunogenomics/harmony."
+  },
+  {
+    "objectID": "workflows/module_integrate_harmony.html#argument-help",
+    "href": "workflows/module_integrate_harmony.html#argument-help",
+    "title": "harmony",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/integrate/harmony/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput h5mu file\nfile, required\n\n\n--output\nOutput h5mu file.\nfile, required\n\n\n--obsm_input\nWhich .obsm slot to use as a starting PCA embedding.\nstring, default: “X_pca”\n\n\n--obsm_output\nIn which .obsm slot to store the resulting integrated embedding.\nstring, default: “X_pca_integrated”\n\n\n--theta\nDiversity clustering penalty parameter. Specify for each variable in group.by.vars. theta=0 does not encourage any diversity. Larger values of theta result in more diverse clusters.\ndouble, default: 2\n\n\n--obs_covariates\nThe .obs field(s) that define the covariate(s) to regress out.\nstring, example: “batch”, example: “sample”"
+  },
+  {
+    "objectID": "workflows/module_integrate_harmony.html#authors",
+    "href": "workflows/module_integrate_harmony.html#authors",
+    "title": "harmony",
+    "section": "Authors",
+    "text": "Authors\n\nDries De Maeyer (author)\nRobrecht Cannoodt   (maintainer, author)"
+  },
+  {
+    "objectID": "workflows/module_transform_log1p.html",
+    "href": "workflows/module_transform_log1p.html",
+    "title": "log1p",
+    "section": "",
+    "text": "Logarithmize the data matrix. Computes X = log(X + 1), where log denotes the natural logarithm unless a different base is given."
+  },
+  {
+    "objectID": "workflows/module_transform_log1p.html#argument-help",
+    "href": "workflows/module_transform_log1p.html#argument-help",
+    "title": "log1p",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/transform/log1p/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput h5mu file\nfile, required, example: “input.h5mu”\n\n\n--input_layer\nInput layer to use. If None, X is normalized\nstring\n\n\n--output_layer\nOutput layer to use. By default, use X.\nstring\n\n\n--output\nOutput h5mu file.\nfile, required, default: “output.h5mu”"
+  },
+  {
+    "objectID": "workflows/module_transform_log1p.html#authors",
+    "href": "workflows/module_transform_log1p.html#authors",
+    "title": "log1p",
+    "section": "Authors",
+    "text": "Authors\n\nDries De Maeyer (maintainer)\nRobrecht Cannoodt   (contributor)"
+  },
+  {
+    "objectID": "workflows/module_cluster_leiden.html",
+    "href": "workflows/module_cluster_leiden.html",
+    "title": "leiden",
+    "section": "",
+    "text": "Cluster cells using the Leiden algorithm [Traag18] implemented in the Scanpy framework [Wolf18]. Leiden is an improved version of the Louvain algorithm [Blondel08]. It has been proposed for single-cell analysis by [Levine15]. This requires having ran neighbors/find_neighbors or neighbors/bbknn first.\nBlondel et al. (2008), Fast unfolding of communities in large networks, J. Stat. Mech. Levine et al. (2015), Data-Driven Phenotypic Dissection of AML Reveals Progenitor-like Cells that Correlate with Prognosis, Cell. Traag et al. (2018), From Louvain to Leiden: guaranteeing well-connected communities arXiv. Wolf et al. (2018), Scanpy: large-scale single-cell gene expression data analysis, Genome Biology."
+  },
+  {
+    "objectID": "workflows/module_cluster_leiden.html#argument-help",
+    "href": "workflows/module_cluster_leiden.html#argument-help",
+    "title": "leiden",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/cluster/leiden/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput file.\nfile, required, example: “input.h5mu”\n\n\n--obsp_connectivities\nIn which .obsp slot the neighbor connectivities can be found.\nstring, default: “connectivities”\n\n\n--output\nOutput file.\nfile, required, example: “output.h5mu”\n\n\n--obs_name\nName of the .obs key under which to add the cluster labels.\nstring, default: “leiden”\n\n\n--resolution\nA parameter value controlling the coarseness of the clustering. Higher values lead to more clusters.\ndouble, default: 1"
+  },
+  {
+    "objectID": "workflows/module_cluster_leiden.html#authors",
+    "href": "workflows/module_cluster_leiden.html#authors",
+    "title": "leiden",
+    "section": "Authors",
+    "text": "Authors\n\nDries De Maeyer (maintainer)"
+  },
+  {
+    "objectID": "workflows/module_reference_build_bdrhap_reference.html",
+    "href": "workflows/module_reference_build_bdrhap_reference.html",
+    "title": "build_bdrhap_reference",
+    "section": "",
+    "text": "Compile a reference into a STAR index compatible with the BD Rhapsody pipeline."
+  },
+  {
+    "objectID": "workflows/module_reference_build_bdrhap_reference.html#argument-help",
+    "href": "workflows/module_reference_build_bdrhap_reference.html#argument-help",
+    "title": "build_bdrhap_reference",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/reference/build_bdrhap_reference/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--genome_fasta\nReference genome fasta.\nfile, required, example: “genome_sequence.fa.gz”\n\n\n--transcriptome_gtf\nReference transcriptome annotation.\nfile, required, example: “transcriptome_annotation.tar.gz”\n\n\n--output\nStar index\nfile, required, example: “star_index.tar.gz”"
+  },
+  {
+    "objectID": "workflows/module_reference_build_bdrhap_reference.html#authors",
+    "href": "workflows/module_reference_build_bdrhap_reference.html#authors",
+    "title": "build_bdrhap_reference",
+    "section": "Authors",
+    "text": "Authors\n\nAngela Pisco   (author)\nRobrecht Cannoodt   (author, maintainer)"
+  },
+  {
+    "objectID": "workflows/workflow_integration_multiomics.html",
+    "href": "workflows/workflow_integration_multiomics.html",
+    "title": "multiomics",
+    "section": "",
+    "text": "A pipeline to analyse multiple multiomics samples."
+  },
+  {
+    "objectID": "workflows/workflow_integration_multiomics.html#argument-help",
+    "href": "workflows/workflow_integration_multiomics.html#argument-help",
+    "title": "multiomics",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the workflow’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script /home/rcannood/workspace/jnj/openpipeline/workflows/integration/multiomics/main.nf --help\n\nInputs\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--id\nID of the sample.\nstring, required, example: “foo”\n\n\n--input\nPath to the sample.\nfile, required, example: “input.h5mu”"
+  },
+  {
+    "objectID": "workflows/workflow_integration_multiomics.html#authors",
+    "href": "workflows/workflow_integration_multiomics.html#authors",
+    "title": "multiomics",
+    "section": "Authors",
+    "text": "Authors\n\nDries Schaumont   (author, maintainer)"
+  },
+  {
+    "objectID": "workflows/module_convert_from_10xmtx_to_h5mu.html",
+    "href": "workflows/module_convert_from_10xmtx_to_h5mu.html",
+    "title": "from_10xmtx_to_h5mu",
+    "section": "",
+    "text": "Converts a 10x mtx into an h5mu file."
+  },
+  {
+    "objectID": "workflows/module_convert_from_10xmtx_to_h5mu.html#argument-help",
+    "href": "workflows/module_convert_from_10xmtx_to_h5mu.html#argument-help",
+    "title": "from_10xmtx_to_h5mu",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/convert/from_10xmtx_to_h5mu/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput mtx folder\nfile, required, example: “input_dir_containing_gz_files”\n\n\n--output\nOutput h5mu file.\nfile, example: “output.h5mu”"
+  },
+  {
+    "objectID": "workflows/module_convert_from_10xmtx_to_h5mu.html#authors",
+    "href": "workflows/module_convert_from_10xmtx_to_h5mu.html#authors",
+    "title": "from_10xmtx_to_h5mu",
+    "section": "Authors",
+    "text": "Authors\n\nRobrecht Cannoodt   (maintainer)"
+  },
+  {
+    "objectID": "workflows/module_mapping_bd_rhapsody.html",
+    "href": "workflows/module_mapping_bd_rhapsody.html",
+    "title": "bd_rhapsody",
+    "section": "",
+    "text": "A wrapper for the BD Rhapsody Analysis CWL v1.10.1 pipeline.\nThe CWL pipeline file is obtained by cloning ‘https://bitbucket.org/CRSwDev/cwl/src/master/’ and removing all objects with class ‘DockerRequirement’ from the YML.\nThis pipeline can be used for a targeted analysis (with --mode targeted) or for a whole transcriptome analysis (with --mode wta).\nThe reference_genome and transcriptome_annotation files can be downloaded from these locations:"
+  },
+  {
+    "objectID": "workflows/module_mapping_bd_rhapsody.html#argument-help",
+    "href": "workflows/module_mapping_bd_rhapsody.html#argument-help",
+    "title": "bd_rhapsody",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/mapping/bd_rhapsody/main.nf --help\n\nInputs\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--mode\nWhether to run a whole transcriptome analysis (WTA) or a targeted analysis.\nstring, required, example: “wta”\n\n\n--input\nPath to your read files in the FASTQ.GZ format. You may specify as many R1/R2 read pairs as you want.\nfile, required, example: “input.fastq.gz”\n\n\n--reference\nRefence to map to. For --mode wta, this is the path to STAR index as a tar.gz file. For --mode targeted, this is the path to mRNA reference file for pre-designed, supplemental, or custom panel, in FASTA format\nfile, required, example: “reference_genome.tar.gz|reference.fasta”\n\n\n--transcriptome_annotation\nPath to GTF annotation file (only for --mode wta).\nfile, example: “transcriptome.gtf”\n\n\n--abseq_reference\nPath to the AbSeq reference file in FASTA format. Only needed if BD AbSeq Ab-Oligos are used.\nfile, example: “abseq_reference.fasta”\n\n\n--supplemental_reference\nPath to the supplemental reference file in FASTA format. Only needed if there are additional transgene sequences used in the experiment (only for --mode wta).\nfile, example: “supplemental_reference.fasta”\n\n\n--sample_prefix\nSpecify a run name to use as the output file base name. Use only letters, numbers, or hyphens. Do not use special characters or spaces.\nstring, default: “sample”\n\n\n\n\n\n\nOutputs\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--output\nOutput folder. Output still needs to be processed further.\nfile, required, example: “output_dir”\n\n\n\n\n\n\nPutative cell calling settings\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--putative_cell_call\nSpecify the dataset to be used for putative cell calling. For putative cell calling using an AbSeq dataset, please provide an AbSeq_Reference fasta file above.\nstring, example: “mRNA”\n\n\n--exact_cell_count\nExact cell count - Set a specific number (>=1) of cells as putative, based on those with the highest error-corrected read count\ninteger, example: 10000\n\n\n--disable_putative_calling\nDisable Refined Putative Cell Calling - Determine putative cells using only the basic algorithm (minimum second derivative along the cumulative reads curve). The refined algorithm attempts to remove false positives and recover false negatives, but may not be ideal for certain complex mixtures of cell types. Does not apply if Exact Cell Count is set.\nboolean_true\n\n\n\n\n\n\nSubsample arguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--subsample\nA number >1 or fraction (0 < n < 1) to indicate the number or percentage of reads to subsample.\ndouble, example: 0.01\n\n\n--subsample_seed\nA seed for replicating a previous subsampled run.\ninteger, example: 3445\n\n\n\n\n\n\nMultiplex arguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--sample_tags_version\nSpecify if multiplexed run.\nstring, example: “human”\n\n\n--tag_names\nTag_Names (optional) - Specify the tag number followed by ‘-’ and the desired sample name to appear in Sample_Tag_Metrics.csv. Do not use the special characters: &, (), [], {}, <>, ?, |\nstring, example: “4-mySample”, example: “9-myOtherSample”, example: “6-alsoThisSample”\n\n\n\n\n\n\nVDJ arguments\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--vdj_version\nSpecify if VDJ run.\nstring, example: “human”\n\n\n\n\n\n\nCWL-runner arguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--parallel\nRun jobs in parallel.\nboolean, default: TRUE\n\n\n--timestamps\nAdd timestamps to the errors, warnings, and notifications.\nboolean_true\n\n\n--dryrun\nIf true, the output directory will only contain the CWL input files, but the pipeline itself will not be executed.\nboolean_true"
+  },
+  {
+    "objectID": "workflows/module_mapping_bd_rhapsody.html#authors",
+    "href": "workflows/module_mapping_bd_rhapsody.html#authors",
+    "title": "bd_rhapsody",
+    "section": "Authors",
+    "text": "Authors\n\nRobrecht Cannoodt   (maintainer)"
+  },
+  {
+    "objectID": "workflows/index.html",
+    "href": "workflows/index.html",
+    "title": "Workflows",
+    "section": "",
+    "text": "Namespace\nName\nAuthor(s)\n\n\n\n\ningestion\nbd_rhapsody\nRobrecht Cannoodt\n\n\ningestion\ncellranger_demux\nAngela Pisco, Samuel D’Souza, Robrecht Cannoodt\n\n\ningestion\ncellranger_mapping\nAngela Pisco, Samuel D’Souza, Robrecht Cannoodt\n\n\ningestion\ndemux\nToni Verbeiren, Marijke Van Moerbeke\n\n\nintegration\nmultimodal_integration\nDries De Maeyer, Robrecht Cannoodt\n\n\nintegration\nmultiomics\nDries Schaumont\n\n\nprocess_rna\nmultisample\nDries De Maeyer, Robrecht Cannoodt\n\n\nprocess_rna\nsinglesample\nDries De Maeyer, Robrecht Cannoodt"
+  },
+  {
+    "objectID": "workflows/index.html#components",
+    "href": "workflows/index.html#components",
+    "title": "Workflows",
+    "section": "Components",
+    "text": "Components\n\n\n\nNamespace\nName\nAuthor(s)\n\n\n\n\ncluster\nleiden\nDries De Maeyer\n\n\ncompression\ntar_extract\n\n\n\nconvert\nfrom_10xh5_to_h5mu\nRobrecht Cannoodt\n\n\nconvert\nfrom_10xmtx_to_h5mu\nRobrecht Cannoodt\n\n\nconvert\nfrom_bd_to_10x_molecular_barcode_tags\nDries Schaumont\n\n\nconvert\nfrom_bdrhap_to_h5mu\nRobrecht Cannoodt\n\n\nconvert\nfrom_h5ad_to_h5mu\nDries De Maeyer\n\n\nconvert\nfrom_h5mu_to_seurat\nRobrecht Cannoodt\n\n\nconvert\nfrom_velocyto_to_h5mu\nDries Schaumont\n\n\ndemux\nbcl_convert\nToni Verbeiren, Marijke Van moerbeke\n\n\ndemux\nbcl2fastq\nToni Verbeiren\n\n\ndemux\ncellranger_mkfastq\nAngela Pisco, Samuel D’Souza, Robrecht Cannoodt\n\n\ndimred\npca\nDries De Maeyer\n\n\ndimred\numap\nDries De Maeyer\n\n\ndownload\ndownload_file\nRobrecht Cannoodt\n\n\ndownload\nsync_test_resources\nRobrecht Cannoodt\n\n\nfiles\nmake_params\nAngela Pisco, Robrecht Cannoodt\n\n\nfilter\ndo_filter\nRobrecht Cannoodt\n\n\nfilter\nfilter_with_counts\nDries De Maeyer, Robrecht Cannoodt\n\n\nfilter\nfilter_with_hvg\nDries De Maeyer, Robrecht Cannoodt\n\n\nfilter\nfilter_with_scrublet\nDries De Maeyer, Robrecht Cannoodt\n\n\nfilter\nsubset_h5mu\nDries Schaumont\n\n\nintegrate\nconcat\nDries Schaumont\n\n\nintegrate\nharmony\nDries De Maeyer, Robrecht Cannoodt\n\n\nintegrate\nharmonypy\nDries Schaumont, Robrecht Cannoodt\n\n\nintegrate\nmerge\nDries Schaumont\n\n\nintegrate\nscanorama\nDries De Maeyer, Dries Schaumont\n\n\ninteractive\nrun_cellxgene\n\n\n\ninteractive\nrun_cirrocumulus\n\n\n\nmapping\nbd_rhapsody\nRobrecht Cannoodt\n\n\nmapping\ncellranger_count_split\nAngela Pisco, Samuel D’Souza, Robrecht Cannoodt\n\n\nmapping\ncellranger_count\nAngela Pisco, Samuel D’Souza, Robrecht Cannoodt\n\n\nneighbors\nbbknn\nDries De Maeyer, Dries Schaumont\n\n\nneighbors\nfind_neighbors\nDries De Maeyer, Robrecht Cannoodt\n\n\nprocess_10xh5\nfilter_10xh5\nRobrecht Cannoodt\n\n\nqc\nfastqc\n\n\n\nqc\nmultiqc\n\n\n\nreference\nbuild_bdrhap_reference\nAngela Pisco, Robrecht Cannoodt\n\n\nreference\nbuild_cellranger_reference\nAngela Pisco, Robrecht Cannoodt\n\n\nreference\nmake_reference\nAngela Pisco, Robrecht Cannoodt\n\n\nreport\nmermaid\nDries De Maeyer\n\n\nsplit\nsplit_modalities\nDries Schaumont\n\n\ntransfer\npublish\nToni Verbeiren\n\n\ntransform\ndelete_layer\nDries Schaumont\n\n\ntransform\nlog1p\nDries De Maeyer, Robrecht Cannoodt\n\n\ntransform\nnormalize_total\nDries De Maeyer, Robrecht Cannoodt\n\n\ntransform\nregress_out\nRobrecht Cannoodt\n\n\ntransform\nscale\nDries Schaumont\n\n\nvelocity\nscvelo\nDries Schaumont\n\n\nvelocity\nvelocyto\nRobrecht Cannoodt"
+  },
+  {
+    "objectID": "workflows/module_files_make_params.html",
+    "href": "workflows/module_files_make_params.html",
+    "title": "make_params",
+    "section": "",
+    "text": "Looks for files in a directory and turn it in a params file."
+  },
+  {
+    "objectID": "workflows/module_files_make_params.html#argument-help",
+    "href": "workflows/module_files_make_params.html#argument-help",
+    "title": "make_params",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/files/make_params/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--base_dir\nBase directory to search recursively\nfile, required, example: “/path/to/dir”\n\n\n--pattern\nAn optional regular expression. Only file names which match the regular expression will be matched.\nstring, required, example: “*.fastq.gz”\n\n\n--n_dirname_drop\nFor every matched file, the parent directory will be traversed N times.\ninteger, default: 0\n\n\n--n_basename_id\nThe unique identifiers will consist of at least N dirnames.\ninteger, default: 0\n\n\n--id_name\nThe name for storing the identifier field in the yaml.\nstring, default: “id”\n\n\n--path_name\nThe name for storing the path field in the yaml.\nstring, default: “path”\n\n\n--group_name\nTop level name for the group of entries.\nstring, example: “param_list”\n\n\n--output\nOutput YAML file.\nfile, required, example: “params.yaml”"
+  },
+  {
+    "objectID": "workflows/module_files_make_params.html#authors",
+    "href": "workflows/module_files_make_params.html#authors",
+    "title": "make_params",
+    "section": "Authors",
+    "text": "Authors\n\nAngela Pisco   (author)\nRobrecht Cannoodt   (maintainer, author)"
+  },
+  {
+    "objectID": "workflows/module_download_sync_test_resources.html",
+    "href": "workflows/module_download_sync_test_resources.html",
+    "title": "sync_test_resources",
+    "section": "",
+    "text": "Synchronise the test resources from s3://openpipelines-data to resources_test"
+  },
+  {
+    "objectID": "workflows/module_download_sync_test_resources.html#argument-help",
+    "href": "workflows/module_download_sync_test_resources.html#argument-help",
+    "title": "sync_test_resources",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/download/sync_test_resources/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nPath to the S3 bucket to sync from.\nstring, default: “s3://openpipelines-data”\n\n\n--output\nPath to the test resource directory.\nfile, default: “resources_test”\n\n\n--quiet\nDisplays the operations that would be performed using the specified command without actually running them.\nboolean_true\n\n\n--dryrun\nDoes not display the operations performed from the specified command.\nboolean_true\n\n\n--delete\nFiles that exist in the destination but not in the source are deleted during sync.\nboolean_true\n\n\n--exclude\nExclude all files or objects from the command that matches the specified pattern.\nstring"
+  },
+  {
+    "objectID": "workflows/module_download_sync_test_resources.html#authors",
+    "href": "workflows/module_download_sync_test_resources.html#authors",
+    "title": "sync_test_resources",
+    "section": "Authors",
+    "text": "Authors\n\nRobrecht Cannoodt   (maintainer)"
+  },
+  {
+    "objectID": "workflows/module_compression_tar_extract.html",
+    "href": "workflows/module_compression_tar_extract.html",
+    "title": "tar_extract",
+    "section": "",
+    "text": "Extract files from a tar archive"
+  },
+  {
+    "objectID": "workflows/module_compression_tar_extract.html#argument-help",
+    "href": "workflows/module_compression_tar_extract.html#argument-help",
+    "title": "tar_extract",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/compression/tar_extract/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput file\nfile, required, example: “input.tar.gz”\n\n\n--output\nFolder to restore file(s) to.\nfile, required, example: “output_folder”\n\n\n--strip_components\nStrip this amount of leading components from file names on extraction. For example, to extract only ‘myfile.txt’ from an archive containing the structure this/goes/deep/myfile.txt', use 3 to strip 'this/goes/deep/'. |integer, example: 1                      | |–exclude`\nPrevents any file or member whose name matches the shell wildcard (pattern) from being extracted."
+  },
+  {
+    "objectID": "workflows/module_compression_tar_extract.html#authors",
+    "href": "workflows/module_compression_tar_extract.html#authors",
+    "title": "tar_extract",
+    "section": "Authors",
+    "text": "Authors"
+  },
+  {
+    "objectID": "workflows/module_transform_scale.html",
+    "href": "workflows/module_transform_scale.html",
+    "title": "scale",
+    "section": "",
+    "text": "Scale data to unit variance and zero mean."
+  },
+  {
+    "objectID": "workflows/module_transform_scale.html#argument-help",
+    "href": "workflows/module_transform_scale.html#argument-help",
+    "title": "scale",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/transform/scale/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput h5mu file.\nfile, required, example: “input.h5mu”\n\n\n--modality\nList of modalities to process.\nstring, default: “rna”\n\n\n--max_value\nClip (truncate) to this value after scaling. Does not clip by default.\ndouble\n\n\n--zero_center\nIf False, omit zero-centering variables, which allows to handle sparse input efficiently.\nboolean, default: TRUE\n\n\n--output\nOutput h5mu file.\nfile, required, default: “output.h5mu”"
+  },
+  {
+    "objectID": "workflows/module_transform_scale.html#authors",
+    "href": "workflows/module_transform_scale.html#authors",
+    "title": "scale",
+    "section": "Authors",
+    "text": "Authors\n\nDries Schaumont   (maintainer)"
+  },
+  {
+    "objectID": "workflows/module_convert_from_h5mu_to_seurat.html",
+    "href": "workflows/module_convert_from_h5mu_to_seurat.html",
+    "title": "from_h5mu_to_seurat",
+    "section": "",
+    "text": "Converts an h5mu file into a Seurat file.\nRestrictions: - Only the intersection of cells is currently loaded into the Seurat object due to the object structure limitation. - Multimodal embeddings (global .obsm slot) are loaded with the assay.used field set to the default assay. - Embeddings names are changed in order to comply with R & Seurat requirements and conventions. - Feature names with underscores (’_‘) are automatically replaced with dashes (’-’) - Seurat does not support global variables metadata /var."
+  },
+  {
+    "objectID": "workflows/module_convert_from_h5mu_to_seurat.html#argument-help",
+    "href": "workflows/module_convert_from_h5mu_to_seurat.html#argument-help",
+    "title": "from_h5mu_to_seurat",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/convert/from_h5mu_to_seurat/main.nf --help\n\nArguments\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput h5mu file\nfile, required, example: “input.h5mu”\n\n\n--output\nOutput Seurat file\nfile, required, example: “output.rds”"
+  },
+  {
+    "objectID": "workflows/module_convert_from_h5mu_to_seurat.html#authors",
+    "href": "workflows/module_convert_from_h5mu_to_seurat.html#authors",
+    "title": "from_h5mu_to_seurat",
+    "section": "Authors",
+    "text": "Authors\n\nRobrecht Cannoodt   (author, maintainer)"
+  },
+  {
+    "objectID": "workflows/module_process_10xh5_filter_10xh5.html",
+    "href": "workflows/module_process_10xh5_filter_10xh5.html",
+    "title": "filter_10xh5",
+    "section": "",
+    "text": "Filter a 10x h5 dataset."
+  },
+  {
+    "objectID": "workflows/module_process_10xh5_filter_10xh5.html#argument-help",
+    "href": "workflows/module_process_10xh5_filter_10xh5.html#argument-help",
+    "title": "filter_10xh5",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/process_10xh5/filter_10xh5/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nAn h5 file from the 10x genomics website.\nstring, required, example: “pbmc_1k_protein_v3_raw_feature_bc_matrix.h5”\n\n\n--output\nOutput h5 file.\nfile, required, example: “pbmc_1k_protein_v3_raw_feature_bc_matrix_filtered.h5”\n\n\n--min_library_size\nMinimum library size.\ninteger, default: 0\n\n\n--min_cells_per_gene\nMinimum number of cells per gene.\ninteger, default: 0\n\n\n--keep_feature_types\nSpecify which feature types will never be filtered out\nstring, example: “Antibody Capture”\n\n\n--verbose\nIncrease verbosity\nboolean_true"
+  },
+  {
+    "objectID": "workflows/module_process_10xh5_filter_10xh5.html#authors",
+    "href": "workflows/module_process_10xh5_filter_10xh5.html#authors",
+    "title": "filter_10xh5",
+    "section": "Authors",
+    "text": "Authors\n\nRobrecht Cannoodt   (maintainer)"
+  },
+  {
+    "objectID": "workflows/module_convert_from_10xh5_to_h5mu.html",
+    "href": "workflows/module_convert_from_10xh5_to_h5mu.html",
+    "title": "from_10xh5_to_h5mu",
+    "section": "",
+    "text": "Converts a 10x h5 into an h5mu file."
+  },
+  {
+    "objectID": "workflows/module_convert_from_10xh5_to_h5mu.html#argument-help",
+    "href": "workflows/module_convert_from_10xh5_to_h5mu.html#argument-help",
+    "title": "from_10xh5_to_h5mu",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/convert/from_10xh5_to_h5mu/main.nf --help\n\nArguments\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput h5 file\nfile, required, example: “input.h5”\n\n\n--output\nOutput h5mu file.\nfile, example: “output.h5mu”"
+  },
+  {
+    "objectID": "workflows/module_convert_from_10xh5_to_h5mu.html#authors",
+    "href": "workflows/module_convert_from_10xh5_to_h5mu.html#authors",
+    "title": "from_10xh5_to_h5mu",
+    "section": "Authors",
+    "text": "Authors\n\nRobrecht Cannoodt   (maintainer)"
+  },
+  {
+    "objectID": "workflows/module_reference_make_reference.html",
+    "href": "workflows/module_reference_make_reference.html",
+    "title": "make_reference",
+    "section": "",
+    "text": "Make a reference build."
+  },
+  {
+    "objectID": "workflows/module_reference_make_reference.html#argument-help",
+    "href": "workflows/module_reference_make_reference.html#argument-help",
+    "title": "make_reference",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/reference/make_reference/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--genome_fasta\nReference genome fasta.\nstring, required, example: “https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/GRCh38.primary_assembly.genome.fa.gz”\n\n\n--transcriptome_gtf\nReference transcriptome annotation.\nstring, required, example: “https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/gencode.v41.annotation.gtf.gz”\n\n\n--ercc\nERCC sequence and annotation file.\nstring, example: “https://assets.thermofisher.com/TFS-Assets/LSG/manuals/ERCC92.zip”\n\n\n--subset_regex\nWill subset the reference chromosomes using the given regex.\nstring, example: “(ERCC-00002|chr1)”\n\n\n--output_fasta\nOutput genome sequence fasta.\nfile, required, example: “genome_sequence.fa.gz”\n\n\n--output_gtf\nOutput transcriptome annotation gtf.\nfile, required, example: “transcriptome_annotation.tar.gz”"
+  },
+  {
+    "objectID": "workflows/module_reference_make_reference.html#authors",
+    "href": "workflows/module_reference_make_reference.html#authors",
+    "title": "make_reference",
+    "section": "Authors",
+    "text": "Authors\n\nAngela Pisco   (author)\nRobrecht Cannoodt   (author, maintainer)"
+  },
+  {
+    "objectID": "workflows/module_filter_filter_with_scrublet.html",
+    "href": "workflows/module_filter_filter_with_scrublet.html",
+    "title": "filter_with_scrublet",
+    "section": "",
+    "text": "Doublet detection using the Scrublet method (Wolock, Lopez and Klein, 2019). The method tests for potential doublets by using the expression profiles of cells to generate synthetic potential doubles which are tested against cells. The method returns a “doublet score” on which it calls for potential doublets.\nFor the source code please visit https://github.com/AllonKleinLab/scrublet.\nFor 10x we expect the doublet rates to be: Multiplet Rate (%) - # of Cells Loaded - # of Cells Recovered ~0.4% ~800 ~500 ~0.8% ~1,600 ~1,000 ~1.6% ~3,200 ~2,000 ~2.3% ~4,800 ~3,000 ~3.1% ~6,400 ~4,000 ~3.9% ~8,000 ~5,000 ~4.6% ~9,600 ~6,000 ~5.4% ~11,200 ~7,000 ~6.1% ~12,800 ~8,000 ~6.9% ~14,400 ~9,000 ~7.6% ~16,000 ~10,000"
+  },
+  {
+    "objectID": "workflows/module_filter_filter_with_scrublet.html#argument-help",
+    "href": "workflows/module_filter_filter_with_scrublet.html#argument-help",
+    "title": "filter_with_scrublet",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/filter/filter_with_scrublet/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput h5mu file\nfile, required, example: “input.h5mu”\n\n\n--output\nOutput h5mu file.\nfile, example: “output.h5mu”\n\n\n--obs_name_filter\nIn which .obs slot to store a boolean array corresponding to which observations should be filtered out.\nstring, default: “filter_with_scrublet”\n\n\n--do_subset\nWhether to subset before storing the output.\nboolean_true\n\n\n--obs_name_doublet_score\nName of the doublet scores column in the obs slot of the returned object.\nstring, default: “scrublet_doublet_score”\n\n\n--min_counts\nThe number of minimal UMI counts per cell that have to be present for initial cell detection.\ninteger, default: 2\n\n\n--min_cells\nThe number of cells in which UMIs for a gene were detected.\ninteger, default: 3\n\n\n--min_gene_variablity_percent\nUsed for gene filtering prior to PCA. Keep the most highly variable genes (in the top min_gene_variability_pctl percentile), as measured by the v-statistic [Klein et al., Cell 2015].\ndouble, default: 85\n\n\n--num_pca_components\nNumber of principal components to use during PCA dimensionality reduction.\ninteger, default: 30\n\n\n--distance_metric\nThe distance metric used for computing similarities.\nstring, default: “euclidean”"
+  },
+  {
+    "objectID": "workflows/module_filter_filter_with_scrublet.html#authors",
+    "href": "workflows/module_filter_filter_with_scrublet.html#authors",
+    "title": "filter_with_scrublet",
+    "section": "Authors",
+    "text": "Authors\n\nDries De Maeyer (contributor)\nRobrecht Cannoodt   (maintainer, contributor)"
+  },
+  {
+    "objectID": "workflows/module_demux_bcl_convert.html",
+    "href": "workflows/module_demux_bcl_convert.html",
+    "title": "bcl_convert",
+    "section": "",
+    "text": "Convert bcl files to fastq files using bcl-convert. Information about upgrading from bcl2fastq via https://emea.support.illumina.com/bulletins/2020/10/upgrading-from-bcl2fastq-to-bcl-convert.html and https://support.illumina.com/sequencing/sequencing_software/bcl-convert/compatibility.html"
+  },
+  {
+    "objectID": "workflows/module_demux_bcl_convert.html#argument-help",
+    "href": "workflows/module_demux_bcl_convert.html#argument-help",
+    "title": "bcl_convert",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/demux/bcl_convert/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput run directory\nfile, required, example: “bcl_dir”\n\n\n--sample_sheet\nPointer to the sample sheet\nfile, required, example: “bcl_dir”\n\n\n--output\nOutput directory containig fastq files\nfile, required, example: “fastq_dir”\n\n\n--separate_reports\nShould reports be stored in a separate dir. Should be used with the –reports argument.\nboolean_true\n\n\n--reports\nReports directory\nfile, default: “reports”, example: “reports_dir”\n\n\n--test_mode\nShould bcl-convert be run in test mode (using –first-tile-only)?\nboolean, default: FALSE"
+  },
+  {
+    "objectID": "workflows/module_demux_bcl_convert.html#authors",
+    "href": "workflows/module_demux_bcl_convert.html#authors",
+    "title": "bcl_convert",
+    "section": "Authors",
+    "text": "Authors\n\nToni Verbeiren  (author, maintainer)\nMarijke Van moerbeke  (author)"
+  },
+  {
+    "objectID": "workflows/module_transform_normalize_total.html",
+    "href": "workflows/module_transform_normalize_total.html",
+    "title": "normalize_total",
+    "section": "",
+    "text": "Normalize counts per cell.\nNormalize each cell by total counts over all genes, so that every cell has the same total count after normalization. If choosing target_sum=1e6, this is CPM normalization.\nIf exclude_highly_expressed=True, very highly expressed genes are excluded from the computation of the normalization factor (size factor) for each cell. This is meaningful as these can strongly influence the resulting normalized values for all other genes [Weinreb17]."
+  },
+  {
+    "objectID": "workflows/module_transform_normalize_total.html#argument-help",
+    "href": "workflows/module_transform_normalize_total.html#argument-help",
+    "title": "normalize_total",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/transform/normalize_total/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput h5mu file\nfile, required, example: “input.h5mu”\n\n\n--input_layer\nInput layer to use. By default, X is normalized\nstring\n\n\n--output\nOutput h5mu file.\nfile, required, default: “output.h5mu”\n\n\n--output_layer\nOutput layer to use. By default, use X.\nstring\n\n\n--target_sum\nIf None, after normalization, each observation (cell) has a total count equal to the median of total counts for observations (cells) before normalization.\ninteger, default: 10000\n\n\n--exclude_highly_expressed\nExclude (very) highly expressed genes for the computation of the normalization factor (size factor) for each cell. A gene is considered highly expressed, if it has more than max_fraction of the total counts in at least one cell. The not-excluded genes will sum up to target_sum.\nboolean_true"
+  },
+  {
+    "objectID": "workflows/module_transform_normalize_total.html#authors",
+    "href": "workflows/module_transform_normalize_total.html#authors",
+    "title": "normalize_total",
+    "section": "Authors",
+    "text": "Authors\n\nDries De Maeyer (maintainer)\nRobrecht Cannoodt   (contributor)"
+  },
+  {
+    "objectID": "workflows/module_transform_regress_out.html",
+    "href": "workflows/module_transform_regress_out.html",
+    "title": "regress_out",
+    "section": "",
+    "text": "Regress out (mostly) unwanted sources of variation. Uses simple linear regression. This is inspired by Seurat’s regressOut function in R [Satija15]. Note that this function tends to overcorrect in certain circumstances as described in issue theislab/scanpy#526. See https://github.com/theislab/scanpy/issues/526."
+  },
+  {
+    "objectID": "workflows/module_transform_regress_out.html#argument-help",
+    "href": "workflows/module_transform_regress_out.html#argument-help",
+    "title": "regress_out",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/transform/regress_out/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput h5mu file\nfile, required, example: “input.h5mu”\n\n\n--output\nOutput h5mu file.\nfile, required, default: “output.h5mu”\n\n\n--modality\nWhich modality (one or more) to run this component on.\nstring, default: “rna”\n\n\n--obs_keys\nWhich .obs keys to regress on.\nstring"
+  },
+  {
+    "objectID": "workflows/module_transform_regress_out.html#authors",
+    "href": "workflows/module_transform_regress_out.html#authors",
+    "title": "regress_out",
+    "section": "Authors",
+    "text": "Authors\n\nRobrecht Cannoodt   (maintainer, contributor)"
+  },
+  {
+    "objectID": "workflows/module_reference_build_cellranger_reference.html",
+    "href": "workflows/module_reference_build_cellranger_reference.html",
+    "title": "build_cellranger_reference",
+    "section": "",
+    "text": "Build a Cell Ranger-compatible reference folder from user-supplied genome FASTA and gene GTF files. Creates a new folder named after the genome."
+  },
+  {
+    "objectID": "workflows/module_reference_build_cellranger_reference.html#argument-help",
+    "href": "workflows/module_reference_build_cellranger_reference.html#argument-help",
+    "title": "build_cellranger_reference",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/reference/build_cellranger_reference/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--genome_fasta\nReference genome fasta.\nfile, required, example: “genome_sequence.fa.gz”\n\n\n--transcriptome_gtf\nReference transcriptome annotation.\nfile, required, example: “transcriptome_annotation.tar.gz”\n\n\n--output\nOutput folder\nfile, required, example: “cellranger_reference”"
+  },
+  {
+    "objectID": "workflows/module_reference_build_cellranger_reference.html#authors",
+    "href": "workflows/module_reference_build_cellranger_reference.html#authors",
+    "title": "build_cellranger_reference",
+    "section": "Authors",
+    "text": "Authors\n\nAngela Pisco   (author)\nRobrecht Cannoodt   (author, maintainer)"
+  },
+  {
+    "objectID": "workflows/workflow_process_rna_singlesample.html",
+    "href": "workflows/workflow_process_rna_singlesample.html",
+    "title": "singlesample",
+    "section": "",
+    "text": "Processing unimodal single-sample RNA transcriptomics data."
+  },
+  {
+    "objectID": "workflows/workflow_process_rna_singlesample.html#argument-help",
+    "href": "workflows/workflow_process_rna_singlesample.html#argument-help",
+    "title": "singlesample",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the workflow’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script /home/rcannood/workspace/jnj/openpipeline/workflows/process_rna/singlesample/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--id\nID of the sample.\nstring, required, example: “foo”\n\n\n--input\nPath to the sample.\nfile, required, example: “dataset.h5mu”\n\n\n--output\nDestination path to the output.\nfile, required, example: “output.h5mu”"
+  },
+  {
+    "objectID": "workflows/workflow_process_rna_singlesample.html#authors",
+    "href": "workflows/workflow_process_rna_singlesample.html#authors",
+    "title": "singlesample",
+    "section": "Authors",
+    "text": "Authors\n\nDries De Maeyer (author)\nRobrecht Cannoodt   (author, maintainer)"
+  },
+  {
+    "objectID": "workflows/module_demux_bcl2fastq.html",
+    "href": "workflows/module_demux_bcl2fastq.html",
+    "title": "bcl2fastq",
+    "section": "",
+    "text": "Convert bcl files to fastq files using bcl2fastq."
+  },
+  {
+    "objectID": "workflows/module_demux_bcl2fastq.html#argument-help",
+    "href": "workflows/module_demux_bcl2fastq.html#argument-help",
+    "title": "bcl2fastq",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/demux/bcl2fastq/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput run directory\nfile, required, example: “bcl_dir”\n\n\n--sample_sheet\nPointer to the sample sheet\nfile, required, example: “SampleSheet.csv”\n\n\n--output\nOutput directory containig fastq files\nfile, required, example: “fastq_dir”\n\n\n--separate_reports\nShould reports be stored in a separate dir. Should be used with the –reports argument.\nboolean_true\n\n\n--reports\nReports directory\nfile, default: “reports”, example: “reports_dir”"
+  },
+  {
+    "objectID": "workflows/module_demux_bcl2fastq.html#authors",
+    "href": "workflows/module_demux_bcl2fastq.html#authors",
+    "title": "bcl2fastq",
+    "section": "Authors",
+    "text": "Authors\n\nToni Verbeiren  (author, maintainer)"
+  },
+  {
+    "objectID": "workflows/module_filter_filter_with_counts.html",
+    "href": "workflows/module_filter_filter_with_counts.html",
+    "title": "filter_with_counts",
+    "section": "",
+    "text": "Filter scRNA-seq data based on the primary QC metrics. This is based on both the UMI counts, the gene counts and the mitochondrial genes (genes starting with mt/MT)."
+  },
+  {
+    "objectID": "workflows/module_filter_filter_with_counts.html#argument-help",
+    "href": "workflows/module_filter_filter_with_counts.html#argument-help",
+    "title": "filter_with_counts",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/filter/filter_with_counts/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput h5mu file\nfile, required, example: “input.h5mu”\n\n\n--output\nOutput h5mu file.\nfile, example: “output.h5mu”\n\n\n--do_subset\nWhether to subset before storing the output.\nboolean_true\n\n\n--obs_name_filter\nIn which .obs slot to store a boolean array corresponding to which observations should be removed.\nstring, default: “filter_with_counts”\n\n\n--var_name_filter\nIn which .var slot to store a boolean array corresponding to which variables should be removed.\nstring, default: “filter_with_counts”\n\n\n--min_counts\nMinimum number of counts captured per cell.\ninteger, example: 200\n\n\n--max_counts\nMaximum number of counts captured per cell.\ninteger, example: 5000000\n\n\n--min_genes_per_cell\nMinimum of non-zero values per cell.\ninteger, example: 200\n\n\n--max_genes_per_cell\nMaximum of non-zero values per cell.\ninteger, example: 1500000\n\n\n--min_cells_per_gene\nMinimum of non-zero values per gene.\ninteger, example: 3\n\n\n--min_fraction_mito\nMinimum fraction of UMIs that are mitochondrial.\ndouble, example: 0\n\n\n--max_fraction_mito\nMaximum fraction of UMIs that are mitochondrial.\ndouble, example: 0.2"
+  },
+  {
+    "objectID": "workflows/module_filter_filter_with_counts.html#authors",
+    "href": "workflows/module_filter_filter_with_counts.html#authors",
+    "title": "filter_with_counts",
+    "section": "Authors",
+    "text": "Authors\n\nDries De Maeyer (contributor)\nRobrecht Cannoodt   (maintainer, contributor)"
+  },
+  {
+    "objectID": "workflows/module_neighbors_bbknn.html",
+    "href": "workflows/module_neighbors_bbknn.html",
+    "title": "bbknn",
+    "section": "",
+    "text": "BBKNN network generation"
+  },
+  {
+    "objectID": "workflows/module_neighbors_bbknn.html#argument-help",
+    "href": "workflows/module_neighbors_bbknn.html#argument-help",
+    "title": "bbknn",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/neighbors/bbknn/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput h5mu file\nfile\n\n\n--obsm_input\nThe dimensionality reduction in .obsm to use for neighbour detection. Defaults to X_pca.\nstring, default: “X_pca”\n\n\n--obs_batch\n.obs column name discriminating between your batches.\nstring, default: “batch”\n\n\n--output\nOutput .h5mu file.\nfile, required\n\n\n--uns_output\nMandatory .uns slot to store various neighbor output objects.\nstring, default: “neighbors”\n\n\n--obsp_distances\nIn which .obsp slot to store the distance matrix between the resulting neighbors.\nstring, default: “distances”\n\n\n--obsp_connectivities\nIn which .obsp slot to store the connectivities matrix between the resulting neighbors.\nstring, default: “connectivities”\n\n\n--n_neighbors_within_batch\nHow many top neighbours to report for each batch; total number of neighbours in the initial k-nearest-neighbours computation will be this number times the number of batches.\ninteger, default: 3\n\n\n--n_pcs\nHow many dimensions (in case of PCA, principal components) to use in the analysis.\ninteger, default: 50\n\n\n--n_trim\nTrim the neighbours of each cell to these many top connectivities. May help with population independence and improve the tidiness of clustering. The lower the value the more independent the individual populations, at the cost of more conserved batch effect. If None (default), sets the parameter value automatically to 10 times neighbors_within_batch times the number of batches. Set to 0 to skip.\ninteger"
+  },
+  {
+    "objectID": "workflows/module_neighbors_bbknn.html#authors",
+    "href": "workflows/module_neighbors_bbknn.html#authors",
+    "title": "bbknn",
+    "section": "Authors",
+    "text": "Authors\n\nDries De Maeyer (author)\nDries Schaumont (maintainer)"
+  },
+  {
+    "objectID": "workflows/module_split_split_modalities.html",
+    "href": "workflows/module_split_split_modalities.html",
+    "title": "split_modalities",
+    "section": "",
+    "text": "Split the modalities from a single .h5mu multimodal sample into seperate .h5mu files."
+  },
+  {
+    "objectID": "workflows/module_split_split_modalities.html#argument-help",
+    "href": "workflows/module_split_split_modalities.html#argument-help",
+    "title": "split_modalities",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/split/split_modalities/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nPath to a single .hm5u file\nfile, required, default: “sample_path”\n\n\n--compression\nThe compression format to be used on the final h5mu object.\nstring, default: “gzip”"
+  },
+  {
+    "objectID": "workflows/module_split_split_modalities.html#authors",
+    "href": "workflows/module_split_split_modalities.html#authors",
+    "title": "split_modalities",
+    "section": "Authors",
+    "text": "Authors\n\nDries Schaumont (maintainer)"
+  },
+  {
+    "objectID": "workflows/module_integrate_harmonypy.html",
+    "href": "workflows/module_integrate_harmonypy.html",
+    "title": "harmonypy",
+    "section": "",
+    "text": "Performs Harmony integration based as described in https://github.com/immunogenomics/harmony. Based on an implementation in python from https://github.com/slowkow/harmonypy"
+  },
+  {
+    "objectID": "workflows/module_integrate_harmonypy.html#argument-help",
+    "href": "workflows/module_integrate_harmonypy.html#argument-help",
+    "title": "harmonypy",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/integrate/harmonypy/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput h5mu file\nfile, required\n\n\n--output\nOutput h5mu file.\nfile, required\n\n\n--obsm_input\nWhich .obsm slot to use as a starting PCA embedding.\nstring, default: “X_pca”\n\n\n--obsm_output\nIn which .obsm slot to store the resulting integrated embedding.\nstring, default: “X_pca_integrated”\n\n\n--theta\nDiversity clustering penalty parameter. Specify for each variable in group.by.vars. theta=0 does not encourage any diversity. Larger values of theta result in more diverse clusters.\ndouble, default: 2\n\n\n--obs_covariates\nThe .obs field(s) that define the covariate(s) to regress out.\nstring, example: “batch”, example: “sample”"
+  },
+  {
+    "objectID": "workflows/module_integrate_harmonypy.html#authors",
+    "href": "workflows/module_integrate_harmonypy.html#authors",
+    "title": "harmonypy",
+    "section": "Authors",
+    "text": "Authors\n\nDries Schaumont (maintainer)\nRobrecht Cannoodt   (contributor)"
+  },
+  {
+    "objectID": "workflows/module_velocity_velocyto.html",
+    "href": "workflows/module_velocity_velocyto.html",
+    "title": "velocyto",
+    "section": "",
+    "text": "Runs the velocity analysis on a BAM file, outputting a loom file."
+  },
+  {
+    "objectID": "workflows/module_velocity_velocyto.html#argument-help",
+    "href": "workflows/module_velocity_velocyto.html#argument-help",
+    "title": "velocyto",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/velocity/velocyto/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nPath to BAM file\nfile, required\n\n\n--transcriptome\nPath to GTF file\nfile, required\n\n\n--barcode\nValid barcodes file, to filter the bam. If –bcfile is not specified all the cell barcodes will be included. Cell barcodes should be specified in the bcfile as the ‘CB’ tag for each read\nfile\n\n\n--without_umi\nfoo\nboolean_true\n\n\n--output\nVelocyto loom file\nfile, required\n\n\n--logic\nThe logic to use for the filtering.\nstring, default: “Default”"
+  },
+  {
+    "objectID": "workflows/module_velocity_velocyto.html#authors",
+    "href": "workflows/module_velocity_velocyto.html#authors",
+    "title": "velocyto",
+    "section": "Authors",
+    "text": "Authors\n\nRobrecht Cannoodt   (maintainer)"
+  },
+  {
+    "objectID": "workflows/module_integrate_merge.html",
+    "href": "workflows/module_integrate_merge.html",
+    "title": "merge",
+    "section": "",
+    "text": "Combine one or more single-modality .h5mu files together into one .h5mu file."
+  },
+  {
+    "objectID": "workflows/module_integrate_merge.html#argument-help",
+    "href": "workflows/module_integrate_merge.html#argument-help",
+    "title": "merge",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/integrate/merge/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nPaths to the single-modality .h5mu files that need to be combined\nfile, required, default: “sample_paths”\n\n\n--output\nPath to the output file.\nfile, default: “output.h5mu”\n\n\n--compression\nThe compression format to be used on the final h5mu object.\nstring, default: “gzip”"
+  },
+  {
+    "objectID": "workflows/module_integrate_merge.html#authors",
+    "href": "workflows/module_integrate_merge.html#authors",
+    "title": "merge",
+    "section": "Authors",
+    "text": "Authors\n\nDries Schaumont (maintainer)"
+  },
+  {
+    "objectID": "workflows/workflow_ingestion_cellranger_mapping.html",
+    "href": "workflows/workflow_ingestion_cellranger_mapping.html",
+    "title": "cellranger_mapping",
+    "section": "",
+    "text": "Cell Ranger mapping pipeline."
+  },
+  {
+    "objectID": "workflows/workflow_ingestion_cellranger_mapping.html#argument-help",
+    "href": "workflows/workflow_ingestion_cellranger_mapping.html#argument-help",
+    "title": "cellranger_mapping",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the workflow’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script /home/rcannood/workspace/jnj/openpipeline/workflows/ingestion/cellranger_mapping/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--id\nID of the sample.\nstring, required, example: “foo”\n\n\n--input\nA fastq file.\nfile, required, example: “data.fastq”\n\n\n--reference\nPath to a Cell Ranger reference.\nfile, required, example: “reference.tar.gz”\n\n\n--cores\nSet max cores the pipeline may request at one time.\ninteger, example: 2\n\n\n--memory\nSet max GB the pipeline may request at one time.\ninteger, example: 10"
+  },
+  {
+    "objectID": "workflows/workflow_ingestion_cellranger_mapping.html#authors",
+    "href": "workflows/workflow_ingestion_cellranger_mapping.html#authors",
+    "title": "cellranger_mapping",
+    "section": "Authors",
+    "text": "Authors\n\nAngela Pisco   (author)\nSamuel D’Souza  (author)\nRobrecht Cannoodt   (author, maintainer)"
+  },
+  {
+    "objectID": "workflows/module_filter_do_filter.html",
+    "href": "workflows/module_filter_do_filter.html",
+    "title": "do_filter",
+    "section": "",
+    "text": "Remove observations and variables based on specified .obs and .var columns."
+  },
+  {
+    "objectID": "workflows/module_filter_do_filter.html#argument-help",
+    "href": "workflows/module_filter_do_filter.html#argument-help",
+    "title": "do_filter",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/filter/do_filter/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput h5mu file\nfile, required, example: “input.h5mu”\n\n\n--obs_filter\nWhich .obs columns to use to filter the observations by.\nstring, example: “filter_with_x”\n\n\n--var_filter\nWhich .var columns to use to filter the observations by.\nstring, default: “filter_with_x”\n\n\n--output\nOutput h5mu file.\nfile, example: “output.h5mu”"
+  },
+  {
+    "objectID": "workflows/module_filter_do_filter.html#authors",
+    "href": "workflows/module_filter_do_filter.html#authors",
+    "title": "do_filter",
+    "section": "Authors",
+    "text": "Authors\n\nRobrecht Cannoodt   (maintainer, contributor)"
+  },
+  {
+    "objectID": "workflows/module_convert_from_bd_to_10x_molecular_barcode_tags.html",
+    "href": "workflows/module_convert_from_bd_to_10x_molecular_barcode_tags.html",
+    "title": "from_bd_to_10x_molecular_barcode_tags",
+    "section": "",
+    "text": "Convert the molecular barcode sequence SAM tag from BD format (MA) to 10X format (UB)."
+  },
+  {
+    "objectID": "workflows/module_convert_from_bd_to_10x_molecular_barcode_tags.html#argument-help",
+    "href": "workflows/module_convert_from_bd_to_10x_molecular_barcode_tags.html#argument-help",
+    "title": "from_bd_to_10x_molecular_barcode_tags",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/convert/from_bd_to_10x_molecular_barcode_tags/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput SAM or BAM file.\nfile, required, example: “input.bam”\n\n\n--output\nOutput alignment file.\nfile, example: “output.sam”\n\n\n--bam\nOutput a BAM file.\nboolean_true\n\n\n--threads\nNumber of threads\ninteger"
+  },
+  {
+    "objectID": "workflows/module_convert_from_bd_to_10x_molecular_barcode_tags.html#authors",
+    "href": "workflows/module_convert_from_bd_to_10x_molecular_barcode_tags.html#authors",
+    "title": "from_bd_to_10x_molecular_barcode_tags",
+    "section": "Authors",
+    "text": "Authors\n\nDries Schaumont   (maintainer)"
+  },
+  {
+    "objectID": "workflows/workflow_ingestion_demux.html",
+    "href": "workflows/workflow_ingestion_demux.html",
+    "title": "demux",
+    "section": "",
+    "text": "Convert bcl files to fastq files using bcl2fastq, bcl-convert or cellranger mkfastq"
+  },
+  {
+    "objectID": "workflows/workflow_ingestion_demux.html#argument-help",
+    "href": "workflows/workflow_ingestion_demux.html#argument-help",
+    "title": "demux",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the workflow’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script /home/rcannood/workspace/jnj/openpipeline/workflows/ingestion/demux/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--id\nID of the sample.\nstring, required, example: “foo”\n\n\n--input\nInput run directory\nfile, required, example: “bcl_dir”\n\n\n--sample_sheet\nPointer to the sample sheet\nfile, required, example: “bcl_dir”\n\n\n--demultiplexer\nThe multiplexer to use, one of bclconvert or mkfastq\nstring, example: “bclconvert”\n\n\n--ignore_missing\nShould the demultiplexer ignore missing entities (filter, …)\nboolean"
+  },
+  {
+    "objectID": "workflows/workflow_ingestion_demux.html#authors",
+    "href": "workflows/workflow_ingestion_demux.html#authors",
+    "title": "demux",
+    "section": "Authors",
+    "text": "Authors\n\nToni Verbeiren  (author, maintainer)\nMarijke Van Moerbeke  (author)"
+  },
+  {
+    "objectID": "workflows/workflow_integration_multimodal_integration.html",
+    "href": "workflows/workflow_integration_multimodal_integration.html",
+    "title": "multimodal_integration",
+    "section": "",
+    "text": "Processing multimodal multi-sample RNA transcriptomics data."
+  },
+  {
+    "objectID": "workflows/workflow_integration_multimodal_integration.html#argument-help",
+    "href": "workflows/workflow_integration_multimodal_integration.html#argument-help",
+    "title": "multimodal_integration",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the workflow’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script /home/rcannood/workspace/jnj/openpipeline/workflows/integration/multimodal_integration/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--id\nID of the sample.\nstring, required, example: “foo”\n\n\n--input\nPath to the sample.\nfile, required, example: “dataset.h5mu”\n\n\n--output\nDestination path to the output.\nfile, required, example: “output.h5mu”\n\n\n--layer\nuse specified layer for expression values instead of the .X object from the modality.\nstring, default: “log_normalized”\n\n\n--obs_covariates\nThe .obs field(s) that define the covariate(s) to regress out.\nstring, required, example: “batch”, example: “sample”"
+  },
+  {
+    "objectID": "workflows/workflow_integration_multimodal_integration.html#authors",
+    "href": "workflows/workflow_integration_multimodal_integration.html#authors",
+    "title": "multimodal_integration",
+    "section": "Authors",
+    "text": "Authors\n\nDries De Maeyer (author)\nRobrecht Cannoodt   (author, maintainer)"
+  },
+  {
+    "objectID": "workflows/module_convert_from_bdrhap_to_h5mu.html",
+    "href": "workflows/module_convert_from_bdrhap_to_h5mu.html",
+    "title": "from_bdrhap_to_h5mu",
+    "section": "",
+    "text": "Convert the output of a BD Rhapsody WTA pipeline to a MuData h5 file."
+  },
+  {
+    "objectID": "workflows/module_convert_from_bdrhap_to_h5mu.html#argument-help",
+    "href": "workflows/module_convert_from_bdrhap_to_h5mu.html#argument-help",
+    "title": "from_bdrhap_to_h5mu",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/convert/from_bdrhap_to_h5mu/main.nf --help\n\nInputs\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--id\nA sample ID.\nstring, required, example: “my_id”\n\n\n--input\nThe output of a BD Rhapsody workflow.\nfile, required, example: “input_dir”\n\n\n\n\n\n\nOutputs\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--output\nOutput h5mu file.\nfile, required, example: “output.h5mu”"
+  },
+  {
+    "objectID": "workflows/module_convert_from_bdrhap_to_h5mu.html#authors",
+    "href": "workflows/module_convert_from_bdrhap_to_h5mu.html#authors",
+    "title": "from_bdrhap_to_h5mu",
+    "section": "Authors",
+    "text": "Authors\n\nRobrecht Cannoodt   (maintainer)"
+  },
+  {
+    "objectID": "workflows/module_qc_multiqc.html",
+    "href": "workflows/module_qc_multiqc.html",
+    "title": "multiqc",
+    "section": "",
+    "text": "Component for multiqc (https://multiqc.info/)"
+  },
+  {
+    "objectID": "workflows/module_qc_multiqc.html#argument-help",
+    "href": "workflows/module_qc_multiqc.html#argument-help",
+    "title": "multiqc",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/qc/multiqc/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nDescribe the input file.\nfile, required, example: “input.txt”\n\n\n--output\nDescribe the output file.\nfile, required, example: “report”"
+  },
+  {
+    "objectID": "workflows/module_qc_multiqc.html#authors",
+    "href": "workflows/module_qc_multiqc.html#authors",
+    "title": "multiqc",
+    "section": "Authors",
+    "text": "Authors"
+  },
+  {
+    "objectID": "workflows/module_dimred_pca.html",
+    "href": "workflows/module_dimred_pca.html",
+    "title": "pca",
+    "section": "",
+    "text": "Computes PCA coordinates, loadings and variance decomposition. Uses the implementation of scikit-learn [Pedregosa11]."
+  },
+  {
+    "objectID": "workflows/module_dimred_pca.html#argument-help",
+    "href": "workflows/module_dimred_pca.html#argument-help",
+    "title": "pca",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/dimred/pca/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput h5mu file\nfile, required, example: “input.h5mu”\n\n\n--layer\nuse specified layer for expression values instead of the .X object from the modality.\nstring\n\n\n--output\nOutput h5mu file.\nfile, required, example: “output.h5mu”\n\n\n--obsm_output\nIn which .obsm slot to store the resulting integrated embedding.\nstring, default: “X_pca”\n\n\n--varm_output\nIn which .varm slot to store the resulting loadings matrix.\nstring, default: “pca_loadings”\n\n\n--uns_output\nIn which .uns slot to store the resulting variance objects.\nstring, default: “pca_variance”\n\n\n--num_components\nNumber of principal components to compute. Defaults to 50, or 1 - minimum dimension size of selected representation.\ninteger, example: 25"
+  },
+  {
+    "objectID": "workflows/module_dimred_pca.html#authors",
+    "href": "workflows/module_dimred_pca.html#authors",
+    "title": "pca",
+    "section": "Authors",
+    "text": "Authors\n\nDries De Maeyer (maintainer)"
+  },
+  {
+    "objectID": "workflows/module_interactive_run_cellxgene.html",
+    "href": "workflows/module_interactive_run_cellxgene.html",
+    "title": "run_cellxgene",
+    "section": "",
+    "text": "Run the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/interactive/run_cellxgene/main.nf --help\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nDirectory to mount\nfile, default: “.”\n\n\n--port\nPort to use\nstring, default: “5005”"
+  },
+  {
+    "objectID": "workflows/module_interactive_run_cellxgene.html#authors",
+    "href": "workflows/module_interactive_run_cellxgene.html#authors",
+    "title": "run_cellxgene",
+    "section": "Authors",
+    "text": "Authors"
+  },
+  {
+    "objectID": "workflows/module_integrate_scanorama.html",
+    "href": "workflows/module_integrate_scanorama.html",
+    "title": "scanorama",
+    "section": "",
+    "text": "Use Scanorama to integrate different experiments."
+  },
+  {
+    "objectID": "workflows/module_integrate_scanorama.html#argument-help",
+    "href": "workflows/module_integrate_scanorama.html#argument-help",
+    "title": "scanorama",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/integrate/scanorama/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput h5mu file\nfile, required\n\n\n--output\nOutput .h5mu file\nfile, required, default: “output.h5ad”\n\n\n--obs_batch\nColumn name discriminating between your batches.\nstring, default: “batch”\n\n\n--obsm_input\nBasis obsm slot to run scanorama on.\nstring, default: “X_pca”\n\n\n--obsm_output\nThe name of the field in adata.obsm where the integrated embeddings will be stored after running this function. Defaults to X_scanorama.\nstring, default: “X_scanorama”\n\n\n--knn\nNumber of nearest neighbors to use for matching.\ninteger, default: 20\n\n\n--batch_size\nThe batch size used in the alignment vector computation. Useful when integrating very large (>100k samples) datasets. Set to large value that runs within available memory.\ninteger, default: 5000\n\n\n--sigma\nCorrection smoothing parameter on Gaussian kernel.\ndouble, default: 15\n\n\n--approx\nUse approximate nearest neighbors with Python annoy; greatly speeds up matching runtime.\nboolean, default: TRUE\n\n\n--alpha\nAlignment score minimum cutoff\ndouble, default: 0.1"
+  },
+  {
+    "objectID": "workflows/module_integrate_scanorama.html#authors",
+    "href": "workflows/module_integrate_scanorama.html#authors",
+    "title": "scanorama",
+    "section": "Authors",
+    "text": "Authors\n\nDries De Maeyer (author)\nDries Schaumont   (maintainer)"
+  },
+  {
+    "objectID": "workflows/module_transfer_publish.html",
+    "href": "workflows/module_transfer_publish.html",
+    "title": "publish",
+    "section": "",
+    "text": "Publish an artifact and optionally rename with parameters"
+  },
+  {
+    "objectID": "workflows/module_transfer_publish.html#argument-help",
+    "href": "workflows/module_transfer_publish.html#argument-help",
+    "title": "publish",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/transfer/publish/main.nf --help\n\nArguments\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput filename\nfile, required\n\n\n--output\nOutput filename\nfile, required"
+  },
+  {
+    "objectID": "workflows/module_transfer_publish.html#authors",
+    "href": "workflows/module_transfer_publish.html#authors",
+    "title": "publish",
+    "section": "Authors",
+    "text": "Authors\n\nToni Verbeiren (maintainer)"
+  },
+  {
+    "objectID": "workflows/module_neighbors_find_neighbors.html",
+    "href": "workflows/module_neighbors_find_neighbors.html",
+    "title": "find_neighbors",
+    "section": "",
+    "text": "Compute a neighborhood graph of observations [McInnes18].\nThe neighbor search efficiency of this heavily relies on UMAP [McInnes18], which also provides a method for estimating connectivities of data points - the connectivity of the manifold (method==‘umap’). If method==‘gauss’, connectivities are computed according to [Coifman05], in the adaption of [Haghverdi16]."
+  },
+  {
+    "objectID": "workflows/module_neighbors_find_neighbors.html#argument-help",
+    "href": "workflows/module_neighbors_find_neighbors.html#argument-help",
+    "title": "find_neighbors",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/neighbors/find_neighbors/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput h5mu file\nfile, required, example: “input.h5mu”\n\n\n--obsm_input\nWhich .obsm slot to use as a starting PCA embedding.\nstring, default: “X_pca”\n\n\n--output\nOutput h5mu file containing the found neighbors.\nfile, example: “output.h5mu”\n\n\n--uns_output\nMandatory .uns slot to store various neighbor output objects.\nstring, default: “neighbors”\n\n\n--obsp_distances\nIn which .obsp slot to store the distance matrix between the resulting neighbors.\nstring, default: “distances”\n\n\n--obsp_connectivities\nIn which .obsp slot to store the connectivities matrix between the resulting neighbors.\nstring, default: “connectivities”\n\n\n--metric\nThe distance metric to be used in the generation of the nearest neighborhood network.\nstring, default: “euclidean”\n\n\n--num_neighbors\nThe size of local neighborhood (in terms of number of neighboring data points) used for manifold approximation. Larger values result in more global views of the manifold, while smaller values result in more local data being preserved. In general values should be in the range 2 to 100. If knn is True, number of nearest neighbors to be searched. If knn is False, a Gaussian kernel width is set to the distance of the n_neighbors neighbor.\ninteger, default: 15\n\n\n--seed\nA random seed.\ninteger, default: 0"
+  },
+  {
+    "objectID": "workflows/module_neighbors_find_neighbors.html#authors",
+    "href": "workflows/module_neighbors_find_neighbors.html#authors",
+    "title": "find_neighbors",
+    "section": "Authors",
+    "text": "Authors\n\nDries De Maeyer (maintainer)\nRobrecht Cannoodt   (contributor)"
+  },
+  {
+    "objectID": "workflows/module_filter_subset_h5mu.html",
+    "href": "workflows/module_filter_subset_h5mu.html",
+    "title": "subset_h5mu",
+    "section": "",
+    "text": "Create a subset of a mudata file by selecting the first number of observations"
+  },
+  {
+    "objectID": "workflows/module_filter_subset_h5mu.html#argument-help",
+    "href": "workflows/module_filter_subset_h5mu.html#argument-help",
+    "title": "subset_h5mu",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/filter/subset_h5mu/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput h5mu file\nfile, required, example: “input.h5mu”\n\n\n--output\nOutput h5mu file.\nfile, example: “output.h5mu”\n\n\n--number_of_observations\nNumber of observations to be selected from the h5mu file.\ninteger, example: 5"
+  },
+  {
+    "objectID": "workflows/module_filter_subset_h5mu.html#authors",
+    "href": "workflows/module_filter_subset_h5mu.html#authors",
+    "title": "subset_h5mu",
+    "section": "Authors",
+    "text": "Authors\n\nDries Schaumont  (maintainer)"
+  },
+  {
+    "objectID": "workflows/module_mapping_cellranger_count_split.html",
+    "href": "workflows/module_mapping_cellranger_count_split.html",
+    "title": "cellranger_count_split",
+    "section": "",
+    "text": "Split 10x Cell Ranger output directory into separate output fields."
+  },
+  {
+    "objectID": "workflows/module_mapping_cellranger_count_split.html#argument-help",
+    "href": "workflows/module_mapping_cellranger_count_split.html#argument-help",
+    "title": "cellranger_count_split",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/mapping/cellranger_count_split/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nOutput directory from a Cell Ranger count run.\nfile, required, example: “input_dir”"
+  },
+  {
+    "objectID": "workflows/module_mapping_cellranger_count_split.html#authors",
+    "href": "workflows/module_mapping_cellranger_count_split.html#authors",
+    "title": "cellranger_count_split",
+    "section": "Authors",
+    "text": "Authors\n\nAngela Pisco   (author)\nSamuel D’Souza  (author)\nRobrecht Cannoodt   (author, maintainer)"
+  },
+  {
+    "objectID": "workflows/module_mapping_cellranger_count.html",
+    "href": "workflows/module_mapping_cellranger_count.html",
+    "title": "cellranger_count",
+    "section": "",
+    "text": "Align fastq files using Cell Ranger count."
+  },
+  {
+    "objectID": "workflows/module_mapping_cellranger_count.html#argument-help",
+    "href": "workflows/module_mapping_cellranger_count.html#argument-help",
+    "title": "cellranger_count",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/mapping/cellranger_count/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nThe folder with fastq.gz files to align.\nfile, required\n\n\n--reference\nThe path to reference tar.gz file.\nfile, required\n\n\n--output\nThe folder to store the alignment results.\nfile, required, example: “/path/to/output”\n\n\n--expect_cells\nExpected number of recovered cells, used as input to cell calling algorithm.\ninteger, example: 3000\n\n\n--chemistry\nAssay configuration. - auto: autodetect mode - threeprime: Single Cell 3’ - fiveprime: Single Cell 5’ - SC3Pv1: Single Cell 3’ v1 - SC3Pv2: Single Cell 3’ v2 - SC3Pv3: Single Cell 3’ v3 - SC3Pv3LT: Single Cell 3’ v3 LT - SC3Pv3HT: Single Cell 3’ v3 HT - SC5P-PE: Single Cell 5’ paired-end - SC5P-R2: Single Cell 5’ R2-only - SC-FB: Single Cell Antibody-only 3’ v2 or 5’ See https://kb.10xgenomics.com/hc/en-us/articles/115003764132-How-does-Cell-Ranger-auto-detect-chemistry- for more information.\nstring, default: “auto”\n\n\n--secondary_analysis\nWhether or not to run the secondary analysis e.g. clustering.\nboolean, default: FALSE\n\n\n--generate_bam\nWhether to generate a BAM file.\nboolean, default: TRUE\n\n\n--include_introns\nInclude intronic reads in count (default=true unless –target-panel is specified in which case default=false)\nboolean, default: TRUE"
+  },
+  {
+    "objectID": "workflows/module_mapping_cellranger_count.html#authors",
+    "href": "workflows/module_mapping_cellranger_count.html#authors",
+    "title": "cellranger_count",
+    "section": "Authors",
+    "text": "Authors\n\nAngela Pisco   (author)\nSamuel D’Souza  (author)\nRobrecht Cannoodt   (author, maintainer)"
+  },
+  {
+    "objectID": "workflows/module_qc_fastqc.html",
+    "href": "workflows/module_qc_fastqc.html",
+    "title": "fastqc",
+    "section": "",
+    "text": "Fastqc component, please see https://www.bioinformatics.babraham.ac.uk/projects/fastqc/. This component can take one or more files (by means of shell globbing) or a complete directory."
+  },
+  {
+    "objectID": "workflows/module_qc_fastqc.html#argument-help",
+    "href": "workflows/module_qc_fastqc.html#argument-help",
+    "title": "fastqc",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/qc/fastqc/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--mode\nThe mode in which the component works. Can be either files or dir.\nstring, default: “files”\n\n\n--input\nDirectory containing input fastq files.\nfile, required, example: “fastq_dir”\n\n\n--output\nOutput directory to write reports to.\nfile, required, example: “qc”"
+  },
+  {
+    "objectID": "workflows/module_qc_fastqc.html#authors",
+    "href": "workflows/module_qc_fastqc.html#authors",
+    "title": "fastqc",
+    "section": "Authors",
+    "text": "Authors"
+  },
+  {
+    "objectID": "workflows/module_convert_from_h5ad_to_h5mu.html",
+    "href": "workflows/module_convert_from_h5ad_to_h5mu.html",
+    "title": "from_h5ad_to_h5mu",
+    "section": "",
+    "text": "Converts a single layer h5ad file into a single muon object"
+  },
+  {
+    "objectID": "workflows/module_convert_from_h5ad_to_h5mu.html#argument-help",
+    "href": "workflows/module_convert_from_h5ad_to_h5mu.html#argument-help",
+    "title": "from_h5ad_to_h5mu",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the module’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/convert/from_h5ad_to_h5mu/main.nf --help\n\nArguments\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput h5ad files\nfile, required, default: “input.h5ad”\n\n\n--output\nOutput muon file.\nfile, default: “output.h5mu”"
+  },
+  {
+    "objectID": "workflows/module_convert_from_h5ad_to_h5mu.html#authors",
+    "href": "workflows/module_convert_from_h5ad_to_h5mu.html#authors",
+    "title": "from_h5ad_to_h5mu",
+    "section": "Authors",
+    "text": "Authors\n\nDries De Maeyer (maintainer)"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "About",
+    "section": "",
+    "text": "However, as new analysis methods are being proposed at an increasing rate, and novel multi-omic sequencing technologies are becoming commonplace, there is an urgent need for new analysis standards for single-cell (multi-)omics data.\nOpenPipelines are best-practice workflows for single-cell single- and multi-omics data. To ensure these workflows are accessible to non-experts and can be deployed in a fast and reproducible way, we will build these into reproducible, modular, and updatable best-practice analysis pipelines using industry-standard workflow tools, high-performance versions of popular methods, and an interoperable, language-independent framework."
+  },
+  {
+    "objectID": "contribute/index.html",
+    "href": "contribute/index.html",
+    "title": "Developers Guide",
+    "section": "",
+    "text": "Openpipelines is being developed in Viash and Nextflow. If you are unfamiliar with either one of these platforms, you can check out their respective documentations here and here. To start contributing to openpipelines, you will need at least a working version of Java 11, OpenJDK 11, or a later version (up to Java 18). Additionally, by using Docker, you can build and test pipeline components and pipelines without needing to manually install dependencies for these components on your machine.\nViash and Nextflow can be installed by following the guides in the documentation for both of these tools. However, openpipelines provides a setup script that downloads the binaries for the versions that openpipelines is currently using. First, fork the openpipelines GitHub repository here. If you are unfamiliar with this process, please check out the corresponding Github documentation. Next, you can clone your fork and install Viash and Nextflow in the bin folder.\ngit clone https://github.com/YOUR-USER-NAME/openpipeline.git\ncd openpipeline\n./bin/init"
+  },
+  {
+    "objectID": "contribute/index.html#directory-structure",
+    "href": "contribute/index.html#directory-structure",
+    "title": "Developers Guide",
+    "section": "Directory structure",
+    "text": "Directory structure\nThe root of the repository contains three main folders:\n\nbin, which contains the viash and nextflow binairies,\nsrc, which contains the source code for individual components,\nthe workflows folder containing the implementations of the pipelines (combining one or more components).\n(optionally) the target folder\n\nEach subfolder from src contains a Viash namespace, a logical grouping of pipeline components that perform a similar function. Within each namespace, subfolders designate individual pipeline components. For example ./src/convert/from_bdrhap_to_h5ad contains the implementation for a component from_bdrhap_to_h5ad which is grouped together with other components such as from_10xmtx_to_h5mu into a namespace convert. In a similar manner as grouping components into namespaces, pipelines are grouped together into folders. However, these are not component namespaces and as such do not interact with viash ns commands (see below).\nThe bin directory contains the Viash and Nextflow binaries and scripts. As will become apparent later on, Viash not only provides commands to perform operations on individual components, but also on groups of components in a namespace and all components in a project. As a rule of thumb, the basic Viash commands with a space (like ./bin/viash test) are designated for running commands on individual components, while ns commands are (./bin/viash ns test) are for namespaces. Additionally, the Viash underscore (_) commands (like ./bin/viash_test) are derived from the ns commands, but have defaults set for some of the most common configuration options like the docker registry used for the project, the docker organisation name, and the tag. Generally, an underscore command will be used instead of its ns sibling.\nWhen cloning a fresh repository, there will be no target folder present. This is because the target folder will only be created after components have been build."
+  },
+  {
+    "objectID": "contribute/index.html#building-components",
+    "href": "contribute/index.html#building-components",
+    "title": "Developers Guide",
+    "section": "Building components",
+    "text": "Building components\nWhen running or testing individual components, it is not necessary to execute an extra command to run the build step, viash test and viash run will build the component on the fly. However, before integrating components into a pipeline, you will need to build the components. More specifically, openpipelines uses Nextflow to combine components into pipelines, so we need to have at least the components build for nextflow platform as target. The easiest method to build the components is to use:\n./bin/viash_build\nAfter using ./bin/viash_build, the target folder will be populated with three subfolders, corresponding to the build platforms that viash supports: native, docker and nextflow. In contrast to ./bin/viash build, viash_build will use all of the platforms defined in each of the components configuration instead of the first one. Keep in mind that running ./bin/viash_build will not always cause a component to be re-build completely. Caching mechanisms in the docker platform for example will make sure only components for which alterations have been made will be build, significantly reducing build times. In summary, using ./bin/viash_build makes sure that the latest build of components are available before starting to integrate them in pipelines.\nBuilding an individual component can still be useful, for example when debugging a component for which the build fails or if you want to create a standalone executable for a component to execute it without the need to use viash. To build an individual component, ./bin/viash build can be used. Note that the default build directory of this viash base command is output, which is not the location where build components will be imported from when integrating them in pipelines. Using the --output argument, you can set it to any directory you want, for example:\n./bin/viash build ./src/filter/do_filter/config.vsh.yaml -o ./target/native/filter/do_filter/ -p native"
+  },
+  {
+    "objectID": "contribute/index.html#implementing-pipelines",
+    "href": "contribute/index.html#implementing-pipelines",
+    "title": "Developers Guide",
+    "section": "Implementing pipelines",
+    "text": "Implementing pipelines"
+  },
+  {
+    "objectID": "contribute/index.html#running-pipelines",
+    "href": "contribute/index.html#running-pipelines",
+    "title": "Developers Guide",
+    "section": "Running pipelines",
+    "text": "Running pipelines\n\nRunning pipelines from the CLI\nAfter building the components\nbin/nextflow run . \\\n  -main-script workflows/integration/multimodal_integration/main.nf \\\n  -profile docker \\\n  -resume \n  --publish_dir foo/\n  --input \"bar\"\n  --output \"test.txt\"\n\n\nRunning pipelines from nf-tower"
+  },
+  {
+    "objectID": "contribute/index.html#running-tests",
+    "href": "contribute/index.html#running-tests",
+    "title": "Developers Guide",
+    "section": "Running tests",
+    "text": "Running tests\n\nFetching the test data.\nThe input data that is needed to run the tests will need to be downloaded from the openpipelines Amazon AWS s3 bucket first. To do so, the download/sync_test_resource component can be used, which will download the data to the correct location (resources_test) by default.\n./bin/viash run ./src/download/sync_test_resources/config.vsh.yaml -p docker -- --input s3://openpipelines-data\nOr, if you do not want to use Docker and have aws-cli tools installed natively:\n./bin/viash run ./src/download/sync_test_resources/config.vsh.yaml -p native -- --input s3://openpipelines-data\n\n\nRunning component unittests\nTo build and run tests for individual component that you are working on, use viash test with the config.vsh.yaml of the component you would like to test. For example:\n./bin/viash test ./src/convert/from_10xh5_to_h5mu/config.vsh.yaml\nKeep in mind that when no platform is passed to viash test, it will use the first platform that is specified in the config, which is docker for most of the components in openpipelines. Use -p native for example if you do not want to use docker.\nIt is also possible to execute the tests for all components in each namespace using ./bin/viash_test (note the underscore instead of a space).\n./bin/viash_test\n\n\nIntegration tests\nIndividual integration tests can be run by using the integration_test.sh scripts for a pipeline, located next to the main.nf in the workflows folder.\n./workflows/ingestion/cellranger_demux/integration_test.sh\nRunning all integration tests is also possible using a helper script that can be found at workflows/test/integration_test.sh. Using this script requires a working R installation with tidyverse installed. However, as pipelines are implemented by combining individual components\n./workflows/test/integration_test.sh"
+  },
+  {
+    "objectID": "contribute/index.html#bug-reports",
+    "href": "contribute/index.html#bug-reports",
+    "title": "Developers Guide",
+    "section": "Bug reports",
+    "text": "Bug reports\nIssues with Openpipelines are being tracked on Github. In order for an issue to be fixed in a timely manner, creating a complete and reproducable is essential."
+  },
+  {
+    "objectID": "contribute/index.html#branching-strategy",
+    "href": "contribute/index.html#branching-strategy",
+    "title": "Developers Guide",
+    "section": "Branching strategy",
+    "text": "Branching strategy\n\n\n\n\n%%{init: { 'logLevel': 'debug', 'theme': 'default'} } }%%\ngitGraph\n  commit id: \"initial commit\"\n  branch main_build\n  commit id: \"CI build\"\n  checkout main\n  commit\n  checkout main_build\n  merge main\n  checkout main\n  branch feature_a\n  branch feature_b\n  checkout feature_a\n  commit\n  commit\n  checkout main\n  commit id: \"#release 0.1\" type: HIGHLIGHT\n  checkout main_build\n  merge main\n  checkout main\n  branch release\n  commit tag: \"0.1\"\n  checkout main\n  commit\n  checkout feature_b\n  commit\n  commit\n  checkout feature_a\n  commit\n  checkout main\n  merge feature_a\n  checkout main_build\n  merge main\n  checkout main\n  checkout feature_b\n  commit\n  checkout main\n  merge feature_b\n  checkout main_build\n  merge main\n  checkout release\n  merge main tag: \"0.2\"\n\n\n\n\n\n\n\n\nThe develoment version of openpipelines is available on the main branch. This is where all new code should be merged into by creating a pull request. Once a pull request has been approved and merged, Github Actions CI will automatically build all components (creating the target directory) and push the result to the main_build branch. In essence, the main_build branch is a copy of the main branch, but also containing the build components. Once it is time to create a openpipelines release, the Github CI release workflow is manually triggered, the components on the main branch will be build and tested. Then, the result will be pushed to the release branch and the integration tests will be run. If all tests succeeded, a new github tag and release can be created manually from the release branch."
   },
   {
     "objectID": "architecture/index.html",
@@ -74,13 +1271,13 @@
     "href": "architecture/index.html#subworkflows",
     "title": "Overview",
     "section": "Subworkflows",
-    "text": "Subworkflows\n\nIngestion\nPurpose: Convert raw sequencing data or count tables into MuData data for further processing.\n\n\n\n\n\n\nflowchart LR\n\n  BCL[\"BCL*\"]\n  Fastq[\"Fastq*\"]\n  Ref[\"Reference\"]\n  RawDir[\"Raw out*\"]\n  RawCounts[\"Raw counts†\"]\n\n  Demux[/\"Demux\"/]\n  Mapping[/\"Mapping\"/]\n  Convert[/\"Convert\"/]\n\n  BCL --- Demux --> Fastq\n  Fastq & Ref --- Mapping --> RawDir --- Convert --> RawCounts\n\n\n  BCL -.-|\".tar.gz/Directory\"| BCL\n  Fastq -.-|\".fastq.gz/.fastq\"| Fastq\n  Ref -.-|\".tar.gz?\"| Ref\n  RawDir -.-|\"Directory\"| RawDir\n  RawCounts -.-|\".h5mu\"| RawCounts\n\n  linkStyle 7,8,9,10,11 stroke:#fff,stroke-width:0px,text-align:left;\n\n\n\n\n\nFigure 2: Ingestion pipeline.\n*: Possible entry points.\n†: Output file(s)\n\n\n\n\n\n\n\nSingle-sample unimodal processing\nPurpose: Per modality fitering pipelines are available to select true from false cells.\n\n\n\n\n\n\nflowchart LR\n\n  RawCounts[\"Raw counts*\"]\n  Processed[\"Processed\\ncounts†\"]\n\n  Step1[/\"Cell\\nfiltering\"/]\n  Step2[/\"Doublet\\ncalling\"/]\n  Step3[/\"Ambient RNA\\ncorrection\"/]\n  \n  RawCounts --> Step1 --> Step2 --> Step3 --> Processed\n\n\n\n\n\nFigure 3: Single-sample processing pipeline.\n*: Possible entry points.\n†: Output file(s)\n\n\n\n\n\n\n\nMulti-sample unimodal processing\nPurpose: … .\n\n\n\n\n\n\nflowchart LR\n\n  Processed[\"Processed\\ncounts*\"]\n  Normalised[\"Normalised\\ncounts†\"]\n\n  Step1[/\"Feature annotation\"/]\n  Step2[/\"Batch correction?\"/]\n  Step3[/\"Normalisation\"/]\n  Step4[/\"Feature selection\"/]\n\n  Processed --> Step1 --> Step2 --> Step3 --> Step4 --> Normalised\n\n\n\n\n\nFigure 4: Multi-sample processing pipeline.\n*: Possible entry points.\n†: Output file(s)\n\n\n\n\n\n\n\nIntegration\nPurpose: Performs an integration pipeline for single cell data based on a single or multiple modalities.\n\n\n\n\n\n\nflowchart LR\n\n  Normalised[\"Normalised\\ncounts*\"]\n  Integrated[\"Integrated\\ndata†\"]\n\n  Step1[/\"Data integration\"/]\n  Step2[/\"Dimensionality\\nreduction\"/]\n  \n  Normalised --> Step1 --> Step2 --> Integrated\n\n\n\n\n\nFigure 5: Integration pipeline.\n*: Possible entry points.\n†: Output file(s)\n\n\n\n\n\n\n\nInterpretation\nPurpose: Take different dataset annotations and combine them together into a single enriched dataset. The idea is to have a diff_muon object, i.e. a muon object containing the changes of the original object where data from the diff_muon will be pushed to the original muon object.\n\n\n\n\n\n\nNote\n\n\n\nThis is what we did a time ago and it has the drawback that it could make everything very slow. We might need to be able to aggregate diffs before adding them to the final object."
+    "text": "Subworkflows\n\nIngestion\nPurpose: Convert raw sequencing data or count tables into MuData data for further processing.\n\n\n\n\n\n\nflowchart LR\n\n  BCL[\"BCL<sup>*</sup>\"]\n  Fastq[\"Fastq<sup>*</sup>\"]\n  Ref[\"Reference\"]\n  RawDir[\"Raw out<sup>*</sup>\"]\n  RawCounts[\"Raw counts<sup>†</sup>\"]\n\n  Demux[/\"Demux\"/]\n  Mapping[/\"Mapping\"/]\n  Convert[/\"Convert\"/]\n\n  BCL --- Demux --> Fastq\n  Fastq & Ref --- Mapping --> RawDir --- Convert --> RawCounts\n\n\n  BCL -.-|\".tar.gz/Directory\"| BCL\n  Fastq -.-|\".fastq.gz/.fastq\"| Fastq\n  Ref -.-|\".tar.gz?\"| Ref\n  RawDir -.-|\"Directory\"| RawDir\n  RawCounts -.-|\".h5mu\"| RawCounts\n\n  linkStyle 7,8,9,10,11 stroke:#fff,stroke-width:0px,text-align:left;\n\n\n\n\n\nFigure 2: Ingestion pipeline.\n*: Possible entry points.\n†: Output file(s)\n\n\n\n\n\n\n\nSingle-sample unimodal processing\nPurpose: Per modality fitering pipelines are available to select true from false cells.\n\n\n\n\n\n\nflowchart LR\n\n  RawCounts[\"Raw counts<sup>*</sup>\"]\n  Processed[\"Processed\\ncounts<sup>†</sup>\"]\n\n  Step1[/\"Cell\\nfiltering\"/]\n  Step2[/\"Doublet\\ncalling\"/]\n  Step3[/\"Ambient RNA\\ncorrection\"/]\n  \n  RawCounts --> Step1 --> Step2 --> Step3 --> Processed\n\n\n\n\n\nFigure 3: Single-sample processing pipeline.\n*: Possible entry points.\n†: Output file(s)\n\n\n\n\n\n\n\nMulti-sample unimodal processing\nPurpose: … .\n\n\n\n\n\n\nflowchart LR\n\n  Processed[\"Processed\\ncounts<sup>*</sup>\"]\n  Normalised[\"Normalised\\ncounts<sup>†</sup>\"]\n\n  Step1[/\"Feature annotation\"/]\n  Step2[/\"Batch correction?\"/]\n  Step3[/\"Normalisation\"/]\n  Step4[/\"Feature selection\"/]\n\n  Processed --> Step1 --> Step2 --> Step3 --> Step4 --> Normalised\n\n\n\n\n\nFigure 4: Multi-sample processing pipeline.\n*: Possible entry points.\n†: Output file(s)\n\n\n\n\n\n\n\nIntegration\nPurpose: Performs an integration pipeline for single cell data based on a single or multiple modalities.\n\n\n\n\n\n\nflowchart LR\n\n  Normalised[\"Normalised\\ncounts<sup>*</sup>\"]\n  Integrated[\"Integrated\\ndata<sup>†</sup>\"]\n\n  Step1[/\"Data integration\"/]\n  Step2[/\"Dimensionality\\nreduction\"/]\n  \n  Normalised --> Step1 --> Step2 --> Integrated\n\n\n\n\n\nFigure 5: Integration pipeline.\n*: Possible entry points.\n†: Output file(s)\n\n\n\n\n\n\n\nInterpretation\nPurpose: Take different dataset annotations and combine them together into a single enriched dataset. The idea is to have a diff_muon object, i.e. a muon object containing the changes of the original object where data from the diff_muon will be pushed to the original muon object.\n\n\n\n\n\n\nNote\n\n\n\nThis is what we did a time ago and it has the drawback that it could make everything very slow. We might need to be able to aggregate diffs before adding them to the final object."
   },
   {
-    "objectID": "contribute/index.html",
-    "href": "contribute/index.html",
-    "title": "Developers Guide",
+    "objectID": "architecture/use-cases.html",
+    "href": "architecture/use-cases.html",
+    "title": "Use-cases",
     "section": "",
-    "text": "%%{init: { 'logLevel': 'debug', 'theme': 'default'} } }%%\ngitGraph\n  commit id: \"initial commit\"\n  branch main_build\n  commit id: \"CI build\"\n  checkout main\n  commit\n  checkout main_build\n  merge main\n  checkout main\n  branch feature_a\n  branch feature_b\n  checkout feature_a\n  commit\n  commit\n  checkout main\n  commit id: \"#release 0.1\" type: HIGHLIGHT\n  checkout main_build\n  merge main\n  checkout main\n  branch release\n  commit tag: \"0.1\"\n  checkout main\n  commit\n  checkout feature_b\n  commit\n  commit\n  checkout feature_a\n  commit\n  checkout main\n  merge feature_a\n  checkout main_build\n  merge main\n  checkout main\n  checkout feature_b\n  commit\n  checkout main\n  merge feature_b\n  checkout main_build\n  merge main\n  checkout release\n  merge main tag: \"0.2\""
+    "text": "A single unimodal sample\n\n\n\n\n\n\nflowchart LR\n\n  Raw1[Sample 1] --- Ingestion1[/Ingestion/] --> Split1[/Split/] --> GEX1[GEX 1]\n  GEX1 --> ProcGEX1[/USS GEX/]\n  ProcGEX1 --- ConcatGEX[/Concatenating\\nSamples/] --> GEX[Combined\\nGEX]\n  GEX --> ProcGEX[/UMS GEX/]\n  ProcGEX --- Merge[/Merge/] --> Integration[/Integration/] --> Downstream[/.../]\n\n\n\n\n\n\nFigure 1: Example of how the concatenation and merges work.\nGEX: Gene-expression. USS: Unimodal single-sample processing. UMS: Unimodal multi-sample processing.\n\n\n\n\n\n\n\nA single multimodal sample\n\n\n\n\n\n\nflowchart LR\n\n  Raw1[Sample 1] --- Ingestion1[/Ingestion/] --> Split1[/Split/] --> GEX1[GEX 1] & ADT1[ADT 1] & RNAV1[RNAV 1]\n  GEX1 --> ProcGEX1[/USS GEX/]\n  ADT1 --> ProcADT1[/USS ADT/]\n  RNAV1 --> ProcRNAV1[/USS RNAV/]\n  ProcGEX1 --- ConcatGEX[/Concatenating\\nSamples/] --> GEX[Combined\\nGEX]\n  ProcADT1 --- ConcatADT[/Concatenating\\nSamples/] --> ADT[Combined\\nADT]\n  ProcRNAV1 --- ConcatRNAV[/Concatenating\\nSamples/] --> RNAV[Combined\\nRNAV]\n  GEX --> ProcGEX[/UMS GEX/]\n  ADT --> ProcADT[/UMS ADT/]\n  RNAV --> ProcRNAV[/UMS RNAV/]\n  ProcGEX & ProcADT & ProcRNAV--- Merge[/Merge/] --> Integration[/Integration/] --> Downstream[/.../]\n\n\n\n\n\n\nFigure 2: Example of how the concatenation and merges work.\nGEX: Gene-expression. ADT: Antibody-Derived Tags. RNAV: RNA Velocity. USS: Unimodal single-sample processing. UMS: Unimodal multi-sample processing.\n\n\n\n\n\n\n\nMultiple unimodal samples\n\n\n\n\n\n\nflowchart LR\n\n  Raw1[Sample 1] --- Ingestion1[/Ingestion/] --> Split1[/Split/] --> GEX1[GEX 1]\n  Raw2[Sample 2] --- Ingestion2[/Ingestion/] --> Split2[/Split/] --> GEX2[GEX 2]\n  Raw3[Sample 3] --- Ingestion3[/Ingestion/] --> Split3[/Split/] --> GEX3[GEX 3]\n  GEX1 --> ProcGEX1[/USS GEX/]\n  GEX2 --> ProcGEX2[/USS GEX/]\n  GEX3 --> ProcGEX3[/USS GEX/]\n  ProcGEX1 & ProcGEX2 & ProcGEX3 --- ConcatGEX[/Concatenating\\nSamples/] --> GEX[Combined\\nGEX]\n  GEX --> ProcGEX[/UMS GEX/]\n  ProcGEX --- Merge[/Merge/] --> Integration[/Integration/] --> Downstream[/.../]\n\n\n\n\n\n\nFigure 3: Example of how the concatenation and merges work.\nGEX: Gene-expression. USS: Unimodal single-sample processing. UMS: Unimodal multi-sample processing.\n\n\n\n\n\n\n\nMultiple multimodal samples\n\n\n\n\n\n\nflowchart LR\n\n  Raw1[Sample 1] --- Ingestion1[/Ingestion/] --> Split1[/Split/] --> GEX1[GEX 1] & ADT1[ADT 1]\n  Raw2[Sample 2] --- Ingestion2[/Ingestion/] --> Split2[/Split/] --> GEX2[GEX 2] & ADT2[ADT 2]\n  GEX1 --> ProcGEX1[/USS GEX/]\n  ADT1 --> ProcADT1[/USS ADT/]\n  GEX2 --> ProcGEX2[/USS GEX/]\n  ADT2 --> ProcADT2[/USS ADT/]\n  ProcGEX1 & ProcGEX2 --- ConcatGEX[/Concatenating\\nSamples/] --> GEX[Combined\\nGEX]\n  ProcADT1 & ProcADT2 --- ConcatADT[/Concatenating\\nSamples/] --> ADT[Combined\\nADT]\n  GEX --> ProcGEX[/UMS GEX/]\n  ADT --> ProcADT[/UMS ADT/]\n  ProcGEX & ProcADT --- Merge[/Merge/] --> Integration[/Integration/] --> Downstream[/.../]\n\n\n\n\n\n\nFigure 4: Example of how the concat and merges work.\nGEX: Gene-expression. ADT: Antibody-Derived Tags. USS: Unimodal single-sample processing. UMS: Unimodal multi-sample processing."
   }
 ]

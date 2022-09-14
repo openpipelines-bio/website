@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.189">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>OpenPipelines - Workflows</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../openpipelines.png" alt="" class="navbar-logo">
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html">About</a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-architecture" role="button" data-bs-toggle="dropdown" aria-expanded="false">Architecture</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-architecture">    
+        <li>
+    <a class="dropdown-item" href="../architecture/index.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../architecture/use-cases.html">
+ <span class="dropdown-text">Use-cases</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="../workflows/index.html" aria-current="page">Workflows</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../contribute/index.html">Contribute</a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/openpipelines-bio/openpipeline">Source Code</a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#workflows" id="toc-workflows" class="nav-link active" data-scroll-target="#workflows">Workflows</a></li>
+  <li><a href="#components" id="toc-components" class="nav-link" data-scroll-target="#components">Components</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/openpipeline-web/edit/main/workflows/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/openpipeline-web/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Workflows</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="workflows" class="level2">
+<h2 class="anchored" data-anchor-id="workflows">Workflows</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Namespace</th>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Author(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ingestion</td>
+<td style="text-align: left;"><a href="../workflows/workflow_ingestion_bd_rhapsody.html">bd_rhapsody</a></td>
+<td style="text-align: left;">Robrecht Cannoodt</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ingestion</td>
+<td style="text-align: left;"><a href="../workflows/workflow_ingestion_cellranger_demux.html">cellranger_demux</a></td>
+<td style="text-align: left;">Angela Pisco, Samuel D’Souza, Robrecht Cannoodt</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ingestion</td>
+<td style="text-align: left;"><a href="../workflows/workflow_ingestion_cellranger_mapping.html">cellranger_mapping</a></td>
+<td style="text-align: left;">Angela Pisco, Samuel D’Souza, Robrecht Cannoodt</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ingestion</td>
+<td style="text-align: left;"><a href="../workflows/workflow_ingestion_demux.html">demux</a></td>
+<td style="text-align: left;">Toni Verbeiren, Marijke Van Moerbeke</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">integration</td>
+<td style="text-align: left;"><a href="../workflows/workflow_integration_multimodal_integration.html">multimodal_integration</a></td>
+<td style="text-align: left;">Dries De Maeyer, Robrecht Cannoodt</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">integration</td>
+<td style="text-align: left;"><a href="../workflows/workflow_integration_multiomics.html">multiomics</a></td>
+<td style="text-align: left;">Dries Schaumont</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">process_rna</td>
+<td style="text-align: left;"><a href="../workflows/workflow_process_rna_multisample.html">multisample</a></td>
+<td style="text-align: left;">Dries De Maeyer, Robrecht Cannoodt</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">process_rna</td>
+<td style="text-align: left;"><a href="../workflows/workflow_process_rna_singlesample.html">singlesample</a></td>
+<td style="text-align: left;">Dries De Maeyer, Robrecht Cannoodt</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="components" class="level2">
+<h2 class="anchored" data-anchor-id="components">Components</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Namespace</th>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Author(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">cluster</td>
+<td style="text-align: left;"><a href="../workflows/module_cluster_leiden.html">leiden</a></td>
+<td style="text-align: left;">Dries De Maeyer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">compression</td>
+<td style="text-align: left;"><a href="../workflows/module_compression_tar_extract.html">tar_extract</a></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">convert</td>
+<td style="text-align: left;"><a href="../workflows/module_convert_from_10xh5_to_h5mu.html">from_10xh5_to_h5mu</a></td>
+<td style="text-align: left;">Robrecht Cannoodt</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">convert</td>
+<td style="text-align: left;"><a href="../workflows/module_convert_from_10xmtx_to_h5mu.html">from_10xmtx_to_h5mu</a></td>
+<td style="text-align: left;">Robrecht Cannoodt</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">convert</td>
+<td style="text-align: left;"><a href="../workflows/module_convert_from_bd_to_10x_molecular_barcode_tags.html">from_bd_to_10x_molecular_barcode_tags</a></td>
+<td style="text-align: left;">Dries Schaumont</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">convert</td>
+<td style="text-align: left;"><a href="../workflows/module_convert_from_bdrhap_to_h5mu.html">from_bdrhap_to_h5mu</a></td>
+<td style="text-align: left;">Robrecht Cannoodt</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">convert</td>
+<td style="text-align: left;"><a href="../workflows/module_convert_from_h5ad_to_h5mu.html">from_h5ad_to_h5mu</a></td>
+<td style="text-align: left;">Dries De Maeyer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">convert</td>
+<td style="text-align: left;"><a href="../workflows/module_convert_from_h5mu_to_seurat.html">from_h5mu_to_seurat</a></td>
+<td style="text-align: left;">Robrecht Cannoodt</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">convert</td>
+<td style="text-align: left;"><a href="../workflows/module_convert_from_velocyto_to_h5mu.html">from_velocyto_to_h5mu</a></td>
+<td style="text-align: left;">Dries Schaumont</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">demux</td>
+<td style="text-align: left;"><a href="../workflows/module_demux_bcl_convert.html">bcl_convert</a></td>
+<td style="text-align: left;">Toni Verbeiren, Marijke Van moerbeke</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">demux</td>
+<td style="text-align: left;"><a href="../workflows/module_demux_bcl2fastq.html">bcl2fastq</a></td>
+<td style="text-align: left;">Toni Verbeiren</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">demux</td>
+<td style="text-align: left;"><a href="../workflows/module_demux_cellranger_mkfastq.html">cellranger_mkfastq</a></td>
+<td style="text-align: left;">Angela Pisco, Samuel D’Souza, Robrecht Cannoodt</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">dimred</td>
+<td style="text-align: left;"><a href="../workflows/module_dimred_pca.html">pca</a></td>
+<td style="text-align: left;">Dries De Maeyer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">dimred</td>
+<td style="text-align: left;"><a href="../workflows/module_dimred_umap.html">umap</a></td>
+<td style="text-align: left;">Dries De Maeyer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">download</td>
+<td style="text-align: left;"><a href="../workflows/module_download_download_file.html">download_file</a></td>
+<td style="text-align: left;">Robrecht Cannoodt</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">download</td>
+<td style="text-align: left;"><a href="../workflows/module_download_sync_test_resources.html">sync_test_resources</a></td>
+<td style="text-align: left;">Robrecht Cannoodt</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">files</td>
+<td style="text-align: left;"><a href="../workflows/module_files_make_params.html">make_params</a></td>
+<td style="text-align: left;">Angela Pisco, Robrecht Cannoodt</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">filter</td>
+<td style="text-align: left;"><a href="../workflows/module_filter_do_filter.html">do_filter</a></td>
+<td style="text-align: left;">Robrecht Cannoodt</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">filter</td>
+<td style="text-align: left;"><a href="../workflows/module_filter_filter_with_counts.html">filter_with_counts</a></td>
+<td style="text-align: left;">Dries De Maeyer, Robrecht Cannoodt</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">filter</td>
+<td style="text-align: left;"><a href="../workflows/module_filter_filter_with_hvg.html">filter_with_hvg</a></td>
+<td style="text-align: left;">Dries De Maeyer, Robrecht Cannoodt</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">filter</td>
+<td style="text-align: left;"><a href="../workflows/module_filter_filter_with_scrublet.html">filter_with_scrublet</a></td>
+<td style="text-align: left;">Dries De Maeyer, Robrecht Cannoodt</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">filter</td>
+<td style="text-align: left;"><a href="../workflows/module_filter_subset_h5mu.html">subset_h5mu</a></td>
+<td style="text-align: left;">Dries Schaumont</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">integrate</td>
+<td style="text-align: left;"><a href="../workflows/module_integrate_concat.html">concat</a></td>
+<td style="text-align: left;">Dries Schaumont</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">integrate</td>
+<td style="text-align: left;"><a href="../workflows/module_integrate_harmony.html">harmony</a></td>
+<td style="text-align: left;">Dries De Maeyer, Robrecht Cannoodt</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">integrate</td>
+<td style="text-align: left;"><a href="../workflows/module_integrate_harmonypy.html">harmonypy</a></td>
+<td style="text-align: left;">Dries Schaumont, Robrecht Cannoodt</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">integrate</td>
+<td style="text-align: left;"><a href="../workflows/module_integrate_merge.html">merge</a></td>
+<td style="text-align: left;">Dries Schaumont</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">integrate</td>
+<td style="text-align: left;"><a href="../workflows/module_integrate_scanorama.html">scanorama</a></td>
+<td style="text-align: left;">Dries De Maeyer, Dries Schaumont</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">interactive</td>
+<td style="text-align: left;"><a href="../workflows/module_interactive_run_cellxgene.html">run_cellxgene</a></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">interactive</td>
+<td style="text-align: left;"><a href="../workflows/module_interactive_run_cirrocumulus.html">run_cirrocumulus</a></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mapping</td>
+<td style="text-align: left;"><a href="../workflows/module_mapping_bd_rhapsody.html">bd_rhapsody</a></td>
+<td style="text-align: left;">Robrecht Cannoodt</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mapping</td>
+<td style="text-align: left;"><a href="../workflows/module_mapping_cellranger_count_split.html">cellranger_count_split</a></td>
+<td style="text-align: left;">Angela Pisco, Samuel D’Souza, Robrecht Cannoodt</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mapping</td>
+<td style="text-align: left;"><a href="../workflows/module_mapping_cellranger_count.html">cellranger_count</a></td>
+<td style="text-align: left;">Angela Pisco, Samuel D’Souza, Robrecht Cannoodt</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">neighbors</td>
+<td style="text-align: left;"><a href="../workflows/module_neighbors_bbknn.html">bbknn</a></td>
+<td style="text-align: left;">Dries De Maeyer, Dries Schaumont</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">neighbors</td>
+<td style="text-align: left;"><a href="../workflows/module_neighbors_find_neighbors.html">find_neighbors</a></td>
+<td style="text-align: left;">Dries De Maeyer, Robrecht Cannoodt</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">process_10xh5</td>
+<td style="text-align: left;"><a href="../workflows/module_process_10xh5_filter_10xh5.html">filter_10xh5</a></td>
+<td style="text-align: left;">Robrecht Cannoodt</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">qc</td>
+<td style="text-align: left;"><a href="../workflows/module_qc_fastqc.html">fastqc</a></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">qc</td>
+<td style="text-align: left;"><a href="../workflows/module_qc_multiqc.html">multiqc</a></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">reference</td>
+<td style="text-align: left;"><a href="../workflows/module_reference_build_bdrhap_reference.html">build_bdrhap_reference</a></td>
+<td style="text-align: left;">Angela Pisco, Robrecht Cannoodt</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">reference</td>
+<td style="text-align: left;"><a href="../workflows/module_reference_build_cellranger_reference.html">build_cellranger_reference</a></td>
+<td style="text-align: left;">Angela Pisco, Robrecht Cannoodt</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">reference</td>
+<td style="text-align: left;"><a href="../workflows/module_reference_make_reference.html">make_reference</a></td>
+<td style="text-align: left;">Angela Pisco, Robrecht Cannoodt</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">report</td>
+<td style="text-align: left;"><a href="../workflows/module_report_mermaid.html">mermaid</a></td>
+<td style="text-align: left;">Dries De Maeyer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">split</td>
+<td style="text-align: left;"><a href="../workflows/module_split_split_modalities.html">split_modalities</a></td>
+<td style="text-align: left;">Dries Schaumont</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">transfer</td>
+<td style="text-align: left;"><a href="../workflows/module_transfer_publish.html">publish</a></td>
+<td style="text-align: left;">Toni Verbeiren</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">transform</td>
+<td style="text-align: left;"><a href="../workflows/module_transform_delete_layer.html">delete_layer</a></td>
+<td style="text-align: left;">Dries Schaumont</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">transform</td>
+<td style="text-align: left;"><a href="../workflows/module_transform_log1p.html">log1p</a></td>
+<td style="text-align: left;">Dries De Maeyer, Robrecht Cannoodt</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">transform</td>
+<td style="text-align: left;"><a href="../workflows/module_transform_normalize_total.html">normalize_total</a></td>
+<td style="text-align: left;">Dries De Maeyer, Robrecht Cannoodt</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">transform</td>
+<td style="text-align: left;"><a href="../workflows/module_transform_regress_out.html">regress_out</a></td>
+<td style="text-align: left;">Robrecht Cannoodt</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">transform</td>
+<td style="text-align: left;"><a href="../workflows/module_transform_scale.html">scale</a></td>
+<td style="text-align: left;">Dries Schaumont</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">velocity</td>
+<td style="text-align: left;"><a href="../workflows/module_velocity_scvelo.html">scvelo</a></td>
+<td style="text-align: left;">Dries Schaumont</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">velocity</td>
+<td style="text-align: left;"><a href="../workflows/module_velocity_velocyto.html">velocyto</a></td>
+<td style="text-align: left;">Robrecht Cannoodt</td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Copyright 2022, OpenPipelines-bio</div>
+  </div>
+</footer>
+
+
+
+</body></html>
