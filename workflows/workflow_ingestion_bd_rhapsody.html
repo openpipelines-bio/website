@@ -234,7 +234,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="argument-help" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="argument-help">Argument help</h2>
 <p>Run the following command to view the workflow’s help page:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="at">-r</span> main_build <span class="at">-main-script</span> /home/rcannood/workspace/jnj/openpipeline/workflows/ingestion/bd_rhapsody/main.nf <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="at">-r</span> main_build <span class="at">-main-script</span> ./workflows/ingestion/bd_rhapsody/main.nf <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="inputs" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="inputs">Inputs</h3>
 <div class="column-body-outset">
@@ -301,9 +301,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="column-body-outset">
 <table class="table">
 <colgroup>
-<col style="width: 10%">
-<col style="width: 54%">
-<col style="width: 35%">
+<col style="width: 12%">
+<col style="width: 57%">
+<col style="width: 30%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -314,9 +314,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><code>--output</code></td>
-<td style="text-align: left;">Output folder. Output still needs to be processed further.</td>
+<td style="text-align: left;"><code>--output_raw</code></td>
+<td style="text-align: left;">The BD Rhapsody output folder as it comes out of the BD Rhapsody pipeline</td>
 <td style="text-align: left;">file, required, example: “output_dir”</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--output_h5mu</code></td>
+<td style="text-align: left;">The converted h5mu file.</td>
+<td style="text-align: left;">file, required, example: “output.h5mu”</td>
 </tr>
 </tbody>
 </table>

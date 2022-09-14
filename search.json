@@ -42,27 +42,6 @@
     "text": "Authors\n\nRobrecht Cannoodt   (maintainer)"
   },
   {
-    "objectID": "workflows/workflow_ingestion_cellranger_demux.html",
-    "href": "workflows/workflow_ingestion_cellranger_demux.html",
-    "title": "cellranger_demux",
-    "section": "",
-    "text": "Cell Ranger demux pipeline."
-  },
-  {
-    "objectID": "workflows/workflow_ingestion_cellranger_demux.html#argument-help",
-    "href": "workflows/workflow_ingestion_cellranger_demux.html#argument-help",
-    "title": "cellranger_demux",
-    "section": "Argument help",
-    "text": "Argument help\nRun the following command to view the workflow’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script /home/rcannood/workspace/jnj/openpipeline/workflows/ingestion/cellranger_demux/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--id\nID of the sample.\nstring, required, example: “foo”\n\n\n--input\nA BCL directory.\nfile, required, example: “/path/to/bcl”\n\n\n--sample_sheet\nThe sample sheet for the samples to be demultiplexed.\nfile, required, example: “sample_sheet.csv”\n\n\n--cores\nSet max cores the pipeline may request at one time.\ninteger, example: 2\n\n\n--memory\nSet max GB the pipeline may request at one time.\ninteger, example: 10"
-  },
-  {
-    "objectID": "workflows/workflow_ingestion_cellranger_demux.html#authors",
-    "href": "workflows/workflow_ingestion_cellranger_demux.html#authors",
-    "title": "cellranger_demux",
-    "section": "Authors",
-    "text": "Authors\n\nAngela Pisco   (author)\nSamuel D’Souza  (author)\nRobrecht Cannoodt   (author, maintainer)"
-  },
-  {
     "objectID": "workflows/module_convert_from_velocyto_to_h5mu.html",
     "href": "workflows/module_convert_from_velocyto_to_h5mu.html",
     "title": "from_velocyto_to_h5mu",
@@ -193,7 +172,7 @@
     "href": "workflows/workflow_ingestion_bd_rhapsody.html#argument-help",
     "title": "bd_rhapsody",
     "section": "Argument help",
-    "text": "Argument help\nRun the following command to view the workflow’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script /home/rcannood/workspace/jnj/openpipeline/workflows/ingestion/bd_rhapsody/main.nf --help\n\nInputs\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--mode\nWhether to run a whole transcriptome analysis (WTA) or a targeted analysis.\nstring, required, example: “wta”\n\n\n--id\nID of the sample.\nstring, required, example: “foo”\n\n\n--input\nPath to your read files in the FASTQ.GZ format. You may specify as many R1/R2 read pairs as you want.\nfile, required, example: “input.fastq.gz”\n\n\n--reference\nRefence to map to. For --mode wta, this is the path to STAR index as a tar.gz file. For --mode targeted, this is the path to mRNA reference file for pre-designed, supplemental, or custom panel, in FASTA format\nfile, required, example: “reference_genome.tar.gz|reference.fasta”\n\n\n--transcriptome_annotation\nPath to GTF annotation file (only for --mode wta).\nfile, example: “transcriptome.gtf”\n\n\n--abseq_reference\nPath to the AbSeq reference file in FASTA format. Only needed if BD AbSeq Ab-Oligos are used.\nfile, example: “abseq_reference.fasta”\n\n\n--supplemental_reference\nPath to the supplemental reference file in FASTA format. Only needed if there are additional transgene sequences used in the experiment (only for --mode wta).\nfile, example: “supplemental_reference.fasta”\n\n\n--sample_prefix\nSpecify a run name to use as the output file base name. Use only letters, numbers, or hyphens. Do not use special characters or spaces.\nstring, default: “sample”\n\n\n\n\n\n\nOutputs\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--output\nOutput folder. Output still needs to be processed further.\nfile, required, example: “output_dir”\n\n\n\n\n\n\nPutative cell calling settings\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--putative_cell_call\nSpecify the dataset to be used for putative cell calling. For putative cell calling using an AbSeq dataset, please provide an AbSeq_Reference fasta file above.\nstring, example: “mRNA”\n\n\n--exact_cell_count\nExact cell count - Set a specific number (>=1) of cells as putative, based on those with the highest error-corrected read count\ninteger, example: 10000\n\n\n--disable_putative_calling\nDisable Refined Putative Cell Calling - Determine putative cells using only the basic algorithm (minimum second derivative along the cumulative reads curve). The refined algorithm attempts to remove false positives and recover false negatives, but may not be ideal for certain complex mixtures of cell types. Does not apply if Exact Cell Count is set.\nboolean_true\n\n\n\n\n\n\nSubsample arguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--subsample\nA number >1 or fraction (0 < n < 1) to indicate the number or percentage of reads to subsample.\ndouble, example: 0.01\n\n\n--subsample_seed\nA seed for replicating a previous subsampled run.\ninteger, example: 3445\n\n\n\n\n\n\nMultiplex arguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--sample_tags_version\nSpecify if multiplexed run.\nstring, example: “human”\n\n\n--tag_names\nTag_Names (optional) - Specify the tag number followed by ‘-’ and the desired sample name to appear in Sample_Tag_Metrics.csv. Do not use the special characters: &, (), [], {}, <>, ?, |\nstring, example: “4-mySample”, example: “9-myOtherSample”, example: “6-alsoThisSample”\n\n\n\n\n\n\nVDJ arguments\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--vdj_version\nSpecify if VDJ run.\nstring, example: “human”\n\n\n\n\n\n\nCWL-runner arguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--parallel\nRun jobs in parallel.\nboolean, default: TRUE\n\n\n--timestamps\nAdd timestamps to the errors, warnings, and notifications.\nboolean_true\n\n\n--dryrun\nIf true, the output directory will only contain the CWL input files, but the pipeline itself will not be executed.\nboolean_true"
+    "text": "Argument help\nRun the following command to view the workflow’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script ./workflows/ingestion/bd_rhapsody/main.nf --help\n\nInputs\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--mode\nWhether to run a whole transcriptome analysis (WTA) or a targeted analysis.\nstring, required, example: “wta”\n\n\n--id\nID of the sample.\nstring, required, example: “foo”\n\n\n--input\nPath to your read files in the FASTQ.GZ format. You may specify as many R1/R2 read pairs as you want.\nfile, required, example: “input.fastq.gz”\n\n\n--reference\nRefence to map to. For --mode wta, this is the path to STAR index as a tar.gz file. For --mode targeted, this is the path to mRNA reference file for pre-designed, supplemental, or custom panel, in FASTA format\nfile, required, example: “reference_genome.tar.gz|reference.fasta”\n\n\n--transcriptome_annotation\nPath to GTF annotation file (only for --mode wta).\nfile, example: “transcriptome.gtf”\n\n\n--abseq_reference\nPath to the AbSeq reference file in FASTA format. Only needed if BD AbSeq Ab-Oligos are used.\nfile, example: “abseq_reference.fasta”\n\n\n--supplemental_reference\nPath to the supplemental reference file in FASTA format. Only needed if there are additional transgene sequences used in the experiment (only for --mode wta).\nfile, example: “supplemental_reference.fasta”\n\n\n--sample_prefix\nSpecify a run name to use as the output file base name. Use only letters, numbers, or hyphens. Do not use special characters or spaces.\nstring, default: “sample”\n\n\n\n\n\n\nOutputs\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--output_raw\nThe BD Rhapsody output folder as it comes out of the BD Rhapsody pipeline\nfile, required, example: “output_dir”\n\n\n--output_h5mu\nThe converted h5mu file.\nfile, required, example: “output.h5mu”\n\n\n\n\n\n\nPutative cell calling settings\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--putative_cell_call\nSpecify the dataset to be used for putative cell calling. For putative cell calling using an AbSeq dataset, please provide an AbSeq_Reference fasta file above.\nstring, example: “mRNA”\n\n\n--exact_cell_count\nExact cell count - Set a specific number (>=1) of cells as putative, based on those with the highest error-corrected read count\ninteger, example: 10000\n\n\n--disable_putative_calling\nDisable Refined Putative Cell Calling - Determine putative cells using only the basic algorithm (minimum second derivative along the cumulative reads curve). The refined algorithm attempts to remove false positives and recover false negatives, but may not be ideal for certain complex mixtures of cell types. Does not apply if Exact Cell Count is set.\nboolean_true\n\n\n\n\n\n\nSubsample arguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--subsample\nA number >1 or fraction (0 < n < 1) to indicate the number or percentage of reads to subsample.\ndouble, example: 0.01\n\n\n--subsample_seed\nA seed for replicating a previous subsampled run.\ninteger, example: 3445\n\n\n\n\n\n\nMultiplex arguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--sample_tags_version\nSpecify if multiplexed run.\nstring, example: “human”\n\n\n--tag_names\nTag_Names (optional) - Specify the tag number followed by ‘-’ and the desired sample name to appear in Sample_Tag_Metrics.csv. Do not use the special characters: &, (), [], {}, <>, ?, |\nstring, example: “4-mySample”, example: “9-myOtherSample”, example: “6-alsoThisSample”\n\n\n\n\n\n\nVDJ arguments\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--vdj_version\nSpecify if VDJ run.\nstring, example: “human”\n\n\n\n\n\n\nCWL-runner arguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--parallel\nRun jobs in parallel.\nboolean, default: TRUE\n\n\n--timestamps\nAdd timestamps to the errors, warnings, and notifications.\nboolean_true\n\n\n--dryrun\nIf true, the output directory will only contain the CWL input files, but the pipeline itself will not be executed.\nboolean_true"
   },
   {
     "objectID": "workflows/workflow_ingestion_bd_rhapsody.html#authors",
@@ -222,27 +201,6 @@
     "title": "delete_layer",
     "section": "Authors",
     "text": "Authors\n\nDries Schaumont (maintainer)"
-  },
-  {
-    "objectID": "workflows/workflow_process_rna_multisample.html",
-    "href": "workflows/workflow_process_rna_multisample.html",
-    "title": "multisample",
-    "section": "",
-    "text": "Processing unimodal multi-sample RNA transcriptomics data."
-  },
-  {
-    "objectID": "workflows/workflow_process_rna_multisample.html#argument-help",
-    "href": "workflows/workflow_process_rna_multisample.html#argument-help",
-    "title": "multisample",
-    "section": "Argument help",
-    "text": "Argument help\nRun the following command to view the workflow’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script /home/rcannood/workspace/jnj/openpipeline/workflows/process_rna/multisample/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--id\nIDs of the sample.\nstring, required, example: “foo”\n\n\n--input\nPath to the samples.\nfile, required, example: “dataset.h5mu”\n\n\n--output\nDestination path to the output.\nfile, required, example: “output.h5mu”"
-  },
-  {
-    "objectID": "workflows/workflow_process_rna_multisample.html#authors",
-    "href": "workflows/workflow_process_rna_multisample.html#authors",
-    "title": "multisample",
-    "section": "Authors",
-    "text": "Authors\n\nDries De Maeyer (author)\nRobrecht Cannoodt   (author, maintainer)"
   },
   {
     "objectID": "workflows/module_integrate_harmony.html",
@@ -329,23 +287,23 @@
     "text": "Authors\n\nAngela Pisco   (author)\nRobrecht Cannoodt   (author, maintainer)"
   },
   {
-    "objectID": "workflows/workflow_integration_multiomics.html",
-    "href": "workflows/workflow_integration_multiomics.html",
-    "title": "multiomics",
+    "objectID": "workflows/workflow_multiomics_full_pipeline.html",
+    "href": "workflows/workflow_multiomics_full_pipeline.html",
+    "title": "full_pipeline",
     "section": "",
     "text": "A pipeline to analyse multiple multiomics samples."
   },
   {
-    "objectID": "workflows/workflow_integration_multiomics.html#argument-help",
-    "href": "workflows/workflow_integration_multiomics.html#argument-help",
-    "title": "multiomics",
+    "objectID": "workflows/workflow_multiomics_full_pipeline.html#argument-help",
+    "href": "workflows/workflow_multiomics_full_pipeline.html#argument-help",
+    "title": "full_pipeline",
     "section": "Argument help",
-    "text": "Argument help\nRun the following command to view the workflow’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script /home/rcannood/workspace/jnj/openpipeline/workflows/integration/multiomics/main.nf --help\n\nInputs\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--id\nID of the sample.\nstring, required, example: “foo”\n\n\n--input\nPath to the sample.\nfile, required, example: “input.h5mu”"
+    "text": "Argument help\nRun the following command to view the workflow’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script ./workflows/multiomics/full_pipeline/main.nf --help\n\nInputs\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--id\nID of the sample.\nstring, required, example: “foo”\n\n\n--input\nPath to the sample.\nfile, required, example: “input.h5mu”"
   },
   {
-    "objectID": "workflows/workflow_integration_multiomics.html#authors",
-    "href": "workflows/workflow_integration_multiomics.html#authors",
-    "title": "multiomics",
+    "objectID": "workflows/workflow_multiomics_full_pipeline.html#authors",
+    "href": "workflows/workflow_multiomics_full_pipeline.html#authors",
+    "title": "full_pipeline",
     "section": "Authors",
     "text": "Authors\n\nDries Schaumont   (author, maintainer)"
   },
@@ -396,14 +354,14 @@
     "href": "workflows/index.html",
     "title": "Workflows",
     "section": "",
-    "text": "Namespace\nName\nAuthor(s)\n\n\n\n\ningestion\nbd_rhapsody\nRobrecht Cannoodt\n\n\ningestion\ncellranger_demux\nAngela Pisco, Samuel D’Souza, Robrecht Cannoodt\n\n\ningestion\ncellranger_mapping\nAngela Pisco, Samuel D’Souza, Robrecht Cannoodt\n\n\ningestion\ndemux\nToni Verbeiren, Marijke Van Moerbeke\n\n\nintegration\nmultimodal_integration\nDries De Maeyer, Robrecht Cannoodt\n\n\nintegration\nmultiomics\nDries Schaumont\n\n\nprocess_rna\nmultisample\nDries De Maeyer, Robrecht Cannoodt\n\n\nprocess_rna\nsinglesample\nDries De Maeyer, Robrecht Cannoodt"
+    "text": "Namespace\nName\nAuthor(s)\n\n\n\n\ningestion\nbd_rhapsody\nRobrecht Cannoodt\n\n\ningestion\ncellranger_mapping\nAngela Pisco, Samuel D’Souza, Robrecht Cannoodt\n\n\ningestion\ndemux\nToni Verbeiren, Marijke Van Moerbeke, Angela Pisco, Samuel D’Souza, Robrecht Cannoodt\n\n\nmultiomics\nfull_pipeline\nDries Schaumont\n\n\nmultiomics\nintegration\nDries De Maeyer, Robrecht Cannoodt, Dries Schaumont\n\n\nmultiomics\nrna_multisample\nDries De Maeyer, Robrecht Cannoodt, Dries Schaumont\n\n\nmultiomics\nrna_singlesample\nDries De Maeyer, Robrecht Cannoodt, Dries Schaumont"
   },
   {
     "objectID": "workflows/index.html#components",
     "href": "workflows/index.html#components",
     "title": "Workflows",
     "section": "Components",
-    "text": "Components\n\n\n\nNamespace\nName\nAuthor(s)\n\n\n\n\ncluster\nleiden\nDries De Maeyer\n\n\ncompression\ntar_extract\n\n\n\nconvert\nfrom_10xh5_to_h5mu\nRobrecht Cannoodt\n\n\nconvert\nfrom_10xmtx_to_h5mu\nRobrecht Cannoodt\n\n\nconvert\nfrom_bd_to_10x_molecular_barcode_tags\nDries Schaumont\n\n\nconvert\nfrom_bdrhap_to_h5mu\nRobrecht Cannoodt\n\n\nconvert\nfrom_h5ad_to_h5mu\nDries De Maeyer\n\n\nconvert\nfrom_h5mu_to_seurat\nRobrecht Cannoodt\n\n\nconvert\nfrom_velocyto_to_h5mu\nDries Schaumont\n\n\ndemux\nbcl_convert\nToni Verbeiren, Marijke Van moerbeke\n\n\ndemux\nbcl2fastq\nToni Verbeiren\n\n\ndemux\ncellranger_mkfastq\nAngela Pisco, Samuel D’Souza, Robrecht Cannoodt\n\n\ndimred\npca\nDries De Maeyer\n\n\ndimred\numap\nDries De Maeyer\n\n\ndownload\ndownload_file\nRobrecht Cannoodt\n\n\ndownload\nsync_test_resources\nRobrecht Cannoodt\n\n\nfiles\nmake_params\nAngela Pisco, Robrecht Cannoodt\n\n\nfilter\ndo_filter\nRobrecht Cannoodt\n\n\nfilter\nfilter_with_counts\nDries De Maeyer, Robrecht Cannoodt\n\n\nfilter\nfilter_with_hvg\nDries De Maeyer, Robrecht Cannoodt\n\n\nfilter\nfilter_with_scrublet\nDries De Maeyer, Robrecht Cannoodt\n\n\nfilter\nsubset_h5mu\nDries Schaumont\n\n\nintegrate\nconcat\nDries Schaumont\n\n\nintegrate\nharmony\nDries De Maeyer, Robrecht Cannoodt\n\n\nintegrate\nharmonypy\nDries Schaumont, Robrecht Cannoodt\n\n\nintegrate\nmerge\nDries Schaumont\n\n\nintegrate\nscanorama\nDries De Maeyer, Dries Schaumont\n\n\ninteractive\nrun_cellxgene\n\n\n\ninteractive\nrun_cirrocumulus\n\n\n\nmapping\nbd_rhapsody\nRobrecht Cannoodt\n\n\nmapping\ncellranger_count_split\nAngela Pisco, Samuel D’Souza, Robrecht Cannoodt\n\n\nmapping\ncellranger_count\nAngela Pisco, Samuel D’Souza, Robrecht Cannoodt\n\n\nneighbors\nbbknn\nDries De Maeyer, Dries Schaumont\n\n\nneighbors\nfind_neighbors\nDries De Maeyer, Robrecht Cannoodt\n\n\nprocess_10xh5\nfilter_10xh5\nRobrecht Cannoodt\n\n\nqc\nfastqc\n\n\n\nqc\nmultiqc\n\n\n\nreference\nbuild_bdrhap_reference\nAngela Pisco, Robrecht Cannoodt\n\n\nreference\nbuild_cellranger_reference\nAngela Pisco, Robrecht Cannoodt\n\n\nreference\nmake_reference\nAngela Pisco, Robrecht Cannoodt\n\n\nreport\nmermaid\nDries De Maeyer\n\n\nsplit\nsplit_modalities\nDries Schaumont\n\n\ntransfer\npublish\nToni Verbeiren\n\n\ntransform\ndelete_layer\nDries Schaumont\n\n\ntransform\nlog1p\nDries De Maeyer, Robrecht Cannoodt\n\n\ntransform\nnormalize_total\nDries De Maeyer, Robrecht Cannoodt\n\n\ntransform\nregress_out\nRobrecht Cannoodt\n\n\ntransform\nscale\nDries Schaumont\n\n\nvelocity\nscvelo\nDries Schaumont\n\n\nvelocity\nvelocyto\nRobrecht Cannoodt"
+    "text": "Components\n\n\n\nNamespace\nName\nAuthor(s)\n\n\n\n\ncluster\nleiden\nDries De Maeyer\n\n\ncompression\ntar_extract\n\n\n\nconvert\nfrom_10xh5_to_h5mu\nRobrecht Cannoodt\n\n\nconvert\nfrom_10xmtx_to_h5mu\nRobrecht Cannoodt\n\n\nconvert\nfrom_bd_to_10x_molecular_barcode_tags\nDries Schaumont\n\n\nconvert\nfrom_bdrhap_to_h5mu\nRobrecht Cannoodt\n\n\nconvert\nfrom_h5ad_to_h5mu\nDries De Maeyer\n\n\nconvert\nfrom_h5mu_to_seurat\nRobrecht Cannoodt\n\n\nconvert\nfrom_velocyto_to_h5mu\nDries Schaumont\n\n\ndemux\nbcl_convert\nToni Verbeiren, Marijke Van Moerbeke\n\n\ndemux\nbcl2fastq\nToni Verbeiren\n\n\ndemux\ncellranger_mkfastq\nAngela Pisco, Samuel D’Souza, Robrecht Cannoodt\n\n\ndimred\npca\nDries De Maeyer\n\n\ndimred\numap\nDries De Maeyer\n\n\ndownload\ndownload_file\nRobrecht Cannoodt\n\n\ndownload\nsync_test_resources\nRobrecht Cannoodt\n\n\nfiles\nmake_params\nAngela Pisco, Robrecht Cannoodt\n\n\nfilter\ndo_filter\nRobrecht Cannoodt\n\n\nfilter\nfilter_with_counts\nDries De Maeyer, Robrecht Cannoodt\n\n\nfilter\nfilter_with_hvg\nDries De Maeyer, Robrecht Cannoodt\n\n\nfilter\nfilter_with_scrublet\nDries De Maeyer, Robrecht Cannoodt\n\n\nfilter\nsubset_h5mu\nDries Schaumont\n\n\nintegrate\nconcat\nDries Schaumont\n\n\nintegrate\nharmony\nDries De Maeyer, Robrecht Cannoodt\n\n\nintegrate\nharmonypy\nDries Schaumont, Robrecht Cannoodt\n\n\nintegrate\nmerge\nDries Schaumont\n\n\nintegrate\nscanorama\nDries De Maeyer, Dries Schaumont\n\n\ninteractive\nrun_cellxgene\n\n\n\ninteractive\nrun_cirrocumulus\n\n\n\nmapping\nbd_rhapsody\nRobrecht Cannoodt\n\n\nmapping\ncellranger_count_split\nAngela Pisco, Samuel D’Souza, Robrecht Cannoodt\n\n\nmapping\ncellranger_count\nAngela Pisco, Samuel D’Souza, Robrecht Cannoodt\n\n\nneighbors\nbbknn\nDries De Maeyer, Dries Schaumont\n\n\nneighbors\nfind_neighbors\nDries De Maeyer, Robrecht Cannoodt\n\n\nprocess_10xh5\nfilter_10xh5\nRobrecht Cannoodt\n\n\nqc\nfastqc\n\n\n\nqc\nmultiqc\n\n\n\nreference\nbuild_bdrhap_reference\nAngela Pisco, Robrecht Cannoodt\n\n\nreference\nbuild_cellranger_reference\nAngela Pisco, Robrecht Cannoodt\n\n\nreference\nmake_reference\nAngela Pisco, Robrecht Cannoodt\n\n\nreport\nmermaid\nDries De Maeyer\n\n\nsplit\nsplit_modalities\nDries Schaumont\n\n\ntransfer\npublish\nToni Verbeiren\n\n\ntransform\ndelete_layer\nDries Schaumont\n\n\ntransform\nlog1p\nDries De Maeyer, Robrecht Cannoodt\n\n\ntransform\nnormalize_total\nDries De Maeyer, Robrecht Cannoodt\n\n\ntransform\nregress_out\nRobrecht Cannoodt\n\n\ntransform\nscale\nDries Schaumont\n\n\nvelocity\nscvelo\nDries Schaumont\n\n\nvelocity\nvelocyto\nRobrecht Cannoodt"
   },
   {
     "objectID": "workflows/module_files_make_params.html",
@@ -613,7 +571,7 @@
     "href": "workflows/module_demux_bcl_convert.html#authors",
     "title": "bcl_convert",
     "section": "Authors",
-    "text": "Authors\n\nToni Verbeiren  (author, maintainer)\nMarijke Van moerbeke  (author)"
+    "text": "Authors\n\nToni Verbeiren  (author, maintainer)\nMarijke Van Moerbeke  (author)"
   },
   {
     "objectID": "workflows/module_transform_normalize_total.html",
@@ -677,27 +635,6 @@
     "title": "build_cellranger_reference",
     "section": "Authors",
     "text": "Authors\n\nAngela Pisco   (author)\nRobrecht Cannoodt   (author, maintainer)"
-  },
-  {
-    "objectID": "workflows/workflow_process_rna_singlesample.html",
-    "href": "workflows/workflow_process_rna_singlesample.html",
-    "title": "singlesample",
-    "section": "",
-    "text": "Processing unimodal single-sample RNA transcriptomics data."
-  },
-  {
-    "objectID": "workflows/workflow_process_rna_singlesample.html#argument-help",
-    "href": "workflows/workflow_process_rna_singlesample.html#argument-help",
-    "title": "singlesample",
-    "section": "Argument help",
-    "text": "Argument help\nRun the following command to view the workflow’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script /home/rcannood/workspace/jnj/openpipeline/workflows/process_rna/singlesample/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--id\nID of the sample.\nstring, required, example: “foo”\n\n\n--input\nPath to the sample.\nfile, required, example: “dataset.h5mu”\n\n\n--output\nDestination path to the output.\nfile, required, example: “output.h5mu”"
-  },
-  {
-    "objectID": "workflows/workflow_process_rna_singlesample.html#authors",
-    "href": "workflows/workflow_process_rna_singlesample.html#authors",
-    "title": "singlesample",
-    "section": "Authors",
-    "text": "Authors\n\nDries De Maeyer (author)\nRobrecht Cannoodt   (author, maintainer)"
   },
   {
     "objectID": "workflows/module_demux_bcl2fastq.html",
@@ -858,7 +795,7 @@
     "href": "workflows/workflow_ingestion_cellranger_mapping.html#argument-help",
     "title": "cellranger_mapping",
     "section": "Argument help",
-    "text": "Argument help\nRun the following command to view the workflow’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script /home/rcannood/workspace/jnj/openpipeline/workflows/ingestion/cellranger_mapping/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--id\nID of the sample.\nstring, required, example: “foo”\n\n\n--input\nA fastq file.\nfile, required, example: “data.fastq”\n\n\n--reference\nPath to a Cell Ranger reference.\nfile, required, example: “reference.tar.gz”\n\n\n--cores\nSet max cores the pipeline may request at one time.\ninteger, example: 2\n\n\n--memory\nSet max GB the pipeline may request at one time.\ninteger, example: 10"
+    "text": "Argument help\nRun the following command to view the workflow’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script ./workflows/ingestion/cellranger_mapping/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--id\nID of the sample.\nstring, required, example: “foo”\n\n\n--input\nA fastq file.\nfile, required, example: “data.fastq”\n\n\n--reference\nPath to a Cell Ranger reference.\nfile, required, example: “reference.tar.gz”\n\n\n--output_raw\nThe raw output folder.\nfile, required, example: “output_dir”\n\n\n--output_h5mu\nThe converted h5mu file.\nfile, required, example: “output.h5mu”"
   },
   {
     "objectID": "workflows/workflow_ingestion_cellranger_mapping.html#authors",
@@ -921,35 +858,77 @@
     "href": "workflows/workflow_ingestion_demux.html#argument-help",
     "title": "demux",
     "section": "Argument help",
-    "text": "Argument help\nRun the following command to view the workflow’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script /home/rcannood/workspace/jnj/openpipeline/workflows/ingestion/demux/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--id\nID of the sample.\nstring, required, example: “foo”\n\n\n--input\nInput run directory\nfile, required, example: “bcl_dir”\n\n\n--sample_sheet\nPointer to the sample sheet\nfile, required, example: “bcl_dir”\n\n\n--demultiplexer\nThe multiplexer to use, one of bclconvert or mkfastq\nstring, example: “bclconvert”\n\n\n--ignore_missing\nShould the demultiplexer ignore missing entities (filter, …)\nboolean"
+    "text": "Argument help\nRun the following command to view the workflow’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script ./workflows/ingestion/demux/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--id\nID of the sample.\nstring, required, example: “foo”\n\n\n--input\nInput run directory\nfile, required, example: “bcl_dir”\n\n\n--sample_sheet\nPointer to the sample sheet\nfile, required, example: “bcl_dir”\n\n\n--demultiplexer\nThe multiplexer to use, one of bclconvert or mkfastq\nstring, example: “bclconvert”\n\n\n--ignore_missing\nShould the demultiplexer ignore missing entities (filter, …)\nboolean"
   },
   {
     "objectID": "workflows/workflow_ingestion_demux.html#authors",
     "href": "workflows/workflow_ingestion_demux.html#authors",
     "title": "demux",
     "section": "Authors",
-    "text": "Authors\n\nToni Verbeiren  (author, maintainer)\nMarijke Van Moerbeke  (author)"
+    "text": "Authors\n\nToni Verbeiren  (author, maintainer)\nMarijke Van Moerbeke  (author)\nAngela Pisco   (author)\nSamuel D’Souza  (author)\nRobrecht Cannoodt   (author)"
   },
   {
-    "objectID": "workflows/workflow_integration_multimodal_integration.html",
-    "href": "workflows/workflow_integration_multimodal_integration.html",
-    "title": "multimodal_integration",
+    "objectID": "workflows/workflow_multiomics_integration.html",
+    "href": "workflows/workflow_multiomics_integration.html",
+    "title": "integration",
     "section": "",
     "text": "Processing multimodal multi-sample RNA transcriptomics data."
   },
   {
-    "objectID": "workflows/workflow_integration_multimodal_integration.html#argument-help",
-    "href": "workflows/workflow_integration_multimodal_integration.html#argument-help",
-    "title": "multimodal_integration",
+    "objectID": "workflows/workflow_multiomics_integration.html#argument-help",
+    "href": "workflows/workflow_multiomics_integration.html#argument-help",
+    "title": "integration",
     "section": "Argument help",
-    "text": "Argument help\nRun the following command to view the workflow’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script /home/rcannood/workspace/jnj/openpipeline/workflows/integration/multimodal_integration/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--id\nID of the sample.\nstring, required, example: “foo”\n\n\n--input\nPath to the sample.\nfile, required, example: “dataset.h5mu”\n\n\n--output\nDestination path to the output.\nfile, required, example: “output.h5mu”\n\n\n--layer\nuse specified layer for expression values instead of the .X object from the modality.\nstring, default: “log_normalized”\n\n\n--obs_covariates\nThe .obs field(s) that define the covariate(s) to regress out.\nstring, required, example: “batch”, example: “sample”"
+    "text": "Argument help\nRun the following command to view the workflow’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script ./workflows/multiomics/integration/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--id\nID of the sample.\nstring, required, example: “foo”\n\n\n--input\nPath to the sample.\nfile, required, example: “dataset.h5mu”\n\n\n--output\nDestination path to the output.\nfile, required, example: “output.h5mu”\n\n\n--layer\nuse specified layer for expression values instead of the .X object from the modality.\nstring, default: “log_normalized”\n\n\n--obs_covariates\nThe .obs field(s) that define the covariate(s) to regress out.\nstring, required, example: “batch”, example: “sample”"
   },
   {
-    "objectID": "workflows/workflow_integration_multimodal_integration.html#authors",
-    "href": "workflows/workflow_integration_multimodal_integration.html#authors",
-    "title": "multimodal_integration",
+    "objectID": "workflows/workflow_multiomics_integration.html#authors",
+    "href": "workflows/workflow_multiomics_integration.html#authors",
+    "title": "integration",
     "section": "Authors",
-    "text": "Authors\n\nDries De Maeyer (author)\nRobrecht Cannoodt   (author, maintainer)"
+    "text": "Authors\n\nDries De Maeyer (author)\nRobrecht Cannoodt   (author, maintainer)\nDries Schaumont   (author)"
+  },
+  {
+    "objectID": "workflows/workflow_multiomics_rna_multisample.html",
+    "href": "workflows/workflow_multiomics_rna_multisample.html",
+    "title": "rna_multisample",
+    "section": "",
+    "text": "Processing unimodal multi-sample RNA transcriptomics data."
+  },
+  {
+    "objectID": "workflows/workflow_multiomics_rna_multisample.html#argument-help",
+    "href": "workflows/workflow_multiomics_rna_multisample.html#argument-help",
+    "title": "rna_multisample",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the workflow’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script ./workflows/multiomics/rna_multisample/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--id\nIDs of the sample.\nstring, required, example: “foo”\n\n\n--input\nPath to the samples.\nfile, required, example: “dataset.h5mu”\n\n\n--output\nDestination path to the output.\nfile, required, example: “output.h5mu”"
+  },
+  {
+    "objectID": "workflows/workflow_multiomics_rna_multisample.html#authors",
+    "href": "workflows/workflow_multiomics_rna_multisample.html#authors",
+    "title": "rna_multisample",
+    "section": "Authors",
+    "text": "Authors\n\nDries De Maeyer (author)\nRobrecht Cannoodt   (author, maintainer)\nDries Schaumont   (author)"
+  },
+  {
+    "objectID": "workflows/workflow_multiomics_rna_singlesample.html",
+    "href": "workflows/workflow_multiomics_rna_singlesample.html",
+    "title": "rna_singlesample",
+    "section": "",
+    "text": "Processing unimodal single-sample RNA transcriptomics data."
+  },
+  {
+    "objectID": "workflows/workflow_multiomics_rna_singlesample.html#argument-help",
+    "href": "workflows/workflow_multiomics_rna_singlesample.html#argument-help",
+    "title": "rna_singlesample",
+    "section": "Argument help",
+    "text": "Argument help\nRun the following command to view the workflow’s help page:\nnextflow run openpipelines-bio/openpipeline -r main_build -main-script ./workflows/multiomics/rna_singlesample/main.nf --help\n\nArguments\n\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--id\nID of the sample.\nstring, required, example: “foo”\n\n\n--input\nPath to the sample.\nfile, required, example: “dataset.h5mu”\n\n\n--output\nDestination path to the output.\nfile, required, example: “output.h5mu”"
+  },
+  {
+    "objectID": "workflows/workflow_multiomics_rna_singlesample.html#authors",
+    "href": "workflows/workflow_multiomics_rna_singlesample.html#authors",
+    "title": "rna_singlesample",
+    "section": "Authors",
+    "text": "Authors\n\nDries De Maeyer (author)\nRobrecht Cannoodt   (author, maintainer)\nDries Schaumont   (author)"
   },
   {
     "objectID": "workflows/module_convert_from_bdrhap_to_h5mu.html",

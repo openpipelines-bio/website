@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>OpenPipelines - multisample</title>
+<title>OpenPipelines - full_pipeline</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -188,18 +188,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#argument-help" id="toc-argument-help" class="nav-link active" data-scroll-target="#argument-help">Argument help</a>
   <ul class="collapse">
-  <li><a href="#arguments" id="toc-arguments" class="nav-link" data-scroll-target="#arguments">Arguments</a></li>
+  <li><a href="#inputs" id="toc-inputs" class="nav-link" data-scroll-target="#inputs">Inputs</a></li>
   </ul></li>
   <li><a href="#authors" id="toc-authors" class="nav-link" data-scroll-target="#authors">Authors</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/openpipeline-web/edit/main/workflows/workflow_process_rna_multisample.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/openpipeline-web/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/openpipeline-web/edit/main/workflows/workflow_multiomics_full_pipeline.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/openpipeline-web/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">multisample</h1>
+<h1 class="title">full_pipeline</h1>
 </div>
 
 
@@ -213,20 +213,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>Processing unimodal multi-sample RNA transcriptomics data.</p>
+<p>A pipeline to analyse multiple multiomics samples.</p>
 <section id="argument-help" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="argument-help">Argument help</h2>
 <p>Run the following command to view the workflow’s help page:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="at">-r</span> main_build <span class="at">-main-script</span> /home/rcannood/workspace/jnj/openpipeline/workflows/process_rna/multisample/main.nf <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="arguments" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="arguments">Arguments</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="at">-r</span> main_build <span class="at">-main-script</span> ./workflows/multiomics/full_pipeline/main.nf <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="inputs" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="inputs">Inputs</h3>
 <div class="column-body-outset">
 <table class="table">
-<colgroup>
-<col style="width: 13%">
-<col style="width: 38%">
-<col style="width: 48%">
-</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Name</th>
@@ -237,18 +232,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"><code>--id</code></td>
-<td style="text-align: left;">IDs of the sample.</td>
+<td style="text-align: left;">ID of the sample.</td>
 <td style="text-align: left;">string, required, example: “foo”</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--input</code></td>
-<td style="text-align: left;">Path to the samples.</td>
-<td style="text-align: left;">file, required, example: “dataset.h5mu”</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>--output</code></td>
-<td style="text-align: left;">Destination path to the output.</td>
-<td style="text-align: left;">file, required, example: “output.h5mu”</td>
+<td style="text-align: left;">Path to the sample.</td>
+<td style="text-align: left;">file, required, example: “input.h5mu”</td>
 </tr>
 </tbody>
 </table>
@@ -258,8 +248,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="authors" class="level2">
 <h2 class="anchored" data-anchor-id="authors">Authors</h2>
 <ul>
-<li>Dries De Maeyer (author)</li>
-<li>Robrecht Cannoodt <a href="https://github.com/rcannood"><i class="fa-brands fa-github" aria-hidden="true"></i></a> <a href="https://orcid.org/0000-0003-3641-729X"><i class="fa-brands fa-orcid" aria-hidden="true"></i></a> (author, maintainer)</li>
+<li>Dries Schaumont <a href="https://github.com/DriesSchaumont"><i class="fa-brands fa-github" aria-hidden="true"></i></a> <a href="https://orcid.org/0000-0002-4389-0440"><i class="fa-brands fa-orcid" aria-hidden="true"></i></a> (author, maintainer)</li>
 </ul>
 
 

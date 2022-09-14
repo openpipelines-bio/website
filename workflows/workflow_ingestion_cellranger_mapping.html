@@ -217,15 +217,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="argument-help" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="argument-help">Argument help</h2>
 <p>Run the following command to view the workflow’s help page:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="at">-r</span> main_build <span class="at">-main-script</span> /home/rcannood/workspace/jnj/openpipeline/workflows/ingestion/cellranger_mapping/main.nf <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="at">-r</span> main_build <span class="at">-main-script</span> ./workflows/ingestion/cellranger_mapping/main.nf <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="arguments" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="arguments">Arguments</h3>
 <div class="column-body-outset">
 <table class="table">
 <colgroup>
-<col style="width: 12%">
+<col style="width: 17%">
+<col style="width: 35%">
 <col style="width: 47%">
-<col style="width: 40%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -251,14 +251,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td style="text-align: left;">file, required, example: “reference.tar.gz”</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>--cores</code></td>
-<td style="text-align: left;">Set max cores the pipeline may request at one time.</td>
-<td style="text-align: left;">integer, example: 2</td>
+<td style="text-align: left;"><code>--output_raw</code></td>
+<td style="text-align: left;">The raw output folder.</td>
+<td style="text-align: left;">file, required, example: “output_dir”</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>--memory</code></td>
-<td style="text-align: left;">Set max GB the pipeline may request at one time.</td>
-<td style="text-align: left;">integer, example: 10</td>
+<td style="text-align: left;"><code>--output_h5mu</code></td>
+<td style="text-align: left;">The converted h5mu file.</td>
+<td style="text-align: left;">file, required, example: “output.h5mu”</td>
 </tr>
 </tbody>
 </table>
