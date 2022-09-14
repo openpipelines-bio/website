@@ -1,0 +1,28 @@
+---
+title: multiqc
+---
+
+Component for multiqc (https://multiqc.info/)
+
+
+## Argument help
+
+Run the following command to view the module's help page:
+```bash
+nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/qc/multiqc/main.nf --help
+```
+
+### Arguments
+
+
+
+:::{.column-body-outset}
+|Name       |Description               |Attributes                           |
+|:----------|:-------------------------|:------------------------------------|
+|`--input`  |Describe the input file.  |file, required, example: "input.txt" |
+|`--output` |Describe the output file. |file, required, example: "report"    |
+:::
+
+## Authors
+
+

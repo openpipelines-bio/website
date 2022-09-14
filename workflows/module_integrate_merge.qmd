@@ -1,0 +1,29 @@
+---
+title: merge
+---
+
+Combine one or more single-modality .h5mu files together into one .h5mu file.
+
+
+## Argument help
+
+Run the following command to view the module's help page:
+```bash
+nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/integrate/merge/main.nf --help
+```
+
+### Arguments
+
+
+
+:::{.column-body-outset}
+|Name            |Description                                                       |Attributes                              |
+|:---------------|:-----------------------------------------------------------------|:---------------------------------------|
+|`--input`       |Paths to the single-modality .h5mu files that need to be combined |file, required, default: "sample_paths" |
+|`--output`      |Path to the output file.                                          |file, default: "output.h5mu"            |
+|`--compression` |The compression format to be used on the final h5mu object.       |string, default: "gzip"                 |
+:::
+
+## Authors
+
+ * Dries Schaumont  (maintainer)

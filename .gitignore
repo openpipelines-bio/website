@@ -9,3 +9,6 @@
 /env/
 
 _site
+*.html
+*.pdf
+*_files/

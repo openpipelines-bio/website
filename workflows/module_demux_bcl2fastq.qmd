@@ -1,0 +1,31 @@
+---
+title: bcl2fastq
+---
+
+Convert bcl files to fastq files using bcl2fastq.
+
+
+## Argument help
+
+Run the following command to view the module's help page:
+```bash
+nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/demux/bcl2fastq/main.nf --help
+```
+
+### Arguments
+
+
+
+:::{.column-body-outset}
+|Name                 |Description                                                                             |Attributes                                       |
+|:--------------------|:---------------------------------------------------------------------------------------|:------------------------------------------------|
+|`--input`            |Input run directory                                                                     |file, required, example: "bcl_dir"               |
+|`--sample_sheet`     |Pointer to the sample sheet                                                             |file, required, example: "SampleSheet.csv"       |
+|`--output`           |Output directory containig fastq files                                                  |file, required, example: "fastq_dir"             |
+|`--separate_reports` |Should reports be stored in a separate dir. Should be used with the --reports argument. |boolean_true                                     |
+|`--reports`          |Reports directory                                                                       |file, default: "reports", example: "reports_dir" |
+:::
+
+## Authors
+
+ * Toni Verbeiren [{{< fa brands github >}}](https://github.com/tverbeiren) (author, maintainer)
