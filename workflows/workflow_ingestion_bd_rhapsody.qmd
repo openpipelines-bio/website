@@ -21,7 +21,7 @@ The reference_genome and transcriptome_annotation files can be downloaded from t
 
 Run the following command to view the workflow's help page:
 ```bash
-nextflow run openpipelines-bio/openpipeline -r main_build -main-script /home/rcannood/workspace/jnj/openpipeline/workflows/ingestion/bd_rhapsody/main.nf --help
+nextflow run openpipelines-bio/openpipeline -r main_build -main-script ./workflows/ingestion/bd_rhapsody/main.nf --help
 ```
 
 ### Inputs
@@ -46,9 +46,10 @@ nextflow run openpipelines-bio/openpipeline -r main_build -main-script /home/rca
 
 
 :::{.column-body-outset}
-|Name       |Description                                                |Attributes                            |
-|:----------|:----------------------------------------------------------|:-------------------------------------|
-|`--output` |Output folder. Output still needs to be processed further. |file, required, example: "output_dir" |
+|Name            |Description                                                               |Attributes                             |
+|:---------------|:-------------------------------------------------------------------------|:--------------------------------------|
+|`--output_raw`  |The BD Rhapsody output folder as it comes out of the BD Rhapsody pipeline |file, required, example: "output_dir"  |
+|`--output_h5mu` |The converted h5mu file.                                                  |file, required, example: "output.h5mu" |
 :::
 
 ### Putative cell calling settings

@@ -1,5 +1,5 @@
 ---
-title: multimodal_integration
+title: integration
 ---
 
 Processing multimodal multi-sample RNA transcriptomics data.
@@ -8,7 +8,7 @@ Processing multimodal multi-sample RNA transcriptomics data.
 
 Run the following command to view the workflow's help page:
 ```bash
-nextflow run openpipelines-bio/openpipeline -r main_build -main-script /home/rcannood/workspace/jnj/openpipeline/workflows/integration/multimodal_integration/main.nf --help
+nextflow run openpipelines-bio/openpipeline -r main_build -main-script ./workflows/multiomics/integration/main.nf --help
 ```
 
 ### Arguments
@@ -29,3 +29,4 @@ nextflow run openpipelines-bio/openpipeline -r main_build -main-script /home/rca
 
  * Dries De Maeyer  (author)
  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author, maintainer)
+ * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (author)

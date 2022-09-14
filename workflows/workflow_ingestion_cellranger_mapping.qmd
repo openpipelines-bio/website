@@ -8,7 +8,7 @@ Cell Ranger mapping pipeline.
 
 Run the following command to view the workflow's help page:
 ```bash
-nextflow run openpipelines-bio/openpipeline -r main_build -main-script /home/rcannood/workspace/jnj/openpipeline/workflows/ingestion/cellranger_mapping/main.nf --help
+nextflow run openpipelines-bio/openpipeline -r main_build -main-script ./workflows/ingestion/cellranger_mapping/main.nf --help
 ```
 
 ### Arguments
@@ -16,13 +16,13 @@ nextflow run openpipelines-bio/openpipeline -r main_build -main-script /home/rca
 
 
 :::{.column-body-outset}
-|Name          |Description                                         |Attributes                                  |
-|:-------------|:---------------------------------------------------|:-------------------------------------------|
-|`--id`        |ID of the sample.                                   |string, required, example: "foo"            |
-|`--input`     |A fastq file.                                       |file, required, example: "data.fastq"       |
-|`--reference` |Path to a Cell Ranger reference.                    |file, required, example: "reference.tar.gz" |
-|`--cores`     |Set max cores the pipeline may request at one time. |integer, example: 2                         |
-|`--memory`    |Set max GB the pipeline may request at one time.    |integer, example: 10                        |
+|Name            |Description                      |Attributes                                  |
+|:---------------|:--------------------------------|:-------------------------------------------|
+|`--id`          |ID of the sample.                |string, required, example: "foo"            |
+|`--input`       |A fastq file.                    |file, required, example: "data.fastq"       |
+|`--reference`   |Path to a Cell Ranger reference. |file, required, example: "reference.tar.gz" |
+|`--output_raw`  |The raw output folder.           |file, required, example: "output_dir"       |
+|`--output_h5mu` |The converted h5mu file.         |file, required, example: "output.h5mu"      |
 :::
 
 ## Authors

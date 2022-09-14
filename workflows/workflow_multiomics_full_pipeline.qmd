@@ -1,5 +1,5 @@
 ---
-title: multiomics
+title: full_pipeline
 ---
 
 A pipeline to analyse multiple multiomics samples.
@@ -8,7 +8,7 @@ A pipeline to analyse multiple multiomics samples.
 
 Run the following command to view the workflow's help page:
 ```bash
-nextflow run openpipelines-bio/openpipeline -r main_build -main-script /home/rcannood/workspace/jnj/openpipeline/workflows/integration/multiomics/main.nf --help
+nextflow run openpipelines-bio/openpipeline -r main_build -main-script ./workflows/multiomics/full_pipeline/main.nf --help
 ```
 
 ### Inputs

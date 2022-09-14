@@ -33,4 +33,4 @@ nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/ne
 ## Authors
 
  * Toni Verbeiren [{{< fa brands github >}}](https://github.com/tverbeiren) (author, maintainer)
- * Marijke Van moerbeke [{{< fa brands orcid >}}](https://orcid.org/0000-0002-3097-5621) (author)
+ * Marijke Van Moerbeke [{{< fa brands orcid >}}](https://orcid.org/0000-0002-3097-5621) (author)
