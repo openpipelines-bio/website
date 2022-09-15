@@ -1,0 +1,43 @@
+---
+title: Do filter
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `do_filter`  
+Namespace: `filter`
+
+### Command
+
+```bash
+nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/filter/do_filter/main.nf --help
+```
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/filter/do_filter){.btn-action .btn-sm .btn-info .btn role="button"}
+:::
+
+Remove observations and variables based on specified .obs and .var columns.
+
+
+## Argument group
+
+### Arguments
+
+
+
+:::{.column-body-outset}
+|Name           |Description                                              |Attributes                              |
+|:--------------|:--------------------------------------------------------|:---------------------------------------|
+|`--input`      |Input h5mu file                                          |`file`, required, example: "input.h5mu" |
+|`--obs_filter` |Which .obs columns to use to filter the observations by. |`string`, example: "filter_with_x"      |
+|`--var_filter` |Which .var columns to use to filter the observations by. |`string`, default: "filter_with_x"      |
+|`--output`     |Output h5mu file.                                        |`file`, example: "output.h5mu"          |
+:::
+
+## Authors
+
+ * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (maintainer, contributor)

@@ -1,0 +1,41 @@
+---
+title: Multiqc
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `multiqc`  
+Namespace: `qc`
+
+### Command
+
+```bash
+nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/qc/multiqc/main.nf --help
+```
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/qc/multiqc){.btn-action .btn-sm .btn-info .btn role="button"}
+:::
+
+Component for multiqc (https://multiqc.info/)
+
+
+## Argument group
+
+### Arguments
+
+
+
+:::{.column-body-outset}
+|Name       |Description               |Attributes                             |
+|:----------|:-------------------------|:--------------------------------------|
+|`--input`  |Describe the input file.  |`file`, required, example: "input.txt" |
+|`--output` |Describe the output file. |`file`, required, example: "report"    |
+:::
+
+## Authors
+
+

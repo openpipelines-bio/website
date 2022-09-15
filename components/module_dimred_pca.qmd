@@ -1,0 +1,46 @@
+---
+title: Pca
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `pca`  
+Namespace: `dimred`
+
+### Command
+
+```bash
+nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/dimred/pca/main.nf --help
+```
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/dimred/pca){.btn-action .btn-sm .btn-info .btn role="button"}
+:::
+
+Computes PCA coordinates, loadings and variance decomposition. Uses the implementation of scikit-learn [Pedregosa11].
+
+
+## Argument group
+
+### Arguments
+
+
+
+:::{.column-body-outset}
+|Name               |Description                                                                                                          |Attributes                               |
+|:------------------|:--------------------------------------------------------------------------------------------------------------------|:----------------------------------------|
+|`--input`          |Input h5mu file                                                                                                      |`file`, required, example: "input.h5mu"  |
+|`--layer`          |use specified layer for expression values instead of the .X object from the modality.                                |`string`                                 |
+|`--output`         |Output h5mu file.                                                                                                    |`file`, required, example: "output.h5mu" |
+|`--obsm_output`    |In which .obsm slot to store the resulting integrated embedding.                                                     |`string`, default: "X_pca"               |
+|`--varm_output`    |In which .varm slot to store the resulting loadings matrix.                                                          |`string`, default: "pca_loadings"        |
+|`--uns_output`     |In which .uns slot to store the resulting variance objects.                                                          |`string`, default: "pca_variance"        |
+|`--num_components` |Number of principal components to compute. Defaults to 50, or 1 - minimum dimension size of selected representation. |`integer`, example: 25                   |
+:::
+
+## Authors
+
+ * Dries De Maeyer  (maintainer)

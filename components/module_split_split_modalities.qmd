@@ -1,0 +1,41 @@
+---
+title: Split modalities
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `split_modalities`  
+Namespace: `split`
+
+### Command
+
+```bash
+nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/split/split_modalities/main.nf --help
+```
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/split/split_modalities){.btn-action .btn-sm .btn-info .btn role="button"}
+:::
+
+Split the modalities from a single .h5mu multimodal sample into seperate .h5mu files. 
+
+
+## Argument group
+
+### Arguments
+
+
+
+:::{.column-body-outset}
+|Name            |Description                                                 |Attributes                               |
+|:---------------|:-----------------------------------------------------------|:----------------------------------------|
+|`--input`       |Path to a single .hm5u file                                 |`file`, required, default: "sample_path" |
+|`--compression` |The compression format to be used on the final h5mu object. |`string`, default: "gzip"                |
+:::
+
+## Authors
+
+ * Dries Schaumont  (maintainer)

@@ -1,0 +1,43 @@
+---
+title: Rna singlesample
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `rna_singlesample`  
+Namespace: `multiomics`
+
+### Command
+
+```bash
+nextflow run openpipelines-bio/openpipeline -r main_build -main-script workflows/multiomics/rna_singlesample/main.nf --help
+```
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/workflows/multiomics/rna_singlesample){.btn-action .btn-sm .btn-info .btn role="button"}
+:::
+
+Processing unimodal single-sample RNA transcriptomics data.
+
+## Argument group
+
+### Arguments
+
+
+
+:::{.column-body-outset}
+|Name       |Description                     |Attributes                                |
+|:----------|:-------------------------------|:-----------------------------------------|
+|`--id`     |ID of the sample.               |`string`, required, example: "foo"        |
+|`--input`  |Path to the sample.             |`file`, required, example: "dataset.h5mu" |
+|`--output` |Destination path to the output. |`file`, required, example: "output.h5mu"  |
+:::
+
+## Authors
+
+ * Dries De Maeyer  (author)
+ * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author, maintainer)
+ * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (author)

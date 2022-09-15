@@ -1,0 +1,45 @@
+---
+title: Harmony
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `harmony`  
+Namespace: `integrate`
+
+### Command
+
+```bash
+nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/integrate/harmony/main.nf --help
+```
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/integrate/harmony){.btn-action .btn-sm .btn-info .btn role="button"}
+:::
+
+Performs Harmony integration based as described in https://github.com/immunogenomics/harmony.
+
+## Argument group
+
+### Arguments
+
+
+
+:::{.column-body-outset}
+|Name               |Description                                                                                                                                                                           |Attributes                                    |
+|:------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------|
+|`--input`          |Input h5mu file                                                                                                                                                                       |`file`, required                              |
+|`--output`         |Output h5mu file.                                                                                                                                                                     |`file`, required                              |
+|`--obsm_input`     |Which .obsm slot to use as a starting PCA embedding.                                                                                                                                  |`string`, default: "X_pca"                    |
+|`--obsm_output`    |In which .obsm slot to store the resulting integrated embedding.                                                                                                                      |`string`, default: "X_pca_integrated"         |
+|`--theta`          |Diversity clustering penalty parameter. Specify for each variable in group.by.vars. theta=0 does not encourage any diversity. Larger values of theta result in more diverse clusters. |`double`, default: 2                          |
+|`--obs_covariates` |The .obs field(s) that define the covariate(s) to regress out.                                                                                                                        |`string`, example: "batch", example: "sample" |
+:::
+
+## Authors
+
+ * Dries De Maeyer  (author)
+ * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (maintainer, author)

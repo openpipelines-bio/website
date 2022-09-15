@@ -4,6 +4,8 @@ project:
 website:
   title: "OpenPipelines"
   image: "openpipelines.png"
+  site-url: https://openproblems.bio
+  repo-url: https://github.com/openproblems-bio/website
   navbar:
     logo: "openpipelines.png"
     title: false
@@ -13,15 +15,15 @@ website:
         menu: 
           - architecture/index.qmd
           - architecture/use-cases.qmd
-      - workflows/index.qmd
+      - components/index.qmd
       - text: Contribute
         href: contribute/index.qmd
     right:
       - text: Source Code
         url: https://github.com/openpipelines-bio/openpipeline
-  page-footer: "Copyright 2022, OpenPipelines-bio"
-  repo-url: https://github.com/openpipelines-bio/openpipeline-web
+  page-footer: "Copyright 2022, OpenPipelines.bio"
   repo-actions: [edit, issue] 
+  google-analytics: G-KKE3LFPPV8
 
 format:
   html:

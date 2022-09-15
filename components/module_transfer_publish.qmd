@@ -1,0 +1,40 @@
+---
+title: Publish
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `publish`  
+Namespace: `transfer`
+
+### Command
+
+```bash
+nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/transfer/publish/main.nf --help
+```
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/transfer/publish){.btn-action .btn-sm .btn-info .btn role="button"}
+:::
+
+Publish an artifact and optionally rename with parameters
+
+## Argument group
+
+### Arguments
+
+
+
+:::{.column-body-outset}
+|Name       |Description     |Attributes       |
+|:----------|:---------------|:----------------|
+|`--input`  |Input filename  |`file`, required |
+|`--output` |Output filename |`file`, required |
+:::
+
+## Authors
+
+ * Toni Verbeiren  (maintainer)

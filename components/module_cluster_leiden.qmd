@@ -1,0 +1,51 @@
+---
+title: Leiden
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `leiden`  
+Namespace: `cluster`
+
+### Command
+
+```bash
+nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/cluster/leiden/main.nf --help
+```
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/cluster/leiden){.btn-action .btn-sm .btn-info .btn role="button"}
+:::
+
+Cluster cells using the Leiden algorithm [Traag18] implemented in the Scanpy framework [Wolf18]. Leiden is an improved version of the Louvain algorithm [Blondel08]. 
+It has been proposed for single-cell analysis by [Levine15]. 
+This requires having ran neighbors/find_neighbors or neighbors/bbknn first.
+
+Blondel et al. (2008), Fast unfolding of communities in large networks, J. Stat. Mech.
+Levine et al. (2015), Data-Driven Phenotypic Dissection of AML Reveals Progenitor-like Cells that Correlate with Prognosis, Cell.
+Traag et al. (2018), From Louvain to Leiden: guaranteeing well-connected communities arXiv.
+Wolf et al. (2018), Scanpy: large-scale single-cell gene expression data analysis, Genome Biology.
+
+
+## Argument group
+
+### Arguments
+
+
+
+:::{.column-body-outset}
+|Name                    |Description                                                                                          |Attributes                               |
+|:-----------------------|:----------------------------------------------------------------------------------------------------|:----------------------------------------|
+|`--input`               |Input file.                                                                                          |`file`, required, example: "input.h5mu"  |
+|`--obsp_connectivities` |In which .obsp slot the neighbor connectivities can be found.                                        |`string`, default: "connectivities"      |
+|`--output`              |Output file.                                                                                         |`file`, required, example: "output.h5mu" |
+|`--obs_name`            |Name of the .obs key under which to add the cluster labels.                                          |`string`, default: "leiden"              |
+|`--resolution`          |A parameter value controlling the coarseness of the clustering. Higher values lead to more clusters. |`double`, default: 1                     |
+:::
+
+## Authors
+
+ * Dries De Maeyer  (maintainer)

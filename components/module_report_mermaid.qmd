@@ -1,0 +1,42 @@
+---
+title: Mermaid
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `mermaid`  
+Namespace: `report`
+
+### Command
+
+```bash
+nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/report/mermaid/main.nf --help
+```
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/report/mermaid){.btn-action .btn-sm .btn-info .btn role="button"}
+:::
+
+Generates a network from mermaid code. See `https://mermaid-js.github.io/mermaid/#/Tutorials`. This component uses the external mermaid.ink service to generate visual networks.
+
+
+## Argument group
+
+### Arguments
+
+
+
+:::{.column-body-outset}
+|Name       |Description                  |Attributes                 |
+|:----------|:----------------------------|:--------------------------|
+|`--input`  |Input directory              |`file`, required           |
+|`--output` |Generated network as output. |`file`, required           |
+|`--test`   |The test file to be executed |`file`, default: "test.py" |
+:::
+
+## Authors
+
+ * Dries De Maeyer  (maintainer)

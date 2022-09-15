@@ -1,0 +1,40 @@
+---
+title: Full pipeline
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `full_pipeline`  
+Namespace: `multiomics`
+
+### Command
+
+```bash
+nextflow run openpipelines-bio/openpipeline -r main_build -main-script workflows/multiomics/full_pipeline/main.nf --help
+```
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/workflows/multiomics/full_pipeline){.btn-action .btn-sm .btn-info .btn role="button"}
+:::
+
+A pipeline to analyse multiple multiomics samples.
+
+## Argument group
+
+### Inputs
+
+
+
+:::{.column-body-outset}
+|Name      |Description         |Attributes                              |
+|:---------|:-------------------|:---------------------------------------|
+|`--id`    |ID of the sample.   |`string`, required, example: "foo"      |
+|`--input` |Path to the sample. |`file`, required, example: "input.h5mu" |
+:::
+
+## Authors
+
+ * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (author, maintainer)

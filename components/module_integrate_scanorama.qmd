@@ -1,0 +1,50 @@
+---
+title: Scanorama
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `scanorama`  
+Namespace: `integrate`
+
+### Command
+
+```bash
+nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/integrate/scanorama/main.nf --help
+```
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/integrate/scanorama){.btn-action .btn-sm .btn-info .btn role="button"}
+:::
+
+Use Scanorama to integrate different experiments.
+
+
+## Argument group
+
+### Arguments
+
+
+
+:::{.column-body-outset}
+|Name            |Description                                                                                                                                                                 |Attributes                               |
+|:---------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------|
+|`--input`       |Input h5mu file                                                                                                                                                             |`file`, required                         |
+|`--output`      |Output .h5mu file                                                                                                                                                           |`file`, required, default: "output.h5ad" |
+|`--obs_batch`   |Column name discriminating between your batches.                                                                                                                            |`string`, default: "batch"               |
+|`--obsm_input`  |Basis obsm slot to run scanorama on.                                                                                                                                        |`string`, default: "X_pca"               |
+|`--obsm_output` |The name of the field in adata.obsm where the integrated embeddings will be stored after running this function. Defaults to X_scanorama.                                    |`string`, default: "X_scanorama"         |
+|`--knn`         |Number of nearest neighbors to use for matching.                                                                                                                            |`integer`, default: 20                   |
+|`--batch_size`  |The batch size used in the alignment vector computation. Useful when integrating very large (>100k samples) datasets. Set to large value that runs within available memory. |`integer`, default: 5000                 |
+|`--sigma`       |Correction smoothing parameter on Gaussian kernel.                                                                                                                          |`double`, default: 15                    |
+|`--approx`      |Use approximate nearest neighbors with Python annoy; greatly speeds up matching runtime.                                                                                    |`boolean`, default: TRUE                 |
+|`--alpha`       |Alignment score minimum cutoff                                                                                                                                              |`double`, default: 0.1                   |
+:::
+
+## Authors
+
+ * Dries De Maeyer  (author)
+ * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (maintainer)

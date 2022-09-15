@@ -1,0 +1,43 @@
+---
+title: From bd to 10x molecular barcode tags
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `from_bd_to_10x_molecular_barcode_tags`  
+Namespace: `convert`
+
+### Command
+
+```bash
+nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/convert/from_bd_to_10x_molecular_barcode_tags/main.nf --help
+```
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/convert/from_bd_to_10x_molecular_barcode_tags){.btn-action .btn-sm .btn-info .btn role="button"}
+:::
+
+Convert the molecular barcode sequence SAM tag from BD format (MA) to 10X format (UB).
+
+
+## Argument group
+
+### Arguments
+
+
+
+:::{.column-body-outset}
+|Name        |Description            |Attributes                             |
+|:-----------|:----------------------|:--------------------------------------|
+|`--input`   |Input SAM or BAM file. |`file`, required, example: "input.bam" |
+|`--output`  |Output alignment file. |`file`, example: "output.sam"          |
+|`--bam`     |Output a BAM file.     |`boolean_true`                         |
+|`--threads` |Number of threads      |`integer`                              |
+:::
+
+## Authors
+
+ * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (maintainer)

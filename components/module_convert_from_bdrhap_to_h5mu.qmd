@@ -1,0 +1,51 @@
+---
+title: From bdrhap to h5mu
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `from_bdrhap_to_h5mu`  
+Namespace: `convert`
+
+### Command
+
+```bash
+nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/convert/from_bdrhap_to_h5mu/main.nf --help
+```
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/convert/from_bdrhap_to_h5mu){.btn-action .btn-sm .btn-info .btn role="button"}
+:::
+
+Convert the output of a BD Rhapsody WTA pipeline to a MuData h5 file.
+
+
+## Argument groups
+
+### Inputs
+
+
+
+:::{.column-body-outset}
+|Name      |Description                           |Attributes                             |
+|:---------|:-------------------------------------|:--------------------------------------|
+|`--id`    |A sample ID.                          |`string`, required, example: "my_id"   |
+|`--input` |The output of a BD Rhapsody workflow. |`file`, required, example: "input_dir" |
+:::
+
+### Outputs
+
+
+
+:::{.column-body-outset}
+|Name       |Description       |Attributes                               |
+|:----------|:-----------------|:----------------------------------------|
+|`--output` |Output h5mu file. |`file`, required, example: "output.h5mu" |
+:::
+
+## Authors
+
+ * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (maintainer)

@@ -1,0 +1,49 @@
+---
+title: Bcl convert
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `bcl_convert`  
+Namespace: `demux`
+
+### Command
+
+```bash
+nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/demux/bcl_convert/main.nf --help
+```
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/demux/bcl_convert){.btn-action .btn-sm .btn-info .btn role="button"}
+:::
+
+Convert bcl files to fastq files using bcl-convert.
+Information about upgrading from bcl2fastq via
+https://emea.support.illumina.com/bulletins/2020/10/upgrading-from-bcl2fastq-to-bcl-convert.html
+and https://support.illumina.com/sequencing/sequencing_software/bcl-convert/compatibility.html
+
+
+## Argument group
+
+### Arguments
+
+
+
+:::{.column-body-outset}
+|Name                 |Description                                                                             |Attributes                                         |
+|:--------------------|:---------------------------------------------------------------------------------------|:--------------------------------------------------|
+|`--input`            |Input run directory                                                                     |`file`, required, example: "bcl_dir"               |
+|`--sample_sheet`     |Pointer to the sample sheet                                                             |`file`, required, example: "bcl_dir"               |
+|`--output`           |Output directory containig fastq files                                                  |`file`, required, example: "fastq_dir"             |
+|`--separate_reports` |Should reports be stored in a separate dir. Should be used with the --reports argument. |`boolean_true`                                     |
+|`--reports`          |Reports directory                                                                       |`file`, default: "reports", example: "reports_dir" |
+|`--test_mode`        |Should bcl-convert be run in test mode (using --first-tile-only)?                       |`boolean`, default: FALSE                          |
+:::
+
+## Authors
+
+ * Toni Verbeiren [{{< fa brands github >}}](https://github.com/tverbeiren) (author, maintainer)
+ * Marijke Van Moerbeke [{{< fa brands orcid >}}](https://orcid.org/0000-0002-3097-5621) (author)
