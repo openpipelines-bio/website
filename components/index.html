@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.242">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>OpenPipelines - Components</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KKE3LFPPV8"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
+</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../openpipelines.png" alt="" class="navbar-logo">
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html">About</a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-architecture" role="button" data-bs-toggle="dropdown" aria-expanded="false">Architecture</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-architecture">    
+        <li>
+    <a class="dropdown-item" href="../architecture/index.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../architecture/use-cases.html">
+ <span class="dropdown-text">Use-cases</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="../components/index.html" aria-current="page">Components</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../contribute/index.html">Contribute</a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/openpipelines-bio/openpipeline">Source Code</a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#workflows" id="toc-workflows" class="nav-link active" data-scroll-target="#workflows">Workflows</a></li>
+  <li><a href="#components" id="toc-components" class="nav-link" data-scroll-target="#components">Components</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openproblems-bio/website/edit/main/components/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openproblems-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Components</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="workflows" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="workflows">Workflows</h2>
+<div class="column-body-outset">
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Namespace</th>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Ingestion</td>
+<td style="text-align: left;"><a href="../components/workflow_ingestion_bd_rhapsody.html">BD Rhapsody</a></td>
+<td style="text-align: left;">A BD Rhapsody mapping and conversion pipeline</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ingestion</td>
+<td style="text-align: left;"><a href="../components/workflow_ingestion_cellranger_mapping.html">Cellranger mapping</a></td>
+<td style="text-align: left;">Cell Ranger mapping pipeline</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ingestion</td>
+<td style="text-align: left;"><a href="../components/workflow_ingestion_demux.html">Demux</a></td>
+<td style="text-align: left;">Convert bcl files to fastq files using bcl2fastq, bcl-convert or cellranger mkfastq</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Multiomics</td>
+<td style="text-align: left;"><a href="../components/workflow_multiomics_full_pipeline.html">Full pipeline</a></td>
+<td style="text-align: left;">A pipeline to analyse multiple multiomics samples</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Multiomics</td>
+<td style="text-align: left;"><a href="../components/workflow_multiomics_integration.html">Integration</a></td>
+<td style="text-align: left;">Processing multimodal multi-sample RNA transcriptomics data</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Multiomics</td>
+<td style="text-align: left;"><a href="../components/workflow_multiomics_rna_multisample.html">Rna multisample</a></td>
+<td style="text-align: left;">Processing unimodal multi-sample RNA transcriptomics data</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Multiomics</td>
+<td style="text-align: left;"><a href="../components/workflow_multiomics_rna_singlesample.html">Rna singlesample</a></td>
+<td style="text-align: left;">Processing unimodal single-sample RNA transcriptomics data</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="components" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="components">Components</h2>
+<div class="column-body-outset">
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Namespace</th>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Cluster</td>
+<td style="text-align: left;"><a href="../components/module_cluster_leiden.html">Leiden</a></td>
+<td style="text-align: left;">Cluster cells using the Leiden algorithm [Traag18] implemented in the Scanpy framework [Wolf18]</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Convert</td>
+<td style="text-align: left;"><a href="../components/module_convert_from_10xh5_to_h5mu.html">From 10xh5 to h5mu</a></td>
+<td style="text-align: left;">Converts a 10x h5 into an h5mu file</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Convert</td>
+<td style="text-align: left;"><a href="../components/module_convert_from_10xmtx_to_h5mu.html">From 10xmtx to h5mu</a></td>
+<td style="text-align: left;">Converts a 10x mtx into an h5mu file</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Convert</td>
+<td style="text-align: left;"><a href="../components/module_convert_from_bd_to_10x_molecular_barcode_tags.html">From bd to 10x molecular barcode tags</a></td>
+<td style="text-align: left;">Convert the molecular barcode sequence SAM tag from BD format (MA) to 10X format (UB)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Convert</td>
+<td style="text-align: left;"><a href="../components/module_convert_from_bdrhap_to_h5mu.html">From bdrhap to h5mu</a></td>
+<td style="text-align: left;">Convert the output of a BD Rhapsody WTA pipeline to a MuData h5 file</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Convert</td>
+<td style="text-align: left;"><a href="../components/module_convert_from_h5ad_to_h5mu.html">From h5ad to h5mu</a></td>
+<td style="text-align: left;">Converts a single layer h5ad file into a single muon object</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Convert</td>
+<td style="text-align: left;"><a href="../components/module_convert_from_h5mu_to_seurat.html">From h5mu to seurat</a></td>
+<td style="text-align: left;">Converts an h5mu file into a Seurat file</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Convert</td>
+<td style="text-align: left;"><a href="../components/module_convert_from_velocyto_to_h5mu.html">From velocyto to h5mu</a></td>
+<td style="text-align: left;">Convert a velocyto</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Demux</td>
+<td style="text-align: left;"><a href="../components/module_demux_bcl_convert.html">Bcl convert</a></td>
+<td style="text-align: left;">Convert bcl files to fastq files using bcl-convert</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Demux</td>
+<td style="text-align: left;"><a href="../components/module_demux_bcl2fastq.html">Bcl2fastq</a></td>
+<td style="text-align: left;">Convert bcl files to fastq files using bcl2fastq</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Demux</td>
+<td style="text-align: left;"><a href="../components/module_demux_cellranger_mkfastq.html">Cellranger mkfastq</a></td>
+<td style="text-align: left;">Demultiplex raw sequencing data</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Dimred</td>
+<td style="text-align: left;"><a href="../components/module_dimred_pca.html">Pca</a></td>
+<td style="text-align: left;">Computes PCA coordinates, loadings and variance decomposition</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Dimred</td>
+<td style="text-align: left;"><a href="../components/module_dimred_umap.html">Umap</a></td>
+<td style="text-align: left;">UMAP (Uniform Manifold Approximation and Projection) is a manifold learning technique suitable for visualizing high-dimensional data</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Download</td>
+<td style="text-align: left;"><a href="../components/module_download_download_file.html">Download file</a></td>
+<td style="text-align: left;">Download a file</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Download</td>
+<td style="text-align: left;"><a href="../components/module_download_sync_test_resources.html">Sync test resources</a></td>
+<td style="text-align: left;">Synchronise the test resources from s3://openpipelines-data to resources_test</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Files</td>
+<td style="text-align: left;"><a href="../components/module_files_make_params.html">Make params</a></td>
+<td style="text-align: left;">Looks for files in a directory and turn it in a params file</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Filter</td>
+<td style="text-align: left;"><a href="../components/module_filter_do_filter.html">Do filter</a></td>
+<td style="text-align: left;">Remove observations and variables based on specified</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Filter</td>
+<td style="text-align: left;"><a href="../components/module_filter_filter_with_counts.html">Filter with counts</a></td>
+<td style="text-align: left;">Filter scRNA-seq data based on the primary QC metrics</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Filter</td>
+<td style="text-align: left;"><a href="../components/module_filter_filter_with_hvg.html">Filter with hvg</a></td>
+<td style="text-align: left;">Annotate highly variable genes [Satija15] [Zheng17] [Stuart19]</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Filter</td>
+<td style="text-align: left;"><a href="../components/module_filter_filter_with_scrublet.html">Filter with scrublet</a></td>
+<td style="text-align: left;">Doublet detection using the Scrublet method (Wolock, Lopez and Klein, 2019)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Integrate</td>
+<td style="text-align: left;"><a href="../components/module_integrate_concat.html">Concat</a></td>
+<td style="text-align: left;">Concatenates several uni-modal samples in</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Integrate</td>
+<td style="text-align: left;"><a href="../components/module_integrate_harmony.html">Harmony</a></td>
+<td style="text-align: left;">Performs Harmony integration based as described in https://github</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Integrate</td>
+<td style="text-align: left;"><a href="../components/module_integrate_harmonypy.html">Harmonypy</a></td>
+<td style="text-align: left;">Performs Harmony integration based as described in https://github</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Integrate</td>
+<td style="text-align: left;"><a href="../components/module_integrate_merge.html">Merge</a></td>
+<td style="text-align: left;">Combine one or more single-modality</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Integrate</td>
+<td style="text-align: left;"><a href="../components/module_integrate_scanorama.html">Scanorama</a></td>
+<td style="text-align: left;">Use Scanorama to integrate different experiments</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mapping</td>
+<td style="text-align: left;"><a href="../components/module_mapping_bd_rhapsody.html">BD Rhapsody</a></td>
+<td style="text-align: left;">A wrapper for the BD Rhapsody Analysis CWL v1.10.1 pipeline</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mapping</td>
+<td style="text-align: left;"><a href="../components/module_mapping_cellranger_count_split.html">Cellranger count split</a></td>
+<td style="text-align: left;">Split 10x Cell Ranger output directory into separate output fields</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mapping</td>
+<td style="text-align: left;"><a href="../components/module_mapping_cellranger_count.html">Cellranger count</a></td>
+<td style="text-align: left;">Align fastq files using Cell Ranger count</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Neighbors</td>
+<td style="text-align: left;"><a href="../components/module_neighbors_bbknn.html">Bbknn</a></td>
+<td style="text-align: left;">BBKNN network generation</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Neighbors</td>
+<td style="text-align: left;"><a href="../components/module_neighbors_find_neighbors.html">Find neighbors</a></td>
+<td style="text-align: left;">Compute a neighborhood graph of observations [McInnes18]</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Process 10xh5</td>
+<td style="text-align: left;"><a href="../components/module_process_10xh5_filter_10xh5.html">Filter 10xh5</a></td>
+<td style="text-align: left;">Filter a 10x h5 dataset</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Qc</td>
+<td style="text-align: left;"><a href="../components/module_qc_fastqc.html">Fastqc</a></td>
+<td style="text-align: left;">Fastqc component, please see https://www</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Qc</td>
+<td style="text-align: left;"><a href="../components/module_qc_multiqc.html">Multiqc</a></td>
+<td style="text-align: left;">Component for multiqc (https://multiqc</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Reference</td>
+<td style="text-align: left;"><a href="../components/module_reference_build_bdrhap_reference.html">Build bdrhap reference</a></td>
+<td style="text-align: left;">Compile a reference into a STAR index compatible with the BD Rhapsody pipeline</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Reference</td>
+<td style="text-align: left;"><a href="../components/module_reference_build_cellranger_reference.html">Build cellranger reference</a></td>
+<td style="text-align: left;">Build a Cell Ranger-compatible reference folder from user-supplied genome FASTA and gene GTF files</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Reference</td>
+<td style="text-align: left;"><a href="../components/module_reference_make_reference.html">Make reference</a></td>
+<td style="text-align: left;">Make a reference build</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Report</td>
+<td style="text-align: left;"><a href="../components/module_report_mermaid.html">Mermaid</a></td>
+<td style="text-align: left;">Generates a network from mermaid code</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Split</td>
+<td style="text-align: left;"><a href="../components/module_split_split_modalities.html">Split modalities</a></td>
+<td style="text-align: left;">Split the modalities from a single</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Transfer</td>
+<td style="text-align: left;"><a href="../components/module_transfer_publish.html">Publish</a></td>
+<td style="text-align: left;">Publish an artifact and optionally rename with parameters</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Transform</td>
+<td style="text-align: left;"><a href="../components/module_transform_delete_layer.html">Delete layer</a></td>
+<td style="text-align: left;">Delete an anndata layer from one or more modalities</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Transform</td>
+<td style="text-align: left;"><a href="../components/module_transform_log1p.html">Log1p</a></td>
+<td style="text-align: left;">Logarithmize the data matrix</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Transform</td>
+<td style="text-align: left;"><a href="../components/module_transform_normalize_total.html">Normalize total</a></td>
+<td style="text-align: left;">Normalize counts per cell</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Transform</td>
+<td style="text-align: left;"><a href="../components/module_transform_regress_out.html">Regress out</a></td>
+<td style="text-align: left;">Regress out (mostly) unwanted sources of variation</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Transform</td>
+<td style="text-align: left;"><a href="../components/module_transform_scale.html">Scale</a></td>
+<td style="text-align: left;">Scale data to unit variance and zero mean</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Velocity</td>
+<td style="text-align: left;"><a href="../components/module_velocity_scvelo.html">Scvelo</a></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Velocity</td>
+<td style="text-align: left;"><a href="../components/module_velocity_velocyto.html">Velocyto</a></td>
+<td style="text-align: left;">Runs the velocity analysis on a BAM file, outputting a loom file</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Copyright 2022, OpenPipelines.bio</div>
+  </div>
+</footer>
+
+
+
+</body></html>
