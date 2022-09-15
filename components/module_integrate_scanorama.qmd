@@ -29,7 +29,6 @@ Use Scanorama to integrate different experiments.
 
 
 
-:::{.column-body-outset}
 |Name            |Description                                                                                                                                                                 |Attributes                               |
 |:---------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------|
 |`--input`       |Input h5mu file                                                                                                                                                             |`file`, required                         |
@@ -42,7 +41,6 @@ Use Scanorama to integrate different experiments.
 |`--sigma`       |Correction smoothing parameter on Gaussian kernel.                                                                                                                          |`double`, default: 15                    |
 |`--approx`      |Use approximate nearest neighbors with Python annoy; greatly speeds up matching runtime.                                                                                    |`boolean`, default: TRUE                 |
 |`--alpha`       |Alignment score minimum cutoff                                                                                                                                              |`double`, default: 0.1                   |
-:::
 
 ## Authors
 

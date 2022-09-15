@@ -28,7 +28,6 @@ Cell Ranger mapping pipeline.
 
 
 
-:::{.column-body-outset}
 |Name            |Description                      |Attributes                                    |
 |:---------------|:--------------------------------|:---------------------------------------------|
 |`--id`          |ID of the sample.                |`string`, required, example: "foo"            |
@@ -36,7 +35,6 @@ Cell Ranger mapping pipeline.
 |`--reference`   |Path to a Cell Ranger reference. |`file`, required, example: "reference.tar.gz" |
 |`--output_raw`  |The raw output folder.           |`file`, required, example: "output_dir"       |
 |`--output_h5mu` |The converted h5mu file.         |`file`, required, example: "output.h5mu"      |
-:::
 
 ## Authors
 

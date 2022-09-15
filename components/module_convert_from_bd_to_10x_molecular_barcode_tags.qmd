@@ -29,14 +29,12 @@ Convert the molecular barcode sequence SAM tag from BD format (MA) to 10X format
 
 
 
-:::{.column-body-outset}
 |Name        |Description            |Attributes                             |
 |:-----------|:----------------------|:--------------------------------------|
 |`--input`   |Input SAM or BAM file. |`file`, required, example: "input.bam" |
 |`--output`  |Output alignment file. |`file`, example: "output.sam"          |
 |`--bam`     |Output a BAM file.     |`boolean_true`                         |
 |`--threads` |Number of threads      |`integer`                              |
-:::
 
 ## Authors
 

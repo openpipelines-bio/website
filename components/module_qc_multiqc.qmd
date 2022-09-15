@@ -29,12 +29,10 @@ Component for multiqc (https://multiqc.info/)
 
 
 
-:::{.column-body-outset}
 |Name       |Description               |Attributes                             |
 |:----------|:-------------------------|:--------------------------------------|
 |`--input`  |Describe the input file.  |`file`, required, example: "input.txt" |
 |`--output` |Describe the output file. |`file`, required, example: "report"    |
-:::
 
 ## Authors
 

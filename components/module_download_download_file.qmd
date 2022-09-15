@@ -29,13 +29,11 @@ Download a file.
 
 
 
-:::{.column-body-outset}
 |Name        |Description                 |Attributes                                                                                                                                      |
 |:-----------|:---------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------|
 |`--input`   |URL to a file to download.  |`string`, required, example: "https://cf.10xgenomics.com/samples/cell-exp/3.0.0/pbmc_1k_protein_v3/pbmc_1k_protein_v3_raw_feature_bc_matrix.h5" |
 |`--output`  |Path where to store output. |`file`, required, example: "pbmc_1k_protein_v3_raw_feature_bc_matrix.h5"                                                                        |
 |`--verbose` |Increase verbosity          |`boolean_true`                                                                                                                                  |
-:::
 
 ## Authors
 

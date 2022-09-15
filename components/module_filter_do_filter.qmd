@@ -29,14 +29,12 @@ Remove observations and variables based on specified .obs and .var columns.
 
 
 
-:::{.column-body-outset}
 |Name           |Description                                              |Attributes                              |
 |:--------------|:--------------------------------------------------------|:---------------------------------------|
 |`--input`      |Input h5mu file                                          |`file`, required, example: "input.h5mu" |
 |`--obs_filter` |Which .obs columns to use to filter the observations by. |`string`, example: "filter_with_x"      |
 |`--var_filter` |Which .var columns to use to filter the observations by. |`string`, default: "filter_with_x"      |
 |`--output`     |Output h5mu file.                                        |`file`, example: "output.h5mu"          |
-:::
 
 ## Authors
 

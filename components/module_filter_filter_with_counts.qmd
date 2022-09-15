@@ -31,7 +31,6 @@ and the mitochondrial genes (genes starting with mt/MT).
 
 
 
-:::{.column-body-outset}
 |Name                   |Description                                                                                        |Attributes                              |
 |:----------------------|:--------------------------------------------------------------------------------------------------|:---------------------------------------|
 |`--input`              |Input h5mu file                                                                                    |`file`, required, example: "input.h5mu" |
@@ -46,7 +45,6 @@ and the mitochondrial genes (genes starting with mt/MT).
 |`--min_cells_per_gene` |Minimum of non-zero values per gene.                                                               |`integer`, example: 3                   |
 |`--min_fraction_mito`  |Minimum fraction of UMIs that are mitochondrial.                                                   |`double`, example: 0                    |
 |`--max_fraction_mito`  |Maximum fraction of UMIs that are mitochondrial.                                                   |`double`, example: 0.2                  |
-:::
 
 ## Authors
 

@@ -28,7 +28,6 @@ Demultiplex raw sequencing data
 
 
 
-:::{.column-body-outset}
 |Name                 |Description                                                                             |Attributes                                                      |
 |:--------------------|:---------------------------------------------------------------------------------------|:---------------------------------------------------------------|
 |`--input`            |Path to the (untarred) BCL files. Expects 'RunParameters.xml' at './'.                  |`file`, required, example: "/path/to/bcl"                       |
@@ -38,7 +37,6 @@ Demultiplex raw sequencing data
 |`--reports`          |Reports directory                                                                       |`file`, default: "reports", example: "reports_dir"              |
 |`--cores`            |Set max cores the pipeline may request at one time.                                     |`integer`, example: 2                                           |
 |`--memory`           |Set max GB the pipeline may request at one time.                                        |`integer`, example: 10                                          |
-:::
 
 ## Authors
 

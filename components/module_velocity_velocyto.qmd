@@ -28,7 +28,6 @@ Runs the velocity analysis on a BAM file, outputting a loom file.
 
 
 
-:::{.column-body-outset}
 |Name              |Description                                                                                                                                                                                |Attributes                   |
 |:-----------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------|
 |`--input`         |Path to BAM file                                                                                                                                                                           |`file`, required             |
@@ -37,7 +36,6 @@ Runs the velocity analysis on a BAM file, outputting a loom file.
 |`--without_umi`   |foo                                                                                                                                                                                        |`boolean_true`               |
 |`--output`        |Velocyto loom file                                                                                                                                                                         |`file`, required             |
 |`--logic`         |The logic to use for the filtering.                                                                                                                                                        |`string`, default: "Default" |
-:::
 
 ## Authors
 

@@ -28,27 +28,22 @@ nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/ne
 
 
 
-:::{.column-body-outset}
 |Name      |Description         |Attributes       |
 |:---------|:-------------------|:----------------|
 |`--input` |Velocyto loom file. |`file`, required |
-:::
 
 ### Outputs
 
 
 
-:::{.column-body-outset}
 |Name       |Description                                              |Attributes       |
 |:----------|:--------------------------------------------------------|:----------------|
 |`--output` |Output directory. If it does not exist, will be created. |`file`, required |
-:::
 
 ### Filtering and normalization
 
 Arguments for filtering, normalization an log transform (see scvelo.pp.filter_and_normalize function)
 
-:::{.column-body-outset}
 |Name                  |Description                                                                    |Attributes               |
 |:---------------------|:------------------------------------------------------------------------------|:------------------------|
 |`--min_counts`        |Minimum number of counts required for a gene to pass filtering (spliced).      |`integer`                |
@@ -59,18 +54,15 @@ Arguments for filtering, normalization an log transform (see scvelo.pp.filter_an
 |`--min_shared_cells`  |Minimum number of cells required to be expressed (both unspliced and spliced). |`integer`                |
 |`--n_top_genes`       |Number of genes to keep.                                                       |`integer`                |
 |`--log_transform`     |Do not log transform counts.                                                   |`boolean`, default: TRUE |
-:::
 
 ### Fitting parameters
 
 Arguments for fitting the data
 
-:::{.column-body-outset}
 |Name                       |Description                                                                                                                                                                                 |Attributes             |
 |:--------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------|
 |`--n_principal_components` |Number of principal components to use for calculating moments.                                                                                                                              |`integer`              |
 |`--n_neighbors`            |Number of neighbors to use. First/second-order moments are computed for each cell across its nearest neighbors, where the neighbor graph is obtained from euclidean distances in PCA space. |`integer`, default: 30 |
-:::
 
 ## Authors
 

@@ -29,13 +29,11 @@ Generates a network from mermaid code. See `https://mermaid-js.github.io/mermaid
 
 
 
-:::{.column-body-outset}
 |Name       |Description                  |Attributes                 |
 |:----------|:----------------------------|:--------------------------|
 |`--input`  |Input directory              |`file`, required           |
 |`--output` |Generated network as output. |`file`, required           |
 |`--test`   |The test file to be executed |`file`, default: "test.py" |
-:::
 
 ## Authors
 

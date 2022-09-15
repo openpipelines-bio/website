@@ -29,12 +29,10 @@ Convert a velocyto .loom file to h5mu
 
 
 
-:::{.column-body-outset}
 |Name       |Description                |Attributes                              |
 |:----------|:--------------------------|:---------------------------------------|
 |`--input`  |Input velocyto .loom file. |`file`, required, example: "input.loom" |
 |`--output` |Output h5mu file.          |`file`, example: "output.h5mu"          |
-:::
 
 ## Authors
 

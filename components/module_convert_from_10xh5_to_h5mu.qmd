@@ -29,12 +29,10 @@ Converts a 10x h5 into an h5mu file.
 
 
 
-:::{.column-body-outset}
 |Name       |Description       |Attributes                            |
 |:----------|:-----------------|:-------------------------------------|
 |`--input`  |Input h5 file     |`file`, required, example: "input.h5" |
 |`--output` |Output h5mu file. |`file`, example: "output.h5mu"        |
-:::
 
 ## Authors
 

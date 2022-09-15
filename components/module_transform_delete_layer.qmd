@@ -29,14 +29,12 @@ Delete an anndata layer from one or more modalities.
 
 
 
-:::{.column-body-outset}
 |Name           |Description                                                           |Attributes                               |
 |:--------------|:---------------------------------------------------------------------|:----------------------------------------|
 |`--input`      |Input h5mu file                                                       |`file`, required, example: "input.h5mu"  |
 |`--layer`      |Input layer to remove                                                 |`string`, required                       |
 |`--output`     |Output h5mu file.                                                     |`file`, required, default: "output.h5mu" |
 |`--missing_ok` |Do not raise an error if the layer does not exist for all modalities. |`boolean_true`                           |
-:::
 
 ## Authors
 

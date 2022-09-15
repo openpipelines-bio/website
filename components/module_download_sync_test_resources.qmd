@@ -28,7 +28,6 @@ Synchronise the test resources from s3://openpipelines-data to resources_test
 
 
 
-:::{.column-body-outset}
 |Name        |Description                                                                                                |Attributes                                   |
 |:-----------|:----------------------------------------------------------------------------------------------------------|:--------------------------------------------|
 |`--input`   |Path to the S3 bucket to sync from.                                                                        |`string`, default: "s3://openpipelines-data" |
@@ -37,7 +36,6 @@ Synchronise the test resources from s3://openpipelines-data to resources_test
 |`--dryrun`  |Does not display the operations performed from the specified command.                                      |`boolean_true`                               |
 |`--delete`  |Files that exist in the destination but not in the source are deleted during sync.                         |`boolean_true`                               |
 |`--exclude` |Exclude all files or objects from the command that matches the specified pattern.                          |`string`                                     |
-:::
 
 ## Authors
 

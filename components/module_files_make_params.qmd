@@ -28,7 +28,6 @@ Looks for files in a directory and turn it in a params file.
 
 
 
-:::{.column-body-outset}
 |Name               |Description                                                                                         |Attributes                                |
 |:------------------|:---------------------------------------------------------------------------------------------------|:-----------------------------------------|
 |`--base_dir`       |Base directory to search recursively                                                                |`file`, required, example: "/path/to/dir" |
@@ -39,7 +38,6 @@ Looks for files in a directory and turn it in a params file.
 |`--path_name`      |The name for storing the path field in the yaml.                                                    |`string`, default: "path"                 |
 |`--group_name`     |Top level name for the group of entries.                                                            |`string`, example: "param_list"           |
 |`--output`         |Output YAML file.                                                                                   |`file`, required, example: "params.yaml"  |
-:::
 
 ## Authors
 

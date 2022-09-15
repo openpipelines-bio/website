@@ -29,12 +29,10 @@ Converts a single layer h5ad file into a single muon object
 
 
 
-:::{.column-body-outset}
 |Name       |Description       |Attributes                              |
 |:----------|:-----------------|:---------------------------------------|
 |`--input`  |Input h5ad files  |`file`, required, default: "input.h5ad" |
 |`--output` |Output muon file. |`file`, default: "output.h5mu"          |
-:::
 
 ## Authors
 

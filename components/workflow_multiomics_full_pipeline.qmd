@@ -28,12 +28,10 @@ A pipeline to analyse multiple multiomics samples.
 
 
 
-:::{.column-body-outset}
 |Name      |Description         |Attributes                              |
 |:---------|:-------------------|:---------------------------------------|
 |`--id`    |ID of the sample.   |`string`, required, example: "foo"      |
 |`--input` |Path to the sample. |`file`, required, example: "input.h5mu" |
-:::
 
 ## Authors
 

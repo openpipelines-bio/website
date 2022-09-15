@@ -32,14 +32,12 @@ See https://github.com/theislab/scanpy/issues/526.
 
 
 
-:::{.column-body-outset}
 |Name         |Description                                            |Attributes                               |
 |:------------|:------------------------------------------------------|:----------------------------------------|
 |`--input`    |Input h5mu file                                        |`file`, required, example: "input.h5mu"  |
 |`--output`   |Output h5mu file.                                      |`file`, required, default: "output.h5mu" |
 |`--modality` |Which modality (one or more) to run this component on. |`string`, default: "rna"                 |
 |`--obs_keys` |Which .obs keys to regress on.                         |`string`                                 |
-:::
 
 ## Authors
 

@@ -48,7 +48,6 @@ For 10x we expect the doublet rates to be:
 
 
 
-:::{.column-body-outset}
 |Name                            |Description                                                                                                                                                                            |Attributes                                  |
 |:-------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------|
 |`--input`                       |Input h5mu file                                                                                                                                                                        |`file`, required, example: "input.h5mu"     |
@@ -61,7 +60,6 @@ For 10x we expect the doublet rates to be:
 |`--min_gene_variablity_percent` |Used for gene filtering prior to PCA. Keep the most highly variable genes (in the top min_gene_variability_pctl percentile), as measured by the v-statistic [Klein et al., Cell 2015]. |`double`, default: 85                       |
 |`--num_pca_components`          |Number of principal components to use during PCA dimensionality reduction.                                                                                                             |`integer`, default: 30                      |
 |`--distance_metric`             |The distance metric used for computing similarities.                                                                                                                                   |`string`, default: "euclidean"              |
-:::
 
 ## Authors
 

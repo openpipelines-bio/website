@@ -28,13 +28,11 @@ Processing unimodal single-sample RNA transcriptomics data.
 
 
 
-:::{.column-body-outset}
 |Name       |Description                     |Attributes                                |
 |:----------|:-------------------------------|:-----------------------------------------|
 |`--id`     |ID of the sample.               |`string`, required, example: "foo"        |
 |`--input`  |Path to the sample.             |`file`, required, example: "dataset.h5mu" |
 |`--output` |Destination path to the output. |`file`, required, example: "output.h5mu"  |
-:::
 
 ## Authors
 

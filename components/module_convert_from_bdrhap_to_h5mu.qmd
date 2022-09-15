@@ -29,22 +29,18 @@ Convert the output of a BD Rhapsody WTA pipeline to a MuData h5 file.
 
 
 
-:::{.column-body-outset}
 |Name      |Description                           |Attributes                             |
 |:---------|:-------------------------------------|:--------------------------------------|
 |`--id`    |A sample ID.                          |`string`, required, example: "my_id"   |
 |`--input` |The output of a BD Rhapsody workflow. |`file`, required, example: "input_dir" |
-:::
 
 ### Outputs
 
 
 
-:::{.column-body-outset}
 |Name       |Description       |Attributes                               |
 |:----------|:-----------------|:----------------------------------------|
 |`--output` |Output h5mu file. |`file`, required, example: "output.h5mu" |
-:::
 
 ## Authors
 

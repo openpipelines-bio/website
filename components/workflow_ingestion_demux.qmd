@@ -29,7 +29,6 @@ Convert bcl files to fastq files using bcl2fastq, bcl-convert or cellranger mkfa
 
 
 
-:::{.column-body-outset}
 |Name               |Description                                                    |Attributes                           |
 |:------------------|:--------------------------------------------------------------|:------------------------------------|
 |`--id`             |ID of the sample.                                              |`string`, required, example: "foo"   |
@@ -37,7 +36,6 @@ Convert bcl files to fastq files using bcl2fastq, bcl-convert or cellranger mkfa
 |`--sample_sheet`   |Pointer to the sample sheet                                    |`file`, required, example: "bcl_dir" |
 |`--demultiplexer`  |The multiplexer to use, one of bclconvert or mkfastq           |`string`, example: "bclconvert"      |
 |`--ignore_missing` |Should the demultiplexer ignore missing entities (filter, ...) |`boolean`                            |
-:::
 
 ## Authors
 

@@ -29,14 +29,12 @@ Logarithmize the data matrix. Computes X = log(X + 1), where log denotes the nat
 
 
 
-:::{.column-body-outset}
 |Name             |Description                                  |Attributes                               |
 |:----------------|:--------------------------------------------|:----------------------------------------|
 |`--input`        |Input h5mu file                              |`file`, required, example: "input.h5mu"  |
 |`--input_layer`  |Input layer to use. If None, X is normalized |`string`                                 |
 |`--output_layer` |Output layer to use. By default, use X.      |`string`                                 |
 |`--output`       |Output h5mu file.                            |`file`, required, default: "output.h5mu" |
-:::
 
 ## Authors
 

@@ -28,7 +28,6 @@ Processing multimodal multi-sample RNA transcriptomics data.
 
 
 
-:::{.column-body-outset}
 |Name               |Description                                                                           |Attributes                                              |
 |:------------------|:-------------------------------------------------------------------------------------|:-------------------------------------------------------|
 |`--id`             |ID of the sample.                                                                     |`string`, required, example: "foo"                      |
@@ -36,7 +35,6 @@ Processing multimodal multi-sample RNA transcriptomics data.
 |`--output`         |Destination path to the output.                                                       |`file`, required, example: "output.h5mu"                |
 |`--layer`          |use specified layer for expression values instead of the .X object from the modality. |`string`, default: "log_normalized"                     |
 |`--obs_covariates` |The .obs field(s) that define the covariate(s) to regress out.                        |`string`, required, example: "batch", example: "sample" |
-:::
 
 ## Authors
 

@@ -29,7 +29,6 @@ Scale data to unit variance and zero mean.
 
 
 
-:::{.column-body-outset}
 |Name            |Description                                                                               |Attributes                               |
 |:---------------|:-----------------------------------------------------------------------------------------|:----------------------------------------|
 |`--input`       |Input h5mu file.                                                                          |`file`, required, example: "input.h5mu"  |
@@ -37,7 +36,6 @@ Scale data to unit variance and zero mean.
 |`--max_value`   |Clip (truncate) to this value after scaling. Does not clip by default.                    |`double`                                 |
 |`--zero_center` |If False, omit zero-centering variables, which allows to handle sparse input efficiently. |`boolean`, default: TRUE                 |
 |`--output`      |Output h5mu file.                                                                         |`file`, required, default: "output.h5mu" |
-:::
 
 ## Authors
 

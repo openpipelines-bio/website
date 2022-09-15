@@ -29,7 +29,6 @@ Filter a 10x h5 dataset.
 
 
 
-:::{.column-body-outset}
 |Name                   |Description                                            |Attributes                                                                        |
 |:----------------------|:------------------------------------------------------|:---------------------------------------------------------------------------------|
 |`--input`              |An h5 file from the 10x genomics website.              |`string`, required, example: "pbmc_1k_protein_v3_raw_feature_bc_matrix.h5"        |
@@ -38,7 +37,6 @@ Filter a 10x h5 dataset.
 |`--min_cells_per_gene` |Minimum number of cells per gene.                      |`integer`, default: 0                                                             |
 |`--keep_feature_types` |Specify which feature types will never be filtered out |`string`, example: "Antibody Capture"                                             |
 |`--verbose`            |Increase verbosity                                     |`boolean_true`                                                                    |
-:::
 
 ## Authors
 

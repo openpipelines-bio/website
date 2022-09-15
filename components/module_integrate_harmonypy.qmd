@@ -28,7 +28,6 @@ Performs Harmony integration based as described in https://github.com/immunogeno
 
 
 
-:::{.column-body-outset}
 |Name               |Description                                                                                                                                                                           |Attributes                                    |
 |:------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------|
 |`--input`          |Input h5mu file                                                                                                                                                                       |`file`, required                              |
@@ -37,7 +36,6 @@ Performs Harmony integration based as described in https://github.com/immunogeno
 |`--obsm_output`    |In which .obsm slot to store the resulting integrated embedding.                                                                                                                      |`string`, default: "X_pca_integrated"         |
 |`--theta`          |Diversity clustering penalty parameter. Specify for each variable in group.by.vars. theta=0 does not encourage any diversity. Larger values of theta result in more diverse clusters. |`double`, default: 2                          |
 |`--obs_covariates` |The .obs field(s) that define the covariate(s) to regress out.                                                                                                                        |`string`, example: "batch", example: "sample" |
-:::
 
 ## Authors
 

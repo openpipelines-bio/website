@@ -28,12 +28,10 @@ Publish an artifact and optionally rename with parameters
 
 
 
-:::{.column-body-outset}
 |Name       |Description     |Attributes       |
 |:----------|:---------------|:----------------|
 |`--input`  |Input filename  |`file`, required |
 |`--output` |Output filename |`file`, required |
-:::
 
 ## Authors
 

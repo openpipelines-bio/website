@@ -32,7 +32,6 @@ and https://support.illumina.com/sequencing/sequencing_software/bcl-convert/comp
 
 
 
-:::{.column-body-outset}
 |Name                 |Description                                                                             |Attributes                                         |
 |:--------------------|:---------------------------------------------------------------------------------------|:--------------------------------------------------|
 |`--input`            |Input run directory                                                                     |`file`, required, example: "bcl_dir"               |
@@ -41,7 +40,6 @@ and https://support.illumina.com/sequencing/sequencing_software/bcl-convert/comp
 |`--separate_reports` |Should reports be stored in a separate dir. Should be used with the --reports argument. |`boolean_true`                                     |
 |`--reports`          |Reports directory                                                                       |`file`, default: "reports", example: "reports_dir" |
 |`--test_mode`        |Should bcl-convert be run in test mode (using --first-tile-only)?                       |`boolean`, default: FALSE                          |
-:::
 
 ## Authors
 

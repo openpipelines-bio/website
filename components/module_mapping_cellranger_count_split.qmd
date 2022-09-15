@@ -28,11 +28,9 @@ Split 10x Cell Ranger output directory into separate output fields.
 
 
 
-:::{.column-body-outset}
 |Name      |Description                                    |Attributes                             |
 |:---------|:----------------------------------------------|:--------------------------------------|
 |`--input` |Output directory from a Cell Ranger count run. |`file`, required, example: "input_dir" |
-:::
 
 ## Authors
 

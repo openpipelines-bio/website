@@ -36,12 +36,10 @@ Restrictions:
 
 
 
-:::{.column-body-outset}
 |Name       |Description        |Attributes                              |
 |:----------|:------------------|:---------------------------------------|
 |`--input`  |Input h5mu file    |`file`, required, example: "input.h5mu" |
 |`--output` |Output Seurat file |`file`, required, example: "output.rds" |
-:::
 
 ## Authors
 

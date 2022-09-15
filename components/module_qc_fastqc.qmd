@@ -29,13 +29,11 @@ Fastqc component, please see https://www.bioinformatics.babraham.ac.uk/projects/
 
 
 
-:::{.column-body-outset}
 |Name       |Description                                                        |Attributes                             |
 |:----------|:------------------------------------------------------------------|:--------------------------------------|
 |`--mode`   |The mode in which the component works. Can be either files or dir. |`string`, default: "files"             |
 |`--input`  |Directory containing input fastq files.                            |`file`, required, example: "fastq_dir" |
 |`--output` |Output directory to write reports to.                              |`file`, required, example: "qc"        |
-:::
 
 ## Authors
 

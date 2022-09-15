@@ -29,7 +29,6 @@ BBKNN network generation
 
 
 
-:::{.column-body-outset}
 |Name                         |Description                                                                                                                                                                                                                                                                                                                                                                                                       |Attributes                          |
 |:----------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------|
 |`--input`                    |Input h5mu file                                                                                                                                                                                                                                                                                                                                                                                                   |`file`                              |
@@ -42,7 +41,6 @@ BBKNN network generation
 |`--n_neighbors_within_batch` |How many top neighbours to report for each batch; total number of neighbours in the initial k-nearest-neighbours computation will be this number times the number of batches.                                                                                                                                                                                                                                     |`integer`, default: 3               |
 |`--n_pcs`                    |How many dimensions (in case of PCA, principal components) to use in the analysis.                                                                                                                                                                                                                                                                                                                                |`integer`, default: 50              |
 |`--n_trim`                   |Trim the neighbours of each cell to these many top connectivities. May help with population independence and improve the tidiness of clustering. The lower the value the more independent the individual populations, at the cost of more conserved batch effect. If `None` (default), sets the parameter value automatically to 10 times `neighbors_within_batch` times the number of batches. Set to 0 to skip. |`integer`                           |
-:::
 
 ## Authors
 

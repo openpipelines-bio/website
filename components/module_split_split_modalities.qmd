@@ -29,12 +29,10 @@ Split the modalities from a single .h5mu multimodal sample into seperate .h5mu f
 
 
 
-:::{.column-body-outset}
 |Name            |Description                                                 |Attributes                               |
 |:---------------|:-----------------------------------------------------------|:----------------------------------------|
 |`--input`       |Path to a single .hm5u file                                 |`file`, required, default: "sample_path" |
 |`--compression` |The compression format to be used on the final h5mu object. |`string`, default: "gzip"                |
-:::
 
 ## Authors
 

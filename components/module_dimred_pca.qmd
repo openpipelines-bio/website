@@ -29,7 +29,6 @@ Computes PCA coordinates, loadings and variance decomposition. Uses the implemen
 
 
 
-:::{.column-body-outset}
 |Name               |Description                                                                                                          |Attributes                               |
 |:------------------|:--------------------------------------------------------------------------------------------------------------------|:----------------------------------------|
 |`--input`          |Input h5mu file                                                                                                      |`file`, required, example: "input.h5mu"  |
@@ -39,7 +38,6 @@ Computes PCA coordinates, loadings and variance decomposition. Uses the implemen
 |`--varm_output`    |In which .varm slot to store the resulting loadings matrix.                                                          |`string`, default: "pca_loadings"        |
 |`--uns_output`     |In which .uns slot to store the resulting variance objects.                                                          |`string`, default: "pca_variance"        |
 |`--num_components` |Number of principal components to compute. Defaults to 50, or 1 - minimum dimension size of selected representation. |`integer`, example: 25                   |
-:::
 
 ## Authors
 

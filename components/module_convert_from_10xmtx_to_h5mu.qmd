@@ -29,12 +29,10 @@ Converts a 10x mtx into an h5mu file.
 
 
 
-:::{.column-body-outset}
 |Name       |Description       |Attributes                                                 |
 |:----------|:-----------------|:----------------------------------------------------------|
 |`--input`  |Input mtx folder  |`file`, required, example: "input_dir_containing_gz_files" |
 |`--output` |Output h5mu file. |`file`, example: "output.h5mu"                             |
-:::
 
 ## Authors
 

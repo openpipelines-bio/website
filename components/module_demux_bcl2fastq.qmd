@@ -29,7 +29,6 @@ Convert bcl files to fastq files using bcl2fastq.
 
 
 
-:::{.column-body-outset}
 |Name                 |Description                                                                             |Attributes                                         |
 |:--------------------|:---------------------------------------------------------------------------------------|:--------------------------------------------------|
 |`--input`            |Input run directory                                                                     |`file`, required, example: "bcl_dir"               |
@@ -37,7 +36,6 @@ Convert bcl files to fastq files using bcl2fastq.
 |`--output`           |Output directory containig fastq files                                                  |`file`, required, example: "fastq_dir"             |
 |`--separate_reports` |Should reports be stored in a separate dir. Should be used with the --reports argument. |`boolean_true`                                     |
 |`--reports`          |Reports directory                                                                       |`file`, default: "reports", example: "reports_dir" |
-:::
 
 ## Authors
 
