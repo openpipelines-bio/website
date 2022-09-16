@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.242">
+<meta name="generator" content="quarto-1.1.251">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -132,6 +132,9 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 </script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -271,6 +274,36 @@ Namespace: <code>multiomics</code></p>
 <li>Robrecht Cannoodt <a href="https://github.com/rcannood"><i class="fa-brands fa-github" aria-hidden="true"></i></a> <a href="https://orcid.org/0000-0003-3641-729X"><i class="fa-brands fa-orcid" aria-hidden="true"></i></a> (author, maintainer)</li>
 <li>Dries Schaumont <a href="https://github.com/DriesSchaumont"><i class="fa-brands fa-github" aria-hidden="true"></i></a> <a href="https://orcid.org/0000-0002-4389-0440"><i class="fa-brands fa-orcid" aria-hidden="true"></i></a> (author)</li>
 </ul>
+</section>
+<section id="visualisation" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="visualisation">Visualisation</h2>
+<div class="cell page-columns page-full">
+<div class="cell-output-display column-screen-inset-shaded">
+<div>
+<p>
+</p><pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-1">flowchart LR
+    p0(Channel.fromList)
+    p8(concat)
+    p15(normalize_total)
+    p22(log1p)
+    p29(delete_layer)
+    p37(filter_with_hvg)
+    p43(output)
+    p0--&gt;p8
+    p8--&gt;p15
+    p15--&gt;p22
+    p22--&gt;p29
+    p29--&gt;p37
+    p37--&gt;p43
+
+</pre>
+<div id="mermaid-tooltip-1" class="mermaidTooltip">
+
+</div>
+<p></p>
+</div>
+</div>
+</div>
 
 
 </section>
