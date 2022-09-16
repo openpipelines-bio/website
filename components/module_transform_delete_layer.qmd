@@ -39,3 +39,4 @@ Delete an anndata layer from one or more modalities.
 ## Authors
 
  * Dries Schaumont  (maintainer)
+

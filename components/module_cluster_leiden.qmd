@@ -47,3 +47,4 @@ Wolf et al. (2018), Scanpy: large-scale single-cell gene expression data analysi
 ## Authors
 
  * Dries De Maeyer  (maintainer)
+

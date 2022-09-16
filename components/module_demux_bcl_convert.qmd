@@ -45,3 +45,4 @@ and https://support.illumina.com/sequencing/sequencing_software/bcl-convert/comp
 
  * Toni Verbeiren [{{< fa brands github >}}](https://github.com/tverbeiren) (author, maintainer)
  * Marijke Van Moerbeke [{{< fa brands orcid >}}](https://orcid.org/0000-0002-3097-5621) (author)
+

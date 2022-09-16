@@ -5,15 +5,15 @@ title: Components
 ## Workflows
 
 :::{.column-body-outset}
-|Namespace  |Name               |Description                                                                         |
-|:----------|:------------------|:-----------------------------------------------------------------------------------|
-|Ingestion  |[BD Rhapsody](workflow_ingestion_bd_rhapsody.qmd)|A BD Rhapsody mapping and conversion pipeline                                       |
-|Ingestion  |[Cellranger mapping](workflow_ingestion_cellranger_mapping.qmd)|Cell Ranger mapping pipeline                                                        |
-|Ingestion  |[Demux](workflow_ingestion_demux.qmd)|Convert bcl files to fastq files using bcl2fastq, bcl-convert or cellranger mkfastq |
-|Multiomics |[Full pipeline](workflow_multiomics_full_pipeline.qmd)|A pipeline to analyse multiple multiomics samples                                   |
-|Multiomics |[Integration](workflow_multiomics_integration.qmd)|Processing multimodal multi-sample RNA transcriptomics data                         |
-|Multiomics |[Rna multisample](workflow_multiomics_rna_multisample.qmd)|Processing unimodal multi-sample RNA transcriptomics data                           |
-|Multiomics |[Rna singlesample](workflow_multiomics_rna_singlesample.qmd)|Processing unimodal single-sample RNA transcriptomics data                          |
+|Namespace  |Name                |Description                                                                                                 |
+|:----------|:-------------------|:-----------------------------------------------------------------------------------------------------------|
+|Ingestion  |[BD Rhapsody](workflow_ingestion_bd_rhapsody.qmd)|A generic pipeline for running BD Rhapsody WTA or Targeted mapping, with support for AbSeq, VDJ and/or SMK. |
+|Ingestion  |[Cell Ranger mapping](workflow_ingestion_cellranger_mapping.qmd)|A pipeline for running Cell Ranger mapping                                                                  |
+|Ingestion  |[Demux](workflow_ingestion_demux.qmd)|A generic pipeline for running bcl2fastq, bcl-convert or Cell Ranger mkfastq.                               |
+|Multiomics |[Full pipeline](workflow_multiomics_full_pipeline.qmd)|A pipeline to analyse multiple multiomics samples                                                           |
+|Multiomics |[Integration](workflow_multiomics_integration.qmd)|A pipeline for demultiplexing multimodal multi-sample RNA transcriptomics data                              |
+|Multiomics |[Rna multisample](workflow_multiomics_rna_multisample.qmd)|Processing unimodal multi-sample RNA transcriptomics data                                                   |
+|Multiomics |[Rna singlesample](workflow_multiomics_rna_singlesample.qmd)|Processing unimodal single-sample RNA transcriptomics data                                                  |
 :::
 
 ## Components

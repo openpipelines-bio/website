@@ -67,3 +67,4 @@ Arguments for fitting the data
 ## Authors
 
  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (maintainer)
+

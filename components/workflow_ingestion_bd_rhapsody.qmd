@@ -109,3 +109,18 @@ Alternatively, BD also provides standard references which can be downloaded from
 ## Authors
 
  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (maintainer)
+
+## Visualisation
+
+```{mermaid}
+%%| column: screen-inset-shaded
+flowchart LR
+    p0(Channel.fromList)
+    p8(bd_rhapsody)
+    p16(from_bdrhap_to_h5mu)
+    p22(output)
+    p0-->p8
+    p8-->p16
+    p16-->p22
+
+```

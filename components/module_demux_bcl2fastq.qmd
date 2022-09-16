@@ -40,3 +40,4 @@ Convert bcl files to fastq files using bcl2fastq.
 ## Authors
 
  * Toni Verbeiren [{{< fa brands github >}}](https://github.com/tverbeiren) (author, maintainer)
+

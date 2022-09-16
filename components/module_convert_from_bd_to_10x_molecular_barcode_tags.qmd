@@ -39,3 +39,4 @@ Convert the molecular barcode sequence SAM tag from BD format (MA) to 10X format
 ## Authors
 
  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (maintainer)
+

@@ -37,3 +37,4 @@ Converts a single layer h5ad file into a single muon object
 ## Authors
 
  * Dries De Maeyer  (maintainer)
+

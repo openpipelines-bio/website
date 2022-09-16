@@ -40,3 +40,4 @@ Concatenates several uni-modal samples in .h5mu files into a single file.
 ## Authors
 
  * Dries Schaumont  (maintainer)
+

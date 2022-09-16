@@ -28,11 +28,60 @@ A pipeline to analyse multiple multiomics samples.
 
 
 
-|Name      |Description         |Attributes                              |
-|:---------|:-------------------|:---------------------------------------|
-|`--id`    |ID of the sample.   |`string`, required, example: "foo"      |
-|`--input` |Path to the sample. |`file`, required, example: "input.h5mu" |
+|Name               |Description                                                    |Attributes                                              |
+|:------------------|:--------------------------------------------------------------|:-------------------------------------------------------|
+|`--id`             |ID of the sample.                                              |`string`, required, example: "foo"                      |
+|`--input`          |Path to the sample.                                            |`file`, required, example: "input.h5mu"                 |
+|`--obs_covariates` |The .obs field(s) that define the covariate(s) to regress out. |`string`, required, example: "batch", example: "sample" |
 
 ## Authors
 
  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (author, maintainer)
+
+## Visualisation
+
+```{mermaid}
+%%| column: screen-inset-shaded
+flowchart LR
+    p0(Channel.fromList)
+    p10(split_modalities)
+    p12(map)
+    p19(filter_with_counts)
+    p26(do_filter)
+    p34(filter_with_scrublet)
+    p46(concat)
+    p53(normalize_total)
+    p60(log1p)
+    p67(delete_layer)
+    p75(filter_with_hvg)
+    p89(concat)
+    p86(concat)
+    p96(merge)
+    p105(pca)
+    p113(harmonypy)
+    p121(find_neighbors)
+    p128(leiden)
+    p136(umap)
+    p142(output)
+    p0-->p10
+    p10-->p12
+    p12-->p19
+    p19-->p26
+    p26-->p34
+    p34-->p46
+    p46-->p53
+    p53-->p60
+    p60-->p67
+    p67-->p75
+    p75-->p89
+    p12-->p86
+    p86-->p89
+    p89-->p96
+    p96-->p105
+    p105-->p113
+    p113-->p121
+    p121-->p128
+    p128-->p136
+    p136-->p142
+
+```

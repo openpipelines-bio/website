@@ -36,3 +36,4 @@ Publish an artifact and optionally rename with parameters
 ## Authors
 
  * Toni Verbeiren  (maintainer)
+

@@ -38,3 +38,4 @@ Generates a network from mermaid code. See `https://mermaid-js.github.io/mermaid
 ## Authors
 
  * Dries De Maeyer  (maintainer)
+

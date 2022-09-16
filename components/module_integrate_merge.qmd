@@ -38,3 +38,4 @@ Combine one or more single-modality .h5mu files together into one .h5mu file.
 ## Authors
 
  * Dries Schaumont  (maintainer)
+

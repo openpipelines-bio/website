@@ -41,3 +41,4 @@ Performs Harmony integration based as described in https://github.com/immunogeno
 
  * Dries De Maeyer  (author)
  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (maintainer, author)
+

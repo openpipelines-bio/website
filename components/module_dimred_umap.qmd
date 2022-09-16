@@ -47,3 +47,4 @@ UMAP (Uniform Manifold Approximation and Projection) is a manifold learning tech
 ## Authors
 
  * Dries De Maeyer  (maintainer)
+

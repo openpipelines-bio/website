@@ -42,3 +42,4 @@ Computes PCA coordinates, loadings and variance decomposition. Uses the implemen
 ## Authors
 
  * Dries De Maeyer  (maintainer)
+

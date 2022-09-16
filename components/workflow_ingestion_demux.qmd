@@ -20,7 +20,7 @@ nextflow run openpipelines-bio/openpipeline -r main_build -main-script workflows
 [Source](https://github.com/openpipelines-bio/openpipeline/blob/main/workflows/ingestion/demux){.btn-action .btn-sm .btn-info .btn role="button"}
 :::
 
-Convert bcl files to fastq files using bcl2fastq, bcl-convert or cellranger mkfastq
+Convert `.bcl` files to `.fastq` files using bcl2fastq, bcl-convert or Cell Ranger mkfastq.
 
 
 ## Argument group
@@ -44,3 +44,36 @@ Convert bcl files to fastq files using bcl2fastq, bcl-convert or cellranger mkfa
  * Angela Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) (author)
  * Samuel D'Souza [{{< fa brands github >}}](https://github.com/srdsam) (author)
  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author)
+
+## Visualisation
+
+```{mermaid}
+%%| column: screen-inset-shaded
+flowchart LR
+    p0(Channel.fromList)
+    p2(view)
+    p8(cellranger_mkfastq)
+    p27(mix)
+    p16(bcl_convert)
+    p24(bcl2fastq)
+    p28(mix)
+    p33(fastqc)
+    p36(output)
+    p44(multiqc)
+    p47(output)
+    p51(output)
+    p27-->p28
+    p0-->p2
+    p2-->p8
+    p8-->p27
+    p2-->p16
+    p16-->p27
+    p2-->p24
+    p24-->p28
+    p28-->p33
+    p33-->p36
+    p28-->p44
+    p44-->p47
+    p28-->p51
+
+```

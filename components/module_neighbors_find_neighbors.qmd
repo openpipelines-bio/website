@@ -47,3 +47,4 @@ The neighbor search efficiency of this heavily relies on UMAP [McInnes18], which
 
  * Dries De Maeyer  (maintainer)
  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (contributor)
+
