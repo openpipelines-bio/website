@@ -294,31 +294,35 @@ Namespace: <code>ingestion</code></p>
 <div>
 <p>
 </p><pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-1">flowchart LR
-    p0(Channel.fromList)
-    p2(view)
+    p0(Input)
+    p3(filter)
     p8(cellranger_mkfastq)
     p27(mix)
+    p11(filter)
     p16(bcl_convert)
+    p19(filter)
     p24(bcl2fastq)
-    p28(mix)
-    p33(fastqc)
-    p36(output)
-    p44(multiqc)
-    p47(output)
-    p51(output)
-    p27--&gt;p28
-    p0--&gt;p2
-    p2--&gt;p8
+    p32(fastqc)
+    p35(Output)
+    p37(toSortedList)
+    p43(multiqc)
+    p46(Output)
+    p50(Output)
+    p0--&gt;p3
+    p0--&gt;p11
+    p0--&gt;p19
+    p3--&gt;p8
     p8--&gt;p27
-    p2--&gt;p16
+    p11--&gt;p16
     p16--&gt;p27
-    p2--&gt;p24
-    p24--&gt;p28
-    p28--&gt;p33
-    p33--&gt;p36
-    p28--&gt;p44
-    p44--&gt;p47
-    p28--&gt;p51
+    p19--&gt;p24
+    p24--&gt;p27
+    p27--&gt;p32
+    p32--&gt;p35
+    p27--&gt;p37
+    p37--&gt;p43
+    p43--&gt;p46
+    p27--&gt;p50
 
 </pre>
 <div id="mermaid-tooltip-1" class="mermaidTooltip">

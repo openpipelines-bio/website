@@ -280,46 +280,54 @@ Namespace: <code>multiomics</code></p>
 <div>
 <p>
 </p><pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-1">flowchart LR
-    p0(Channel.fromList)
+    p0(Input)
+    p2(flatMap)
     p10(split_modalities)
-    p12(map)
     p19(filter_with_counts)
     p26(do_filter)
     p34(filter_with_scrublet)
+    p38(toSortedList)
     p46(concat)
     p53(normalize_total)
     p60(log1p)
     p67(delete_layer)
     p75(filter_with_hvg)
     p89(concat)
+    p80(toSortedList)
     p86(concat)
+    p90(toSortedList)
     p96(merge)
     p105(pca)
     p113(harmonypy)
     p121(find_neighbors)
     p128(leiden)
     p136(umap)
-    p142(output)
-    p0--&gt;p10
-    p10--&gt;p12
-    p12--&gt;p19
+    p140(toSortedList)
+    p142(Output)
+    p89--&gt;p90
+    p0--&gt;p2
+    p2--&gt;p10
+    p10--&gt;p19
     p19--&gt;p26
     p26--&gt;p34
-    p34--&gt;p46
+    p34--&gt;p38
+    p38--&gt;p46
     p46--&gt;p53
     p53--&gt;p60
     p60--&gt;p67
     p67--&gt;p75
     p75--&gt;p89
-    p12--&gt;p86
+    p10--&gt;p80
+    p80--&gt;p86
     p86--&gt;p89
-    p89--&gt;p96
+    p90--&gt;p96
     p96--&gt;p105
     p105--&gt;p113
     p113--&gt;p121
     p121--&gt;p128
     p128--&gt;p136
-    p136--&gt;p142
+    p136--&gt;p140
+    p140--&gt;p142
 
 </pre>
 <div id="mermaid-tooltip-1" class="mermaidTooltip">

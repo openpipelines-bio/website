@@ -179,7 +179,7 @@
     "href": "components/workflow_ingestion_bd_rhapsody.html#visualisation",
     "title": "BD Rhapsody",
     "section": "Visualisation",
-    "text": "Visualisation\n\n\n\n\nflowchart LR\n    p0(Channel.fromList)\n    p8(bd_rhapsody)\n    p16(from_bdrhap_to_h5mu)\n    p22(output)\n    p0-->p8\n    p8-->p16\n    p16-->p22"
+    "text": "Visualisation\n\n\n\n\nflowchart LR\n    p0(Input)\n    p8(bd_rhapsody)\n    p16(from_bdrhap_to_h5mu)\n    p22(Output)\n    p0-->p8\n    p8-->p16\n    p16-->p22"
   },
   {
     "objectID": "components/module_transform_delete_layer.html",
@@ -333,7 +333,7 @@
     "href": "components/workflow_multiomics_full_pipeline.html#visualisation",
     "title": "Full pipeline",
     "section": "Visualisation",
-    "text": "Visualisation\n\n\n\n\nflowchart LR\n    p0(Channel.fromList)\n    p10(split_modalities)\n    p12(map)\n    p19(filter_with_counts)\n    p26(do_filter)\n    p34(filter_with_scrublet)\n    p46(concat)\n    p53(normalize_total)\n    p60(log1p)\n    p67(delete_layer)\n    p75(filter_with_hvg)\n    p89(concat)\n    p86(concat)\n    p96(merge)\n    p105(pca)\n    p113(harmonypy)\n    p121(find_neighbors)\n    p128(leiden)\n    p136(umap)\n    p142(output)\n    p0-->p10\n    p10-->p12\n    p12-->p19\n    p19-->p26\n    p26-->p34\n    p34-->p46\n    p46-->p53\n    p53-->p60\n    p60-->p67\n    p67-->p75\n    p75-->p89\n    p12-->p86\n    p86-->p89\n    p89-->p96\n    p96-->p105\n    p105-->p113\n    p113-->p121\n    p121-->p128\n    p128-->p136\n    p136-->p142"
+    "text": "Visualisation\n\n\n\n\nflowchart LR\n    p0(Input)\n    p2(flatMap)\n    p10(split_modalities)\n    p19(filter_with_counts)\n    p26(do_filter)\n    p34(filter_with_scrublet)\n    p38(toSortedList)\n    p46(concat)\n    p53(normalize_total)\n    p60(log1p)\n    p67(delete_layer)\n    p75(filter_with_hvg)\n    p89(concat)\n    p80(toSortedList)\n    p86(concat)\n    p90(toSortedList)\n    p96(merge)\n    p105(pca)\n    p113(harmonypy)\n    p121(find_neighbors)\n    p128(leiden)\n    p136(umap)\n    p140(toSortedList)\n    p142(Output)\n    p89-->p90\n    p0-->p2\n    p2-->p10\n    p10-->p19\n    p19-->p26\n    p26-->p34\n    p34-->p38\n    p38-->p46\n    p46-->p53\n    p53-->p60\n    p60-->p67\n    p67-->p75\n    p75-->p89\n    p10-->p80\n    p80-->p86\n    p86-->p89\n    p90-->p96\n    p96-->p105\n    p105-->p113\n    p113-->p121\n    p121-->p128\n    p128-->p136\n    p136-->p140\n    p140-->p142"
   },
   {
     "objectID": "components/module_convert_from_10xmtx_to_h5mu.html",
@@ -816,7 +816,7 @@
     "href": "components/workflow_ingestion_cellranger_mapping.html#visualisation",
     "title": "Cell Ranger mapping",
     "section": "Visualisation",
-    "text": "Visualisation\n\n\n\n\nflowchart LR\n    p0(Channel.fromList)\n    p8(cellranger_count)\n    p15(cellranger_count_split)\n    p23(from_10xh5_to_h5mu)\n    p30(output)\n    p0-->p8\n    p8-->p15\n    p15-->p23\n    p23-->p30"
+    "text": "Visualisation\n\n\n\n\nflowchart LR\n    p0(Input)\n    p8(cellranger_count)\n    p15(cellranger_count_split)\n    p23(from_10xh5_to_h5mu)\n    p30(Output)\n    p0-->p8\n    p8-->p15\n    p15-->p23\n    p23-->p30"
   },
   {
     "objectID": "components/module_filter_do_filter.html",
@@ -886,7 +886,7 @@
     "href": "components/workflow_ingestion_demux.html#visualisation",
     "title": "Demux",
     "section": "Visualisation",
-    "text": "Visualisation\n\n\n\n\nflowchart LR\n    p0(Channel.fromList)\n    p2(view)\n    p8(cellranger_mkfastq)\n    p27(mix)\n    p16(bcl_convert)\n    p24(bcl2fastq)\n    p28(mix)\n    p33(fastqc)\n    p36(output)\n    p44(multiqc)\n    p47(output)\n    p51(output)\n    p27-->p28\n    p0-->p2\n    p2-->p8\n    p8-->p27\n    p2-->p16\n    p16-->p27\n    p2-->p24\n    p24-->p28\n    p28-->p33\n    p33-->p36\n    p28-->p44\n    p44-->p47\n    p28-->p51"
+    "text": "Visualisation\n\n\n\n\nflowchart LR\n    p0(Input)\n    p3(filter)\n    p8(cellranger_mkfastq)\n    p27(mix)\n    p11(filter)\n    p16(bcl_convert)\n    p19(filter)\n    p24(bcl2fastq)\n    p32(fastqc)\n    p35(Output)\n    p37(toSortedList)\n    p43(multiqc)\n    p46(Output)\n    p50(Output)\n    p0-->p3\n    p0-->p11\n    p0-->p19\n    p3-->p8\n    p8-->p27\n    p11-->p16\n    p16-->p27\n    p19-->p24\n    p24-->p27\n    p27-->p32\n    p32-->p35\n    p27-->p37\n    p37-->p43\n    p43-->p46\n    p27-->p50"
   },
   {
     "objectID": "components/workflow_multiomics_integration.html",
@@ -914,7 +914,7 @@
     "href": "components/workflow_multiomics_integration.html#visualisation",
     "title": "Integration",
     "section": "Visualisation",
-    "text": "Visualisation\n\n\n\n\nflowchart LR\n    p0(Channel.fromList)\n    p8(pca)\n    p16(harmonypy)\n    p24(find_neighbors)\n    p31(leiden)\n    p39(umap)\n    p45(output)\n    p0-->p8\n    p8-->p16\n    p16-->p24\n    p24-->p31\n    p31-->p39\n    p39-->p45"
+    "text": "Visualisation\n\n\n\n\nflowchart LR\n    p0(Input)\n    p8(pca)\n    p16(harmonypy)\n    p24(find_neighbors)\n    p31(leiden)\n    p39(umap)\n    p45(Output)\n    p0-->p8\n    p8-->p16\n    p16-->p24\n    p24-->p31\n    p31-->p39\n    p39-->p45"
   },
   {
     "objectID": "components/workflow_multiomics_rna_multisample.html",
@@ -942,7 +942,7 @@
     "href": "components/workflow_multiomics_rna_multisample.html#visualisation",
     "title": "Rna multisample",
     "section": "Visualisation",
-    "text": "Visualisation\n\n\n\n\nflowchart LR\n    p0(Channel.fromList)\n    p8(concat)\n    p15(normalize_total)\n    p22(log1p)\n    p29(delete_layer)\n    p37(filter_with_hvg)\n    p43(output)\n    p0-->p8\n    p8-->p15\n    p15-->p22\n    p22-->p29\n    p29-->p37\n    p37-->p43"
+    "text": "Visualisation\n\n\n\n\nflowchart LR\n    p0(Input)\n    p8(concat)\n    p15(normalize_total)\n    p22(log1p)\n    p29(delete_layer)\n    p37(filter_with_hvg)\n    p43(Output)\n    p0-->p8\n    p8-->p15\n    p15-->p22\n    p22-->p29\n    p29-->p37\n    p37-->p43"
   },
   {
     "objectID": "components/workflow_multiomics_rna_singlesample.html",
@@ -970,7 +970,7 @@
     "href": "components/workflow_multiomics_rna_singlesample.html#visualisation",
     "title": "Rna singlesample",
     "section": "Visualisation",
-    "text": "Visualisation\n\n\n\n\nflowchart LR\n    p0(Channel.fromList)\n    p8(filter_with_counts)\n    p15(do_filter)\n    p23(filter_with_scrublet)\n    p30(output)\n    p0-->p8\n    p8-->p15\n    p15-->p23\n    p23-->p30"
+    "text": "Visualisation\n\n\n\n\nflowchart LR\n    p0(Input)\n    p8(filter_with_counts)\n    p15(do_filter)\n    p23(filter_with_scrublet)\n    p30(Output)\n    p0-->p8\n    p8-->p15\n    p15-->p23\n    p23-->p30"
   },
   {
     "objectID": "components/module_convert_from_bdrhap_to_h5mu.html",
