@@ -47,13 +47,13 @@ A pipeline for demultiplexing multimodal multi-sample RNA transcriptomics data.
 ```{mermaid}
 %%| column: screen-inset-shaded
 flowchart LR
-    p0(Channel.fromList)
+    p0(Input)
     p8(pca)
     p16(harmonypy)
     p24(find_neighbors)
     p31(leiden)
     p39(umap)
-    p45(output)
+    p45(Output)
     p0-->p8
     p8-->p16
     p16-->p24

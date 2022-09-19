@@ -45,13 +45,13 @@ Processing unimodal multi-sample RNA transcriptomics data.
 ```{mermaid}
 %%| column: screen-inset-shaded
 flowchart LR
-    p0(Channel.fromList)
+    p0(Input)
     p8(concat)
     p15(normalize_total)
     p22(log1p)
     p29(delete_layer)
     p37(filter_with_hvg)
-    p43(output)
+    p43(Output)
     p0-->p8
     p8-->p15
     p15-->p22

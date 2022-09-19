@@ -50,30 +50,34 @@ Convert `.bcl` files to `.fastq` files using bcl2fastq, bcl-convert or Cell Rang
 ```{mermaid}
 %%| column: screen-inset-shaded
 flowchart LR
-    p0(Channel.fromList)
-    p2(view)
+    p0(Input)
+    p3(filter)
     p8(cellranger_mkfastq)
     p27(mix)
+    p11(filter)
     p16(bcl_convert)
+    p19(filter)
     p24(bcl2fastq)
-    p28(mix)
-    p33(fastqc)
-    p36(output)
-    p44(multiqc)
-    p47(output)
-    p51(output)
-    p27-->p28
-    p0-->p2
-    p2-->p8
+    p32(fastqc)
+    p35(Output)
+    p37(toSortedList)
+    p43(multiqc)
+    p46(Output)
+    p50(Output)
+    p0-->p3
+    p0-->p11
+    p0-->p19
+    p3-->p8
     p8-->p27
-    p2-->p16
+    p11-->p16
     p16-->p27
-    p2-->p24
-    p24-->p28
-    p28-->p33
-    p33-->p36
-    p28-->p44
-    p44-->p47
-    p28-->p51
+    p19-->p24
+    p24-->p27
+    p27-->p32
+    p32-->p35
+    p27-->p37
+    p37-->p43
+    p43-->p46
+    p27-->p50
 
 ```

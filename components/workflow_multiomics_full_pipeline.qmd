@@ -43,45 +43,53 @@ A pipeline to analyse multiple multiomics samples.
 ```{mermaid}
 %%| column: screen-inset-shaded
 flowchart LR
-    p0(Channel.fromList)
+    p0(Input)
+    p2(flatMap)
     p10(split_modalities)
-    p12(map)
     p19(filter_with_counts)
     p26(do_filter)
     p34(filter_with_scrublet)
+    p38(toSortedList)
     p46(concat)
     p53(normalize_total)
     p60(log1p)
     p67(delete_layer)
     p75(filter_with_hvg)
     p89(concat)
+    p80(toSortedList)
     p86(concat)
+    p90(toSortedList)
     p96(merge)
     p105(pca)
     p113(harmonypy)
     p121(find_neighbors)
     p128(leiden)
     p136(umap)
-    p142(output)
-    p0-->p10
-    p10-->p12
-    p12-->p19
+    p140(toSortedList)
+    p142(Output)
+    p89-->p90
+    p0-->p2
+    p2-->p10
+    p10-->p19
     p19-->p26
     p26-->p34
-    p34-->p46
+    p34-->p38
+    p38-->p46
     p46-->p53
     p53-->p60
     p60-->p67
     p67-->p75
     p75-->p89
-    p12-->p86
+    p10-->p80
+    p80-->p86
     p86-->p89
-    p89-->p96
+    p90-->p96
     p96-->p105
     p105-->p113
     p113-->p121
     p121-->p128
     p128-->p136
-    p136-->p142
+    p136-->p140
+    p140-->p142
 
 ```

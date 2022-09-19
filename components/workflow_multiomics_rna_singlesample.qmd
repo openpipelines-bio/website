@@ -45,11 +45,11 @@ Processing unimodal single-sample RNA transcriptomics data.
 ```{mermaid}
 %%| column: screen-inset-shaded
 flowchart LR
-    p0(Channel.fromList)
+    p0(Input)
     p8(filter_with_counts)
     p15(do_filter)
     p23(filter_with_scrublet)
-    p30(output)
+    p30(Output)
     p0-->p8
     p8-->p15
     p15-->p23

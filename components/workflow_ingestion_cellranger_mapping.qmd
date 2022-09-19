@@ -47,11 +47,11 @@ A pipeline for running Cell Ranger mapping.
 ```{mermaid}
 %%| column: screen-inset-shaded
 flowchart LR
-    p0(Channel.fromList)
+    p0(Input)
     p8(cellranger_count)
     p15(cellranger_count_split)
     p23(from_10xh5_to_h5mu)
-    p30(output)
+    p30(Output)
     p0-->p8
     p8-->p15
     p15-->p23
