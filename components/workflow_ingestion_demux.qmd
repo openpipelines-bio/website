@@ -34,7 +34,7 @@ Convert `.bcl` files to `.fastq` files using bcl2fastq, bcl-convert or Cell Rang
 |`--id`             |ID of the sample.                                              |`string`, required, example: "foo"   |
 |`--input`          |Input run directory                                            |`file`, required, example: "bcl_dir" |
 |`--sample_sheet`   |Pointer to the sample sheet                                    |`file`, required, example: "bcl_dir" |
-|`--demultiplexer`  |The multiplexer to use, one of bclconvert or mkfastq           |`string`, example: "bclconvert"      |
+|`--demultiplexer`  |The multiplexer to use, one of bclconvert or mkfastq           |`string`, default: "bcl2fastq"       |
 |`--ignore_missing` |Should the demultiplexer ignore missing entities (filter, ...) |`boolean`                            |
 
 ## Authors

@@ -20,7 +20,13 @@ nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/ne
 [Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/reference/make_reference){.btn-action .btn-sm .btn-info .btn role="button"}
 :::
 
-Make a reference build.
+Preprocess and build a transcriptome reference.
+
+Example input files are:
+  - `genome_fasta`: https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/GRCh38.primary_assembly.genome.fa.gz
+  - `transcriptome_gtf`: https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/gencode.v41.annotation.gtf.gz
+  - `ercc`: https://assets.thermofisher.com/TFS-Assets/LSG/manuals/ERCC92.zip
+
 
 ## Argument group
 
@@ -28,14 +34,14 @@ Make a reference build.
 
 
 
-|Name                  |Description                                                  |Attributes                                                                                                                               |
-|:---------------------|:------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------|
-|`--genome_fasta`      |Reference genome fasta.                                      |`string`, required, example: "https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/GRCh38.primary_assembly.genome.fa.gz" |
-|`--transcriptome_gtf` |Reference transcriptome annotation.                          |`string`, required, example: "https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/gencode.v41.annotation.gtf.gz"        |
-|`--ercc`              |ERCC sequence and annotation file.                           |`string`, example: "https://assets.thermofisher.com/TFS-Assets/LSG/manuals/ERCC92.zip"                                                   |
-|`--subset_regex`      |Will subset the reference chromosomes using the given regex. |`string`, example: "(ERCC-00002&#124;chr1)"                                                                                              |
-|`--output_fasta`      |Output genome sequence fasta.                                |`file`, required, example: "genome_sequence.fa.gz"                                                                                       |
-|`--output_gtf`        |Output transcriptome annotation gtf.                         |`file`, required, example: "transcriptome_annotation.tar.gz"                                                                             |
+|Name                  |Description                                                  |Attributes                                                   |
+|:---------------------|:------------------------------------------------------------|:------------------------------------------------------------|
+|`--genome_fasta`      |Reference genome fasta. Example:                             |`file`, required, example: "genome_fasta.fa.gz"              |
+|`--transcriptome_gtf` |Reference transcriptome annotation.                          |`file`, required, example: "transcriptome.gtf.gz"            |
+|`--ercc`              |ERCC sequence and annotation file.                           |`file`, example: "ercc.zip"                                  |
+|`--subset_regex`      |Will subset the reference chromosomes using the given regex. |`string`, example: "(ERCC-00002&#124;chr1)"                  |
+|`--output_fasta`      |Output genome sequence fasta.                                |`file`, required, example: "genome_sequence.fa.gz"           |
+|`--output_gtf`        |Output transcriptome annotation gtf.                         |`file`, required, example: "transcriptome_annotation.gtf.gz" |
 
 ## Authors
 

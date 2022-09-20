@@ -10,6 +10,7 @@ title: Components
 |Ingestion  |[BD Rhapsody](workflow_ingestion_bd_rhapsody.qmd)|A generic pipeline for running BD Rhapsody WTA or Targeted mapping, with support for AbSeq, VDJ and/or SMK. |
 |Ingestion  |[Cell Ranger mapping](workflow_ingestion_cellranger_mapping.qmd)|A pipeline for running Cell Ranger mapping                                                                  |
 |Ingestion  |[Demux](workflow_ingestion_demux.qmd)|A generic pipeline for running bcl2fastq, bcl-convert or Cell Ranger mkfastq.                               |
+|Ingestion  |[Make reference](workflow_ingestion_make_reference.qmd)|Build a transcriptomics reference into one of many formats                                                  |
 |Multiomics |[Full pipeline](workflow_multiomics_full_pipeline.qmd)|A pipeline to analyse multiple multiomics samples                                                           |
 |Multiomics |[Integration](workflow_multiomics_integration.qmd)|A pipeline for demultiplexing multimodal multi-sample RNA transcriptomics data                              |
 |Multiomics |[Rna multisample](workflow_multiomics_rna_multisample.qmd)|Processing unimodal multi-sample RNA transcriptomics data                                                   |
@@ -56,7 +57,7 @@ title: Components
 |Qc            |[Multiqc](module_qc_multiqc.qmd)      |Component for multiqc (https://multiqc                                                                                               |
 |Reference     |[Build bdrhap reference](module_reference_build_bdrhap_reference.qmd)|Compile a reference into a STAR index compatible with the BD Rhapsody pipeline                                                       |
 |Reference     |[Build cellranger reference](module_reference_build_cellranger_reference.qmd)|Build a Cell Ranger-compatible reference folder from user-supplied genome FASTA and gene GTF files                                   |
-|Reference     |[Make reference](module_reference_make_reference.qmd)|Make a reference build                                                                                                               |
+|Reference     |[Make reference](module_reference_make_reference.qmd)|Preprocess and build a transcriptome reference                                                                                       |
 |Report        |[Mermaid](module_report_mermaid.qmd)  |Generates a network from mermaid code                                                                                                |
 |Split         |[Split modalities](module_split_split_modalities.qmd)|Split the modalities from a single                                                                                                   |
 |Transfer      |[Publish](module_transfer_publish.qmd)|Publish an artifact and optionally rename with parameters                                                                            |

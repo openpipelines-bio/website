@@ -31,7 +31,7 @@ Compile a reference into a STAR index compatible with the BD Rhapsody pipeline.
 |Name                  |Description                         |Attributes                                                   |
 |:---------------------|:-----------------------------------|:------------------------------------------------------------|
 |`--genome_fasta`      |Reference genome fasta.             |`file`, required, example: "genome_sequence.fa.gz"           |
-|`--transcriptome_gtf` |Reference transcriptome annotation. |`file`, required, example: "transcriptome_annotation.tar.gz" |
+|`--transcriptome_gtf` |Reference transcriptome annotation. |`file`, required, example: "transcriptome_annotation.gtf.gz" |
 |`--output`            |Star index                          |`file`, required, example: "star_index.tar.gz"               |
 
 ## Authors

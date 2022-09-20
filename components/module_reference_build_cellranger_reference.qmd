@@ -31,7 +31,7 @@ Build a Cell Ranger-compatible reference folder from user-supplied genome FASTA 
 |Name                  |Description                         |Attributes                                                   |
 |:---------------------|:-----------------------------------|:------------------------------------------------------------|
 |`--genome_fasta`      |Reference genome fasta.             |`file`, required, example: "genome_sequence.fa.gz"           |
-|`--transcriptome_gtf` |Reference transcriptome annotation. |`file`, required, example: "transcriptome_annotation.tar.gz" |
+|`--transcriptome_gtf` |Reference transcriptome annotation. |`file`, required, example: "transcriptome_annotation.gtf.gz" |
 |`--output`            |Output folder                       |`file`, required, example: "cellranger_reference"            |
 
 ## Authors
