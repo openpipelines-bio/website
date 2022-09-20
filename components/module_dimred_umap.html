@@ -225,15 +225,15 @@ Namespace: <code>dimred</code></p>
 <p><a href="https://github.com/openpipelines-bio/openpipeline/blob/main/src/dimred/umap" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
 </section>
 </div></div><p>UMAP (Uniform Manifold Approximation and Projection) is a manifold learning technique suitable for visualizing high-dimensional data. Besides tending to be faster than tSNE, it optimizes the embedding such that it best reflects the topology of the data, which we represent throughout Scanpy using a neighborhood graph. tSNE, by contrast, optimizes the distribution of nearest-neighbor distances in the embedding such that these best match the distribution of distances in the high-dimensional space. We use the implementation of umap-learn [McInnes18]. For a few comparisons of UMAP with tSNE, see this preprint.</p>
-<section id="argument-group" class="level2">
-<h2 class="anchored" data-anchor-id="argument-group">Argument group</h2>
-<section id="arguments" class="level3">
-<h3 class="anchored" data-anchor-id="arguments">Arguments</h3>
+<section id="argument-groups" class="level2">
+<h2 class="anchored" data-anchor-id="argument-groups">Argument groups</h2>
+<section id="inputs" class="level3">
+<h3 class="anchored" data-anchor-id="inputs">Inputs</h3>
 <table class="table">
 <colgroup>
-<col style="width: 5%">
-<col style="width: 85%">
-<col style="width: 9%">
+<col style="width: 13%">
+<col style="width: 55%">
+<col style="width: 31%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -250,19 +250,57 @@ Namespace: <code>dimred</code></p>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--uns_neighbors</code></td>
-<td style="text-align: left;">The .uns neighbors slot as output by the <code>find_neighbors</code> component.</td>
+<td style="text-align: left;">The <code>.uns</code> neighbors slot as output by the <code>find_neighbors</code> component.</td>
 <td style="text-align: left;"><code>string</code>, default: “neighbors”</td>
 </tr>
+</tbody>
+</table>
+</section>
+<section id="outputs" class="level3">
+<h3 class="anchored" data-anchor-id="outputs">Outputs</h3>
+<table class="table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 49%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
 <tr class="odd">
 <td style="text-align: left;"><code>--output</code></td>
 <td style="text-align: left;">Output h5mu file.</td>
 <td style="text-align: left;"><code>file</code>, required, example: “output.h5mu”</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>--output_key</code></td>
+<td style="text-align: left;"><code>--obsm_output</code></td>
 <td style="text-align: left;">The pre/postfix under which to store the UMAP results.</td>
 <td style="text-align: left;"><code>string</code>, default: “umap”</td>
 </tr>
+</tbody>
+</table>
+</section>
+<section id="arguments" class="level3">
+<h3 class="anchored" data-anchor-id="arguments">Arguments</h3>
+<table class="table">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 87%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
 <tr class="odd">
 <td style="text-align: left;"><code>--min_dist</code></td>
 <td style="text-align: left;">The effective minimum distance between embedded points. Smaller values will result in a more clustered/clumped embedding where nearby points on the manifold are drawn closer together, while larger values will result on a more even dispersal of points. The value should be set relative to the spread value, which determines the scale at which embedded points will be spread out.</td>
@@ -270,7 +308,7 @@ Namespace: <code>dimred</code></p>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--spread</code></td>
-<td style="text-align: left;">The effective scale of embedded points. In combination with min_dist this determines how clustered/clumped the embedded points are.</td>
+<td style="text-align: left;">The effective scale of embedded points. In combination with <code>min_dist</code> this determines how clustered/clumped the embedded points are.</td>
 <td style="text-align: left;"><code>double</code>, default: 1</td>
 </tr>
 <tr class="odd">
@@ -280,7 +318,7 @@ Namespace: <code>dimred</code></p>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--max_iter</code></td>
-<td style="text-align: left;">The number of iterations (epochs) of the optimization.</td>
+<td style="text-align: left;">The number of iterations (epochs) of the optimization. Called <code>n_epochs</code> in the original UMAP.</td>
 <td style="text-align: left;"><code>integer</code></td>
 </tr>
 <tr class="odd">
@@ -300,7 +338,7 @@ Namespace: <code>dimred</code></p>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--init_pos</code></td>
-<td style="text-align: left;">How to initialize the low dimensional embedding. Called init in the original UMAP. Options are paga, spectral and random.</td>
+<td style="text-align: left;">How to initialize the low dimensional embedding. Called <code>init</code> in the original UMAP. Options are: * Any key from <code>.obsm</code> * <code>'paga'</code>: positions from <code>paga()</code> * <code>'spectral'</code>: use a spectral embedding of the graph * <code>'random'</code>: assign initial embedding positions at random.</td>
 <td style="text-align: left;"><code>string</code>, default: “spectral”</td>
 </tr>
 </tbody>

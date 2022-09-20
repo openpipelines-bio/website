@@ -226,16 +226,17 @@ Namespace: <code>reference</code></p>
 <h3 class="anchored" data-anchor-id="links">Links</h3>
 <p><a href="https://github.com/openpipelines-bio/openpipeline/blob/main/src/reference/make_reference" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
 </section>
-</div></div><p>Make a reference build.</p>
+</div></div><p>Preprocess and build a transcriptome reference.</p>
+<p>Example input files are: - <code>genome_fasta</code>: https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/GRCh38.primary_assembly.genome.fa.gz - <code>transcriptome_gtf</code>: https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/gencode.v41.annotation.gtf.gz - <code>ercc</code>: https://assets.thermofisher.com/TFS-Assets/LSG/manuals/ERCC92.zip</p>
 <section id="argument-group" class="level2">
 <h2 class="anchored" data-anchor-id="argument-group">Argument group</h2>
 <section id="arguments" class="level3">
 <h3 class="anchored" data-anchor-id="arguments">Arguments</h3>
 <table class="table">
 <colgroup>
-<col style="width: 10%">
-<col style="width: 27%">
-<col style="width: 62%">
+<col style="width: 15%">
+<col style="width: 42%">
+<col style="width: 42%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -247,18 +248,18 @@ Namespace: <code>reference</code></p>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"><code>--genome_fasta</code></td>
-<td style="text-align: left;">Reference genome fasta.</td>
-<td style="text-align: left;"><code>string</code>, required, example: “https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/GRCh38.primary_assembly.genome.fa.gz”</td>
+<td style="text-align: left;">Reference genome fasta. Example:</td>
+<td style="text-align: left;"><code>file</code>, required, example: “genome_fasta.fa.gz”</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--transcriptome_gtf</code></td>
 <td style="text-align: left;">Reference transcriptome annotation.</td>
-<td style="text-align: left;"><code>string</code>, required, example: “https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/gencode.v41.annotation.gtf.gz”</td>
+<td style="text-align: left;"><code>file</code>, required, example: “transcriptome.gtf.gz”</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--ercc</code></td>
 <td style="text-align: left;">ERCC sequence and annotation file.</td>
-<td style="text-align: left;"><code>string</code>, example: “https://assets.thermofisher.com/TFS-Assets/LSG/manuals/ERCC92.zip”</td>
+<td style="text-align: left;"><code>file</code>, example: “ercc.zip”</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--subset_regex</code></td>
@@ -273,7 +274,7 @@ Namespace: <code>reference</code></p>
 <tr class="even">
 <td style="text-align: left;"><code>--output_gtf</code></td>
 <td style="text-align: left;">Output transcriptome annotation gtf.</td>
-<td style="text-align: left;"><code>file</code>, required, example: “transcriptome_annotation.tar.gz”</td>
+<td style="text-align: left;"><code>file</code>, required, example: “transcriptome_annotation.gtf.gz”</td>
 </tr>
 </tbody>
 </table>
