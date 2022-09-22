@@ -1,5 +1,5 @@
 ---
-title: Full pipeline
+title: "Full pipeline"
 toc: false
 ---
 
@@ -18,6 +18,7 @@ nextflow run openpipelines-bio/openpipeline -r main_build -main-script workflows
 
 ### Links
 [Source](https://github.com/openpipelines-bio/openpipeline/blob/main/workflows/multiomics/full_pipeline){.btn-action .btn-sm .btn-info .btn role="button"}
+
 :::
 
 A pipeline to analyse multiple multiomics samples.
@@ -25,8 +26,6 @@ A pipeline to analyse multiple multiomics samples.
 ## Argument group
 
 ### Inputs
-
-
 
 |Name               |Description                                                    |Attributes                                              |
 |:------------------|:--------------------------------------------------------------|:-------------------------------------------------------|
@@ -36,7 +35,7 @@ A pipeline to analyse multiple multiomics samples.
 
 ## Authors
 
- * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (author, maintainer)
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (author, maintainer)
 
 ## Visualisation
 

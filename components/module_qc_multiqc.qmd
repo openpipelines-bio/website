@@ -1,5 +1,5 @@
 ---
-title: Multiqc
+title: "Multiqc"
 toc: false
 ---
 
@@ -18,6 +18,7 @@ nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/ne
 
 ### Links
 [Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/qc/multiqc){.btn-action .btn-sm .btn-info .btn role="button"}
+
 :::
 
 Component for multiqc (https://multiqc.info/)
@@ -27,14 +28,10 @@ Component for multiqc (https://multiqc.info/)
 
 ### Arguments
 
-
-
 |Name       |Description               |Attributes                             |
 |:----------|:-------------------------|:--------------------------------------|
 |`--input`  |Describe the input file.  |`file`, required, example: "input.txt" |
 |`--output` |Describe the output file. |`file`, required, example: "report"    |
 
 ## Authors
-
-
 

@@ -1,5 +1,5 @@
 ---
-title: Merge
+title: "Merge"
 toc: false
 ---
 
@@ -18,6 +18,7 @@ nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/ne
 
 ### Links
 [Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/integrate/merge){.btn-action .btn-sm .btn-info .btn role="button"}
+
 :::
 
 Combine one or more single-modality .h5mu files together into one .h5mu file.
@@ -27,8 +28,6 @@ Combine one or more single-modality .h5mu files together into one .h5mu file.
 
 ### Arguments
 
-
-
 |Name            |Description                                                       |Attributes                                |
 |:---------------|:-----------------------------------------------------------------|:-----------------------------------------|
 |`--input`       |Paths to the single-modality .h5mu files that need to be combined |`file`, required, default: "sample_paths" |
@@ -37,5 +36,4 @@ Combine one or more single-modality .h5mu files together into one .h5mu file.
 
 ## Authors
 
- * Dries Schaumont  (maintainer)
-
+  * Dries Schaumont (maintainer)

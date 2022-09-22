@@ -1,5 +1,5 @@
 ---
-title: Filter with scrublet
+title: "Filter with scrublet"
 toc: false
 ---
 
@@ -18,6 +18,7 @@ nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/ne
 
 ### Links
 [Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/filter/filter_with_scrublet){.btn-action .btn-sm .btn-info .btn role="button"}
+
 :::
 
 Doublet detection using the Scrublet method (Wolock, Lopez and Klein, 2019).
@@ -46,8 +47,6 @@ For 10x we expect the doublet rates to be:
 
 ### Arguments
 
-
-
 |Name                            |Description                                                                                                                                                                            |Attributes                                  |
 |:-------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------|
 |`--input`                       |Input h5mu file                                                                                                                                                                        |`file`, required, example: "input.h5mu"     |
@@ -63,6 +62,5 @@ For 10x we expect the doublet rates to be:
 
 ## Authors
 
- * Dries De Maeyer  (contributor)
- * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (maintainer, contributor)
-
+  * Dries De Maeyer (contributor)
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (maintainer, contributor)

@@ -1,5 +1,5 @@
 ---
-title: Filter 10xh5
+title: "Filter 10xh5"
 toc: false
 ---
 
@@ -18,6 +18,7 @@ nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/ne
 
 ### Links
 [Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/process_10xh5/filter_10xh5){.btn-action .btn-sm .btn-info .btn role="button"}
+
 :::
 
 Filter a 10x h5 dataset.
@@ -26,8 +27,6 @@ Filter a 10x h5 dataset.
 ## Argument group
 
 ### Arguments
-
-
 
 |Name                   |Description                                            |Attributes                                                                        |
 |:----------------------|:------------------------------------------------------|:---------------------------------------------------------------------------------|
@@ -40,5 +39,4 @@ Filter a 10x h5 dataset.
 
 ## Authors
 
- * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (maintainer)
-
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (maintainer)

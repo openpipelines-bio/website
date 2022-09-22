@@ -1,5 +1,5 @@
 ---
-title: From 10xmtx to h5mu
+title: "From 10xmtx to h5mu"
 toc: false
 ---
 
@@ -18,6 +18,7 @@ nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/ne
 
 ### Links
 [Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/convert/from_10xmtx_to_h5mu){.btn-action .btn-sm .btn-info .btn role="button"}
+
 :::
 
 Converts a 10x mtx into an h5mu file.
@@ -27,8 +28,6 @@ Converts a 10x mtx into an h5mu file.
 
 ### Arguments
 
-
-
 |Name       |Description       |Attributes                                                 |
 |:----------|:-----------------|:----------------------------------------------------------|
 |`--input`  |Input mtx folder  |`file`, required, example: "input_dir_containing_gz_files" |
@@ -36,5 +35,4 @@ Converts a 10x mtx into an h5mu file.
 
 ## Authors
 
- * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (maintainer)
-
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (maintainer)

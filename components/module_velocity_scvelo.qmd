@@ -1,5 +1,5 @@
 ---
-title: Scvelo
+title: "Scvelo"
 toc: false
 ---
 
@@ -18,6 +18,7 @@ nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/ne
 
 ### Links
 [Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/velocity/scvelo){.btn-action .btn-sm .btn-info .btn role="button"}
+
 :::
 
 
@@ -26,23 +27,22 @@ nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/ne
 
 ### Inputs
 
-
-
 |Name      |Description         |Attributes       |
 |:---------|:-------------------|:----------------|
 |`--input` |Velocyto loom file. |`file`, required |
 
+
 ### Outputs
-
-
 
 |Name       |Description                                              |Attributes       |
 |:----------|:--------------------------------------------------------|:----------------|
 |`--output` |Output directory. If it does not exist, will be created. |`file`, required |
 
+
 ### Filtering and normalization
 
 Arguments for filtering, normalization an log transform (see scvelo.pp.filter_and_normalize function)
+
 
 |Name                  |Description                                                                    |Attributes               |
 |:---------------------|:------------------------------------------------------------------------------|:------------------------|
@@ -55,9 +55,11 @@ Arguments for filtering, normalization an log transform (see scvelo.pp.filter_an
 |`--n_top_genes`       |Number of genes to keep.                                                       |`integer`                |
 |`--log_transform`     |Do not log transform counts.                                                   |`boolean`, default: TRUE |
 
+
 ### Fitting parameters
 
 Arguments for fitting the data
+
 
 |Name                       |Description                                                                                                                                                                                 |Attributes             |
 |:--------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------|
@@ -66,5 +68,4 @@ Arguments for fitting the data
 
 ## Authors
 
- * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (maintainer)
-
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (maintainer)

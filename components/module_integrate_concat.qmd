@@ -1,5 +1,5 @@
 ---
-title: Concat
+title: "Concat"
 toc: false
 ---
 
@@ -18,6 +18,7 @@ nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/ne
 
 ### Links
 [Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/integrate/concat){.btn-action .btn-sm .btn-info .btn role="button"}
+
 :::
 
 Concatenates several uni-modal samples in .h5mu files into a single file.
@@ -26,8 +27,6 @@ Concatenates several uni-modal samples in .h5mu files into a single file.
 ## Argument group
 
 ### Arguments
-
-
 
 |Name                |Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |Attributes                                  |
 |:-------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------|
@@ -39,5 +38,4 @@ Concatenates several uni-modal samples in .h5mu files into a single file.
 
 ## Authors
 
- * Dries Schaumont  (maintainer)
-
+  * Dries Schaumont (maintainer)

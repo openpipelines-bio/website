@@ -1,5 +1,5 @@
 ---
-title: Log1p
+title: "Log1p"
 toc: false
 ---
 
@@ -18,6 +18,7 @@ nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/ne
 
 ### Links
 [Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/transform/log1p){.btn-action .btn-sm .btn-info .btn role="button"}
+
 :::
 
 Logarithmize the data matrix. Computes X = log(X + 1), where log denotes the natural logarithm unless a different base is given.
@@ -26,8 +27,6 @@ Logarithmize the data matrix. Computes X = log(X + 1), where log denotes the nat
 ## Argument group
 
 ### Arguments
-
-
 
 |Name             |Description                                  |Attributes                               |
 |:----------------|:--------------------------------------------|:----------------------------------------|
@@ -38,6 +37,5 @@ Logarithmize the data matrix. Computes X = log(X + 1), where log denotes the nat
 
 ## Authors
 
- * Dries De Maeyer  (maintainer)
- * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (contributor)
-
+  * Dries De Maeyer (maintainer)
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (contributor)

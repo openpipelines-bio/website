@@ -1,5 +1,5 @@
 ---
-title: Umap
+title: "Umap"
 toc: false
 ---
 
@@ -18,6 +18,7 @@ nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/ne
 
 ### Links
 [Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/dimred/umap){.btn-action .btn-sm .btn-info .btn role="button"}
+
 :::
 
 UMAP (Uniform Manifold Approximation and Projection) is a manifold learning technique suitable for visualizing high-dimensional data. Besides tending to be faster than tSNE, it optimizes the embedding such that it best reflects the topology of the data, which we represent throughout Scanpy using a neighborhood graph. tSNE, by contrast, optimizes the distribution of nearest-neighbor distances in the embedding such that these best match the distribution of distances in the high-dimensional space. We use the implementation of umap-learn [McInnes18]. For a few comparisons of UMAP with tSNE, see this preprint.
@@ -27,25 +28,21 @@ UMAP (Uniform Manifold Approximation and Projection) is a manifold learning tech
 
 ### Inputs
 
-
-
 |Name              |Description                                                            |Attributes                              |
 |:-----------------|:----------------------------------------------------------------------|:---------------------------------------|
 |`--input`         |Input h5mu file                                                        |`file`, required, example: "input.h5mu" |
 |`--uns_neighbors` |The `.uns` neighbors slot as output by the `find_neighbors` component. |`string`, default: "neighbors"          |
 
+
 ### Outputs
-
-
 
 |Name            |Description                                            |Attributes                               |
 |:---------------|:------------------------------------------------------|:----------------------------------------|
 |`--output`      |Output h5mu file.                                      |`file`, required, example: "output.h5mu" |
 |`--obsm_output` |The pre/postfix under which to store the UMAP results. |`string`, default: "umap"                |
 
+
 ### Arguments
-
-
 
 |Name                     |Description                                                                                                                                                                                                                                                                                                                                                                               |Attributes                    |
 |:------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------|
@@ -60,5 +57,4 @@ UMAP (Uniform Manifold Approximation and Projection) is a manifold learning tech
 
 ## Authors
 
- * Dries De Maeyer  (maintainer)
-
+  * Dries De Maeyer (maintainer)

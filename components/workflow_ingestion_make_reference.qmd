@@ -1,5 +1,5 @@
 ---
-title: Make reference
+title: "Make reference"
 toc: false
 ---
 
@@ -18,6 +18,7 @@ nextflow run openpipelines-bio/openpipeline -r main_build -main-script workflows
 
 ### Links
 [Source](https://github.com/openpipelines-bio/openpipeline/blob/main/workflows/ingestion/make_reference){.btn-action .btn-sm .btn-info .btn role="button"}
+
 :::
 
 Build a transcriptomics reference into one of many formats.
@@ -27,8 +28,6 @@ Build a transcriptomics reference into one of many formats.
 
 ### Inputs
 
-
-
 |Name                  |Description                         |Attributes                                                                                                                            |
 |:---------------------|:-----------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------|
 |`--id`                |ID of the reference.                |`string`, required, example: "foo"                                                                                                    |
@@ -36,9 +35,8 @@ Build a transcriptomics reference into one of many formats.
 |`--transcriptome_gtf` |Reference transcriptome annotation. |`file`, required, example: "https:/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/gencode.v41.annotation.gtf.gz"        |
 |`--ercc`              |ERCC sequence and annotation file.  |`file`, example: "https:/assets.thermofisher.com/TFS-Assets/LSG/manuals/ERCC92.zip"                                                   |
 
+
 ### Outputs
-
-
 
 |Name                   |Description                          |Attributes                                         |
 |:----------------------|:------------------------------------|:--------------------------------------------------|
@@ -48,9 +46,8 @@ Build a transcriptomics reference into one of many formats.
 |`--output_cellranger`  |Output index                         |`file`, example: "index.tar.gz"                    |
 |`--output_bd_rhapsody` |Output index                         |`file`, example: "index.tar.gz"                    |
 
+
 ### Arguments
-
-
 
 |Name             |Description                                                  |Attributes                                  |
 |:----------------|:------------------------------------------------------------|:-------------------------------------------|
@@ -58,8 +55,8 @@ Build a transcriptomics reference into one of many formats.
 
 ## Authors
 
- * Angela Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) (author)
- * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author, maintainer)
+  * Angela Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) (author)
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author, maintainer)
 
 ## Visualisation
 

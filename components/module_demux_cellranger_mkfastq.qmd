@@ -1,5 +1,5 @@
 ---
-title: Cellranger mkfastq
+title: "Cellranger mkfastq"
 toc: false
 ---
 
@@ -18,6 +18,7 @@ nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/ne
 
 ### Links
 [Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/demux/cellranger_mkfastq){.btn-action .btn-sm .btn-info .btn role="button"}
+
 :::
 
 Demultiplex raw sequencing data
@@ -25,8 +26,6 @@ Demultiplex raw sequencing data
 ## Argument group
 
 ### Arguments
-
-
 
 |Name                 |Description                                                                             |Attributes                                                      |
 |:--------------------|:---------------------------------------------------------------------------------------|:---------------------------------------------------------------|
@@ -40,7 +39,6 @@ Demultiplex raw sequencing data
 
 ## Authors
 
- * Angela Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) (author)
- * Samuel D'Souza [{{< fa brands github >}}](https://github.com/srdsam) (author)
- * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author, maintainer)
-
+  * Angela Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) (author)
+  * Samuel D'Souza [{{< fa brands github >}}](https://github.com/srdsam) (author)
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author, maintainer)

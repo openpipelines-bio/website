@@ -1,5 +1,5 @@
 ---
-title: Scanorama
+title: "Scanorama"
 toc: false
 ---
 
@@ -18,6 +18,7 @@ nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/ne
 
 ### Links
 [Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/integrate/scanorama){.btn-action .btn-sm .btn-info .btn role="button"}
+
 :::
 
 Use Scanorama to integrate different experiments.
@@ -26,8 +27,6 @@ Use Scanorama to integrate different experiments.
 ## Argument group
 
 ### Arguments
-
-
 
 |Name            |Description                                                                                                                                                                 |Attributes                               |
 |:---------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------|
@@ -44,6 +43,5 @@ Use Scanorama to integrate different experiments.
 
 ## Authors
 
- * Dries De Maeyer  (author)
- * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (maintainer)
-
+  * Dries De Maeyer (author)
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (maintainer)

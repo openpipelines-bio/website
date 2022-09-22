@@ -1,5 +1,5 @@
 ---
-title: Pca
+title: "Pca"
 toc: false
 ---
 
@@ -18,6 +18,7 @@ nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/ne
 
 ### Links
 [Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/dimred/pca){.btn-action .btn-sm .btn-info .btn role="button"}
+
 :::
 
 Computes PCA coordinates, loadings and variance decomposition. Uses the implementation of scikit-learn [Pedregosa11].
@@ -26,8 +27,6 @@ Computes PCA coordinates, loadings and variance decomposition. Uses the implemen
 ## Argument group
 
 ### Arguments
-
-
 
 |Name               |Description                                                                                                          |Attributes                               |
 |:------------------|:--------------------------------------------------------------------------------------------------------------------|:----------------------------------------|
@@ -41,5 +40,4 @@ Computes PCA coordinates, loadings and variance decomposition. Uses the implemen
 
 ## Authors
 
- * Dries De Maeyer  (maintainer)
-
+  * Dries De Maeyer (maintainer)

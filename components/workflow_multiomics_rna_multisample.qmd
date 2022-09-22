@@ -1,5 +1,5 @@
 ---
-title: Rna multisample
+title: "Rna multisample"
 toc: false
 ---
 
@@ -18,6 +18,7 @@ nextflow run openpipelines-bio/openpipeline -r main_build -main-script workflows
 
 ### Links
 [Source](https://github.com/openpipelines-bio/openpipeline/blob/main/workflows/multiomics/rna_multisample){.btn-action .btn-sm .btn-info .btn role="button"}
+
 :::
 
 Processing unimodal multi-sample RNA transcriptomics data.
@@ -25,8 +26,6 @@ Processing unimodal multi-sample RNA transcriptomics data.
 ## Argument group
 
 ### Arguments
-
-
 
 |Name       |Description                     |Attributes                                |
 |:----------|:-------------------------------|:-----------------------------------------|
@@ -36,9 +35,9 @@ Processing unimodal multi-sample RNA transcriptomics data.
 
 ## Authors
 
- * Dries De Maeyer  (author)
- * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author, maintainer)
- * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (author)
+  * Dries De Maeyer (author)
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author, maintainer)
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (author)
 
 ## Visualisation
 

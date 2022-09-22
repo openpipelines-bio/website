@@ -1,5 +1,5 @@
 ---
-title: From h5ad to h5mu
+title: "From h5ad to h5mu"
 toc: false
 ---
 
@@ -18,6 +18,7 @@ nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/ne
 
 ### Links
 [Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/convert/from_h5ad_to_h5mu){.btn-action .btn-sm .btn-info .btn role="button"}
+
 :::
 
 Converts a single layer h5ad file into a single muon object
@@ -27,8 +28,6 @@ Converts a single layer h5ad file into a single muon object
 
 ### Arguments
 
-
-
 |Name       |Description       |Attributes                              |
 |:----------|:-----------------|:---------------------------------------|
 |`--input`  |Input h5ad files  |`file`, required, default: "input.h5ad" |
@@ -36,5 +35,4 @@ Converts a single layer h5ad file into a single muon object
 
 ## Authors
 
- * Dries De Maeyer  (maintainer)
-
+  * Dries De Maeyer (maintainer)

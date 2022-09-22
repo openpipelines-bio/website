@@ -1,5 +1,5 @@
 ---
-title: Delete layer
+title: "Delete layer"
 toc: false
 ---
 
@@ -18,6 +18,7 @@ nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/ne
 
 ### Links
 [Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/transform/delete_layer){.btn-action .btn-sm .btn-info .btn role="button"}
+
 :::
 
 Delete an anndata layer from one or more modalities.
@@ -26,8 +27,6 @@ Delete an anndata layer from one or more modalities.
 ## Argument group
 
 ### Arguments
-
-
 
 |Name           |Description                                                           |Attributes                               |
 |:--------------|:---------------------------------------------------------------------|:----------------------------------------|
@@ -38,5 +37,4 @@ Delete an anndata layer from one or more modalities.
 
 ## Authors
 
- * Dries Schaumont  (maintainer)
-
+  * Dries Schaumont (maintainer)

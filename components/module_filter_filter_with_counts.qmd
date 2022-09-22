@@ -1,5 +1,5 @@
 ---
-title: Filter with counts
+title: "Filter with counts"
 toc: false
 ---
 
@@ -18,6 +18,7 @@ nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/ne
 
 ### Links
 [Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/filter/filter_with_counts){.btn-action .btn-sm .btn-info .btn role="button"}
+
 :::
 
 Filter scRNA-seq data based on the primary QC metrics. 
@@ -28,8 +29,6 @@ and the mitochondrial genes (genes starting with mt/MT).
 ## Argument group
 
 ### Arguments
-
-
 
 |Name                   |Description                                                                                        |Attributes                              |
 |:----------------------|:--------------------------------------------------------------------------------------------------|:---------------------------------------|
@@ -48,6 +47,5 @@ and the mitochondrial genes (genes starting with mt/MT).
 
 ## Authors
 
- * Dries De Maeyer  (contributor)
- * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (maintainer, contributor)
-
+  * Dries De Maeyer (contributor)
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (maintainer, contributor)
