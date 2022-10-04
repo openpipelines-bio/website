@@ -59,13 +59,13 @@ flowchart LR
     p86(concat)
     p90(toSortedList)
     p96(merge)
-    p105(pca)
-    p113(harmonypy)
-    p121(find_neighbors)
-    p128(leiden)
-    p136(umap)
-    p140(toSortedList)
-    p142(Output)
+    p106(pca)
+    p114(harmonypy)
+    p122(find_neighbors)
+    p130(leiden)
+    p138(umap)
+    p143(toSortedList)
+    p145(Output)
     p89-->p90
     p0-->p2
     p2-->p10
@@ -83,12 +83,12 @@ flowchart LR
     p80-->p86
     p86-->p89
     p90-->p96
-    p96-->p105
-    p105-->p113
-    p113-->p121
-    p121-->p128
-    p128-->p136
-    p136-->p140
-    p140-->p142
+    p96-->p106
+    p106-->p114
+    p114-->p122
+    p122-->p130
+    p130-->p138
+    p138-->p143
+    p143-->p145
 
 ```
