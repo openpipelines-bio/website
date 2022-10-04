@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>OpenPipelines - Cell Ranger mapping</title>
+<title>OpenPipelines - Add metadata</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -132,9 +132,6 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 </script>
-<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -200,7 +197,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Cell Ranger mapping</h1>
+<h1 class="title">Add metadata</h1>
 </div>
 
 
@@ -218,27 +215,27 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <div class="no-row-height column-margin column-container"><div class="">
 <section id="info" class="level3">
 <h3 class="anchored" data-anchor-id="info">Info</h3>
-<p>ID: <code>cellranger_mapping</code><br>
-Namespace: <code>ingestion</code></p>
+<p>ID: <code>add_metadata</code><br>
+Namespace: <code>integrate</code></p>
 </section>
 <section id="command" class="level3">
 <h3 class="anchored" data-anchor-id="command">Command</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="at">-r</span> main_build <span class="at">-main-script</span> workflows/ingestion/cellranger_mapping/main.nf <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="at">-r</span> main_build <span class="at">-main-script</span> target/nextflow/integrate/add_metadata/main.nf <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="links" class="level3">
 <h3 class="anchored" data-anchor-id="links">Links</h3>
-<p><a href="https://github.com/openpipelines-bio/openpipeline/blob/main/workflows/ingestion/cellranger_mapping" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
+<p><a href="https://github.com/openpipelines-bio/openpipeline/blob/main/src/integrate/add_metadata" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
 </section>
-</div></div><p>A pipeline for running Cell Ranger mapping.</p>
+</div></div><p>Add a csv containing metadata to the .obs or .var field of a mudata file.</p>
 <section id="argument-groups" class="level2">
 <h2 class="anchored" data-anchor-id="argument-groups">Argument groups</h2>
-<section id="inputs" class="level3">
-<h3 class="anchored" data-anchor-id="inputs">Inputs</h3>
+<section id="mudata-input" class="level3">
+<h3 class="anchored" data-anchor-id="mudata-input">MuData Input</h3>
 <table class="table">
 <colgroup>
-<col style="width: 6%">
-<col style="width: 42%">
-<col style="width: 50%">
+<col style="width: 5%">
+<col style="width: 86%">
+<col style="width: 7%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -249,30 +246,49 @@ Namespace: <code>ingestion</code></p>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><code>--id</code></td>
-<td style="text-align: left;">ID of the sample.</td>
-<td style="text-align: left;"><code>string</code>, required, example: “foo”</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;"><code>--input</code></td>
-<td style="text-align: left;">The fastq.gz files to align. Can also be a single directory containing fastq.gz files.</td>
-<td style="text-align: left;"><code>file</code>, required, example: “sample_S1_L001_R1_001.fastq.gz”, example: “sample_S1_L001_R2_001.fastq.gz”</td>
+<td style="text-align: left;">Input h5mu file</td>
+<td style="text-align: left;"><code>file</code>, required</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--obs_key</code></td>
+<td style="text-align: left;">Obs column name where the sample id can be found for each observation to join on. Usefull when adding metadata to concatenated samples. Mutually exclusive with –var_key and –sample_id</td>
+<td style="text-align: left;"><code>string</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>--reference</code></td>
-<td style="text-align: left;">The path to Cell Ranger reference tar.gz file.</td>
-<td style="text-align: left;"><code>file</code>, required, example: “reference.tar.gz”</td>
+<td style="text-align: left;"><code>--var_key</code></td>
+<td style="text-align: left;">Var column name where the sample id can be found for each observation to join on. Usefull when adding metadata to concatenated samples. Mutually exclusive with –var_key and –sample_id.</td>
+<td style="text-align: left;"><code>string</code></td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="outputs" class="level3">
-<h3 class="anchored" data-anchor-id="outputs">Outputs</h3>
+<section id="mudata-output" class="level3">
+<h3 class="anchored" data-anchor-id="mudata-output">MuData Output</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--output</code></td>
+<td style="text-align: left;">Output h5mu file.</td>
+<td style="text-align: left;"><code>file</code>, required</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="metadata-input" class="level3">
+<h3 class="anchored" data-anchor-id="metadata-input">Metadata Input</h3>
 <table class="table">
 <colgroup>
-<col style="width: 19%">
-<col style="width: 30%">
-<col style="width: 50%">
+<col style="width: 14%">
+<col style="width: 60%">
+<col style="width: 25%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -283,97 +299,14 @@ Namespace: <code>ingestion</code></p>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><code>--output_raw</code></td>
-<td style="text-align: left;">The raw output folder.</td>
-<td style="text-align: left;"><code>file</code>, required, example: “output_dir”</td>
+<td style="text-align: left;"><code>--input_csv</code></td>
+<td style="text-align: left;">.csv file containing metadata”</td>
+<td style="text-align: left;"><code>file</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>--output_h5mu</code></td>
-<td style="text-align: left;">The converted h5mu file.</td>
-<td style="text-align: left;"><code>file</code>, required, example: “output.h5mu”</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="cell-ranger-arguments" class="level3">
-<h3 class="anchored" data-anchor-id="cell-ranger-arguments">Cell Ranger arguments</h3>
-<table class="table">
-<colgroup>
-<col style="width: 4%">
-<col style="width: 91%">
-<col style="width: 4%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Description</th>
-<th style="text-align: left;">Attributes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><code>--expect_cells</code></td>
-<td style="text-align: left;">Expected number of recovered cells, used as input to cell calling algorithm.</td>
-<td style="text-align: left;"><code>integer</code>, example: 3000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>--chemistry</code></td>
-<td style="text-align: left;">Assay configuration. - auto: autodetect mode - threeprime: Single Cell 3’ - fiveprime: Single Cell 5’ - SC3Pv1: Single Cell 3’ v1 - SC3Pv2: Single Cell 3’ v2 - SC3Pv3: Single Cell 3’ v3 - SC3Pv3LT: Single Cell 3’ v3 LT - SC3Pv3HT: Single Cell 3’ v3 HT - SC5P-PE: Single Cell 5’ paired-end - SC5P-R2: Single Cell 5’ R2-only - SC-FB: Single Cell Antibody-only 3’ v2 or 5’ See https://kb.10xgenomics.com/hc/en-us/articles/115003764132-How-does-Cell-Ranger-auto-detect-chemistry- for more information.</td>
-<td style="text-align: left;"><code>string</code>, default: “auto”</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>--secondary_analysis</code></td>
-<td style="text-align: left;">Whether or not to run the secondary analysis e.g.&nbsp;clustering.</td>
-<td style="text-align: left;"><code>boolean</code>, default: FALSE</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>--generate_bam</code></td>
-<td style="text-align: left;">Whether to generate a BAM file.</td>
-<td style="text-align: left;"><code>boolean</code>, default: TRUE</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>--include_introns</code></td>
-<td style="text-align: left;">Include intronic reads in count (default=true unless –target-panel is specified in which case default=false)</td>
-<td style="text-align: left;"><code>boolean</code>, default: TRUE</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="mudata-conversion-arguments" class="level3">
-<h3 class="anchored" data-anchor-id="mudata-conversion-arguments">MuData conversion arguments</h3>
-<table class="table">
-<colgroup>
-<col style="width: 13%">
-<col style="width: 57%">
-<col style="width: 29%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Description</th>
-<th style="text-align: left;">Attributes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><code>--which_10xh5</code></td>
-<td style="text-align: left;">Which 10x .h5 file to convert to h5mu after Cell Ranger is done mapping.</td>
-<td style="text-align: left;"><code>string</code>, default: “raw_h5”</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>--min_genes</code></td>
-<td style="text-align: left;">Minimum number of counts required for a cell to pass filtering.</td>
-<td style="text-align: left;"><code>integer</code>, example: 100</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>--min_counts</code></td>
-<td style="text-align: left;">Minimum number of genes expressed required for a cell to pass filtering.</td>
-<td style="text-align: left;"><code>integer</code>, example: 1000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>--obsm_metrics</code></td>
-<td style="text-align: left;">Name of the .obsm slot under which to QC metrics (if any).</td>
-<td style="text-align: left;"><code>string</code>, default: “metrics_summary”</td>
+<td style="text-align: left;"><code>--csv_key</code></td>
+<td style="text-align: left;">column of the the csv that corresponds to the sample id.</td>
+<td style="text-align: left;"><code>string</code>, default: “id”</td>
 </tr>
 </tbody>
 </table>
@@ -382,36 +315,8 @@ Namespace: <code>ingestion</code></p>
 <section id="authors" class="level2">
 <h2 class="anchored" data-anchor-id="authors">Authors</h2>
 <ul>
-<li>Angela Pisco <a href="https://github.com/aopisco"><i class="fa-brands fa-github" aria-hidden="true"></i></a> <a href="https://orcid.org/0000-0003-0142-2355"><i class="fa-brands fa-orcid" aria-hidden="true"></i></a> (author)</li>
-<li>Samuel D’Souza <a href="https://github.com/srdsam"><i class="fa-brands fa-github" aria-hidden="true"></i></a> (author)</li>
-<li>Robrecht Cannoodt <a href="https://github.com/rcannood"><i class="fa-brands fa-github" aria-hidden="true"></i></a> <a href="https://orcid.org/0000-0003-3641-729X"><i class="fa-brands fa-orcid" aria-hidden="true"></i></a> (author, maintainer)</li>
+<li>Dries Schaumont <a href="https://orcid.org/0000-0002-4389-0440"><i class="fa-brands fa-orcid" aria-hidden="true"></i></a> (author)</li>
 </ul>
-</section>
-<section id="visualisation" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="visualisation">Visualisation</h2>
-<div class="cell page-columns page-full">
-<div class="cell-output-display column-screen-inset-shaded">
-<div>
-<p>
-</p><pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-1">flowchart LR
-    p0(Input)
-    p9(cellranger_count)
-    p16(cellranger_count_split)
-    p24(from_10xh5_to_h5mu)
-    p31(Output)
-    p0--&gt;p9
-    p9--&gt;p16
-    p16--&gt;p24
-    p24--&gt;p31
-
-</pre>
-<div id="mermaid-tooltip-1" class="mermaidTooltip">
-
-</div>
-<p></p>
-</div>
-</div>
-</div>
 
 
 </section>

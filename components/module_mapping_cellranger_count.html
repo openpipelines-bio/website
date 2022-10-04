@@ -227,15 +227,15 @@ Namespace: <code>mapping</code></p>
 <p><a href="https://github.com/openpipelines-bio/openpipeline/blob/main/src/mapping/cellranger_count" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
 </section>
 </div></div><p>Align fastq files using Cell Ranger count.</p>
-<section id="argument-group" class="level2">
-<h2 class="anchored" data-anchor-id="argument-group">Argument group</h2>
-<section id="arguments" class="level3">
-<h3 class="anchored" data-anchor-id="arguments">Arguments</h3>
+<section id="argument-groups" class="level2">
+<h2 class="anchored" data-anchor-id="argument-groups">Argument groups</h2>
+<section id="inputs" class="level3">
+<h3 class="anchored" data-anchor-id="inputs">Inputs</h3>
 <table class="table">
 <colgroup>
-<col style="width: 4%">
-<col style="width: 87%">
-<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 42%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -247,40 +247,78 @@ Namespace: <code>mapping</code></p>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"><code>--input</code></td>
-<td style="text-align: left;">The folder with fastq.gz files to align.</td>
-<td style="text-align: left;"><code>file</code>, required</td>
+<td style="text-align: left;">The fastq.gz files to align. Can also be a single directory containing fastq.gz files.</td>
+<td style="text-align: left;"><code>file</code>, required, example: “sample_S1_L001_R1_001.fastq.gz”, example: “sample_S1_L001_R2_001.fastq.gz”</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--reference</code></td>
-<td style="text-align: left;">The path to reference tar.gz file.</td>
-<td style="text-align: left;"><code>file</code>, required</td>
+<td style="text-align: left;">The path to Cell Ranger reference tar.gz file.</td>
+<td style="text-align: left;"><code>file</code>, required, example: “reference.tar.gz”</td>
 </tr>
+</tbody>
+</table>
+</section>
+<section id="outputs" class="level3">
+<h3 class="anchored" data-anchor-id="outputs">Outputs</h3>
+<table class="table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 43%">
+<col style="width: 45%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
 <tr class="odd">
 <td style="text-align: left;"><code>--output</code></td>
 <td style="text-align: left;">The folder to store the alignment results.</td>
 <td style="text-align: left;"><code>file</code>, required, example: “/path/to/output”</td>
 </tr>
-<tr class="even">
+</tbody>
+</table>
+</section>
+<section id="arguments" class="level3">
+<h3 class="anchored" data-anchor-id="arguments">Arguments</h3>
+<table class="table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 91%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td style="text-align: left;"><code>--expect_cells</code></td>
 <td style="text-align: left;">Expected number of recovered cells, used as input to cell calling algorithm.</td>
 <td style="text-align: left;"><code>integer</code>, example: 3000</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>--chemistry</code></td>
 <td style="text-align: left;">Assay configuration. - auto: autodetect mode - threeprime: Single Cell 3’ - fiveprime: Single Cell 5’ - SC3Pv1: Single Cell 3’ v1 - SC3Pv2: Single Cell 3’ v2 - SC3Pv3: Single Cell 3’ v3 - SC3Pv3LT: Single Cell 3’ v3 LT - SC3Pv3HT: Single Cell 3’ v3 HT - SC5P-PE: Single Cell 5’ paired-end - SC5P-R2: Single Cell 5’ R2-only - SC-FB: Single Cell Antibody-only 3’ v2 or 5’ See https://kb.10xgenomics.com/hc/en-us/articles/115003764132-How-does-Cell-Ranger-auto-detect-chemistry- for more information.</td>
 <td style="text-align: left;"><code>string</code>, default: “auto”</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>--secondary_analysis</code></td>
 <td style="text-align: left;">Whether or not to run the secondary analysis e.g.&nbsp;clustering.</td>
 <td style="text-align: left;"><code>boolean</code>, default: FALSE</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>--generate_bam</code></td>
 <td style="text-align: left;">Whether to generate a BAM file.</td>
 <td style="text-align: left;"><code>boolean</code>, default: TRUE</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>--include_introns</code></td>
 <td style="text-align: left;">Include intronic reads in count (default=true unless –target-panel is specified in which case default=false)</td>
 <td style="text-align: left;"><code>boolean</code>, default: TRUE</td>

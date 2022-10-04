@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>OpenPipelines - From h5mu to seurat</title>
+<title>OpenPipelines - Add id</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -102,8 +102,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -197,7 +195,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">From h5mu to seurat</h1>
+<h1 class="title">Add id</h1>
 </div>
 
 
@@ -215,28 +213,27 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <div class="no-row-height column-margin column-container"><div class="">
 <section id="info" class="level3">
 <h3 class="anchored" data-anchor-id="info">Info</h3>
-<p>ID: <code>from_h5mu_to_seurat</code><br>
-Namespace: <code>convert</code></p>
+<p>ID: <code>add_id</code><br>
+Namespace: <code>metadata</code></p>
 </section>
 <section id="command" class="level3">
 <h3 class="anchored" data-anchor-id="command">Command</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="at">-r</span> main_build <span class="at">-main-script</span> target/nextflow/convert/from_h5mu_to_seurat/main.nf <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="at">-r</span> main_build <span class="at">-main-script</span> target/nextflow/metadata/add_id/main.nf <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="links" class="level3">
 <h3 class="anchored" data-anchor-id="links">Links</h3>
-<p><a href="https://github.com/openpipelines-bio/openpipeline/blob/main/src/convert/from_h5mu_to_seurat" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
+<p><a href="https://github.com/openpipelines-bio/openpipeline/blob/main/src/metadata/add_id" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
 </section>
-</div></div><p>Converts an h5mu file into a Seurat file.</p>
-<p>Restrictions: - Only the intersection of cells is currently loaded into the Seurat object due to the object structure limitation. - Multimodal embeddings (global .obsm slot) are loaded with the assay.used field set to the default assay. - Embeddings names are changed in order to comply with R &amp; Seurat requirements and conventions. - Feature names with underscores (’_‘) are automatically replaced with dashes (’-’) - Seurat does not support global variables metadata /var.</p>
+</div></div><p>Add id of .obs. Also allows to make .obs_names (the .obs index) unique by prefixing the values with an unique id per .h5mu file.</p>
 <section id="argument-group" class="level2">
 <h2 class="anchored" data-anchor-id="argument-group">Argument group</h2>
 <section id="arguments" class="level3">
 <h3 class="anchored" data-anchor-id="arguments">Arguments</h3>
 <table class="table">
 <colgroup>
-<col style="width: 15%">
 <col style="width: 27%">
-<col style="width: 57%">
+<col style="width: 38%">
+<col style="width: 33%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -248,13 +245,23 @@ Namespace: <code>convert</code></p>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"><code>--input</code></td>
-<td style="text-align: left;">Input h5mu file</td>
-<td style="text-align: left;"><code>file</code>, required, example: “input.h5mu”</td>
+<td style="text-align: left;">Path to the input .h5mu.</td>
+<td style="text-align: left;"><code>file</code>, required, example: “sample_path”</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>--output</code></td>
-<td style="text-align: left;">Output Seurat file</td>
-<td style="text-align: left;"><code>file</code>, required, example: “output.rds”</td>
+<td style="text-align: left;"><code>--input_id</code></td>
+<td style="text-align: left;">The input id.</td>
+<td style="text-align: left;"><code>string</code>, required</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--obs_output</code></td>
+<td style="text-align: left;">Name of the .obs column where to store the id.</td>
+<td style="text-align: left;"><code>string</code>, default: “sample_id”</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--make_observation_keys_unique</code></td>
+<td style="text-align: left;">Join the id to the .obs index (.obs_names).</td>
+<td style="text-align: left;"><code>boolean_true</code></td>
 </tr>
 </tbody>
 </table>
@@ -263,7 +270,7 @@ Namespace: <code>convert</code></p>
 <section id="authors" class="level2">
 <h2 class="anchored" data-anchor-id="authors">Authors</h2>
 <ul>
-<li>Robrecht Cannoodt <a href="https://github.com/rcannood"><i class="fa-brands fa-github" aria-hidden="true"></i></a> <a href="https://orcid.org/0000-0003-3641-729X"><i class="fa-brands fa-orcid" aria-hidden="true"></i></a> (author, maintainer)</li>
+<li>Dries Schaumont (maintainer)</li>
 </ul>
 
 

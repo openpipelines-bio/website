@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>OpenPipelines - Cell Ranger mapping</title>
+<title>OpenPipelines - Cellranger multi</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -132,9 +132,6 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 </script>
-<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -200,7 +197,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Cell Ranger mapping</h1>
+<h1 class="title">Cellranger multi</h1>
 </div>
 
 
@@ -218,61 +215,27 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <div class="no-row-height column-margin column-container"><div class="">
 <section id="info" class="level3">
 <h3 class="anchored" data-anchor-id="info">Info</h3>
-<p>ID: <code>cellranger_mapping</code><br>
-Namespace: <code>ingestion</code></p>
+<p>ID: <code>cellranger_multi</code><br>
+Namespace: <code>mapping</code></p>
 </section>
 <section id="command" class="level3">
 <h3 class="anchored" data-anchor-id="command">Command</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="at">-r</span> main_build <span class="at">-main-script</span> workflows/ingestion/cellranger_mapping/main.nf <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="at">-r</span> main_build <span class="at">-main-script</span> target/nextflow/mapping/cellranger_multi/main.nf <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="links" class="level3">
 <h3 class="anchored" data-anchor-id="links">Links</h3>
-<p><a href="https://github.com/openpipelines-bio/openpipeline/blob/main/workflows/ingestion/cellranger_mapping" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
+<p><a href="https://github.com/openpipelines-bio/openpipeline/blob/main/src/mapping/cellranger_multi" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
 </section>
-</div></div><p>A pipeline for running Cell Ranger mapping.</p>
+</div></div><p>Align fastq files using Cell Ranger multi.</p>
 <section id="argument-groups" class="level2">
 <h2 class="anchored" data-anchor-id="argument-groups">Argument groups</h2>
-<section id="inputs" class="level3">
-<h3 class="anchored" data-anchor-id="inputs">Inputs</h3>
-<table class="table">
-<colgroup>
-<col style="width: 6%">
-<col style="width: 42%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Description</th>
-<th style="text-align: left;">Attributes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><code>--id</code></td>
-<td style="text-align: left;">ID of the sample.</td>
-<td style="text-align: left;"><code>string</code>, required, example: “foo”</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>--input</code></td>
-<td style="text-align: left;">The fastq.gz files to align. Can also be a single directory containing fastq.gz files.</td>
-<td style="text-align: left;"><code>file</code>, required, example: “sample_S1_L001_R1_001.fastq.gz”, example: “sample_S1_L001_R2_001.fastq.gz”</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>--reference</code></td>
-<td style="text-align: left;">The path to Cell Ranger reference tar.gz file.</td>
-<td style="text-align: left;"><code>file</code>, required, example: “reference.tar.gz”</td>
-</tr>
-</tbody>
-</table>
-</section>
 <section id="outputs" class="level3">
 <h3 class="anchored" data-anchor-id="outputs">Outputs</h3>
 <table class="table">
 <colgroup>
-<col style="width: 19%">
-<col style="width: 30%">
-<col style="width: 50%">
+<col style="width: 11%">
+<col style="width: 43%">
+<col style="width: 45%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -283,24 +246,98 @@ Namespace: <code>ingestion</code></p>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><code>--output_raw</code></td>
-<td style="text-align: left;">The raw output folder.</td>
-<td style="text-align: left;"><code>file</code>, required, example: “output_dir”</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>--output_h5mu</code></td>
-<td style="text-align: left;">The converted h5mu file.</td>
-<td style="text-align: left;"><code>file</code>, required, example: “output.h5mu”</td>
+<td style="text-align: left;"><code>--output</code></td>
+<td style="text-align: left;">The folder to store the alignment results.</td>
+<td style="text-align: left;"><code>file</code>, required, example: “/path/to/output”</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="cell-ranger-arguments" class="level3">
-<h3 class="anchored" data-anchor-id="cell-ranger-arguments">Cell Ranger arguments</h3>
+<section id="input-files" class="level3">
+<h3 class="anchored" data-anchor-id="input-files">Input files</h3>
 <table class="table">
 <colgroup>
 <col style="width: 4%">
-<col style="width: 91%">
+<col style="width: 71%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--input</code></td>
+<td style="text-align: left;">The FASTQ files to be analyzed. FASTQ files should conform to the naming conventions of bcl2fastq and mkfastq: <code>[Sample Name]_S[Sample Index]_L00[Lane Number]_[Read Type]_001.fastq.gz</code></td>
+<td style="text-align: left;"><code>file</code>, required, example: “mysample_S1_L001_R1_001.fastq.gz”, example: “mysample_S1_L001_R2_001.fastq.gz”</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--gex_reference</code></td>
+<td style="text-align: left;">Genome refence index built by Cell Ranger mkref.</td>
+<td style="text-align: left;"><code>file</code>, required, example: “reference_genome.tar.gz”</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--vdj_reference</code></td>
+<td style="text-align: left;">VDJ refence index built by Cell Ranger mkref.</td>
+<td style="text-align: left;"><code>file</code>, example: “reference_vdj.tar.gz”</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--feature_reference</code></td>
+<td style="text-align: left;">Path to the Feature reference CSV file, declaring Feature Barcode constructs and associated barcodes. Required only for Antibody Capture or CRISPR Guide Capture libraries. See https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/using/feature-bc-analysis#feature-ref for more information.</td>
+<td style="text-align: left;"><code>file</code>, example: “feature_reference.csv”</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="library-arguments" class="level3">
+<h3 class="anchored" data-anchor-id="library-arguments">Library arguments</h3>
+<table class="table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 71%">
+<col style="width: 19%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--library_id</code></td>
+<td style="text-align: left;">The Illumina sample name to analyze. This must exactly match the ‘Sample Name’ part of the FASTQ files specified in the <code>--input</code> argument.</td>
+<td style="text-align: left;"><code>string</code>, required, example: “mysample1”</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--library_type</code></td>
+<td style="text-align: left;">The underlying feature type of the library. Possible values: “Gene Expression”, “VDJ”, “VDJ-T”, “VDJ-B”, “Antibody Capture”, “CRISPR Guide Capture”, “Multiplexing Capture”</td>
+<td style="text-align: left;"><code>string</code>, required, example: “Gene Expression”</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--library_subsample</code></td>
+<td style="text-align: left;">Optional. The rate at which reads from the provided FASTQ files are sampled. Must be strictly greater than 0 and less than or equal to 1.</td>
+<td style="text-align: left;"><code>string</code>, example: “0.5”</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--library_lanes</code></td>
+<td style="text-align: left;">Lanes associated with this sample. Defaults to using all lanes.</td>
+<td style="text-align: left;"><code>string</code>, example: “1-4”</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gene-expression-arguments" class="level3">
+<h3 class="anchored" data-anchor-id="gene-expression-arguments">Gene expression arguments</h3>
+<p>Arguments relevant to the analysis of gene expression data.</p>
+<table class="table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 90%">
 <col style="width: 4%">
 </colgroup>
 <thead>
@@ -312,40 +349,41 @@ Namespace: <code>ingestion</code></p>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><code>--expect_cells</code></td>
+<td style="text-align: left;"><code>--gex_expect_cells</code></td>
 <td style="text-align: left;">Expected number of recovered cells, used as input to cell calling algorithm.</td>
 <td style="text-align: left;"><code>integer</code>, example: 3000</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>--chemistry</code></td>
+<td style="text-align: left;"><code>--gex_chemistry</code></td>
 <td style="text-align: left;">Assay configuration. - auto: autodetect mode - threeprime: Single Cell 3’ - fiveprime: Single Cell 5’ - SC3Pv1: Single Cell 3’ v1 - SC3Pv2: Single Cell 3’ v2 - SC3Pv3: Single Cell 3’ v3 - SC3Pv3LT: Single Cell 3’ v3 LT - SC3Pv3HT: Single Cell 3’ v3 HT - SC5P-PE: Single Cell 5’ paired-end - SC5P-R2: Single Cell 5’ R2-only - SC-FB: Single Cell Antibody-only 3’ v2 or 5’ See https://kb.10xgenomics.com/hc/en-us/articles/115003764132-How-does-Cell-Ranger-auto-detect-chemistry- for more information.</td>
 <td style="text-align: left;"><code>string</code>, default: “auto”</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>--secondary_analysis</code></td>
+<td style="text-align: left;"><code>--gex_secondary_analysis</code></td>
 <td style="text-align: left;">Whether or not to run the secondary analysis e.g.&nbsp;clustering.</td>
 <td style="text-align: left;"><code>boolean</code>, default: FALSE</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>--generate_bam</code></td>
+<td style="text-align: left;"><code>--gex_generate_bam</code></td>
 <td style="text-align: left;">Whether to generate a BAM file.</td>
 <td style="text-align: left;"><code>boolean</code>, default: TRUE</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>--include_introns</code></td>
+<td style="text-align: left;"><code>--gex_include_introns</code></td>
 <td style="text-align: left;">Include intronic reads in count (default=true unless –target-panel is specified in which case default=false)</td>
 <td style="text-align: left;"><code>boolean</code>, default: TRUE</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="mudata-conversion-arguments" class="level3">
-<h3 class="anchored" data-anchor-id="mudata-conversion-arguments">MuData conversion arguments</h3>
+<section id="cell-multiplexing-parameters" class="level3">
+<h3 class="anchored" data-anchor-id="cell-multiplexing-parameters">Cell multiplexing parameters</h3>
+<p>Arguments related to cell multiplexing.</p>
 <table class="table">
 <colgroup>
-<col style="width: 13%">
-<col style="width: 57%">
-<col style="width: 29%">
+<col style="width: 12%">
+<col style="width: 82%">
+<col style="width: 4%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -356,24 +394,43 @@ Namespace: <code>ingestion</code></p>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><code>--which_10xh5</code></td>
-<td style="text-align: left;">Which 10x .h5 file to convert to h5mu after Cell Ranger is done mapping.</td>
-<td style="text-align: left;"><code>string</code>, default: “raw_h5”</td>
+<td style="text-align: left;"><code>--cell_multiplex_sample_id</code></td>
+<td style="text-align: left;">A name to identify a multiplexed sample. Must be alphanumeric with hyphens and/or underscores, and less than 64 characters. Required for Cell Multiplexing libraries.</td>
+<td style="text-align: left;"><code>string</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>--min_genes</code></td>
-<td style="text-align: left;">Minimum number of counts required for a cell to pass filtering.</td>
-<td style="text-align: left;"><code>integer</code>, example: 100</td>
+<td style="text-align: left;"><code>--cell_multiplex_oligo_ids</code></td>
+<td style="text-align: left;">The Cell Multiplexing oligo IDs used to multiplex this sample. If multiple CMOs were used for a sample, separate IDs with a pipe (e.g., CMO301|CMO302). Required for Cell Multiplexing libraries.</td>
+<td style="text-align: left;"><code>string</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>--min_counts</code></td>
-<td style="text-align: left;">Minimum number of genes expressed required for a cell to pass filtering.</td>
-<td style="text-align: left;"><code>integer</code>, example: 1000</td>
+<td style="text-align: left;"><code>--cell_multiplex_description</code></td>
+<td style="text-align: left;">A description for the sample.</td>
+<td style="text-align: left;"><code>string</code></td>
 </tr>
-<tr class="even">
-<td style="text-align: left;"><code>--obsm_metrics</code></td>
-<td style="text-align: left;">Name of the .obsm slot under which to QC metrics (if any).</td>
-<td style="text-align: left;"><code>string</code>, default: “metrics_summary”</td>
+</tbody>
+</table>
+</section>
+<section id="executor-arguments" class="level3">
+<h3 class="anchored" data-anchor-id="executor-arguments">Executor arguments</h3>
+<table class="table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 81%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--dryrun</code></td>
+<td style="text-align: left;">If true, the output directory will only contain the CWL input files, but the pipeline itself will not be executed.</td>
+<td style="text-align: left;"><code>boolean_true</code></td>
 </tr>
 </tbody>
 </table>
@@ -383,35 +440,9 @@ Namespace: <code>ingestion</code></p>
 <h2 class="anchored" data-anchor-id="authors">Authors</h2>
 <ul>
 <li>Angela Pisco <a href="https://github.com/aopisco"><i class="fa-brands fa-github" aria-hidden="true"></i></a> <a href="https://orcid.org/0000-0003-0142-2355"><i class="fa-brands fa-orcid" aria-hidden="true"></i></a> (author)</li>
-<li>Samuel D’Souza <a href="https://github.com/srdsam"><i class="fa-brands fa-github" aria-hidden="true"></i></a> (author)</li>
 <li>Robrecht Cannoodt <a href="https://github.com/rcannood"><i class="fa-brands fa-github" aria-hidden="true"></i></a> <a href="https://orcid.org/0000-0003-3641-729X"><i class="fa-brands fa-orcid" aria-hidden="true"></i></a> (author, maintainer)</li>
+<li>Dries De Maeyer (maintainer)</li>
 </ul>
-</section>
-<section id="visualisation" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="visualisation">Visualisation</h2>
-<div class="cell page-columns page-full">
-<div class="cell-output-display column-screen-inset-shaded">
-<div>
-<p>
-</p><pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-1">flowchart LR
-    p0(Input)
-    p9(cellranger_count)
-    p16(cellranger_count_split)
-    p24(from_10xh5_to_h5mu)
-    p31(Output)
-    p0--&gt;p9
-    p9--&gt;p16
-    p16--&gt;p24
-    p24--&gt;p31
-
-</pre>
-<div id="mermaid-tooltip-1" class="mermaidTooltip">
-
-</div>
-<p></p>
-</div>
-</div>
-</div>
 
 
 </section>
