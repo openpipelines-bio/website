@@ -10,12 +10,6 @@ toc: false
 ID: `filter_with_scrublet`  
 Namespace: `filter`
 
-### Command
-
-```bash
-nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/filter/filter_with_scrublet/main.nf --help
-```
-
 ### Links
 [Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/filter/filter_with_scrublet){.btn-action .btn-sm .btn-info .btn role="button"}
 
@@ -43,22 +37,73 @@ For 10x we expect the doublet rates to be:
   ~7.6% ~16,000 ~10,000
 
 
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main_build -latest \
+  -main-script target/nextflow/filter/filter_with_scrublet/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Arguments
+input: # please fill in - example: "input.h5mu"
+modality: "rna"
+# output: "$id.$key.output.h5mu"
+obs_name_filter: "filter_with_scrublet"
+do_subset: false
+obs_name_doublet_score: "scrublet_doublet_score"
+min_counts: 2
+min_cells: 3
+min_gene_variablity_percent: 85
+num_pca_components: 30
+distance_metric: "euclidean"
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main_build -latest \
+  -profile docker \
+  -main-script target/nextflow/filter/filter_with_scrublet/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
 ## Argument group
 
 ### Arguments
 
-|Name                            |Description                                                                                                                                                                            |Attributes                                  |
-|:-------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------|
-|`--input`                       |Input h5mu file                                                                                                                                                                        |`file`, required, example: "input.h5mu"     |
-|`--output`                      |Output h5mu file.                                                                                                                                                                      |`file`, example: "output.h5mu"              |
-|`--obs_name_filter`             |In which .obs slot to store a boolean array corresponding to which observations should be filtered out.                                                                                |`string`, default: "filter_with_scrublet"   |
-|`--do_subset`                   |Whether to subset before storing the output.                                                                                                                                           |`boolean_true`                              |
-|`--obs_name_doublet_score`      |Name of the doublet scores column in the obs slot of the returned object.                                                                                                              |`string`, default: "scrublet_doublet_score" |
-|`--min_counts`                  |The number of minimal UMI counts per cell that have to be present for initial cell detection.                                                                                          |`integer`, default: 2                       |
-|`--min_cells`                   |The number of cells in which UMIs for a gene were detected.                                                                                                                            |`integer`, default: 3                       |
-|`--min_gene_variablity_percent` |Used for gene filtering prior to PCA. Keep the most highly variable genes (in the top min_gene_variability_pctl percentile), as measured by the v-statistic [Klein et al., Cell 2015]. |`double`, default: 85                       |
-|`--num_pca_components`          |Number of principal components to use during PCA dimensionality reduction.                                                                                                             |`integer`, default: 30                      |
-|`--distance_metric`             |The distance metric used for computing similarities.                                                                                                                                   |`string`, default: "euclidean"              |
+|Name                            |Description                                                                                                                                                                            |Attributes                                    |
+|:-------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------|
+|`--input`                       |Input h5mu file                                                                                                                                                                        |`file`, required, example: `"input.h5mu"`     |
+|`--output`                      |Output h5mu file.                                                                                                                                                                      |`file`, example: `"output.h5mu"`              |
+|`--obs_name_filter`             |In which .obs slot to store a boolean array corresponding to which observations should be filtered out.                                                                                |`string`, default: `"filter_with_scrublet"`   |
+|`--do_subset`                   |Whether to subset before storing the output.                                                                                                                                           |`boolean_true`                                |
+|`--obs_name_doublet_score`      |Name of the doublet scores column in the obs slot of the returned object.                                                                                                              |`string`, default: `"scrublet_doublet_score"` |
+|`--min_counts`                  |The number of minimal UMI counts per cell that have to be present for initial cell detection.                                                                                          |`integer`, default: `2`                       |
+|`--min_cells`                   |The number of cells in which UMIs for a gene were detected.                                                                                                                            |`integer`, default: `3`                       |
+|`--min_gene_variablity_percent` |Used for gene filtering prior to PCA. Keep the most highly variable genes (in the top min_gene_variability_pctl percentile), as measured by the v-statistic [Klein et al., Cell 2015]. |`double`, default: `85`                       |
+|`--num_pca_components`          |Number of principal components to use during PCA dimensionality reduction.                                                                                                             |`integer`, default: `30`                      |
+|`--distance_metric`             |The distance metric used for computing similarities.                                                                                                                                   |`string`, default: `"euclidean"`              |
 
 ## Authors
 

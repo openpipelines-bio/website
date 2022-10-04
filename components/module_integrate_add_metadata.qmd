@@ -10,18 +10,63 @@ toc: false
 ID: `add_metadata`  
 Namespace: `integrate`
 
-### Command
-
-```bash
-nextflow run openpipelines-bio/openpipeline -r main_build -main-script target/nextflow/integrate/add_metadata/main.nf --help
-```
-
 ### Links
 [Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/integrate/add_metadata){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
 Add a csv containing metadata to the .obs or .var field of a mudata file.
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main_build -latest \
+  -main-script target/nextflow/integrate/add_metadata/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# MuData Input
+input: # please fill in - example: "path/to/file"
+modality: "rna"
+# obs_key: "foo"
+# var_key: "foo"
+
+# MuData Output
+# output: "$id.$key.output.output"
+
+# Metadata Input
+# input_csv: "path/to/file"
+csv_key: "id"
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main_build -latest \
+  -profile docker \
+  -main-script target/nextflow/integrate/add_metadata/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
 
 ## Argument groups
 
@@ -43,10 +88,10 @@ Add a csv containing metadata to the .obs or .var field of a mudata file.
 
 ### Metadata Input
 
-|Name          |Description                                              |Attributes              |
-|:-------------|:--------------------------------------------------------|:-----------------------|
-|`--input_csv` |.csv file containing metadata"                           |`file`                  |
-|`--csv_key`   |column of the the csv that corresponds to the sample id. |`string`, default: "id" |
+|Name          |Description                                              |Attributes                |
+|:-------------|:--------------------------------------------------------|:-------------------------|
+|`--input_csv` |.csv file containing metadata"                           |`file`                    |
+|`--csv_key`   |column of the the csv that corresponds to the sample id. |`string`, default: `"id"` |
 
 ## Authors
 
