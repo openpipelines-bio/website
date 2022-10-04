@@ -218,24 +218,91 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <p>ID: <code>cellranger_multi</code><br>
 Namespace: <code>mapping</code></p>
 </section>
-<section id="command" class="level3">
-<h3 class="anchored" data-anchor-id="command">Command</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="at">-r</span> main_build <span class="at">-main-script</span> target/nextflow/mapping/cellranger_multi/main.nf <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
 <section id="links" class="level3">
 <h3 class="anchored" data-anchor-id="links">Links</h3>
 <p><a href="https://github.com/openpipelines-bio/openpipeline/blob/main/src/mapping/cellranger_multi" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
 </section>
 </div></div><p>Align fastq files using Cell Ranger multi.</p>
+<section id="example-commands" class="level2">
+<h2 class="anchored" data-anchor-id="example-commands">Example commands</h2>
+<p>You can run the pipeline using <code>nextflow run</code>.</p>
+<section id="view-help" class="level3">
+<h3 class="anchored" data-anchor-id="view-help">View help</h3>
+<p>You can use <code>--help</code> as a parameter to get an overview of the possible parameters.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> main_build <span class="at">-latest</span> <span class="dt">\</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> target/nextflow/mapping/cellranger_multi/main.nf <span class="dt">\</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="run-command" class="level3">
+<h3 class="anchored" data-anchor-id="run-command">Run command</h3>
+<details>
+<summary>
+Example of <code>params.yaml</code>
+</summary>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Outputs</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># output: "$id.$key.output.output"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Input files</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">input</span><span class="kw">:</span><span class="co"> # please fill in - example: ["mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"]</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">gex_reference</span><span class="kw">:</span><span class="co"> # please fill in - example: "reference_genome.tar.gz"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># vdj_reference: "reference_vdj.tar.gz"</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># feature_reference: "feature_reference.csv"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Library arguments</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library_id</span><span class="kw">:</span><span class="co"> # please fill in - example: ["mysample1"]</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library_type</span><span class="kw">:</span><span class="co"> # please fill in - example: ["Gene Expression"]</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># library_subsample: ["0.5"]</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># library_lanes: ["1-4"]</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene expression arguments</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># gex_expect_cells: 3000</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">gex_chemistry</span><span class="kw">:</span><span class="at"> </span><span class="st">"auto"</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">gex_secondary_analysis</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="fu">gex_generate_bam</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="fu">gex_include_introns</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Cell multiplexing parameters</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># cell_multiplex_sample_id: "foo"</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># cell_multiplex_oligo_ids: "foo"</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co"># cell_multiplex_description: "foo"</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Executor arguments</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="fu">dryrun</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Nextflow input-output arguments</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="fu">publish_dir</span><span class="kw">:</span><span class="co"> # please fill in - example: "output/"</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co"># param_list: "my_params.yaml"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> main_build <span class="at">-latest</span> <span class="dt">\</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-profile</span> docker <span class="dt">\</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> target/nextflow/mapping/cellranger_multi/main.nf <span class="dt">\</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">-params-file</span> params.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Replace <code>-profile docker</code> with <code>-profile podman</code> or <code>-profile singularity</code> depending on the desired backend.</p>
+</div>
+</div>
+</section>
+</section>
 <section id="argument-groups" class="level2">
 <h2 class="anchored" data-anchor-id="argument-groups">Argument groups</h2>
 <section id="outputs" class="level3">
 <h3 class="anchored" data-anchor-id="outputs">Outputs</h3>
 <table class="table">
 <colgroup>
-<col style="width: 11%">
-<col style="width: 43%">
-<col style="width: 45%">
+<col style="width: 10%">
+<col style="width: 42%">
+<col style="width: 46%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -248,7 +315,7 @@ Namespace: <code>mapping</code></p>
 <tr class="odd">
 <td style="text-align: left;"><code>--output</code></td>
 <td style="text-align: left;">The folder to store the alignment results.</td>
-<td style="text-align: left;"><code>file</code>, required, example: “/path/to/output”</td>
+<td style="text-align: left;"><code>file</code>, required, example: <code>"/path/to/output"</code></td>
 </tr>
 </tbody>
 </table>
@@ -258,8 +325,8 @@ Namespace: <code>mapping</code></p>
 <table class="table">
 <colgroup>
 <col style="width: 4%">
-<col style="width: 71%">
-<col style="width: 23%">
+<col style="width: 70%">
+<col style="width: 24%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -272,22 +339,22 @@ Namespace: <code>mapping</code></p>
 <tr class="odd">
 <td style="text-align: left;"><code>--input</code></td>
 <td style="text-align: left;">The FASTQ files to be analyzed. FASTQ files should conform to the naming conventions of bcl2fastq and mkfastq: <code>[Sample Name]_S[Sample Index]_L00[Lane Number]_[Read Type]_001.fastq.gz</code></td>
-<td style="text-align: left;"><code>file</code>, required, example: “mysample_S1_L001_R1_001.fastq.gz”, example: “mysample_S1_L001_R2_001.fastq.gz”</td>
+<td style="text-align: left;"><code>file</code>, required, example: <code>"mysample_S1_L001_R1_001.fastq.gz"</code>, example: <code>"mysample_S1_L001_R2_001.fastq.gz"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--gex_reference</code></td>
 <td style="text-align: left;">Genome refence index built by Cell Ranger mkref.</td>
-<td style="text-align: left;"><code>file</code>, required, example: “reference_genome.tar.gz”</td>
+<td style="text-align: left;"><code>file</code>, required, example: <code>"reference_genome.tar.gz"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--vdj_reference</code></td>
 <td style="text-align: left;">VDJ refence index built by Cell Ranger mkref.</td>
-<td style="text-align: left;"><code>file</code>, example: “reference_vdj.tar.gz”</td>
+<td style="text-align: left;"><code>file</code>, example: <code>"reference_vdj.tar.gz"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--feature_reference</code></td>
 <td style="text-align: left;">Path to the Feature reference CSV file, declaring Feature Barcode constructs and associated barcodes. Required only for Antibody Capture or CRISPR Guide Capture libraries. See https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/using/feature-bc-analysis#feature-ref for more information.</td>
-<td style="text-align: left;"><code>file</code>, example: “feature_reference.csv”</td>
+<td style="text-align: left;"><code>file</code>, example: <code>"feature_reference.csv"</code></td>
 </tr>
 </tbody>
 </table>
@@ -297,8 +364,8 @@ Namespace: <code>mapping</code></p>
 <table class="table">
 <colgroup>
 <col style="width: 9%">
-<col style="width: 71%">
-<col style="width: 19%">
+<col style="width: 70%">
+<col style="width: 20%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -311,22 +378,22 @@ Namespace: <code>mapping</code></p>
 <tr class="odd">
 <td style="text-align: left;"><code>--library_id</code></td>
 <td style="text-align: left;">The Illumina sample name to analyze. This must exactly match the ‘Sample Name’ part of the FASTQ files specified in the <code>--input</code> argument.</td>
-<td style="text-align: left;"><code>string</code>, required, example: “mysample1”</td>
+<td style="text-align: left;"><code>string</code>, required, example: <code>"mysample1"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--library_type</code></td>
 <td style="text-align: left;">The underlying feature type of the library. Possible values: “Gene Expression”, “VDJ”, “VDJ-T”, “VDJ-B”, “Antibody Capture”, “CRISPR Guide Capture”, “Multiplexing Capture”</td>
-<td style="text-align: left;"><code>string</code>, required, example: “Gene Expression”</td>
+<td style="text-align: left;"><code>string</code>, required, example: <code>"Gene Expression"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--library_subsample</code></td>
 <td style="text-align: left;">Optional. The rate at which reads from the provided FASTQ files are sampled. Must be strictly greater than 0 and less than or equal to 1.</td>
-<td style="text-align: left;"><code>string</code>, example: “0.5”</td>
+<td style="text-align: left;"><code>string</code>, example: <code>"0.5"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--library_lanes</code></td>
 <td style="text-align: left;">Lanes associated with this sample. Defaults to using all lanes.</td>
-<td style="text-align: left;"><code>string</code>, example: “1-4”</td>
+<td style="text-align: left;"><code>string</code>, example: <code>"1-4"</code></td>
 </tr>
 </tbody>
 </table>
@@ -338,7 +405,7 @@ Namespace: <code>mapping</code></p>
 <colgroup>
 <col style="width: 4%">
 <col style="width: 90%">
-<col style="width: 4%">
+<col style="width: 5%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -351,27 +418,27 @@ Namespace: <code>mapping</code></p>
 <tr class="odd">
 <td style="text-align: left;"><code>--gex_expect_cells</code></td>
 <td style="text-align: left;">Expected number of recovered cells, used as input to cell calling algorithm.</td>
-<td style="text-align: left;"><code>integer</code>, example: 3000</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>3000</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--gex_chemistry</code></td>
 <td style="text-align: left;">Assay configuration. - auto: autodetect mode - threeprime: Single Cell 3’ - fiveprime: Single Cell 5’ - SC3Pv1: Single Cell 3’ v1 - SC3Pv2: Single Cell 3’ v2 - SC3Pv3: Single Cell 3’ v3 - SC3Pv3LT: Single Cell 3’ v3 LT - SC3Pv3HT: Single Cell 3’ v3 HT - SC5P-PE: Single Cell 5’ paired-end - SC5P-R2: Single Cell 5’ R2-only - SC-FB: Single Cell Antibody-only 3’ v2 or 5’ See https://kb.10xgenomics.com/hc/en-us/articles/115003764132-How-does-Cell-Ranger-auto-detect-chemistry- for more information.</td>
-<td style="text-align: left;"><code>string</code>, default: “auto”</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"auto"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--gex_secondary_analysis</code></td>
 <td style="text-align: left;">Whether or not to run the secondary analysis e.g.&nbsp;clustering.</td>
-<td style="text-align: left;"><code>boolean</code>, default: FALSE</td>
+<td style="text-align: left;"><code>boolean</code>, default: <code>FALSE</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--gex_generate_bam</code></td>
 <td style="text-align: left;">Whether to generate a BAM file.</td>
-<td style="text-align: left;"><code>boolean</code>, default: TRUE</td>
+<td style="text-align: left;"><code>boolean</code>, default: <code>TRUE</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--gex_include_introns</code></td>
 <td style="text-align: left;">Include intronic reads in count (default=true unless –target-panel is specified in which case default=false)</td>
-<td style="text-align: left;"><code>boolean</code>, default: TRUE</td>
+<td style="text-align: left;"><code>boolean</code>, default: <code>TRUE</code></td>
 </tr>
 </tbody>
 </table>

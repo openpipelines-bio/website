@@ -221,15 +221,68 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <p>ID: <code>integration</code><br>
 Namespace: <code>multiomics</code></p>
 </section>
-<section id="command" class="level3">
-<h3 class="anchored" data-anchor-id="command">Command</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="at">-r</span> main_build <span class="at">-main-script</span> workflows/multiomics/integration/main.nf <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
 <section id="links" class="level3">
 <h3 class="anchored" data-anchor-id="links">Links</h3>
 <p><a href="https://github.com/openpipelines-bio/openpipeline/blob/main/workflows/multiomics/integration" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
 </section>
 </div></div><p>A pipeline for demultiplexing multimodal multi-sample RNA transcriptomics data.</p>
+<section id="example-commands" class="level2">
+<h2 class="anchored" data-anchor-id="example-commands">Example commands</h2>
+<p>You can run the pipeline using <code>nextflow run</code>.</p>
+<section id="view-help" class="level3">
+<h3 class="anchored" data-anchor-id="view-help">View help</h3>
+<p>You can use <code>--help</code> as a parameter to get an overview of the possible parameters.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> main_build <span class="at">-latest</span> <span class="dt">\</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> workflows/multiomics/integration/main.nf <span class="dt">\</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="run-command" class="level3">
+<h3 class="anchored" data-anchor-id="run-command">Run command</h3>
+<details>
+<summary>
+Example of <code>params.yaml</code>
+</summary>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inputs</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="co"> # please fill in - example: "foo"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">input</span><span class="kw">:</span><span class="co"> # please fill in - example: "dataset.h5mu"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">layer</span><span class="kw">:</span><span class="at"> </span><span class="st">"log_normalized"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">obs_covariates</span><span class="kw">:</span><span class="co"> # please fill in - example: ["batch", "sample"]</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Outputs</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># output: "$id.$key.output.h5mu"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">obsm_pca</span><span class="kw">:</span><span class="at"> </span><span class="st">"X_pca"</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">obsm_integrated</span><span class="kw">:</span><span class="at"> </span><span class="st">"X_pca_integrated"</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">uns_neighbors</span><span class="kw">:</span><span class="at"> </span><span class="st">"neighbors"</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">obsp_neighbor_distances</span><span class="kw">:</span><span class="at"> </span><span class="st">"distances"</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">obsp_neighbor_connectivities</span><span class="kw">:</span><span class="at"> </span><span class="st">"connectivities"</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">obs_cluster</span><span class="kw">:</span><span class="at"> </span><span class="st">"leiden"</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">obsm_umap</span><span class="kw">:</span><span class="at"> </span><span class="st">"X_umap"</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Nextflow input-output arguments</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">publish_dir</span><span class="kw">:</span><span class="co"> # please fill in - example: "output/"</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># param_list: "my_params.yaml"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> main_build <span class="at">-latest</span> <span class="dt">\</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-profile</span> docker <span class="dt">\</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> workflows/multiomics/integration/main.nf <span class="dt">\</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">-params-file</span> params.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Replace <code>-profile docker</code> with <code>-profile podman</code> or <code>-profile singularity</code> depending on the desired backend.</p>
+</div>
+</div>
+</section>
+</section>
 <section id="argument-groups" class="level2">
 <h2 class="anchored" data-anchor-id="argument-groups">Argument groups</h2>
 <section id="inputs" class="level3">
@@ -237,8 +290,8 @@ Namespace: <code>multiomics</code></p>
 <table class="table">
 <colgroup>
 <col style="width: 11%">
-<col style="width: 53%">
-<col style="width: 34%">
+<col style="width: 52%">
+<col style="width: 36%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -251,22 +304,22 @@ Namespace: <code>multiomics</code></p>
 <tr class="odd">
 <td style="text-align: left;"><code>--id</code></td>
 <td style="text-align: left;">ID of the sample.</td>
-<td style="text-align: left;"><code>string</code>, required, example: “foo”</td>
+<td style="text-align: left;"><code>string</code>, required, example: <code>"foo"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--input</code></td>
 <td style="text-align: left;">Path to the sample.</td>
-<td style="text-align: left;"><code>file</code>, required, example: “dataset.h5mu”</td>
+<td style="text-align: left;"><code>file</code>, required, example: <code>"dataset.h5mu"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--layer</code></td>
 <td style="text-align: left;">use specified layer for expression values instead of the .X object from the modality.</td>
-<td style="text-align: left;"><code>string</code>, default: “log_normalized”</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"log_normalized"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--obs_covariates</code></td>
 <td style="text-align: left;">The .obs field(s) that define the covariate(s) to regress out.</td>
-<td style="text-align: left;"><code>string</code>, required, example: “batch”, example: “sample”</td>
+<td style="text-align: left;"><code>string</code>, required, example: <code>"batch"</code>, example: <code>"sample"</code></td>
 </tr>
 </tbody>
 </table>
@@ -276,8 +329,8 @@ Namespace: <code>multiomics</code></p>
 <table class="table">
 <colgroup>
 <col style="width: 20%">
-<col style="width: 54%">
-<col style="width: 25%">
+<col style="width: 53%">
+<col style="width: 26%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -290,42 +343,42 @@ Namespace: <code>multiomics</code></p>
 <tr class="odd">
 <td style="text-align: left;"><code>--output</code></td>
 <td style="text-align: left;">Destination path to the output.</td>
-<td style="text-align: left;"><code>file</code>, required, example: “output.h5mu”</td>
+<td style="text-align: left;"><code>file</code>, required, example: <code>"output.h5mu"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--obsm_pca</code></td>
 <td style="text-align: left;">In which .obsm slot to store the resulting PCA embedding.</td>
-<td style="text-align: left;"><code>string</code>, default: “X_pca”</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"X_pca"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--obsm_integrated</code></td>
 <td style="text-align: left;">In which .obsm slot to store the resulting integrated embedding.</td>
-<td style="text-align: left;"><code>string</code>, default: “X_pca_integrated”</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"X_pca_integrated"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--uns_neighbors</code></td>
 <td style="text-align: left;">In which .uns slot to store various neighbor output objects.</td>
-<td style="text-align: left;"><code>string</code>, default: “neighbors”</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"neighbors"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--obsp_neighbor_distances</code></td>
 <td style="text-align: left;">In which .obsp slot to store the distance matrix between the resulting neighbors.</td>
-<td style="text-align: left;"><code>string</code>, default: “distances”</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"distances"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--obsp_neighbor_connectivities</code></td>
 <td style="text-align: left;">In which .obsp slot to store the connectivities matrix between the resulting neighbors.</td>
-<td style="text-align: left;"><code>string</code>, default: “connectivities”</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"connectivities"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--obs_cluster</code></td>
 <td style="text-align: left;">Name of the .obs key under which to add the cluster labels.</td>
-<td style="text-align: left;"><code>string</code>, default: “leiden”</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"leiden"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--obsm_umap</code></td>
 <td style="text-align: left;">In which .obsm slot to store the resulting UMAP embedding.</td>
-<td style="text-align: left;"><code>string</code>, default: “X_umap”</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"X_umap"</code></td>
 </tr>
 </tbody>
 </table>
