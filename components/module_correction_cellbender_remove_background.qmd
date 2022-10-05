@@ -21,7 +21,7 @@ This module removes counts due to ambient RNA molecules and random barcode swapp
 At the moment, only the count matrices produced by the CellRanger count pipeline is supported. Support for additional tools and protocols 
 will be added in the future. A quick start tutorial can be found here.
 
- Fleming et al. 2022, bioRxiv.
+Fleming et al. 2022, bioRxiv.
 
 
 ## Example commands
@@ -46,12 +46,15 @@ nextflow run openpipelines-bio/openpipeline \
 ```yaml
 # Inputs
 input: # please fill in - example: "input.h5"
+modality: "rna"
 
 # Outputs
 # output: "$id.$key.output.h5"
-# output_filtered: "$id.$key.output_filtered.h5"
-# output_report: "$id.$key.output_report.pdf"
-# output_cell_barcodes: "$id.$key.output_cell_barcodes.csv"
+layer_output: "corrected"
+obs_latent_rt_efficiency: "latent_rt_efficiency"
+obs_latent_cell_probability: "latent_cell_probability"
+obs_latent_scale: "latent_scale"
+var_ambient_expression: "ambient_expression"
 
 # Arguments
 # model: "foo"
@@ -84,19 +87,18 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Inputs
 
-|Name      |Description |Attributes                              |
-|:---------|:-----------|:---------------------------------------|
-|`--input` |Input file. |`file`, required, example: `"input.h5"` |
+|Name         |Description                    |Attributes                              |
+|:------------|:------------------------------|:---------------------------------------|
+|`--input`    |Input file.                    |`file`, required, example: `"input.h5"` |
+|`--modality` |List of modalities to process. |`string`, default: `"rna"`              |
 
 
 ### Outputs
 
-|Name                     |Description                                                                                                                                                                                                                                                                                                                    |Attributes                                        |
-|:------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------|
-|`--output`               |Full count matrix as an h5 file, with background RNA removed. This file contains all the original droplet barcodes.                                                                                                                                                                                                            |`file`, required, example: `"output.h5"`          |
-|`--output_filtered`      |Filtered count matrix as an h5 file, with background RNA removed. The word "filtered" means that this file contains only the droplets which were determined to have a > 50% posterior probability of containing cells.                                                                                                         |`file`, required, example: `"output_filtered.h5"` |
-|`--output_report`        |PDF file that provides a standard graphical summary of the inference procedure.                                                                                                                                                                                                                                                |`file`, example: `"report.pdf"`                   |
-|`--output_cell_barcodes` |CSV file containing all the droplet barcodes which were determined to have a > 50% posterior probability of containing cells. Barcodes are written in plain text. This information is also contained in each of the above outputs, but is included as a separate output for convenient use in certain downstream applications. |`file`, example: `"output.csv"`                   |
+|Name             |Description                                                                                                           |Attributes                               |
+|:----------------|:---------------------------------------------------------------------------------------------------------------------|:----------------------------------------|
+|`--output`       |Full count matrix as an h5mu file, with background RNA removed. This file contains all the original droplet barcodes. |`file`, required, example: `"output.h5"` |
+|`--layer_output` |Output layer                                                                                                          |`string`, default: `"corrected"`         |
 
 
 ### Arguments

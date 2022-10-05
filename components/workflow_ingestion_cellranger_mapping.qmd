@@ -45,6 +45,7 @@ reference: # please fill in - example: "reference.tar.gz"
 # Outputs
 # output_raw: "$id.$key.output_raw.output_raw"
 # output_h5mu: "$id.$key.output_h5mu.h5mu"
+obsm_metrics: "metrics_summary"
 
 # Cell Ranger arguments
 # expect_cells: 3000
@@ -52,12 +53,6 @@ chemistry: "auto"
 secondary_analysis: false
 generate_bam: true
 include_introns: true
-
-# MuData conversion arguments
-which_10xh5: "raw_h5"
-# min_genes: 100
-# min_counts: 1000
-obsm_metrics: "metrics_summary"
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
@@ -90,10 +85,11 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Outputs
 
-|Name            |Description              |Attributes                                 |
-|:---------------|:------------------------|:------------------------------------------|
-|`--output_raw`  |The raw output folder.   |`file`, required, example: `"output_dir"`  |
-|`--output_h5mu` |The converted h5mu file. |`file`, required, example: `"output.h5mu"` |
+|Name             |Description                                                |Attributes                                 |
+|:----------------|:----------------------------------------------------------|:------------------------------------------|
+|`--output_raw`   |The raw output folder.                                     |`file`, required, example: `"output_dir"`  |
+|`--output_h5mu`  |The converted h5mu file.                                   |`file`, required, example: `"output.h5mu"` |
+|`--obsm_metrics` |Name of the .obsm slot under which to QC metrics (if any). |`string`, default: `"metrics_summary"`     |
 
 
 ### Cell Ranger arguments
@@ -105,16 +101,6 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--secondary_analysis` |Whether or not to run the secondary analysis e.g. clustering.                                                                                                                                                                                                                                                                                                                                                                                                                                                     |`boolean`, default: `FALSE` |
 |`--generate_bam`       |Whether to generate a BAM file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |`boolean`, default: `TRUE`  |
 |`--include_introns`    |Include intronic reads in count (default=true unless --target-panel is specified in which case default=false)                                                                                                                                                                                                                                                                                                                                                                                                     |`boolean`, default: `TRUE`  |
-
-
-### MuData conversion arguments
-
-|Name             |Description                                                              |Attributes                             |
-|:----------------|:------------------------------------------------------------------------|:--------------------------------------|
-|`--which_10xh5`  |Which 10x .h5 file to convert to h5mu after Cell Ranger is done mapping. |`string`, default: `"raw_h5"`          |
-|`--min_genes`    |Minimum number of counts required for a cell to pass filtering.          |`integer`, example: `100`              |
-|`--min_counts`   |Minimum number of genes expressed required for a cell to pass filtering. |`integer`, example: `1000`             |
-|`--obsm_metrics` |Name of the .obsm slot under which to QC metrics (if any).               |`string`, default: `"metrics_summary"` |
 
 ## Authors
 

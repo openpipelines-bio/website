@@ -5,10 +5,12 @@ title: "Components"
 ## Workflows
 
 :::{.column-body-outset}
-|Namespace  |Name                |Description                                                                                                 |
-|:----------|:-------------------|:-----------------------------------------------------------------------------------------------------------|
+|Namespace  |Name                        |Description                                                                                                 |
+|:----------|:---------------------------|:-----------------------------------------------------------------------------------------------------------|
+|Conversion |[Conversion](workflow_conversion_conversion.qmd)|A pipeline to convert different file formats to                                                             |
 |Ingestion  |[BD Rhapsody](workflow_ingestion_bd_rhapsody.qmd)|A generic pipeline for running BD Rhapsody WTA or Targeted mapping, with support for AbSeq, VDJ and/or SMK. |
 |Ingestion  |[Cell Ranger mapping](workflow_ingestion_cellranger_mapping.qmd)|A pipeline for running Cell Ranger mapping                                                                  |
+|Ingestion  |[Cell Ranger post-processing](workflow_ingestion_cellranger_postprocessing.qmd)|Post-processing Cell Ranger datasets                                                                        |
 |Ingestion  |[Demux](workflow_ingestion_demux.qmd)|A generic pipeline for running bcl2fastq, bcl-convert or Cell Ranger mkfastq.                               |
 |Ingestion  |[Make reference](workflow_ingestion_make_reference.qmd)|Build a transcriptomics reference into one of many formats                                                  |
 |Multiomics |[Full pipeline](workflow_multiomics_full_pipeline.qmd)|A pipeline to analyse multiple multiomics samples                                                           |
@@ -30,6 +32,9 @@ title: "Components"
 |Convert       |[From h5ad to h5mu](module_convert_from_h5ad_to_h5mu.qmd)|Converts a single layer h5ad file into a single muon object                                                                          |
 |Convert       |[From velocyto to h5mu](module_convert_from_velocyto_to_h5mu.qmd)|Convert a velocyto                                                                                                                   |
 |Correction    |[Cellbender remove background](module_correction_cellbender_remove_background.qmd)|Eliminating technical artifacts from high-throughput single-cell RNA sequencing data                                                 |
+|Dataflow      |[Concat](module_dataflow_concat.qmd)  |Concatenates several uni-modal samples in                                                                                            |
+|Dataflow      |[Merge](module_dataflow_merge.qmd)    |Combine one or more single-modality                                                                                                  |
+|Dataflow      |[Split modalities](module_dataflow_split_modalities.qmd)|Split the modalities from a single                                                                                                   |
 |Demux         |[Bcl convert](module_demux_bcl_convert.qmd)|Convert bcl files to fastq files using bcl-convert                                                                                   |
 |Demux         |[Bcl2fastq](module_demux_bcl2fastq.qmd)|Convert bcl files to fastq files using bcl2fastq                                                                                     |
 |Demux         |[Cellranger mkfastq](module_demux_cellranger_mkfastq.qmd)|Demultiplex raw sequencing data                                                                                                      |
@@ -42,17 +47,17 @@ title: "Components"
 |Filter        |[Filter with counts](module_filter_filter_with_counts.qmd)|Filter scRNA-seq data based on the primary QC metrics                                                                                |
 |Filter        |[Filter with hvg](module_filter_filter_with_hvg.qmd)|Annotate highly variable genes [Satija15] [Zheng17] [Stuart19]                                                                       |
 |Filter        |[Filter with scrublet](module_filter_filter_with_scrublet.qmd)|Doublet detection using the Scrublet method (Wolock, Lopez and Klein, 2019)                                                          |
-|Integrate     |[Add metadata](module_integrate_add_metadata.qmd)|Add a csv containing metadata to the                                                                                                 |
-|Integrate     |[Concat](module_integrate_concat.qmd) |Concatenates several uni-modal samples in                                                                                            |
+|Filter        |[Subset h5mu](module_filter_subset_h5mu.qmd)|Create a subset of a mudata file by selecting the first number of observations                                                       |
 |Integrate     |[Harmony](module_integrate_harmony.qmd)|Performs Harmony integration based as described in https://github                                                                    |
 |Integrate     |[Harmonypy](module_integrate_harmonypy.qmd)|Performs Harmony integration based as described in https://github                                                                    |
-|Integrate     |[Merge](module_integrate_merge.qmd)   |Combine one or more single-modality                                                                                                  |
 |Integrate     |[Scanorama](module_integrate_scanorama.qmd)|Use Scanorama to integrate different experiments                                                                                     |
+|Integrate     |[Scvi](module_integrate_scvi.qmd)     |Performs scvi integration as done in the human lung cell atlas https://github                                                        |
 |Mapping       |[BD Rhapsody](module_mapping_bd_rhapsody.qmd)|A wrapper for the BD Rhapsody Analysis CWL v1.10.1 pipeline                                                                          |
 |Mapping       |[Cellranger count split](module_mapping_cellranger_count_split.qmd)|Split 10x Cell Ranger output directory into separate output fields                                                                   |
 |Mapping       |[Cellranger count](module_mapping_cellranger_count.qmd)|Align fastq files using Cell Ranger count                                                                                            |
 |Mapping       |[Cellranger multi](module_mapping_cellranger_multi.qmd)|Align fastq files using Cell Ranger multi                                                                                            |
 |Metadata      |[Add id](module_metadata_add_id.qmd)  |Add id of                                                                                                                            |
+|Metadata      |[Join csv](module_metadata_join_csv.qmd)|Join a csv containing metadata to the                                                                                                |
 |Neighbors     |[Bbknn](module_neighbors_bbknn.qmd)   |BBKNN network generation                                                                                                             |
 |Neighbors     |[Find neighbors](module_neighbors_find_neighbors.qmd)|Compute a neighborhood graph of observations [McInnes18]                                                                             |
 |Process 10xh5 |[Filter 10xh5](module_process_10xh5_filter_10xh5.qmd)|Filter a 10x h5 dataset                                                                                                              |
@@ -62,7 +67,6 @@ title: "Components"
 |Reference     |[Build cellranger reference](module_reference_build_cellranger_reference.qmd)|Build a Cell Ranger-compatible reference folder from user-supplied genome FASTA and gene GTF files                                   |
 |Reference     |[Make reference](module_reference_make_reference.qmd)|Preprocess and build a transcriptome reference                                                                                       |
 |Report        |[Mermaid](module_report_mermaid.qmd)  |Generates a network from mermaid code                                                                                                |
-|Split         |[Split modalities](module_split_split_modalities.qmd)|Split the modalities from a single                                                                                                   |
 |Transfer      |[Publish](module_transfer_publish.qmd)|Publish an artifact and optionally rename with parameters                                                                            |
 |Transform     |[Delete layer](module_transform_delete_layer.qmd)|Delete an anndata layer from one or more modalities                                                                                  |
 |Transform     |[Log1p](module_transform_log1p.qmd)   |Logarithmize the data matrix                                                                                                         |

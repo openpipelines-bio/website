@@ -70,7 +70,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 |Name                   |Description                                            |Attributes                                                                          |
 |:----------------------|:------------------------------------------------------|:-----------------------------------------------------------------------------------|
-|`--input`              |An h5 file from the 10x genomics website.              |`string`, required, example: `"pbmc_1k_protein_v3_raw_feature_bc_matrix.h5"`        |
+|`--input`              |An h5 file from the 10x genomics website.              |`file`, required, example: `"pbmc_1k_protein_v3_raw_feature_bc_matrix.h5"`          |
 |`--output`             |Output h5 file.                                        |`file`, required, example: `"pbmc_1k_protein_v3_raw_feature_bc_matrix_filtered.h5"` |
 |`--min_library_size`   |Minimum library size.                                  |`integer`, default: `0`                                                             |
 |`--min_cells_per_gene` |Minimum number of cells per gene.                      |`integer`, default: `0`                                                             |

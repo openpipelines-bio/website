@@ -8,10 +8,10 @@ toc: false
 ### Info
 
 ID: `split_modalities`  
-Namespace: `split`
+Namespace: `dataflow`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/split/split_modalities){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/dataflow/split_modalities){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -29,7 +29,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 ```bash
 nextflow run openpipelines-bio/openpipeline \
   -r main_build -latest \
-  -main-script target/nextflow/split/split_modalities/main.nf \
+  -main-script target/nextflow/dataflow/split_modalities/main.nf \
   --help
 ```
 
@@ -53,7 +53,7 @@ publish_dir: # please fill in - example: "output/"
 nextflow run openpipelines-bio/openpipeline \
   -r main_build -latest \
   -profile docker \
-  -main-script target/nextflow/split/split_modalities/main.nf \
+  -main-script target/nextflow/dataflow/split_modalities/main.nf \
   -params-file params.yaml
 ```
 
