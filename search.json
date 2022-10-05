@@ -119,60 +119,39 @@
     "text": "Visualisation\n\n\n\n\nflowchart LR\n    p0(Input)\n    p9(pca)\n    p17(harmonypy)\n    p25(find_neighbors)\n    p33(leiden)\n    p41(umap)\n    p48(Output)\n    p0-->p9\n    p9-->p17\n    p17-->p25\n    p25-->p33\n    p33-->p41\n    p41-->p48"
   },
   {
-    "objectID": "components/module_integrate_concat.html",
-    "href": "components/module_integrate_concat.html",
-    "title": "Concat",
+    "objectID": "components/workflow_conversion_conversion.html",
+    "href": "components/workflow_conversion_conversion.html",
+    "title": "Conversion",
     "section": "",
-    "text": "ID: concat\nNamespace: integrate\n\n\n\nSource\nConcatenates several uni-modal samples in .h5mu files into a single file."
+    "text": "ID: conversion\nNamespace: conversion\n\n\n\nSource\nA pipeline to convert different file formats to .h5mu."
   },
   {
-    "objectID": "components/module_integrate_concat.html#example-commands",
-    "href": "components/module_integrate_concat.html#example-commands",
-    "title": "Concat",
+    "objectID": "components/workflow_conversion_conversion.html#example-commands",
+    "href": "components/workflow_conversion_conversion.html#example-commands",
+    "title": "Conversion",
     "section": "Example commands",
-    "text": "Example commands\nYou can run the pipeline using nextflow run.\n\nView help\nYou can use --help as a parameter to get an overview of the possible parameters.\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -main-script target/nextflow/integrate/concat/main.nf \\\n  --help\n\n\nRun command\n\n\nExample of params.yaml\n\n# Arguments\ninput: # please fill in - example: [\"sample_paths\"]\nsample_names: # please fill in - example: [\"sample_names\"]\n# output: \"$id.$key.output.h5mu\"\nobs_sample_name: \"sample_id\"\ncompression: \"gzip\"\nother_axis_mode: \"move\"\n\n# Nextflow input-output arguments\npublish_dir: # please fill in - example: \"output/\"\n# param_list: \"my_params.yaml\"\n\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -profile docker \\\n  -main-script target/nextflow/integrate/concat/main.nf \\\n  -params-file params.yaml\n\n\n\n\n\n\nNote\n\n\n\nReplace -profile docker with -profile podman or -profile singularity depending on the desired backend."
+    "text": "Example commands\nYou can run the pipeline using nextflow run.\n\nView help\nYou can use --help as a parameter to get an overview of the possible parameters.\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -main-script workflows/conversion/conversion/main.nf \\\n  --help\n\n\nRun command\n\n\nExample of params.yaml\n\n# Inputs\nid: # please fill in - example: \"foo\"\ninput: # please fill in - example: [\"input.h5mu\"]\ninput_type: # please fill in - example: \"foo\"\n\n# Outputs\n# output: \"$id.$key.output.h5mu\"\n\n# Conversion from h5ad\n# modality: [\"foo\"]\n\n# Nextflow input-output arguments\npublish_dir: # please fill in - example: \"output/\"\n# param_list: \"my_params.yaml\"\n\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -profile docker \\\n  -main-script workflows/conversion/conversion/main.nf \\\n  -params-file params.yaml\n\n\n\n\n\n\nNote\n\n\n\nReplace -profile docker with -profile podman or -profile singularity depending on the desired backend."
   },
   {
-    "objectID": "components/module_integrate_concat.html#argument-group",
-    "href": "components/module_integrate_concat.html#argument-group",
-    "title": "Concat",
-    "section": "Argument group",
-    "text": "Argument group\n\nArguments\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nPaths to the different samples to be concatenated.\nfile, required, example: \"sample_paths\"\n\n\n--sample_names\nNames of the different samples that have to be concatenated. Must be of same length as --input.\nstring, required, example: \"sample_names\"\n\n\n--obs_sample_name\nName of the .obs key under which to add the sample names.\nstring, default: \"sample_id\"\n\n\n--compression\nThe compression format to be used on the final h5mu object.\nstring, default: \"gzip\"\n\n\n--other_axis_mode\nHow to handle the merging of other axis (var, obs, …). - None: keep no data - same: only keep elements of the matrices which are the same in each of the samples - unique: only keep elements for which there is only 1 possible value (1 value that can occur in multiple samples) - first: keep the annotation from the first sample - only: keep elements that show up in only one of the objects (1 unique element in only 1 sample) - move: identical to ‘same’, but moving the conflicting values to .varm or .obsm\nstring, default: \"move\""
+    "objectID": "components/workflow_conversion_conversion.html#argument-groups",
+    "href": "components/workflow_conversion_conversion.html#argument-groups",
+    "title": "Conversion",
+    "section": "Argument groups",
+    "text": "Argument groups\n\nInputs\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--id\nID of the sample.\nstring, required, example: \"foo\"\n\n\n--input\nPath to the sample.\nfile, required, example: \"input.h5mu\"\n\n\n--input_type\nType of the input file\nstring, required\n\n\n\n\n\nOutputs\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--output\nName or template for the output files.\nfile, example: \"output.h5mu\"\n\n\n\n\n\nConversion from h5ad\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--modality\nName of the modality where the h5ad is stored in the h5mu object.\nstring"
   },
   {
-    "objectID": "components/module_integrate_concat.html#authors",
-    "href": "components/module_integrate_concat.html#authors",
-    "title": "Concat",
+    "objectID": "components/workflow_conversion_conversion.html#authors",
+    "href": "components/workflow_conversion_conversion.html#authors",
+    "title": "Conversion",
     "section": "Authors",
-    "text": "Authors\n\nDries Schaumont (maintainer)"
+    "text": "Authors\n\nDries Schaumont   (author, maintainer)"
   },
   {
-    "objectID": "components/module_integrate_merge.html",
-    "href": "components/module_integrate_merge.html",
-    "title": "Merge",
-    "section": "",
-    "text": "ID: merge\nNamespace: integrate\n\n\n\nSource\nCombine one or more single-modality .h5mu files together into one .h5mu file."
-  },
-  {
-    "objectID": "components/module_integrate_merge.html#example-commands",
-    "href": "components/module_integrate_merge.html#example-commands",
-    "title": "Merge",
-    "section": "Example commands",
-    "text": "Example commands\nYou can run the pipeline using nextflow run.\n\nView help\nYou can use --help as a parameter to get an overview of the possible parameters.\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -main-script target/nextflow/integrate/merge/main.nf \\\n  --help\n\n\nRun command\n\n\nExample of params.yaml\n\n# Arguments\ninput: # please fill in - example: [\"sample_paths\"]\n# output: \"$id.$key.output.h5mu\"\ncompression: \"gzip\"\n\n# Nextflow input-output arguments\npublish_dir: # please fill in - example: \"output/\"\n# param_list: \"my_params.yaml\"\n\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -profile docker \\\n  -main-script target/nextflow/integrate/merge/main.nf \\\n  -params-file params.yaml\n\n\n\n\n\n\nNote\n\n\n\nReplace -profile docker with -profile podman or -profile singularity depending on the desired backend."
-  },
-  {
-    "objectID": "components/module_integrate_merge.html#argument-group",
-    "href": "components/module_integrate_merge.html#argument-group",
-    "title": "Merge",
-    "section": "Argument group",
-    "text": "Argument group\n\nArguments\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nPaths to the single-modality .h5mu files that need to be combined\nfile, required, default: \"sample_paths\"\n\n\n--output\nPath to the output file.\nfile, default: \"output.h5mu\"\n\n\n--compression\nThe compression format to be used on the final h5mu object.\nstring, default: \"gzip\""
-  },
-  {
-    "objectID": "components/module_integrate_merge.html#authors",
-    "href": "components/module_integrate_merge.html#authors",
-    "title": "Merge",
-    "section": "Authors",
-    "text": "Authors\n\nDries Schaumont (maintainer)"
+    "objectID": "components/workflow_conversion_conversion.html#visualisation",
+    "href": "components/workflow_conversion_conversion.html#visualisation",
+    "title": "Conversion",
+    "section": "Visualisation",
+    "text": "Visualisation\n\n\n\n\nflowchart LR\n    p0(Input)\n    p3(filter)\n    p8(from_10xh5_to_h5mu)\n    p27(mix)\n    p11(filter)\n    p16(from_10xmtx_to_h5mu)\n    p19(filter)\n    p24(from_h5ad_to_h5mu)\n    p29(toSortedList)\n    p31(Output)\n    p0-->p3\n    p0-->p11\n    p0-->p19\n    p3-->p8\n    p8-->p27\n    p11-->p16\n    p16-->p27\n    p19-->p24\n    p24-->p27\n    p27-->p29\n    p29-->p31"
   },
   {
     "objectID": "components/module_reference_build_bdrhap_reference.html",
@@ -494,14 +473,14 @@
     "href": "components/workflow_ingestion_cellranger_mapping.html#example-commands",
     "title": "Cell Ranger mapping",
     "section": "Example commands",
-    "text": "Example commands\nYou can run the pipeline using nextflow run.\n\nView help\nYou can use --help as a parameter to get an overview of the possible parameters.\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -main-script workflows/ingestion/cellranger_mapping/main.nf \\\n  --help\n\n\nRun command\n\n\nExample of params.yaml\n\n# Inputs\nid: # please fill in - example: \"foo\"\ninput: # please fill in - example: [\"sample_S1_L001_R1_001.fastq.gz\", \"sample_S1_L001_R2_001.fastq.gz\"]\nreference: # please fill in - example: \"reference.tar.gz\"\n\n# Outputs\n# output_raw: \"$id.$key.output_raw.output_raw\"\n# output_h5mu: \"$id.$key.output_h5mu.h5mu\"\n\n# Cell Ranger arguments\n# expect_cells: 3000\nchemistry: \"auto\"\nsecondary_analysis: false\ngenerate_bam: true\ninclude_introns: true\n\n# MuData conversion arguments\nwhich_10xh5: \"raw_h5\"\n# min_genes: 100\n# min_counts: 1000\nobsm_metrics: \"metrics_summary\"\n\n# Nextflow input-output arguments\npublish_dir: # please fill in - example: \"output/\"\n# param_list: \"my_params.yaml\"\n\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -profile docker \\\n  -main-script workflows/ingestion/cellranger_mapping/main.nf \\\n  -params-file params.yaml\n\n\n\n\n\n\nNote\n\n\n\nReplace -profile docker with -profile podman or -profile singularity depending on the desired backend."
+    "text": "Example commands\nYou can run the pipeline using nextflow run.\n\nView help\nYou can use --help as a parameter to get an overview of the possible parameters.\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -main-script workflows/ingestion/cellranger_mapping/main.nf \\\n  --help\n\n\nRun command\n\n\nExample of params.yaml\n\n# Inputs\nid: # please fill in - example: \"foo\"\ninput: # please fill in - example: [\"sample_S1_L001_R1_001.fastq.gz\", \"sample_S1_L001_R2_001.fastq.gz\"]\nreference: # please fill in - example: \"reference.tar.gz\"\n\n# Outputs\n# output_raw: \"$id.$key.output_raw.output_raw\"\n# output_h5mu: \"$id.$key.output_h5mu.h5mu\"\nobsm_metrics: \"metrics_summary\"\n\n# Cell Ranger arguments\n# expect_cells: 3000\nchemistry: \"auto\"\nsecondary_analysis: false\ngenerate_bam: true\ninclude_introns: true\n\n# Nextflow input-output arguments\npublish_dir: # please fill in - example: \"output/\"\n# param_list: \"my_params.yaml\"\n\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -profile docker \\\n  -main-script workflows/ingestion/cellranger_mapping/main.nf \\\n  -params-file params.yaml\n\n\n\n\n\n\nNote\n\n\n\nReplace -profile docker with -profile podman or -profile singularity depending on the desired backend."
   },
   {
     "objectID": "components/workflow_ingestion_cellranger_mapping.html#argument-groups",
     "href": "components/workflow_ingestion_cellranger_mapping.html#argument-groups",
     "title": "Cell Ranger mapping",
     "section": "Argument groups",
-    "text": "Argument groups\n\nInputs\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--id\nID of the sample.\nstring, required, example: \"foo\"\n\n\n--input\nThe fastq.gz files to align. Can also be a single directory containing fastq.gz files.\nfile, required, example: \"sample_S1_L001_R1_001.fastq.gz\", example: \"sample_S1_L001_R2_001.fastq.gz\"\n\n\n--reference\nThe path to Cell Ranger reference tar.gz file.\nfile, required, example: \"reference.tar.gz\"\n\n\n\n\n\nOutputs\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--output_raw\nThe raw output folder.\nfile, required, example: \"output_dir\"\n\n\n--output_h5mu\nThe converted h5mu file.\nfile, required, example: \"output.h5mu\"\n\n\n\n\n\nCell Ranger arguments\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--expect_cells\nExpected number of recovered cells, used as input to cell calling algorithm.\ninteger, example: 3000\n\n\n--chemistry\nAssay configuration. - auto: autodetect mode - threeprime: Single Cell 3’ - fiveprime: Single Cell 5’ - SC3Pv1: Single Cell 3’ v1 - SC3Pv2: Single Cell 3’ v2 - SC3Pv3: Single Cell 3’ v3 - SC3Pv3LT: Single Cell 3’ v3 LT - SC3Pv3HT: Single Cell 3’ v3 HT - SC5P-PE: Single Cell 5’ paired-end - SC5P-R2: Single Cell 5’ R2-only - SC-FB: Single Cell Antibody-only 3’ v2 or 5’ See https://kb.10xgenomics.com/hc/en-us/articles/115003764132-How-does-Cell-Ranger-auto-detect-chemistry- for more information.\nstring, default: \"auto\"\n\n\n--secondary_analysis\nWhether or not to run the secondary analysis e.g. clustering.\nboolean, default: FALSE\n\n\n--generate_bam\nWhether to generate a BAM file.\nboolean, default: TRUE\n\n\n--include_introns\nInclude intronic reads in count (default=true unless –target-panel is specified in which case default=false)\nboolean, default: TRUE\n\n\n\n\n\nMuData conversion arguments\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--which_10xh5\nWhich 10x .h5 file to convert to h5mu after Cell Ranger is done mapping.\nstring, default: \"raw_h5\"\n\n\n--min_genes\nMinimum number of counts required for a cell to pass filtering.\ninteger, example: 100\n\n\n--min_counts\nMinimum number of genes expressed required for a cell to pass filtering.\ninteger, example: 1000\n\n\n--obsm_metrics\nName of the .obsm slot under which to QC metrics (if any).\nstring, default: \"metrics_summary\""
+    "text": "Argument groups\n\nInputs\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--id\nID of the sample.\nstring, required, example: \"foo\"\n\n\n--input\nThe fastq.gz files to align. Can also be a single directory containing fastq.gz files.\nfile, required, example: \"sample_S1_L001_R1_001.fastq.gz\", example: \"sample_S1_L001_R2_001.fastq.gz\"\n\n\n--reference\nThe path to Cell Ranger reference tar.gz file.\nfile, required, example: \"reference.tar.gz\"\n\n\n\n\n\nOutputs\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--output_raw\nThe raw output folder.\nfile, required, example: \"output_dir\"\n\n\n--output_h5mu\nThe converted h5mu file.\nfile, required, example: \"output.h5mu\"\n\n\n--obsm_metrics\nName of the .obsm slot under which to QC metrics (if any).\nstring, default: \"metrics_summary\"\n\n\n\n\n\nCell Ranger arguments\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--expect_cells\nExpected number of recovered cells, used as input to cell calling algorithm.\ninteger, example: 3000\n\n\n--chemistry\nAssay configuration. - auto: autodetect mode - threeprime: Single Cell 3’ - fiveprime: Single Cell 5’ - SC3Pv1: Single Cell 3’ v1 - SC3Pv2: Single Cell 3’ v2 - SC3Pv3: Single Cell 3’ v3 - SC3Pv3LT: Single Cell 3’ v3 LT - SC3Pv3HT: Single Cell 3’ v3 HT - SC5P-PE: Single Cell 5’ paired-end - SC5P-R2: Single Cell 5’ R2-only - SC-FB: Single Cell Antibody-only 3’ v2 or 5’ See https://kb.10xgenomics.com/hc/en-us/articles/115003764132-How-does-Cell-Ranger-auto-detect-chemistry- for more information.\nstring, default: \"auto\"\n\n\n--secondary_analysis\nWhether or not to run the secondary analysis e.g. clustering.\nboolean, default: FALSE\n\n\n--generate_bam\nWhether to generate a BAM file.\nboolean, default: TRUE\n\n\n--include_introns\nInclude intronic reads in count (default=true unless –target-panel is specified in which case default=false)\nboolean, default: TRUE"
   },
   {
     "objectID": "components/workflow_ingestion_cellranger_mapping.html#authors",
@@ -630,6 +609,34 @@
     "text": "Authors\n\nDries De Maeyer (maintainer)"
   },
   {
+    "objectID": "components/module_metadata_join_csv.html",
+    "href": "components/module_metadata_join_csv.html",
+    "title": "Join csv",
+    "section": "",
+    "text": "ID: join_csv\nNamespace: metadata\n\n\n\nSource\nJoin a csv containing metadata to the .obs or .var field of a mudata file."
+  },
+  {
+    "objectID": "components/module_metadata_join_csv.html#example-commands",
+    "href": "components/module_metadata_join_csv.html#example-commands",
+    "title": "Join csv",
+    "section": "Example commands",
+    "text": "Example commands\nYou can run the pipeline using nextflow run.\n\nView help\nYou can use --help as a parameter to get an overview of the possible parameters.\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -main-script target/nextflow/metadata/join_csv/main.nf \\\n  --help\n\n\nRun command\n\n\nExample of params.yaml\n\n# MuData Input\ninput: # please fill in - example: \"path/to/file\"\nmodality: \"rna\"\n# obs_key: \"foo\"\n# var_key: \"foo\"\n\n# MuData Output\n# output: \"$id.$key.output.output\"\n\n# Metadata Input\n# input_csv: \"path/to/file\"\ncsv_key: \"id\"\n\n# Nextflow input-output arguments\npublish_dir: # please fill in - example: \"output/\"\n# param_list: \"my_params.yaml\"\n\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -profile docker \\\n  -main-script target/nextflow/metadata/join_csv/main.nf \\\n  -params-file params.yaml\n\n\n\n\n\n\nNote\n\n\n\nReplace -profile docker with -profile podman or -profile singularity depending on the desired backend."
+  },
+  {
+    "objectID": "components/module_metadata_join_csv.html#argument-groups",
+    "href": "components/module_metadata_join_csv.html#argument-groups",
+    "title": "Join csv",
+    "section": "Argument groups",
+    "text": "Argument groups\n\nMuData Input\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput h5mu file\nfile, required\n\n\n--obs_key\nObs column name where the sample id can be found for each observation to join on. Useful when adding metadata to concatenated samples. Mutually exclusive with –var_key and –sample_id”\nstring\n\n\n--var_key\nVar column name where the sample id can be found for each observation to join on. Useful when adding metadata to concatenated samples. Mutually exclusive with –var_key and –sample_id.”\nstring\n\n\n\n\n\nMuData Output\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--output\nOutput h5mu file.\nfile, required\n\n\n\n\n\nMetadata Input\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input_csv\n.csv file containing metadata”\nfile\n\n\n--csv_key\ncolumn of the the csv that corresponds to the sample id.\nstring, default: \"id\""
+  },
+  {
+    "objectID": "components/module_metadata_join_csv.html#authors",
+    "href": "components/module_metadata_join_csv.html#authors",
+    "title": "Join csv",
+    "section": "Authors",
+    "text": "Authors\n\nDries Schaumont  (author)"
+  },
+  {
     "objectID": "components/workflow_ingestion_bd_rhapsody.html",
     "href": "components/workflow_ingestion_bd_rhapsody.html",
     "title": "BD Rhapsody",
@@ -704,14 +711,14 @@
     "href": "components/module_convert_from_10xh5_to_h5mu.html#example-commands",
     "title": "From 10xh5 to h5mu",
     "section": "Example commands",
-    "text": "Example commands\nYou can run the pipeline using nextflow run.\n\nView help\nYou can use --help as a parameter to get an overview of the possible parameters.\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -main-script target/nextflow/convert/from_10xh5_to_h5mu/main.nf \\\n  --help\n\n\nRun command\n\n\nExample of params.yaml\n\n# Inputs\n# sample_id: \"my_sample\"\ninput: # please fill in - example: \"raw_feature_bc_matrix.h5\"\n# input_metrics_summary: \"metrics_cellranger.h5\"\n\n# Outputs\n# output: \"$id.$key.output.h5mu\"\nuns_metrics: \"metrics_cellranger\"\n\n# Arguments\n# min_genes: 100\n# min_counts: 1000\n\n# Nextflow input-output arguments\npublish_dir: # please fill in - example: \"output/\"\n# param_list: \"my_params.yaml\"\n\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -profile docker \\\n  -main-script target/nextflow/convert/from_10xh5_to_h5mu/main.nf \\\n  -params-file params.yaml\n\n\n\n\n\n\nNote\n\n\n\nReplace -profile docker with -profile podman or -profile singularity depending on the desired backend."
+    "text": "Example commands\nYou can run the pipeline using nextflow run.\n\nView help\nYou can use --help as a parameter to get an overview of the possible parameters.\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -main-script target/nextflow/convert/from_10xh5_to_h5mu/main.nf \\\n  --help\n\n\nRun command\n\n\nExample of params.yaml\n\n# Inputs\ninput: # please fill in - example: \"raw_feature_bc_matrix.h5\"\n# input_metrics_summary: \"metrics_cellranger.h5\"\n\n# Outputs\n# output: \"$id.$key.output.h5mu\"\nuns_metrics: \"metrics_cellranger\"\n\n# Arguments\n# min_genes: 100\n# min_counts: 1000\n\n# Nextflow input-output arguments\npublish_dir: # please fill in - example: \"output/\"\n# param_list: \"my_params.yaml\"\n\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -profile docker \\\n  -main-script target/nextflow/convert/from_10xh5_to_h5mu/main.nf \\\n  -params-file params.yaml\n\n\n\n\n\n\nNote\n\n\n\nReplace -profile docker with -profile podman or -profile singularity depending on the desired backend."
   },
   {
     "objectID": "components/module_convert_from_10xh5_to_h5mu.html#argument-groups",
     "href": "components/module_convert_from_10xh5_to_h5mu.html#argument-groups",
     "title": "From 10xh5 to h5mu",
     "section": "Argument groups",
-    "text": "Argument groups\n\nInputs\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--sample_id\nSample ID to be stored in an obs column.\nstring, example: \"my_sample\"\n\n\n--input\nA 10x h5 file as generated by Cell Ranger.\nfile, required, example: \"raw_feature_bc_matrix.h5\"\n\n\n--input_metrics_summary\nA metrics summary csv file as generated by Cell Ranger.\nfile, example: \"metrics_cellranger.h5\"\n\n\n\n\n\nOutputs\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--output\nOutput h5mu file.\nfile, example: \"output.h5mu\"\n\n\n--uns_metrics\nName of the .uns slot under which to QC metrics (if any).\nstring, default: \"metrics_cellranger\"\n\n\n\n\n\nArguments\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--min_genes\nMinimum number of counts required for a cell to pass filtering.\ninteger, example: 100\n\n\n--min_counts\nMinimum number of genes expressed required for a cell to pass filtering.\ninteger, example: 1000"
+    "text": "Argument groups\n\nInputs\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nA 10x h5 file as generated by Cell Ranger.\nfile, required, example: \"raw_feature_bc_matrix.h5\"\n\n\n--input_metrics_summary\nA metrics summary csv file as generated by Cell Ranger.\nfile, example: \"metrics_cellranger.h5\"\n\n\n\n\n\nOutputs\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--output\nOutput h5mu file.\nfile, example: \"output.h5mu\"\n\n\n--uns_metrics\nName of the .uns slot under which to QC metrics (if any).\nstring, default: \"metrics_cellranger\"\n\n\n\n\n\nArguments\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--min_genes\nMinimum number of counts required for a cell to pass filtering.\ninteger, example: 100\n\n\n--min_counts\nMinimum number of genes expressed required for a cell to pass filtering.\ninteger, example: 1000"
   },
   {
     "objectID": "components/module_convert_from_10xh5_to_h5mu.html#authors",
@@ -896,18 +903,81 @@
     "text": "Visualisation\n\n\n\n\nflowchart LR\n    p0(Input)\n    p9(make_reference)\n    p13(filter)\n    p18(build_cellranger_reference)\n    p34(join)\n    p23(filter)\n    p28(build_bdrhap_reference)\n    p35(join)\n    p36(join)\n    p41(Output)\n    p34-->p35\n    p35-->p36\n    p0-->p9\n    p9-->p13\n    p13-->p18\n    p18-->p34\n    p9-->p23\n    p23-->p28\n    p28-->p35\n    p0-->p36\n    p9-->p34\n    p36-->p41"
   },
   {
+    "objectID": "components/module_integrate_scvi.html",
+    "href": "components/module_integrate_scvi.html",
+    "title": "Scvi",
+    "section": "",
+    "text": "ID: scvi\nNamespace: integrate\n\n\n\nSource\nPerforms scvi integration as done in the human lung cell atlas https://github.com/LungCellAtlas/HLCA"
+  },
+  {
+    "objectID": "components/module_integrate_scvi.html#example-commands",
+    "href": "components/module_integrate_scvi.html#example-commands",
+    "title": "Scvi",
+    "section": "Example commands",
+    "text": "Example commands\nYou can run the pipeline using nextflow run.\n\nView help\nYou can use --help as a parameter to get an overview of the possible parameters.\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -main-script target/nextflow/integrate/scvi/main.nf \\\n  --help\n\n\nRun command\n\n\nExample of params.yaml\n\n# Inputs\ninput: # please fill in - example: \"path/to/file\"\nmodality: \"rna\"\n# input_layer: \"foo\"\nobs_batch: \"sample_id\"\n# var_input: \"foo\"\n\n# Outputs\n# output: \"$id.$key.output.output\"\nobsm_output: \"X_scvi_integrated\"\n\n# Early stopping arguments\n# early_stopping: true\nearly_stopping_monitor: \"elbo_validation\"\nearly_stopping_patience: 45\nearly_stopping_min_delta: 0.0\n\n# Learning parameters\nmax_epochs: # please fill in - example: 123\nreduce_lr_on_plateau: true\nlr_factor: 0.6\nlr_patience: 30\n\n# Nextflow input-output arguments\npublish_dir: # please fill in - example: \"output/\"\n# param_list: \"my_params.yaml\"\n\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -profile docker \\\n  -main-script target/nextflow/integrate/scvi/main.nf \\\n  -params-file params.yaml\n\n\n\n\n\n\nNote\n\n\n\nReplace -profile docker with -profile podman or -profile singularity depending on the desired backend."
+  },
+  {
+    "objectID": "components/module_integrate_scvi.html#argument-groups",
+    "href": "components/module_integrate_scvi.html#argument-groups",
+    "title": "Scvi",
+    "section": "Argument groups",
+    "text": "Argument groups\n\nInputs\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput h5mu file\nfile, required\n\n\n--input_layer\nInput layer to use. If None, X is used\nstring\n\n\n--obs_batch\nColumn name discriminating between your batches.\nstring, default: \"sample_id\"\n\n\n--var_input\n.var column containing highly variable genes. By default, do not subset genes.\nstring\n\n\n\n\n\nOutputs\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--output\nOutput h5mu file.\nfile, required\n\n\n--obsm_output\nIn which .obsm slot to store the resulting integrated embedding.\nstring, default: \"X_scvi_integrated\"\n\n\n\n\n\nEarly stopping arguments\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--early_stopping\nWhether to perform early stopping with respect to the validation set.\nboolean\n\n\n--early_stopping_monitor\nMetric logged during validation set epoch.\nstring, default: \"elbo_validation\"\n\n\n--early_stopping_patience\nNumber of validation epochs with no improvement after which training will be stopped.\ninteger, default: 45\n\n\n--early_stopping_min_delta\nMinimum change in the monitored quantity to qualify as an improvement, i.e. an absolute change of less than min_delta, will count as no improvement.\ndouble, default: 0\n\n\n\n\n\nLearning parameters\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--max_epochs\nNumber of passes through the dataset, defaults to (20000 / number of cells) * 400 or 400; whichever is smallest.\ninteger, required\n\n\n--reduce_lr_on_plateau\nWhether to monitor validation loss and reduce learning rate when validation set lr_scheduler_metric plateaus.\nboolean, default: TRUE\n\n\n--lr_factor\nFactor to reduce learning rate.\ndouble, default: 0.6\n\n\n--lr_patience\nNumber of epochs with no improvement after which learning rate will be reduced.\ndouble, default: 30"
+  },
+  {
+    "objectID": "components/module_integrate_scvi.html#authors",
+    "href": "components/module_integrate_scvi.html#authors",
+    "title": "Scvi",
+    "section": "Authors",
+    "text": "Authors\n\nMalte Luecken   (author)\nDries Schaumont   (maintainer)"
+  },
+  {
+    "objectID": "components/workflow_ingestion_cellranger_postprocessing.html",
+    "href": "components/workflow_ingestion_cellranger_postprocessing.html",
+    "title": "Cell Ranger post-processing",
+    "section": "",
+    "text": "ID: cellranger_postprocessing\nNamespace: ingestion\n\n\n\nSource\nPost-processing Cell Ranger datasets."
+  },
+  {
+    "objectID": "components/workflow_ingestion_cellranger_postprocessing.html#example-commands",
+    "href": "components/workflow_ingestion_cellranger_postprocessing.html#example-commands",
+    "title": "Cell Ranger post-processing",
+    "section": "Example commands",
+    "text": "Example commands\nYou can run the pipeline using nextflow run.\n\nView help\nYou can use --help as a parameter to get an overview of the possible parameters.\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -main-script workflows/ingestion/cellranger_postprocessing/main.nf \\\n  --help\n\n\nRun command\n\n\nExample of params.yaml\n\n# Inputs\nid: # please fill in - example: \"foo\"\ninput: # please fill in - example: \"input.h5mu\"\n\n# Outputs\n# output: \"$id.$key.output.h5mu\"\n\n# Correction arguments\nperform_correction: false\n\n# Filtering arguments\n# min_genes: 100\n# min_counts: 1000\n\n# Nextflow input-output arguments\npublish_dir: # please fill in - example: \"output/\"\n# param_list: \"my_params.yaml\"\n\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -profile docker \\\n  -main-script workflows/ingestion/cellranger_postprocessing/main.nf \\\n  -params-file params.yaml\n\n\n\n\n\n\nNote\n\n\n\nReplace -profile docker with -profile podman or -profile singularity depending on the desired backend."
+  },
+  {
+    "objectID": "components/workflow_ingestion_cellranger_postprocessing.html#argument-groups",
+    "href": "components/workflow_ingestion_cellranger_postprocessing.html#argument-groups",
+    "title": "Cell Ranger post-processing",
+    "section": "Argument groups",
+    "text": "Argument groups\n\nInputs\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--id\nID of the sample.\nstring, required, example: \"foo\"\n\n\n--input\nInput h5mu file created by running Cell Ranger and converting its output to h5mu.\nfile, required, example: \"input.h5mu\"\n\n\n\n\n\nOutputs\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--output\nThe converted h5mu file.\nfile, required, default: \"$id.cellranger_postprocessing.output.h5mu\"\n\n\n\n\n\nCorrection arguments\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--perform_correction\nWhether or not to run CellBender to perform count correction.\nboolean_true\n\n\n\n\n\nFiltering arguments\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--min_genes\nMinimum number of counts required for a cell to pass filtering.\ninteger, example: 100\n\n\n--min_counts\nMinimum number of genes expressed required for a cell to pass filtering.\ninteger, example: 1000"
+  },
+  {
+    "objectID": "components/workflow_ingestion_cellranger_postprocessing.html#authors",
+    "href": "components/workflow_ingestion_cellranger_postprocessing.html#authors",
+    "title": "Cell Ranger post-processing",
+    "section": "Authors",
+    "text": "Authors\n\nAngela Pisco   (author)\nRobrecht Cannoodt   (author, maintainer)"
+  },
+  {
+    "objectID": "components/workflow_ingestion_cellranger_postprocessing.html#visualisation",
+    "href": "components/workflow_ingestion_cellranger_postprocessing.html#visualisation",
+    "title": "Cell Ranger post-processing",
+    "section": "Visualisation",
+    "text": "Visualisation\n\n\n\n\nflowchart LR\n    p0(Input)\n    p7(from_10xh5_to_h5mu)\n    p15(subset_h5mu)\n    p21(filter)\n    p26(cellbender_remove_background)\n    p31(mix)\n    p30(filter)\n    p32(filter)\n    p38(filter_with_counts)\n    p42(mix)\n    p41(filter)\n    p48(publish)\n    p54(Output)\n    p30-->p31\n    p31-->p32\n    p31-->p41\n    p41-->p42\n    p0-->p7\n    p7-->p15\n    p15-->p21\n    p15-->p30\n    p21-->p26\n    p26-->p31\n    p32-->p38\n    p38-->p42\n    p42-->p48\n    p48-->p54"
+  },
+  {
     "objectID": "components/index.html",
     "href": "components/index.html",
     "title": "Components",
     "section": "",
-    "text": "Namespace\nName\nDescription\n\n\n\n\nIngestion\nBD Rhapsody\nA generic pipeline for running BD Rhapsody WTA or Targeted mapping, with support for AbSeq, VDJ and/or SMK.\n\n\nIngestion\nCell Ranger mapping\nA pipeline for running Cell Ranger mapping\n\n\nIngestion\nDemux\nA generic pipeline for running bcl2fastq, bcl-convert or Cell Ranger mkfastq.\n\n\nIngestion\nMake reference\nBuild a transcriptomics reference into one of many formats\n\n\nMultiomics\nFull pipeline\nA pipeline to analyse multiple multiomics samples\n\n\nMultiomics\nIntegration\nA pipeline for demultiplexing multimodal multi-sample RNA transcriptomics data\n\n\nMultiomics\nRna multisample\nProcessing unimodal multi-sample RNA transcriptomics data\n\n\nMultiomics\nRna singlesample\nProcessing unimodal single-sample RNA transcriptomics data"
+    "text": "Namespace\nName\nDescription\n\n\n\n\nConversion\nConversion\nA pipeline to convert different file formats to\n\n\nIngestion\nBD Rhapsody\nA generic pipeline for running BD Rhapsody WTA or Targeted mapping, with support for AbSeq, VDJ and/or SMK.\n\n\nIngestion\nCell Ranger mapping\nA pipeline for running Cell Ranger mapping\n\n\nIngestion\nCell Ranger post-processing\nPost-processing Cell Ranger datasets\n\n\nIngestion\nDemux\nA generic pipeline for running bcl2fastq, bcl-convert or Cell Ranger mkfastq.\n\n\nIngestion\nMake reference\nBuild a transcriptomics reference into one of many formats\n\n\nMultiomics\nFull pipeline\nA pipeline to analyse multiple multiomics samples\n\n\nMultiomics\nIntegration\nA pipeline for demultiplexing multimodal multi-sample RNA transcriptomics data\n\n\nMultiomics\nRna multisample\nProcessing unimodal multi-sample RNA transcriptomics data\n\n\nMultiomics\nRna singlesample\nProcessing unimodal single-sample RNA transcriptomics data"
   },
   {
     "objectID": "components/index.html#modules",
     "href": "components/index.html#modules",
     "title": "Components",
     "section": "Modules",
-    "text": "Modules\n\n\n\n\nNamespace\nName\nDescription\n\n\n\n\nCluster\nLeiden\nCluster cells using the Leiden algorithm [Traag18] implemented in the Scanpy framework [Wolf18]\n\n\nConvert\nFrom 10xh5 to h5mu\nConverts a 10x h5 into an h5mu file\n\n\nConvert\nFrom 10xmtx to h5mu\nConverts a 10x mtx into an h5mu file\n\n\nConvert\nFrom bd to 10x molecular barcode tags\nConvert the molecular barcode sequence SAM tag from BD format (MA) to 10X format (UB)\n\n\nConvert\nFrom bdrhap to h5mu\nConvert the output of a BD Rhapsody WTA pipeline to a MuData h5 file\n\n\nConvert\nFrom h5ad to h5mu\nConverts a single layer h5ad file into a single muon object\n\n\nConvert\nFrom velocyto to h5mu\nConvert a velocyto\n\n\nCorrection\nCellbender remove background\nEliminating technical artifacts from high-throughput single-cell RNA sequencing data\n\n\nDemux\nBcl convert\nConvert bcl files to fastq files using bcl-convert\n\n\nDemux\nBcl2fastq\nConvert bcl files to fastq files using bcl2fastq\n\n\nDemux\nCellranger mkfastq\nDemultiplex raw sequencing data\n\n\nDimred\nPca\nComputes PCA coordinates, loadings and variance decomposition\n\n\nDimred\nUmap\nUMAP (Uniform Manifold Approximation and Projection) is a manifold learning technique suitable for visualizing high-dimensional data\n\n\nDownload\nDownload file\nDownload a file\n\n\nDownload\nSync test resources\nSynchronise the test resources from s3://openpipelines-data to resources_test\n\n\nFiles\nMake params\nLooks for files in a directory and turn it in a params file\n\n\nFilter\nDo filter\nRemove observations and variables based on specified\n\n\nFilter\nFilter with counts\nFilter scRNA-seq data based on the primary QC metrics\n\n\nFilter\nFilter with hvg\nAnnotate highly variable genes [Satija15] [Zheng17] [Stuart19]\n\n\nFilter\nFilter with scrublet\nDoublet detection using the Scrublet method (Wolock, Lopez and Klein, 2019)\n\n\nIntegrate\nAdd metadata\nAdd a csv containing metadata to the\n\n\nIntegrate\nConcat\nConcatenates several uni-modal samples in\n\n\nIntegrate\nHarmony\nPerforms Harmony integration based as described in https://github\n\n\nIntegrate\nHarmonypy\nPerforms Harmony integration based as described in https://github\n\n\nIntegrate\nMerge\nCombine one or more single-modality\n\n\nIntegrate\nScanorama\nUse Scanorama to integrate different experiments\n\n\nMapping\nBD Rhapsody\nA wrapper for the BD Rhapsody Analysis CWL v1.10.1 pipeline\n\n\nMapping\nCellranger count split\nSplit 10x Cell Ranger output directory into separate output fields\n\n\nMapping\nCellranger count\nAlign fastq files using Cell Ranger count\n\n\nMapping\nCellranger multi\nAlign fastq files using Cell Ranger multi\n\n\nMetadata\nAdd id\nAdd id of\n\n\nNeighbors\nBbknn\nBBKNN network generation\n\n\nNeighbors\nFind neighbors\nCompute a neighborhood graph of observations [McInnes18]\n\n\nProcess 10xh5\nFilter 10xh5\nFilter a 10x h5 dataset\n\n\nQc\nFastqc\nFastqc component, please see https://www\n\n\nQc\nMultiqc\nComponent for multiqc (https://multiqc\n\n\nReference\nBuild bdrhap reference\nCompile a reference into a STAR index compatible with the BD Rhapsody pipeline\n\n\nReference\nBuild cellranger reference\nBuild a Cell Ranger-compatible reference folder from user-supplied genome FASTA and gene GTF files\n\n\nReference\nMake reference\nPreprocess and build a transcriptome reference\n\n\nReport\nMermaid\nGenerates a network from mermaid code\n\n\nSplit\nSplit modalities\nSplit the modalities from a single\n\n\nTransfer\nPublish\nPublish an artifact and optionally rename with parameters\n\n\nTransform\nDelete layer\nDelete an anndata layer from one or more modalities\n\n\nTransform\nLog1p\nLogarithmize the data matrix\n\n\nTransform\nNormalize total\nNormalize counts per cell\n\n\nTransform\nRegress out\nRegress out (mostly) unwanted sources of variation\n\n\nTransform\nScale\nScale data to unit variance and zero mean\n\n\nVelocity\nScvelo\n\n\n\nVelocity\nVelocyto\nRuns the velocity analysis on a BAM file, outputting a loom file"
+    "text": "Modules\n\n\n\n\nNamespace\nName\nDescription\n\n\n\n\nCluster\nLeiden\nCluster cells using the Leiden algorithm [Traag18] implemented in the Scanpy framework [Wolf18]\n\n\nConvert\nFrom 10xh5 to h5mu\nConverts a 10x h5 into an h5mu file\n\n\nConvert\nFrom 10xmtx to h5mu\nConverts a 10x mtx into an h5mu file\n\n\nConvert\nFrom bd to 10x molecular barcode tags\nConvert the molecular barcode sequence SAM tag from BD format (MA) to 10X format (UB)\n\n\nConvert\nFrom bdrhap to h5mu\nConvert the output of a BD Rhapsody WTA pipeline to a MuData h5 file\n\n\nConvert\nFrom h5ad to h5mu\nConverts a single layer h5ad file into a single muon object\n\n\nConvert\nFrom velocyto to h5mu\nConvert a velocyto\n\n\nCorrection\nCellbender remove background\nEliminating technical artifacts from high-throughput single-cell RNA sequencing data\n\n\nDataflow\nConcat\nConcatenates several uni-modal samples in\n\n\nDataflow\nMerge\nCombine one or more single-modality\n\n\nDataflow\nSplit modalities\nSplit the modalities from a single\n\n\nDemux\nBcl convert\nConvert bcl files to fastq files using bcl-convert\n\n\nDemux\nBcl2fastq\nConvert bcl files to fastq files using bcl2fastq\n\n\nDemux\nCellranger mkfastq\nDemultiplex raw sequencing data\n\n\nDimred\nPca\nComputes PCA coordinates, loadings and variance decomposition\n\n\nDimred\nUmap\nUMAP (Uniform Manifold Approximation and Projection) is a manifold learning technique suitable for visualizing high-dimensional data\n\n\nDownload\nDownload file\nDownload a file\n\n\nDownload\nSync test resources\nSynchronise the test resources from s3://openpipelines-data to resources_test\n\n\nFiles\nMake params\nLooks for files in a directory and turn it in a params file\n\n\nFilter\nDo filter\nRemove observations and variables based on specified\n\n\nFilter\nFilter with counts\nFilter scRNA-seq data based on the primary QC metrics\n\n\nFilter\nFilter with hvg\nAnnotate highly variable genes [Satija15] [Zheng17] [Stuart19]\n\n\nFilter\nFilter with scrublet\nDoublet detection using the Scrublet method (Wolock, Lopez and Klein, 2019)\n\n\nFilter\nSubset h5mu\nCreate a subset of a mudata file by selecting the first number of observations\n\n\nIntegrate\nHarmony\nPerforms Harmony integration based as described in https://github\n\n\nIntegrate\nHarmonypy\nPerforms Harmony integration based as described in https://github\n\n\nIntegrate\nScanorama\nUse Scanorama to integrate different experiments\n\n\nIntegrate\nScvi\nPerforms scvi integration as done in the human lung cell atlas https://github\n\n\nMapping\nBD Rhapsody\nA wrapper for the BD Rhapsody Analysis CWL v1.10.1 pipeline\n\n\nMapping\nCellranger count split\nSplit 10x Cell Ranger output directory into separate output fields\n\n\nMapping\nCellranger count\nAlign fastq files using Cell Ranger count\n\n\nMapping\nCellranger multi\nAlign fastq files using Cell Ranger multi\n\n\nMetadata\nAdd id\nAdd id of\n\n\nMetadata\nJoin csv\nJoin a csv containing metadata to the\n\n\nNeighbors\nBbknn\nBBKNN network generation\n\n\nNeighbors\nFind neighbors\nCompute a neighborhood graph of observations [McInnes18]\n\n\nProcess 10xh5\nFilter 10xh5\nFilter a 10x h5 dataset\n\n\nQc\nFastqc\nFastqc component, please see https://www\n\n\nQc\nMultiqc\nComponent for multiqc (https://multiqc\n\n\nReference\nBuild bdrhap reference\nCompile a reference into a STAR index compatible with the BD Rhapsody pipeline\n\n\nReference\nBuild cellranger reference\nBuild a Cell Ranger-compatible reference folder from user-supplied genome FASTA and gene GTF files\n\n\nReference\nMake reference\nPreprocess and build a transcriptome reference\n\n\nReport\nMermaid\nGenerates a network from mermaid code\n\n\nTransfer\nPublish\nPublish an artifact and optionally rename with parameters\n\n\nTransform\nDelete layer\nDelete an anndata layer from one or more modalities\n\n\nTransform\nLog1p\nLogarithmize the data matrix\n\n\nTransform\nNormalize total\nNormalize counts per cell\n\n\nTransform\nRegress out\nRegress out (mostly) unwanted sources of variation\n\n\nTransform\nScale\nScale data to unit variance and zero mean\n\n\nVelocity\nScvelo\n\n\n\nVelocity\nVelocyto\nRuns the velocity analysis on a BAM file, outputting a loom file"
   },
   {
     "objectID": "components/workflow_multiomics_full_pipeline.html",
@@ -1001,34 +1071,6 @@
     "text": "Authors\n\nDries De Maeyer (author)\nRobrecht Cannoodt   (maintainer, author)"
   },
   {
-    "objectID": "components/module_integrate_add_metadata.html",
-    "href": "components/module_integrate_add_metadata.html",
-    "title": "Add metadata",
-    "section": "",
-    "text": "ID: add_metadata\nNamespace: integrate\n\n\n\nSource\nAdd a csv containing metadata to the .obs or .var field of a mudata file."
-  },
-  {
-    "objectID": "components/module_integrate_add_metadata.html#example-commands",
-    "href": "components/module_integrate_add_metadata.html#example-commands",
-    "title": "Add metadata",
-    "section": "Example commands",
-    "text": "Example commands\nYou can run the pipeline using nextflow run.\n\nView help\nYou can use --help as a parameter to get an overview of the possible parameters.\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -main-script target/nextflow/integrate/add_metadata/main.nf \\\n  --help\n\n\nRun command\n\n\nExample of params.yaml\n\n# MuData Input\ninput: # please fill in - example: \"path/to/file\"\nmodality: \"rna\"\n# obs_key: \"foo\"\n# var_key: \"foo\"\n\n# MuData Output\n# output: \"$id.$key.output.output\"\n\n# Metadata Input\n# input_csv: \"path/to/file\"\ncsv_key: \"id\"\n\n# Nextflow input-output arguments\npublish_dir: # please fill in - example: \"output/\"\n# param_list: \"my_params.yaml\"\n\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -profile docker \\\n  -main-script target/nextflow/integrate/add_metadata/main.nf \\\n  -params-file params.yaml\n\n\n\n\n\n\nNote\n\n\n\nReplace -profile docker with -profile podman or -profile singularity depending on the desired backend."
-  },
-  {
-    "objectID": "components/module_integrate_add_metadata.html#argument-groups",
-    "href": "components/module_integrate_add_metadata.html#argument-groups",
-    "title": "Add metadata",
-    "section": "Argument groups",
-    "text": "Argument groups\n\nMuData Input\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput h5mu file\nfile, required\n\n\n--obs_key\nObs column name where the sample id can be found for each observation to join on. Usefull when adding metadata to concatenated samples. Mutually exclusive with –var_key and –sample_id\nstring\n\n\n--var_key\nVar column name where the sample id can be found for each observation to join on. Usefull when adding metadata to concatenated samples. Mutually exclusive with –var_key and –sample_id.\nstring\n\n\n\n\n\nMuData Output\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--output\nOutput h5mu file.\nfile, required\n\n\n\n\n\nMetadata Input\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input_csv\n.csv file containing metadata”\nfile\n\n\n--csv_key\ncolumn of the the csv that corresponds to the sample id.\nstring, default: \"id\""
-  },
-  {
-    "objectID": "components/module_integrate_add_metadata.html#authors",
-    "href": "components/module_integrate_add_metadata.html#authors",
-    "title": "Add metadata",
-    "section": "Authors",
-    "text": "Authors\n\nDries Schaumont  (author)"
-  },
-  {
     "objectID": "components/workflow_ingestion_demux.html",
     "href": "components/workflow_ingestion_demux.html",
     "title": "Demux",
@@ -1092,6 +1134,34 @@
     "text": "Authors\n\nToni Verbeiren  (author, maintainer)"
   },
   {
+    "objectID": "components/module_dataflow_merge.html",
+    "href": "components/module_dataflow_merge.html",
+    "title": "Merge",
+    "section": "",
+    "text": "ID: merge\nNamespace: dataflow\n\n\n\nSource\nCombine one or more single-modality .h5mu files together into one .h5mu file."
+  },
+  {
+    "objectID": "components/module_dataflow_merge.html#example-commands",
+    "href": "components/module_dataflow_merge.html#example-commands",
+    "title": "Merge",
+    "section": "Example commands",
+    "text": "Example commands\nYou can run the pipeline using nextflow run.\n\nView help\nYou can use --help as a parameter to get an overview of the possible parameters.\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -main-script target/nextflow/dataflow/merge/main.nf \\\n  --help\n\n\nRun command\n\n\nExample of params.yaml\n\n# Arguments\ninput: # please fill in - example: [\"sample_paths\"]\n# output: \"$id.$key.output.h5mu\"\ncompression: \"gzip\"\n\n# Nextflow input-output arguments\npublish_dir: # please fill in - example: \"output/\"\n# param_list: \"my_params.yaml\"\n\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -profile docker \\\n  -main-script target/nextflow/dataflow/merge/main.nf \\\n  -params-file params.yaml\n\n\n\n\n\n\nNote\n\n\n\nReplace -profile docker with -profile podman or -profile singularity depending on the desired backend."
+  },
+  {
+    "objectID": "components/module_dataflow_merge.html#argument-group",
+    "href": "components/module_dataflow_merge.html#argument-group",
+    "title": "Merge",
+    "section": "Argument group",
+    "text": "Argument group\n\nArguments\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nPaths to the single-modality .h5mu files that need to be combined\nfile, required, default: \"sample_paths\"\n\n\n--output\nPath to the output file.\nfile, default: \"output.h5mu\"\n\n\n--compression\nThe compression format to be used on the final h5mu object.\nstring, default: \"gzip\""
+  },
+  {
+    "objectID": "components/module_dataflow_merge.html#authors",
+    "href": "components/module_dataflow_merge.html#authors",
+    "title": "Merge",
+    "section": "Authors",
+    "text": "Authors\n\nDries Schaumont (maintainer)"
+  },
+  {
     "objectID": "components/module_correction_cellbender_remove_background.html",
     "href": "components/module_correction_cellbender_remove_background.html",
     "title": "Cellbender remove background",
@@ -1103,14 +1173,14 @@
     "href": "components/module_correction_cellbender_remove_background.html#example-commands",
     "title": "Cellbender remove background",
     "section": "Example commands",
-    "text": "Example commands\nYou can run the pipeline using nextflow run.\n\nView help\nYou can use --help as a parameter to get an overview of the possible parameters.\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -main-script target/nextflow/correction/cellbender_remove_background/main.nf \\\n  --help\n\n\nRun command\n\n\nExample of params.yaml\n\n# Inputs\ninput: # please fill in - example: \"input.h5\"\n\n# Outputs\n# output: \"$id.$key.output.h5\"\n# output_filtered: \"$id.$key.output_filtered.h5\"\n# output_report: \"$id.$key.output_report.pdf\"\n# output_cell_barcodes: \"$id.$key.output_cell_barcodes.csv\"\n\n# Arguments\n# model: \"foo\"\n# total_droplets_included: 50000\n# epochs: 150\n# fpr: 0.01\nexclude_antibody_capture: false\n# learning_rate: 1.0E-4\ncuda: false\n\n# Nextflow input-output arguments\npublish_dir: # please fill in - example: \"output/\"\n# param_list: \"my_params.yaml\"\n\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -profile docker \\\n  -main-script target/nextflow/correction/cellbender_remove_background/main.nf \\\n  -params-file params.yaml\n\n\n\n\n\n\nNote\n\n\n\nReplace -profile docker with -profile podman or -profile singularity depending on the desired backend."
+    "text": "Example commands\nYou can run the pipeline using nextflow run.\n\nView help\nYou can use --help as a parameter to get an overview of the possible parameters.\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -main-script target/nextflow/correction/cellbender_remove_background/main.nf \\\n  --help\n\n\nRun command\n\n\nExample of params.yaml\n\n# Inputs\ninput: # please fill in - example: \"input.h5\"\nmodality: \"rna\"\n\n# Outputs\n# output: \"$id.$key.output.h5\"\nlayer_output: \"corrected\"\nobs_latent_rt_efficiency: \"latent_rt_efficiency\"\nobs_latent_cell_probability: \"latent_cell_probability\"\nobs_latent_scale: \"latent_scale\"\nvar_ambient_expression: \"ambient_expression\"\n\n# Arguments\n# model: \"foo\"\n# total_droplets_included: 50000\n# epochs: 150\n# fpr: 0.01\nexclude_antibody_capture: false\n# learning_rate: 1.0E-4\ncuda: false\n\n# Nextflow input-output arguments\npublish_dir: # please fill in - example: \"output/\"\n# param_list: \"my_params.yaml\"\n\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -profile docker \\\n  -main-script target/nextflow/correction/cellbender_remove_background/main.nf \\\n  -params-file params.yaml\n\n\n\n\n\n\nNote\n\n\n\nReplace -profile docker with -profile podman or -profile singularity depending on the desired backend."
   },
   {
     "objectID": "components/module_correction_cellbender_remove_background.html#argument-groups",
     "href": "components/module_correction_cellbender_remove_background.html#argument-groups",
     "title": "Cellbender remove background",
     "section": "Argument groups",
-    "text": "Argument groups\n\nInputs\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput file.\nfile, required, example: \"input.h5\"\n\n\n\n\n\nOutputs\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--output\nFull count matrix as an h5 file, with background RNA removed. This file contains all the original droplet barcodes.\nfile, required, example: \"output.h5\"\n\n\n--output_filtered\nFiltered count matrix as an h5 file, with background RNA removed. The word “filtered” means that this file contains only the droplets which were determined to have a > 50% posterior probability of containing cells.\nfile, required, example: \"output_filtered.h5\"\n\n\n--output_report\nPDF file that provides a standard graphical summary of the inference procedure.\nfile, example: \"report.pdf\"\n\n\n--output_cell_barcodes\nCSV file containing all the droplet barcodes which were determined to have a > 50% posterior probability of containing cells. Barcodes are written in plain text. This information is also contained in each of the above outputs, but is included as a separate output for convenient use in certain downstream applications.\nfile, example: \"output.csv\"\n\n\n\n\n\nArguments\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--model\nWhich model is being used for count data. ‘simple’ does not model either ambient RNA or random barcode swapping (for debugging purposes – not recommended). ‘ambient’ assumes background RNA is incorporated into droplets. ‘swapping’ assumes background RNA comes from random barcode swapping. ‘full’ uses a combined ambient and swapping model. Defaults to ‘full’.\nstring\n\n\n--total_droplets_included\nThe number of droplets from the rank-ordered UMI plot that will be analyzed. The largest ‘total_droplets’ droplets will have their cell probabilities inferred as an output.\ninteger, example: 50000\n\n\n--epochs\nNumber of epochs to train\ninteger, example: 150\n\n\n--fpr\nTarget false positive rate in (0, 1). A false positive is a true signal count that is erroneously removed. More background removal is accompanied by more signal removal at high values of FPR. You can specify multiple values, which will create multiple output files.\ndouble, example: 0.01\n\n\n--exclude_antibody_capture\nIncluding the flag –exclude-antibody-capture will cause remove-background to operate on gene counts only, ignoring other features.\nboolean_true\n\n\n--learning_rate\nTraining detail: lower learning rate for inference. A OneCycle learning rate schedule is used, where the upper learning rate is ten times this value. (For this value, probably do not exceed 1e-3).\ndouble, example: 1e-04\n\n\n--cuda\nIncluding the flag –cuda will run the inference on a GPU.\nboolean_true"
+    "text": "Argument groups\n\nInputs\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput file.\nfile, required, example: \"input.h5\"\n\n\n--modality\nList of modalities to process.\nstring, default: \"rna\"\n\n\n\n\n\nOutputs\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--output\nFull count matrix as an h5mu file, with background RNA removed. This file contains all the original droplet barcodes.\nfile, required, example: \"output.h5\"\n\n\n--layer_output\nOutput layer\nstring, default: \"corrected\"\n\n\n\n\n\nArguments\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--model\nWhich model is being used for count data. ‘simple’ does not model either ambient RNA or random barcode swapping (for debugging purposes – not recommended). ‘ambient’ assumes background RNA is incorporated into droplets. ‘swapping’ assumes background RNA comes from random barcode swapping. ‘full’ uses a combined ambient and swapping model. Defaults to ‘full’.\nstring\n\n\n--total_droplets_included\nThe number of droplets from the rank-ordered UMI plot that will be analyzed. The largest ‘total_droplets’ droplets will have their cell probabilities inferred as an output.\ninteger, example: 50000\n\n\n--epochs\nNumber of epochs to train\ninteger, example: 150\n\n\n--fpr\nTarget false positive rate in (0, 1). A false positive is a true signal count that is erroneously removed. More background removal is accompanied by more signal removal at high values of FPR. You can specify multiple values, which will create multiple output files.\ndouble, example: 0.01\n\n\n--exclude_antibody_capture\nIncluding the flag –exclude-antibody-capture will cause remove-background to operate on gene counts only, ignoring other features.\nboolean_true\n\n\n--learning_rate\nTraining detail: lower learning rate for inference. A OneCycle learning rate schedule is used, where the upper learning rate is ten times this value. (For this value, probably do not exceed 1e-3).\ndouble, example: 1e-04\n\n\n--cuda\nIncluding the flag –cuda will run the inference on a GPU.\nboolean_true"
   },
   {
     "objectID": "components/module_correction_cellbender_remove_background.html#authors",
@@ -1202,6 +1272,34 @@
     "title": "Delete layer",
     "section": "Authors",
     "text": "Authors\n\nDries Schaumont (maintainer)"
+  },
+  {
+    "objectID": "components/module_filter_subset_h5mu.html",
+    "href": "components/module_filter_subset_h5mu.html",
+    "title": "Subset h5mu",
+    "section": "",
+    "text": "ID: subset_h5mu\nNamespace: filter\n\n\n\nSource\nCreate a subset of a mudata file by selecting the first number of observations"
+  },
+  {
+    "objectID": "components/module_filter_subset_h5mu.html#example-commands",
+    "href": "components/module_filter_subset_h5mu.html#example-commands",
+    "title": "Subset h5mu",
+    "section": "Example commands",
+    "text": "Example commands\nYou can run the pipeline using nextflow run.\n\nView help\nYou can use --help as a parameter to get an overview of the possible parameters.\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -main-script target/nextflow/filter/subset_h5mu/main.nf \\\n  --help\n\n\nRun command\n\n\nExample of params.yaml\n\n# Arguments\ninput: # please fill in - example: \"input.h5mu\"\nmodality: \"rna\"\n# output: \"$id.$key.output.h5mu\"\n# number_of_observations: 5\n\n# Nextflow input-output arguments\npublish_dir: # please fill in - example: \"output/\"\n# param_list: \"my_params.yaml\"\n\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -profile docker \\\n  -main-script target/nextflow/filter/subset_h5mu/main.nf \\\n  -params-file params.yaml\n\n\n\n\n\n\nNote\n\n\n\nReplace -profile docker with -profile podman or -profile singularity depending on the desired backend."
+  },
+  {
+    "objectID": "components/module_filter_subset_h5mu.html#argument-group",
+    "href": "components/module_filter_subset_h5mu.html#argument-group",
+    "title": "Subset h5mu",
+    "section": "Argument group",
+    "text": "Argument group\n\nArguments\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput h5mu file\nfile, required, example: \"input.h5mu\"\n\n\n--output\nOutput h5mu file.\nfile, example: \"output.h5mu\"\n\n\n--number_of_observations\nNumber of observations to be selected from the h5mu file.\ninteger, example: 5"
+  },
+  {
+    "objectID": "components/module_filter_subset_h5mu.html#authors",
+    "href": "components/module_filter_subset_h5mu.html#authors",
+    "title": "Subset h5mu",
+    "section": "Authors",
+    "text": "Authors\n\nDries Schaumont  (maintainer)"
   },
   {
     "objectID": "components/module_transform_normalize_total.html",
@@ -1355,21 +1453,21 @@
     "href": "components/module_filter_filter_with_counts.html#example-commands",
     "title": "Filter with counts",
     "section": "Example commands",
-    "text": "Example commands\nYou can run the pipeline using nextflow run.\n\nView help\nYou can use --help as a parameter to get an overview of the possible parameters.\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -main-script target/nextflow/filter/filter_with_counts/main.nf \\\n  --help\n\n\nRun command\n\n\nExample of params.yaml\n\n# Arguments\ninput: # please fill in - example: \"input.h5mu\"\nmodality: \"rna\"\n# output: \"$id.$key.output.h5mu\"\ndo_subset: false\nobs_name_filter: \"filter_with_counts\"\nvar_name_filter: \"filter_with_counts\"\n# min_counts: 200\n# max_counts: 5000000\n# min_genes_per_cell: 200\n# max_genes_per_cell: 1500000\n# min_cells_per_gene: 3\n# min_fraction_mito: 0\n# max_fraction_mito: 0.2\n\n# Nextflow input-output arguments\npublish_dir: # please fill in - example: \"output/\"\n# param_list: \"my_params.yaml\"\n\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -profile docker \\\n  -main-script target/nextflow/filter/filter_with_counts/main.nf \\\n  -params-file params.yaml\n\n\n\n\n\n\nNote\n\n\n\nReplace -profile docker with -profile podman or -profile singularity depending on the desired backend."
+    "text": "Example commands\nYou can run the pipeline using nextflow run.\n\nView help\nYou can use --help as a parameter to get an overview of the possible parameters.\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -main-script target/nextflow/filter/filter_with_counts/main.nf \\\n  --help\n\n\nRun command\n\n\nExample of params.yaml\n\n# Inputs\ninput: # please fill in - example: \"input.h5mu\"\nmodality: \"rna\"\nlayer: \"rna\"\n\n# Outputs\n# output: \"$id.$key.output.h5mu\"\ndo_subset: false\nobs_name_filter: \"filter_with_counts\"\nvar_name_filter: \"filter_with_counts\"\n\n# Arguments\n# min_counts: 200\n# max_counts: 5000000\n# min_genes_per_cell: 200\n# max_genes_per_cell: 1500000\n# min_cells_per_gene: 3\n# min_fraction_mito: 0\n# max_fraction_mito: 0.2\n\n# Nextflow input-output arguments\npublish_dir: # please fill in - example: \"output/\"\n# param_list: \"my_params.yaml\"\n\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -profile docker \\\n  -main-script target/nextflow/filter/filter_with_counts/main.nf \\\n  -params-file params.yaml\n\n\n\n\n\n\nNote\n\n\n\nReplace -profile docker with -profile podman or -profile singularity depending on the desired backend."
   },
   {
-    "objectID": "components/module_filter_filter_with_counts.html#argument-group",
-    "href": "components/module_filter_filter_with_counts.html#argument-group",
+    "objectID": "components/module_filter_filter_with_counts.html#argument-groups",
+    "href": "components/module_filter_filter_with_counts.html#argument-groups",
     "title": "Filter with counts",
-    "section": "Argument group",
-    "text": "Argument group\n\nArguments\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput h5mu file\nfile, required, example: \"input.h5mu\"\n\n\n--output\nOutput h5mu file.\nfile, example: \"output.h5mu\"\n\n\n--do_subset\nWhether to subset before storing the output.\nboolean_true\n\n\n--obs_name_filter\nIn which .obs slot to store a boolean array corresponding to which observations should be removed.\nstring, default: \"filter_with_counts\"\n\n\n--var_name_filter\nIn which .var slot to store a boolean array corresponding to which variables should be removed.\nstring, default: \"filter_with_counts\"\n\n\n--min_counts\nMinimum number of counts captured per cell.\ninteger, example: 200\n\n\n--max_counts\nMaximum number of counts captured per cell.\ninteger, example: 5000000\n\n\n--min_genes_per_cell\nMinimum of non-zero values per cell.\ninteger, example: 200\n\n\n--max_genes_per_cell\nMaximum of non-zero values per cell.\ninteger, example: 1500000\n\n\n--min_cells_per_gene\nMinimum of non-zero values per gene.\ninteger, example: 3\n\n\n--min_fraction_mito\nMinimum fraction of UMIs that are mitochondrial.\ndouble, example: 0\n\n\n--max_fraction_mito\nMaximum fraction of UMIs that are mitochondrial.\ndouble, example: 0.2"
+    "section": "Argument groups",
+    "text": "Argument groups\n\nInputs\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nInput h5mu file\nfile, required, example: \"input.h5mu\"\n\n\n\n\n\nOutputs\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--output\nOutput h5mu file.\nfile, example: \"output.h5mu\"\n\n\n--do_subset\nWhether to subset before storing the output.\nboolean_true\n\n\n--obs_name_filter\nIn which .obs slot to store a boolean array corresponding to which observations should be removed.\nstring, default: \"filter_with_counts\"\n\n\n--var_name_filter\nIn which .var slot to store a boolean array corresponding to which variables should be removed.\nstring, default: \"filter_with_counts\"\n\n\n\n\n\nArguments\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--min_counts\nMinimum number of counts captured per cell.\ninteger, example: 200\n\n\n--max_counts\nMaximum number of counts captured per cell.\ninteger, example: 5000000\n\n\n--min_genes_per_cell\nMinimum of non-zero values per cell.\ninteger, example: 200\n\n\n--max_genes_per_cell\nMaximum of non-zero values per cell.\ninteger, example: 1500000\n\n\n--min_cells_per_gene\nMinimum of non-zero values per gene.\ninteger, example: 3\n\n\n--min_fraction_mito\nMinimum fraction of UMIs that are mitochondrial.\ndouble, example: 0\n\n\n--max_fraction_mito\nMaximum fraction of UMIs that are mitochondrial.\ndouble, example: 0.2"
   },
   {
     "objectID": "components/module_filter_filter_with_counts.html#authors",
     "href": "components/module_filter_filter_with_counts.html#authors",
     "title": "Filter with counts",
     "section": "Authors",
-    "text": "Authors\n\nDries De Maeyer (contributor)\nRobrecht Cannoodt   (maintainer, contributor)"
+    "text": "Authors\n\nDries De Maeyer (author)\nRobrecht Cannoodt   (maintainer, author)"
   },
   {
     "objectID": "components/module_mapping_bd_rhapsody.html",
@@ -1582,6 +1680,34 @@
     "text": "Authors\n\nAngela Pisco   (author)\nRobrecht Cannoodt   (author, maintainer)\nDries De Maeyer (maintainer)"
   },
   {
+    "objectID": "components/module_dataflow_concat.html",
+    "href": "components/module_dataflow_concat.html",
+    "title": "Concat",
+    "section": "",
+    "text": "ID: concat\nNamespace: dataflow\n\n\n\nSource\nConcatenates several uni-modal samples in .h5mu files into a single file."
+  },
+  {
+    "objectID": "components/module_dataflow_concat.html#example-commands",
+    "href": "components/module_dataflow_concat.html#example-commands",
+    "title": "Concat",
+    "section": "Example commands",
+    "text": "Example commands\nYou can run the pipeline using nextflow run.\n\nView help\nYou can use --help as a parameter to get an overview of the possible parameters.\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -main-script target/nextflow/dataflow/concat/main.nf \\\n  --help\n\n\nRun command\n\n\nExample of params.yaml\n\n# Arguments\ninput: # please fill in - example: [\"sample_paths\"]\ninput_id: # please fill in - example: [\"foo\"]\n# output: \"$id.$key.output.h5mu\"\nobs_sample_name: \"sample_id\"\ncompression: \"gzip\"\nother_axis_mode: \"move\"\n\n# Nextflow input-output arguments\npublish_dir: # please fill in - example: \"output/\"\n# param_list: \"my_params.yaml\"\n\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -profile docker \\\n  -main-script target/nextflow/dataflow/concat/main.nf \\\n  -params-file params.yaml\n\n\n\n\n\n\nNote\n\n\n\nReplace -profile docker with -profile podman or -profile singularity depending on the desired backend."
+  },
+  {
+    "objectID": "components/module_dataflow_concat.html#argument-group",
+    "href": "components/module_dataflow_concat.html#argument-group",
+    "title": "Concat",
+    "section": "Argument group",
+    "text": "Argument group\n\nArguments\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nPaths to the different samples to be concatenated.\nfile, required, example: \"sample_paths\"\n\n\n--input_id\nNames of the different samples that have to be concatenated. Must be specified when using ‘–mode move’. In this case, the ids will be used for the columns names of the dataframes registring the conflicts. If specified, must be of same length as --input.\nstring, required\n\n\n--obs_sample_name\nName of the .obs key under which to add the sample names.\nstring, default: \"sample_id\"\n\n\n--compression\nThe compression format to be used on the final h5mu object.\nstring, default: \"gzip\"\n\n\n--other_axis_mode\nHow to handle the merging of other axis (var, obs, …). - None: keep no data - same: only keep elements of the matrices which are the same in each of the samples - unique: only keep elements for which there is only 1 possible value (1 value that can occur in multiple samples) - first: keep the annotation from the first sample - only: keep elements that show up in only one of the objects (1 unique element in only 1 sample) - move: identical to ‘same’, but moving the conflicting values to .varm or .obsm\nstring, default: \"move\""
+  },
+  {
+    "objectID": "components/module_dataflow_concat.html#authors",
+    "href": "components/module_dataflow_concat.html#authors",
+    "title": "Concat",
+    "section": "Authors",
+    "text": "Authors\n\nDries Schaumont (maintainer)"
+  },
+  {
     "objectID": "components/module_process_10xh5_filter_10xh5.html",
     "href": "components/module_process_10xh5_filter_10xh5.html",
     "title": "Filter 10xh5",
@@ -1600,7 +1726,7 @@
     "href": "components/module_process_10xh5_filter_10xh5.html#argument-group",
     "title": "Filter 10xh5",
     "section": "Argument group",
-    "text": "Argument group\n\nArguments\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nAn h5 file from the 10x genomics website.\nstring, required, example: \"pbmc_1k_protein_v3_raw_feature_bc_matrix.h5\"\n\n\n--output\nOutput h5 file.\nfile, required, example: \"pbmc_1k_protein_v3_raw_feature_bc_matrix_filtered.h5\"\n\n\n--min_library_size\nMinimum library size.\ninteger, default: 0\n\n\n--min_cells_per_gene\nMinimum number of cells per gene.\ninteger, default: 0\n\n\n--keep_feature_types\nSpecify which feature types will never be filtered out\nstring, example: \"Antibody Capture\"\n\n\n--verbose\nIncrease verbosity\nboolean_true"
+    "text": "Argument group\n\nArguments\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nAn h5 file from the 10x genomics website.\nfile, required, example: \"pbmc_1k_protein_v3_raw_feature_bc_matrix.h5\"\n\n\n--output\nOutput h5 file.\nfile, required, example: \"pbmc_1k_protein_v3_raw_feature_bc_matrix_filtered.h5\"\n\n\n--min_library_size\nMinimum library size.\ninteger, default: 0\n\n\n--min_cells_per_gene\nMinimum number of cells per gene.\ninteger, default: 0\n\n\n--keep_feature_types\nSpecify which feature types will never be filtered out\nstring, example: \"Antibody Capture\"\n\n\n--verbose\nIncrease verbosity\nboolean_true"
   },
   {
     "objectID": "components/module_process_10xh5_filter_10xh5.html#authors",
@@ -1608,34 +1734,6 @@
     "title": "Filter 10xh5",
     "section": "Authors",
     "text": "Authors\n\nRobrecht Cannoodt   (maintainer)"
-  },
-  {
-    "objectID": "components/module_split_split_modalities.html",
-    "href": "components/module_split_split_modalities.html",
-    "title": "Split modalities",
-    "section": "",
-    "text": "ID: split_modalities\nNamespace: split\n\n\n\nSource\nSplit the modalities from a single .h5mu multimodal sample into seperate .h5mu files."
-  },
-  {
-    "objectID": "components/module_split_split_modalities.html#example-commands",
-    "href": "components/module_split_split_modalities.html#example-commands",
-    "title": "Split modalities",
-    "section": "Example commands",
-    "text": "Example commands\nYou can run the pipeline using nextflow run.\n\nView help\nYou can use --help as a parameter to get an overview of the possible parameters.\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -main-script target/nextflow/split/split_modalities/main.nf \\\n  --help\n\n\nRun command\n\n\nExample of params.yaml\n\n# Arguments\ninput: # please fill in - example: \"sample_path\"\n# output: \"$id.$key.output.output\"\ncompression: \"gzip\"\n\n# Nextflow input-output arguments\npublish_dir: # please fill in - example: \"output/\"\n# param_list: \"my_params.yaml\"\n\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -profile docker \\\n  -main-script target/nextflow/split/split_modalities/main.nf \\\n  -params-file params.yaml\n\n\n\n\n\n\nNote\n\n\n\nReplace -profile docker with -profile podman or -profile singularity depending on the desired backend."
-  },
-  {
-    "objectID": "components/module_split_split_modalities.html#argument-group",
-    "href": "components/module_split_split_modalities.html#argument-group",
-    "title": "Split modalities",
-    "section": "Argument group",
-    "text": "Argument group\n\nArguments\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nPath to a single .hm5u file\nfile, required, default: \"sample_path\"\n\n\n--compression\nThe compression format to be used on the final h5mu object.\nstring, default: \"gzip\""
-  },
-  {
-    "objectID": "components/module_split_split_modalities.html#authors",
-    "href": "components/module_split_split_modalities.html#authors",
-    "title": "Split modalities",
-    "section": "Authors",
-    "text": "Authors\n\nDries Schaumont (maintainer)"
   },
   {
     "objectID": "components/module_neighbors_bbknn.html",
@@ -1664,6 +1762,34 @@
     "title": "Bbknn",
     "section": "Authors",
     "text": "Authors\n\nDries De Maeyer (author)\nDries Schaumont (maintainer)"
+  },
+  {
+    "objectID": "components/module_dataflow_split_modalities.html",
+    "href": "components/module_dataflow_split_modalities.html",
+    "title": "Split modalities",
+    "section": "",
+    "text": "ID: split_modalities\nNamespace: dataflow\n\n\n\nSource\nSplit the modalities from a single .h5mu multimodal sample into seperate .h5mu files."
+  },
+  {
+    "objectID": "components/module_dataflow_split_modalities.html#example-commands",
+    "href": "components/module_dataflow_split_modalities.html#example-commands",
+    "title": "Split modalities",
+    "section": "Example commands",
+    "text": "Example commands\nYou can run the pipeline using nextflow run.\n\nView help\nYou can use --help as a parameter to get an overview of the possible parameters.\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -main-script target/nextflow/dataflow/split_modalities/main.nf \\\n  --help\n\n\nRun command\n\n\nExample of params.yaml\n\n# Arguments\ninput: # please fill in - example: \"sample_path\"\n# output: \"$id.$key.output.output\"\ncompression: \"gzip\"\n\n# Nextflow input-output arguments\npublish_dir: # please fill in - example: \"output/\"\n# param_list: \"my_params.yaml\"\n\nnextflow run openpipelines-bio/openpipeline \\\n  -r main_build -latest \\\n  -profile docker \\\n  -main-script target/nextflow/dataflow/split_modalities/main.nf \\\n  -params-file params.yaml\n\n\n\n\n\n\nNote\n\n\n\nReplace -profile docker with -profile podman or -profile singularity depending on the desired backend."
+  },
+  {
+    "objectID": "components/module_dataflow_split_modalities.html#argument-group",
+    "href": "components/module_dataflow_split_modalities.html#argument-group",
+    "title": "Split modalities",
+    "section": "Argument group",
+    "text": "Argument group\n\nArguments\n\n\n\n\n\n\n\n\nName\nDescription\nAttributes\n\n\n\n\n--input\nPath to a single .hm5u file\nfile, required, default: \"sample_path\"\n\n\n--compression\nThe compression format to be used on the final h5mu object.\nstring, default: \"gzip\""
+  },
+  {
+    "objectID": "components/module_dataflow_split_modalities.html#authors",
+    "href": "components/module_dataflow_split_modalities.html#authors",
+    "title": "Split modalities",
+    "section": "Authors",
+    "text": "Authors\n\nDries Schaumont (maintainer)"
   },
   {
     "objectID": "components/module_transform_regress_out.html",

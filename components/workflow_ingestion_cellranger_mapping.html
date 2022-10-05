@@ -251,23 +251,18 @@ Example of <code>params.yaml</code>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Outputs</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># output_raw: "$id.$key.output_raw.output_raw"</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># output_h5mu: "$id.$key.output_h5mu.h5mu"</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Cell Ranger arguments</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># expect_cells: 3000</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">chemistry</span><span class="kw">:</span><span class="at"> </span><span class="st">"auto"</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">secondary_analysis</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">generate_bam</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">include_introns</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># MuData conversion arguments</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">which_10xh5</span><span class="kw">:</span><span class="at"> </span><span class="st">"raw_h5"</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># min_genes: 100</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># min_counts: 1000</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="fu">obsm_metrics</span><span class="kw">:</span><span class="at"> </span><span class="st">"metrics_summary"</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Nextflow input-output arguments</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="fu">publish_dir</span><span class="kw">:</span><span class="co"> # please fill in - example: "output/"</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># param_list: "my_params.yaml"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">obsm_metrics</span><span class="kw">:</span><span class="at"> </span><span class="st">"metrics_summary"</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Cell Ranger arguments</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># expect_cells: 3000</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">chemistry</span><span class="kw">:</span><span class="at"> </span><span class="st">"auto"</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">secondary_analysis</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">generate_bam</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="fu">include_introns</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Nextflow input-output arguments</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">publish_dir</span><span class="kw">:</span><span class="co"> # please fill in - example: "output/"</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># param_list: "my_params.yaml"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> main_build <span class="at">-latest</span> <span class="dt">\</span></span>
@@ -329,9 +324,9 @@ Note
 <h3 class="anchored" data-anchor-id="outputs">Outputs</h3>
 <table class="table">
 <colgroup>
-<col style="width: 19%">
-<col style="width: 29%">
-<col style="width: 51%">
+<col style="width: 14%">
+<col style="width: 49%">
+<col style="width: 36%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -350,6 +345,11 @@ Note
 <td style="text-align: left;"><code>--output_h5mu</code></td>
 <td style="text-align: left;">The converted h5mu file.</td>
 <td style="text-align: left;"><code>file</code>, required, example: <code>"output.h5mu"</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--obsm_metrics</code></td>
+<td style="text-align: left;">Name of the .obsm slot under which to QC metrics (if any).</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"metrics_summary"</code></td>
 </tr>
 </tbody>
 </table>
@@ -394,45 +394,6 @@ Note
 <td style="text-align: left;"><code>--include_introns</code></td>
 <td style="text-align: left;">Include intronic reads in count (default=true unless –target-panel is specified in which case default=false)</td>
 <td style="text-align: left;"><code>boolean</code>, default: <code>TRUE</code></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="mudata-conversion-arguments" class="level3">
-<h3 class="anchored" data-anchor-id="mudata-conversion-arguments">MuData conversion arguments</h3>
-<table class="table">
-<colgroup>
-<col style="width: 13%">
-<col style="width: 56%">
-<col style="width: 30%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Description</th>
-<th style="text-align: left;">Attributes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><code>--which_10xh5</code></td>
-<td style="text-align: left;">Which 10x .h5 file to convert to h5mu after Cell Ranger is done mapping.</td>
-<td style="text-align: left;"><code>string</code>, default: <code>"raw_h5"</code></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>--min_genes</code></td>
-<td style="text-align: left;">Minimum number of counts required for a cell to pass filtering.</td>
-<td style="text-align: left;"><code>integer</code>, example: <code>100</code></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>--min_counts</code></td>
-<td style="text-align: left;">Minimum number of genes expressed required for a cell to pass filtering.</td>
-<td style="text-align: left;"><code>integer</code>, example: <code>1000</code></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>--obsm_metrics</code></td>
-<td style="text-align: left;">Name of the .obsm slot under which to QC metrics (if any).</td>
-<td style="text-align: left;"><code>string</code>, default: <code>"metrics_summary"</code></td>
 </tr>
 </tbody>
 </table>

@@ -242,25 +242,28 @@ Example of <code>params.yaml</code>
 </summary>
 <div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inputs</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">input</span><span class="kw">:</span><span class="co"> # please fill in - example: "input.h5"</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Outputs</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># output: "$id.$key.output.h5"</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># output_filtered: "$id.$key.output_filtered.h5"</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># output_report: "$id.$key.output_report.pdf"</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># output_cell_barcodes: "$id.$key.output_cell_barcodes.csv"</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Arguments</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># model: "foo"</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># total_droplets_included: 50000</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># epochs: 150</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># fpr: 0.01</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">exclude_antibody_capture</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># learning_rate: 1.0E-4</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">cuda</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Nextflow input-output arguments</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="fu">publish_dir</span><span class="kw">:</span><span class="co"> # please fill in - example: "output/"</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># param_list: "my_params.yaml"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">modality</span><span class="kw">:</span><span class="at"> </span><span class="st">"rna"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Outputs</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># output: "$id.$key.output.h5"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">layer_output</span><span class="kw">:</span><span class="at"> </span><span class="st">"corrected"</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">obs_latent_rt_efficiency</span><span class="kw">:</span><span class="at"> </span><span class="st">"latent_rt_efficiency"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">obs_latent_cell_probability</span><span class="kw">:</span><span class="at"> </span><span class="st">"latent_cell_probability"</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">obs_latent_scale</span><span class="kw">:</span><span class="at"> </span><span class="st">"latent_scale"</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">var_ambient_expression</span><span class="kw">:</span><span class="at"> </span><span class="st">"ambient_expression"</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Arguments</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># model: "foo"</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># total_droplets_included: 50000</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># epochs: 150</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># fpr: 0.01</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">exclude_antibody_capture</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># learning_rate: 1.0E-4</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="fu">cuda</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Nextflow input-output arguments</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="fu">publish_dir</span><span class="kw">:</span><span class="co"> # please fill in - example: "output/"</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># param_list: "my_params.yaml"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> main_build <span class="at">-latest</span> <span class="dt">\</span></span>
@@ -287,6 +290,11 @@ Note
 <section id="inputs" class="level3">
 <h3 class="anchored" data-anchor-id="inputs">Inputs</h3>
 <table class="table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 36%">
+<col style="width: 47%">
+</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Name</th>
@@ -300,6 +308,11 @@ Note
 <td style="text-align: left;">Input file.</td>
 <td style="text-align: left;"><code>file</code>, required, example: <code>"input.h5"</code></td>
 </tr>
+<tr class="even">
+<td style="text-align: left;"><code>--modality</code></td>
+<td style="text-align: left;">List of modalities to process.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"rna"</code></td>
+</tr>
 </tbody>
 </table>
 </section>
@@ -307,9 +320,9 @@ Note
 <h3 class="anchored" data-anchor-id="outputs">Outputs</h3>
 <table class="table">
 <colgroup>
-<col style="width: 6%">
-<col style="width: 80%">
-<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 67%">
+<col style="width: 23%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -321,23 +334,13 @@ Note
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"><code>--output</code></td>
-<td style="text-align: left;">Full count matrix as an h5 file, with background RNA removed. This file contains all the original droplet barcodes.</td>
+<td style="text-align: left;">Full count matrix as an h5mu file, with background RNA removed. This file contains all the original droplet barcodes.</td>
 <td style="text-align: left;"><code>file</code>, required, example: <code>"output.h5"</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>--output_filtered</code></td>
-<td style="text-align: left;">Filtered count matrix as an h5 file, with background RNA removed. The word “filtered” means that this file contains only the droplets which were determined to have a &gt; 50% posterior probability of containing cells.</td>
-<td style="text-align: left;"><code>file</code>, required, example: <code>"output_filtered.h5"</code></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>--output_report</code></td>
-<td style="text-align: left;">PDF file that provides a standard graphical summary of the inference procedure.</td>
-<td style="text-align: left;"><code>file</code>, example: <code>"report.pdf"</code></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>--output_cell_barcodes</code></td>
-<td style="text-align: left;">CSV file containing all the droplet barcodes which were determined to have a &gt; 50% posterior probability of containing cells. Barcodes are written in plain text. This information is also contained in each of the above outputs, but is included as a separate output for convenient use in certain downstream applications.</td>
-<td style="text-align: left;"><code>file</code>, example: <code>"output.csv"</code></td>
+<td style="text-align: left;"><code>--layer_output</code></td>
+<td style="text-align: left;">Output layer</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"corrected"</code></td>
 </tr>
 </tbody>
 </table>
