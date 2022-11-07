@@ -230,7 +230,7 @@ Namespace: <code>correction</code></p>
 <h3 class="anchored" data-anchor-id="view-help">View help</h3>
 <p>You can use <code>--help</code> as a parameter to get an overview of the possible parameters.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> main_build <span class="at">-latest</span> <span class="dt">\</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> 0.5.1 <span class="at">-latest</span> <span class="dt">\</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> target/nextflow/correction/cellbender_remove_background/main.nf <span class="dt">\</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
@@ -253,20 +253,27 @@ Example of <code>params.yaml</code>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">var_ambient_expression</span><span class="kw">:</span><span class="at"> </span><span class="st">"ambient_expression"</span></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Arguments</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># model: "foo"</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># total_droplets_included: 50000</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># epochs: 150</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># fpr: 0.01</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">exclude_antibody_capture</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># learning_rate: 1.0E-4</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="fu">cuda</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Nextflow input-output arguments</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="fu">publish_dir</span><span class="kw">:</span><span class="co"> # please fill in - example: "output/"</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># param_list: "my_params.yaml"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># expected_cells: 1000</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># total_droplets_included: 25000</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="fu">expected_cells_from_qc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">model</span><span class="kw">:</span><span class="at"> </span><span class="st">"full"</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">epochs</span><span class="kw">:</span><span class="at"> </span><span class="dv">150</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">low_count_threshold</span><span class="kw">:</span><span class="at"> </span><span class="dv">15</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="fu">z_dim</span><span class="kw">:</span><span class="at"> </span><span class="dv">100</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="fu">z_layers</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="dv">500</span><span class="kw">]</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">training_fraction</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.9</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="fu">empty_drop_training_fraction</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.5</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="fu">fpr</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="fl">0.01</span><span class="kw">]</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">exclude_antibody_capture</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co"># learning_rate: 1.0E-4</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="fu">cuda</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Nextflow input-output arguments</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="fu">publish_dir</span><span class="kw">:</span><span class="co"> # please fill in - example: "output/"</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co"># param_list: "my_params.yaml"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> main_build <span class="at">-latest</span> <span class="dt">\</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> 0.5.1 <span class="at">-latest</span> <span class="dt">\</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-profile</span> docker <span class="dt">\</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> target/nextflow/correction/cellbender_remove_background/main.nf <span class="dt">\</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">-params-file</span> params.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -349,8 +356,8 @@ Note
 <h3 class="anchored" data-anchor-id="arguments">Arguments</h3>
 <table class="table">
 <colgroup>
-<col style="width: 6%">
-<col style="width: 86%">
+<col style="width: 8%">
+<col style="width: 84%">
 <col style="width: 6%">
 </colgroup>
 <thead>
@@ -362,36 +369,71 @@ Note
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><code>--model</code></td>
-<td style="text-align: left;">Which model is being used for count data. ‘simple’ does not model either ambient RNA or random barcode swapping (for debugging purposes – not recommended). ‘ambient’ assumes background RNA is incorporated into droplets. ‘swapping’ assumes background RNA comes from random barcode swapping. ‘full’ uses a combined ambient and swapping model. Defaults to ‘full’.</td>
-<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;"><code>--expected_cells</code></td>
+<td style="text-align: left;">Number of cells expected in the dataset (a rough estimate within a factor of 2 is sufficient).</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>1000</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--total_droplets_included</code></td>
 <td style="text-align: left;">The number of droplets from the rank-ordered UMI plot that will be analyzed. The largest ‘total_droplets’ droplets will have their cell probabilities inferred as an output.</td>
-<td style="text-align: left;"><code>integer</code>, example: <code>50000</code></td>
+<td style="text-align: left;"><code>integer</code>, example: <code>25000</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--expected_cells_from_qc</code></td>
+<td style="text-align: left;">Will use the Cell Ranger QC to determine the estimated number of cells</td>
+<td style="text-align: left;"><code>boolean</code>, default: <code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--model</code></td>
+<td style="text-align: left;">Which model is being used for count data. ‘simple’ does not model either ambient RNA or random barcode swapping (for debugging purposes – not recommended). ‘ambient’ assumes background RNA is incorporated into droplets. ‘swapping’ assumes background RNA comes from random barcode swapping. ‘full’ uses a combined ambient and swapping model.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"full"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--epochs</code></td>
-<td style="text-align: left;">Number of epochs to train</td>
-<td style="text-align: left;"><code>integer</code>, example: <code>150</code></td>
+<td style="text-align: left;">Number of epochs to train.</td>
+<td style="text-align: left;"><code>integer</code>, default: <code>150</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>--fpr</code></td>
-<td style="text-align: left;">Target false positive rate in (0, 1). A false positive is a true signal count that is erroneously removed. More background removal is accompanied by more signal removal at high values of FPR. You can specify multiple values, which will create multiple output files.</td>
-<td style="text-align: left;"><code>double</code>, example: <code>0.01</code></td>
+<td style="text-align: left;"><code>--low_count_threshold</code></td>
+<td style="text-align: left;">Droplets with UMI counts below this number are completely excluded from the analysis. This can help identify the correct prior for empty droplet counts in the rare case where empty counts are extremely high (over 200).</td>
+<td style="text-align: left;"><code>integer</code>, default: <code>15</code></td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;"><code>--z_dim</code></td>
+<td style="text-align: left;">Dimension of latent variable z.</td>
+<td style="text-align: left;"><code>integer</code>, default: <code>100</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--z_layers</code></td>
+<td style="text-align: left;">Dimension of hidden layers in the encoder for z.</td>
+<td style="text-align: left;"><code>integer</code>, default: <code>500</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--training_fraction</code></td>
+<td style="text-align: left;">Training detail: the fraction of the data used for training. The rest is never seen by the inference algorithm. Speeds up learning.</td>
+<td style="text-align: left;"><code>double</code>, default: <code>0.9</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--empty_drop_training_fraction</code></td>
+<td style="text-align: left;">Training detail: the fraction of the training data each epoch that is drawn (randomly sampled) from surely empty droplets.</td>
+<td style="text-align: left;"><code>double</code>, default: <code>0.5</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--fpr</code></td>
+<td style="text-align: left;">Target false positive rate in (0, 1). A false positive is a true signal count that is erroneously removed. More background removal is accompanied by more signal removal at high values of FPR. You can specify multiple values, which will create multiple output files.</td>
+<td style="text-align: left;"><code>double</code>, default: <code>0.01</code></td>
+</tr>
+<tr class="even">
 <td style="text-align: left;"><code>--exclude_antibody_capture</code></td>
 <td style="text-align: left;">Including the flag –exclude-antibody-capture will cause remove-background to operate on gene counts only, ignoring other features.</td>
 <td style="text-align: left;"><code>boolean_true</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>--learning_rate</code></td>
 <td style="text-align: left;">Training detail: lower learning rate for inference. A OneCycle learning rate schedule is used, where the upper learning rate is ten times this value. (For this value, probably do not exceed 1e-3).</td>
 <td style="text-align: left;"><code>double</code>, example: <code>1e-04</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>--cuda</code></td>
 <td style="text-align: left;">Including the flag –cuda will run the inference on a GPU.</td>
 <td style="text-align: left;"><code>boolean_true</code></td>

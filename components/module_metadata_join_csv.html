@@ -230,7 +230,7 @@ Namespace: <code>metadata</code></p>
 <h3 class="anchored" data-anchor-id="view-help">View help</h3>
 <p>You can use <code>--help</code> as a parameter to get an overview of the possible parameters.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> main_build <span class="at">-latest</span> <span class="dt">\</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> 0.5.1 <span class="at">-latest</span> <span class="dt">\</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> target/nextflow/metadata/join_csv/main.nf <span class="dt">\</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
@@ -241,16 +241,16 @@ Namespace: <code>metadata</code></p>
 Example of <code>params.yaml</code>
 </summary>
 <div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># MuData Input</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">input</span><span class="kw">:</span><span class="co"> # please fill in - example: "path/to/file"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">input</span><span class="kw">:</span><span class="co"> # please fill in - example: "input.h5mu"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">modality</span><span class="kw">:</span><span class="at"> </span><span class="st">"rna"</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># obs_key: "foo"</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># var_key: "foo"</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># MuData Output</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># output: "$id.$key.output.output"</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># output: "$id.$key.output.h5mu"</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Metadata Input</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># input_csv: "path/to/file"</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">input_csv</span><span class="kw">:</span><span class="co"> # please fill in - example: "metadata.csv"</span></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">csv_key</span><span class="kw">:</span><span class="at"> </span><span class="st">"id"</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Nextflow input-output arguments</span></span>
@@ -258,7 +258,7 @@ Example of <code>params.yaml</code>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># param_list: "my_params.yaml"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> main_build <span class="at">-latest</span> <span class="dt">\</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> 0.5.1 <span class="at">-latest</span> <span class="dt">\</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-profile</span> docker <span class="dt">\</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> target/nextflow/metadata/join_csv/main.nf <span class="dt">\</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">-params-file</span> params.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -283,9 +283,9 @@ Note
 <h3 class="anchored" data-anchor-id="mudata-input">MuData Input</h3>
 <table class="table">
 <colgroup>
-<col style="width: 5%">
-<col style="width: 86%">
-<col style="width: 7%">
+<col style="width: 4%">
+<col style="width: 77%">
+<col style="width: 17%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -298,7 +298,7 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><code>--input</code></td>
 <td style="text-align: left;">Input h5mu file</td>
-<td style="text-align: left;"><code>file</code>, required</td>
+<td style="text-align: left;"><code>file</code>, required, example: <code>"input.h5mu"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--obs_key</code></td>
@@ -316,6 +316,11 @@ Note
 <section id="mudata-output" class="level3">
 <h3 class="anchored" data-anchor-id="mudata-output">MuData Output</h3>
 <table class="table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 25%">
+<col style="width: 59%">
+</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Name</th>
@@ -327,7 +332,7 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><code>--output</code></td>
 <td style="text-align: left;">Output h5mu file.</td>
-<td style="text-align: left;"><code>file</code>, required</td>
+<td style="text-align: left;"><code>file</code>, required, example: <code>"output.h5mu"</code></td>
 </tr>
 </tbody>
 </table>
@@ -336,9 +341,9 @@ Note
 <h3 class="anchored" data-anchor-id="metadata-input">Metadata Input</h3>
 <table class="table">
 <colgroup>
-<col style="width: 14%">
-<col style="width: 58%">
-<col style="width: 26%">
+<col style="width: 12%">
+<col style="width: 49%">
+<col style="width: 38%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -350,8 +355,8 @@ Note
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"><code>--input_csv</code></td>
-<td style="text-align: left;">.csv file containing metadata”</td>
-<td style="text-align: left;"><code>file</code></td>
+<td style="text-align: left;">.csv file containing metadata</td>
+<td style="text-align: left;"><code>file</code>, required, example: <code>"metadata.csv"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--csv_key</code></td>

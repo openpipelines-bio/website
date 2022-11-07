@@ -167,24 +167,24 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Conversion</td>
-<td style="text-align: left;"><a href="../components/workflow_conversion_conversion.html">Conversion</a></td>
-<td style="text-align: left;">A pipeline to convert different file formats to</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">Ingestion</td>
 <td style="text-align: left;"><a href="../components/workflow_ingestion_bd_rhapsody.html">BD Rhapsody</a></td>
 <td style="text-align: left;">A generic pipeline for running BD Rhapsody WTA or Targeted mapping, with support for AbSeq, VDJ and/or SMK.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Ingestion</td>
 <td style="text-align: left;"><a href="../components/workflow_ingestion_cellranger_mapping.html">Cell Ranger mapping</a></td>
 <td style="text-align: left;">A pipeline for running Cell Ranger mapping</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Ingestion</td>
 <td style="text-align: left;"><a href="../components/workflow_ingestion_cellranger_postprocessing.html">Cell Ranger post-processing</a></td>
 <td style="text-align: left;">Post-processing Cell Ranger datasets</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ingestion</td>
+<td style="text-align: left;"><a href="../components/workflow_ingestion_conversion.html">Conversion</a></td>
+<td style="text-align: left;">A pipeline to convert different file formats to</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Ingestion</td>
@@ -264,98 +264,98 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Convert</td>
+<td style="text-align: left;"><a href="../components/module_convert_from_h5mu_to_h5ad.html">From h5mu to h5ad</a></td>
+<td style="text-align: left;">Converts a h5mu file into a h5ad file</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Convert</td>
 <td style="text-align: left;"><a href="../components/module_convert_from_velocyto_to_h5mu.html">From velocyto to h5mu</a></td>
 <td style="text-align: left;">Convert a velocyto</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Correction</td>
 <td style="text-align: left;"><a href="../components/module_correction_cellbender_remove_background.html">Cellbender remove background</a></td>
 <td style="text-align: left;">Eliminating technical artifacts from high-throughput single-cell RNA sequencing data</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Dataflow</td>
 <td style="text-align: left;"><a href="../components/module_dataflow_concat.html">Concat</a></td>
 <td style="text-align: left;">Concatenates several uni-modal samples in</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Dataflow</td>
 <td style="text-align: left;"><a href="../components/module_dataflow_merge.html">Merge</a></td>
 <td style="text-align: left;">Combine one or more single-modality</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Dataflow</td>
 <td style="text-align: left;"><a href="../components/module_dataflow_split_modalities.html">Split modalities</a></td>
 <td style="text-align: left;">Split the modalities from a single</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Demux</td>
 <td style="text-align: left;"><a href="../components/module_demux_bcl_convert.html">Bcl convert</a></td>
 <td style="text-align: left;">Convert bcl files to fastq files using bcl-convert</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Demux</td>
 <td style="text-align: left;"><a href="../components/module_demux_bcl2fastq.html">Bcl2fastq</a></td>
 <td style="text-align: left;">Convert bcl files to fastq files using bcl2fastq</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Demux</td>
 <td style="text-align: left;"><a href="../components/module_demux_cellranger_mkfastq.html">Cellranger mkfastq</a></td>
 <td style="text-align: left;">Demultiplex raw sequencing data</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Dimred</td>
 <td style="text-align: left;"><a href="../components/module_dimred_pca.html">Pca</a></td>
 <td style="text-align: left;">Computes PCA coordinates, loadings and variance decomposition</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Dimred</td>
 <td style="text-align: left;"><a href="../components/module_dimred_umap.html">Umap</a></td>
 <td style="text-align: left;">UMAP (Uniform Manifold Approximation and Projection) is a manifold learning technique suitable for visualizing high-dimensional data</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Download</td>
 <td style="text-align: left;"><a href="../components/module_download_download_file.html">Download file</a></td>
 <td style="text-align: left;">Download a file</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Download</td>
 <td style="text-align: left;"><a href="../components/module_download_sync_test_resources.html">Sync test resources</a></td>
 <td style="text-align: left;">Synchronise the test resources from s3://openpipelines-data to resources_test</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Files</td>
 <td style="text-align: left;"><a href="../components/module_files_make_params.html">Make params</a></td>
 <td style="text-align: left;">Looks for files in a directory and turn it in a params file</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Filter</td>
 <td style="text-align: left;"><a href="../components/module_filter_do_filter.html">Do filter</a></td>
 <td style="text-align: left;">Remove observations and variables based on specified</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Filter</td>
 <td style="text-align: left;"><a href="../components/module_filter_filter_with_counts.html">Filter with counts</a></td>
 <td style="text-align: left;">Filter scRNA-seq data based on the primary QC metrics</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Filter</td>
 <td style="text-align: left;"><a href="../components/module_filter_filter_with_hvg.html">Filter with hvg</a></td>
 <td style="text-align: left;">Annotate highly variable genes [Satija15] [Zheng17] [Stuart19]</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Filter</td>
 <td style="text-align: left;"><a href="../components/module_filter_filter_with_scrublet.html">Filter with scrublet</a></td>
 <td style="text-align: left;">Doublet detection using the Scrublet method (Wolock, Lopez and Klein, 2019)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Filter</td>
 <td style="text-align: left;"><a href="../components/module_filter_subset_h5mu.html">Subset h5mu</a></td>
 <td style="text-align: left;">Create a subset of a mudata file by selecting the first number of observations</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Integrate</td>
-<td style="text-align: left;"><a href="../components/module_integrate_harmony.html">Harmony</a></td>
-<td style="text-align: left;">Performs Harmony integration based as described in https://github</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Integrate</td>
@@ -403,86 +403,91 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <td style="text-align: left;">Join a csv containing metadata to the</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">Metadata</td>
+<td style="text-align: left;"><a href="../components/module_metadata_join_uns_to_obs.html">Join uns to obs</a></td>
+<td style="text-align: left;">Join a data frame in</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">Neighbors</td>
 <td style="text-align: left;"><a href="../components/module_neighbors_bbknn.html">Bbknn</a></td>
 <td style="text-align: left;">BBKNN network generation</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Neighbors</td>
 <td style="text-align: left;"><a href="../components/module_neighbors_find_neighbors.html">Find neighbors</a></td>
 <td style="text-align: left;">Compute a neighborhood graph of observations [McInnes18]</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Process 10xh5</td>
 <td style="text-align: left;"><a href="../components/module_process_10xh5_filter_10xh5.html">Filter 10xh5</a></td>
 <td style="text-align: left;">Filter a 10x h5 dataset</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Qc</td>
 <td style="text-align: left;"><a href="../components/module_qc_fastqc.html">Fastqc</a></td>
 <td style="text-align: left;">Fastqc component, please see https://www</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Qc</td>
 <td style="text-align: left;"><a href="../components/module_qc_multiqc.html">Multiqc</a></td>
 <td style="text-align: left;">Component for multiqc (https://multiqc</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Reference</td>
 <td style="text-align: left;"><a href="../components/module_reference_build_bdrhap_reference.html">Build bdrhap reference</a></td>
 <td style="text-align: left;">Compile a reference into a STAR index compatible with the BD Rhapsody pipeline</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Reference</td>
 <td style="text-align: left;"><a href="../components/module_reference_build_cellranger_reference.html">Build cellranger reference</a></td>
 <td style="text-align: left;">Build a Cell Ranger-compatible reference folder from user-supplied genome FASTA and gene GTF files</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Reference</td>
 <td style="text-align: left;"><a href="../components/module_reference_make_reference.html">Make reference</a></td>
 <td style="text-align: left;">Preprocess and build a transcriptome reference</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Report</td>
 <td style="text-align: left;"><a href="../components/module_report_mermaid.html">Mermaid</a></td>
 <td style="text-align: left;">Generates a network from mermaid code</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Transfer</td>
 <td style="text-align: left;"><a href="../components/module_transfer_publish.html">Publish</a></td>
 <td style="text-align: left;">Publish an artifact and optionally rename with parameters</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Transform</td>
 <td style="text-align: left;"><a href="../components/module_transform_delete_layer.html">Delete layer</a></td>
 <td style="text-align: left;">Delete an anndata layer from one or more modalities</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Transform</td>
 <td style="text-align: left;"><a href="../components/module_transform_log1p.html">Log1p</a></td>
 <td style="text-align: left;">Logarithmize the data matrix</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Transform</td>
 <td style="text-align: left;"><a href="../components/module_transform_normalize_total.html">Normalize total</a></td>
 <td style="text-align: left;">Normalize counts per cell</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Transform</td>
 <td style="text-align: left;"><a href="../components/module_transform_regress_out.html">Regress out</a></td>
 <td style="text-align: left;">Regress out (mostly) unwanted sources of variation</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Transform</td>
 <td style="text-align: left;"><a href="../components/module_transform_scale.html">Scale</a></td>
 <td style="text-align: left;">Scale data to unit variance and zero mean</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Velocity</td>
 <td style="text-align: left;"><a href="../components/module_velocity_scvelo.html">Scvelo</a></td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Velocity</td>
 <td style="text-align: left;"><a href="../components/module_velocity_velocyto.html">Velocyto</a></td>
 <td style="text-align: left;">Runs the velocity analysis on a BAM file, outputting a loom file</td>
