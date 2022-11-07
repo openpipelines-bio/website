@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r 0.5.1 -latest \
   -main-script target/nextflow/filter/filter_with_counts/main.nf \
   --help
 ```
@@ -43,7 +43,7 @@ nextflow run openpipelines-bio/openpipeline \
 # Inputs
 input: # please fill in - example: "input.h5mu"
 modality: "rna"
-layer: "rna"
+# layer: "raw_counts"
 
 # Outputs
 # output: "$id.$key.output.h5mu"
@@ -68,7 +68,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r 0.5.1 -latest \
   -profile docker \
   -main-script target/nextflow/filter/filter_with_counts/main.nf \
   -params-file params.yaml

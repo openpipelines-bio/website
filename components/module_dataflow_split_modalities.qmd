@@ -28,7 +28,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r 0.5.1 -latest \
   -main-script target/nextflow/dataflow/split_modalities/main.nf \
   --help
 ```
@@ -41,6 +41,7 @@ nextflow run openpipelines-bio/openpipeline \
 # Arguments
 input: # please fill in - example: "sample_path"
 # output: "$id.$key.output.output"
+# output_types: "$id.$key.output_types.csv"
 compression: "gzip"
 
 # Nextflow input-output arguments
@@ -51,7 +52,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r 0.5.1 -latest \
   -profile docker \
   -main-script target/nextflow/dataflow/split_modalities/main.nf \
   -params-file params.yaml
@@ -65,11 +66,14 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name            |Description                                                 |Attributes                                 |
-|:---------------|:-----------------------------------------------------------|:------------------------------------------|
-|`--input`       |Path to a single .hm5u file                                 |`file`, required, default: `"sample_path"` |
-|`--compression` |The compression format to be used on the final h5mu object. |`string`, default: `"gzip"`                |
+|Name             |Description                                                           |Attributes                                     |
+|:----------------|:---------------------------------------------------------------------|:----------------------------------------------|
+|`--input`        |Path to a single .h5mu file.                                          |`file`, required, default: `"sample_path"`     |
+|`--output`       |Output directory containing multiple h5mu files.                      |`file`, required, example: `"/path/to/output"` |
+|`--output_types` |A csv containing the base filename and modality type per output file. |`file`, required, example: `"types.csv"`       |
+|`--compression`  |The compression format to be used on the final h5mu object.           |`string`, default: `"gzip"`                    |
 
 ## Authors
 
   * Dries Schaumont (maintainer)
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (contributor)

@@ -28,7 +28,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r 0.5.1 -latest \
   -main-script target/nextflow/dataflow/concat/main.nf \
   --help
 ```
@@ -54,7 +54,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r 0.5.1 -latest \
   -profile docker \
   -main-script target/nextflow/dataflow/concat/main.nf \
   -params-file params.yaml

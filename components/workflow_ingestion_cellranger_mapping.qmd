@@ -27,7 +27,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r 0.5.1 -latest \
   -main-script workflows/ingestion/cellranger_mapping/main.nf \
   --help
 ```
@@ -62,7 +62,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r 0.5.1 -latest \
   -profile docker \
   -main-script workflows/ingestion/cellranger_mapping/main.nf \
   -params-file params.yaml
@@ -105,8 +105,8 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ## Authors
 
   * Angela Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) (author)
-  * Samuel D'Souza [{{< fa brands github >}}](https://github.com/srdsam) (author)
   * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author, maintainer)
+  * Dries De Maeyer (author)
 
 ## Visualisation
 

@@ -1,5 +1,5 @@
 ---
-title: "From h5ad to h5mu"
+title: "Join uns to obs"
 toc: false
 ---
 
@@ -7,16 +7,15 @@ toc: false
 
 ### Info
 
-ID: `from_h5ad_to_h5mu`  
-Namespace: `convert`
+ID: `join_uns_to_obs`  
+Namespace: `metadata`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/convert/from_h5ad_to_h5mu){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/metadata/join_uns_to_obs){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
-Converts a single layer h5ad file into a single muon object
-
+Join a data frame in .uns containing metadata to the .obs of a mudata file.
 
 ## Example commands
 
@@ -29,7 +28,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 ```bash
 nextflow run openpipelines-bio/openpipeline \
   -r 0.5.1 -latest \
-  -main-script target/nextflow/convert/from_h5ad_to_h5mu/main.nf \
+  -main-script target/nextflow/metadata/join_uns_to_obs/main.nf \
   --help
 ```
 
@@ -39,8 +38,9 @@ nextflow run openpipelines-bio/openpipeline \
 <summary>Example of `params.yaml`</summary>
 ```yaml
 # Arguments
-input: # please fill in - example: ["input.h5ad"]
-modality: ["rna"]
+input: # please fill in - example: "input.h5mu"
+modality: "rna"
+uns_key: # please fill in - example: "foo"
 # output: "$id.$key.output.h5mu"
 
 # Nextflow input-output arguments
@@ -53,7 +53,7 @@ publish_dir: # please fill in - example: "output/"
 nextflow run openpipelines-bio/openpipeline \
   -r 0.5.1 -latest \
   -profile docker \
-  -main-script target/nextflow/convert/from_h5ad_to_h5mu/main.nf \
+  -main-script target/nextflow/metadata/join_uns_to_obs/main.nf \
   -params-file params.yaml
 ```
 
@@ -65,11 +65,10 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name       |Description       |Attributes                                |
-|:----------|:-----------------|:-----------------------------------------|
-|`--input`  |Input h5ad files  |`file`, required, default: `"input.h5ad"` |
-|`--output` |Output muon file. |`file`, default: `"output.h5mu"`          |
+|Name       |Description       |Attributes                                 |
+|:----------|:-----------------|:------------------------------------------|
+|`--input`  |Input h5mu file   |`file`, required, example: `"input.h5mu"`  |
+|`--output` |Output h5mu file. |`file`, required, example: `"output.h5mu"` |
 
 ## Authors
 
-  * Dries De Maeyer (maintainer)

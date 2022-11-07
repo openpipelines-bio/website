@@ -27,7 +27,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r 0.5.1 -latest \
   -main-script workflows/ingestion/cellranger_postprocessing/main.nf \
   --help
 ```
@@ -42,7 +42,7 @@ id: # please fill in - example: "foo"
 input: # please fill in - example: "input.h5mu"
 
 # Outputs
-# output: "$id.$key.output.h5mu"
+# output: "$id.$key.output.output"
 
 # Correction arguments
 perform_correction: false
@@ -59,7 +59,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r 0.5.1 -latest \
   -profile docker \
   -main-script workflows/ingestion/cellranger_postprocessing/main.nf \
   -params-file params.yaml
@@ -81,9 +81,9 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Outputs
 
-|Name       |Description              |Attributes                                                               |
-|:----------|:------------------------|:------------------------------------------------------------------------|
-|`--output` |The converted h5mu file. |`file`, required, default: `"$id.cellranger_postprocessing.output.h5mu"` |
+|Name       |Description              |Attributes |
+|:----------|:------------------------|:----------|
+|`--output` |The converted h5mu file. |`file`     |
 
 
 ### Correction arguments
