@@ -23,6 +23,11 @@ jobs:
       - uses: actions/checkout@v3
           
       - name: Install Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          tinytex: true 
+
+      - name: Render with Quarto
         uses: quarto-dev/quarto-actions/render@v2
 
       - name: Deploy 🚀
