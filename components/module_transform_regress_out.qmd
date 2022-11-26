@@ -1,5 +1,7 @@
 ---
 title: "Regress out"
+namespace: "Transform"
+description: "Regress out (mostly) unwanted sources of variation"
 toc: false
 ---
 
@@ -15,10 +17,7 @@ Namespace: `transform`
 
 :::
 
-Regress out (mostly) unwanted sources of variation.
-Uses simple linear regression. This is inspired by Seurat's regressOut function in R [Satija15]. 
-Note that this function tends to overcorrect in certain circumstances as described in issue theislab/scanpy#526.
-See https://github.com/theislab/scanpy/issues/526.
+
 
 
 ## Example commands
@@ -31,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -main-script target/nextflow/transform/regress_out/main.nf \
   --help
 ```
@@ -41,21 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-input: # please fill in - example: "input.h5mu"
-# output: "$id.$key.output.h5mu"
-modality: "rna"
-# obs_keys: ["foo"]
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/transform/regress_out/main.nf \
   -params-file params.yaml

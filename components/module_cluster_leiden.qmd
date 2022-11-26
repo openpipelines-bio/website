@@ -1,5 +1,7 @@
 ---
 title: "Leiden"
+namespace: "Cluster"
+description: "Cluster cells using the Leiden algorithm [Traag18] implemented in the Scanpy framework [Wolf18]"
 toc: false
 ---
 
@@ -15,14 +17,7 @@ Namespace: `cluster`
 
 :::
 
-Cluster cells using the Leiden algorithm [Traag18] implemented in the Scanpy framework [Wolf18]. Leiden is an improved version of the Louvain algorithm [Blondel08]. 
-It has been proposed for single-cell analysis by [Levine15]. 
-This requires having ran neighbors/find_neighbors or neighbors/bbknn first.
-
-Blondel et al. (2008), Fast unfolding of communities in large networks, J. Stat. Mech.
-Levine et al. (2015), Data-Driven Phenotypic Dissection of AML Reveals Progenitor-like Cells that Correlate with Prognosis, Cell.
-Traag et al. (2018), From Louvain to Leiden: guaranteeing well-connected communities arXiv.
-Wolf et al. (2018), Scanpy: large-scale single-cell gene expression data analysis, Genome Biology.
+  
 
 
 ## Example commands
@@ -35,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -main-script target/nextflow/cluster/leiden/main.nf \
   --help
 ```
@@ -45,23 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-input: # please fill in - example: "input.h5mu"
-modality: "rna"
-obsp_connectivities: "connectivities"
-# output: "$id.$key.output.h5mu"
-obs_name: "leiden"
-resolution: 1
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/cluster/leiden/main.nf \
   -params-file params.yaml
@@ -85,4 +70,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ## Authors
 
-  * Dries De Maeyer (maintainer)
+  * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) (maintainer)

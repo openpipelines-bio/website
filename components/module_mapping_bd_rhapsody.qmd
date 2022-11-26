@@ -1,5 +1,7 @@
 ---
 title: "BD Rhapsody"
+namespace: "Mapping"
+description: "A wrapper for the BD Rhapsody Analysis CWL v1.10.1 pipeline"
 toc: false
 ---
 
@@ -15,20 +17,7 @@ Namespace: `mapping`
 
 :::
 
-A wrapper for the BD Rhapsody Analysis CWL v1.10.1 pipeline.
-
-The CWL pipeline file is obtained by cloning 'https://bitbucket.org/CRSwDev/cwl/src/master/' and removing all objects with class 'DockerRequirement' from the YML.
-
-This pipeline can be used for a targeted analysis (with `--mode targeted`) or for a whole transcriptome analysis (with `--mode wta`).
-
-* If mode is `"targeted"`, then either the `--reference` or `--abseq_reference` parameters must be defined.
-* If mode is `"wta"`, then `--reference` and `--transcriptome_annotation` must be defined, `--abseq_reference` and `--supplemental_reference` is optional.
-
-The reference_genome and transcriptome_annotation files can be generated with the make_reference pipeline.
-Alternatively, BD also provides standard references which can be downloaded from these locations:
-
-  - Human: http://bd-rhapsody-public.s3-website-us-east-1.amazonaws.com/Rhapsody-WTA/GRCh38-PhiX-gencodev29/
-  - Mouse: http://bd-rhapsody-public.s3-website-us-east-1.amazonaws.com/Rhapsody-WTA/GRCm38-PhiX-gencodevM19/
+com/Rhapsody-WTA/GRCm38-PhiX-gencodevM19/
 
 
 ## Example commands
@@ -41,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -main-script target/nextflow/mapping/bd_rhapsody/main.nf \
   --help
 ```
@@ -51,48 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Inputs
-mode: # please fill in - example: "wta"
-input: # please fill in - example: ["input.fastq.gz"]
-reference: # please fill in - example: ["reference_genome.tar.gz|reference.fasta"]
-# transcriptome_annotation: "transcriptome.gtf"
-# abseq_reference: ["abseq_reference.fasta"]
-# supplemental_reference: ["supplemental_reference.fasta"]
-sample_prefix: "sample"
 
-# Outputs
-# output: "$id.$key.output.output"
-
-# Putative cell calling settings
-# putative_cell_call: "mRNA"
-# exact_cell_count: 10000
-disable_putative_calling: false
-
-# Subsample arguments
-# subsample: 0.01
-# subsample_seed: 3445
-
-# Multiplex arguments
-# sample_tags_version: "human"
-# tag_names: ["4-mySample", "9-myOtherSample", "6-alsoThisSample"]
-
-# VDJ arguments
-# vdj_version: "human"
-
-# CWL-runner arguments
-parallel: true
-timestamps: false
-dryrun: false
-
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/mapping/bd_rhapsody/main.nf \
   -params-file params.yaml

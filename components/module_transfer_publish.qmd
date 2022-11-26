@@ -1,5 +1,7 @@
 ---
 title: "Publish"
+namespace: "Transfer"
+description: "Publish an artifact and optionally rename with parameters"
 toc: false
 ---
 
@@ -27,7 +29,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -main-script target/nextflow/transfer/publish/main.nf \
   --help
 ```
@@ -37,19 +39,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-input: # please fill in - example: "path/to/file"
-# output: "$id.$key.output.output"
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/transfer/publish/main.nf \
   -params-file params.yaml
@@ -70,4 +66,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ## Authors
 
-  * Toni Verbeiren (maintainer)
+  * Toni Verbeiren [{{< fa brands github >}}](https://github.com/tverbeiren) (maintainer)

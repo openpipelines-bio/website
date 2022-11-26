@@ -1,5 +1,7 @@
 ---
 title: "From 10xh5 to h5mu"
+namespace: "Convert"
+description: "Converts a 10x h5 into an h5mu file"
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `convert`
 
 :::
 
-Converts a 10x h5 into an h5mu file.
+
 
 
 ## Example commands
@@ -28,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -main-script target/nextflow/convert/from_10xh5_to_h5mu/main.nf \
   --help
 ```
@@ -38,27 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Inputs
-input: # please fill in - example: "raw_feature_bc_matrix.h5"
-# input_metrics_summary: "metrics_cellranger.h5"
 
-# Outputs
-# output: "$id.$key.output.h5mu"
-uns_metrics: "metrics_cellranger"
-
-# Arguments
-# min_genes: 100
-# min_counts: 1000
-
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/convert/from_10xh5_to_h5mu/main.nf \
   -params-file params.yaml

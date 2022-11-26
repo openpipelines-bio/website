@@ -1,5 +1,7 @@
 ---
 title: "Bcl convert"
+namespace: "Demux"
+description: "Convert bcl files to fastq files using bcl-convert"
 toc: false
 ---
 
@@ -15,10 +17,7 @@ Namespace: `demux`
 
 :::
 
-Convert bcl files to fastq files using bcl-convert.
-Information about upgrading from bcl2fastq via
-https://emea.support.illumina.com/bulletins/2020/10/upgrading-from-bcl2fastq-to-bcl-convert.html
-and https://support.illumina.com/sequencing/sequencing_software/bcl-convert/compatibility.html
+html
 
 
 ## Example commands
@@ -31,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -main-script target/nextflow/demux/bcl_convert/main.nf \
   --help
 ```
@@ -41,23 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-input: # please fill in - example: "bcl_dir"
-sample_sheet: # please fill in - example: "bcl_dir"
-# output: "$id.$key.output.output"
-separate_reports: false
-# reports: "$id.$key.reports.reports"
-test_mode: false
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/demux/bcl_convert/main.nf \
   -params-file params.yaml

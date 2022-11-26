@@ -1,5 +1,7 @@
 ---
 title: "Cellranger count"
+namespace: "Mapping"
+description: "Align fastq files using Cell Ranger count"
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `mapping`
 
 :::
 
-Align fastq files using Cell Ranger count.
+
 
 ## Example commands
 
@@ -27,7 +29,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -main-script target/nextflow/mapping/cellranger_count/main.nf \
   --help
 ```
@@ -37,29 +39,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Inputs
-input: # please fill in - example: ["sample_S1_L001_R1_001.fastq.gz", "sample_S1_L001_R2_001.fastq.gz"]
-reference: # please fill in - example: "reference.tar.gz"
 
-# Outputs
-# output: "$id.$key.output.output"
-
-# Arguments
-# expect_cells: 3000
-chemistry: "auto"
-secondary_analysis: false
-generate_bam: true
-include_introns: true
-
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/mapping/cellranger_count/main.nf \
   -params-file params.yaml
@@ -76,7 +62,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |Name          |Description                                                                            |Attributes                                                                                                 |
 |:-------------|:--------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------|
 |`--input`     |The fastq.gz files to align. Can also be a single directory containing fastq.gz files. |`file`, required, example: `"sample_S1_L001_R1_001.fastq.gz"`, example: `"sample_S1_L001_R2_001.fastq.gz"` |
-|`--reference` |The path to Cell Ranger reference tar.gz file.                                         |`file`, required, example: `"reference.tar.gz"`                                                            |
+|`--reference` |The path to Cell Ranger reference tar.gz file. Can also be a directory.                |`file`, required, example: `"reference.tar.gz"`                                                            |
 
 
 ### Outputs

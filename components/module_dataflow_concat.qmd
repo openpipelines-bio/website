@@ -1,5 +1,7 @@
 ---
 title: "Concat"
+namespace: "Dataflow"
+description: "Concatenates several uni-modal samples in "
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `dataflow`
 
 :::
 
-Concatenates several uni-modal samples in .h5mu files into a single file.
+
 
 
 ## Example commands
@@ -28,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -main-script target/nextflow/dataflow/concat/main.nf \
   --help
 ```
@@ -38,23 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-input: # please fill in - example: ["sample_paths"]
-input_id: # please fill in - example: ["foo"]
-# output: "$id.$key.output.h5mu"
-obs_sample_name: "sample_id"
-compression: "gzip"
-other_axis_mode: "move"
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/dataflow/concat/main.nf \
   -params-file params.yaml
@@ -78,4 +70,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ## Authors
 
-  * Dries Schaumont (maintainer)
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (maintainer)

@@ -1,5 +1,7 @@
 ---
 title: "Scanorama"
+namespace: "Integrate"
+description: "Use Scanorama to integrate different experiments"
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `integrate`
 
 :::
 
-Use Scanorama to integrate different experiments.
+
 
 
 ## Example commands
@@ -28,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -main-script target/nextflow/integrate/scanorama/main.nf \
   --help
 ```
@@ -38,28 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-input: # please fill in - example: "path/to/file"
-modality: "rna"
-# output: "$id.$key.output.h5ad"
-obs_batch: "batch"
-obsm_input: "X_pca"
-obsm_output: "X_scanorama"
-knn: 20
-batch_size: 5000
-sigma: 15
-approx: true
-alpha: 0.1
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/integrate/scanorama/main.nf \
   -params-file params.yaml
@@ -88,5 +75,5 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ## Authors
 
-  * Dries De Maeyer (author)
+  * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) (author)
   * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (maintainer)

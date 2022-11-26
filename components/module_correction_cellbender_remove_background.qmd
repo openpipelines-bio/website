@@ -1,5 +1,7 @@
 ---
 title: "Cellbender remove background"
+namespace: "Correction"
+description: "Eliminating technical artifacts from high-throughput single-cell RNA sequencing data"
 toc: false
 ---
 
@@ -15,13 +17,7 @@ Namespace: `correction`
 
 :::
 
-Eliminating technical artifacts from high-throughput single-cell RNA sequencing data.
 
-This module removes counts due to ambient RNA molecules and random barcode swapping from (raw) UMI-based scRNA-seq count matrices. 
-At the moment, only the count matrices produced by the CellRanger count pipeline is supported. Support for additional tools and protocols 
-will be added in the future. A quick start tutorial can be found here.
-
-Fleming et al. 2022, bioRxiv.
 
 
 ## Example commands
@@ -34,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -main-script target/nextflow/correction/cellbender_remove_background/main.nf \
   --help
 ```
@@ -44,43 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Inputs
-input: # please fill in - example: "input.h5"
-modality: "rna"
 
-# Outputs
-# output: "$id.$key.output.h5"
-layer_output: "corrected"
-obs_latent_rt_efficiency: "latent_rt_efficiency"
-obs_latent_cell_probability: "latent_cell_probability"
-obs_latent_scale: "latent_scale"
-var_ambient_expression: "ambient_expression"
-
-# Arguments
-# expected_cells: 1000
-# total_droplets_included: 25000
-expected_cells_from_qc: true
-model: "full"
-epochs: 150
-low_count_threshold: 15
-z_dim: 100
-z_layers: [500]
-training_fraction: 0.9
-empty_drop_training_fraction: 0.5
-fpr: [0.01]
-exclude_antibody_capture: false
-# learning_rate: 1.0E-4
-cuda: false
-
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/correction/cellbender_remove_background/main.nf \
   -params-file params.yaml

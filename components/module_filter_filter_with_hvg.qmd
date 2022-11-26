@@ -1,5 +1,7 @@
 ---
 title: "Filter with hvg"
+namespace: "Filter"
+description: "Annotate highly variable genes [Satija15] [Zheng17] [Stuart19]"
 toc: false
 ---
 
@@ -15,15 +17,7 @@ Namespace: `filter`
 
 :::
 
-Annotate highly variable genes [Satija15] [Zheng17] [Stuart19].
 
-Expects logarithmized data, except when flavor='seurat_v3' in which count data is expected.
-
-Depending on flavor, this reproduces the R-implementations of Seurat [Satija15], Cell Ranger [Zheng17], and Seurat v3 [Stuart19].
-
-For the dispersion-based methods ([Satija15] and [Zheng17]), the normalized dispersion is obtained by scaling with the mean and standard deviation of the dispersions for genes falling into a given bin for mean expression of genes. This means that for each bin of mean expression, highly variable genes are selected.
-
-For [Stuart19], a normalized variance for each gene is computed. First, the data are standardized (i.e., z-score normalization per feature) with a regularized standard deviation. Next, the normalized variance is computed as the variance of each gene after the transformation. Genes are ranked by the normalized variance.
 
 
 ## Example commands
@@ -36,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -main-script target/nextflow/filter/filter_with_hvg/main.nf \
   --help
 ```
@@ -46,33 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-input: # please fill in - example: "input.h5mu"
-modality: "rna"
-# layer: "foo"
-# output: "$id.$key.output.h5mu"
-var_name_filter: "filter_with_hvg"
-varm_name: "hvg"
-do_subset: false
-flavor: "seurat"
-# n_top_genes: 123
-min_mean: 0.0125
-max_mean: 3
-min_disp: 0.5
-# max_disp: 123.0
-span: 0.3
-n_bins: 20
-# obs_batch_key: "foo"
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/filter/filter_with_hvg/main.nf \
   -params-file params.yaml
@@ -106,5 +80,5 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ## Authors
 
-  * Dries De Maeyer (contributor)
+  * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) (contributor)
   * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (maintainer, contributor)

@@ -1,5 +1,7 @@
 ---
 title: "From velocyto to h5mu"
+namespace: "Convert"
+description: "Convert a velocyto "
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `convert`
 
 :::
 
-Convert a velocyto .loom file to h5mu
+loom file to h5mu
 
 
 ## Example commands
@@ -28,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -main-script target/nextflow/convert/from_velocyto_to_h5mu/main.nf \
   --help
 ```
@@ -38,19 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-input: # please fill in - example: "input.loom"
-# output: "$id.$key.output.h5mu"
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/convert/from_velocyto_to_h5mu/main.nf \
   -params-file params.yaml

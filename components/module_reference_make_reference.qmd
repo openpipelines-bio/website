@@ -1,5 +1,7 @@
 ---
 title: "Make reference"
+namespace: "Reference"
+description: "Preprocess and build a transcriptome reference"
 toc: false
 ---
 
@@ -15,12 +17,7 @@ Namespace: `reference`
 
 :::
 
-Preprocess and build a transcriptome reference.
-
-Example input files are:
-  - `genome_fasta`: https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/GRCh38.primary_assembly.genome.fa.gz
-  - `transcriptome_gtf`: https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/gencode.v41.annotation.gtf.gz
-  - `ercc`: https://assets.thermofisher.com/TFS-Assets/LSG/manuals/ERCC92.zip
+zip
 
 
 ## Example commands
@@ -33,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -main-script target/nextflow/reference/make_reference/main.nf \
   --help
 ```
@@ -43,23 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-genome_fasta: # please fill in - example: "genome_fasta.fa.gz"
-transcriptome_gtf: # please fill in - example: "transcriptome.gtf.gz"
-# ercc: "ercc.zip"
-# subset_regex: "(ERCC-00002|chr1)"
-# output_fasta: "$id.$key.output_fasta.gz"
-# output_gtf: "$id.$key.output_gtf.gz"
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/reference/make_reference/main.nf \
   -params-file params.yaml

@@ -1,5 +1,7 @@
 ---
 title: "Sync test resources"
+namespace: "Download"
+description: "Synchronise the test resources from s3://openpipelines-data to resources_test"
 toc: false
 ---
 
@@ -27,7 +29,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -main-script target/nextflow/download/sync_test_resources/main.nf \
   --help
 ```
@@ -37,23 +39,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-input: "s3://openpipelines-data"
-# output: "$id.$key.output.output"
-quiet: false
-dryrun: false
-delete: false
-# exclude: ["foo"]
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/download/sync_test_resources/main.nf \
   -params-file params.yaml

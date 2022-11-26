@@ -1,5 +1,7 @@
 ---
 title: "Filter 10xh5"
+namespace: "Process 10xh5"
+description: "Filter a 10x h5 dataset"
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `process_10xh5`
 
 :::
 
-Filter a 10x h5 dataset.
+
 
 
 ## Example commands
@@ -28,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -main-script target/nextflow/process_10xh5/filter_10xh5/main.nf \
   --help
 ```
@@ -38,23 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-input: # please fill in - example: "pbmc_1k_protein_v3_raw_feature_bc_matrix.h5"
-# output: "$id.$key.output.h5"
-min_library_size: 0
-min_cells_per_gene: 0
-# keep_feature_types: ["Antibody Capture"]
-verbose: false
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/process_10xh5/filter_10xh5/main.nf \
   -params-file params.yaml

@@ -1,5 +1,7 @@
 ---
 title: "Merge"
+namespace: "Dataflow"
+description: "Combine one or more single-modality "
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `dataflow`
 
 :::
 
-Combine one or more single-modality .h5mu files together into one .h5mu file.
+
 
 
 ## Example commands
@@ -28,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -main-script target/nextflow/dataflow/merge/main.nf \
   --help
 ```
@@ -38,20 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-input: # please fill in - example: ["sample_paths"]
-# output: "$id.$key.output.h5mu"
-compression: "gzip"
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/dataflow/merge/main.nf \
   -params-file params.yaml
@@ -73,4 +68,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ## Authors
 
-  * Dries Schaumont (maintainer)
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (maintainer)

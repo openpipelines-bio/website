@@ -1,5 +1,7 @@
 ---
 title: "Cellranger multi"
+namespace: "Mapping"
+description: "Align fastq files using Cell Ranger multi"
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `mapping`
 
 :::
 
-Align fastq files using Cell Ranger multi.
+
 
 ## Example commands
 
@@ -27,7 +29,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -main-script target/nextflow/mapping/cellranger_multi/main.nf \
   --help
 ```
@@ -37,45 +39,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Outputs
-# output: "$id.$key.output.output"
 
-# Input files
-input: # please fill in - example: ["mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"]
-gex_reference: # please fill in - example: "reference_genome.tar.gz"
-# vdj_reference: "reference_vdj.tar.gz"
-# feature_reference: "feature_reference.csv"
-
-# Library arguments
-library_id: # please fill in - example: ["mysample1"]
-library_type: # please fill in - example: ["Gene Expression"]
-# library_subsample: ["0.5"]
-# library_lanes: ["1-4"]
-
-# Gene expression arguments
-# gex_expect_cells: 3000
-gex_chemistry: "auto"
-gex_secondary_analysis: false
-gex_generate_bam: true
-gex_include_introns: true
-
-# Cell multiplexing parameters
-# cell_multiplex_sample_id: "foo"
-# cell_multiplex_oligo_ids: "foo"
-# cell_multiplex_description: "foo"
-
-# Executor arguments
-dryrun: false
-
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/mapping/cellranger_multi/main.nf \
   -params-file params.yaml
@@ -86,13 +56,6 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 :::
 
 ## Argument groups
-
-### Outputs
-
-|Name       |Description                                |Attributes                                     |
-|:----------|:------------------------------------------|:----------------------------------------------|
-|`--output` |The folder to store the alignment results. |`file`, required, example: `"/path/to/output"` |
-
 
 ### Input files
 
@@ -140,6 +103,13 @@ Arguments related to cell multiplexing.
 |`--cell_multiplex_description` |A description for the sample.                                                                                                                                                                          |`string`   |
 
 
+### Outputs
+
+|Name       |Description                                |Attributes                                     |
+|:----------|:------------------------------------------|:----------------------------------------------|
+|`--output` |The folder to store the alignment results. |`file`, required, example: `"/path/to/output"` |
+
+
 ### Executor arguments
 
 |Name       |Description                                                                                                        |Attributes     |
@@ -150,4 +120,4 @@ Arguments related to cell multiplexing.
 
   * Angela Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) (author)
   * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author, maintainer)
-  * Dries De Maeyer (author)
+  * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) (author)

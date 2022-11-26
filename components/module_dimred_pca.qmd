@@ -1,5 +1,7 @@
 ---
 title: "Pca"
+namespace: "Dimred"
+description: "Computes PCA coordinates, loadings and variance decomposition"
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `dimred`
 
 :::
 
-Computes PCA coordinates, loadings and variance decomposition. Uses the implementation of scikit-learn [Pedregosa11].
+
 
 
 ## Example commands
@@ -28,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -main-script target/nextflow/dimred/pca/main.nf \
   --help
 ```
@@ -38,25 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-input: # please fill in - example: "input.h5mu"
-modality: "rna"
-# layer: "foo"
-# output: "$id.$key.output.h5mu"
-obsm_output: "X_pca"
-varm_output: "pca_loadings"
-uns_output: "pca_variance"
-# num_components: 25
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.5.1 -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/dimred/pca/main.nf \
   -params-file params.yaml
@@ -82,4 +72,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ## Authors
 
-  * Dries De Maeyer (maintainer)
+  * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) (maintainer)

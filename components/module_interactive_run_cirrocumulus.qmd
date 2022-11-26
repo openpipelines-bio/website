@@ -1,7 +1,7 @@
 ---
-title: "Join uns to obs"
-namespace: "Metadata"
-description: "Join a data frame in "
+title: "Run cirrocumulus"
+namespace: "Interactive"
+description: ""
 toc: false
 ---
 
@@ -9,11 +9,11 @@ toc: false
 
 ### Info
 
-ID: `join_uns_to_obs`  
-Namespace: `metadata`
+ID: `run_cirrocumulus`  
+Namespace: `interactive`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/metadata/join_uns_to_obs){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/interactive/run_cirrocumulus){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 ```bash
 nextflow run openpipelines-bio/openpipeline \
   -r main_build -latest \
-  -main-script target/nextflow/metadata/join_uns_to_obs/main.nf \
+  -main-script target/nextflow/interactive/run_cirrocumulus/main.nf \
   --help
 ```
 
@@ -47,7 +47,7 @@ nextflow run openpipelines-bio/openpipeline \
 nextflow run openpipelines-bio/openpipeline \
   -r main_build -latest \
   -profile docker \
-  -main-script target/nextflow/metadata/join_uns_to_obs/main.nf \
+  -main-script target/nextflow/interactive/run_cirrocumulus/main.nf \
   -params-file params.yaml
 ```
 
@@ -59,10 +59,10 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name       |Description       |Attributes                                 |
-|:----------|:-----------------|:------------------------------------------|
-|`--input`  |Input h5mu file   |`file`, required, example: `"input.h5mu"`  |
-|`--output` |Output h5mu file. |`file`, required, example: `"output.h5mu"` |
+|Name      |Description        |Attributes                  |
+|:---------|:------------------|:---------------------------|
+|`--input` |Directory to mount |`file`, default: `"."`      |
+|`--port`  |Port to use        |`string`, default: `"5005"` |
 
 ## Authors
 
