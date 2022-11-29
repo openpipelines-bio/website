@@ -1,5 +1,7 @@
 ---
 title: "Build bdrhap reference"
+namespace: "Reference"
+description: "Compile a reference into a STAR index compatible with the BD Rhapsody pipeline."
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `reference`
 
 :::
 
-Compile a reference into a STAR index compatible with the BD Rhapsody pipeline.
+
 
 ## Example commands
 

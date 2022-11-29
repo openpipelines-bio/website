@@ -1,5 +1,7 @@
 ---
 title: "Regress out"
+namespace: "Transform"
+description: "Regress out (mostly) unwanted sources of variation."
 toc: false
 ---
 
@@ -15,11 +17,8 @@ Namespace: `transform`
 
 :::
 
-Regress out (mostly) unwanted sources of variation.
 Uses simple linear regression. This is inspired by Seurat's regressOut function in R [Satija15]. 
-Note that this function tends to overcorrect in certain circumstances as described in issue theislab/scanpy#526.
-See https://github.com/theislab/scanpy/issues/526.
-
+Note that this function tends to overcorrect in certain circumstances as described in issue theislab/scanpy#526. See https://github.com/theislab/scanpy/issues/526
 
 ## Example commands
 

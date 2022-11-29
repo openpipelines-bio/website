@@ -1,5 +1,7 @@
 ---
 title: "Cellranger mkfastq"
+namespace: "Demux"
+description: "Demultiplex raw sequencing data"
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `demux`
 
 :::
 
-Demultiplex raw sequencing data
+
 
 ## Example commands
 

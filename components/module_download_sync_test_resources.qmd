@@ -1,5 +1,7 @@
 ---
 title: "Sync test resources"
+namespace: "Download"
+description: "Synchronise the test resources from s3://openpipelines-data to resources_test"
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `download`
 
 :::
 
-Synchronise the test resources from s3://openpipelines-data to resources_test
+
 
 ## Example commands
 

@@ -1,5 +1,7 @@
 ---
 title: "Demux"
+namespace: "Ingestion"
+description: "A generic pipeline for running bcl2fastq, bcl-convert or Cell Ranger mkfastq."
 toc: false
 ---
 

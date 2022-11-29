@@ -1,5 +1,7 @@
 ---
 title: "From velocyto to h5mu"
+namespace: "Convert"
+description: "Convert a velocyto .loom file to h5mu"
 toc: false
 ---
 
@@ -15,7 +17,6 @@ Namespace: `convert`
 
 :::
 
-Convert a velocyto .loom file to h5mu
 
 
 ## Example commands

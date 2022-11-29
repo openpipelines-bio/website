@@ -1,5 +1,7 @@
 ---
 title: "Split modalities"
+namespace: "Dataflow"
+description: "Split the modalities from a single .h5mu multimodal sample into seperate .h5mu files."
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `dataflow`
 
 :::
 
-Split the modalities from a single .h5mu multimodal sample into seperate .h5mu files. 
+
 
 
 ## Example commands

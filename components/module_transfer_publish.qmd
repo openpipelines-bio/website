@@ -1,5 +1,7 @@
 ---
 title: "Publish"
+namespace: "Transfer"
+description: "Publish an artifact and optionally rename with parameters"
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `transfer`
 
 :::
 
-Publish an artifact and optionally rename with parameters
+
 
 ## Example commands
 

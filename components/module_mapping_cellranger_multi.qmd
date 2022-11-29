@@ -1,5 +1,7 @@
 ---
 title: "Cellranger multi"
+namespace: "Mapping"
+description: "Align fastq files using Cell Ranger multi."
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `mapping`
 
 :::
 
-Align fastq files using Cell Ranger multi.
+
 
 ## Example commands
 
@@ -87,13 +89,6 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ## Argument groups
 
-### Outputs
-
-|Name       |Description                                |Attributes                                     |
-|:----------|:------------------------------------------|:----------------------------------------------|
-|`--output` |The folder to store the alignment results. |`file`, required, example: `"/path/to/output"` |
-
-
 ### Input files
 
 |Name                  |Description                                                                                                                                                                                                                                                                                                                       |Attributes                                                                                                     |
@@ -138,6 +133,13 @@ Arguments related to cell multiplexing.
 |`--cell_multiplex_sample_id`   |A name to identify a multiplexed sample. Must be alphanumeric with hyphens and/or underscores, and less than 64 characters. Required for Cell Multiplexing libraries.                                  |`string`   |
 |`--cell_multiplex_oligo_ids`   |The Cell Multiplexing oligo IDs used to multiplex this sample. If multiple CMOs were used for a sample, separate IDs with a pipe (e.g., CMO301&#124;CMO302). Required for Cell Multiplexing libraries. |`string`   |
 |`--cell_multiplex_description` |A description for the sample.                                                                                                                                                                          |`string`   |
+
+
+### Outputs
+
+|Name       |Description                                |Attributes                                     |
+|:----------|:------------------------------------------|:----------------------------------------------|
+|`--output` |The folder to store the alignment results. |`file`, required, example: `"/path/to/output"` |
 
 
 ### Executor arguments

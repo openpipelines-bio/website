@@ -1,5 +1,7 @@
 ---
 title: "Subset h5mu"
+namespace: "Filter"
+description: "Create a subset of a mudata file by selecting the first number of observations"
 toc: false
 ---
 
@@ -15,7 +17,6 @@ Namespace: `filter`
 
 :::
 
-Create a subset of a mudata file by selecting the first number of observations
 
 
 ## Example commands

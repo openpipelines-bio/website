@@ -1,5 +1,7 @@
 ---
 title: "Join csv"
+namespace: "Metadata"
+description: "Join a csv containing metadata to the .obs or .var field of a mudata file."
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `metadata`
 
 :::
 
-Join a csv containing metadata to the .obs or .var field of a mudata file.
+
 
 ## Example commands
 

@@ -1,5 +1,7 @@
 ---
 title: "Filter with hvg"
+namespace: "Filter"
+description: "Annotate highly variable genes [Satija15] [Zheng17] [Stuart19]."
 toc: false
 ---
 
@@ -14,8 +16,6 @@ Namespace: `filter`
 [Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/filter/filter_with_hvg){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
-
-Annotate highly variable genes [Satija15] [Zheng17] [Stuart19].
 
 Expects logarithmized data, except when flavor='seurat_v3' in which count data is expected.
 

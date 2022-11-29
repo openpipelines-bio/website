@@ -1,5 +1,7 @@
 ---
 title: "Join uns to obs"
+namespace: "Metadata"
+description: "Join a data frame in .uns containing metadata to the .obs of a mudata file."
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `metadata`
 
 :::
 
-Join a data frame in .uns containing metadata to the .obs of a mudata file.
+
 
 ## Example commands
 

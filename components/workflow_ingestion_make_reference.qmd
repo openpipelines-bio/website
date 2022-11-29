@@ -1,5 +1,7 @@
 ---
 title: "Make reference"
+namespace: "Ingestion"
+description: "Build a transcriptomics reference into one of many formats"
 toc: false
 ---
 
@@ -15,7 +17,6 @@ Namespace: `ingestion`
 
 :::
 
-Build a transcriptomics reference into one of many formats.
 
 
 ## Example commands

@@ -1,5 +1,7 @@
 ---
 title: "Cellbender remove background"
+namespace: "Correction"
+description: "Eliminating technical artifacts from high-throughput single-cell RNA sequencing data."
 toc: false
 ---
 
@@ -14,8 +16,6 @@ Namespace: `correction`
 [Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/correction/cellbender_remove_background){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
-
-Eliminating technical artifacts from high-throughput single-cell RNA sequencing data.
 
 This module removes counts due to ambient RNA molecules and random barcode swapping from (raw) UMI-based scRNA-seq count matrices. 
 At the moment, only the count matrices produced by the CellRanger count pipeline is supported. Support for additional tools and protocols 

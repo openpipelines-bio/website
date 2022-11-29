@@ -1,5 +1,7 @@
 ---
 title: "Filter with counts"
+namespace: "Filter"
+description: "Filter scRNA-seq data based on the primary QC metrics."
 toc: false
 ---
 
@@ -15,10 +17,9 @@ Namespace: `filter`
 
 :::
 
-Filter scRNA-seq data based on the primary QC metrics. 
-This is based on both the UMI counts, the gene counts 
-and the mitochondrial genes (genes starting with mt/MT).
 
+This is based on both the UMI counts, the gene counts 
+and the mitochondrial genes (genes starting with mt/MT)
 
 ## Example commands
 

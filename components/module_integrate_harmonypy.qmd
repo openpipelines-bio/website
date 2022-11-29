@@ -1,5 +1,7 @@
 ---
 title: "Harmonypy"
+namespace: "Integrate"
+description: "Performs Harmony integration based as described in https://github.com/immunogenomics/harmony."
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `integrate`
 
 :::
 
-Performs Harmony integration based as described in https://github.com/immunogenomics/harmony. Based on an implementation in python from https://github.com/slowkow/harmonypy
+Based on an implementation in python from https://github.com/slowkow/harmonypy
 
 ## Example commands
 

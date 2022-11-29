@@ -1,5 +1,7 @@
 ---
 title: "Cell Ranger mapping"
+namespace: "Ingestion"
+description: "A pipeline for running Cell Ranger mapping."
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `ingestion`
 
 :::
 
-A pipeline for running Cell Ranger mapping.
+
 
 ## Example commands
 

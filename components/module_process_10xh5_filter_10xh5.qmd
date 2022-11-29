@@ -1,5 +1,7 @@
 ---
 title: "Filter 10xh5"
+namespace: "Process 10xh5"
+description: "Filter a 10x h5 dataset"
 toc: false
 ---
 
@@ -15,7 +17,6 @@ Namespace: `process_10xh5`
 
 :::
 
-Filter a 10x h5 dataset.
 
 
 ## Example commands

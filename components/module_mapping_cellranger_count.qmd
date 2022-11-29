@@ -1,5 +1,7 @@
 ---
 title: "Cellranger count"
+namespace: "Mapping"
+description: "Align fastq files using Cell Ranger count."
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `mapping`
 
 :::
 
-Align fastq files using Cell Ranger count.
+
 
 ## Example commands
 

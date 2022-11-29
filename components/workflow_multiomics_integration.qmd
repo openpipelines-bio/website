@@ -1,5 +1,7 @@
 ---
 title: "Integration"
+namespace: "Multiomics"
+description: "A pipeline for demultiplexing multimodal multi-sample RNA transcriptomics data."
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `multiomics`
 
 :::
 
-A pipeline for demultiplexing multimodal multi-sample RNA transcriptomics data.
+
 
 ## Example commands
 

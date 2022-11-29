@@ -1,5 +1,7 @@
 ---
 title: "Filter with scrublet"
+namespace: "Filter"
+description: "Doublet detection using the Scrublet method (Wolock, Lopez and Klein, 2019)."
 toc: false
 ---
 
@@ -15,7 +17,6 @@ Namespace: `filter`
 
 :::
 
-Doublet detection using the Scrublet method (Wolock, Lopez and Klein, 2019).
 The method tests for potential doublets by using the expression profiles of
 cells to generate synthetic potential doubles which are tested against cells. 
 The method returns a "doublet score" on which it calls for potential doublets.

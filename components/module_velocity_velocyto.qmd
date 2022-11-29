@@ -1,5 +1,7 @@
 ---
 title: "Velocyto"
+namespace: "Velocity"
+description: "Runs the velocity analysis on a BAM file, outputting a loom file."
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `velocity`
 
 :::
 
-Runs the velocity analysis on a BAM file, outputting a loom file.
+
 
 ## Example commands
 

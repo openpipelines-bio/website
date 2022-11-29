@@ -1,5 +1,7 @@
 ---
 title: "Bcl2fastq"
+namespace: "Demux"
+description: "Convert bcl files to fastq files using bcl2fastq"
 toc: false
 ---
 
@@ -15,7 +17,6 @@ Namespace: `demux`
 
 :::
 
-Convert bcl files to fastq files using bcl2fastq.
 
 
 ## Example commands

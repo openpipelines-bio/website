@@ -1,5 +1,7 @@
 ---
 title: "Mermaid"
+namespace: "Report"
+description: "Generates a network from mermaid code."
 toc: false
 ---
 
@@ -15,8 +17,7 @@ Namespace: `report`
 
 :::
 
-Generates a network from mermaid code. See `https://mermaid-js.github.io/mermaid/#/Tutorials`. This component uses the external mermaid.ink service to generate visual networks.
-
+See `https://mermaid-js.github.io/mermaid/#/Tutorials`. This component uses the external mermaid.ink service to generate visual networks
 
 ## Example commands
 

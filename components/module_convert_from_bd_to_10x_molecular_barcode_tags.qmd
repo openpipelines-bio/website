@@ -1,5 +1,7 @@
 ---
 title: "From bd to 10x molecular barcode tags"
+namespace: "Convert"
+description: "Convert the molecular barcode sequence SAM tag from BD format (MA) to 10X format (UB)"
 toc: false
 ---
 
@@ -15,7 +17,6 @@ Namespace: `convert`
 
 :::
 
-Convert the molecular barcode sequence SAM tag from BD format (MA) to 10X format (UB).
 
 
 ## Example commands

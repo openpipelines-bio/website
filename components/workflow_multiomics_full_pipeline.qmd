@@ -1,5 +1,7 @@
 ---
 title: "Full pipeline"
+namespace: "Multiomics"
+description: "A pipeline to analyse multiple multiomics samples."
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `multiomics`
 
 :::
 
-A pipeline to analyse multiple multiomics samples.
+
 
 ## Example commands
 

@@ -1,5 +1,7 @@
 ---
 title: "Download file"
+namespace: "Download"
+description: "Download a file"
 toc: false
 ---
 
@@ -15,7 +17,6 @@ Namespace: `download`
 
 :::
 
-Download a file.
 
 
 ## Example commands

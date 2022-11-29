@@ -1,5 +1,7 @@
 ---
 title: "Scvi"
+namespace: "Integrate"
+description: "Performs scvi integration as done in the human lung cell atlas https://github.com/LungCellAtlas/HLCA"
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `integrate`
 
 :::
 
-Performs scvi integration as done in the human lung cell atlas https://github.com/LungCellAtlas/HLCA
+
 
 ## Example commands
 

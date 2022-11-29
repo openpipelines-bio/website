@@ -1,5 +1,7 @@
 ---
 title: "Make params"
+namespace: "Files"
+description: "Looks for files in a directory and turn it in a params file."
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `files`
 
 :::
 
-Looks for files in a directory and turn it in a params file.
+
 
 ## Example commands
 

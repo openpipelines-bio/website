@@ -1,5 +1,7 @@
 ---
 title: "Pca"
+namespace: "Dimred"
+description: "Computes PCA coordinates, loadings and variance decomposition."
 toc: false
 ---
 
@@ -15,8 +17,7 @@ Namespace: `dimred`
 
 :::
 
-Computes PCA coordinates, loadings and variance decomposition. Uses the implementation of scikit-learn [Pedregosa11].
-
+Uses the implementation of scikit-learn [Pedregosa11]
 
 ## Example commands
 

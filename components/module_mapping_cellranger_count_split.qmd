@@ -1,5 +1,7 @@
 ---
 title: "Cellranger count split"
+namespace: "Mapping"
+description: "Split 10x Cell Ranger output directory into separate output fields."
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `mapping`
 
 :::
 
-Split 10x Cell Ranger output directory into separate output fields.
+
 
 ## Example commands
 

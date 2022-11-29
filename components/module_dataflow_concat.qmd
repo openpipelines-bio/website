@@ -1,5 +1,7 @@
 ---
 title: "Concat"
+namespace: "Dataflow"
+description: "Concatenates several uni-modal samples in .h5mu files into a single file"
 toc: false
 ---
 
@@ -15,7 +17,6 @@ Namespace: `dataflow`
 
 :::
 
-Concatenates several uni-modal samples in .h5mu files into a single file.
 
 
 ## Example commands

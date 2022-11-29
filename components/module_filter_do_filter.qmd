@@ -1,5 +1,7 @@
 ---
 title: "Do filter"
+namespace: "Filter"
+description: "Remove observations and variables based on specified .obs and .var columns"
 toc: false
 ---
 
@@ -15,7 +17,6 @@ Namespace: `filter`
 
 :::
 
-Remove observations and variables based on specified .obs and .var columns.
 
 
 ## Example commands

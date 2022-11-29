@@ -1,5 +1,7 @@
 ---
 title: "Rna multisample"
+namespace: "Multiomics"
+description: "Processing unimodal multi-sample RNA transcriptomics data."
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `multiomics`
 
 :::
 
-Processing unimodal multi-sample RNA transcriptomics data.
+
 
 ## Example commands
 

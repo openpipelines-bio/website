@@ -1,5 +1,7 @@
 ---
 title: "Find neighbors"
+namespace: "Neighbors"
+description: "Compute a neighborhood graph of observations [McInnes18]."
 toc: false
 ---
 
@@ -14,8 +16,6 @@ Namespace: `neighbors`
 [Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/neighbors/find_neighbors){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
-
-Compute a neighborhood graph of observations [McInnes18].
 
 The neighbor search efficiency of this heavily relies on UMAP [McInnes18], which also provides a method for estimating connectivities of data points - the connectivity of the manifold (method=='umap'). If method=='gauss', connectivities are computed according to [Coifman05], in the adaption of [Haghverdi16].
 

@@ -1,5 +1,7 @@
 ---
 title: "Delete layer"
+namespace: "Transform"
+description: "Delete an anndata layer from one or more modalities"
 toc: false
 ---
 
@@ -15,7 +17,6 @@ Namespace: `transform`
 
 :::
 
-Delete an anndata layer from one or more modalities.
 
 
 ## Example commands

@@ -1,5 +1,7 @@
 ---
 title: "From h5ad to h5mu"
+namespace: "Convert"
+description: "Converts a single layer h5ad file into a single muon object"
 toc: false
 ---
 
@@ -15,7 +17,6 @@ Namespace: `convert`
 
 :::
 
-Converts a single layer h5ad file into a single muon object
 
 
 ## Example commands

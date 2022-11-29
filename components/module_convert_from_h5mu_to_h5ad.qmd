@@ -1,5 +1,7 @@
 ---
 title: "From h5mu to h5ad"
+namespace: "Convert"
+description: "Converts a h5mu file into a h5ad file"
 toc: false
 ---
 
@@ -15,7 +17,6 @@ Namespace: `convert`
 
 :::
 
-Converts a h5mu file into a h5ad file.
 
 
 ## Example commands

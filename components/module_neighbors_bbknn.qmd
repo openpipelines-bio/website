@@ -1,5 +1,7 @@
 ---
 title: "Bbknn"
+namespace: "Neighbors"
+description: "BBKNN network generation"
 toc: false
 ---
 
@@ -15,7 +17,6 @@ Namespace: `neighbors`
 
 :::
 
-BBKNN network generation
 
 
 ## Example commands

@@ -1,5 +1,7 @@
 ---
 title: "Build cellranger reference"
+namespace: "Reference"
+description: "Build a Cell Ranger-compatible reference folder from user-supplied genome FASTA and gene GTF files."
 toc: false
 ---
 
@@ -15,7 +17,7 @@ Namespace: `reference`
 
 :::
 
-Build a Cell Ranger-compatible reference folder from user-supplied genome FASTA and gene GTF files. Creates a new folder named after the genome.
+Creates a new folder named after the genome.
 
 ## Example commands
 

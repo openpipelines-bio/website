@@ -1,5 +1,7 @@
 ---
 title: "From bdrhap to h5mu"
+namespace: "Convert"
+description: "Convert the output of a BD Rhapsody WTA pipeline to a MuData h5 file"
 toc: false
 ---
 
@@ -15,7 +17,6 @@ Namespace: `convert`
 
 :::
 
-Convert the output of a BD Rhapsody WTA pipeline to a MuData h5 file.
 
 
 ## Example commands

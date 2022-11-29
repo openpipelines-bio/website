@@ -1,5 +1,7 @@
 ---
 title: "Add id"
+namespace: "Metadata"
+description: "Add id of .obs."
 toc: false
 ---
 
@@ -15,9 +17,8 @@ Namespace: `metadata`
 
 :::
 
-Add id of .obs. Also allows to make .obs_names (the .obs index) unique 
-by prefixing the values with an unique id per .h5mu file.
-
+Also allows to make .obs_names (the .obs index) unique 
+by prefixing the values with an unique id per .h5mu file
 
 ## Example commands
 
