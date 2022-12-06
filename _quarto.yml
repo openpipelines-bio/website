@@ -15,12 +15,25 @@ website:
         menu: 
           - architecture/index.qmd
           - architecture/use-cases.qmd
-      - components/index.qmd
+      - href: components/index.qmd
+        text: Components
       - text: Contribute
         href: contribute/index.qmd
     right:
       - text: Source Code
         url: https://github.com/openpipelines-bio/openpipeline
+  sidebar:
+    - id: components
+      collapse-level: 3
+      title: Components
+      contents: 
+        - components/index.qmd
+        - text: Workflows
+          contents:
+            - auto: "components/workflows/*/*"
+        - text: Modules
+          contents:
+            - auto: "components/modules/*/*"
   page-footer: "Copyright 2022, OpenPipelines.bio"
   repo-actions: [edit, issue] 
   google-analytics: G-KKE3LFPPV8

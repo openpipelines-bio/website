@@ -1,24 +1,25 @@
 ---
-title: "Components"
+title: "Reference"
+description: An overview of the workflows and modules in OpenPipelines
 listing:
-- id: workflows
-  type: table
-  contents: workflow_*.qmd
-  fields: [title, namespace, description]
-  page-size: 1000
-  field-display-names: 
-      namespace: Namespace
-      title: Name
-      description: Description
-- id: modules
-  type: table
-  contents: module_*.qmd
-  fields: [title, namespace, description]
-  field-display-names: 
-      namespace: Namespace
-      title: Name
-      description: Description
+  - id: workflows
+    type: table
+    contents: "workflows/**/*.qmd"
+    fields: [title, namespace, description]
+    field-display-names: 
+        title: Name
+        namespace: Namespace
+        description: Description
+  - id: modules
+    type: table
+    contents: "modules/**/*.qmd"
+    fields: [title, namespace, description]
+    field-display-names: 
+        title: Name
+        namespace: Namespace
+        description: Description
 ---
+
 
 ## Workflows
 
