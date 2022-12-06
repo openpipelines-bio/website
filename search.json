@@ -21,6 +21,55 @@
     "text": "Subworkflows\n\nIngestion\nPurpose: Convert raw sequencing data or count tables into MuData data for further processing.\n\n\n\n\n\n\nflowchart LR\n\n  BCL[\"BCL<sup>*</sup>\"]\n  Fastq[\"Fastq<sup>*</sup>\"]\n  Ref[\"Reference\"]\n  RawDir[\"Raw out<sup>*</sup>\"]\n  RawCounts[\"Raw counts<sup>†</sup>\"]\n\n  Demux[/\"Demux\"/]\n  Mapping[/\"Mapping\"/]\n  Convert[/\"Convert\"/]\n\n  BCL --- Demux --> Fastq\n  Fastq & Ref --- Mapping --> RawDir --- Convert --> RawCounts\n\n\n  BCL -.-|\".tar.gz/Directory\"| BCL\n  Fastq -.-|\".fastq.gz/.fastq\"| Fastq\n  Ref -.-|\".tar.gz?\"| Ref\n  RawDir -.-|\"Directory\"| RawDir\n  RawCounts -.-|\".h5mu\"| RawCounts\n\n  linkStyle 7,8,9,10,11 stroke:#fff,stroke-width:0px,text-align:left;\n\n\n\n\n\nFigure 2: Ingestion pipeline.\n*: Possible entry points.\n†: Output file(s)\n\n\n\n\n\n\n\nSingle-sample unimodal processing\nPurpose: Per modality fitering pipelines are available to select true from false cells.\n\n\n\n\n\n\nflowchart LR\n\n  RawCounts[\"Raw counts<sup>*</sup>\"]\n  Processed[\"Processed\\ncounts<sup>†</sup>\"]\n\n  Step1[/\"Cell\\nfiltering\"/]\n  Step2[/\"Doublet\\ncalling\"/]\n  Step3[/\"Ambient RNA\\ncorrection\"/]\n  \n  RawCounts --> Step1 --> Step2 --> Step3 --> Processed\n\n\n\n\n\nFigure 3: Single-sample processing pipeline.\n*: Possible entry points.\n†: Output file(s)\n\n\n\n\n\n\n\nMulti-sample unimodal processing\nPurpose: … .\n\n\n\n\n\n\nflowchart LR\n\n  Processed[\"Processed\\ncounts<sup>*</sup>\"]\n  Normalised[\"Normalised\\ncounts<sup>†</sup>\"]\n\n  Step1[/\"Feature annotation\"/]\n  Step2[/\"Batch correction?\"/]\n  Step3[/\"Normalisation\"/]\n  Step4[/\"Feature selection\"/]\n\n  Processed --> Step1 --> Step2 --> Step3 --> Step4 --> Normalised\n\n\n\n\n\nFigure 4: Multi-sample processing pipeline.\n*: Possible entry points.\n†: Output file(s)\n\n\n\n\n\n\n\nIntegration\nPurpose: Performs an integration pipeline for single cell data based on a single or multiple modalities.\n\n\n\n\n\n\nflowchart LR\n\n  Normalised[\"Normalised\\ncounts<sup>*</sup>\"]\n  Integrated[\"Integrated\\ndata<sup>†</sup>\"]\n\n  Step1[/\"Data integration\"/]\n  Step2[/\"Dimensionality\\nreduction\"/]\n  \n  Normalised --> Step1 --> Step2 --> Integrated\n\n\n\n\n\nFigure 5: Integration pipeline.\n*: Possible entry points.\n†: Output file(s)\n\n\n\n\n\n\n\nInterpretation\nPurpose: Take different dataset annotations and combine them together into a single enriched dataset. The idea is to have a diff_muon object, i.e. a muon object containing the changes of the original object where data from the diff_muon will be pushed to the original muon object.\n\n\n\n\n\n\nNote\n\n\n\nThis is what we did a time ago and it has the drawback that it could make everything very slow. We might need to be able to aggregate diffs before adding them to the final object."
   },
   {
+    "objectID": "architecture/file-formats.html",
+    "href": "architecture/file-formats.html",
+    "title": "File formats",
+    "section": "",
+    "text": "Note\n\n\n\nFile formats are being discussed in openpipelines-bio/openpipeline#102"
+  },
+  {
+    "objectID": "architecture/file-formats.html#dataset",
+    "href": "architecture/file-formats.html#dataset",
+    "title": "File formats",
+    "section": "Dataset",
+    "text": "Dataset\nobs:\n index # cell id\n sample\n cell_type\n organism\n tissue\n\nmod:\n rna:\n rnav:\n prot:\n atac:\n vdj:"
+  },
+  {
+    "objectID": "architecture/file-formats.html#rna-modality",
+    "href": "architecture/file-formats.html#rna-modality",
+    "title": "File formats",
+    "section": "RNA modality",
+    "text": "RNA modality\nmod:\n rna:\n   layers:\n     counts\n     normalized\n   obs:\n     <qc metrics>\n     doublet_score\n     doublet_bool\n     cluster\n   var:\n     index # feature_id, preferably an ensembl id\n     feature_name\n     <qc metrics>\n     highly_variable\n     highly_variable_score\n   obsm:\n     X_pca\n     X_integrated\n     X_umap\n     annotation # scvi, bbknn, ...\n   obsp:\n     connectivities\n     distances"
+  },
+  {
+    "objectID": "architecture/file-formats.html#adt-modality",
+    "href": "architecture/file-formats.html#adt-modality",
+    "title": "File formats",
+    "section": "ADT modality",
+    "text": "ADT modality\nmod:\n prot:\n   layers:\n     counts\n   var:\n      index # feature_id\n      feature_name # Associated protein names"
+  },
+  {
+    "objectID": "architecture/file-formats.html#vdj-modality",
+    "href": "architecture/file-formats.html#vdj-modality",
+    "title": "File formats",
+    "section": "VDJ modality",
+    "text": "VDJ modality\nmod:\n vdj:\n   obsm:\n     vdj_t\n     vdj_b"
+  },
+  {
+    "objectID": "architecture/file-formats.html#atac-modality",
+    "href": "architecture/file-formats.html#atac-modality",
+    "title": "File formats",
+    "section": "ATAC modality",
+    "text": "ATAC modality\nmod:\n atac:\n   layers:\n     counts\n   var:\n     interval"
+  },
+  {
+    "objectID": "architecture/file-formats.html#rna-velocity-modality",
+    "href": "architecture/file-formats.html#rna-velocity-modality",
+    "title": "File formats",
+    "section": "RNA velocity modality",
+    "text": "RNA velocity modality\nmod:\n rnav:\n   layers:\n     spliced\n     unspliced"
+  },
+  {
     "objectID": "architecture/use-cases.html",
     "href": "architecture/use-cases.html",
     "title": "Use-cases",
