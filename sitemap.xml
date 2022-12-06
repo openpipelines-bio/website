@@ -2,278 +2,278 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://openproblems.bio/index.html</loc>
-    <lastmod>2022-12-06T11:29:52.856Z</lastmod>
+    <lastmod>2022-12-06T13:25:00.248Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/architecture/index.html</loc>
-    <lastmod>2022-12-06T11:29:53.560Z</lastmod>
+    <lastmod>2022-12-06T13:25:01.240Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/architecture/use-cases.html</loc>
-    <lastmod>2022-12-06T11:29:53.920Z</lastmod>
+    <lastmod>2022-12-06T13:25:01.764Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/workflows/multiomics/full_pipeline.html</loc>
-    <lastmod>2022-12-06T11:29:54.340Z</lastmod>
+    <lastmod>2022-12-06T13:25:02.384Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/workflows/multiomics/rna_multisample.html</loc>
-    <lastmod>2022-12-06T11:29:54.728Z</lastmod>
+    <lastmod>2022-12-06T13:25:02.944Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/workflows/multiomics/integration.html</loc>
-    <lastmod>2022-12-06T11:29:55.132Z</lastmod>
+    <lastmod>2022-12-06T13:25:03.532Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/workflows/multiomics/rna_singlesample.html</loc>
-    <lastmod>2022-12-06T11:29:55.508Z</lastmod>
+    <lastmod>2022-12-06T13:25:04.080Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/workflows/ingestion/cellranger_mapping.html</loc>
-    <lastmod>2022-12-06T11:29:55.944Z</lastmod>
+    <lastmod>2022-12-06T13:25:04.680Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/workflows/ingestion/bd_rhapsody.html</loc>
-    <lastmod>2022-12-06T11:29:56.408Z</lastmod>
+    <lastmod>2022-12-06T13:25:05.348Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/workflows/ingestion/conversion.html</loc>
-    <lastmod>2022-12-06T11:29:56.800Z</lastmod>
+    <lastmod>2022-12-06T13:25:05.928Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/workflows/ingestion/demux.html</loc>
-    <lastmod>2022-12-06T11:29:57.192Z</lastmod>
+    <lastmod>2022-12-06T13:25:06.536Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/workflows/ingestion/cellranger_postprocessing.html</loc>
-    <lastmod>2022-12-06T11:29:57.608Z</lastmod>
+    <lastmod>2022-12-06T13:25:07.100Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/workflows/ingestion/make_reference.html</loc>
-    <lastmod>2022-12-06T11:29:58.000Z</lastmod>
+    <lastmod>2022-12-06T13:25:07.696Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/index.html</loc>
-    <lastmod>2022-12-06T11:29:58.796Z</lastmod>
+    <lastmod>2022-12-06T13:25:08.908Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/integrate/scanorama.html</loc>
-    <lastmod>2022-12-06T11:29:59.184Z</lastmod>
+    <lastmod>2022-12-06T13:25:09.436Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/integrate/harmonypy.html</loc>
-    <lastmod>2022-12-06T11:29:59.572Z</lastmod>
+    <lastmod>2022-12-06T13:25:09.964Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/integrate/scvi.html</loc>
-    <lastmod>2022-12-06T11:29:59.972Z</lastmod>
+    <lastmod>2022-12-06T13:25:10.516Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/dataflow/split_modalities.html</loc>
-    <lastmod>2022-12-06T11:30:00.344Z</lastmod>
+    <lastmod>2022-12-06T13:25:11.032Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/dataflow/merge.html</loc>
-    <lastmod>2022-12-06T11:30:00.732Z</lastmod>
+    <lastmod>2022-12-06T13:25:11.596Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/dataflow/concat.html</loc>
-    <lastmod>2022-12-06T11:30:01.116Z</lastmod>
+    <lastmod>2022-12-06T13:25:12.128Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/transform/scale.html</loc>
-    <lastmod>2022-12-06T11:30:01.476Z</lastmod>
+    <lastmod>2022-12-06T13:25:12.652Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/transform/normalize_total.html</loc>
-    <lastmod>2022-12-06T11:30:01.860Z</lastmod>
+    <lastmod>2022-12-06T13:25:13.212Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/transform/regress_out.html</loc>
-    <lastmod>2022-12-06T11:30:02.224Z</lastmod>
+    <lastmod>2022-12-06T13:25:13.740Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/transform/log1p.html</loc>
-    <lastmod>2022-12-06T11:30:02.596Z</lastmod>
+    <lastmod>2022-12-06T13:25:14.256Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/transform/delete_layer.html</loc>
-    <lastmod>2022-12-06T11:30:02.956Z</lastmod>
+    <lastmod>2022-12-06T13:25:14.768Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/files/make_params.html</loc>
-    <lastmod>2022-12-06T11:30:03.340Z</lastmod>
+    <lastmod>2022-12-06T13:25:15.312Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/reference/build_bdrhap_reference.html</loc>
-    <lastmod>2022-12-06T11:30:03.708Z</lastmod>
+    <lastmod>2022-12-06T13:25:15.844Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/reference/make_reference.html</loc>
-    <lastmod>2022-12-06T11:30:04.080Z</lastmod>
+    <lastmod>2022-12-06T13:25:16.368Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/reference/build_cellranger_reference.html</loc>
-    <lastmod>2022-12-06T11:30:04.448Z</lastmod>
+    <lastmod>2022-12-06T13:25:16.881Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/dimred/umap.html</loc>
-    <lastmod>2022-12-06T11:30:04.852Z</lastmod>
+    <lastmod>2022-12-06T13:25:17.469Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/dimred/pca.html</loc>
-    <lastmod>2022-12-06T11:30:05.224Z</lastmod>
+    <lastmod>2022-12-06T13:25:17.993Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/cluster/leiden.html</loc>
-    <lastmod>2022-12-06T11:30:05.628Z</lastmod>
+    <lastmod>2022-12-06T13:25:18.589Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/process_10xh5/filter_10xh5.html</loc>
-    <lastmod>2022-12-06T11:30:05.996Z</lastmod>
+    <lastmod>2022-12-06T13:25:19.105Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/mapping/cellranger_count_split.html</loc>
-    <lastmod>2022-12-06T11:30:06.364Z</lastmod>
+    <lastmod>2022-12-06T13:25:19.633Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/mapping/cellranger_multi.html</loc>
-    <lastmod>2022-12-06T11:30:06.796Z</lastmod>
+    <lastmod>2022-12-06T13:25:20.253Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/mapping/star_align.html</loc>
-    <lastmod>2022-12-06T11:30:08.172Z</lastmod>
+    <lastmod>2022-12-06T13:25:22.205Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/mapping/cellranger_count.html</loc>
-    <lastmod>2022-12-06T11:30:08.588Z</lastmod>
+    <lastmod>2022-12-06T13:25:22.765Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/mapping/bd_rhapsody.html</loc>
-    <lastmod>2022-12-06T11:30:09.032Z</lastmod>
+    <lastmod>2022-12-06T13:25:23.429Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/report/mermaid.html</loc>
-    <lastmod>2022-12-06T11:30:09.392Z</lastmod>
+    <lastmod>2022-12-06T13:25:24.065Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/qc/multiqc.html</loc>
-    <lastmod>2022-12-06T11:30:09.736Z</lastmod>
+    <lastmod>2022-12-06T13:25:24.865Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/qc/fastqc.html</loc>
-    <lastmod>2022-12-06T11:30:10.100Z</lastmod>
+    <lastmod>2022-12-06T13:25:25.661Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/correction/cellbender_remove_background.html</loc>
-    <lastmod>2022-12-06T11:30:10.520Z</lastmod>
+    <lastmod>2022-12-06T13:25:26.749Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/neighbors/find_neighbors.html</loc>
-    <lastmod>2022-12-06T11:30:10.912Z</lastmod>
+    <lastmod>2022-12-06T13:25:27.305Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/neighbors/bbknn.html</loc>
-    <lastmod>2022-12-06T11:30:11.304Z</lastmod>
+    <lastmod>2022-12-06T13:25:27.829Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/velocity/velocyto.html</loc>
-    <lastmod>2022-12-06T11:30:11.672Z</lastmod>
+    <lastmod>2022-12-06T13:25:28.341Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/velocity/scvelo.html</loc>
-    <lastmod>2022-12-06T11:30:12.056Z</lastmod>
+    <lastmod>2022-12-06T13:25:28.877Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/filter/filter_with_hvg.html</loc>
-    <lastmod>2022-12-06T11:30:12.480Z</lastmod>
+    <lastmod>2022-12-06T13:25:29.461Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/filter/filter_with_counts.html</loc>
-    <lastmod>2022-12-06T11:30:12.872Z</lastmod>
+    <lastmod>2022-12-06T13:25:29.985Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/filter/filter_with_scrublet.html</loc>
-    <lastmod>2022-12-06T11:30:13.292Z</lastmod>
+    <lastmod>2022-12-06T13:25:30.553Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/filter/do_filter.html</loc>
-    <lastmod>2022-12-06T11:30:13.660Z</lastmod>
+    <lastmod>2022-12-06T13:25:31.073Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/filter/subset_h5mu.html</loc>
-    <lastmod>2022-12-06T11:30:14.020Z</lastmod>
+    <lastmod>2022-12-06T13:25:31.589Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/transfer/publish.html</loc>
-    <lastmod>2022-12-06T11:30:14.372Z</lastmod>
+    <lastmod>2022-12-06T13:25:32.081Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/convert/from_bd_to_10x_molecular_barcode_tags.html</loc>
-    <lastmod>2022-12-06T11:30:14.740Z</lastmod>
+    <lastmod>2022-12-06T13:25:32.581Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/convert/from_h5ad_to_h5mu.html</loc>
-    <lastmod>2022-12-06T11:30:15.328Z</lastmod>
+    <lastmod>2022-12-06T13:25:33.073Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/convert/from_bdrhap_to_h5mu.html</loc>
-    <lastmod>2022-12-06T11:30:16.196Z</lastmod>
+    <lastmod>2022-12-06T13:25:33.589Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/convert/from_velocyto_to_h5mu.html</loc>
-    <lastmod>2022-12-06T11:30:17.080Z</lastmod>
+    <lastmod>2022-12-06T13:25:34.073Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/convert/from_10xh5_to_h5mu.html</loc>
-    <lastmod>2022-12-06T11:30:17.784Z</lastmod>
+    <lastmod>2022-12-06T13:25:34.593Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/convert/from_cellranger_multi_to_h5mu.html</loc>
-    <lastmod>2022-12-06T11:30:18.380Z</lastmod>
+    <lastmod>2022-12-06T13:25:35.117Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/convert/from_h5mu_to_h5ad.html</loc>
-    <lastmod>2022-12-06T11:30:19.392Z</lastmod>
+    <lastmod>2022-12-06T13:25:35.625Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/convert/from_10xmtx_to_h5mu.html</loc>
-    <lastmod>2022-12-06T11:30:22.040Z</lastmod>
+    <lastmod>2022-12-06T13:25:36.117Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/demux/bcl_convert.html</loc>
-    <lastmod>2022-12-06T11:30:22.540Z</lastmod>
+    <lastmod>2022-12-06T13:25:36.633Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/demux/bcl2fastq.html</loc>
-    <lastmod>2022-12-06T11:30:22.896Z</lastmod>
+    <lastmod>2022-12-06T13:25:37.161Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/demux/cellranger_mkfastq.html</loc>
-    <lastmod>2022-12-06T11:30:23.268Z</lastmod>
+    <lastmod>2022-12-06T13:25:37.745Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/download/sync_test_resources.html</loc>
-    <lastmod>2022-12-06T11:30:23.640Z</lastmod>
+    <lastmod>2022-12-06T13:25:38.277Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/download/download_file.html</loc>
-    <lastmod>2022-12-06T11:30:23.992Z</lastmod>
+    <lastmod>2022-12-06T13:25:38.809Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/metadata/join_csv.html</loc>
-    <lastmod>2022-12-06T11:30:24.364Z</lastmod>
+    <lastmod>2022-12-06T13:25:39.345Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/metadata/add_id.html</loc>
-    <lastmod>2022-12-06T11:30:24.724Z</lastmod>
+    <lastmod>2022-12-06T13:25:39.865Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/components/modules/metadata/join_uns_to_obs.html</loc>
-    <lastmod>2022-12-06T11:30:25.080Z</lastmod>
+    <lastmod>2022-12-06T13:25:40.365Z</lastmod>
   </url>
   <url>
     <loc>https://openproblems.bio/contribute/index.html</loc>
-    <lastmod>2022-12-06T11:30:25.496Z</lastmod>
+    <lastmod>2022-12-06T13:25:40.925Z</lastmod>
   </url>
 </urlset>
