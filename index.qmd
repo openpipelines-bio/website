@@ -1,5 +1,6 @@
 ---
 title: "About"
+sidebar: false
 ---
 
 Breakthroughs in single-cell genomics have been made possible by the simultaneous advancement of experimental and computational technologies. While experimental techniques standardize quickly, computational analysis pipelines are more challenging to compare and thus vary. Analysis platforms such as Seurat and Scanpy have facilitated pipeline building and introduced basic quality standards. Furthermore, we have made first attempts at standardizing workflows for scRNA-seq to bridge the language-gap between these platforms and their users.

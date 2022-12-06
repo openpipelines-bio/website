@@ -1,5 +1,6 @@
 ---
 title: Developers Guide
+sidebar: false
 ---
 
 ## Getting started

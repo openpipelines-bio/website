@@ -23,3 +23,8 @@ nav.navbar > div > a.navbar-brand > img {
   max-height: 3rem;
   margin: 1rem;
 }
+
+.mermaid svg {
+  display: block;
+  margin: auto;
+}
