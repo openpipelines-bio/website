@@ -15,6 +15,7 @@ website:
         menu: 
           - architecture/index.qmd
           - architecture/use-cases.qmd
+          - architecture/file-formats.qmd
       - href: components/index.qmd
         text: Components
       - text: Contribute
