@@ -4,8 +4,8 @@ project:
 website:
   title: "OpenPipelines"
   image: "openpipelines.png"
-  site-url: https://openproblems.bio
-  repo-url: https://github.com/openproblems-bio/website
+  site-url: https://openpipelines.bio
+  repo-url: https://github.com/openpipelines-bio/website
   navbar:
     logo: "openpipelines.png"
     title: false
