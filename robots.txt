@@ -1,1 +1,1 @@
-Sitemap: https://openproblems.bio/sitemap.xml
+Sitemap: https://openpipelines.bio/sitemap.xml
