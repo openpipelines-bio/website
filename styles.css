@@ -1,25 +1,10 @@
 /* css styles */
-g.label {
-    line-height: 1em;
-
-}
-
 #quarto-header nav.navbar {
   height: 5rem;
   padding: 0; 
 }
 
-nav.navbar > div.navbar-container {
-  height: 100%;
-  
-}
-
-nav.navbar > div > a.navbar-brand {
-  height: 100%;
-  padding: 0;
-}   
-
-nav.navbar > div > a.navbar-brand > img {
+a.navbar-brand-logo > img {
   max-height: 3rem;
   margin: 1rem;
 }
