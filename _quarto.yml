@@ -35,7 +35,7 @@ website:
         - text: Modules
           contents:
             - auto: "components/modules/*/*"
-  page-footer: "Copyright 2022, OpenPipelines.bio"
+  page-footer: "Copyright 2023, OpenPipelines.bio"
   repo-actions: [edit, issue] 
   google-analytics: G-KKE3LFPPV8
 
