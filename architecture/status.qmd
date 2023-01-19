@@ -1,0 +1,27 @@
+---
+title: Status
+---
+
+
+
+:::{.column-screen-inset-shaded}
+
+```{mermaid}
+%%| label: fig-status
+%%| fig-cap: "Status of implemented components. Green: implemented, orange: work in progress,   \nGEX: Gene-expression. RNAV: RNA Velocity. ADT: Antibody-Derived Tags. ATAC: Assay for Transposase-Accessible Chromatin."
+
+flowchart LR
+  classDef done fill:#a3f6cf,stroke:#000000;
+  classDef wip fill:#f4cb93,stroke:#000000;
+  classDef todo fill:#f0aeb2,stroke:#000000;
+
+  Raw1[Sample 1] --> Split1[/Split\nmodalities/]:::done --> ProcGEX1 & ProcRNAV1 & ProcADT1 & ProcATAC1 & ProcVDJ1
+  ProcGEX1[/Process GEX\nprofile/]:::done --> ConcatGEX[/Concatenate\nprofiles/]:::done --> ProcGEX[/Process GEX\nprofiles/]:::done
+  ProcRNAV1[/Process RNAV\nprofile/]:::wip --> ConcatRNAV[/Concatenate\nprofiles/]:::done --> ProcRNAV[/Process RNAV\nprofiles/]:::wip
+  ProcADT1[/Process ADT\nprofile/]:::done --> ConcatADT[/Concatenate\nprofiles/]:::done --> ProcADT[/Process ADT\nprofiles/]:::todo
+  ProcATAC1[/Process ATAC\nprofile/]:::todo --> ConcatATAC[/Concatenate\nprofiles/]:::done --> ProcATAC[/Process ATAC\nprofiles/]:::todo
+  ProcVDJ1[/Process VDJ\nprofile/]:::todo --> ConcatVDJ[/Concatenate\nprofiles/]:::done --> ProcVDJ[/Process VDJ\nprofiles/]:::todo
+  ProcGEX & ProcRNAV & ProcADT & ProcATAC & ProcVDJ --> Merge[/Merge\nmodalities/]:::done --> Integration[/Integration/]:::done
+```
+
+:::

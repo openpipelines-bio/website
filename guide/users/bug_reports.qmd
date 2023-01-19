@@ -1,0 +1,6 @@
+---
+title: Bug reports
+---
+
+Issues with Openpipelines are being tracked on [Github](https://github.com/openpipelines-bio/openpipeline/issues).
+In order for an issue to be fixed in a timely manner, creating a complete and reproducable is essential. 
