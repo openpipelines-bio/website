@@ -21,6 +21,8 @@ website:
         text: Components
       - text: Guide
         href: guide/index.qmd
+      - sidebar:About
+
     right:
       - text: Source Code
         url: https://github.com/openpipelines-bio/openpipeline
@@ -40,6 +42,10 @@ website:
       collapse-level: 3
       title: Guide
       contents: guide
+    - id: About
+      collapse-level: 2
+      contents:
+        - auto: about/
   page-footer: "Copyright 2022, OpenPipelines.bio"
   repo-actions: [edit, issue] 
   google-analytics: G-KKE3LFPPV8

@@ -2,6 +2,18 @@
 title: Pull requests
 ---
 
-:::{.callout-note}
-TODO: fill in
-:::
+## Updating your pull request or branch
+While creating changes on your local branch, another developper could have added new changes the openpipeline repository.
+These changes will need to be included into your local branch before a pull request can be merged. Updating your branch involves merging
+the upstream branch (usually `main`) into your branch:
+
+```bash
+# download the changes from the openpipelines repo
+git fetch upstream
+# change your current branch to the branch of the pull request
+git checkout <feature_branch>
+# merge the changes from upstream into your branch
+git merge upstream/main
+# push the updates, your pull request will also be updated
+git push
+```
