@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>OpenPipelines - Overview</title>
+<title>OpenPipelines - Status</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -143,27 +143,14 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#subworkflows" id="toc-subworkflows" class="nav-link active" data-scroll-target="#subworkflows">Subworkflows</a>
-  <ul class="collapse">
-  <li><a href="#ingestion" id="toc-ingestion" class="nav-link" data-scroll-target="#ingestion">Ingestion</a></li>
-  <li><a href="#single-sample-preproc" id="toc-single-sample-preproc" class="nav-link" data-scroll-target="#single-sample-preproc">Single-sample unimodal processing</a></li>
-  <li><a href="#multi-sample-preproc" id="toc-multi-sample-preproc" class="nav-link" data-scroll-target="#multi-sample-preproc">Multi-sample unimodal processing</a></li>
-  <li><a href="#integration" id="toc-integration" class="nav-link" data-scroll-target="#integration">Integration</a></li>
-  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation</a></li>
-  </ul></li>
-  </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/architecture/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+        
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Overview</h1>
+<h1 class="title">Status</h1>
 </div>
 
 
@@ -178,221 +165,38 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 
 </header>
 
-<p>The single-cell workflow is comprised of multiple (standalone) subworkflows.</p>
 <div class="column-screen-inset-shaded">
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-architecture" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-status" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p>
 </p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-1">flowchart LR
-  Raw[Raw\ndata]
-  Dataset[Dataset]
-  Ingestion[/Ingestion/]
-  Preproc1[/Unimodal\nsingle-sample\nprocessing/]
-  Preproc2[/Unimodal\nmulti-sample\nprocessing/]
-  Concat[/Concatenating\nSamples/]
-  Merge[/Merging\nmodes/]
-  Integration[/Integration/]
-  Interpretation[/Interpretation/]
-  Conversion[/Conversion/]
+  classDef done fill:#a3f6cf,stroke:#000000;
+  classDef wip fill:#f4cb93,stroke:#000000;
+  classDef todo fill:#f0aeb2,stroke:#000000;
 
-  Raw --- Ingestion --&gt; Split[/Split/] --&gt; Preproc1 --&gt; Concat --&gt; Preproc2 --&gt; Merge --&gt; Integration --&gt; Interpretation --&gt; Conversion --&gt; Dataset
-
-  Ingestion -.-|"- Demux.\n- Mapping"| Ingestion
-  Preproc1 -.-|"- Count QC\n- Doublet calling\n- Ambient RNA\n- Gatekeeper"| Preproc1
-  Preproc2 -.-|"- Normalisation\n- Feature annotation\n- Feature selection\n- Batch correction?\n- Dim. red.?"| Preproc2
-  Integration -.-|"- Dim. red.\n- Data integration"| Integration
-  Interpretation -.-|"- Clustering\n- Cell typing\n- GRN\n- ..."| Interpretation
-
-  linkStyle 10,11,12,13,14 stroke:#fff,stroke-width:0px,text-align:left;
-
-  %% click Ingestion "./#ingestion"
-  %% style Ingestion color:#2873c7,text-decoration:underline;
-  %% click Preproc1 "./#single-sample-preproc"
-  %% style Preproc1 color:#2873c7,text-decoration:underline;
-  %% click Preproc2 "./#multi-sample-preproc"
-  %% style Preproc2 color:#2873c7,text-decoration:underline;
-  %% click Integration "./#integration"
-  %% style Integration color:#2873c7,text-decoration:underline;
+  Raw1[Sample 1] --&gt; Split1[/Split\nmodalities/]:::done --&gt; ProcGEX1 &amp; ProcRNAV1 &amp; ProcADT1 &amp; ProcATAC1 &amp; ProcVDJ1
+  ProcGEX1[/Process GEX\nprofile/]:::done --&gt; ConcatGEX[/Concatenate\nprofiles/]:::done --&gt; ProcGEX[/Process GEX\nprofiles/]:::done
+  ProcRNAV1[/Process RNAV\nprofile/]:::wip --&gt; ConcatRNAV[/Concatenate\nprofiles/]:::done --&gt; ProcRNAV[/Process RNAV\nprofiles/]:::wip
+  ProcADT1[/Process ADT\nprofile/]:::done --&gt; ConcatADT[/Concatenate\nprofiles/]:::done --&gt; ProcADT[/Process ADT\nprofiles/]:::todo
+  ProcATAC1[/Process ATAC\nprofile/]:::todo --&gt; ConcatATAC[/Concatenate\nprofiles/]:::done --&gt; ProcATAC[/Process ATAC\nprofiles/]:::todo
+  ProcVDJ1[/Process VDJ\nprofile/]:::todo --&gt; ConcatVDJ[/Concatenate\nprofiles/]:::done --&gt; ProcVDJ[/Process VDJ\nprofiles/]:::todo
+  ProcGEX &amp; ProcRNAV &amp; ProcADT &amp; ProcATAC &amp; ProcVDJ --&gt; Merge[/Merge\nmodalities/]:::done --&gt; Integration[/Integration/]:::done
 </pre>
 <div id="mermaid-tooltip-1" class="mermaidTooltip">
 
 </div>
 <p></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;1: Overview single cell processing steps in OpenPipeline. Rectangles are data objects, parallelograms are Viash modules or subworkflows.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1: Status of implemented components. Green: implemented, orange: work in progress,<br>
+GEX: Gene-expression. RNAV: RNA Velocity. ADT: Antibody-Derived Tags. ATAC: Assay for Transposase-Accessible Chromatin.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<section id="subworkflows" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="subworkflows">Subworkflows</h2>
-<section id="ingestion" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="ingestion">Ingestion</h3>
-<p>Purpose: Convert raw sequencing data or count tables into MuData data for further processing.</p>
-<div class="column-screen-inset-shaded">
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-ingestion" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p>
-</p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-2">flowchart LR
-
-  BCL["BCL&lt;sup&gt;*&lt;/sup&gt;"]
-  Fastq["Fastq&lt;sup&gt;*&lt;/sup&gt;"]
-  Ref["Reference"]
-  RawDir["Raw out&lt;sup&gt;*&lt;/sup&gt;"]
-  RawCounts["Raw counts&lt;sup&gt;†&lt;/sup&gt;"]
-
-  Demux[/"Demux"/]
-  Mapping[/"Mapping"/]
-  Convert[/"Convert"/]
-
-  BCL --- Demux --&gt; Fastq
-  Fastq &amp; Ref --- Mapping --&gt; RawDir --- Convert --&gt; RawCounts
 
 
-  BCL -.-|".tar.gz/Directory"| BCL
-  Fastq -.-|".fastq.gz/.fastq"| Fastq
-  Ref -.-|".tar.gz?"| Ref
-  RawDir -.-|"Directory"| RawDir
-  RawCounts -.-|".h5mu"| RawCounts
-
-  linkStyle 7,8,9,10,11 stroke:#fff,stroke-width:0px,text-align:left;
-</pre>
-<div id="mermaid-tooltip-2" class="mermaidTooltip">
-
-</div>
-<p></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2: Ingestion pipeline.<br>
-<code>*</code>: Possible entry points.<br>
-<code>†</code>: Output file(s)</figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="single-sample-preproc" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="single-sample-preproc">Single-sample unimodal processing</h3>
-<p>Purpose: Per modality fitering pipelines are available to select true from false cells.</p>
-<div class="column-screen-inset-shaded">
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-sspreproc" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p>
-</p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-3">flowchart LR
-
-  RawCounts["Raw counts&lt;sup&gt;*&lt;/sup&gt;"]
-  Processed["Processed\ncounts&lt;sup&gt;†&lt;/sup&gt;"]
-
-  Step1[/"Cell\nfiltering"/]
-  Step2[/"Doublet\ncalling"/]
-  Step3[/"Ambient RNA\ncorrection"/]
-  
-  RawCounts --&gt; Step1 --&gt; Step2 --&gt; Step3 --&gt; Processed
-</pre>
-<div id="mermaid-tooltip-3" class="mermaidTooltip">
-
-</div>
-<p></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3: Single-sample processing pipeline.<br>
-<code>*</code>: Possible entry points.<br>
-<code>†</code>: Output file(s)</figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="multi-sample-preproc" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="multi-sample-preproc">Multi-sample unimodal processing</h3>
-<p>Purpose: … .</p>
-<div class="column-screen-inset-shaded">
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-mspreproc" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p>
-</p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-4">flowchart LR
-
-  Processed["Processed\ncounts&lt;sup&gt;*&lt;/sup&gt;"]
-  Normalised["Normalised\ncounts&lt;sup&gt;†&lt;/sup&gt;"]
-
-  Step1[/"Feature annotation"/]
-  Step2[/"Batch correction?"/]
-  Step3[/"Normalisation"/]
-  Step4[/"Feature selection"/]
-
-  Processed --&gt; Step1 --&gt; Step2 --&gt; Step3 --&gt; Step4 --&gt; Normalised
-</pre>
-<div id="mermaid-tooltip-4" class="mermaidTooltip">
-
-</div>
-<p></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4: Multi-sample processing pipeline.<br>
-<code>*</code>: Possible entry points.<br>
-<code>†</code>: Output file(s)</figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="integration" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="integration">Integration</h3>
-<p>Purpose: Performs an integration pipeline for single cell data based on a single or multiple modalities.</p>
-<div class="column-screen-inset-shaded">
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-integration" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p>
-</p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-5">flowchart LR
-
-  Normalised["Normalised\ncounts&lt;sup&gt;*&lt;/sup&gt;"]
-  Integrated["Integrated\ndata&lt;sup&gt;†&lt;/sup&gt;"]
-
-  Step1[/"Data integration"/]
-  Step2[/"Dimensionality\nreduction"/]
-  
-  Normalised --&gt; Step1 --&gt; Step2 --&gt; Integrated
-</pre>
-<div id="mermaid-tooltip-5" class="mermaidTooltip">
-
-</div>
-<p></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;5: Integration pipeline.<br>
-<code>*</code>: Possible entry points.<br>
-<code>†</code>: Output file(s)</figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="interpretation" class="level3">
-<h3 class="anchored" data-anchor-id="interpretation">Interpretation</h3>
-<p>Purpose: Take different dataset annotations and combine them together into a single enriched dataset. The idea is to have a diff_muon object, i.e.&nbsp;a muon object containing the changes of the original object where data from the diff_muon will be pushed to the original muon object.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This is what we did a time ago and it has the drawback that it could make everything very slow. We might need to be able to aggregate diffs before adding them to the final object.</p>
-</div>
-</div>
-
-
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

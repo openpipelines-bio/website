@@ -105,6 +105,10 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
  <span class="dropdown-text">Overview</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../architecture/status.html">
+ <span class="dropdown-text">Status</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../architecture/use-cases.html">
  <span class="dropdown-text">Use-cases</span></a>
   </li>  
@@ -119,8 +123,8 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
  <span class="menu-text">Components</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../contribute/index.html">
- <span class="menu-text">Contribute</span></a>
+    <a class="nav-link" href="../guide/index.html">
+ <span class="menu-text">Guide</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
@@ -147,7 +151,6 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   <li><a href="#multiple-unimodal-samples" id="toc-multiple-unimodal-samples" class="nav-link" data-scroll-target="#multiple-unimodal-samples">Multiple unimodal samples</a></li>
   <li><a href="#a-single-multimodal-sample" id="toc-a-single-multimodal-sample" class="nav-link" data-scroll-target="#a-single-multimodal-sample">A single multimodal sample</a></li>
   <li><a href="#multiple-multimodal-samples" id="toc-multiple-multimodal-samples" class="nav-link" data-scroll-target="#multiple-multimodal-samples">Multiple multimodal samples</a></li>
-  <li><a href="#status" id="toc-status" class="nav-link" data-scroll-target="#status">Status</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/architecture/use-cases.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -292,39 +295,6 @@ GEX: Gene-expression. ADT: Antibody-Derived Tags. RNAV: RNA Velocity.</figcaptio
 <p></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;4: Example of how the concat and merges work.<br>
 GEX: Gene-expression. ADT: Antibody-Derived Tags.</figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="status" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="status">Status</h3>
-<div class="column-screen-inset-shaded">
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-status" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p>
-</p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-5">flowchart LR
-  classDef done fill:#a3f6cf,stroke:#000000;
-  classDef wip fill:#f4cb93,stroke:#000000;
-  classDef todo fill:#f0aeb2,stroke:#000000;
-
-  Raw1[Sample 1] --&gt; Split1[/Split\nmodalities/]:::done --&gt; ProcGEX1 &amp; ProcRNAV1 &amp; ProcADT1 &amp; ProcATAC1 &amp; ProcVDJ1
-  ProcGEX1[/Process GEX\nprofile/]:::done --&gt; ConcatGEX[/Concatenate\nprofiles/]:::done --&gt; ProcGEX[/Process GEX\nprofiles/]:::done
-  ProcRNAV1[/Process RNAV\nprofile/]:::wip --&gt; ConcatRNAV[/Concatenate\nprofiles/]:::done --&gt; ProcRNAV[/Process RNAV\nprofiles/]:::wip
-  ProcADT1[/Process ADT\nprofile/]:::todo --&gt; ConcatADT[/Concatenate\nprofiles/]:::done --&gt; ProcADT[/Process ADT\nprofiles/]:::todo
-  ProcATAC1[/Process ATAC\nprofile/]:::todo --&gt; ConcatATAC[/Concatenate\nprofiles/]:::done --&gt; ProcATAC[/Process ATAC\nprofiles/]:::todo
-  ProcVDJ1[/Process VDJ\nprofile/]:::todo --&gt; ConcatVDJ[/Concatenate\nprofiles/]:::done --&gt; ProcVDJ[/Process VDJ\nprofiles/]:::todo
-  ProcGEX &amp; ProcRNAV &amp; ProcADT &amp; ProcATAC &amp; ProcVDJ --&gt; Merge[/Merge\nmodalities/]:::done --&gt; Integration[/Integration/]:::wip
-</pre>
-<div id="mermaid-tooltip-5" class="mermaidTooltip">
-
-</div>
-<p></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;5: Status of implemented components. Green: implemented, orange: work in progress,<br>
-GEX: Gene-expression. RNAV: RNA Velocity. ADT: Antibody-Derived Tags. ATAC: Assay for Transposase-Accessible Chromatin.</figcaption><p></p>
 </figure>
 </div>
 </div>
