@@ -14,12 +14,13 @@ website:
       - text: Architecture
         menu: 
           - architecture/index.qmd
+          - architecture/status.qmd
           - architecture/use-cases.qmd
           - architecture/file-formats.qmd
       - href: components/index.qmd
         text: Components
-      - text: Contribute
-        href: contribute/index.qmd
+      - text: Guide
+        href: guide/index.qmd
     right:
       - text: Source Code
         url: https://github.com/openpipelines-bio/openpipeline
@@ -35,6 +36,10 @@ website:
         - text: Modules
           contents:
             - auto: "components/modules/*/*"
+    - id: guide
+      collapse-level: 3
+      title: Guide
+      contents: guide
   page-footer: "Copyright 2022, OpenPipelines.bio"
   repo-actions: [edit, issue] 
   google-analytics: G-KKE3LFPPV8

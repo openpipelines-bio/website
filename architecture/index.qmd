@@ -1,6 +1,5 @@
 ---
 title: Overview
-sidebar: false
 ---
 
 The single-cell workflow is comprised of multiple (standalone) subworkflows.
