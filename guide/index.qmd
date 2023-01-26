@@ -1,9 +1,0 @@
----
-title: Guide
----
-
-:::{callout-note}
-TODO: Fill in
-:::
-
-Are you a [user](users/) or a [developer](developers/)?

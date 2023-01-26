@@ -13,3 +13,7 @@ a.navbar-brand-logo > img {
   display: block;
   margin: auto;
 }
+
+.home .title {
+  text-align: center;
+}

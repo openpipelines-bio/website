@@ -19,8 +19,8 @@ website:
           - architecture/file-formats.qmd
       - href: components/index.qmd
         text: Components
-      - text: Guide
-        href: guide/index.qmd
+      - sidebar:guide
+      - sidebar:contributing
       - sidebar:About
 
     right:
@@ -41,11 +41,23 @@ website:
     - id: guide
       collapse-level: 3
       title: Guide
-      contents: guide
+      contents: 
+        - auto: guide
+    - id: contributing
+      collapse-level: 3
+      title: Contributing
+      contents: 
+        - contributing/getting_started.qmd
+        - contributing/creating_components.qmd
+        - contributing/creating_pipelines.qmd
+        - contributing/project_structure.qmd
+        - contributing/running_tests.qmd
+        - contributing/pull_requests.qmd
     - id: About
       collapse-level: 2
       contents:
-        - auto: about/
+        - about/authors.qmd
+        - about/openpipelines.qmd
   page-footer: "Copyright 2022, OpenPipelines.bio"
   repo-actions: [edit, issue] 
   google-analytics: G-KKE3LFPPV8
