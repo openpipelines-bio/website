@@ -5,17 +5,13 @@ description: "Align fastq files using Cell Ranger count."
 type: "module"
 ---
 
-::: {.column-margin}
-
 ### Info
 
-ID: `cellranger_count`  
-Namespace: `mapping`
-
-### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/mapping/cellranger_count){.btn-action .btn-sm .btn-info .btn role="button"}
-
-:::
+| Name | Value            |
+|:------|:------------------------------------------|
+| ID | `cellranger_count` |
+| Namespace | `mapping` |
+| Links | [Source code](https://github.com/openpipelines-bio/openpipeline/blob/main/src/mapping/cellranger_count){.btn-action .btn-sm .btn-info .btn role="button"} |
 
 
 ## Argument groups
@@ -66,32 +62,6 @@ nextflow run openpipelines-bio/openpipeline \
 
 ### Run command
 
-Below is an example of the params.yaml file required for running cellranger_count.
-
-<details>
-<summary>Example of `params.yaml`</summary>
-
-```yaml
-# Inputs
-input: # please fill in - example: ["sample_S1_L001_R1_001.fastq.gz", "sample_S1_L001_R2_001.fastq.gz"]
-reference: # please fill in - example: "reference.tar.gz"
-
-# Outputs
-# output: "$id.$key.output.output"
-
-# Arguments
-# expect_cells: 3000
-chemistry: "auto"
-secondary_analysis: false
-generate_bam: true
-include_introns: true
-
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
-```
-</details>
-
 The command to run the pipeline is:
 
 :::{.panel-tabset}
@@ -103,7 +73,9 @@ nextflow run openpipelines-bio/openpipeline \
   -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/mapping/cellranger_count/main.nf \
-  -params-file params.yaml
+  --input "sample_S1_L001_R1_001.fastq.gz;sample_S1_L001_R2_001.fastq.gz \
+  --reference "reference.tar.gz" \
+  --publish_dir: "output"
 ```
 
 ## Singularity
@@ -113,7 +85,9 @@ nextflow run openpipelines-bio/openpipeline \
   -r main_build -latest \
   -profile singularity \
   -main-script target/nextflow/mapping/cellranger_count/main.nf \
-  -params-file params.yaml
+  --input "sample_S1_L001_R1_001.fastq.gz;sample_S1_L001_R2_001.fastq.gz \
+  --reference "reference.tar.gz" \
+  --publish_dir: "output"
 ```
 
 ## Podman
@@ -123,12 +97,120 @@ nextflow run openpipelines-bio/openpipeline \
   -r main_build -latest \
   -profile podman \
   -main-script target/nextflow/mapping/cellranger_count/main.nf \
-  -params-file params.yaml
+  --input "sample_S1_L001_R1_001.fastq.gz;sample_S1_L001_R2_001.fastq.gz \
+  --reference "reference.tar.gz" \
+  --publish_dir: "output"
 ```
 
 :::
 
+### Run command with parameter file
 
+You can also store your parameters in a JSON, YAML or CSV file and pass it as an argument to the pipeline.
+This is useful for starting a pipeline with more than one sample or more complicated input data.
+
+Here's an example of what the `params.yaml` file could look like:
+
+```yaml
+- id: sample1
+  # Inputs
+  input: # please fill in - example: ["sample_S1_L001_R1_001.fastq.gz", "sample_S1_L001_R2_001.fastq.gz"]
+  reference: # please fill in - example: "reference.tar.gz"
+
+  # Outputs
+  # output: "$id.$key.output.output"
+
+  # Arguments
+  # expect_cells: 3000
+  chemistry: "auto"
+  secondary_analysis: false
+  generate_bam: true
+  include_introns: true
+```
+
+Use the `--param_list` parameter to run the pipeline with a list of input parameters:
+
+:::{.panel-tabset}
+
+## Docker
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main_build -latest \
+  -profile docker \
+  -main-script target/nextflow/mapping/cellranger_count/main.nf \
+  --param_list params.yaml
+```
+
+## Singularity
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main_build -latest \
+  -profile singularity \
+  -main-script target/nextflow/mapping/cellranger_count/main.nf \
+  --param_list params.yaml
+```
+
+## Podman
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main_build -latest \
+  -profile podman \
+  -main-script target/nextflow/mapping/cellranger_count/main.nf \
+  --param_list params.yaml
+```
+
+:::
+
+### Generate a param list
+
+
+<form action="">
+
+  <label for="reference">Reference Genome:</label><br />
+  <input type="text" id="reference" name="reference"> <br />
+
+  <label for="bam-file">BAM File</label><br />
+  <input type="text" id="bam-file" name="bamFile"><br /> 
+
+  <label for="fasta-file">FASTA File</label><br />
+  <input type="text" id="fasta-file" name="fastaFile"><br />
+
+  <label for="vcf-file">VCF File</label><br />
+  <input type="text" id="vcf-file" name="vcfFile"><br />
+
+  <label for="output-file">Output File Name:</label><br />
+  <input type="text" id="output-file" name="outputFile"><br />
+
+  <button type="button" onclick="downloadYAML()">Download <code>params.yaml</code></button>
+</form>
+
+
+<script>
+  function downloadYAML(){
+    let selected_library_type = document.getElementById('library_type').value;
+    let selected_read_length = document.getElementById('read_length').value;
+    let selected_max_reads = document.getElementById('max_reads').value;
+    let selected_num_cores = document.getElementById('num_cores').value;
+  
+    let paramsYAML = {
+      cellranger_mapping:{
+        library_type:selected_library_type,
+        read_length:selected_read_length,
+        max_reads:selected_max_reads,
+        num_cores:selected_num_cores
+      }
+    };
+    let data = "data:text/plain;charset=utf-8," + encodeURIComponent(JSON.stringify(paramsYAML));
+  
+    let link = document.createElement('a');
+    link.setAttribute('href', data);
+    link.setAttribute('download', 'params.yaml');
+    link.click();
+  }
+</script>
 
 ## Use as module
 
@@ -140,7 +222,13 @@ include { cellranger_count } from "./openpipelines/target/nextflow/mapping/cellr
 
 workflow {
   Channel.fromList([
-    ["id", [input: "...", reference: "..."]] // fill in examples of required arguments
+    [
+      "sample1",
+      [
+        input: ["sample_S1_L001_R1_001.fastq.gz", "sample_S1_L001_R2_001.fastq.gz"], 
+        reference: "reference.tar.gz"
+      ]
+    ]
   ])
     | view{"Input: $it"}
     | cellranger_count
