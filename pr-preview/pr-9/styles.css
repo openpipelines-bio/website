@@ -13,6 +13,20 @@ a.navbar-brand-logo > img {
   display: block;
   margin: auto;
 }
+.cluster-label {
+  padding-bottom: 60px;
+
+}
+
+#fig-architecture path[class*="LS-titlebox"] {
+  display: none;
+
+}
+
+#fig-architecture .nodes > g[id*="titlebox"] > rect.label-container {
+  fill: none;
+  stroke: none;
+}
 
 .home .title {
   text-align: center;

@@ -1897,6 +1897,13 @@
     "text": "Issues with Openpipelines are being tracked on Github. In order for an issue to be fixed in a timely manner, creating a complete and reproducable is essential."
   },
   {
+    "objectID": "guide/architecture.html",
+    "href": "guide/architecture.html",
+    "title": "Architecture",
+    "section": "",
+    "text": "The single-cell workflow is comprised of multiple (standalone) subworkflows.\n\n\n\n\n\n\n\nflowchart TD  \n  subgraph ingest [\"Ingestion\"]\n    direction LR\n    RawCounts1[\"Raw counts\"]\n    BCL[\"BCL\"]\n    Demux[\"Demux\"]\n    Fastq[\"Fastq\"]\n    Ref[\"Reference\"]\n    Mapping[\"Mapping\"]\n    RawDir[\"Raw out\"]\n    Convert[\"Convert\"]\n    RawCounts1[\"Raw counts\"]\n    BCL --> Demux --> Fastq\n    Fastq & Ref --> Mapping --> RawDir --> Convert --> RawCounts1\n  end\n  subgraph unimodalsinglesample [\"Unimodal Single Sample Processing\"]\n    direction LR\n    RawCounts2[\"Raw counts for one modality\"]\n    ProccessedCounts1[\"Processed\\nCounts\"]\n    AmbientRNACorr[/\"Ambient RNA\\ncorrection\"/]\n    RawCounts2 --> CellFiltering --> DoubletCalling --> AmbientRNACorr --> ProccessedCounts1\n  end\n  subgraph unimodalmultisample [\"Unimodal Multi Sample Processing\"]\n    direction LR\n    FeatureAnnotation[/\"Feature annotation\"/]\n    BatchCorrection[\"Batch correction\"]\n    Normalization[\"Normalisation\"]\n    FeatureSelection[\"Feature selection\"]\n    ProccessedCounts2[\"Processed\\nCounts\"]\n    DoubletCalling[\"Doublet\\ncalling\"]\n    CellFiltering[\"Cell\\nfiltering\"]\n    NormalisedOut[\"Normalised\\ncounts\"]\n\n    ProccessedCounts2 --> FeatureAnnotation --> BatchCorrection --> Normalization --> FeatureSelection --> NormalisedOut\n  end\n  subgraph integration [\"Integration\"]\n    direction LR\n\n    Normalised[\"Normalised\\ncounts\"]\n    Integrated[\"Integrated\\ndata\"]\n\n    DataIntegration[/\"Data integration\"/]\n    DimRed[/\"Dimensionality\\nreduction\"/]\n  \n    Normalised --> DataIntegration --> DimRed --> Integrated\n\n  end\n  subgraph downstreamprocessing [\"Downstream Processing\"]\n    direction LR\n    Interpretation[\"Interpretation\"]\n    Conversion[\"Conversion\"]\n    Dataset[\"Dataset\"]\n\n    Interpretation --> Conversion --> Dataset\n  end\n\n  ingest --split--> unimodalsinglesample --concat--> unimodalmultisample --merging--> integration  --> downstreamprocessing\n  %% Do not change the ID for these boxes because this is linked to custom css\n  titlebox1[\"Convert raw sequencing data\\nor count tables into MuData data\\nfor further processing.\"]\n  titlebox2[\"Per modality fitering pipelines\\nare available to select true\\nfrom false cells.\"]\n  titlebox3[\"...\"]\n  titlebox4[\"Performs an integration pipeline for single\\ncell data based on a single or multiple modalities.\"]\n  titlebox5[\"Take different dataset annotations and combine\\nthem together into a single enriched dataset.\\n The idea is to have a diff_muon object,\\n i.e. a muon object containing the  changes \\n of the original objectwhere data from the\\ndiff_muon will be pushed to the original muon object.\"]\n  titlebox1 --> titlebox2 --> titlebox3 --> titlebox4 --> titlebox5\n\n\n\n\n\nFigure 1: Overview single cell processing steps in OpenPipeline. Rectangles are data objects, parallelograms are Viash modules or subworkflows."
+  },
+  {
     "objectID": "about/authors.html",
     "href": "about/authors.html",
     "title": "OpenPipelines",
@@ -1934,7 +1941,7 @@
   {
     "objectID": "contributing/pull_requests.html",
     "href": "contributing/pull_requests.html",
-    "title": "Pull requests",
+    "title": "Publishing your changes",
     "section": "",
     "text": "While creating changes on your local branch, another developper could have added new changes the openpipeline repository. These changes will need to be included into your local branch before a pull request can be merged. Updating your branch involves merging the upstream branch (usually main) into your branch:\n# download the changes from the openpipelines repo\ngit fetch upstream\n# change your current branch to the branch of the pull request\ngit checkout <feature_branch>\n# merge the changes from upstream into your branch\ngit merge upstream/main\n# push the updates, your pull request will also be updated\ngit push"
   },

@@ -2,326 +2,330 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://openpipelines.bio/index.html</loc>
-    <lastmod>2023-01-26T09:07:59.045Z</lastmod>
+    <lastmod>2023-02-16T10:25:53.843Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/index.html</loc>
-    <lastmod>2023-01-26T09:08:00.653Z</lastmod>
+    <lastmod>2023-02-16T10:25:55.063Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/workflows/ingestion/cellranger_postprocessing.html</loc>
-    <lastmod>2023-01-26T09:08:01.245Z</lastmod>
+    <lastmod>2023-02-16T10:25:55.927Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/workflows/ingestion/cellranger_mapping.html</loc>
-    <lastmod>2023-01-26T09:08:01.833Z</lastmod>
+    <lastmod>2023-02-16T10:25:56.975Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/workflows/ingestion/make_reference.html</loc>
-    <lastmod>2023-01-26T09:08:02.397Z</lastmod>
+    <lastmod>2023-02-16T10:25:57.427Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/workflows/ingestion/bd_rhapsody.html</loc>
-    <lastmod>2023-01-26T09:08:03.061Z</lastmod>
+    <lastmod>2023-02-16T10:25:57.947Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/workflows/ingestion/demux.html</loc>
-    <lastmod>2023-01-26T09:08:03.613Z</lastmod>
+    <lastmod>2023-02-16T10:25:58.399Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/workflows/ingestion/conversion.html</loc>
-    <lastmod>2023-01-26T09:08:04.165Z</lastmod>
+    <lastmod>2023-02-16T10:25:58.799Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/workflows/multiomics/rna_singlesample.html</loc>
-    <lastmod>2023-01-26T09:08:04.709Z</lastmod>
+    <lastmod>2023-02-16T10:25:59.195Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/workflows/multiomics/rna_multisample.html</loc>
-    <lastmod>2023-01-26T09:08:05.261Z</lastmod>
+    <lastmod>2023-02-16T10:25:59.623Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/workflows/multiomics/integration.html</loc>
-    <lastmod>2023-01-26T09:08:05.821Z</lastmod>
+    <lastmod>2023-02-16T10:26:00.043Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/workflows/multiomics/full_pipeline.html</loc>
-    <lastmod>2023-01-26T09:08:06.373Z</lastmod>
+    <lastmod>2023-02-16T10:26:00.471Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/qc/multiqc.html</loc>
-    <lastmod>2023-01-26T09:08:06.873Z</lastmod>
+    <lastmod>2023-02-16T10:26:00.835Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/qc/fastqc.html</loc>
-    <lastmod>2023-01-26T09:08:07.413Z</lastmod>
+    <lastmod>2023-02-16T10:26:01.243Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/files/make_params.html</loc>
-    <lastmod>2023-01-26T09:08:07.941Z</lastmod>
+    <lastmod>2023-02-16T10:26:01.643Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/transform/delete_layer.html</loc>
-    <lastmod>2023-01-26T09:08:08.461Z</lastmod>
+    <lastmod>2023-02-16T10:26:02.023Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/transform/regress_out.html</loc>
-    <lastmod>2023-01-26T09:08:09.005Z</lastmod>
+    <lastmod>2023-02-16T10:26:02.411Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/transform/normalize_total.html</loc>
-    <lastmod>2023-01-26T09:08:09.561Z</lastmod>
+    <lastmod>2023-02-16T10:26:02.811Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/transform/log1p.html</loc>
-    <lastmod>2023-01-26T09:08:10.077Z</lastmod>
+    <lastmod>2023-02-16T10:26:03.199Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/transform/scale.html</loc>
-    <lastmod>2023-01-26T09:08:10.645Z</lastmod>
+    <lastmod>2023-02-16T10:26:03.607Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/reference/make_reference.html</loc>
-    <lastmod>2023-01-26T09:08:11.221Z</lastmod>
+    <lastmod>2023-02-16T10:26:03.995Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/reference/build_bdrhap_reference.html</loc>
-    <lastmod>2023-01-26T09:08:11.785Z</lastmod>
+    <lastmod>2023-02-16T10:26:04.383Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/reference/build_cellranger_reference.html</loc>
-    <lastmod>2023-01-26T09:08:12.317Z</lastmod>
+    <lastmod>2023-02-16T10:26:04.787Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/correction/cellbender_remove_background.html</loc>
-    <lastmod>2023-01-26T09:08:12.889Z</lastmod>
+    <lastmod>2023-02-16T10:26:05.235Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/dimred/umap.html</loc>
-    <lastmod>2023-01-26T09:08:13.441Z</lastmod>
+    <lastmod>2023-02-16T10:26:05.659Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/dimred/pca.html</loc>
-    <lastmod>2023-01-26T09:08:13.949Z</lastmod>
+    <lastmod>2023-02-16T10:26:06.087Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/report/mermaid.html</loc>
-    <lastmod>2023-01-26T09:08:14.453Z</lastmod>
+    <lastmod>2023-02-16T10:26:06.459Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/integrate/scvi.html</loc>
-    <lastmod>2023-01-26T09:08:15.061Z</lastmod>
+    <lastmod>2023-02-16T10:26:06.879Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/integrate/harmonypy.html</loc>
-    <lastmod>2023-01-26T09:08:15.589Z</lastmod>
+    <lastmod>2023-02-16T10:26:07.279Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/integrate/scanorama.html</loc>
-    <lastmod>2023-01-26T09:08:16.121Z</lastmod>
+    <lastmod>2023-02-16T10:26:07.711Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/demux/bcl_convert.html</loc>
-    <lastmod>2023-01-26T09:08:16.645Z</lastmod>
+    <lastmod>2023-02-16T10:26:08.087Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/demux/cellranger_mkfastq.html</loc>
-    <lastmod>2023-01-26T09:08:17.201Z</lastmod>
+    <lastmod>2023-02-16T10:26:08.475Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/demux/bcl2fastq.html</loc>
-    <lastmod>2023-01-26T09:08:17.721Z</lastmod>
+    <lastmod>2023-02-16T10:26:08.851Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/neighbors/find_neighbors.html</loc>
-    <lastmod>2023-01-26T09:08:18.273Z</lastmod>
+    <lastmod>2023-02-16T10:26:09.267Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/neighbors/bbknn.html</loc>
-    <lastmod>2023-01-26T09:08:18.813Z</lastmod>
+    <lastmod>2023-02-16T10:26:09.675Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/transfer/publish.html</loc>
-    <lastmod>2023-01-26T09:08:19.321Z</lastmod>
+    <lastmod>2023-02-16T10:26:10.079Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/velocity/scvelo.html</loc>
-    <lastmod>2023-01-26T09:08:19.849Z</lastmod>
+    <lastmod>2023-02-16T10:26:10.479Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/velocity/velocyto.html</loc>
-    <lastmod>2023-01-26T09:08:20.346Z</lastmod>
+    <lastmod>2023-02-16T10:26:10.867Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/download/sync_test_resources.html</loc>
-    <lastmod>2023-01-26T09:08:20.842Z</lastmod>
+    <lastmod>2023-02-16T10:26:11.271Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/download/download_file.html</loc>
-    <lastmod>2023-01-26T09:08:21.438Z</lastmod>
+    <lastmod>2023-02-16T10:26:11.651Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/mapping/cellranger_multi.html</loc>
-    <lastmod>2023-01-26T09:08:22.206Z</lastmod>
+    <lastmod>2023-02-16T10:26:12.107Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/mapping/cellranger_count.html</loc>
-    <lastmod>2023-01-26T09:08:22.914Z</lastmod>
+    <lastmod>2023-02-16T10:26:12.519Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/mapping/bd_rhapsody.html</loc>
-    <lastmod>2023-01-26T09:08:23.530Z</lastmod>
+    <lastmod>2023-02-16T10:26:12.987Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/mapping/star_align.html</loc>
-    <lastmod>2023-01-26T09:08:25.478Z</lastmod>
+    <lastmod>2023-02-16T10:26:14.387Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/mapping/cellranger_count_split.html</loc>
-    <lastmod>2023-01-26T09:08:25.998Z</lastmod>
+    <lastmod>2023-02-16T10:26:14.803Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/cluster/leiden.html</loc>
-    <lastmod>2023-01-26T09:08:26.534Z</lastmod>
+    <lastmod>2023-02-16T10:26:15.191Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/metadata/join_csv.html</loc>
-    <lastmod>2023-01-26T09:08:27.058Z</lastmod>
+    <lastmod>2023-02-16T10:26:15.595Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/metadata/join_uns_to_obs.html</loc>
-    <lastmod>2023-01-26T09:08:27.542Z</lastmod>
+    <lastmod>2023-02-16T10:26:15.971Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/metadata/add_id.html</loc>
-    <lastmod>2023-01-26T09:08:28.074Z</lastmod>
+    <lastmod>2023-02-16T10:26:16.379Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/filter/filter_with_scrublet.html</loc>
-    <lastmod>2023-01-26T09:08:28.610Z</lastmod>
+    <lastmod>2023-02-16T10:26:16.787Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/filter/subset_h5mu.html</loc>
-    <lastmod>2023-01-26T09:08:29.114Z</lastmod>
+    <lastmod>2023-02-16T10:26:17.167Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/filter/filter_with_hvg.html</loc>
-    <lastmod>2023-01-26T09:08:29.710Z</lastmod>
+    <lastmod>2023-02-16T10:26:17.603Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/filter/do_filter.html</loc>
-    <lastmod>2023-01-26T09:08:30.214Z</lastmod>
+    <lastmod>2023-02-16T10:26:17.983Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/filter/filter_with_counts.html</loc>
-    <lastmod>2023-01-26T09:08:30.730Z</lastmod>
+    <lastmod>2023-02-16T10:26:18.391Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/process_10xh5/filter_10xh5.html</loc>
-    <lastmod>2023-01-26T09:08:31.290Z</lastmod>
+    <lastmod>2023-02-16T10:26:18.799Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/convert/from_10xmtx_to_h5mu.html</loc>
-    <lastmod>2023-01-26T09:08:31.798Z</lastmod>
+    <lastmod>2023-02-16T10:26:19.171Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/convert/from_h5mu_to_h5ad.html</loc>
-    <lastmod>2023-01-26T09:08:32.306Z</lastmod>
+    <lastmod>2023-02-16T10:26:19.547Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/convert/from_h5ad_to_h5mu.html</loc>
-    <lastmod>2023-01-26T09:08:32.838Z</lastmod>
+    <lastmod>2023-02-16T10:26:19.927Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/convert/from_bdrhap_to_h5mu.html</loc>
-    <lastmod>2023-01-26T09:08:33.362Z</lastmod>
+    <lastmod>2023-02-16T10:26:20.299Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/convert/from_velocyto_to_h5mu.html</loc>
-    <lastmod>2023-01-26T09:08:33.918Z</lastmod>
+    <lastmod>2023-02-16T10:26:20.679Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/convert/from_10xh5_to_h5mu.html</loc>
-    <lastmod>2023-01-26T09:08:34.434Z</lastmod>
+    <lastmod>2023-02-16T10:26:21.067Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/convert/from_bd_to_10x_molecular_barcode_tags.html</loc>
-    <lastmod>2023-01-26T09:08:34.914Z</lastmod>
+    <lastmod>2023-02-16T10:26:21.475Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/convert/from_cellranger_multi_to_h5mu.html</loc>
-    <lastmod>2023-01-26T09:08:35.414Z</lastmod>
+    <lastmod>2023-02-16T10:26:21.851Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/dataflow/merge.html</loc>
-    <lastmod>2023-01-26T09:08:35.898Z</lastmod>
+    <lastmod>2023-02-16T10:26:22.227Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/dataflow/split_modalities.html</loc>
-    <lastmod>2023-01-26T09:08:36.482Z</lastmod>
+    <lastmod>2023-02-16T10:26:22.611Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/components/modules/dataflow/concat.html</loc>
-    <lastmod>2023-01-26T09:08:37.002Z</lastmod>
+    <lastmod>2023-02-16T10:26:23.011Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/guide/running_pipelines.html</loc>
-    <lastmod>2023-01-26T09:08:37.390Z</lastmod>
+    <lastmod>2023-02-16T10:26:23.339Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/guide/bug_reports.html</loc>
-    <lastmod>2023-01-26T09:08:37.762Z</lastmod>
+    <lastmod>2023-02-16T10:26:23.623Z</lastmod>
+  </url>
+  <url>
+    <loc>https://openpipelines.bio/guide/architecture.html</loc>
+    <lastmod>2023-02-16T10:26:23.927Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/about/authors.html</loc>
-    <lastmod>2023-01-26T09:08:38.174Z</lastmod>
+    <lastmod>2023-02-16T10:26:24.231Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/about/openpipelines.html</loc>
-    <lastmod>2023-01-26T09:08:38.562Z</lastmod>
+    <lastmod>2023-02-16T10:26:24.535Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/user_guide/index.html</loc>
-    <lastmod>2023-01-26T09:08:38.910Z</lastmod>
+    <lastmod>2023-02-16T10:26:24.831Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/contributing/pull_requests.html</loc>
-    <lastmod>2023-01-26T09:08:39.326Z</lastmod>
+    <lastmod>2023-02-16T10:26:25.127Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/contributing/project_structure.html</loc>
-    <lastmod>2023-01-26T09:08:39.754Z</lastmod>
+    <lastmod>2023-02-16T10:26:25.439Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/contributing/creating_components.html</loc>
-    <lastmod>2023-01-26T09:08:40.194Z</lastmod>
+    <lastmod>2023-02-16T10:26:25.747Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/contributing/running_tests.html</loc>
-    <lastmod>2023-01-26T09:08:40.590Z</lastmod>
+    <lastmod>2023-02-16T10:26:26.083Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/contributing/getting_started.html</loc>
-    <lastmod>2023-01-26T09:08:41.026Z</lastmod>
+    <lastmod>2023-02-16T10:26:26.403Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/contributing/creating_pipelines.html</loc>
-    <lastmod>2023-01-26T09:08:41.390Z</lastmod>
+    <lastmod>2023-02-16T10:26:26.707Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/architecture/use-cases.html</loc>
-    <lastmod>2023-01-26T09:08:41.830Z</lastmod>
+    <lastmod>2023-02-16T10:26:27.035Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/architecture/index.html</loc>
-    <lastmod>2023-01-26T09:08:42.270Z</lastmod>
+    <lastmod>2023-02-16T10:26:27.403Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/architecture/file-formats.html</loc>
-    <lastmod>2023-01-26T09:08:42.718Z</lastmod>
+    <lastmod>2023-02-16T10:26:27.719Z</lastmod>
   </url>
   <url>
     <loc>https://openpipelines.bio/architecture/status.html</loc>
-    <lastmod>2023-01-26T09:08:43.094Z</lastmod>
+    <lastmod>2023-02-16T10:26:28.007Z</lastmod>
   </url>
 </urlset>
