@@ -40,7 +40,7 @@ website:
             - auto: "components/modules/*/*"
     - id: guide
       collapse-level: 3
-      title: Guide
+      title: User Guide
       contents: 
         - auto: guide
     - id: contributing

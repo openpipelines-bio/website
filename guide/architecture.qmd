@@ -1,0 +1,79 @@
+---
+title: Architecture
+---
+
+The single-cell workflow is comprised of multiple (standalone) subworkflows.
+
+:::{.column-screen-inset-shaded}
+
+```{mermaid}
+%%| label: fig-architecture
+%%| fig-cap: Overview single cell processing steps in OpenPipeline. Rectangles are data objects, parallelograms are Viash modules or subworkflows.
+flowchart TD  
+  subgraph ingest ["Ingestion"]
+    direction LR
+    RawCounts1["Raw counts"]
+    BCL["BCL"]
+    Demux["Demux"]
+    Fastq["Fastq"]
+    Ref["Reference"]
+    Mapping["Mapping"]
+    RawDir["Raw out"]
+    Convert["Convert"]
+    RawCounts1["Raw counts"]
+    BCL --> Demux --> Fastq
+    Fastq & Ref --> Mapping --> RawDir --> Convert --> RawCounts1
+  end
+  subgraph unimodalsinglesample ["Unimodal Single Sample Processing"]
+    direction LR
+    RawCounts2["Raw counts for one modality"]
+    ProccessedCounts1["Processed\nCounts"]
+    AmbientRNACorr[/"Ambient RNA\ncorrection"/]
+    RawCounts2 --> CellFiltering --> DoubletCalling --> AmbientRNACorr --> ProccessedCounts1
+  end
+  subgraph unimodalmultisample ["Unimodal Multi Sample Processing"]
+    direction LR
+    FeatureAnnotation[/"Feature annotation"/]
+    BatchCorrection["Batch correction"]
+    Normalization["Normalisation"]
+    FeatureSelection["Feature selection"]
+    ProccessedCounts2["Processed\nCounts"]
+    DoubletCalling["Doublet\ncalling"]
+    CellFiltering["Cell\nfiltering"]
+    NormalisedOut["Normalised\ncounts"]
+
+    ProccessedCounts2 --> FeatureAnnotation --> BatchCorrection --> Normalization --> FeatureSelection --> NormalisedOut
+  end
+  subgraph integration ["Integration"]
+    direction LR
+
+    Normalised["Normalised\ncounts"]
+    Integrated["Integrated\ndata"]
+
+    DataIntegration[/"Data integration"/]
+    DimRed[/"Dimensionality\nreduction"/]
+  
+    Normalised --> DataIntegration --> DimRed --> Integrated
+
+  end
+  subgraph downstreamprocessing ["Downstream Processing"]
+    direction LR
+    Interpretation["Interpretation"]
+    Conversion["Conversion"]
+    Dataset["Dataset"]
+
+    Interpretation --> Conversion --> Dataset
+  end
+
+  ingest --split--> unimodalsinglesample --concat--> unimodalmultisample --merging--> integration  --> downstreamprocessing
+  %% Do not change the ID for these boxes because this is linked to custom css
+  titlebox1["Convert raw sequencing data\nor count tables into MuData data\nfor further processing."]
+  titlebox2["Per modality fitering pipelines\nare available to select true\nfrom false cells."]
+  titlebox3["..."]
+  titlebox4["Performs an integration pipeline for single\ncell data based on a single or multiple modalities."]
+  titlebox5["Take different dataset annotations and combine\nthem together into a single enriched dataset.\n The idea is to have a diff_muon object,\n i.e. a muon object containing the  changes \n of the original objectwhere data from the\ndiff_muon will be pushed to the original muon object."]
+  titlebox1 --> titlebox2 --> titlebox3 --> titlebox4 --> titlebox5
+```
+
+:::
+
