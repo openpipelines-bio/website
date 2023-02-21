@@ -1,0 +1,92 @@
+---
+title: "Make reference"
+namespace: "Ingestion"
+description: "Build a transcriptomics reference into one of many formats"
+type: "workflow"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `make_reference`  
+Namespace: `ingestion`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/workflows/ingestion/make_reference){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main -latest \
+  -main-script openpipelines/workflows/ingestion/make_reference/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main -latest \
+  -profile docker \
+  -main-script openpipelines/workflows/ingestion/make_reference/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Inputs
+
+|Name                  |Description                         |Attributes                                                                                                                              |
+|:---------------------|:-----------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------|
+|`--id`                |ID of the reference.                |`string`, required, example: `"foo"`                                                                                                    |
+|`--genome_fasta`      |Reference genome fasta.             |`file`, required, example: `"https:/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/GRCh38.primary_assembly.genome.fa.gz"` |
+|`--transcriptome_gtf` |Reference transcriptome annotation. |`file`, required, example: `"https:/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/gencode.v41.annotation.gtf.gz"`        |
+|`--ercc`              |ERCC sequence and annotation file.  |`file`, example: `"https:/assets.thermofisher.com/TFS-Assets/LSG/manuals/ERCC92.zip"`                                                   |
+
+
+### Outputs
+
+|Name                   |Description                          |Attributes                                           |
+|:----------------------|:------------------------------------|:----------------------------------------------------|
+|`--target`             |Which reference indices to generate. |`string`, default: `"star"`                          |
+|`--output_fasta`       |Output genome sequence fasta.        |`file`, example: `"genome_sequence.fa.gz"`           |
+|`--output_gtf`         |Output transcriptome annotation gtf. |`file`, example: `"transcriptome_annotation.gtf.gz"` |
+|`--output_cellranger`  |Output index                         |`file`, example: `"cellranger_index.tar.gz"`         |
+|`--output_bd_rhapsody` |Output index                         |`file`, example: `"bdrhap_index.tar.gz"`             |
+|`--output_star`        |Output index                         |`file`, example: `"star_index.tar.gz"`               |
+
+
+### Arguments
+
+|Name             |Description                                                  |Attributes                                    |
+|:----------------|:------------------------------------------------------------|:---------------------------------------------|
+|`--subset_regex` |Will subset the reference chromosomes using the given regex. |`string`, example: `"(ERCC-00002&#124;chr1)"` |
+
+## Authors
+
+  * Angela Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) (author)
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author, maintainer)
