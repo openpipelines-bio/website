@@ -1,0 +1,15 @@
+/* css styles */
+#quarto-header nav.navbar {
+  height: 5rem;
+  padding: 0; 
+}
+
+a.navbar-brand-logo > img {
+  max-height: 3rem;
+  margin: 1rem;
+}
+
+.mermaid svg {
+  display: block;
+  margin: auto;
+}
