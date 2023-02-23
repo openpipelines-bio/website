@@ -330,14 +330,17 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
     Interpretation --&gt; Conversion --&gt; Dataset
   end
 
-  ingest --split--&gt; unimodalsinglesample --concat--&gt; unimodalmultisample --merging--&gt; integration  --&gt; downstreamprocessing
+  ingest --&gt; split --&gt; unimodalsinglesample --&gt; concat --&gt; unimodalmultisample --&gt; merging --&gt; integration  --&gt; downstreamprocessing
   %% Do not change the ID for these boxes because this is linked to custom css
-  titlebox1["Convert raw sequencing data\nor count tables into MuData data\nfor further processing."]
+  titlebox_ingestion["Convert raw sequencing data\nor count tables into MuData data\nfor further processing."]
+  titlebox_empty[" "]
   titlebox2["Per modality fitering pipelines\nare available to select true\nfrom false cells."]
+  titlebox_empty2[" "]
   titlebox3["..."]
+  titlebox_empty3[" "]
   titlebox4["Performs an integration pipeline for single\ncell data based on a single or multiple modalities."]
   titlebox5["Take different dataset annotations and combine\nthem together into a single enriched dataset.\n The idea is to have a diff_muon object,\n i.e. a muon object containing the  changes \n of the original objectwhere data from the\ndiff_muon will be pushed to the original muon object."]
-  titlebox1 --&gt; titlebox2 --&gt; titlebox3 --&gt; titlebox4 --&gt; titlebox5
+  titlebox_ingestion --&gt; titlebox_empty --&gt; titlebox2 --&gt; titlebox_empty2 --&gt; titlebox3 --&gt; titlebox_empty3--&gt; titlebox4 --&gt; titlebox5
 </pre>
 <div id="mermaid-tooltip-1" class="mermaidTooltip">
 
