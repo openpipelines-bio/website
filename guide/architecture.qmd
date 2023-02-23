@@ -65,14 +65,17 @@ flowchart TD
     Interpretation --> Conversion --> Dataset
   end
 
-  ingest --split--> unimodalsinglesample --concat--> unimodalmultisample --merging--> integration  --> downstreamprocessing
+  ingest --> split --> unimodalsinglesample --> concat --> unimodalmultisample --> merging --> integration  --> downstreamprocessing
   %% Do not change the ID for these boxes because this is linked to custom css
-  titlebox1["Convert raw sequencing data\nor count tables into MuData data\nfor further processing."]
+  titlebox_ingestion["Convert raw sequencing data\nor count tables into MuData data\nfor further processing."]
+  titlebox_empty[" "]
   titlebox2["Per modality fitering pipelines\nare available to select true\nfrom false cells."]
+  titlebox_empty2[" "]
   titlebox3["..."]
+  titlebox_empty3[" "]
   titlebox4["Performs an integration pipeline for single\ncell data based on a single or multiple modalities."]
   titlebox5["Take different dataset annotations and combine\nthem together into a single enriched dataset.\n The idea is to have a diff_muon object,\n i.e. a muon object containing the  changes \n of the original objectwhere data from the\ndiff_muon will be pushed to the original muon object."]
-  titlebox1 --> titlebox2 --> titlebox3 --> titlebox4 --> titlebox5
+  titlebox_ingestion --> titlebox_empty --> titlebox2 --> titlebox_empty2 --> titlebox3 --> titlebox_empty3--> titlebox4 --> titlebox5
 ```
 
 :::

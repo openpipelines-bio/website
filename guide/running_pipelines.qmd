@@ -23,3 +23,20 @@ bin/nextflow run . \
 
 ### Running pipelines from Nextflow Tower
 
+### Using param_list to pass large parameter sets
+
+Using Viash's VDSL3 nextflow platform, an optional `-param_list` argument can be used to pass a large number of inputs to a workflow. Additionally, the pipeline parameter values can be set for each input to the workflow independently. A `param_list` can either be a list of maps, a csv file, a json file, a yaml file, or simply a yaml blob:
+
+* A csv file should have column names which correspond to the different arguments of this pipeline. Example: `--param_list data.csv` with columns `id,input`.
+* A json or a yaml file should be a list of maps, each of which has keys corresponding to the arguments of the pipeline. Example: `--param_list data.json` with contents `[ {'id': 'foo', 'input': 'foo.txt'}, {'id': 'bar', 'input': 'bar.txt'} ]`.
+* A yaml blob can also be passed directly as a string. Example: `--param_list "[ {'id': 'foo', 'input': 'foo.txt'}, {'id': 'bar', 'input': 'bar.txt'} ]"`.
+* A list of maps can be in a `nextflow.config` file, where the keys of each map corresponds to the arguments of the pipeline. Example in a `nextflow.config` file: `param_list: [ ['id': 'foo', 'input': 'foo.txt'], ['id': 'bar', 'input': 'bar.txt'] ]`.
+
+When passing a csv, json or yaml file, relative path names are relativized to the location of the parameter file. No relativation is performed when `param_list` is a list of maps (as-is) or a yaml blob.
+
+Using a `param_list` can be combined with setting parameters that are set for all parameter sets. These 'gobal' parameters will always be overwritten with their counterpart that was specified in a more specific manner for a single parameter set. For example, using 
+```--param_list "[ {'id': 'foo', 'input': 'foo.txt'}, {'id': 'bar'} ]" --input 'global.txt'```
+will result in the following parameter sets being processed:
+
+* `id`: `foo`, `input`: `foo.txt`
+* `id`: `bar`, `input`: `global.txt`
