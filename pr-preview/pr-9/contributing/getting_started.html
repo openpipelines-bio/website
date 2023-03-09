@@ -143,7 +143,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../openpipelines.png" alt="" class="navbar-logo">
+    <img src="../openpipelines_new.svg" alt="" class="navbar-logo">
     </a>
   </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -155,29 +155,6 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
     <a class="nav-link" href="../index.html">
  <span class="menu-text">Openpipelines</span></a>
   </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-architecture" role="button" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Architecture</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-architecture">    
-        <li>
-    <a class="dropdown-item" href="../architecture/index.html">
- <span class="dropdown-text">Overview</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../architecture/status.html">
- <span class="dropdown-text">Status</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../architecture/use-cases.html">
- <span class="dropdown-text">Use-cases</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../architecture/file-formats.html">
- <span class="dropdown-text">File formats</span></a>
-  </li>  
-    </ul>
-  </li>
   <li class="nav-item">
     <a class="nav-link" href="../components/index.html">
  <span class="menu-text">Components</span></a>
@@ -197,8 +174,16 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
  <span class="dropdown-text">Bug reports</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../guide/data_api.html">
+ <span class="dropdown-text">Data API</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../guide/running_pipelines.html">
  <span class="dropdown-text">Running pipelines</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../guide/implementation_status.html">
+ <span class="dropdown-text">Status</span></a>
   </li>  
     </ul>
   </li>
@@ -313,10 +298,8 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#forking-the-code-and-cloning-the-repository" id="toc-forking-the-code-and-cloning-the-repository" class="nav-link active" data-scroll-target="#forking-the-code-and-cloning-the-repository">Forking the code and cloning the repository</a>
-  <ul class="collapse">
-  <li><a href="#installing-viash-and-nextflow" id="toc-installing-viash-and-nextflow" class="nav-link" data-scroll-target="#installing-viash-and-nextflow">Installing <code>viash</code> and <code>nextflow</code></a></li>
-  </ul></li>
+  <li><a href="#forking-the-code-and-cloning-the-repository" id="toc-forking-the-code-and-cloning-the-repository" class="nav-link active" data-scroll-target="#forking-the-code-and-cloning-the-repository">Forking the code and cloning the repository</a></li>
+  <li><a href="#sec-install-viash-nextflow" id="toc-sec-install-viash-nextflow" class="nav-link" data-scroll-target="#sec-install-viash-nextflow">Installing <code>viash</code> and <code>nextflow</code></a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/contributing/getting_started.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -358,15 +341,15 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<section id="installing-viash-and-nextflow" class="level2">
-<h2 class="anchored" data-anchor-id="installing-viash-and-nextflow">Installing <code>viash</code> and <code>nextflow</code></h2>
+</section>
+<section id="sec-install-viash-nextflow" class="level1">
+<h1>Installing <code>viash</code> and <code>nextflow</code></h1>
 <p>Openpipelines is being developed in Viash and Nextflow. If you are unfamiliar with either one of these platforms, you can check out their respective documentations <a href="https://viash.io/guides/getting_started/introduction/">here</a> and <a href="https://www.nextflow.io/docs/latest/index.html">here</a>. To start contributing to openpipelines, you will need at least a working version of Java 11, OpenJDK 11, or a later version (up to Java 18). Additionally, by using <a href="https://www.docker.com/">Docker</a>,you can build and test pipeline components and pipelines without needing to manually install dependencies for these components on your machine.</p>
 <p>Viash and Nextflow can be installed by following the guides in the documentation for both of these tools. Make sure the <code>viash</code> and <code>nextflow</code> binaries are located in an existing directory that is listed in your <code>$PATH</code>. You can check if everything worked by running the following two commands and see if they output the correct location of the executables.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> viash</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> nextflow</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

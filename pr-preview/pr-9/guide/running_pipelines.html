@@ -143,7 +143,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../openpipelines.png" alt="" class="navbar-logo">
+    <img src="../openpipelines_new.svg" alt="" class="navbar-logo">
     </a>
   </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -155,29 +155,6 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
     <a class="nav-link" href="../index.html">
  <span class="menu-text">Openpipelines</span></a>
   </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-architecture" role="button" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Architecture</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-architecture">    
-        <li>
-    <a class="dropdown-item" href="../architecture/index.html">
- <span class="dropdown-text">Overview</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../architecture/status.html">
- <span class="dropdown-text">Status</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../architecture/use-cases.html">
- <span class="dropdown-text">Use-cases</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../architecture/file-formats.html">
- <span class="dropdown-text">File formats</span></a>
-  </li>  
-    </ul>
-  </li>
   <li class="nav-item">
     <a class="nav-link" href="../components/index.html">
  <span class="menu-text">Components</span></a>
@@ -197,8 +174,16 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
  <span class="dropdown-text">Bug reports</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../guide/data_api.html">
+ <span class="dropdown-text">Data API</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../guide/running_pipelines.html">
  <span class="dropdown-text">Running pipelines</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../guide/implementation_status.html">
+ <span class="dropdown-text">Status</span></a>
   </li>  
     </ul>
   </li>
@@ -294,7 +279,17 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../guide/data_api.html" class="sidebar-item-text sidebar-link">Data API</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../guide/running_pipelines.html" class="sidebar-item-text sidebar-link active">Running pipelines</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../guide/implementation_status.html" class="sidebar-item-text sidebar-link">Status</a>
   </div>
 </li>
       </ul>
@@ -308,9 +303,12 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#running-pipelines-from-the-cli" id="toc-running-pipelines-from-the-cli" class="nav-link active" data-scroll-target="#running-pipelines-from-the-cli">Running pipelines from the CLI</a></li>
+  <li><a href="#installing-viash-and-nextflow" id="toc-installing-viash-and-nextflow" class="nav-link active" data-scroll-target="#installing-viash-and-nextflow">Installing Viash and Nextflow</a>
+  <ul class="collapse">
+  <li><a href="#running-pipelines-from-the-cli" id="toc-running-pipelines-from-the-cli" class="nav-link" data-scroll-target="#running-pipelines-from-the-cli">Running pipelines from the CLI</a></li>
   <li><a href="#running-pipelines-from-nextflow-tower" id="toc-running-pipelines-from-nextflow-tower" class="nav-link" data-scroll-target="#running-pipelines-from-nextflow-tower">Running pipelines from Nextflow Tower</a></li>
   <li><a href="#using-param_list-to-pass-large-parameter-sets" id="toc-using-param_list-to-pass-large-parameter-sets" class="nav-link" data-scroll-target="#using-param_list-to-pass-large-parameter-sets">Using param_list to pass large parameter sets</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/guide/running_pipelines.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -351,6 +349,9 @@ Note
 </ul>
 </div>
 </div>
+<section id="installing-viash-and-nextflow" class="level1">
+<h1>Installing Viash and Nextflow</h1>
+<p>Before you try running OpenPipelines, please install Viash and Nextflow first (<strong>?@sec-install-viash-nextflow</strong>).</p>
 <section id="running-pipelines-from-the-cli" class="level3">
 <h3 class="anchored" data-anchor-id="running-pipelines-from-the-cli">Running pipelines from the CLI</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bin/nextflow</span> run . <span class="dt">\</span></span>
@@ -381,6 +382,7 @@ Note
 </ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

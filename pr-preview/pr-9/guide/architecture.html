@@ -83,7 +83,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../openpipelines.png" alt="" class="navbar-logo">
+    <img src="../openpipelines_new.svg" alt="" class="navbar-logo">
     </a>
   </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -95,29 +95,6 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
     <a class="nav-link" href="../index.html">
  <span class="menu-text">Openpipelines</span></a>
   </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-architecture" role="button" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Architecture</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-architecture">    
-        <li>
-    <a class="dropdown-item" href="../architecture/index.html">
- <span class="dropdown-text">Overview</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../architecture/status.html">
- <span class="dropdown-text">Status</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../architecture/use-cases.html">
- <span class="dropdown-text">Use-cases</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../architecture/file-formats.html">
- <span class="dropdown-text">File formats</span></a>
-  </li>  
-    </ul>
-  </li>
   <li class="nav-item">
     <a class="nav-link" href="../components/index.html">
  <span class="menu-text">Components</span></a>
@@ -137,8 +114,16 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
  <span class="dropdown-text">Bug reports</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../guide/data_api.html">
+ <span class="dropdown-text">Data API</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../guide/running_pipelines.html">
  <span class="dropdown-text">Running pipelines</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../guide/implementation_status.html">
+ <span class="dropdown-text">Status</span></a>
   </li>  
     </ul>
   </li>
@@ -234,7 +219,17 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../guide/data_api.html" class="sidebar-item-text sidebar-link">Data API</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../guide/running_pipelines.html" class="sidebar-item-text sidebar-link">Running pipelines</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../guide/implementation_status.html" class="sidebar-item-text sidebar-link">Status</a>
   </div>
 </li>
       </ul>
@@ -244,7 +239,19 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#use-cases" id="toc-use-cases" class="nav-link active" data-scroll-target="#use-cases">Use-cases</a>
+  <ul class="collapse">
+  <li><a href="#a-single-unimodal-sample" id="toc-a-single-unimodal-sample" class="nav-link" data-scroll-target="#a-single-unimodal-sample">A single unimodal sample</a></li>
+  <li><a href="#multiple-unimodal-samples" id="toc-multiple-unimodal-samples" class="nav-link" data-scroll-target="#multiple-unimodal-samples">Multiple unimodal samples</a></li>
+  <li><a href="#a-single-multimodal-sample" id="toc-a-single-multimodal-sample" class="nav-link" data-scroll-target="#a-single-multimodal-sample">A single multimodal sample</a></li>
+  <li><a href="#multiple-multimodal-samples" id="toc-multiple-multimodal-samples" class="nav-link" data-scroll-target="#multiple-multimodal-samples">Multiple multimodal samples</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/guide/architecture.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
@@ -352,8 +359,138 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
+<section id="use-cases" class="level1 page-columns page-full">
+<h1>Use-cases</h1>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In these use-cases, <code>Interpretation</code>, <code>Conversion</code> and <code>Dataset</code> are omitted because they are the same in every use case.</p>
+</div>
+</div>
+<section id="a-single-unimodal-sample" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="a-single-unimodal-sample">A single unimodal sample</h3>
+<div class="column-screen-inset-shaded">
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-example1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p>
+</p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-2">flowchart LR
+
+  Raw1[Sample 1] --&gt; Split1[/Split\nmodalities/] --&gt; ProcGEX1[/Process GEX\nprofile/]
+  ProcGEX1 --&gt; ConcatGEX[/Concatenate\nprofiles/] --&gt; ProcGEX[/Process GEX\nprofiles/]
+  ProcGEX --&gt; Merge[/Merge\nmodalities/] --&gt; Integration[/Integration/]
+
+</pre>
+<div id="mermaid-tooltip-2" class="mermaidTooltip">
+
+</div>
+<p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2: Example of how the concatenation and merges work.<br>
+GEX: Gene-expression.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="multiple-unimodal-samples" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="multiple-unimodal-samples">Multiple unimodal samples</h3>
+<div class="column-screen-inset-shaded">
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-example3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p>
+</p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-3">flowchart LR
+
+  Raw1[Sample 1] --&gt; Split1[/Split\nmodalities/] --&gt; ProcGEX1[/Process GEX\nprofile/]
+  Raw2[Sample 2] --&gt; Split2[/Split\nmodalities/] --&gt; ProcGEX2[/Process GEX\nprofile/]
+  Raw3[Sample 3] --&gt; Split3[/Split\nmodalities/] --&gt; ProcGEX3[/Process GEX\nprofile/]
+  ProcGEX1 &amp; ProcGEX2 &amp; ProcGEX3 --&gt; ConcatGEX[/Concatenate\nprofiles/] --&gt; ProcGEX[/Process GEX\nprofiles/] 
+  ProcGEX --&gt; Merge[/Merge\nmodalities/] --&gt; Integration[/Integration/]
+
+</pre>
+<div id="mermaid-tooltip-3" class="mermaidTooltip">
+
+</div>
+<p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3: Example of how the concatenation and merges work.<br>
+GEX: Gene-expression.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="a-single-multimodal-sample" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="a-single-multimodal-sample">A single multimodal sample</h3>
+<div class="column-screen-inset-shaded">
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-example2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p>
+</p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-4">flowchart LR
+
+  Raw1[Sample 1] --&gt; Split1[/Split\nmodalities/] --&gt; ProcGEX1 &amp; ProcADT1 &amp; ProcRNAV1
+  ProcGEX1[/Process GEX\nprofile/] --&gt; ConcatGEX[/Concatenate\nprofiles/] --&gt; ProcGEX[/Process GEX\nprofiles/]
+  ProcADT1[/Process ADT\nprofile/] --&gt; ConcatADT[/Concatenate\nprofiles/] --&gt; ProcADT[/Process ADT\nprofiles/]
+  ProcRNAV1[/Process RNAV\nprofile/] --&gt; ConcatRNAV[/Concatenate\nprofiles/] --&gt; ProcRNAV[/Process RNAV\nprofiles/]
+  ProcGEX &amp; ProcADT &amp; ProcRNAV--&gt; Merge[/Merge\nmodalities/] --&gt; Integration[/Integration/]
+
+</pre>
+<div id="mermaid-tooltip-4" class="mermaidTooltip">
+
+</div>
+<p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4: Example of how the concatenation and merges work.<br>
+GEX: Gene-expression. ADT: Antibody-Derived Tags. RNAV: RNA Velocity.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="multiple-multimodal-samples" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="multiple-multimodal-samples">Multiple multimodal samples</h3>
+<div class="column-screen-inset-shaded">
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-example4" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p>
+</p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-5">flowchart LR
+
+  Raw1[Sample 1] --&gt; Split1[/Split\nmodalities/] --&gt; ProcGEX1 &amp; ProcADT1
+  Raw2[Sample 2] --&gt; Split2[/Split\nmodalities/] --&gt; ProcGEX2 &amp; ProcADT2
+  ProcGEX1[/Process GEX\nprofile/] &amp; ProcGEX2[/Process GEX\nprofile/] --&gt; ConcatGEX[/Concatenate\nprofiles/] --&gt; ProcGEX[/Process GEX\nprofiles/]
+  ProcADT1[/Process ADT\nprofile/] &amp; ProcADT2[/Process ADT\nprofile/] --&gt; ConcatADT[/Concatenate\nprofiles/] --&gt; ProcADT[/Process ADT\nprofiles/]
+  ProcGEX &amp; ProcADT --&gt; Merge[/Merge\nmodalities/] --&gt; Integration[/Integration/]
+
+</pre>
+<div id="mermaid-tooltip-5" class="mermaidTooltip">
+
+</div>
+<p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;5: Example of how the concat and merges work.<br>
+GEX: Gene-expression. ADT: Antibody-Derived Tags.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>OpenPipelines - File formats</title>
+<title>OpenPipelines - Data API</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -135,7 +135,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -143,7 +143,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../openpipelines.png" alt="" class="navbar-logo">
+    <img src="../openpipelines_new.svg" alt="" class="navbar-logo">
     </a>
   </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -155,29 +155,6 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
     <a class="nav-link" href="../index.html">
  <span class="menu-text">Openpipelines</span></a>
   </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-architecture" role="button" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Architecture</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-architecture">    
-        <li>
-    <a class="dropdown-item" href="../architecture/index.html">
- <span class="dropdown-text">Overview</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../architecture/status.html">
- <span class="dropdown-text">Status</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../architecture/use-cases.html">
- <span class="dropdown-text">Use-cases</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../architecture/file-formats.html">
- <span class="dropdown-text">File formats</span></a>
-  </li>  
-    </ul>
-  </li>
   <li class="nav-item">
     <a class="nav-link" href="../components/index.html">
  <span class="menu-text">Components</span></a>
@@ -197,8 +174,16 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
  <span class="dropdown-text">Bug reports</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../guide/data_api.html">
+ <span class="dropdown-text">Data API</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../guide/running_pipelines.html">
  <span class="dropdown-text">Running pipelines</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../guide/implementation_status.html">
+ <span class="dropdown-text">Status</span></a>
   </li>  
     </ul>
   </li>
@@ -259,10 +244,59 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Data API</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Guide</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../guide/architecture.html" class="sidebar-item-text sidebar-link">Architecture</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../guide/bug_reports.html" class="sidebar-item-text sidebar-link">Bug reports</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../guide/data_api.html" class="sidebar-item-text sidebar-link active">Data API</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../guide/running_pipelines.html" class="sidebar-item-text sidebar-link">Running pipelines</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../guide/implementation_status.html" class="sidebar-item-text sidebar-link">Status</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -276,14 +310,14 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   <li><a href="#atac-modality" id="toc-atac-modality" class="nav-link" data-scroll-target="#atac-modality">ATAC modality</a></li>
   <li><a href="#rna-velocity-modality" id="toc-rna-velocity-modality" class="nav-link" data-scroll-target="#rna-velocity-modality">RNA velocity modality</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/architecture/file-formats.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/guide/data_api.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">File formats</h1>
+<h1 class="title d-none d-lg-block">Data API</h1>
 </div>
 
 
