@@ -9,6 +9,11 @@ TODO: Fill in these sections.
 * Point to the "Components" tab
 :::
 
+
+# Installing Viash and Nextflow
+
+Before you try running OpenPipelines, please install Viash and Nextflow first (@sec-install-viash-nextflow).
+
 ### Running pipelines from the CLI
 
 ```bash

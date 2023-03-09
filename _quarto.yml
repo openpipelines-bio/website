@@ -7,16 +7,16 @@ website:
   site-url: https://openpipelines.bio
   repo-url: https://github.com/openpipelines-bio/website
   navbar:
-    logo: "openpipelines.png"
+    logo: "openpipelines_new.svg"
     title: false
     left:
       - index.qmd
-      - text: Architecture
-        menu: 
-          - architecture/index.qmd
-          - architecture/status.qmd
-          - architecture/use-cases.qmd
-          - architecture/file-formats.qmd
+      # - text: Architecture
+      #   menu: 
+      #     - architecture/index.qmd
+      #     - architecture/status.qmd
+      #     - architecture/use-cases.qmd
+      #     - architecture/file-formats.qmd
       - href: components/index.qmd
         text: Components
       - sidebar:guide
