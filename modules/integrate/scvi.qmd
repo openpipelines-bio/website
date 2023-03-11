@@ -71,10 +71,12 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Outputs
 
-|Name            |Description                                                      |Attributes                               |
-|:---------------|:----------------------------------------------------------------|:----------------------------------------|
-|`--output`      |Output h5mu file.                                                |`file`, required                         |
-|`--obsm_output` |In which .obsm slot to store the resulting integrated embedding. |`string`, default: `"X_scvi_integrated"` |
+|Name                   |Description                                                      |Attributes                               |
+|:----------------------|:----------------------------------------------------------------|:----------------------------------------|
+|`--output`             |Output h5mu file.                                                |`file`, required                         |
+|`--model_output`       |Folder where the state of the trained model will be saved to.    |`file`                                   |
+|`--output_compression` |The compression format to be used on the output h5mu object.     |`string`, example: `"gzip"`              |
+|`--obsm_output`        |In which .obsm slot to store the resulting integrated embedding. |`string`, default: `"X_scvi_integrated"` |
 
 
 ### Early stopping arguments

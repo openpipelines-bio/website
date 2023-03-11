@@ -69,11 +69,12 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Outputs
 
-|Name             |Description                                                |Attributes                                 |
-|:----------------|:----------------------------------------------------------|:------------------------------------------|
-|`--output_raw`   |The raw output folder.                                     |`file`, required, example: `"output_dir"`  |
-|`--output_h5mu`  |The converted h5mu file.                                   |`file`, required, example: `"output.h5mu"` |
-|`--obsm_metrics` |Name of the .obsm slot under which to QC metrics (if any). |`string`, default: `"metrics_summary"`     |
+|Name             |Description                                                       |Attributes                                 |
+|:----------------|:-----------------------------------------------------------------|:------------------------------------------|
+|`--output_raw`   |Location where the output folder from Cell Ranger will be stored. |`file`, required, example: `"output_dir"`  |
+|`--output_h5mu`  |The output from Cell Ranger, converted to h5mu.                   |`file`, required, example: `"output.h5mu"` |
+|`--obsm_metrics` |Name of the .obsm slot under which to QC metrics (if any).        |`string`, default: `"metrics_summary"`     |
+|`--output_type`  |Which Cell Ranger output to use for converting to h5mu.           |`string`, default: `"raw"`                 |
 
 
 ### Cell Ranger arguments

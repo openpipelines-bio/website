@@ -60,12 +60,12 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name            |Description                                                 |Attributes                                |
-|:---------------|:-----------------------------------------------------------|:-----------------------------------------|
-|`--input`       |Input MuData file                                           |`file`, required, default: `"input.h5mu"` |
-|`--modality`    |                                                            |`string`, default: `"rna"`                |
-|`--output`      |Output AnnData file.                                        |`file`, default: `"output.h5ad"`          |
-|`--compression` |The compression format to be used on the final h5ad object. |`string`, default: `"gzip"`               |
+|Name                   |Description                                                 |Attributes                                |
+|:----------------------|:-----------------------------------------------------------|:-----------------------------------------|
+|`--input`              |Input MuData file                                           |`file`, required, default: `"input.h5mu"` |
+|`--modality`           |                                                            |`string`, default: `"rna"`                |
+|`--output`             |Output AnnData file.                                        |`file`, default: `"output.h5ad"`          |
+|`--output_compression` |The compression format to be used on the final h5ad object. |`string`, default: `"gzip"`               |
 
 ## Authors
 

@@ -60,14 +60,15 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name             |Description                                  |Attributes                                 |
-|:----------------|:--------------------------------------------|:------------------------------------------|
-|`--input`        |Input h5mu file                              |`file`, required, example: `"input.h5mu"`  |
-|`--modality`     |                                             |`string`, default: `"rna"`                 |
-|`--input_layer`  |Input layer to use. If None, X is normalized |`string`                                   |
-|`--output_layer` |Output layer to use. By default, use X.      |`string`                                   |
-|`--output`       |Output h5mu file.                            |`file`, required, default: `"output.h5mu"` |
-|`--base`         |                                             |`double`, example: `2`                     |
+|Name                   |Description                                                  |Attributes                                 |
+|:----------------------|:------------------------------------------------------------|:------------------------------------------|
+|`--input`              |Input h5mu file                                              |`file`, required, example: `"input.h5mu"`  |
+|`--modality`           |                                                             |`string`, default: `"rna"`                 |
+|`--input_layer`        |Input layer to use. If None, X is normalized                 |`string`                                   |
+|`--output_layer`       |Output layer to use. By default, use X.                      |`string`                                   |
+|`--output`             |Output h5mu file.                                            |`file`, required, default: `"output.h5mu"` |
+|`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`                |
+|`--base`               |                                                             |`double`, example: `2`                     |
 
 ## Authors
 

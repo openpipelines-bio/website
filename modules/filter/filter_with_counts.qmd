@@ -73,12 +73,13 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Outputs
 
-|Name                |Description                                                                                        |Attributes                                |
-|:-------------------|:--------------------------------------------------------------------------------------------------|:-----------------------------------------|
-|`--output`          |Output h5mu file.                                                                                  |`file`, example: `"output.h5mu"`          |
-|`--do_subset`       |Whether to subset before storing the output.                                                       |`boolean_true`                            |
-|`--obs_name_filter` |In which .obs slot to store a boolean array corresponding to which observations should be removed. |`string`, default: `"filter_with_counts"` |
-|`--var_name_filter` |In which .var slot to store a boolean array corresponding to which variables should be removed.    |`string`, default: `"filter_with_counts"` |
+|Name                   |Description                                                                                        |Attributes                                |
+|:----------------------|:--------------------------------------------------------------------------------------------------|:-----------------------------------------|
+|`--output`             |Output h5mu file.                                                                                  |`file`, example: `"output.h5mu"`          |
+|`--output_compression` |The compression format to be used on the output h5mu object.                                       |`string`, example: `"gzip"`               |
+|`--do_subset`          |Whether to subset before storing the output.                                                       |`boolean_true`                            |
+|`--obs_name_filter`    |In which .obs slot to store a boolean array corresponding to which observations should be removed. |`string`, default: `"filter_with_counts"` |
+|`--var_name_filter`    |In which .var slot to store a boolean array corresponding to which variables should be removed.    |`string`, default: `"filter_with_counts"` |
 
 
 ### Arguments

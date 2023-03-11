@@ -67,9 +67,10 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Outputs
 
-|Name       |Description                                              |Attributes       |
-|:----------|:--------------------------------------------------------|:----------------|
-|`--output` |Output directory. If it does not exist, will be created. |`file`, required |
+|Name                   |Description                                                  |Attributes                  |
+|:----------------------|:------------------------------------------------------------|:---------------------------|
+|`--output`             |Output directory. If it does not exist, will be created.     |`file`, required            |
+|`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"` |
 
 
 ### Filtering and normalization

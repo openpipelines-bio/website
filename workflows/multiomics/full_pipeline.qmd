@@ -108,6 +108,20 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--var_qc_metrics` |Keys to select a boolean (containing only True or False) column from .var. For each cell, calculate the proportion of total values for genes which are labeled 'True',  compared to the total sum of the values for all genes. |`string`, default: `"filter_with_hvg"`, example: `"ercc,highly_variable"` |
 |`--top_n_vars`     |Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. `--top_n_vars 20,50` finds cumulative proportion to the 20th and 50th most expressed vars.                |`integer`, default: `50`, default: `100`, default: `200`, default: `500`  |
 
+
+### Harmony integration options
+
+|Name                  |Description                                                                                                                                                                             |Attributes             |
+|:---------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------|
+|`--rna_harmony_theta` |Diversity clustering penalty parameter. Specify for each variable in group.by.vars.  theta=0 does not encourage any diversity. Larger values of theta result in more diverse clusters." |`double`, default: `2` |
+
+
+### Leiden Clustering Options
+
+|Name                  |Description                                                                    |Attributes             |
+|:---------------------|:------------------------------------------------------------------------------|:----------------------|
+|`--leiden_resolution` |Control the coarseness of the clustering. Higher values lead to more clusters. |`double`, default: `1` |
+
 ## Authors
 
   * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (author, maintainer)

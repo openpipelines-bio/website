@@ -61,13 +61,14 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name                             |Description                                    |Attributes                                 |
-|:--------------------------------|:----------------------------------------------|:------------------------------------------|
-|`--input`                        |Path to the input .h5mu.                       |`file`, required, example: `"sample_path"` |
-|`--input_id`                     |The input id.                                  |`string`, required                         |
-|`--obs_output`                   |Name of the .obs column where to store the id. |`string`, default: `"sample_id"`           |
-|`--output`                       |                                               |`file`, example: `"output.h5mu"`           |
-|`--make_observation_keys_unique` |Join the id to the .obs index (.obs_names).    |`boolean_true`                             |
+|Name                             |Description                                                  |Attributes                                 |
+|:--------------------------------|:------------------------------------------------------------|:------------------------------------------|
+|`--input`                        |Path to the input .h5mu.                                     |`file`, required, example: `"sample_path"` |
+|`--input_id`                     |The input id.                                                |`string`, required                         |
+|`--obs_output`                   |Name of the .obs column where to store the id.               |`string`, default: `"sample_id"`           |
+|`--output`                       |                                                             |`file`, example: `"output.h5mu"`           |
+|`--output_compression`           |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`                |
+|`--make_observation_keys_unique` |Join the id to the .obs index (.obs_names).                  |`boolean_true`                             |
 
 ## Authors
 
