@@ -68,10 +68,11 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Outputs
 
-|Name            |Description                                               |Attributes                                |
-|:---------------|:---------------------------------------------------------|:-----------------------------------------|
-|`--output`      |Output h5mu file.                                         |`file`, example: `"output.h5mu"`          |
-|`--uns_metrics` |Name of the .uns slot under which to QC metrics (if any). |`string`, default: `"metrics_cellranger"` |
+|Name                   |Description                                               |Attributes                                |
+|:----------------------|:---------------------------------------------------------|:-----------------------------------------|
+|`--output`             |Output h5mu file.                                         |`file`, example: `"output.h5mu"`          |
+|`--output_compression` |                                                          |`string`, example: `"gzip"`               |
+|`--uns_metrics`        |Name of the .uns slot under which to QC metrics (if any). |`string`, default: `"metrics_cellranger"` |
 
 
 ### Arguments

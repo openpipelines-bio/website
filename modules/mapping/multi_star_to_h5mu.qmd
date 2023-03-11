@@ -60,10 +60,11 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name       |Description                           |Attributes                                  |
-|:----------|:-------------------------------------|:-------------------------------------------|
-|`--input`  |The directory created by `multi_star` |`file`, required, example: `"/path/to/foo"` |
-|`--output` |Output h5mu file.                     |`file`, required, example: `"output.h5mu"`  |
+|Name                   |Description                                                  |Attributes                                  |
+|:----------------------|:------------------------------------------------------------|:-------------------------------------------|
+|`--input`              |The directory created by `multi_star`                        |`file`, required, example: `"/path/to/foo"` |
+|`--output`             |Output h5mu file.                                            |`file`, required, example: `"output.h5mu"`  |
+|`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`                 |
 
 ## Authors
 

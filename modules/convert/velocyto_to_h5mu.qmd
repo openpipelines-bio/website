@@ -71,12 +71,13 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Outputs
 
-|Name                |Description                           |Attributes                            |
-|:-------------------|:-------------------------------------|:-------------------------------------|
-|`--output`          |Path to the output MuData file.       |`file`, example: `"output.h5mu"`      |
-|`--layer_spliced`   |Output layer for the spliced reads.   |`string`, default: `"velo_spliced"`   |
-|`--layer_unspliced` |Output layer for the unspliced reads. |`string`, default: `"velo_unspliced"` |
-|`--layer_ambiguous` |Output layer for the ambiguous reads. |`string`, default: `"velo_ambiguous"` |
+|Name                   |Description                                                  |Attributes                            |
+|:----------------------|:------------------------------------------------------------|:-------------------------------------|
+|`--output`             |Path to the output MuData file.                              |`file`, example: `"output.h5mu"`      |
+|`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`           |
+|`--layer_spliced`      |Output layer for the spliced reads.                          |`string`, default: `"velo_spliced"`   |
+|`--layer_unspliced`    |Output layer for the unspliced reads.                        |`string`, default: `"velo_unspliced"` |
+|`--layer_ambiguous`    |Output layer for the ambiguous reads.                        |`string`, default: `"velo_ambiguous"` |
 
 ## Authors
 

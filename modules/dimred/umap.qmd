@@ -69,10 +69,11 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Outputs
 
-|Name            |Description                                            |Attributes                                 |
-|:---------------|:------------------------------------------------------|:------------------------------------------|
-|`--output`      |Output h5mu file.                                      |`file`, required, example: `"output.h5mu"` |
-|`--obsm_output` |The pre/postfix under which to store the UMAP results. |`string`, default: `"umap"`                |
+|Name                   |Description                                                  |Attributes                                 |
+|:----------------------|:------------------------------------------------------------|:------------------------------------------|
+|`--output`             |Output h5mu file.                                            |`file`, required, example: `"output.h5mu"` |
+|`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`                |
+|`--obsm_output`        |The pre/postfix under which to store the UMAP results.       |`string`, default: `"umap"`                |
 
 
 ### Arguments

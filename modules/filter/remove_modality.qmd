@@ -60,11 +60,12 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name         |Description       |Attributes                                |
-|:------------|:-----------------|:-----------------------------------------|
-|`--input`    |Input h5mu file   |`file`, required, example: `"input.h5mu"` |
-|`--modality` |                  |`string`, required                        |
-|`--output`   |Output h5mu file. |`file`, example: `"output.h5mu"`          |
+|Name                   |Description                                                  |Attributes                                |
+|:----------------------|:------------------------------------------------------------|:-----------------------------------------|
+|`--input`              |Input h5mu file                                              |`file`, required, example: `"input.h5mu"` |
+|`--modality`           |                                                             |`string`, required                        |
+|`--output`             |Output h5mu file.                                            |`file`, example: `"output.h5mu"`          |
+|`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`               |
 
 ## Authors
 

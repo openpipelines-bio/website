@@ -75,6 +75,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--modality`            |                                                                                                     |`string`, default: `"rna"`                 |
 |`--obsp_connectivities` |In which .obsp slot the neighbor connectivities can be found.                                        |`string`, default: `"connectivities"`      |
 |`--output`              |Output file.                                                                                         |`file`, required, example: `"output.h5mu"` |
+|`--output_compression`  |                                                                                                     |`string`, example: `"gzip"`                |
 |`--obs_name`            |Name of the .obs key under which to add the cluster labels.                                          |`string`, default: `"leiden"`              |
 |`--resolution`          |A parameter value controlling the coarseness of the clustering. Higher values lead to more clusters. |`double`, default: `1`                     |
 
