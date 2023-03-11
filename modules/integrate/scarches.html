@@ -327,9 +327,9 @@ Note
 <h3 class="anchored" data-anchor-id="outputs">Outputs</h3>
 <table class="table">
 <colgroup>
-<col style="width: 13%">
-<col style="width: 52%">
-<col style="width: 34%">
+<col style="width: 17%">
+<col style="width: 49%">
+<col style="width: 32%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -345,11 +345,16 @@ Note
 <td style="text-align: left;"><code>file</code>, required</td>
 </tr>
 <tr class="even">
+<td style="text-align: left;"><code>--output_compression</code></td>
+<td style="text-align: left;">The compression format to be used on the output h5mu object.</td>
+<td style="text-align: left;"><code>string</code>, example: <code>"gzip"</code></td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;"><code>--model_output</code></td>
 <td style="text-align: left;">Output directory for model</td>
 <td style="text-align: left;"><code>file</code>, default: <code>"model"</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>--obsm_output</code></td>
 <td style="text-align: left;">In which .obsm slot to store the resulting integrated embedding.</td>
 <td style="text-align: left;"><code>string</code>, default: <code>"X_integrated_scanvi"</code></td>

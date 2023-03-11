@@ -319,41 +319,46 @@ Note
 <td style="text-align: left;"><code>file</code>, example: <code>"output.h5mu"</code></td>
 </tr>
 <tr class="even">
+<td style="text-align: left;"><code>--output_compression</code></td>
+<td style="text-align: left;">The compression format to be used on the output h5mu object.</td>
+<td style="text-align: left;"><code>string</code>, example: <code>"gzip"</code></td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;"><code>--obs_name_filter</code></td>
 <td style="text-align: left;">In which .obs slot to store a boolean array corresponding to which observations should be filtered out.</td>
 <td style="text-align: left;"><code>string</code>, default: <code>"filter_with_scrublet"</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>--do_subset</code></td>
 <td style="text-align: left;">Whether to subset before storing the output.</td>
 <td style="text-align: left;"><code>boolean_true</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>--obs_name_doublet_score</code></td>
 <td style="text-align: left;">Name of the doublet scores column in the obs slot of the returned object.</td>
 <td style="text-align: left;"><code>string</code>, default: <code>"scrublet_doublet_score"</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>--min_counts</code></td>
 <td style="text-align: left;">The number of minimal UMI counts per cell that have to be present for initial cell detection.</td>
 <td style="text-align: left;"><code>integer</code>, default: <code>2</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>--min_cells</code></td>
 <td style="text-align: left;">The number of cells in which UMIs for a gene were detected.</td>
 <td style="text-align: left;"><code>integer</code>, default: <code>3</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>--min_gene_variablity_percent</code></td>
 <td style="text-align: left;">Used for gene filtering prior to PCA. Keep the most highly variable genes (in the top min_gene_variability_pctl percentile), as measured by the v-statistic [Klein et al., Cell 2015].</td>
 <td style="text-align: left;"><code>double</code>, default: <code>85</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>--num_pca_components</code></td>
 <td style="text-align: left;">Number of principal components to use during PCA dimensionality reduction.</td>
 <td style="text-align: left;"><code>integer</code>, default: <code>30</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>--distance_metric</code></td>
 <td style="text-align: left;">The distance metric used for computing similarities.</td>
 <td style="text-align: left;"><code>string</code>, default: <code>"euclidean"</code></td>

@@ -333,9 +333,9 @@ Note
 <h3 class="anchored" data-anchor-id="outputs">Outputs</h3>
 <table class="table">
 <colgroup>
-<col style="width: 12%">
-<col style="width: 61%">
-<col style="width: 26%">
+<col style="width: 14%">
+<col style="width: 60%">
+<col style="width: 25%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -351,16 +351,21 @@ Note
 <td style="text-align: left;"><code>file</code>, example: <code>"output.h5mu"</code></td>
 </tr>
 <tr class="even">
+<td style="text-align: left;"><code>--output_compression</code></td>
+<td style="text-align: left;">The compression format to be used on the output h5mu object.</td>
+<td style="text-align: left;"><code>string</code>, example: <code>"gzip"</code></td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;"><code>--do_subset</code></td>
 <td style="text-align: left;">Whether to subset before storing the output.</td>
 <td style="text-align: left;"><code>boolean_true</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>--obs_name_filter</code></td>
 <td style="text-align: left;">In which .obs slot to store a boolean array corresponding to which observations should be removed.</td>
 <td style="text-align: left;"><code>string</code>, default: <code>"filter_with_counts"</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>--var_name_filter</code></td>
 <td style="text-align: left;">In which .var slot to store a boolean array corresponding to which variables should be removed.</td>
 <td style="text-align: left;"><code>string</code>, default: <code>"filter_with_counts"</code></td>

@@ -322,9 +322,9 @@ Note
 <h3 class="anchored" data-anchor-id="outputs">Outputs</h3>
 <table class="table">
 <colgroup>
-<col style="width: 14%">
-<col style="width: 49%">
-<col style="width: 36%">
+<col style="width: 13%">
+<col style="width: 52%">
+<col style="width: 34%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -336,18 +336,23 @@ Note
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"><code>--output_raw</code></td>
-<td style="text-align: left;">The raw output folder.</td>
+<td style="text-align: left;">Location where the output folder from Cell Ranger will be stored.</td>
 <td style="text-align: left;"><code>file</code>, required, example: <code>"output_dir"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--output_h5mu</code></td>
-<td style="text-align: left;">The converted h5mu file.</td>
+<td style="text-align: left;">The output from Cell Ranger, converted to h5mu.</td>
 <td style="text-align: left;"><code>file</code>, required, example: <code>"output.h5mu"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--obsm_metrics</code></td>
 <td style="text-align: left;">Name of the .obsm slot under which to QC metrics (if any).</td>
 <td style="text-align: left;"><code>string</code>, default: <code>"metrics_summary"</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--output_type</code></td>
+<td style="text-align: left;">Which Cell Ranger output to use for converting to h5mu.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"raw"</code></td>
 </tr>
 </tbody>
 </table>

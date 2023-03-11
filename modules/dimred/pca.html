@@ -289,9 +289,9 @@ Note
 <h3 class="anchored" data-anchor-id="arguments">Arguments</h3>
 <table class="table">
 <colgroup>
-<col style="width: 10%">
-<col style="width: 65%">
-<col style="width: 24%">
+<col style="width: 12%">
+<col style="width: 63%">
+<col style="width: 23%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -327,26 +327,31 @@ Note
 <td style="text-align: left;"><code>file</code>, required, example: <code>"output.h5mu"</code></td>
 </tr>
 <tr class="even">
+<td style="text-align: left;"><code>--output_compression</code></td>
+<td style="text-align: left;">The compression format to be used on the output h5mu object.</td>
+<td style="text-align: left;"><code>string</code>, example: <code>"gzip"</code></td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;"><code>--obsm_output</code></td>
 <td style="text-align: left;">In which .obsm slot to store the resulting embedding.</td>
 <td style="text-align: left;"><code>string</code>, default: <code>"X_pca"</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>--varm_output</code></td>
 <td style="text-align: left;">In which .varm slot to store the resulting loadings matrix.</td>
 <td style="text-align: left;"><code>string</code>, default: <code>"pca_loadings"</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>--uns_output</code></td>
 <td style="text-align: left;">In which .uns slot to store the resulting variance objects.</td>
 <td style="text-align: left;"><code>string</code>, default: <code>"pca_variance"</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>--num_components</code></td>
 <td style="text-align: left;">Number of principal components to compute. Defaults to 50, or 1 - minimum dimension size of selected representation.</td>
 <td style="text-align: left;"><code>integer</code>, example: <code>25</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>--overwrite</code></td>
 <td style="text-align: left;">Allow overwriting .obsm, .varm and .uns slots.</td>
 <td style="text-align: left;"><code>boolean_true</code></td>

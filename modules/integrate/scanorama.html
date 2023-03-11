@@ -288,8 +288,8 @@ Note
 <h3 class="anchored" data-anchor-id="arguments">Arguments</h3>
 <table class="table">
 <colgroup>
-<col style="width: 6%">
-<col style="width: 74%">
+<col style="width: 9%">
+<col style="width: 72%">
 <col style="width: 18%">
 </colgroup>
 <thead>
@@ -316,41 +316,46 @@ Note
 <td style="text-align: left;"><code>file</code>, required, default: <code>"output.h5ad"</code></td>
 </tr>
 <tr class="even">
+<td style="text-align: left;"><code>--output_compression</code></td>
+<td style="text-align: left;">The compression format to be used on the output h5mu object.</td>
+<td style="text-align: left;"><code>string</code>, example: <code>"gzip"</code></td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;"><code>--obs_batch</code></td>
 <td style="text-align: left;">Column name discriminating between your batches.</td>
 <td style="text-align: left;"><code>string</code>, default: <code>"batch"</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>--obsm_input</code></td>
 <td style="text-align: left;">Basis obsm slot to run scanorama on.</td>
 <td style="text-align: left;"><code>string</code>, default: <code>"X_pca"</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>--obsm_output</code></td>
 <td style="text-align: left;">The name of the field in adata.obsm where the integrated embeddings will be stored after running this function. Defaults to X_scanorama.</td>
 <td style="text-align: left;"><code>string</code>, default: <code>"X_scanorama"</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>--knn</code></td>
 <td style="text-align: left;">Number of nearest neighbors to use for matching.</td>
 <td style="text-align: left;"><code>integer</code>, default: <code>20</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>--batch_size</code></td>
 <td style="text-align: left;">The batch size used in the alignment vector computation. Useful when integrating very large (&gt;100k samples) datasets. Set to large value that runs within available memory.</td>
 <td style="text-align: left;"><code>integer</code>, default: <code>5000</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>--sigma</code></td>
 <td style="text-align: left;">Correction smoothing parameter on Gaussian kernel.</td>
 <td style="text-align: left;"><code>double</code>, default: <code>15</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>--approx</code></td>
 <td style="text-align: left;">Use approximate nearest neighbors with Python annoy; greatly speeds up matching runtime.</td>
 <td style="text-align: left;"><code>boolean</code>, default: <code>TRUE</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>--alpha</code></td>
 <td style="text-align: left;">Alignment score minimum cutoff</td>
 <td style="text-align: left;"><code>double</code>, default: <code>0.1</code></td>

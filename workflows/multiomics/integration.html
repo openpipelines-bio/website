@@ -375,9 +375,9 @@ Note
 <h3 class="anchored" data-anchor-id="harmony-integration-options">Harmony integration options</h3>
 <table class="table">
 <colgroup>
-<col style="width: 13%">
-<col style="width: 44%">
-<col style="width: 41%">
+<col style="width: 7%">
+<col style="width: 69%">
+<col style="width: 22%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -396,6 +396,11 @@ Note
 <td style="text-align: left;"><code>--obs_covariates</code></td>
 <td style="text-align: left;">The .obs field(s) that define the covariate(s) to regress out.</td>
 <td style="text-align: left;"><code>string</code>, required, example: <code>"batch"</code>, example: <code>"sample"</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--rna_theta</code></td>
+<td style="text-align: left;">Diversity clustering penalty parameter. Specify for each variable in group.by.vars. theta=0 does not encourage any diversity. Larger values of theta result in more diverse clusters.”</td>
+<td style="text-align: left;"><code>double</code>, default: <code>2</code></td>
 </tr>
 </tbody>
 </table>
@@ -438,9 +443,9 @@ Note
 <h3 class="anchored" data-anchor-id="clustering-options">Clustering options</h3>
 <table class="table">
 <colgroup>
-<col style="width: 15%">
-<col style="width: 56%">
-<col style="width: 28%">
+<col style="width: 16%">
+<col style="width: 60%">
+<col style="width: 22%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -454,6 +459,11 @@ Note
 <td style="text-align: left;"><code>--obs_cluster</code></td>
 <td style="text-align: left;">Name of the .obs key under which to add the cluster labels.</td>
 <td style="text-align: left;"><code>string</code>, default: <code>"leiden"</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--leiden_resolution</code></td>
+<td style="text-align: left;">Control the coarseness of the clustering. Higher values lead to more clusters.</td>
+<td style="text-align: left;"><code>double</code>, default: <code>1</code></td>
 </tr>
 </tbody>
 </table>

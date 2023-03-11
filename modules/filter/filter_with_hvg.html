@@ -292,8 +292,8 @@ Note
 <h3 class="anchored" data-anchor-id="arguments">Arguments</h3>
 <table class="table">
 <colgroup>
-<col style="width: 3%">
-<col style="width: 88%">
+<col style="width: 4%">
+<col style="width: 87%">
 <col style="width: 7%">
 </colgroup>
 <thead>
@@ -325,61 +325,66 @@ Note
 <td style="text-align: left;"><code>file</code>, example: <code>"output.h5mu"</code></td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;"><code>--output_compression</code></td>
+<td style="text-align: left;">The compression format to be used on the output h5mu object.</td>
+<td style="text-align: left;"><code>string</code>, example: <code>"gzip"</code></td>
+</tr>
+<tr class="even">
 <td style="text-align: left;"><code>--var_name_filter</code></td>
 <td style="text-align: left;">In which .var slot to store a boolean array corresponding to which observations should be filtered out.</td>
 <td style="text-align: left;"><code>string</code>, default: <code>"filter_with_hvg"</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>--varm_name</code></td>
 <td style="text-align: left;">In which .varm slot to store additional metadata.</td>
 <td style="text-align: left;"><code>string</code>, default: <code>"hvg"</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>--do_subset</code></td>
 <td style="text-align: left;">Whether to subset before storing the output.</td>
 <td style="text-align: left;"><code>boolean_true</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>--flavor</code></td>
 <td style="text-align: left;">Choose the flavor for identifying highly variable genes. For the dispersion based methods in their default workflows, Seurat passes the cutoffs whereas Cell Ranger passes n_top_genes.</td>
 <td style="text-align: left;"><code>string</code>, default: <code>"seurat"</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>--n_top_genes</code></td>
 <td style="text-align: left;">Number of highly-variable genes to keep. Mandatory if flavor=‘seurat_v3’.</td>
 <td style="text-align: left;"><code>integer</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>--min_mean</code></td>
 <td style="text-align: left;">If n_top_genes is defined, this and all other cutoffs for the means and the normalized dispersions are ignored. Ignored if flavor=‘seurat_v3’.</td>
 <td style="text-align: left;"><code>double</code>, default: <code>0.0125</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>--max_mean</code></td>
 <td style="text-align: left;">If n_top_genes is defined, this and all other cutoffs for the means and the normalized dispersions are ignored. Ignored if flavor=‘seurat_v3’.</td>
 <td style="text-align: left;"><code>double</code>, default: <code>3</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>--min_disp</code></td>
 <td style="text-align: left;">If n_top_genes is defined, this and all other cutoffs for the means and the normalized dispersions are ignored. Ignored if flavor=‘seurat_v3’.</td>
 <td style="text-align: left;"><code>double</code>, default: <code>0.5</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>--max_disp</code></td>
 <td style="text-align: left;">If n_top_genes is defined, this and all other cutoffs for the means and the normalized dispersions are ignored. Ignored if flavor=‘seurat_v3’. Default is +inf.</td>
 <td style="text-align: left;"><code>double</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>--span</code></td>
 <td style="text-align: left;">The fraction of the data (cells) used when estimating the variance in the loess model fit if flavor=‘seurat_v3’.</td>
 <td style="text-align: left;"><code>double</code>, default: <code>0.3</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>--n_bins</code></td>
 <td style="text-align: left;">Number of bins for binning the mean gene expression. Normalization is done with respect to each bin. If just a single gene falls into a bin, the normalized dispersion is artificially set to 1.</td>
 <td style="text-align: left;"><code>integer</code>, default: <code>20</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>--obs_batch_key</code></td>
 <td style="text-align: left;">If specified, highly-variable genes are selected within each batch separately and merged. This simple process avoids the selection of batch-specific genes and acts as a lightweight batch correction method. For all flavors, genes are first sorted by how many batches they are a HVG. For dispersion-based flavors ties are broken by normalized dispersion. If flavor = ‘seurat_v3’, ties are broken by the median (across batches) rank based on within-batch normalized variance.</td>
 <td style="text-align: left;"><code>string</code></td>

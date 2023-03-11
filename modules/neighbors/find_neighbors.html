@@ -322,31 +322,36 @@ Note
 <td style="text-align: left;"><code>file</code>, example: <code>"output.h5mu"</code></td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;"><code>--output_compression</code></td>
+<td style="text-align: left;">The compression format to be used on the output h5mu object.</td>
+<td style="text-align: left;"><code>string</code>, example: <code>"gzip"</code></td>
+</tr>
+<tr class="even">
 <td style="text-align: left;"><code>--uns_output</code></td>
 <td style="text-align: left;">Mandatory .uns slot to store various neighbor output objects.</td>
 <td style="text-align: left;"><code>string</code>, default: <code>"neighbors"</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>--obsp_distances</code></td>
 <td style="text-align: left;">In which .obsp slot to store the distance matrix between the resulting neighbors.</td>
 <td style="text-align: left;"><code>string</code>, default: <code>"distances"</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>--obsp_connectivities</code></td>
 <td style="text-align: left;">In which .obsp slot to store the connectivities matrix between the resulting neighbors.</td>
 <td style="text-align: left;"><code>string</code>, default: <code>"connectivities"</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>--metric</code></td>
 <td style="text-align: left;">The distance metric to be used in the generation of the nearest neighborhood network.</td>
 <td style="text-align: left;"><code>string</code>, default: <code>"euclidean"</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>--num_neighbors</code></td>
 <td style="text-align: left;">The size of local neighborhood (in terms of number of neighboring data points) used for manifold approximation. Larger values result in more global views of the manifold, while smaller values result in more local data being preserved. In general values should be in the range 2 to 100. If knn is True, number of nearest neighbors to be searched. If knn is False, a Gaussian kernel width is set to the distance of the n_neighbors neighbor.</td>
 <td style="text-align: left;"><code>integer</code>, default: <code>15</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>--seed</code></td>
 <td style="text-align: left;">A random seed.</td>
 <td style="text-align: left;"><code>integer</code>, default: <code>0</code></td>

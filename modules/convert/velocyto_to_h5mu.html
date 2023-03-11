@@ -323,9 +323,9 @@ Note
 <h3 class="anchored" data-anchor-id="outputs">Outputs</h3>
 <table class="table">
 <colgroup>
-<col style="width: 20%">
-<col style="width: 39%">
-<col style="width: 39%">
+<col style="width: 18%">
+<col style="width: 50%">
+<col style="width: 31%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -341,16 +341,21 @@ Note
 <td style="text-align: left;"><code>file</code>, example: <code>"output.h5mu"</code></td>
 </tr>
 <tr class="even">
+<td style="text-align: left;"><code>--output_compression</code></td>
+<td style="text-align: left;">The compression format to be used on the output h5mu object.</td>
+<td style="text-align: left;"><code>string</code>, example: <code>"gzip"</code></td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;"><code>--layer_spliced</code></td>
 <td style="text-align: left;">Output layer for the spliced reads.</td>
 <td style="text-align: left;"><code>string</code>, default: <code>"velo_spliced"</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>--layer_unspliced</code></td>
 <td style="text-align: left;">Output layer for the unspliced reads.</td>
 <td style="text-align: left;"><code>string</code>, default: <code>"velo_unspliced"</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>--layer_ambiguous</code></td>
 <td style="text-align: left;">Output layer for the ambiguous reads.</td>
 <td style="text-align: left;"><code>string</code>, default: <code>"velo_ambiguous"</code></td>

@@ -289,8 +289,8 @@ Note
 <h3 class="anchored" data-anchor-id="arguments">Arguments</h3>
 <table class="table">
 <colgroup>
-<col style="width: 7%">
-<col style="width: 69%">
+<col style="width: 8%">
+<col style="width: 68%">
 <col style="width: 22%">
 </colgroup>
 <thead>
@@ -312,26 +312,31 @@ Note
 <td style="text-align: left;"><code>file</code>, required</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;"><code>--output_compression</code></td>
+<td style="text-align: left;">The compression format to be used on the output h5mu object.</td>
+<td style="text-align: left;"><code>string</code>, example: <code>"gzip"</code></td>
+</tr>
+<tr class="even">
 <td style="text-align: left;"><code>--modality</code></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"><code>string</code>, default: <code>"rna"</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>--obsm_input</code></td>
 <td style="text-align: left;">Which .obsm slot to use as a starting PCA embedding.</td>
 <td style="text-align: left;"><code>string</code>, default: <code>"X_pca"</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>--obsm_output</code></td>
 <td style="text-align: left;">In which .obsm slot to store the resulting integrated embedding.</td>
 <td style="text-align: left;"><code>string</code>, default: <code>"X_pca_integrated"</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>--theta</code></td>
 <td style="text-align: left;">Diversity clustering penalty parameter. Specify for each variable in group.by.vars. theta=0 does not encourage any diversity. Larger values of theta result in more diverse clusters.</td>
 <td style="text-align: left;"><code>double</code>, default: <code>2</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>--obs_covariates</code></td>
 <td style="text-align: left;">The .obs field(s) that define the covariate(s) to regress out.</td>
 <td style="text-align: left;"><code>string</code>, required, example: <code>"batch"</code>, example: <code>"sample"</code></td>

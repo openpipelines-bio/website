@@ -323,16 +323,21 @@ Note
 <td style="text-align: left;"><code>file</code>, required, default: <code>"output.h5mu"</code></td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;"><code>--output_compression</code></td>
+<td style="text-align: left;">The compression format to be used on the output h5mu object.</td>
+<td style="text-align: left;"><code>string</code>, example: <code>"gzip"</code></td>
+</tr>
+<tr class="even">
 <td style="text-align: left;"><code>--output_layer</code></td>
 <td style="text-align: left;">Output layer to use. By default, use X.</td>
 <td style="text-align: left;"><code>string</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>--target_sum</code></td>
 <td style="text-align: left;">If None, after normalization, each observation (cell) has a total count equal to the median of total counts for observations (cells) before normalization.</td>
 <td style="text-align: left;"><code>integer</code>, default: <code>10000</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>--exclude_highly_expressed</code></td>
 <td style="text-align: left;">Exclude (very) highly expressed genes for the computation of the normalization factor (size factor) for each cell. A gene is considered highly expressed, if it has more than max_fraction of the total counts in at least one cell. The not-excluded genes will sum up to target_sum.</td>
 <td style="text-align: left;"><code>boolean_true</code></td>
