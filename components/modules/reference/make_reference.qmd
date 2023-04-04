@@ -34,7 +34,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main -latest \
+  -r 0.7.1 -latest \
   -main-script target/nextflow/reference/make_reference/main.nf \
   --help
 ```
@@ -50,7 +50,7 @@ nextflow run openpipelines-bio/openpipeline \
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main -latest \
+  -r 0.7.1 -latest \
   -profile docker \
   -main-script target/nextflow/reference/make_reference/main.nf \
   -params-file params.yaml
