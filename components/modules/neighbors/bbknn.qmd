@@ -14,7 +14,7 @@ ID: `bbknn`
 Namespace: `neighbors`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/neighbors/bbknn){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/neighbors/bbknn){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

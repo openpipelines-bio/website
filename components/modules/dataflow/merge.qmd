@@ -14,7 +14,7 @@ ID: `merge`
 Namespace: `dataflow`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/dataflow/merge){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/dataflow/merge){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

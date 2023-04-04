@@ -14,7 +14,7 @@ ID: `do_filter`
 Namespace: `filter`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/filter/do_filter){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/filter/do_filter){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

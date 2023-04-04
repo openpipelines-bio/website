@@ -14,7 +14,7 @@ ID: `integration`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/workflows/multiomics/integration){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/workflows/multiomics/integration){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

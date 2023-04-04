@@ -14,7 +14,7 @@ ID: `multi_star`
 Namespace: `mapping`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/mapping/multi_star){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/mapping/multi_star){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

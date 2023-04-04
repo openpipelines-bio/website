@@ -14,7 +14,7 @@ ID: `umap`
 Namespace: `dimred`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/dimred/umap){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/dimred/umap){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

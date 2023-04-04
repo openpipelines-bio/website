@@ -14,7 +14,7 @@ ID: `scanorama`
 Namespace: `integrate`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/integrate/scanorama){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/integrate/scanorama){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

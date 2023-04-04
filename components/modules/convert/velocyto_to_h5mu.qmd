@@ -14,7 +14,7 @@ ID: `velocyto_to_h5mu`
 Namespace: `convert`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/velocity/velocyto_to_h5mu){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/velocity/velocyto_to_h5mu){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

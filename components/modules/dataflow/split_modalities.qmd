@@ -14,7 +14,7 @@ ID: `split_modalities`
 Namespace: `dataflow`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/dataflow/split_modalities){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/dataflow/split_modalities){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

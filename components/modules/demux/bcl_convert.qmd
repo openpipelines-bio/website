@@ -14,7 +14,7 @@ ID: `bcl_convert`
 Namespace: `demux`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/demux/bcl_convert){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/demux/bcl_convert){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

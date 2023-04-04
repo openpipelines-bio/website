@@ -14,7 +14,7 @@ ID: `pca`
 Namespace: `dimred`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/dimred/pca){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/dimred/pca){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

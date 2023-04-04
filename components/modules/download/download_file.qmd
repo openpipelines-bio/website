@@ -14,7 +14,7 @@ ID: `download_file`
 Namespace: `download`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/download/download_file){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/download/download_file){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

@@ -14,7 +14,7 @@ ID: `remove_modality`
 Namespace: `filter`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/filter/remove_modality){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/filter/remove_modality){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

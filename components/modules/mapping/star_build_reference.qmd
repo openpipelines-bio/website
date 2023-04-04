@@ -14,7 +14,7 @@ ID: `star_build_reference`
 Namespace: `mapping`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/mapping/star_build_reference){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/mapping/star_build_reference){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

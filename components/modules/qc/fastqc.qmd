@@ -14,7 +14,7 @@ ID: `fastqc`
 Namespace: `qc`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/qc/fastqc){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/qc/fastqc){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

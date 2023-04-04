@@ -14,7 +14,7 @@ ID: `htseq_count`
 Namespace: `mapping`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/mapping/htseq_count){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/mapping/htseq_count){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

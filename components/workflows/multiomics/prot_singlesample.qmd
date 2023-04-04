@@ -14,7 +14,7 @@ ID: `prot_singlesample`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/workflows/multiomics/prot_singlesample){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/workflows/multiomics/prot_singlesample){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

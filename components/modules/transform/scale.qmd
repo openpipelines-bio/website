@@ -14,7 +14,7 @@ ID: `scale`
 Namespace: `transform`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/transform/scaling){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/transform/scaling){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

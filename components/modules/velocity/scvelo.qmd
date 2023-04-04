@@ -14,7 +14,7 @@ ID: `scvelo`
 Namespace: `velocity`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/velocity/scvelo){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/velocity/scvelo){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
