@@ -14,7 +14,7 @@ ID: `pca`
 Namespace: `dimred`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/dimred/pca){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/dimred/pca){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r main -latest \
   -main-script target/nextflow/dimred/pca/main.nf \
   --help
 ```
@@ -40,25 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-input: # please fill in - example: "input.h5mu"
-modality: "rna"
-# layer: "foo"
-# output: "$id.$key.output.h5mu"
-obsm_output: "X_pca"
-varm_output: "pca_loadings"
-uns_output: "pca_variance"
-# num_components: 25
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r main -latest \
   -profile docker \
   -main-script target/nextflow/dimred/pca/main.nf \
   -params-file params.yaml
@@ -72,16 +60,19 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name               |Description                                                                                                          |Attributes                                 |
-|:------------------|:--------------------------------------------------------------------------------------------------------------------|:------------------------------------------|
-|`--input`          |Input h5mu file                                                                                                      |`file`, required, example: `"input.h5mu"`  |
-|`--modality`       |                                                                                                                     |`string`, default: `"rna"`                 |
-|`--layer`          |Use specified layer for expression values instead of the .X object from the modality.                                |`string`                                   |
-|`--output`         |Output h5mu file.                                                                                                    |`file`, required, example: `"output.h5mu"` |
-|`--obsm_output`    |In which .obsm slot to store the resulting embedding.                                                                |`string`, default: `"X_pca"`               |
-|`--varm_output`    |In which .varm slot to store the resulting loadings matrix.                                                          |`string`, default: `"pca_loadings"`        |
-|`--uns_output`     |In which .uns slot to store the resulting variance objects.                                                          |`string`, default: `"pca_variance"`        |
-|`--num_components` |Number of principal components to compute. Defaults to 50, or 1 - minimum dimension size of selected representation. |`integer`, example: `25`                   |
+|Name                   |Description                                                                                                          |Attributes                                 |
+|:----------------------|:--------------------------------------------------------------------------------------------------------------------|:------------------------------------------|
+|`--input`              |Input h5mu file                                                                                                      |`file`, required, example: `"input.h5mu"`  |
+|`--modality`           |                                                                                                                     |`string`, default: `"rna"`                 |
+|`--layer`              |Use specified layer for expression values instead of the .X object from the modality.                                |`string`                                   |
+|`--var_input`          |Column name in .var matrix that will be used to select which genes to run the PCA on.                                |`string`, example: `"filter_with_hvg"`     |
+|`--output`             |Output h5mu file.                                                                                                    |`file`, required, example: `"output.h5mu"` |
+|`--output_compression` |The compression format to be used on the output h5mu object.                                                         |`string`, example: `"gzip"`                |
+|`--obsm_output`        |In which .obsm slot to store the resulting embedding.                                                                |`string`, default: `"X_pca"`               |
+|`--varm_output`        |In which .varm slot to store the resulting loadings matrix.                                                          |`string`, default: `"pca_loadings"`        |
+|`--uns_output`         |In which .uns slot to store the resulting variance objects.                                                          |`string`, default: `"pca_variance"`        |
+|`--num_components`     |Number of principal components to compute. Defaults to 50, or 1 - minimum dimension size of selected representation. |`integer`, example: `25`                   |
+|`--overwrite`          |Allow overwriting .obsm, .varm and .uns slots.                                                                       |`boolean_true`                             |
 
 ## Authors
 

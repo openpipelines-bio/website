@@ -14,7 +14,7 @@ ID: `delete_layer`
 Namespace: `transform`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/transform/delete_layer){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/transform/delete_layer){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r main -latest \
   -main-script target/nextflow/transform/delete_layer/main.nf \
   --help
 ```
@@ -40,22 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-input: # please fill in - example: "input.h5mu"
-modality: "rna"
-layer: # please fill in - example: ["foo"]
-# output: "$id.$key.output.h5mu"
-missing_ok: false
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r main -latest \
   -profile docker \
   -main-script target/nextflow/transform/delete_layer/main.nf \
   -params-file params.yaml
@@ -69,13 +60,14 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name           |Description                                                           |Attributes                                 |
-|:--------------|:---------------------------------------------------------------------|:------------------------------------------|
-|`--input`      |Input h5mu file                                                       |`file`, required, example: `"input.h5mu"`  |
-|`--modality`   |                                                                      |`string`, default: `"rna"`                 |
-|`--layer`      |Input layer to remove                                                 |`string`, required                         |
-|`--output`     |Output h5mu file.                                                     |`file`, required, default: `"output.h5mu"` |
-|`--missing_ok` |Do not raise an error if the layer does not exist for all modalities. |`boolean_true`                             |
+|Name                   |Description                                                           |Attributes                                 |
+|:----------------------|:---------------------------------------------------------------------|:------------------------------------------|
+|`--input`              |Input h5mu file                                                       |`file`, required, example: `"input.h5mu"`  |
+|`--modality`           |                                                                      |`string`, default: `"rna"`                 |
+|`--layer`              |Input layer to remove                                                 |`string`, required                         |
+|`--output`             |Output h5mu file.                                                     |`file`, required, default: `"output.h5mu"` |
+|`--output_compression` |The compression format to be used on the output h5mu object.          |`string`, example: `"gzip"`                |
+|`--missing_ok`         |Do not raise an error if the layer does not exist for all modalities. |`boolean_true`                             |
 
 ## Authors
 

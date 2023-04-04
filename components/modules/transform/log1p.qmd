@@ -14,7 +14,7 @@ ID: `log1p`
 Namespace: `transform`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/transform/log1p){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/transform/log1p){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r main -latest \
   -main-script target/nextflow/transform/log1p/main.nf \
   --help
 ```
@@ -40,23 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-input: # please fill in - example: "input.h5mu"
-modality: "rna"
-# input_layer: "foo"
-# output_layer: "foo"
-# output: "$id.$key.output.h5mu"
-# base: 2
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r main -latest \
   -profile docker \
   -main-script target/nextflow/transform/log1p/main.nf \
   -params-file params.yaml
@@ -70,14 +60,15 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name             |Description                                  |Attributes                                 |
-|:----------------|:--------------------------------------------|:------------------------------------------|
-|`--input`        |Input h5mu file                              |`file`, required, example: `"input.h5mu"`  |
-|`--modality`     |                                             |`string`, default: `"rna"`                 |
-|`--input_layer`  |Input layer to use. If None, X is normalized |`string`                                   |
-|`--output_layer` |Output layer to use. By default, use X.      |`string`                                   |
-|`--output`       |Output h5mu file.                            |`file`, required, default: `"output.h5mu"` |
-|`--base`         |                                             |`double`, example: `2`                     |
+|Name                   |Description                                                  |Attributes                                 |
+|:----------------------|:------------------------------------------------------------|:------------------------------------------|
+|`--input`              |Input h5mu file                                              |`file`, required, example: `"input.h5mu"`  |
+|`--modality`           |                                                             |`string`, default: `"rna"`                 |
+|`--input_layer`        |Input layer to use. If None, X is normalized                 |`string`                                   |
+|`--output_layer`       |Output layer to use. By default, use X.                      |`string`                                   |
+|`--output`             |Output h5mu file.                                            |`file`, required, default: `"output.h5mu"` |
+|`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`                |
+|`--base`               |                                                             |`double`, example: `2`                     |
 
 ## Authors
 

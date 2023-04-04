@@ -14,7 +14,7 @@ ID: `star_align`
 Namespace: `mapping`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/mapping/star_align){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/mapping/star_align){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r main -latest \
   -main-script target/nextflow/mapping/star_align/main.nf \
   --help
 ```
@@ -40,20 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Input/Output
-input: # please fill in - example: ["mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"]
-reference: # please fill in - example: "/path/to/reference"
-# output: "$id.$key.output.output"
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r main -latest \
   -profile docker \
   -main-script target/nextflow/mapping/star_align/main.nf \
   -params-file params.yaml
@@ -67,11 +60,11 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Input/Output
 
-|Name          |Description                                |Attributes                                                                                                     |
-|:-------------|:------------------------------------------|:--------------------------------------------------------------------------------------------------------------|
-|`--input`     |The FASTQ files to be analyzed.            |`file`, required, example: `"mysample_S1_L001_R1_001.fastq.gz"`, example: `"mysample_S1_L001_R2_001.fastq.gz"` |
-|`--reference` |Path to the reference built by star_mkref. |`file`, required, example: `"/path/to/reference"`                                                              |
-|`--output`    |Path to output directory.                  |`file`, required, example: `"/path/to/foo"`                                                                    |
+|Name          |Description                                                                                                       |Attributes                                                                                                     |
+|:-------------|:-----------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------|
+|`--input`     |The FASTQ files to be analyzed. Corresponds to the --readFilesIn argument in the STAR command.                    |`file`, required, example: `"mysample_S1_L001_R1_001.fastq.gz"`, example: `"mysample_S1_L001_R2_001.fastq.gz"` |
+|`--reference` |Path to the reference built by star_build_reference. Corresponds to the --genomeDir argument in the STAR command. |`file`, required, example: `"/path/to/reference"`                                                              |
+|`--output`    |Path to output directory. Corresponds to the --outFileNamePrefix argument in the STAR command.                    |`file`, required, example: `"/path/to/foo"`                                                                    |
 
 
 ### Run Parameters

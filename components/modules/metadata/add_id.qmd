@@ -14,7 +14,7 @@ ID: `add_id`
 Namespace: `metadata`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/metadata/add_id){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/metadata/add_id){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -31,7 +31,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r main -latest \
   -main-script target/nextflow/metadata/add_id/main.nf \
   --help
 ```
@@ -41,22 +41,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-input: # please fill in - example: "sample_path"
-input_id: # please fill in - example: "foo"
-obs_output: "sample_id"
-# output: "$id.$key.output.h5mu"
-make_observation_keys_unique: false
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r main -latest \
   -profile docker \
   -main-script target/nextflow/metadata/add_id/main.nf \
   -params-file params.yaml
@@ -70,13 +61,14 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name                             |Description                                    |Attributes                                 |
-|:--------------------------------|:----------------------------------------------|:------------------------------------------|
-|`--input`                        |Path to the input .h5mu.                       |`file`, required, example: `"sample_path"` |
-|`--input_id`                     |The input id.                                  |`string`, required                         |
-|`--obs_output`                   |Name of the .obs column where to store the id. |`string`, default: `"sample_id"`           |
-|`--output`                       |                                               |`file`, example: `"output.h5mu"`           |
-|`--make_observation_keys_unique` |Join the id to the .obs index (.obs_names).    |`boolean_true`                             |
+|Name                             |Description                                                  |Attributes                                 |
+|:--------------------------------|:------------------------------------------------------------|:------------------------------------------|
+|`--input`                        |Path to the input .h5mu.                                     |`file`, required, example: `"sample_path"` |
+|`--input_id`                     |The input id.                                                |`string`, required                         |
+|`--obs_output`                   |Name of the .obs column where to store the id.               |`string`, default: `"sample_id"`           |
+|`--output`                       |                                                             |`file`, example: `"output.h5mu"`           |
+|`--output_compression`           |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`                |
+|`--make_observation_keys_unique` |Join the id to the .obs index (.obs_names).                  |`boolean_true`                             |
 
 ## Authors
 
