@@ -32,7 +32,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 ```bash
 nextflow run openpipelines-bio/openpipeline \
   -r 0.7.1 -latest \
-  -main-script openpipelines/workflows/ingestion/demux/main.nf \
+  -main-script workflows/ingestion/demux/main.nf \
   --help
 ```
 
@@ -49,7 +49,7 @@ nextflow run openpipelines-bio/openpipeline \
 nextflow run openpipelines-bio/openpipeline \
   -r 0.7.1 -latest \
   -profile docker \
-  -main-script openpipelines/workflows/ingestion/demux/main.nf \
+  -main-script workflows/ingestion/demux/main.nf \
   -params-file params.yaml
 ```
 
