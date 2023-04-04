@@ -14,7 +14,7 @@ ID: `filter_with_scrublet`
 Namespace: `filter`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/filter/filter_with_scrublet){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/filter/filter_with_scrublet){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -49,7 +49,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r main -latest \
   -main-script target/nextflow/filter/filter_with_scrublet/main.nf \
   --help
 ```
@@ -59,28 +59,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-input: # please fill in - example: "input.h5mu"
-modality: "rna"
-# output: "$id.$key.output.h5mu"
-obs_name_filter: "filter_with_scrublet"
-do_subset: false
-obs_name_doublet_score: "scrublet_doublet_score"
-min_counts: 2
-min_cells: 3
-min_gene_variablity_percent: 85
-num_pca_components: 30
-distance_metric: "euclidean"
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r main -latest \
   -profile docker \
   -main-script target/nextflow/filter/filter_with_scrublet/main.nf \
   -params-file params.yaml

@@ -14,7 +14,7 @@ ID: `concat`
 Namespace: `dataflow`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/dataflow/concat){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/dataflow/concat){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r main -latest \
   -main-script target/nextflow/dataflow/concat/main.nf \
   --help
 ```
@@ -40,23 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-input: # please fill in - example: ["sample_paths"]
-input_id: # please fill in - example: ["foo"]
-# output: "$id.$key.output.h5mu"
-obs_sample_name: "sample_id"
-compression: "gzip"
-other_axis_mode: "move"
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r main -latest \
   -profile docker \
   -main-script target/nextflow/dataflow/concat/main.nf \
   -params-file params.yaml
@@ -73,7 +63,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |Name                |Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |Attributes                                  |
 |:-------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------|
 |`--input`           |Paths to the different samples to be concatenated.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |`file`, required, example: `"sample_paths"` |
-|`--input_id`        |Names of the different samples that have to be concatenated.  Must be specified when using '--mode move'. In this case, the ids will be used for the columns names of the dataframes registring the conflicts. If specified, must be of same length as `--input`.                                                                                                                                                                                                                                                                  |`string`, required                          |
+|`--input_id`        |Names of the different samples that have to be concatenated.  Must be specified when using '--mode move'. In this case, the ids will be used for the columns names of the dataframes registring the conflicts. If specified, must be of same length as `--input`.                                                                                                                                                                                                                                                                  |`string`                                    |
 |`--output`          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |`file`, example: `"output.h5mu"`            |
 |`--obs_sample_name` |Name of the .obs key under which to add the sample names.                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |`string`, default: `"sample_id"`            |
 |`--compression`     |The compression format to be used on the final h5mu object.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |`string`, default: `"gzip"`                 |

@@ -14,7 +14,7 @@ ID: `make_reference`
 Namespace: `reference`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/reference/make_reference){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/reference/make_reference){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -34,7 +34,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r main -latest \
   -main-script target/nextflow/reference/make_reference/main.nf \
   --help
 ```
@@ -44,23 +44,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-genome_fasta: # please fill in - example: "genome_fasta.fa.gz"
-transcriptome_gtf: # please fill in - example: "transcriptome.gtf.gz"
-# ercc: "ercc.zip"
-# subset_regex: "(ERCC-00002|chr1)"
-# output_fasta: "$id.$key.output_fasta.gz"
-# output_gtf: "$id.$key.output_gtf.gz"
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r main -latest \
   -profile docker \
   -main-script target/nextflow/reference/make_reference/main.nf \
   -params-file params.yaml
