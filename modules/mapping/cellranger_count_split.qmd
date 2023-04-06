@@ -14,7 +14,7 @@ ID: `cellranger_count_split`
 Namespace: `mapping`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/mapping/cellranger_count_split){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/openpipelines/src/mapping/cellranger_count_split){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main -latest \
+  -r main_build -latest \
   -main-script target/nextflow/mapping/cellranger_count_split/main.nf \
   --help
 ```
@@ -46,7 +46,7 @@ nextflow run openpipelines-bio/openpipeline \
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/mapping/cellranger_count_split/main.nf \
   -params-file params.yaml

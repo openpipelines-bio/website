@@ -14,7 +14,7 @@ ID: `cellbender_remove_background`
 Namespace: `correction`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/correction/cellbender_remove_background){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/openpipelines/src/correction/cellbender_remove_background){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -35,7 +35,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main -latest \
+  -r main_build -latest \
   -main-script target/nextflow/correction/cellbender_remove_background/main.nf \
   --help
 ```
@@ -51,7 +51,7 @@ nextflow run openpipelines-bio/openpipeline \
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/correction/cellbender_remove_background/main.nf \
   -params-file params.yaml
@@ -73,15 +73,16 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Outputs
 
-|Name                            |Description                                                                                                           |Attributes                                     |
-|:-------------------------------|:---------------------------------------------------------------------------------------------------------------------|:----------------------------------------------|
-|`--output`                      |Full count matrix as an h5mu file, with background RNA removed. This file contains all the original droplet barcodes. |`file`, required, example: `"output.h5mu"`     |
-|`--output_compression`          |                                                                                                                      |`string`, example: `"gzip"`                    |
-|`--layer_output`                |Output layer                                                                                                          |`string`, default: `"corrected"`               |
-|`--obs_latent_rt_efficiency`    |                                                                                                                      |`string`, default: `"latent_rt_efficiency"`    |
-|`--obs_latent_cell_probability` |                                                                                                                      |`string`, default: `"latent_cell_probability"` |
-|`--obs_latent_scale`            |                                                                                                                      |`string`, default: `"latent_scale"`            |
-|`--var_ambient_expression`      |                                                                                                                      |`string`, default: `"ambient_expression"`      |
+|Name                            |Description                                                                                                           |Attributes                                             |
+|:-------------------------------|:---------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------|
+|`--output`                      |Full count matrix as an h5mu file, with background RNA removed. This file contains all the original droplet barcodes. |`file`, required, example: `"output.h5mu"`             |
+|`--output_compression`          |                                                                                                                      |`string`, example: `"gzip"`                            |
+|`--layer_output`                |Output layer                                                                                                          |`string`, default: `"corrected"`                       |
+|`--obs_latent_rt_efficiency`    |                                                                                                                      |`string`, default: `"latent_rt_efficiency"`            |
+|`--obs_latent_cell_probability` |                                                                                                                      |`string`, default: `"latent_cell_probability"`         |
+|`--obs_latent_scale`            |                                                                                                                      |`string`, default: `"latent_scale"`                    |
+|`--var_ambient_expression`      |                                                                                                                      |`string`, default: `"ambient_expression"`              |
+|`--obsm_latent_gene_encoding`   |                                                                                                                      |`string`, default: `"cellbender_latent_gene_encoding"` |
 
 
 ### Arguments
