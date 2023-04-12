@@ -14,7 +14,7 @@ ID: `bd_rhapsody`
 Namespace: `ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/workflows/ingestion/bd_rhapsody){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/workflows/ingestion/bd_rhapsody){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -42,8 +42,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main -latest \
-  -main-script openpipelines/workflows/ingestion/bd_rhapsody/main.nf \
+  -r main_build -latest \
+  -main-script workflows/ingestion/bd_rhapsody/main.nf \
   --help
 ```
 
@@ -52,15 +52,52 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
+# Inputs
+mode: # please fill in - example: "wta"
+id: # please fill in - example: "foo"
+input: # please fill in - example: ["input.fastq.gz"]
+reference: # please fill in - example: ["reference_genome.tar.gz|reference.fasta"]
+# transcriptome_annotation: "transcriptome.gtf"
+# abseq_reference: ["abseq_reference.fasta"]
+# supplemental_reference: ["supplemental_reference.fasta"]
+sample_prefix: "sample"
 
+# Outputs
+# output_raw: "$id.$key.output_raw.output_raw"
+# output_h5mu: "$id.$key.output_h5mu.h5mu"
+
+# Putative cell calling settings
+# putative_cell_call: "mRNA"
+# exact_cell_count: 10000
+disable_putative_calling: false
+
+# Subsample arguments
+# subsample: 0.01
+# subsample_seed: 3445
+
+# Multiplex arguments
+# sample_tags_version: "human"
+# tag_names: ["4-mySample", "9-myOtherSample", "6-alsoThisSample"]
+
+# VDJ arguments
+# vdj_version: "human"
+
+# CWL-runner arguments
+parallel: true
+timestamps: false
+dryrun: false
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main -latest \
+  -r main_build -latest \
   -profile docker \
-  -main-script openpipelines/workflows/ingestion/bd_rhapsody/main.nf \
+  -main-script workflows/ingestion/bd_rhapsody/main.nf \
   -params-file params.yaml
 ```
 
@@ -135,3 +172,28 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ## Authors
 
   * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (maintainer)
+
+## Visualisation
+
+```{mermaid}
+%%| column: screen-inset-shaded
+flowchart LR
+    p0(Input)
+    p2(toSortedList)
+    p4(flatMap)
+    p13(join)
+    p11(bd_rhapsody)
+    p23(join)
+    p21(from_bdrhap_to_h5mu)
+    p28(Output)
+    p0-->p2
+    p2-->p4
+    p4-->p13
+    p4-->p11
+    p11-->p13
+    p13-->p23
+    p13-->p21
+    p21-->p23
+    p23-->p28
+
+```

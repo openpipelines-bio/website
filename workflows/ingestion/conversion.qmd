@@ -14,7 +14,7 @@ ID: `conversion`
 Namespace: `ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/workflows/ingestion/conversion){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/workflows/ingestion/conversion){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,8 +30,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main -latest \
-  -main-script openpipelines/workflows/ingestion/conversion/main.nf \
+  -r main_build -latest \
+  -main-script workflows/ingestion/conversion/main.nf \
   --help
 ```
 
@@ -40,15 +40,28 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
+# Inputs
+id: # please fill in - example: "foo"
+input: # please fill in - example: ["input.h5mu"]
+input_type: # please fill in - example: "foo"
 
+# Outputs
+# output: "$id.$key.output.h5mu"
+
+# Conversion from h5ad
+# modality: ["foo"]
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main -latest \
+  -r main_build -latest \
   -profile docker \
-  -main-script openpipelines/workflows/ingestion/conversion/main.nf \
+  -main-script workflows/ingestion/conversion/main.nf \
   -params-file params.yaml
 ```
 
@@ -84,3 +97,45 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
   * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (author, maintainer)
   * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) (author)
+
+## Visualisation
+
+```{mermaid}
+%%| column: screen-inset-shaded
+flowchart LR
+    p0(Input)
+    p2(toSortedList)
+    p4(flatMap)
+    p5(filter)
+    p13(join)
+    p11(from_10xh5_to_h5mu)
+    p35(mix)
+    p15(filter)
+    p23(join)
+    p21(from_10xmtx_to_h5mu)
+    p25(filter)
+    p33(join)
+    p31(from_h5ad_to_h5mu)
+    p37(toSortedList)
+    p39(Output)
+    p4-->p5
+    p4-->p15
+    p4-->p25
+    p0-->p2
+    p2-->p4
+    p5-->p13
+    p5-->p11
+    p11-->p13
+    p13-->p35
+    p15-->p23
+    p15-->p21
+    p21-->p23
+    p23-->p35
+    p25-->p33
+    p25-->p31
+    p31-->p33
+    p33-->p35
+    p35-->p37
+    p37-->p39
+
+```

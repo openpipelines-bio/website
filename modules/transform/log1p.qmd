@@ -14,7 +14,7 @@ ID: `log1p`
 Namespace: `transform`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/transform/log1p){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/transform/log1p){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main -latest \
+  -r main_build -latest \
   -main-script target/nextflow/transform/log1p/main.nf \
   --help
 ```
@@ -40,13 +40,24 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
+# Arguments
+input: # please fill in - example: "input.h5mu"
+modality: "rna"
+# input_layer: "foo"
+# output_layer: "foo"
+# output: "$id.$key.output.h5mu"
+# output_compression: "gzip"
+# base: 2
 
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/transform/log1p/main.nf \
   -params-file params.yaml
