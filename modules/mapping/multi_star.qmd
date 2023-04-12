@@ -14,7 +14,7 @@ ID: `multi_star`
 Namespace: `mapping`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/mapping/multi_star){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/experiment_website_push/src/mapping/multi_star){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main -latest \
+  -r experiment_website_push -latest \
   -main-script target/nextflow/mapping/multi_star/main.nf \
   --help
 ```
@@ -46,7 +46,7 @@ nextflow run openpipelines-bio/openpipeline \
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main -latest \
+  -r experiment_website_push -latest \
   -profile docker \
   -main-script target/nextflow/mapping/multi_star/main.nf \
   -params-file params.yaml
@@ -135,7 +135,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 |Name                         |Description                                                                                                                                                                                                                                                                                                                                                              |Attributes                     |
 |:----------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------|
-|`--clipAdapterType`          |adapter clipping type  - Hamming ... adapter clipping based on Hamming distance, with the number of mismatches controlled by --clip5pAdapterMMp - CellRanger4 ... 5p and 3p adapter clipping similar to CellRanger4. Utilizes Opal package by Martin Šošić: https://github.com/Martinsos/opal - None ... no adapter clipping, all other clip* parameters are disregarded |`string`, example: `"Hamming"` |
+|`--clipAdapterType`          |adapter clipping type  - Hamming ... adapter clipping based on Hamming distance, with the number of mismatches controlled by --clip5pAdapterMMp - CellRanger4 ... 5p and 3p adapter clipping similar to CellRanger4. Utilizes Opal package by Martin Sosic: https://github.com/Martinsos/opal - None ... no adapter clipping, all other clip* parameters are disregarded |`string`, example: `"Hamming"` |
 |`--clip3pNbases`             |number(s) of bases to clip from 3p of each mate. If one value is given, it will be assumed the same for both mates.                                                                                                                                                                                                                                                      |`integer`, example: `0`        |
 |`--clip3pAdapterSeq`         |adapter sequences to clip from 3p of each mate.  If one value is given, it will be assumed the same for both mates.  - polyA ... polyA sequence with the length equal to read length                                                                                                                                                                                     |`string`                       |
 |`--clip3pAdapterMMp`         |max proportion of mismatches for 3p adapter clipping for each mate.  If one value is given, it will be assumed the same for both mates.                                                                                                                                                                                                                                  |`double`, example: `0.1`       |
@@ -357,7 +357,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 |Name               |Description                                                                                                                                                                                                                                                                                                                                                                          |Attributes |
 |:------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------|
-|`--waspOutputMode` |WASP allele-specific output type. This is re-implementation of the original WASP mappability filtering by Bryce van de Geijn, Graham McVicker, Yoav Gilad & Jonathan K Pritchard. Please cite the original WASP paper: Nature Methods 12, 1061–1063 (2015), https://www.nature.com/articles/nmeth.3582 .  - SAMtag      ... add WASP tags to the alignments that pass WASP filtering |`string`   |
+|`--waspOutputMode` |WASP allele-specific output type. This is re-implementation of the original WASP mappability filtering by Bryce van de Geijn, Graham McVicker, Yoav Gilad & Jonathan K Pritchard. Please cite the original WASP paper: Nature Methods 12, 1061-1063 (2015), https://www.nature.com/articles/nmeth.3582 .  - SAMtag      ... add WASP tags to the alignments that pass WASP filtering |`string`   |
 
 
 ### STARsolo (single cell RNA-seq) parameters

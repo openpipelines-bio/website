@@ -14,7 +14,7 @@ ID: `bd_rhapsody`
 Namespace: `ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/workflows/ingestion/bd_rhapsody){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/experiment_website_push/workflows/ingestion/bd_rhapsody){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -42,8 +42,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main -latest \
-  -main-script openpipelines/workflows/ingestion/bd_rhapsody/main.nf \
+  -r experiment_website_push -latest \
+  -main-script workflows/ingestion/bd_rhapsody/main.nf \
   --help
 ```
 
@@ -58,9 +58,9 @@ nextflow run openpipelines-bio/openpipeline \
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main -latest \
+  -r experiment_website_push -latest \
   -profile docker \
-  -main-script openpipelines/workflows/ingestion/bd_rhapsody/main.nf \
+  -main-script workflows/ingestion/bd_rhapsody/main.nf \
   -params-file params.yaml
 ```
 
@@ -135,3 +135,28 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ## Authors
 
   * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (maintainer)
+
+## Visualisation
+
+```{mermaid}
+%%| column: screen-inset-shaded
+flowchart LR
+    p0(Input)
+    p2(toSortedList)
+    p4(flatMap)
+    p13(join)
+    p11(bd_rhapsody)
+    p23(join)
+    p21(from_bdrhap_to_h5mu)
+    p28(Output)
+    p0-->p2
+    p2-->p4
+    p4-->p13
+    p4-->p11
+    p11-->p13
+    p13-->p23
+    p13-->p21
+    p21-->p23
+    p23-->p28
+
+```

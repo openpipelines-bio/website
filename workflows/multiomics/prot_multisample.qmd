@@ -1,0 +1,91 @@
+---
+title: "Prot multisample"
+namespace: "Multiomics"
+description: "Processing unimodal multi-sample ADT data."
+type: "workflow"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `prot_multisample`  
+Namespace: `multiomics`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/experiment_website_push/workflows/multiomics/prot_multisample){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r experiment_website_push -latest \
+  -main-script workflows/multiomics/prot_multisample/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r experiment_website_push -latest \
+  -profile docker \
+  -main-script workflows/multiomics/prot_multisample/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument group
+
+### Inputs
+
+|Name          |Description                 |Attributes                                    |
+|:-------------|:---------------------------|:---------------------------------------------|
+|`--id`        |ID of the concatenated file |`string`, required, example: `"concatenated"` |
+|`--sample_id` |IDs of the sample.          |`string`, required, example: `"foo"`          |
+|`--input`     |Path to the samples.        |`file`, required, example: `"dataset.h5mu"`   |
+
+## Authors
+
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (author)
+
+## Visualisation
+
+```{mermaid}
+%%| column: screen-inset-shaded
+flowchart LR
+    p0(Input)
+    p2(toSortedList)
+    p4(flatMap)
+    p14(join)
+    p12(clr)
+    p18(Output)
+    p0-->p2
+    p2-->p4
+    p4-->p14
+    p4-->p12
+    p12-->p14
+    p14-->p18
+
+```

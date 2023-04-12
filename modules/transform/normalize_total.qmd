@@ -14,7 +14,7 @@ ID: `normalize_total`
 Namespace: `transform`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/transform/normalize_total){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/experiment_website_push/src/transform/normalize_total){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -33,7 +33,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main -latest \
+  -r experiment_website_push -latest \
   -main-script target/nextflow/transform/normalize_total/main.nf \
   --help
 ```
@@ -49,7 +49,7 @@ nextflow run openpipelines-bio/openpipeline \
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main -latest \
+  -r experiment_website_push -latest \
   -profile docker \
   -main-script target/nextflow/transform/normalize_total/main.nf \
   -params-file params.yaml

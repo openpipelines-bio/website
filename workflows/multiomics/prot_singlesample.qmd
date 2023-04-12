@@ -14,7 +14,7 @@ ID: `prot_singlesample`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/workflows/multiomics/prot_singlesample){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/experiment_website_push/workflows/multiomics/prot_singlesample){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,8 +30,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main -latest \
-  -main-script openpipelines/workflows/multiomics/prot_singlesample/main.nf \
+  -r experiment_website_push -latest \
+  -main-script workflows/multiomics/prot_singlesample/main.nf \
   --help
 ```
 
@@ -46,9 +46,9 @@ nextflow run openpipelines-bio/openpipeline \
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main -latest \
+  -r experiment_website_push -latest \
   -profile docker \
-  -main-script openpipelines/workflows/multiomics/prot_singlesample/main.nf \
+  -main-script workflows/multiomics/prot_singlesample/main.nf \
   -params-file params.yaml
 ```
 
@@ -90,3 +90,28 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
   * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) (author)
   * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author, maintainer)
   * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (author)
+
+## Visualisation
+
+```{mermaid}
+%%| column: screen-inset-shaded
+flowchart LR
+    p0(Input)
+    p3(toSortedList)
+    p5(flatMap)
+    p15(join)
+    p13(filter_with_counts)
+    p25(join)
+    p23(do_filter)
+    p32(Output)
+    p0-->p3
+    p3-->p5
+    p5-->p15
+    p5-->p13
+    p13-->p15
+    p15-->p25
+    p15-->p23
+    p23-->p25
+    p25-->p32
+
+```

@@ -14,7 +14,7 @@ ID: `add_id`
 Namespace: `metadata`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/metadata/add_id){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/experiment_website_push/src/metadata/add_id){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -31,7 +31,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main -latest \
+  -r experiment_website_push -latest \
   -main-script target/nextflow/metadata/add_id/main.nf \
   --help
 ```
@@ -47,7 +47,7 @@ nextflow run openpipelines-bio/openpipeline \
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main -latest \
+  -r experiment_website_push -latest \
   -profile docker \
   -main-script target/nextflow/metadata/add_id/main.nf \
   -params-file params.yaml

@@ -14,7 +14,7 @@ ID: `integration`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/workflows/multiomics/integration){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/experiment_website_push/workflows/multiomics/integration){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,8 +30,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main -latest \
-  -main-script openpipelines/workflows/multiomics/integration/main.nf \
+  -r experiment_website_push -latest \
+  -main-script workflows/multiomics/integration/main.nf \
   --help
 ```
 
@@ -46,9 +46,9 @@ nextflow run openpipelines-bio/openpipeline \
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main -latest \
+  -r experiment_website_push -latest \
   -profile docker \
-  -main-script openpipelines/workflows/multiomics/integration/main.nf \
+  -main-script workflows/multiomics/integration/main.nf \
   -params-file params.yaml
 ```
 
@@ -119,3 +119,50 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
   * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) (author)
   * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author, maintainer)
   * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (author)
+
+## Visualisation
+
+```{mermaid}
+%%| column: screen-inset-shaded
+flowchart LR
+    p0(Input)
+    p2(toSortedList)
+    p4(flatMap)
+    p15(join)
+    p13(pca)
+    p18(filter)
+    p29(concat)
+    p19(filter)
+    p27(join)
+    p25(harmonypy)
+    p38(join)
+    p36(find_neighbors)
+    p48(join)
+    p46(leiden)
+    p58(join)
+    p56(umap)
+    p64(Output)
+    p18-->p29
+    p0-->p2
+    p2-->p4
+    p4-->p15
+    p4-->p13
+    p13-->p15
+    p15-->p18
+    p15-->p19
+    p19-->p27
+    p19-->p25
+    p25-->p27
+    p27-->p29
+    p29-->p38
+    p29-->p36
+    p36-->p38
+    p38-->p48
+    p38-->p46
+    p46-->p48
+    p48-->p58
+    p48-->p56
+    p56-->p58
+    p58-->p64
+
+```
