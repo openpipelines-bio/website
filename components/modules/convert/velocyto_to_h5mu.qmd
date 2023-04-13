@@ -1,0 +1,86 @@
+---
+title: "Velocyto to h5mu"
+namespace: "Convert"
+description: "Convert a velocyto loom file to a h5mu file."
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `velocyto_to_h5mu`  
+Namespace: `convert`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/velocity/velocyto_to_h5mu){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+If an input h5mu file is also provided, the velocity
+h5ad object will get added to that h5mu instead.
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 0.7.1 -latest \
+  -main-script target/nextflow/convert/velocyto_to_h5mu/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 0.7.1 -latest \
+  -profile docker \
+  -main-script target/nextflow/convert/velocyto_to_h5mu/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Inputs
+
+|Name           |Description                             |Attributes                                |
+|:--------------|:---------------------------------------|:-----------------------------------------|
+|`--input_loom` |Path to the input loom file.            |`file`, required, example: `"input.loom"` |
+|`--input_h5mu` |If a MuData file is provided,           |`file`, example: `"input.h5mu"`           |
+|`--modality`   |The name of the modality to operate on. |`string`, default: `"rna_velocity"`       |
+
+
+### Outputs
+
+|Name                   |Description                                                  |Attributes                            |
+|:----------------------|:------------------------------------------------------------|:-------------------------------------|
+|`--output`             |Path to the output MuData file.                              |`file`, example: `"output.h5mu"`      |
+|`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`           |
+|`--layer_spliced`      |Output layer for the spliced reads.                          |`string`, default: `"velo_spliced"`   |
+|`--layer_unspliced`    |Output layer for the unspliced reads.                        |`string`, default: `"velo_unspliced"` |
+|`--layer_ambiguous`    |Output layer for the ambiguous reads.                        |`string`, default: `"velo_ambiguous"` |
+
+## Authors
+
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (maintainer, author)
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author)
+  * Angela Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) (contributor)

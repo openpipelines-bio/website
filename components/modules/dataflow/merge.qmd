@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r 0.7.1 -latest \
   -main-script target/nextflow/dataflow/merge/main.nf \
   --help
 ```
@@ -40,20 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-input: # please fill in - example: ["sample_paths"]
-# output: "$id.$key.output.h5mu"
-compression: "gzip"
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r 0.7.1 -latest \
   -profile docker \
   -main-script target/nextflow/dataflow/merge/main.nf \
   -params-file params.yaml
@@ -67,11 +60,11 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name            |Description                                                       |Attributes                                  |
-|:---------------|:-----------------------------------------------------------------|:-------------------------------------------|
-|`--input`       |Paths to the single-modality .h5mu files that need to be combined |`file`, required, default: `"sample_paths"` |
-|`--output`      |Path to the output file.                                          |`file`, default: `"output.h5mu"`            |
-|`--compression` |The compression format to be used on the final h5mu object.       |`string`, default: `"gzip"`                 |
+|Name                   |Description                                                       |Attributes                                  |
+|:----------------------|:-----------------------------------------------------------------|:-------------------------------------------|
+|`--input`              |Paths to the single-modality .h5mu files that need to be combined |`file`, required, default: `"sample_paths"` |
+|`--output`             |Path to the output file.                                          |`file`, default: `"output.h5mu"`            |
+|`--output_compression` |The compression format to be used on the output h5mu object.      |`string`, example: `"gzip"`                 |
 
 ## Authors
 

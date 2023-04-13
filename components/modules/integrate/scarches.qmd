@@ -1,7 +1,7 @@
 ---
-title: "Scvi"
+title: "Scarches"
 namespace: "Integrate"
-description: "Performs scvi integration as done in the human lung cell atlas https://github.com/LungCellAtlas/HLCA"
+description: "Performs reference mapping with scArches"
 type: "module"
 toc: false
 ---
@@ -10,11 +10,11 @@ toc: false
 
 ### Info
 
-ID: `scvi`  
+ID: `scarches`  
 Namespace: `integrate`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/integrate/scvi){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/integrate/scarches){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -31,7 +31,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 ```bash
 nextflow run openpipelines-bio/openpipeline \
   -r 0.7.1 -latest \
-  -main-script target/nextflow/integrate/scvi/main.nf \
+  -main-script target/nextflow/integrate/scarches/main.nf \
   --help
 ```
 
@@ -48,7 +48,7 @@ nextflow run openpipelines-bio/openpipeline \
 nextflow run openpipelines-bio/openpipeline \
   -r 0.7.1 -latest \
   -profile docker \
-  -main-script target/nextflow/integrate/scvi/main.nf \
+  -main-script target/nextflow/integrate/scarches/main.nf \
   -params-file params.yaml
 ```
 
@@ -60,23 +60,22 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Inputs
 
-|Name            |Description                                                                    |Attributes                       |
-|:---------------|:------------------------------------------------------------------------------|:--------------------------------|
-|`--input`       |Input h5mu file                                                                |`file`, required                 |
-|`--modality`    |                                                                               |`string`, default: `"rna"`       |
-|`--input_layer` |Input layer to use. If None, X is used                                         |`string`                         |
-|`--obs_batch`   |Column name discriminating between your batches.                               |`string`, default: `"sample_id"` |
-|`--var_input`   |.var column containing highly variable genes. By default, do not subset genes. |`string`                         |
+|Name             |Description                                                                                                                             |Attributes                          |
+|:----------------|:---------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------|
+|`--input`        |Input h5mu file to use as a query                                                                                                       |`file`, required                    |
+|`--modality`     |                                                                                                                                        |`string`, default: `"rna"`          |
+|`--reference`    |Path to the directory with reference model or a web link. For HLCA use https://zenodo.org/record/6337966/files/HLCA_reference_model.zip |`file`, required                    |
+|`--dataset_name` |Name of query dataset to use as a batch name. If not set, name of the input file is used                                                |`string`, default: `"test_dataset"` |
 
 
 ### Outputs
 
-|Name                   |Description                                                      |Attributes                               |
-|:----------------------|:----------------------------------------------------------------|:----------------------------------------|
-|`--output`             |Output h5mu file.                                                |`file`, required                         |
-|`--model_output`       |Folder where the state of the trained model will be saved to.    |`file`                                   |
-|`--output_compression` |The compression format to be used on the output h5mu object.     |`string`, example: `"gzip"`              |
-|`--obsm_output`        |In which .obsm slot to store the resulting integrated embedding. |`string`, default: `"X_scvi_integrated"` |
+|Name                   |Description                                                      |Attributes                                 |
+|:----------------------|:----------------------------------------------------------------|:------------------------------------------|
+|`--output`             |Output h5mu file.                                                |`file`, required                           |
+|`--output_compression` |The compression format to be used on the output h5mu object.     |`string`, example: `"gzip"`                |
+|`--model_output`       |Output directory for model                                       |`file`, default: `"model"`                 |
+|`--obsm_output`        |In which .obsm slot to store the resulting integrated embedding. |`string`, default: `"X_integrated_scanvi"` |
 
 
 ### Early stopping arguments
@@ -100,5 +99,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ## Authors
 
-  * Malte D. Luecken [{{< fa brands github >}}](https://github.com/LuckyMD) [{{< fa brands orcid >}}](https://orcid.org/0000-0001-7464-7921) (author)
-  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (maintainer)
+  * Vladimir Shitov [{{< fa brands github >}}](https://github.com/vladimirshitov) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-1960-8812) ()

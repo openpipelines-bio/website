@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r 0.7.1 -latest \
   -main-script target/nextflow/reference/build_bdrhap_reference/main.nf \
   --help
 ```
@@ -40,20 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-genome_fasta: # please fill in - example: "genome_sequence.fa.gz"
-transcriptome_gtf: # please fill in - example: "transcriptome_annotation.gtf.gz"
-# output: "$id.$key.output.gz"
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r 0.7.1 -latest \
   -profile docker \
   -main-script target/nextflow/reference/build_bdrhap_reference/main.nf \
   -params-file params.yaml

@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r 0.7.1 -latest \
   -main-script workflows/ingestion/cellranger_mapping/main.nf \
   --help
 ```
@@ -40,32 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Inputs
-id: # please fill in - example: "foo"
-input: # please fill in - example: ["sample_S1_L001_R1_001.fastq.gz", "sample_S1_L001_R2_001.fastq.gz"]
-reference: # please fill in - example: "reference.tar.gz"
 
-# Outputs
-# output_raw: "$id.$key.output_raw.output_raw"
-# output_h5mu: "$id.$key.output_h5mu.h5mu"
-obsm_metrics: "metrics_summary"
-
-# Cell Ranger arguments
-# expect_cells: 3000
-chemistry: "auto"
-secondary_analysis: false
-generate_bam: true
-include_introns: true
-
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r 0.7.1 -latest \
   -profile docker \
   -main-script workflows/ingestion/cellranger_mapping/main.nf \
   -params-file params.yaml
@@ -88,11 +69,12 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Outputs
 
-|Name             |Description                                                |Attributes                                 |
-|:----------------|:----------------------------------------------------------|:------------------------------------------|
-|`--output_raw`   |The raw output folder.                                     |`file`, required, example: `"output_dir"`  |
-|`--output_h5mu`  |The converted h5mu file.                                   |`file`, required, example: `"output.h5mu"` |
-|`--obsm_metrics` |Name of the .obsm slot under which to QC metrics (if any). |`string`, default: `"metrics_summary"`     |
+|Name             |Description                                                       |Attributes                                 |
+|:----------------|:-----------------------------------------------------------------|:------------------------------------------|
+|`--output_raw`   |Location where the output folder from Cell Ranger will be stored. |`file`, required, example: `"output_dir"`  |
+|`--output_h5mu`  |The output from Cell Ranger, converted to h5mu.                   |`file`, required, example: `"output.h5mu"` |
+|`--obsm_metrics` |Name of the .obsm slot under which to QC metrics (if any).        |`string`, default: `"metrics_summary"`     |
+|`--output_type`  |Which Cell Ranger output to use for converting to h5mu.           |`string`, default: `"raw"`                 |
 
 
 ### Cell Ranger arguments
@@ -110,20 +92,3 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
   * Angela Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) (author)
   * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author, maintainer)
   * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) (author)
-
-## Visualisation
-
-```{mermaid}
-%%| column: screen-inset-shaded
-flowchart LR
-    p0(Input)
-    p9(cellranger_count)
-    p16(cellranger_count_split)
-    p24(from_10xh5_to_h5mu)
-    p31(Output)
-    p0-->p9
-    p9-->p16
-    p16-->p24
-    p24-->p31
-
-```

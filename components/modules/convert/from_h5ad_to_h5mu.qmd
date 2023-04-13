@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r 0.7.1 -latest \
   -main-script target/nextflow/convert/from_h5ad_to_h5mu/main.nf \
   --help
 ```
@@ -40,20 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-input: # please fill in - example: ["input.h5ad"]
-modality: ["rna"]
-# output: "$id.$key.output.h5mu"
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r 0.7.1 -latest \
   -profile docker \
   -main-script target/nextflow/convert/from_h5ad_to_h5mu/main.nf \
   -params-file params.yaml
@@ -67,11 +60,12 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name         |Description         |Attributes                                |
-|:------------|:-------------------|:-----------------------------------------|
-|`--input`    |Input h5ad files    |`file`, required, default: `"input.h5ad"` |
-|`--modality` |                    |`string`, default: `"rna"`                |
-|`--output`   |Output MuData file. |`file`, default: `"output.h5mu"`          |
+|Name                   |Description         |Attributes                                |
+|:----------------------|:-------------------|:-----------------------------------------|
+|`--input`              |Input h5ad files    |`file`, required, default: `"input.h5ad"` |
+|`--modality`           |                    |`string`, default: `"rna"`                |
+|`--output`             |Output MuData file. |`file`, default: `"output.h5mu"`          |
+|`--output_compression` |                    |`string`, example: `"gzip"`               |
 
 ## Authors
 

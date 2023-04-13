@@ -1,7 +1,7 @@
 ---
-title: "Rna singlesample"
+title: "Prot singlesample"
 namespace: "Multiomics"
-description: "Processing unimodal single-sample RNA transcriptomics data."
+description: "Processing unimodal single-sample CITE-seq data."
 type: "workflow"
 toc: false
 ---
@@ -10,11 +10,11 @@ toc: false
 
 ### Info
 
-ID: `rna_singlesample`  
+ID: `prot_singlesample`  
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/workflows/multiomics/rna_singlesample){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/workflows/multiomics/prot_singlesample){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -31,7 +31,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 ```bash
 nextflow run openpipelines-bio/openpipeline \
   -r 0.7.1 -latest \
-  -main-script workflows/multiomics/rna_singlesample/main.nf \
+  -main-script workflows/multiomics/prot_singlesample/main.nf \
   --help
 ```
 
@@ -48,7 +48,7 @@ nextflow run openpipelines-bio/openpipeline \
 nextflow run openpipelines-bio/openpipeline \
   -r 0.7.1 -latest \
   -profile docker \
-  -main-script workflows/multiomics/rna_singlesample/main.nf \
+  -main-script workflows/multiomics/prot_singlesample/main.nf \
   -params-file params.yaml
 ```
 
@@ -75,15 +75,15 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Filtering options
 
-|Name                   |Description                                      |Attributes                    |
-|:----------------------|:------------------------------------------------|:-----------------------------|
-|`--min_counts`         |Minimum number of counts captured per cell.      |`integer`, example: `200`     |
-|`--max_counts`         |Maximum number of counts captured per cell.      |`integer`, example: `5000000` |
-|`--min_genes_per_cell` |Minimum of non-zero values per cell.             |`integer`, example: `200`     |
-|`--max_genes_per_cell` |Maximum of non-zero values per cell.             |`integer`, example: `1500000` |
-|`--min_cells_per_gene` |Minimum of non-zero values per gene.             |`integer`, example: `3`       |
-|`--min_fraction_mito`  |Minimum fraction of UMIs that are mitochondrial. |`double`, example: `0`        |
-|`--max_fraction_mito`  |Maximum fraction of UMIs that are mitochondrial. |`double`, example: `0.2`      |
+|Name                      |Description                                          |Attributes                    |
+|:-------------------------|:----------------------------------------------------|:-----------------------------|
+|`--min_counts`            |Minimum number of counts captured per cell.          |`integer`, example: `200`     |
+|`--max_counts`            |Maximum number of counts captured per cell.          |`integer`, example: `5000000` |
+|`--min_proteins_per_cell` |Minimum of non-zero values per cell.                 |`integer`, example: `200`     |
+|`--max_proteins_per_cell` |Maximum of non-zero values per cell.                 |`integer`, example: `1500000` |
+|`--min_cells_per_protein` |Minimum of non-zero values per gene.                 |`integer`, example: `3`       |
+|`--min_fraction_mito`     |Minimum fraction of proteins that are mitochondrial. |`double`, example: `0`        |
+|`--max_fraction_mito`     |Maximum fraction of proteins that are mitochondrial. |`double`, example: `0.2`      |
 
 ## Authors
 
