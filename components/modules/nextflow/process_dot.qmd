@@ -1,0 +1,70 @@
+---
+title: "Process dot"
+namespace: "Nextflow"
+description: "Convert a Viash-based Nextflow .dot file into something useful"
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `process_dot`  
+Namespace: `nextflow`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/viash_tools/src/nextflow/process_dot){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main_build -latest \
+  -main-script target/nextflow/nextflow/process_dot/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main_build -latest \
+  -profile docker \
+  -main-script target/nextflow/nextflow/process_dot/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument group
+
+### Arguments
+
+|Name       |Description                                                                  |Attributes                               |
+|:----------|:----------------------------------------------------------------------------|:----------------------------------------|
+|`--input`  |Input .dot file as created by running `nextflow run ... -with-dag graph.dot` |`file`, required, example: `"graph.dot"` |
+|`--output` |A processed `.dot` file.                                                     |`file`, example: `"output.dot"`          |
+|`--format` |The format of the output graph                                               |`string`, default: `"mermaid"`           |
+
+## Authors
+

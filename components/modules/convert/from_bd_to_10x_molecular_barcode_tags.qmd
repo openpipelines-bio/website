@@ -14,7 +14,7 @@ ID: `from_bd_to_10x_molecular_barcode_tags`
 Namespace: `convert`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/convert/from_bd_to_10x_molecular_barcode_tags){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/convert/from_bd_to_10x_molecular_barcode_tags){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.7.1 -latest \
+  -r main_build -latest \
   -main-script target/nextflow/convert/from_bd_to_10x_molecular_barcode_tags/main.nf \
   --help
 ```
@@ -40,13 +40,21 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
+# Arguments
+input: # please fill in - example: "input.bam"
+# output: "$id.$key.output.sam"
+bam: false
+# threads: 123
 
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.7.1 -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/convert/from_bd_to_10x_molecular_barcode_tags/main.nf \
   -params-file params.yaml

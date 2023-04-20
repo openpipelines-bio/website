@@ -14,7 +14,7 @@ ID: `scvi`
 Namespace: `integrate`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/integrate/scvi){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/integrate/scvi){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.7.1 -latest \
+  -r main_build -latest \
   -main-script target/nextflow/integrate/scvi/main.nf \
   --help
 ```
@@ -40,13 +40,40 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
+# Inputs
+input: # please fill in - example: "path/to/file"
+modality: "rna"
+# input_layer: "foo"
+obs_batch: "sample_id"
+# var_input: "foo"
 
+# Outputs
+# output: "$id.$key.output.output"
+# model_output: "$id.$key.model_output.model_output"
+# output_compression: "gzip"
+obsm_output: "X_scvi_integrated"
+
+# Early stopping arguments
+# early_stopping: true
+early_stopping_monitor: "elbo_validation"
+early_stopping_patience: 45
+early_stopping_min_delta: 0.0
+
+# Learning parameters
+max_epochs: # please fill in - example: 123
+reduce_lr_on_plateau: true
+lr_factor: 0.6
+lr_patience: 30
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.7.1 -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/integrate/scvi/main.nf \
   -params-file params.yaml

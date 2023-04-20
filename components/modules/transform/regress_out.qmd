@@ -14,7 +14,7 @@ ID: `regress_out`
 Namespace: `transform`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/transform/regress_out){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/transform/regress_out){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -31,7 +31,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.7.1 -latest \
+  -r main_build -latest \
   -main-script target/nextflow/transform/regress_out/main.nf \
   --help
 ```
@@ -41,13 +41,22 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
+# Arguments
+input: # please fill in - example: "input.h5mu"
+# output: "$id.$key.output.h5mu"
+# output_compression: "gzip"
+modality: "rna"
+# obs_keys: ["foo"]
 
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.7.1 -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/transform/regress_out/main.nf \
   -params-file params.yaml
