@@ -2329,5 +2329,12 @@
     "title": "File formats",
     "section": "RNA velocity modality",
     "text": "RNA velocity modality\nmod:\n rnav:\n   layers:\n     spliced\n     unspliced"
+  },
+  {
+    "objectID": "CHANGELOG.html",
+    "href": "CHANGELOG.html",
+    "title": "OpenPipelines.bio v0.7.2",
+    "section": "",
+    "text": "OpenPipelines.bio v0.7.2\nFirst versioned release of the website."
   }
 ]
