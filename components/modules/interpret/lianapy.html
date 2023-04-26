@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Runs the velocity analysis on a BAM file, outputting a loom file.">
+<meta name="description" content="Performs LIANA integration based as described in https://github.com/saezlab/liana-py">
 
-<title>OpenPipelines - Velocyto</title>
+<title>OpenPipelines - Lianapy</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -178,7 +178,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Modules</li><li class="breadcrumb-item"><a href="../../../components/modules/velocity/scvelo.html">Velocity</a></li><li class="breadcrumb-item"><a href="../../../components/modules/velocity/velocyto.html">Velocyto</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Modules</li><li class="breadcrumb-item"><a href="../../../components/modules/interpret/lianapy.html">Interpret</a></li><li class="breadcrumb-item"><a href="../../../components/modules/interpret/lianapy.html">Lianapy</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -640,7 +640,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/interpret/lianapy.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../components/modules/interpret/lianapy.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Lianapy</span></a>
   </div>
 </li>
@@ -954,7 +954,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/velocity/velocyto.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../components/modules/velocity/velocyto.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Velocyto</span></a>
   </div>
 </li>
@@ -974,12 +974,12 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Velocyto</h1>
+<h1 class="title">Lianapy</h1>
 </div>
 
 <div>
   <div class="description">
-    Runs the velocity analysis on a BAM file, outputting a loom file.
+    Performs LIANA integration based as described in https://github.com/saezlab/liana-py
   </div>
 </div>
 
@@ -998,12 +998,12 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <div class="no-row-height column-margin column-container"><div class="">
 <section id="info" class="level3">
 <h3 class="anchored" data-anchor-id="info">Info</h3>
-<p>ID: <code>velocyto</code><br>
-Namespace: <code>velocity</code></p>
+<p>ID: <code>lianapy</code><br>
+Namespace: <code>interpret</code></p>
 </section>
 <section id="links" class="level3">
 <h3 class="anchored" data-anchor-id="links">Links</h3>
-<p><a href="https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/velocity/velocyto" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
+<p><a href="https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/interpret/lianapy" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
 </section>
 </div></div><section id="example-commands" class="level2">
 <h2 class="anchored" data-anchor-id="example-commands">Example commands</h2>
@@ -1013,7 +1013,7 @@ Namespace: <code>velocity</code></p>
 <p>You can use <code>--help</code> as a parameter to get an overview of the possible parameters.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> main_build <span class="at">-latest</span> <span class="dt">\</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> target/nextflow/velocity/velocyto/main.nf <span class="dt">\</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> target/nextflow/interpret/lianapy/main.nf <span class="dt">\</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="run-command" class="level3">
@@ -1024,20 +1024,26 @@ Example of <code>params.yaml</code>
 </summary>
 <div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Arguments</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">input</span><span class="kw">:</span><span class="co"> # please fill in - example: "path/to/file"</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">transcriptome</span><span class="kw">:</span><span class="co"> # please fill in - example: "path/to/file"</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># barcode: "path/to/file"</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">without_umi</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># output: "$id.$key.output.output"</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">logic</span><span class="kw">:</span><span class="at"> </span><span class="st">"Default"</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Nextflow input-output arguments</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">publish_dir</span><span class="kw">:</span><span class="co"> # please fill in - example: "output/"</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># param_list: "my_params.yaml"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># output: "$id.$key.output.output"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">output_compression</span><span class="kw">:</span><span class="at"> </span><span class="st">"gzip"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">modality</span><span class="kw">:</span><span class="at"> </span><span class="st">"rna"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># layer: "foo"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">groupby</span><span class="kw">:</span><span class="at"> </span><span class="st">"bulk_labels"</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">resource_name</span><span class="kw">:</span><span class="at"> </span><span class="st">"consensus"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">expr_prop</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.1</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">min_cells</span><span class="kw">:</span><span class="at"> </span><span class="dv">5</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate_method</span><span class="kw">:</span><span class="at"> </span><span class="st">"rra"</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">return_all_lrs</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">n_perms</span><span class="kw">:</span><span class="at"> </span><span class="dv">100</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Nextflow input-output arguments</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="fu">publish_dir</span><span class="kw">:</span><span class="co"> # please fill in - example: "output/"</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># param_list: "my_params.yaml"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> main_build <span class="at">-latest</span> <span class="dt">\</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-profile</span> docker <span class="dt">\</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> target/nextflow/velocity/velocyto/main.nf <span class="dt">\</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> target/nextflow/interpret/lianapy/main.nf <span class="dt">\</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">-params-file</span> params.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1060,9 +1066,9 @@ Note
 <h3 class="anchored" data-anchor-id="arguments">Arguments</h3>
 <table class="table">
 <colgroup>
-<col style="width: 7%">
+<col style="width: 8%">
 <col style="width: 79%">
-<col style="width: 13%">
+<col style="width: 12%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1074,33 +1080,63 @@ Note
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"><code>--input</code></td>
-<td style="text-align: left;">Path to BAM file</td>
+<td style="text-align: left;">Input h5mu file</td>
 <td style="text-align: left;"><code>file</code>, required</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>--transcriptome</code></td>
-<td style="text-align: left;">Path to GTF file</td>
-<td style="text-align: left;"><code>file</code>, required</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>--barcode</code></td>
-<td style="text-align: left;">Valid barcodes file, to filter the bam. If –bcfile is not specified all the cell barcodes will be included. Cell barcodes should be specified in the bcfile as the ‘CB’ tag for each read</td>
-<td style="text-align: left;"><code>file</code></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>--without_umi</code></td>
-<td style="text-align: left;">foo</td>
-<td style="text-align: left;"><code>boolean_true</code></td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;"><code>--output</code></td>
-<td style="text-align: left;">Velocyto loom file</td>
+<td style="text-align: left;">Output h5mu file.</td>
 <td style="text-align: left;"><code>file</code>, required</td>
 </tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--output_compression</code></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>string</code>, default: <code>"gzip"</code></td>
+</tr>
 <tr class="even">
-<td style="text-align: left;"><code>--logic</code></td>
-<td style="text-align: left;">The logic to use for the filtering.</td>
-<td style="text-align: left;"><code>string</code>, default: <code>"Default"</code></td>
+<td style="text-align: left;"><code>--modality</code></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>string</code>, default: <code>"rna"</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--layer</code></td>
+<td style="text-align: left;">Layer in anndata.AnnData.layers to use. If None, use mudata.mod[modality].X.</td>
+<td style="text-align: left;"><code>string</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--groupby</code></td>
+<td style="text-align: left;">The key of the observations grouping to consider.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"bulk_labels"</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--resource_name</code></td>
+<td style="text-align: left;">Name of the resource to be loaded and use for ligand-receptor inference.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"consensus"</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--expr_prop</code></td>
+<td style="text-align: left;">Minimum expression proportion for the ligands/receptors (and their subunits) in the corresponding cell identities. Set to ‘0’, to return unfiltered results.</td>
+<td style="text-align: left;"><code>double</code>, default: <code>0.1</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--min_cells</code></td>
+<td style="text-align: left;">Minimum cells per cell identity (‘groupby’) to be considered for downstream analysis.</td>
+<td style="text-align: left;"><code>integer</code>, default: <code>5</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--aggregate_method</code></td>
+<td style="text-align: left;">Method aggregation approach, one of [‘mean’, ‘rra’], where ‘mean’ represents the mean rank, while ‘rra’ is the RobustRankAggregate (Kolde et al., 2014) of the interactions.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"rra"</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--return_all_lrs</code></td>
+<td style="text-align: left;">Bool whether to return all LRs, or only those that surpass the ‘expr_prop’ threshold. Those interactions that do not pass the ‘expr_prop’ threshold will be assigned to the <em>worst</em> score of the ones that do. ‘False’ by default.</td>
+<td style="text-align: left;"><code>boolean</code>, default: <code>FALSE</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--n_perms</code></td>
+<td style="text-align: left;">Number of permutations for the permutation test. Note that this is relevant only for permutation-based methods - e.g.&nbsp;’CellPhoneDB</td>
+<td style="text-align: left;"><code>integer</code>, default: <code>100</code></td>
 </tr>
 </tbody>
 </table>
@@ -1109,7 +1145,8 @@ Note
 <section id="authors" class="level2">
 <h2 class="anchored" data-anchor-id="authors">Authors</h2>
 <ul>
-<li>Robrecht Cannoodt <a href="https://github.com/rcannood"><i class="fa-brands fa-github" aria-hidden="true"></i></a> <a href="https://orcid.org/0000-0003-3641-729X"><i class="fa-brands fa-orcid" aria-hidden="true"></i></a> (maintainer)</li>
+<li>Mauro Saporita <a href="https://github.com/mauro-saporita"><i class="fa-brands fa-github" aria-hidden="true"></i></a> (author)</li>
+<li>Povilas Gibas <a href="https://github.com/PoGibas"><i class="fa-brands fa-github" aria-hidden="true"></i></a> (author)</li>
 </ul>
 
 
@@ -1355,7 +1392,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center">Copyright 2022, OpenPipelines.bio<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/components/modules/velocity/velocyto.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    <div class="nav-footer-center">Copyright 2022, OpenPipelines.bio<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/components/modules/interpret/lianapy.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
