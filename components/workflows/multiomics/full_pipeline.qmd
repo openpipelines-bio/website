@@ -14,7 +14,7 @@ ID: `full_pipeline`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/workflows/multiomics/full_pipeline){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/workflows/multiomics/full_pipeline){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.7.1 -latest \
+  -r main_build -latest \
   -main-script workflows/multiomics/full_pipeline/main.nf \
   --help
 ```
@@ -40,13 +40,52 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
+# Inputs
+id: # please fill in - example: "foo"
+input: # please fill in - example: "input.h5mu"
+obs_covariates: ["sample_id"]
 
+# RNA filtering options
+# rna_min_counts: 200
+# rna_max_counts: 5000000
+# rna_min_vars_per_cell: 200
+# rna_max_vars_per_cell: 1500000
+# min_cells_per_protein: 3
+# rna_min_fraction_mito: 0
+# rna_max_fraction_mito: 0.2
+
+# CITE-seq filtering options
+# prot_min_counts: 3
+# prot_max_counts: 5000000
+# prot_min_vars_per_cell: 200
+# prot_max_vars_per_cell: 100000000
+# prot_min_cells_per_protein: 3
+# prot_min_fraction_mito: 0
+# prot_max_fraction_mito: 0.2
+
+# Highly variable gene detection
+filter_with_hvg_var_output: "filter_with_hvg"
+filter_with_hvg_obs_batch_key: "sample_id"
+
+# QC metrics calculation options
+var_qc_metrics: ["filter_with_hvg"]
+top_n_vars: [50, 100, 200, 500]
+
+# Harmony integration options
+rna_harmony_theta: [2]
+
+# Leiden Clustering Options
+leiden_resolution: 1
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.7.1 -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script workflows/multiomics/full_pipeline/main.nf \
   -params-file params.yaml
@@ -125,3 +164,176 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ## Authors
 
   * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (author, maintainer)
+
+## Visualisation
+
+```{mermaid}
+%%| column: screen-inset-shaded
+flowchart LR
+    p0(Input)
+    p2(toSortedList)
+    p4(flatMap)
+    p15(join)
+    p13(add_id)
+    p25(join)
+    p23(split_modalities)
+    p27(flatMap)
+    p28(filter)
+    p31(toSortedList)
+    p33(flatMap)
+    p43(join)
+    p41(filter_with_counts)
+    p53(join)
+    p51(do_filter)
+    p64(join)
+    p62(filter_with_scrublet)
+    p68(toSortedList)
+    p69(filter)
+    p73(toSortedList)
+    p75(flatMap)
+    p86(join)
+    p84(concat)
+    p96(join)
+    p94(normalize_total)
+    p106(join)
+    p104(log1p)
+    p116(join)
+    p114(delete_layer)
+    p126(join)
+    p124(filter_with_hvg)
+    p136(join)
+    p134(calculate_qc_metrics)
+    p202(concat)
+    p139(filter)
+    p142(toSortedList)
+    p144(flatMap)
+    p154(join)
+    p152(test_wf:run_wf:prot_singlesample:filter_with_counts:filter_with_counts_process1)
+    p164(join)
+    p162(test_wf:run_wf:prot_singlesample:do_filter:do_filter_process1)
+    p169(toSortedList)
+    p170(filter)
+    p174(toSortedList)
+    p176(flatMap)
+    p186(join)
+    p184(clr)
+    p189(filter)
+    p191(groupTuple)
+    p200(join)
+    p198(test_wf:run_wf:concat:concat_process1)
+    p203(toSortedList)
+    p212(join)
+    p210(merge)
+    p216(toSortedList)
+    p218(flatMap)
+    p229(join)
+    p227(pca)
+    p232(filter)
+    p243(concat)
+    p233(filter)
+    p241(join)
+    p239(harmonypy)
+    p252(join)
+    p250(find_neighbors)
+    p262(join)
+    p260(leiden)
+    p272(join)
+    p270(umap)
+    p277(toSortedList)
+    p279(Output)
+    p27-->p28
+    p68-->p69
+    p27-->p139
+    p169-->p170
+    p27-->p189
+    p202-->p203
+    p232-->p243
+    p0-->p2
+    p2-->p4
+    p4-->p15
+    p4-->p13
+    p13-->p15
+    p15-->p25
+    p15-->p23
+    p23-->p25
+    p25-->p27
+    p28-->p31
+    p31-->p33
+    p33-->p43
+    p33-->p41
+    p41-->p43
+    p43-->p53
+    p43-->p51
+    p51-->p53
+    p53-->p64
+    p53-->p62
+    p62-->p64
+    p64-->p68
+    p69-->p73
+    p73-->p75
+    p75-->p86
+    p75-->p84
+    p84-->p86
+    p86-->p96
+    p86-->p94
+    p94-->p96
+    p96-->p106
+    p96-->p104
+    p104-->p106
+    p106-->p116
+    p106-->p114
+    p114-->p116
+    p116-->p126
+    p116-->p124
+    p124-->p126
+    p126-->p136
+    p126-->p134
+    p134-->p136
+    p136-->p202
+    p139-->p142
+    p142-->p144
+    p144-->p154
+    p144-->p152
+    p152-->p154
+    p154-->p164
+    p154-->p162
+    p162-->p164
+    p164-->p169
+    p170-->p174
+    p174-->p176
+    p176-->p186
+    p176-->p184
+    p184-->p186
+    p186-->p202
+    p189-->p191
+    p191-->p200
+    p191-->p198
+    p198-->p200
+    p200-->p202
+    p203-->p212
+    p203-->p210
+    p210-->p212
+    p212-->p216
+    p216-->p218
+    p218-->p229
+    p218-->p227
+    p227-->p229
+    p229-->p232
+    p229-->p233
+    p233-->p241
+    p233-->p239
+    p239-->p241
+    p241-->p243
+    p243-->p252
+    p243-->p250
+    p250-->p252
+    p252-->p262
+    p252-->p260
+    p260-->p262
+    p262-->p272
+    p262-->p270
+    p270-->p272
+    p272-->p277
+    p277-->p279
+
+```

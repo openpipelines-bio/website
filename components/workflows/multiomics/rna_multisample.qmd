@@ -14,7 +14,7 @@ ID: `rna_multisample`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/workflows/multiomics/rna_multisample){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/workflows/multiomics/rna_multisample){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.7.1 -latest \
+  -r main_build -latest \
   -main-script workflows/multiomics/rna_multisample/main.nf \
   --help
 ```
@@ -40,13 +40,30 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
+# Inputs
+id: # please fill in - example: "concatenated"
+sample_id: # please fill in - example: ["foo"]
+input: # please fill in - example: ["dataset.h5mu"]
 
+# Filtering highly variable genes
+filter_with_hvg_var_output: "filter_with_hvg"
+filter_with_hvg_obs_batch_key: "sample_id"
+filter_with_hvg_flavor: "seurat"
+# filter_with_hvg_n_top_genes: 123
+
+# QC metrics calculation options
+var_qc_metrics: ["filter_with_hvg"]
+top_n_vars: [50, 100, 200, 500]
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.7.1 -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script workflows/multiomics/rna_multisample/main.nf \
   -params-file params.yaml
@@ -89,3 +106,48 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
   * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) (author)
   * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author, maintainer)
   * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (author)
+
+## Visualisation
+
+```{mermaid}
+%%| column: screen-inset-shaded
+flowchart LR
+    p0(Input)
+    p3(toSortedList)
+    p5(flatMap)
+    p16(join)
+    p14(concat)
+    p26(join)
+    p24(normalize_total)
+    p36(join)
+    p34(log1p)
+    p46(join)
+    p44(delete_layer)
+    p56(join)
+    p54(filter_with_hvg)
+    p66(join)
+    p64(calculate_qc_metrics)
+    p72(Output)
+    p0-->p3
+    p3-->p5
+    p5-->p16
+    p5-->p14
+    p14-->p16
+    p16-->p26
+    p16-->p24
+    p24-->p26
+    p26-->p36
+    p26-->p34
+    p34-->p36
+    p36-->p46
+    p36-->p44
+    p44-->p46
+    p46-->p56
+    p46-->p54
+    p54-->p56
+    p56-->p66
+    p56-->p64
+    p64-->p66
+    p66-->p72
+
+```

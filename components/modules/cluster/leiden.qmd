@@ -14,7 +14,7 @@ ID: `leiden`
 Namespace: `cluster`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/cluster/leiden){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/cluster/leiden){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -39,7 +39,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.7.1 -latest \
+  -r main_build -latest \
   -main-script target/nextflow/cluster/leiden/main.nf \
   --help
 ```
@@ -49,13 +49,24 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
+# Arguments
+input: # please fill in - example: "input.h5mu"
+modality: "rna"
+obsp_connectivities: "connectivities"
+# output: "$id.$key.output.h5mu"
+# output_compression: "gzip"
+obs_name: "leiden"
+resolution: 1
 
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.7.1 -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/cluster/leiden/main.nf \
   -params-file params.yaml
