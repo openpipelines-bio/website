@@ -9,7 +9,6 @@
       "/components/workflows/ingestion/conversion.html",
       "/components/workflows/ingestion/demux.html",
       "/components/workflows/multiomics/full_pipeline.html",
-      "/components/workflows/docs/generate_component_qmd.html",
       "/components/workflows/multiomics/integration.html",
       "/components/workflows/ingestion/make_reference.html",
       "/components/workflows/multiomics/prot_multisample.html",
@@ -47,7 +46,6 @@
       "/components/modules/convert/from_cellranger_multi_to_h5mu.html",
       "/components/modules/convert/from_h5ad_to_h5mu.html",
       "/components/modules/convert/from_h5mu_to_h5ad.html",
-      "/components/modules/quarto/generate_documentation_qmd.html",
       "/components/modules/integrate/harmonypy.html",
       "/components/modules/mapping/htseq_count.html",
       "/components/modules/mapping/htseq_count_to_h5mu.html",
@@ -64,10 +62,8 @@
       "/components/modules/mapping/multi_star_to_h5mu.html",
       "/components/modules/qc/multiqc.html",
       "/components/modules/transform/normalize_total.html",
-      "/components/modules/viash/ns_list.html",
       "/components/modules/dimred/pca.html",
       "/components/modules/annotate/popv.html",
-      "/components/modules/nextflow/process_dot.html",
       "/components/modules/transfer/publish.html",
       "/components/modules/transform/regress_out.html",
       "/components/modules/filter/remove_modality.html",
@@ -85,8 +81,7 @@
       "/components/modules/download/sync_test_resources.html",
       "/components/modules/dimred/umap.html",
       "/components/modules/velocity/velocyto.html",
-      "/components/modules/convert/velocyto_to_h5mu.html",
-      "/components/modules/quarto/viash_configs_to_qmd.html"
+      "/components/modules/convert/velocyto_to_h5mu.html"
     ]
   }
 ]
