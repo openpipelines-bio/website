@@ -46,7 +46,7 @@ website:
 
 format:
   html:
-    theme: simplex
+    theme: [simplex, theme.scss]
     css: styles.css
     toc: true
 
