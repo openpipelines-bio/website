@@ -1,0 +1,81 @@
+---
+title: "Scanorama"
+namespace: "Integrate"
+description: "Use Scanorama to integrate different experiments"
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `scanorama`  
+Namespace: `integrate`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/integrate/scanorama){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main -latest \
+  -main-script target/nextflow/integrate/scanorama/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main -latest \
+  -profile docker \
+  -main-script target/nextflow/integrate/scanorama/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument group
+
+### Arguments
+
+|Name                   |Description                                                                                                                                                                 |Attributes                                 |
+|:----------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------|
+|`--input`              |Input h5mu file                                                                                                                                                             |`file`, required                           |
+|`--modality`           |                                                                                                                                                                            |`string`, default: `"rna"`                 |
+|`--output`             |Output .h5mu file                                                                                                                                                           |`file`, required, default: `"output.h5ad"` |
+|`--output_compression` |The compression format to be used on the output h5mu object.                                                                                                                |`string`, example: `"gzip"`                |
+|`--obs_batch`          |Column name discriminating between your batches.                                                                                                                            |`string`, default: `"batch"`               |
+|`--obsm_input`         |Basis obsm slot to run scanorama on.                                                                                                                                        |`string`, default: `"X_pca"`               |
+|`--obsm_output`        |The name of the field in adata.obsm where the integrated embeddings will be stored after running this function. Defaults to X_scanorama.                                    |`string`, default: `"X_scanorama"`         |
+|`--knn`                |Number of nearest neighbors to use for matching.                                                                                                                            |`integer`, default: `20`                   |
+|`--batch_size`         |The batch size used in the alignment vector computation. Useful when integrating very large (>100k samples) datasets. Set to large value that runs within available memory. |`integer`, default: `5000`                 |
+|`--sigma`              |Correction smoothing parameter on Gaussian kernel.                                                                                                                          |`double`, default: `15`                    |
+|`--approx`             |Use approximate nearest neighbors with Python annoy; greatly speeds up matching runtime.                                                                                    |`boolean`, default: `TRUE`                 |
+|`--alpha`              |Alignment score minimum cutoff                                                                                                                                              |`double`, default: `0.1`                   |
+
+## Authors
+
+  * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) (author)
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (maintainer)

@@ -1,0 +1,112 @@
+---
+title: "Popv"
+namespace: "Annotate"
+description: "Performs popular major vote cell typing on single cell sequence data https://github.com/czbiohub/PopV"
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `popv`  
+Namespace: `annotate`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/annotate/popv){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main -latest \
+  -main-script target/nextflow/annotate/popv/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main -latest \
+  -profile docker \
+  -main-script target/nextflow/annotate/popv/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Inputs
+
+Arguments related to the input (aka query) dataset.
+
+
+|Name                       |Description                                                                                                                                                    |Attributes                                |
+|:--------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------|
+|`--input`                  |Input h5mu file.                                                                                                                                               |`file`, required, example: `"input.h5mu"` |
+|`--modality`               |Which modality to process.                                                                                                                                     |`string`, default: `"rna"`                |
+|`--input_layer`            |Which layer to use. If no value is provided, the counts are assumed to be in the `.X` slot. Otherwise, count data is expected to be in `.layers[input_layer]`. |`string`                                  |
+|`--input_obs_batch`        |Key in obs field of input adata for batch information. If no value is provided, batch label is assumed to be unknown.                                          |`string`                                  |
+|`--input_var_subset`       |Subset the input object with this column.                                                                                                                      |`string`                                  |
+|`--input_obs_label`        |Key in obs field of input adata for label information. This is only used for training scANVI. Unlabelled cells should be set to `"unknown_celltype_label"`.    |`string`                                  |
+|`--unknown_celltype_label` |If `input_obs_label` is specified, cells with this value will be treated as unknown and will be predicted by the model.                                        |`string`, default: `"unknown"`            |
+
+
+### Reference
+
+Arguments related to the reference dataset.
+
+
+|Name                    |Description                                                                                 |Attributes                                              |
+|:-----------------------|:-------------------------------------------------------------------------------------------|:-------------------------------------------------------|
+|`--reference`           |User-provided reference tissue. The data that will be used as reference to call cell types. |`file`, required, example: `"TS_Bladder_filtered.h5ad"` |
+|`--reference_obs_label` |Key in obs field of reference AnnData with cell-type information.                           |`string`, default: `"cell_ontology_class"`              |
+|`--reference_obs_batch` |Key in obs field of input adata for batch information.                                      |`string`, default: `"donor_assay"`                      |
+
+
+### Outputs
+
+Output arguments.
+
+
+|Name                   |Description       |Attributes                                 |
+|:----------------------|:-----------------|:------------------------------------------|
+|`--output`             |Output h5mu file. |`file`, required, example: `"output.h5mu"` |
+|`--output_compression` |                  |`string`, example: `"gzip"`                |
+
+
+### Arguments
+
+Other arguments.
+
+
+|Name        |Description                                                             |Attributes                                                        |
+|:-----------|:-----------------------------------------------------------------------|:-----------------------------------------------------------------|
+|`--methods` |Methods to call cell types. By default, runs to knn_on_scvi and scanvi. |`string`, required, example: `"knn_on_scvi"`, example: `"scanvi"` |
+
+## Authors
+
+  * Matthias Beyens [{{< fa brands github >}}](https://github.com/MatthiasBeyens) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3304-0706) (author)
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author)

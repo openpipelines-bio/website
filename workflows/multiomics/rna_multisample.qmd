@@ -1,0 +1,105 @@
+---
+title: "Rna multisample"
+namespace: "Multiomics"
+description: "Processing unimodal multi-sample RNA transcriptomics data."
+type: "workflow"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `rna_multisample`  
+Namespace: `multiomics`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/workflows/multiomics/rna_multisample){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main -latest \
+  -main-script openpipelines/workflows/multiomics/rna_multisample/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main -latest \
+  -profile docker \
+  -main-script openpipelines/workflows/multiomics/rna_multisample/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Inputs
+
+|Name          |Description                 |Attributes                                    |
+|:-------------|:---------------------------|:---------------------------------------------|
+|`--id`        |ID of the concatenated file |`string`, required, example: `"concatenated"` |
+|`--sample_id` |IDs of the sample.          |`string`, required, example: `"foo"`          |
+|`--input`     |Path to the samples.        |`file`, required, example: `"dataset.h5mu"`   |
+
+
+### Sample ID options
+
+Options for adding the id to .obs on the MuData object. Having a sample 
+id present in a requirement of several components for this pipeline.
+
+
+
+|Name                                    |Description                                                                                         |Attributes                       |
+|:---------------------------------------|:---------------------------------------------------------------------------------------------------|:--------------------------------|
+|`--add_id_to_obs`                       |Add the value passed with --id to .obs.                                                             |`boolean`, default: `TRUE`       |
+|`--add_id_obs_output`                   |.Obs column to add the sample IDs to. Required and only used when  --add_id_to_obs is set to 'true' |`string`, default: `"sample_id"` |
+|`--add_id_make_observation_keys_unique` |Join the id to the .obs index (.obs_names).  Only used when --add_id_to_obs is set to 'true'.       |`boolean`, default: `TRUE`       |
+
+
+### Filtering highly variable genes
+
+|Name                              |Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |Attributes                             |
+|:---------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------|
+|`--filter_with_hvg_var_output`    |In which .var slot to store a boolean array corresponding to the highly variable genes.                                                                                                                                                                                                                                                                                                                                                                                                     |`string`, default: `"filter_with_hvg"` |
+|`--filter_with_hvg_obs_batch_key` |If specified, highly-variable genes are selected within each batch separately and merged. This simple  process avoids the selection of batch-specific genes and acts as a lightweight batch correction method.  For all flavors, genes are first sorted by how many batches they are a HVG. For dispersion-based flavors  ties are broken by normalized dispersion. If flavor = 'seurat_v3', ties are broken by the median (across batches) rank based on within-batch normalized variance. |`string`, default: `"sample_id"`       |
+|`--filter_with_hvg_flavor`        |Choose the flavor for identifying highly variable genes. For the dispersion based methods in their default workflows, Seurat passes the cutoffs whereas Cell Ranger passes n_top_genes.                                                                                                                                                                                                                                                                                                     |`string`, default: `"seurat"`          |
+|`--filter_with_hvg_n_top_genes`   |Number of highly-variable genes to keep. Mandatory if filter_with_hvg_flavor is set to 'seurat_v3'.                                                                                                                                                                                                                                                                                                                                                                                         |`integer`                              |
+
+
+### QC metrics calculation options
+
+|Name               |Description                                                                                                                                                                                                                    |Attributes                                                                |
+|:------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------|
+|`--var_qc_metrics` |Keys to select a boolean (containing only True or False) column from .var. For each cell, calculate the proportion of total values for genes which are labeled 'True',  compared to the total sum of the values for all genes. |`string`, default: `"filter_with_hvg"`, example: `"ercc,highly_variable"` |
+|`--top_n_vars`     |Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. `--top_n_vars 20,50` finds cumulative proportion to the 20th and 50th most expressed vars.                |`integer`, default: `50`, default: `100`, default: `200`, default: `500`  |
+
+## Authors
+
+  * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) (author)
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author, maintainer)
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (author)

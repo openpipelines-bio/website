@@ -1,0 +1,77 @@
+---
+title: "Harmonypy"
+namespace: "Integrate"
+description: "Performs Harmony integration based as described in https://github.com/immunogenomics/harmony."
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `harmonypy`  
+Namespace: `integrate`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/integrate/harmonypy){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+Based on an implementation in python from https://github.com/slowkow/harmonypy
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main -latest \
+  -main-script target/nextflow/integrate/harmonypy/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main -latest \
+  -profile docker \
+  -main-script target/nextflow/integrate/harmonypy/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument group
+
+### Arguments
+
+|Name                   |Description                                                                                                                                                                           |Attributes                                                  |
+|:----------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------|
+|`--input`              |Input h5mu file                                                                                                                                                                       |`file`, required                                            |
+|`--output`             |Output h5mu file.                                                                                                                                                                     |`file`, required                                            |
+|`--output_compression` |The compression format to be used on the output h5mu object.                                                                                                                          |`string`, example: `"gzip"`                                 |
+|`--modality`           |                                                                                                                                                                                      |`string`, default: `"rna"`                                  |
+|`--obsm_input`         |Which .obsm slot to use as a starting PCA embedding.                                                                                                                                  |`string`, default: `"X_pca"`                                |
+|`--obsm_output`        |In which .obsm slot to store the resulting integrated embedding.                                                                                                                      |`string`, default: `"X_pca_integrated"`                     |
+|`--theta`              |Diversity clustering penalty parameter. Specify for each variable in group.by.vars. theta=0 does not encourage any diversity. Larger values of theta result in more diverse clusters. |`double`, default: `2`                                      |
+|`--obs_covariates`     |The .obs field(s) that define the covariate(s) to regress out.                                                                                                                        |`string`, required, example: `"batch"`, example: `"sample"` |
+
+## Authors
+
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (maintainer)
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (contributor)

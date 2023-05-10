@@ -1,0 +1,73 @@
+---
+title: "Bcl2fastq"
+namespace: "Demux"
+description: "Convert bcl files to fastq files using bcl2fastq"
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `bcl2fastq`  
+Namespace: `demux`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/src/demux/bcl2fastq){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main -latest \
+  -main-script target/nextflow/demux/bcl2fastq/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main -latest \
+  -profile docker \
+  -main-script target/nextflow/demux/bcl2fastq/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument group
+
+### Arguments
+
+|Name               |Description                            |Attributes                                     |
+|:------------------|:--------------------------------------|:----------------------------------------------|
+|`--input`          |Input run directory                    |`file`, required, example: `"bcl_dir"`         |
+|`--sample_sheet`   |Pointer to the sample sheet            |`file`, required, example: `"SampleSheet.csv"` |
+|`--output`         |Output directory containig fastq files |`file`, required, example: `"fastq_dir"`       |
+|`--reports`        |Reports directory                      |`file`, example: `"reports_dir"`               |
+|`--ignore_missing` |                                       |`boolean_true`                                 |
+
+## Authors
+
+  * Toni Verbeiren [{{< fa brands github >}}](https://github.com/tverbeiren) (author, maintainer)

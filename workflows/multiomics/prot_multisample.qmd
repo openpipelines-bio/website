@@ -1,0 +1,85 @@
+---
+title: "Prot multisample"
+namespace: "Multiomics"
+description: "Processing unimodal multi-sample ADT data."
+type: "workflow"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `prot_multisample`  
+Namespace: `multiomics`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/openpipelines/workflows/multiomics/prot_multisample){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main -latest \
+  -main-script openpipelines/workflows/multiomics/prot_multisample/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main -latest \
+  -profile docker \
+  -main-script openpipelines/workflows/multiomics/prot_multisample/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Inputs
+
+|Name          |Description                 |Attributes                                    |
+|:-------------|:---------------------------|:---------------------------------------------|
+|`--id`        |ID of the concatenated file |`string`, required, example: `"concatenated"` |
+|`--sample_id` |IDs of the sample.          |`string`, required, example: `"foo"`          |
+|`--input`     |Path to the samples.        |`file`, required, example: `"dataset.h5mu"`   |
+
+
+### Sample ID options
+
+Options for adding the id to .obs on the MuData object. Having a sample 
+id present in a requirement of several components for this pipeline.
+
+
+
+|Name                                    |Description                                                                                         |Attributes                       |
+|:---------------------------------------|:---------------------------------------------------------------------------------------------------|:--------------------------------|
+|`--add_id_to_obs`                       |Add the value passed with --id to .obs.                                                             |`boolean`, default: `TRUE`       |
+|`--add_id_obs_output`                   |.Obs column to add the sample IDs to. Required and only used when  --add_id_to_obs is set to 'true' |`string`, default: `"sample_id"` |
+|`--add_id_make_observation_keys_unique` |Join the id to the .obs index (.obs_names).  Only used when --add_id_to_obs is set to 'true'.       |`boolean`, default: `TRUE`       |
+
+## Authors
+
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (author)
