@@ -14,7 +14,7 @@ ID: `cellranger_postprocessing`
 Namespace: `ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/workflows/ingestion/cellranger_postprocessing){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/workflows/ingestion/cellranger_postprocessing){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -114,31 +114,50 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 %%| column: screen-inset-shaded
 flowchart LR
     p0(Input)
+    p9(join)
     p7(from_10xh5_to_h5mu)
-    p15(subset_h5mu)
-    p21(filter)
-    p26(cellbender_remove_background)
-    p31(mix)
-    p30(filter)
-    p32(filter)
-    p38(filter_with_counts)
-    p42(mix)
-    p41(filter)
-    p48(publish)
-    p54(Output)
-    p30-->p31
-    p31-->p32
-    p31-->p41
-    p41-->p42
+    p19(join)
+    p17(subset_h5mu)
+    p23(toSortedList)
+    p25(flatMap)
+    p27(filter)
+    p35(join)
+    p33(cellbender_remove_background)
+    p39(mix)
+    p38(filter)
+    p40(filter)
+    p49(join)
+    p47(filter_with_counts)
+    p52(mix)
+    p51(filter)
+    p61(join)
+    p59(publish)
+    p66(Output)
+    p38-->p39
+    p39-->p40
+    p39-->p51
+    p51-->p52
+    p0-->p9
     p0-->p7
-    p7-->p15
-    p15-->p21
-    p15-->p30
-    p21-->p26
-    p26-->p31
-    p32-->p38
-    p38-->p42
-    p42-->p48
-    p48-->p54
+    p7-->p9
+    p9-->p19
+    p9-->p17
+    p17-->p19
+    p19-->p23
+    p23-->p25
+    p25-->p27
+    p25-->p38
+    p27-->p35
+    p27-->p33
+    p33-->p35
+    p35-->p39
+    p40-->p49
+    p40-->p47
+    p47-->p49
+    p49-->p52
+    p52-->p61
+    p52-->p59
+    p59-->p61
+    p61-->p66
 
 ```

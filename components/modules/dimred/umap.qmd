@@ -14,7 +14,7 @@ ID: `umap`
 Namespace: `dimred`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/dimred/umap){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/dimred/umap){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -47,6 +47,7 @@ uns_neighbors: "neighbors"
 
 # Outputs
 # output: "$id.$key.output.h5mu"
+# output_compression: "gzip"
 obsm_output: "umap"
 
 # Arguments
@@ -90,10 +91,11 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Outputs
 
-|Name            |Description                                            |Attributes                                 |
-|:---------------|:------------------------------------------------------|:------------------------------------------|
-|`--output`      |Output h5mu file.                                      |`file`, required, example: `"output.h5mu"` |
-|`--obsm_output` |The pre/postfix under which to store the UMAP results. |`string`, default: `"umap"`                |
+|Name                   |Description                                                  |Attributes                                 |
+|:----------------------|:------------------------------------------------------------|:------------------------------------------|
+|`--output`             |Output h5mu file.                                            |`file`, required, example: `"output.h5mu"` |
+|`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`                |
+|`--obsm_output`        |The pre/postfix under which to store the UMAP results.       |`string`, default: `"umap"`                |
 
 
 ### Arguments

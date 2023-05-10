@@ -14,7 +14,7 @@ ID: `do_filter`
 Namespace: `filter`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/filter/do_filter){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/filter/do_filter){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -44,8 +44,9 @@ nextflow run openpipelines-bio/openpipeline \
 input: # please fill in - example: "input.h5mu"
 modality: "rna"
 # obs_filter: ["filter_with_x"]
-var_filter: ["filter_with_x"]
+# var_filter: ["filter_with_x"]
 # output: "$id.$key.output.h5mu"
+# output_compression: "gzip"
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
@@ -69,13 +70,14 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name           |Description                                              |Attributes                                |
-|:--------------|:--------------------------------------------------------|:-----------------------------------------|
-|`--input`      |Input h5mu file                                          |`file`, required, example: `"input.h5mu"` |
-|`--modality`   |                                                         |`string`, default: `"rna"`                |
-|`--obs_filter` |Which .obs columns to use to filter the observations by. |`string`, example: `"filter_with_x"`      |
-|`--var_filter` |Which .var columns to use to filter the observations by. |`string`, default: `"filter_with_x"`      |
-|`--output`     |Output h5mu file.                                        |`file`, example: `"output.h5mu"`          |
+|Name                   |Description                                                  |Attributes                                |
+|:----------------------|:------------------------------------------------------------|:-----------------------------------------|
+|`--input`              |Input h5mu file                                              |`file`, required, example: `"input.h5mu"` |
+|`--modality`           |                                                             |`string`, default: `"rna"`                |
+|`--obs_filter`         |Which .obs columns to use to filter the observations by.     |`string`, example: `"filter_with_x"`      |
+|`--var_filter`         |Which .var columns to use to filter the observations by.     |`string`, example: `"filter_with_x"`      |
+|`--output`             |Output h5mu file.                                            |`file`, example: `"output.h5mu"`          |
+|`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`               |
 
 ## Authors
 

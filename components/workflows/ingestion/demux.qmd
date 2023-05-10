@@ -14,7 +14,7 @@ ID: `demux`
 Namespace: `ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/workflows/ingestion/demux){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/workflows/ingestion/demux){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -92,33 +92,52 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 %%| column: screen-inset-shaded
 flowchart LR
     p0(Input)
-    p3(filter)
-    p8(cellranger_mkfastq)
-    p27(mix)
-    p11(filter)
-    p16(bcl_convert)
-    p19(filter)
-    p24(bcl2fastq)
-    p32(fastqc)
-    p35(Output)
-    p37(toSortedList)
-    p43(multiqc)
+    p2(toSortedList)
+    p4(flatMap)
+    p5(filter)
+    p13(join)
+    p11(cellranger_mkfastq)
+    p35(mix)
+    p15(filter)
+    p23(join)
+    p21(bcl_convert)
+    p25(filter)
+    p33(join)
+    p31(bcl2fastq)
+    p44(join)
+    p42(fastqc)
     p46(Output)
-    p50(Output)
-    p0-->p3
-    p0-->p11
-    p0-->p19
-    p3-->p8
-    p8-->p27
-    p11-->p16
-    p16-->p27
-    p19-->p24
-    p24-->p27
-    p27-->p32
-    p32-->p35
-    p27-->p37
-    p37-->p43
-    p43-->p46
-    p27-->p50
+    p48(toSortedList)
+    p57(join)
+    p55(multiqc)
+    p59(Output)
+    p63(Output)
+    p4-->p5
+    p4-->p15
+    p4-->p25
+    p0-->p2
+    p2-->p4
+    p5-->p13
+    p5-->p11
+    p11-->p13
+    p13-->p35
+    p15-->p23
+    p15-->p21
+    p21-->p23
+    p23-->p35
+    p25-->p33
+    p25-->p31
+    p31-->p33
+    p33-->p35
+    p35-->p44
+    p35-->p42
+    p42-->p44
+    p44-->p46
+    p35-->p48
+    p48-->p57
+    p48-->p55
+    p55-->p57
+    p57-->p59
+    p35-->p63
 
 ```

@@ -14,7 +14,7 @@ ID: `split_modalities`
 Namespace: `dataflow`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/dataflow/split_modalities){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/dataflow/split_modalities){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -44,6 +44,7 @@ nextflow run openpipelines-bio/openpipeline \
 # Arguments
 input: # please fill in - example: "sample_path"
 # output: "$id.$key.output.output"
+# output_compression: "gzip"
 # output_types: "$id.$key.output_types.csv"
 compression: "gzip"
 
@@ -69,12 +70,13 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name             |Description                                                           |Attributes                                     |
-|:----------------|:---------------------------------------------------------------------|:----------------------------------------------|
-|`--input`        |Path to a single .h5mu file.                                          |`file`, required, default: `"sample_path"`     |
-|`--output`       |Output directory containing multiple h5mu files.                      |`file`, required, example: `"/path/to/output"` |
-|`--output_types` |A csv containing the base filename and modality type per output file. |`file`, required, example: `"types.csv"`       |
-|`--compression`  |The compression format to be used on the final h5mu object.           |`string`, default: `"gzip"`                    |
+|Name                   |Description                                                           |Attributes                                     |
+|:----------------------|:---------------------------------------------------------------------|:----------------------------------------------|
+|`--input`              |Path to a single .h5mu file.                                          |`file`, required, default: `"sample_path"`     |
+|`--output`             |Output directory containing multiple h5mu files.                      |`file`, required, example: `"/path/to/output"` |
+|`--output_compression` |The compression format to be used on the output h5mu object.          |`string`, example: `"gzip"`                    |
+|`--output_types`       |A csv containing the base filename and modality type per output file. |`file`, required, example: `"types.csv"`       |
+|`--compression`        |The compression format to be used on the final h5mu object.           |`string`, default: `"gzip"`                    |
 
 ## Authors
 

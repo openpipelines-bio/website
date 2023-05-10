@@ -14,7 +14,7 @@ ID: `scvi`
 Namespace: `integrate`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/integrate/scvi){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/integrate/scvi){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -49,6 +49,8 @@ obs_batch: "sample_id"
 
 # Outputs
 # output: "$id.$key.output.output"
+# model_output: "$id.$key.model_output.model_output"
+# output_compression: "gzip"
 obsm_output: "X_scvi_integrated"
 
 # Early stopping arguments
@@ -96,10 +98,12 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Outputs
 
-|Name            |Description                                                      |Attributes                               |
-|:---------------|:----------------------------------------------------------------|:----------------------------------------|
-|`--output`      |Output h5mu file.                                                |`file`, required                         |
-|`--obsm_output` |In which .obsm slot to store the resulting integrated embedding. |`string`, default: `"X_scvi_integrated"` |
+|Name                   |Description                                                      |Attributes                               |
+|:----------------------|:----------------------------------------------------------------|:----------------------------------------|
+|`--output`             |Output h5mu file.                                                |`file`, required                         |
+|`--model_output`       |Folder where the state of the trained model will be saved to.    |`file`                                   |
+|`--output_compression` |The compression format to be used on the output h5mu object.     |`string`, example: `"gzip"`              |
+|`--obsm_output`        |In which .obsm slot to store the resulting integrated embedding. |`string`, default: `"X_scvi_integrated"` |
 
 
 ### Early stopping arguments

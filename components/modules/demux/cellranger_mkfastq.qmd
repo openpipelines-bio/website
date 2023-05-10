@@ -14,7 +14,7 @@ ID: `cellranger_mkfastq`
 Namespace: `demux`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/demux/cellranger_mkfastq){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/demux/cellranger_mkfastq){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -45,8 +45,6 @@ input: # please fill in - example: "/path/to/bcl"
 sample_sheet: # please fill in - example: "SampleSheet.csv"
 # output: "$id.$key.output.output"
 # reports: "$id.$key.reports.reports"
-# cores: 2
-# memory: 10
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
@@ -76,8 +74,6 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--sample_sheet` |The path to the sample sheet.                                          |`file`, required, example: `"SampleSheet.csv"`                      |
 |`--output`       |The folder to store the demux results                                  |`file`, required, default: `"fastqs"`, example: `"/path/to/output"` |
 |`--reports`      |Reports directory                                                      |`file`, example: `"reports_dir"`                                    |
-|`--cores`        |Set max cores the pipeline may request at one time.                    |`integer`, example: `2`                                             |
-|`--memory`       |Set max GB the pipeline may request at one time.                       |`integer`, example: `10`                                            |
 
 ## Authors
 

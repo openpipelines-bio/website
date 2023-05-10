@@ -14,7 +14,7 @@ ID: `from_bdrhap_to_h5mu`
 Namespace: `convert`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/convert/from_bdrhap_to_h5mu){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/convert/from_bdrhap_to_h5mu){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -46,6 +46,7 @@ input: # please fill in - example: "input_dir/"
 
 # Outputs
 # output: "$id.$key.output.h5mu"
+# output_compression: "gzip"
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
@@ -77,9 +78,10 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Outputs
 
-|Name       |Description       |Attributes                                 |
-|:----------|:-----------------|:------------------------------------------|
-|`--output` |Output h5mu file. |`file`, required, example: `"output.h5mu"` |
+|Name                   |Description       |Attributes                                 |
+|:----------------------|:-----------------|:------------------------------------------|
+|`--output`             |Output h5mu file. |`file`, required, example: `"output.h5mu"` |
+|`--output_compression` |                  |`string`, example: `"gzip"`                |
 
 ## Authors
 

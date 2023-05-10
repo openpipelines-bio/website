@@ -14,9 +14,22 @@ ID: `from_cellranger_multi_to_h5mu`
 Namespace: `convert`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/convert/from_cellranger_multi_to_h5mu){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/convert/from_cellranger_multi_to_h5mu){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
+
+By default, will map the following library type names to modality names:
+  - Gene Expression: rna
+  - Peaks: atac
+  - Antibody Capture: prot
+  - VDJ: vdj
+  - VDJ-T: vdj_t
+  - VDJ-B: vdj_b
+  - CRISPR Guide Capture: crispr
+  - Multiplexing Capture: hashing
+
+Other library types have their whitepace removed and dashes replaced by
+underscores to generate the modality name.
 
 Currently does not allow parsing the output from cell barcode demultiplexing.
 
@@ -44,6 +57,7 @@ nextflow run openpipelines-bio/openpipeline \
 # Arguments
 input: # please fill in - example: "input_dir_containing_modalities"
 # output: "$id.$key.output.h5mu"
+# output_compression: "gzip"
 uns_metrics: "metrics_cellranger"
 
 # Nextflow input-output arguments
@@ -68,11 +82,12 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name            |Description                                                        |Attributes                                                     |
-|:---------------|:------------------------------------------------------------------|:--------------------------------------------------------------|
-|`--input`       |Input folder. Must contain the output from a cellranger multi run. |`file`, required, example: `"input_dir_containing_modalities"` |
-|`--output`      |Output h5mu file.                                                  |`file`, example: `"output.h5mu"`                               |
-|`--uns_metrics` |Name of the .uns slot under which to QC metrics (if any).          |`string`, default: `"metrics_cellranger"`                      |
+|Name                   |Description                                                        |Attributes                                                     |
+|:----------------------|:------------------------------------------------------------------|:--------------------------------------------------------------|
+|`--input`              |Input folder. Must contain the output from a cellranger multi run. |`file`, required, example: `"input_dir_containing_modalities"` |
+|`--output`             |Output h5mu file.                                                  |`file`, example: `"output.h5mu"`                               |
+|`--output_compression` |                                                                   |`string`, example: `"gzip"`                                    |
+|`--uns_metrics`        |Name of the .uns slot under which to QC metrics (if any).          |`string`, default: `"metrics_cellranger"`                      |
 
 ## Authors
 

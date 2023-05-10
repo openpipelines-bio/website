@@ -14,7 +14,7 @@ ID: `bd_rhapsody`
 Namespace: `ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/workflows/ingestion/bd_rhapsody){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/workflows/ingestion/bd_rhapsody){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -179,11 +179,21 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 %%| column: screen-inset-shaded
 flowchart LR
     p0(Input)
-    p8(bd_rhapsody)
-    p16(from_bdrhap_to_h5mu)
-    p22(Output)
-    p0-->p8
-    p8-->p16
-    p16-->p22
+    p2(toSortedList)
+    p4(flatMap)
+    p13(join)
+    p11(bd_rhapsody)
+    p23(join)
+    p21(from_bdrhap_to_h5mu)
+    p28(Output)
+    p0-->p2
+    p2-->p4
+    p4-->p13
+    p4-->p11
+    p11-->p13
+    p13-->p23
+    p13-->p21
+    p21-->p23
+    p23-->p28
 
 ```

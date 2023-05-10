@@ -14,7 +14,7 @@ ID: `from_h5ad_to_h5mu`
 Namespace: `convert`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/convert/from_h5ad_to_h5mu){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/convert/from_h5ad_to_h5mu){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -44,6 +44,7 @@ nextflow run openpipelines-bio/openpipeline \
 input: # please fill in - example: ["input.h5ad"]
 modality: ["rna"]
 # output: "$id.$key.output.h5mu"
+# output_compression: "gzip"
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
@@ -67,11 +68,12 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name         |Description         |Attributes                                |
-|:------------|:-------------------|:-----------------------------------------|
-|`--input`    |Input h5ad files    |`file`, required, default: `"input.h5ad"` |
-|`--modality` |                    |`string`, default: `"rna"`                |
-|`--output`   |Output MuData file. |`file`, default: `"output.h5mu"`          |
+|Name                   |Description         |Attributes                                |
+|:----------------------|:-------------------|:-----------------------------------------|
+|`--input`              |Input h5ad files    |`file`, required, default: `"input.h5ad"` |
+|`--modality`           |                    |`string`, default: `"rna"`                |
+|`--output`             |Output MuData file. |`file`, default: `"output.h5mu"`          |
+|`--output_compression` |                    |`string`, example: `"gzip"`               |
 
 ## Authors
 

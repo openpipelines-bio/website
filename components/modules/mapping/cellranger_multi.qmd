@@ -14,7 +14,7 @@ ID: `cellranger_multi`
 Namespace: `mapping`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/mapping/cellranger_multi){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/mapping/cellranger_multi){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -59,7 +59,7 @@ library_type: # please fill in - example: ["Gene Expression"]
 # gex_expect_cells: 3000
 gex_chemistry: "auto"
 gex_secondary_analysis: false
-gex_generate_bam: true
+gex_generate_bam: false
 gex_include_introns: true
 
 # Cell multiplexing parameters
@@ -120,7 +120,7 @@ Arguments relevant to the analysis of gene expression data.
 |`--gex_expect_cells`       |Expected number of recovered cells, used as input to cell calling algorithm.                                                                                                                                                                                                                                                                                                                                                                                                                                      |`integer`, example: `3000`  |
 |`--gex_chemistry`          |Assay configuration. - auto: autodetect mode - threeprime: Single Cell 3' - fiveprime: Single Cell 5' - SC3Pv1: Single Cell 3' v1 - SC3Pv2: Single Cell 3' v2 - SC3Pv3: Single Cell 3' v3 - SC3Pv3LT: Single Cell 3' v3 LT - SC3Pv3HT: Single Cell 3' v3 HT - SC5P-PE: Single Cell 5' paired-end - SC5P-R2: Single Cell 5' R2-only - SC-FB: Single Cell Antibody-only 3' v2 or 5' See https://kb.10xgenomics.com/hc/en-us/articles/115003764132-How-does-Cell-Ranger-auto-detect-chemistry- for more information. |`string`, default: `"auto"` |
 |`--gex_secondary_analysis` |Whether or not to run the secondary analysis e.g. clustering.                                                                                                                                                                                                                                                                                                                                                                                                                                                     |`boolean`, default: `FALSE` |
-|`--gex_generate_bam`       |Whether to generate a BAM file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |`boolean`, default: `TRUE`  |
+|`--gex_generate_bam`       |Whether to generate a BAM file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |`boolean`, default: `FALSE` |
 |`--gex_include_introns`    |Include intronic reads in count (default=true unless --target-panel is specified in which case default=false)                                                                                                                                                                                                                                                                                                                                                                                                     |`boolean`, default: `TRUE`  |
 
 

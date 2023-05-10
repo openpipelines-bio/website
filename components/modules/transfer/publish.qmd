@@ -14,7 +14,7 @@ ID: `publish`
 Namespace: `transfer`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/transfer/publish){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/transfer/publish){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

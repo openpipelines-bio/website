@@ -14,7 +14,7 @@ ID: `from_h5mu_to_h5ad`
 Namespace: `convert`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/convert/from_h5mu_to_h5ad){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/convert/from_h5mu_to_h5ad){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -44,7 +44,7 @@ nextflow run openpipelines-bio/openpipeline \
 input: # please fill in - example: "input.h5mu"
 modality: "rna"
 # output: "$id.$key.output.h5ad"
-compression: "gzip"
+output_compression: "gzip"
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
@@ -68,12 +68,12 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name            |Description                                                 |Attributes                                |
-|:---------------|:-----------------------------------------------------------|:-----------------------------------------|
-|`--input`       |Input MuData file                                           |`file`, required, default: `"input.h5mu"` |
-|`--modality`    |                                                            |`string`, default: `"rna"`                |
-|`--output`      |Output AnnData file.                                        |`file`, default: `"output.h5ad"`          |
-|`--compression` |The compression format to be used on the final h5ad object. |`string`, default: `"gzip"`               |
+|Name                   |Description                                                 |Attributes                                |
+|:----------------------|:-----------------------------------------------------------|:-----------------------------------------|
+|`--input`              |Input MuData file                                           |`file`, required, default: `"input.h5mu"` |
+|`--modality`           |                                                            |`string`, default: `"rna"`                |
+|`--output`             |Output AnnData file.                                        |`file`, default: `"output.h5ad"`          |
+|`--output_compression` |The compression format to be used on the final h5ad object. |`string`, default: `"gzip"`               |
 
 ## Authors
 

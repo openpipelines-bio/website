@@ -14,7 +14,7 @@ ID: `merge`
 Namespace: `dataflow`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/dataflow/merge){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/dataflow/merge){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -43,7 +43,7 @@ nextflow run openpipelines-bio/openpipeline \
 # Arguments
 input: # please fill in - example: ["sample_paths"]
 # output: "$id.$key.output.h5mu"
-compression: "gzip"
+# output_compression: "gzip"
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
@@ -67,11 +67,11 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name            |Description                                                       |Attributes                                  |
-|:---------------|:-----------------------------------------------------------------|:-------------------------------------------|
-|`--input`       |Paths to the single-modality .h5mu files that need to be combined |`file`, required, default: `"sample_paths"` |
-|`--output`      |Path to the output file.                                          |`file`, default: `"output.h5mu"`            |
-|`--compression` |The compression format to be used on the final h5mu object.       |`string`, default: `"gzip"`                 |
+|Name                   |Description                                                       |Attributes                                  |
+|:----------------------|:-----------------------------------------------------------------|:-------------------------------------------|
+|`--input`              |Paths to the single-modality .h5mu files that need to be combined |`file`, required, default: `"sample_paths"` |
+|`--output`             |Path to the output file.                                          |`file`, default: `"output.h5mu"`            |
+|`--output_compression` |The compression format to be used on the output h5mu object.      |`string`, example: `"gzip"`                 |
 
 ## Authors
 

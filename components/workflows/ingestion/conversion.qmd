@@ -14,7 +14,7 @@ ID: `conversion`
 Namespace: `ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/workflows/ingestion/conversion){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/workflows/ingestion/conversion){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -104,25 +104,38 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 %%| column: screen-inset-shaded
 flowchart LR
     p0(Input)
-    p3(filter)
-    p8(from_10xh5_to_h5mu)
-    p27(mix)
-    p11(filter)
-    p16(from_10xmtx_to_h5mu)
-    p19(filter)
-    p24(from_h5ad_to_h5mu)
-    p29(toSortedList)
-    p31(Output)
-    p0-->p3
-    p0-->p11
-    p0-->p19
-    p3-->p8
-    p8-->p27
-    p11-->p16
-    p16-->p27
-    p19-->p24
-    p24-->p27
-    p27-->p29
-    p29-->p31
+    p2(toSortedList)
+    p4(flatMap)
+    p5(filter)
+    p13(join)
+    p11(from_10xh5_to_h5mu)
+    p35(mix)
+    p15(filter)
+    p23(join)
+    p21(from_10xmtx_to_h5mu)
+    p25(filter)
+    p33(join)
+    p31(from_h5ad_to_h5mu)
+    p37(toSortedList)
+    p39(Output)
+    p4-->p5
+    p4-->p15
+    p4-->p25
+    p0-->p2
+    p2-->p4
+    p5-->p13
+    p5-->p11
+    p11-->p13
+    p13-->p35
+    p15-->p23
+    p15-->p21
+    p21-->p23
+    p23-->p35
+    p25-->p33
+    p25-->p31
+    p31-->p33
+    p33-->p35
+    p35-->p37
+    p37-->p39
 
 ```

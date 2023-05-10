@@ -14,7 +14,7 @@ ID: `filter_with_counts`
 Namespace: `filter`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/filter/filter_with_counts){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/filter/filter_with_counts){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -46,9 +46,12 @@ nextflow run openpipelines-bio/openpipeline \
 input: # please fill in - example: "input.h5mu"
 modality: "rna"
 # layer: "raw_counts"
+# var_gene_names: "gene_symbol"
+mitochondrial_gene_regex: "^[mM][tT]-"
 
 # Outputs
 # output: "$id.$key.output.h5mu"
+# output_compression: "gzip"
 do_subset: false
 obs_name_filter: "filter_with_counts"
 var_name_filter: "filter_with_counts"
@@ -84,21 +87,24 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Inputs
 
-|Name         |Description     |Attributes                                |
-|:------------|:---------------|:-----------------------------------------|
-|`--input`    |Input h5mu file |`file`, required, example: `"input.h5mu"` |
-|`--modality` |                |`string`, default: `"rna"`                |
-|`--layer`    |                |`string`, example: `"raw_counts"`         |
+|Name                         |Description                                                                                                                                                                                                                 |Attributes                                |
+|:----------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------|
+|`--input`                    |Input h5mu file                                                                                                                                                                                                             |`file`, required, example: `"input.h5mu"` |
+|`--modality`                 |                                                                                                                                                                                                                            |`string`, default: `"rna"`                |
+|`--layer`                    |                                                                                                                                                                                                                            |`string`, example: `"raw_counts"`         |
+|`--var_gene_names`           |.var column name to be used to detect mitochondrial genes instead of .var_names (default if not set).  Gene names matching with the regex value from --mitochondrial_gene_regex will be identified as a mitochondrial gene. |`string`, example: `"gene_symbol"`        |
+|`--mitochondrial_gene_regex` |Regex string that identifies mitochondrial genes from --var_gene_names. By default will detect human and mouse mitochondrial genes from a gene symbol.                                                                      |`string`, default: `"^[mM][tT]-"`         |
 
 
 ### Outputs
 
-|Name                |Description                                                                                        |Attributes                                |
-|:-------------------|:--------------------------------------------------------------------------------------------------|:-----------------------------------------|
-|`--output`          |Output h5mu file.                                                                                  |`file`, example: `"output.h5mu"`          |
-|`--do_subset`       |Whether to subset before storing the output.                                                       |`boolean_true`                            |
-|`--obs_name_filter` |In which .obs slot to store a boolean array corresponding to which observations should be removed. |`string`, default: `"filter_with_counts"` |
-|`--var_name_filter` |In which .var slot to store a boolean array corresponding to which variables should be removed.    |`string`, default: `"filter_with_counts"` |
+|Name                   |Description                                                                                        |Attributes                                |
+|:----------------------|:--------------------------------------------------------------------------------------------------|:-----------------------------------------|
+|`--output`             |Output h5mu file.                                                                                  |`file`, example: `"output.h5mu"`          |
+|`--output_compression` |The compression format to be used on the output h5mu object.                                       |`string`, example: `"gzip"`               |
+|`--do_subset`          |Whether to subset before storing the output.                                                       |`boolean_true`                            |
+|`--obs_name_filter`    |In which .obs slot to store a boolean array corresponding to which observations should be removed. |`string`, default: `"filter_with_counts"` |
+|`--var_name_filter`    |In which .var slot to store a boolean array corresponding to which variables should be removed.    |`string`, default: `"filter_with_counts"` |
 
 
 ### Arguments

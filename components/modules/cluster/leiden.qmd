@@ -14,7 +14,7 @@ ID: `leiden`
 Namespace: `cluster`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/cluster/leiden){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/cluster/leiden){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -54,6 +54,7 @@ input: # please fill in - example: "input.h5mu"
 modality: "rna"
 obsp_connectivities: "connectivities"
 # output: "$id.$key.output.h5mu"
+# output_compression: "gzip"
 obs_name: "leiden"
 resolution: 1
 
@@ -85,6 +86,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--modality`            |                                                                                                     |`string`, default: `"rna"`                 |
 |`--obsp_connectivities` |In which .obsp slot the neighbor connectivities can be found.                                        |`string`, default: `"connectivities"`      |
 |`--output`              |Output file.                                                                                         |`file`, required, example: `"output.h5mu"` |
+|`--output_compression`  |                                                                                                     |`string`, example: `"gzip"`                |
 |`--obs_name`            |Name of the .obs key under which to add the cluster labels.                                          |`string`, default: `"leiden"`              |
 |`--resolution`          |A parameter value controlling the coarseness of the clustering. Higher values lead to more clusters. |`double`, default: `1`                     |
 

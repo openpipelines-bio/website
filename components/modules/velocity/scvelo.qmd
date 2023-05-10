@@ -14,7 +14,7 @@ ID: `scvelo`
 Namespace: `velocity`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/velocity/scvelo){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/velocity/scvelo){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -45,6 +45,7 @@ input: # please fill in - example: "path/to/file"
 
 # Outputs
 # output: "$id.$key.output.output"
+# output_compression: "gzip"
 
 # Filtering and normalization
 # min_counts: 123
@@ -89,9 +90,10 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Outputs
 
-|Name       |Description                                              |Attributes       |
-|:----------|:--------------------------------------------------------|:----------------|
-|`--output` |Output directory. If it does not exist, will be created. |`file`, required |
+|Name                   |Description                                                  |Attributes                  |
+|:----------------------|:------------------------------------------------------------|:---------------------------|
+|`--output`             |Output directory. If it does not exist, will be created.     |`file`, required            |
+|`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"` |
 
 
 ### Filtering and normalization

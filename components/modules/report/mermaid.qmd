@@ -14,7 +14,7 @@ ID: `mermaid`
 Namespace: `report`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/report/mermaid){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/report/mermaid){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

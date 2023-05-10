@@ -1,0 +1,110 @@
+---
+title: "Calculate qc metrics"
+namespace: "Qc"
+description: "Add basic quality control metrics to an .h5mu file."
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `calculate_qc_metrics`  
+Namespace: `qc`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/qc/calculate_qc_metrics){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+The metrics are comparable to what scanpy.pp.calculate_qc_metrics output,
+although they have slightly different names:
+
+Var metrics (name in this component -> name in scanpy):
+  - pct_dropout -> pct_dropout_by_{expr_type}
+  - num_nonzero_obs -> n_cells_by_{expr_type}
+  - obs_mean -> mean_{expr_type}
+  - total_counts -> total_{expr_type}
+
+Obs metrics:
+  - num_nonzero_vars -> n_genes_by_{expr_type}
+  - pct_{var_qc_metrics]} -> pct_{expr_type}_{qc_var}
+  - total_counts_{var_qc_metrics} -> total_{expr_type}_{qc_var}
+  - pct_of_counts_in_top_{top_n_vars}_vars -> pct_{expr_type}_in_top_{n}_{var_type}
+  - total_counts -> total_{expr_type}
+  
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main_build -latest \
+  -main-script target/nextflow/qc/calculate_qc_metrics/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Inputs
+input: # please fill in - example: "input.h5mu"
+modality: "rna"
+# layer: "raw_counts"
+# var_qc_metrics: ["ercc", "highly_variable"]
+# top_n_vars: [123]
+
+# Outputs
+# output: "$id.$key.output.h5mu"
+# output_compression: "gzip"
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main_build -latest \
+  -profile docker \
+  -main-script target/nextflow/qc/calculate_qc_metrics/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Inputs
+
+|Name               |Description                                                                                                                                                                                                                    |Attributes                                  |
+|:------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------|
+|`--input`          |Input h5mu file                                                                                                                                                                                                                |`file`, required, example: `"input.h5mu"`   |
+|`--modality`       |                                                                                                                                                                                                                               |`string`, default: `"rna"`                  |
+|`--layer`          |                                                                                                                                                                                                                               |`string`, example: `"raw_counts"`           |
+|`--var_qc_metrics` |Keys to select a boolean (containing only True or False) column from .var. For each cell, calculate the proportion of total values for genes which are labeled 'True',  compared to the total sum of the values for all genes. |`string`, example: `"ercc,highly_variable"` |
+|`--top_n_vars`     |Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. `--top_n_vars 20,50` finds cumulative proportion to the 20th and 50th most expressed vars.                |`integer`                                   |
+
+
+### Outputs
+
+|Name                   |Description                                                  |Attributes                       |
+|:----------------------|:------------------------------------------------------------|:--------------------------------|
+|`--output`             |Output h5mu file.                                            |`file`, example: `"output.h5mu"` |
+|`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`      |
+
+## Authors
+
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (author)

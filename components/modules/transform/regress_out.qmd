@@ -14,7 +14,7 @@ ID: `regress_out`
 Namespace: `transform`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/transform/regress_out){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/transform/regress_out){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -44,6 +44,7 @@ nextflow run openpipelines-bio/openpipeline \
 # Arguments
 input: # please fill in - example: "input.h5mu"
 # output: "$id.$key.output.h5mu"
+# output_compression: "gzip"
 modality: "rna"
 # obs_keys: ["foo"]
 
@@ -69,12 +70,13 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name         |Description                                            |Attributes                                 |
-|:------------|:------------------------------------------------------|:------------------------------------------|
-|`--input`    |Input h5mu file                                        |`file`, required, example: `"input.h5mu"`  |
-|`--output`   |Output h5mu file.                                      |`file`, required, default: `"output.h5mu"` |
-|`--modality` |Which modality (one or more) to run this component on. |`string`, default: `"rna"`                 |
-|`--obs_keys` |Which .obs keys to regress on.                         |`string`                                   |
+|Name                   |Description                                                  |Attributes                                 |
+|:----------------------|:------------------------------------------------------------|:------------------------------------------|
+|`--input`              |Input h5mu file                                              |`file`, required, example: `"input.h5mu"`  |
+|`--output`             |Output h5mu file.                                            |`file`, required, default: `"output.h5mu"` |
+|`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`                |
+|`--modality`           |Which modality (one or more) to run this component on.       |`string`, default: `"rna"`                 |
+|`--obs_keys`           |Which .obs keys to regress on.                               |`string`                                   |
 
 ## Authors
 

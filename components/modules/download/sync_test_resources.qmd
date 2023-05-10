@@ -14,7 +14,7 @@ ID: `sync_test_resources`
 Namespace: `download`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/download/sync_test_resources){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/download/sync_test_resources){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

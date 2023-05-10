@@ -14,7 +14,7 @@ ID: `bbknn`
 Namespace: `neighbors`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/neighbors/bbknn){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/neighbors/bbknn){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -46,6 +46,7 @@ modality: "rna"
 obsm_input: "X_pca"
 obs_batch: "batch"
 # output: "$id.$key.output.output"
+# output_compression: "gzip"
 uns_output: "neighbors"
 obsp_distances: "distances"
 obsp_connectivities: "connectivities"
@@ -82,6 +83,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--obsm_input`               |The dimensionality reduction in `.obsm` to use for neighbour detection. Defaults to X_pca.                                                                                                                                                                                                                                                                                                                        |`string`, default: `"X_pca"`          |
 |`--obs_batch`                |.obs column name discriminating between your batches.                                                                                                                                                                                                                                                                                                                                                             |`string`, default: `"batch"`          |
 |`--output`                   |Output .h5mu file.                                                                                                                                                                                                                                                                                                                                                                                                |`file`, required                      |
+|`--output_compression`       |The compression format to be used on the output h5mu object.                                                                                                                                                                                                                                                                                                                                                      |`string`, example: `"gzip"`           |
 |`--uns_output`               |Mandatory .uns slot to store various neighbor output objects.                                                                                                                                                                                                                                                                                                                                                     |`string`, default: `"neighbors"`      |
 |`--obsp_distances`           |In which .obsp slot to store the distance matrix between the resulting neighbors.                                                                                                                                                                                                                                                                                                                                 |`string`, default: `"distances"`      |
 |`--obsp_connectivities`      |In which .obsp slot to store the connectivities matrix between the resulting neighbors.                                                                                                                                                                                                                                                                                                                           |`string`, default: `"connectivities"` |
