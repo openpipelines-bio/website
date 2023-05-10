@@ -1,5 +1,6 @@
 ---
 title: Creating components
+order: 20
 ---
 
 # A common file format

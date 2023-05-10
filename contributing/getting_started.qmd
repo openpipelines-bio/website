@@ -1,5 +1,6 @@
 ---
 title: Getting started
+order: 0
 ---
 
 # Forking the code and cloning the repository

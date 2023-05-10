@@ -1,5 +1,6 @@
 ---
 title: Publishing your changes
+order: 40
 ---
 
 ## Updating your pull request or branch

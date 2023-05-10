@@ -1,5 +1,6 @@
 ---
 title: Project structure
+order: 10
 ---
 
 ## Project structure

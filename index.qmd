@@ -7,6 +7,11 @@ title-block-banner: "#f0f5f5"
 title-block-banner-color: "#00cc99"
 ---
 
+```{r eval=FALSE, include=FALSE}
+library(rmarkdown)
+library(languageserver)
+```
+
 ::: {layout-nrow=1}
 
 :::{.column}

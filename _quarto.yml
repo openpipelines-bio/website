@@ -3,7 +3,7 @@ project:
 
 website:
   title: "OpenPipelines"
-  image: "openpipelines.png"
+  image: "images/logo.svg"
   site-url: https://openpipelines.bio
   repo-url: https://github.com/openpipelines-bio/website
   navbar:
@@ -16,47 +16,27 @@ website:
       #     - architecture/status.qmd
       #     - architecture/use-cases.qmd
       #     - architecture/file-formats.qmd
-      - sidebar:guide
-      - sidebar:contributing
-      - href: components/index.qmd
-        text: Reference
-      - sidebar:About
+      - components/index.qmd
+      - guide/index.qmd
+      - contributing/index.qmd
 
     right:
+      - about.qmd
       - text: Source Code
         url: https://github.com/openpipelines-bio/openpipeline
   sidebar:
     - id: components
-      collapse-level: 3
+      collapse-level: 4
       title: Components
-      contents: 
-        - components/index.qmd
-        - text: Workflows
-          contents:
-            - auto: "components/workflows/*/*"
-        - text: Modules
-          contents:
-            - auto: "components/modules/*/*"
+      contents: components
     - id: guide
       collapse-level: 3
       title: User Guide
-      contents: 
-        - auto: guide
+      contents: guide
     - id: contributing
       collapse-level: 3
       title: Contributing
-      contents: 
-        - contributing/getting_started.qmd
-        - contributing/creating_components.qmd
-        - contributing/creating_pipelines.qmd
-        - contributing/project_structure.qmd
-        - contributing/running_tests.qmd
-        - contributing/pull_requests.qmd
-    - id: About
-      collapse-level: 2
-      contents:
-        - about/authors.qmd
-        - about/openpipelines.qmd
+      contents:  contributing
   page-footer: "Copyright 2022, OpenPipelines.bio"
   repo-actions: [edit, issue] 
   google-analytics: G-KKE3LFPPV8
