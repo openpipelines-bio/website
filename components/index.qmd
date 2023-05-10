@@ -1,6 +1,7 @@
 ---
 title: "Components"
 description: An overview of the workflows and modules in OpenPipelines
+page-layout: full
 listing:
   - id: workflows
     type: table

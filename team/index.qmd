@@ -1,5 +1,5 @@
 ---
-title: "About"
+title: "Team"
 toc: false
 page-layout: full
 anchor-sections: false
@@ -24,7 +24,7 @@ authors <- lapply(paths, yaml::read_yaml)
 for (author in authors) {
   author_id <- gsub("[^a-z_]", "", gsub(" ", "_", tolower(author$name)))
   
-  out_path <- paste0(repo_path, "/about/authors/", author_id, "/index.qmd")
+  out_path <- paste0(repo_path, "/team/authors/", author_id, "/index.qmd")
   out_dir <- dirname(out_path)
   if (!dir.exists(out_dir)) {
     dir.create(out_dir, recursive = TRUE)

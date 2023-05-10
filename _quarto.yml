@@ -1,27 +1,32 @@
 project:
   type: website
+  preview:
+    port: 4100
 
 website:
   title: "OpenPipelines"
+  description: "Best-practice workflows for single-cell single- and multi-omics data"
   image: "images/logo.svg"
   site-url: https://openpipelines.bio
   repo-url: https://github.com/openpipelines-bio/website
+  repo-actions: [edit, issue] 
+  google-analytics: G-KKE3LFPPV8
+
+  page-footer:
+    left: "&copy; OpenPipelines.bio 2022"
+
   navbar:
     logo: "images/logo_source.svg"
     title: false
     left:
-      # - text: Architecture
-      #   menu: 
-      #     - architecture/index.qmd
-      #     - architecture/status.qmd
-      #     - architecture/use-cases.qmd
-      #     - architecture/file-formats.qmd
+      - href: index.qmd
+        text: About
       - components/index.qmd
       - guide/index.qmd
       - contributing/index.qmd
 
     right:
-      - about/index.qmd
+      - team/index.qmd
       - text: Source Code
         url: https://github.com/openpipelines-bio/openpipeline
   sidebar:
@@ -37,9 +42,6 @@ website:
       collapse-level: 3
       title: Contributing
       contents:  contributing
-  page-footer: "Copyright 2022, OpenPipelines.bio"
-  repo-actions: [edit, issue] 
-  google-analytics: G-KKE3LFPPV8
 
 format:
   html:

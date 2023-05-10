@@ -40,7 +40,7 @@ Contributing
 :::{.column}
 More resources
 
-- [Team](about.qmd)
+- [Team](team/index.qmd)
 - [Source code](https://github.com/openpipelines-bio/openpipeline)
 :::
 
