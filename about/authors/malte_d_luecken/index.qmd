@@ -1,0 +1,18 @@
+---
+title: Malte D. Luecken
+image: https://www.github.com/LuckyMD.png
+organizations: []
+about:
+  template: jolla
+  links:
+  - icon: bi-envelope
+    text: E-mail
+    href: mailto:malte.luecken@helmholtz-muenchen.de
+  - icon: bi-github
+    text: GitHub
+    href: https://github.com/LuckyMD
+  - icon: fa-brands fa-orcid
+    text: ORCID
+    href: https://orcid.org/0000-0001-7464-7921
+---
+

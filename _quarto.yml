@@ -21,7 +21,7 @@ website:
       - contributing/index.qmd
 
     right:
-      - about.qmd
+      - about/index.qmd
       - text: Source Code
         url: https://github.com/openpipelines-bio/openpipeline
   sidebar:
