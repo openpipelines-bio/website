@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>OpenPipelines - File formats</title>
+<title>OpenPipelines - Architecture</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -101,12 +67,15 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 </script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -114,7 +83,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../openpipelines.png" alt="" class="navbar-logo">
+    <img src="../images/logo.svg" alt="" class="navbar-logo">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -127,39 +96,24 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
     <a class="nav-link" href="../index.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-architecture" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
- <span class="menu-text">Architecture</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-architecture">    
-        <li>
-    <a class="dropdown-item" href="../architecture/index.html" rel="" target="">
- <span class="dropdown-text">Overview</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../architecture/status.html" rel="" target="">
- <span class="dropdown-text">Status</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../architecture/use-cases.html" rel="" target="">
- <span class="dropdown-text">Use-cases</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../architecture/file-formats.html" rel="" target="">
- <span class="dropdown-text">File formats</span></a>
-  </li>  
-    </ul>
-  </li>
   <li class="nav-item">
     <a class="nav-link" href="../components/index.html" rel="" target="">
  <span class="menu-text">Components</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../guide/index.html" rel="" target="">
+    <a class="nav-link active" href="../guide/index.html" rel="" target="" aria-current="page">
  <span class="menu-text">Guide</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../contributing/index.html" rel="" target="">
+ <span class="menu-text">Contributing</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../team/index.html" rel="" target="">
+ <span class="menu-text">Team</span></a>
+  </li>  
   <li class="nav-item">
     <a class="nav-link" href="https://github.com/openpipelines-bio/openpipeline" rel="" target="">
  <span class="menu-text">Source Code</span></a>
@@ -170,31 +124,90 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/index.html">Guide</a></li><li class="breadcrumb-item"><a href="../guide/architecture.html">Architecture</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../guide/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Guide</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../guide/architecture.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Architecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../guide/bug_reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bug reports</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../guide/data_api.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data API</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../guide/implementation_status.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Status</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../guide/running_pipelines.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Running pipelines</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#dataset" id="toc-dataset" class="nav-link active" data-scroll-target="#dataset">Dataset</a></li>
-  <li><a href="#rna-modality" id="toc-rna-modality" class="nav-link" data-scroll-target="#rna-modality">RNA modality</a></li>
-  <li><a href="#adt-modality" id="toc-adt-modality" class="nav-link" data-scroll-target="#adt-modality">ADT modality</a></li>
-  <li><a href="#vdj-modality" id="toc-vdj-modality" class="nav-link" data-scroll-target="#vdj-modality">VDJ modality</a></li>
-  <li><a href="#atac-modality" id="toc-atac-modality" class="nav-link" data-scroll-target="#atac-modality">ATAC modality</a></li>
-  <li><a href="#rna-velocity-modality" id="toc-rna-velocity-modality" class="nav-link" data-scroll-target="#rna-velocity-modality">RNA velocity modality</a></li>
+  <li><a href="#use-cases" id="toc-use-cases" class="nav-link active" data-scroll-target="#use-cases">Use-cases</a>
+  <ul class="collapse">
+  <li><a href="#a-single-unimodal-sample" id="toc-a-single-unimodal-sample" class="nav-link" data-scroll-target="#a-single-unimodal-sample">A single unimodal sample</a></li>
+  <li><a href="#multiple-unimodal-samples" id="toc-multiple-unimodal-samples" class="nav-link" data-scroll-target="#multiple-unimodal-samples">Multiple unimodal samples</a></li>
+  <li><a href="#a-single-multimodal-sample" id="toc-a-single-multimodal-sample" class="nav-link" data-scroll-target="#a-single-multimodal-sample">A single multimodal sample</a></li>
+  <li><a href="#multiple-multimodal-samples" id="toc-multiple-multimodal-samples" class="nav-link" data-scroll-target="#multiple-multimodal-samples">Multiple multimodal samples</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/architecture/file-formats.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/guide/architecture.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">File formats</h1>
+<h1 class="title">Architecture</h1>
 </div>
 
 
@@ -209,6 +222,91 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 
 </header>
 
+<p>The single-cell workflow is comprised of multiple (standalone) subworkflows.</p>
+<div class="column-screen-inset-shaded">
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-architecture" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div>
+
+<pre class="mermaid mermaid-js" data-label="fig-architecture">flowchart TD  
+  subgraph ingest ["Ingestion"]
+    direction LR
+    RawCounts1["Raw counts"]
+    BCL["BCL"]
+    Demux["Demux"]
+    Fastq["Fastq"]
+    Ref["Reference"]
+    Mapping["Mapping"]
+    RawDir["Raw out"]
+    Convert["Convert"]
+    RawCounts1["Raw counts"]
+    BCL --&gt; Demux --&gt; Fastq
+    Fastq &amp; Ref --&gt; Mapping --&gt; RawDir --&gt; Convert --&gt; RawCounts1
+  end
+  subgraph unimodalsinglesample ["Unimodal Single Sample Processing"]
+    direction LR
+    RawCounts2["Raw counts for one modality"]
+    ProccessedCounts1["Processed\nCounts"]
+    AmbientRNACorr[/"Ambient RNA\ncorrection"/]
+    RawCounts2 --&gt; CellFiltering --&gt; DoubletCalling --&gt; AmbientRNACorr --&gt; ProccessedCounts1
+  end
+  subgraph unimodalmultisample ["Unimodal Multi Sample Processing"]
+    direction LR
+    FeatureAnnotation[/"Feature annotation"/]
+    BatchCorrection["Batch correction"]
+    Normalization["Normalisation"]
+    FeatureSelection["Feature selection"]
+    ProccessedCounts2["Processed\nCounts"]
+    DoubletCalling["Doublet\ncalling"]
+    CellFiltering["Cell\nfiltering"]
+    NormalisedOut["Normalised\ncounts"]
+
+    ProccessedCounts2 --&gt; FeatureAnnotation --&gt; BatchCorrection --&gt; Normalization --&gt; FeatureSelection --&gt; NormalisedOut
+  end
+  subgraph integration ["Integration"]
+    direction LR
+
+    Normalised["Normalised\ncounts"]
+    Integrated["Integrated\ndata"]
+
+    DataIntegration[/"Data integration"/]
+    DimRed[/"Dimensionality\nreduction"/]
+  
+    Normalised --&gt; DataIntegration --&gt; DimRed --&gt; Integrated
+
+  end
+  subgraph downstreamprocessing ["Downstream Processing"]
+    direction LR
+    Interpretation["Interpretation"]
+    Conversion["Conversion"]
+    Dataset["Dataset"]
+
+    Interpretation --&gt; Conversion --&gt; Dataset
+  end
+
+  ingest --&gt; split --&gt; unimodalsinglesample --&gt; concat --&gt; unimodalmultisample --&gt; merging --&gt; integration  --&gt; downstreamprocessing
+  %% Do not change the ID for these boxes because this is linked to custom css
+  titlebox_ingestion["Convert raw sequencing data\nor count tables into MuData data\nfor further processing."]
+  titlebox_empty[" "]
+  titlebox2["Per modality fitering pipelines\nare available to select true\nfrom false cells."]
+  titlebox_empty2[" "]
+  titlebox3["..."]
+  titlebox_empty3[" "]
+  titlebox4["Performs an integration pipeline for single\ncell data based on a single or multiple modalities."]
+  titlebox5["Take different dataset annotations and combine\nthem together into a single enriched dataset.\n The idea is to have a diff_muon object,\n i.e. a muon object containing the  changes \n of the original objectwhere data from the\ndiff_muon will be pushed to the original muon object."]
+  titlebox_ingestion --&gt; titlebox_empty --&gt; titlebox2 --&gt; titlebox_empty2 --&gt; titlebox3 --&gt; titlebox_empty3--&gt; titlebox4 --&gt; titlebox5
+</pre>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;1: Overview single cell processing steps in OpenPipeline. Rectangles are data objects, parallelograms are Viash modules or subworkflows.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<section id="use-cases" class="level1 page-columns page-full">
+<h1>Use-cases</h1>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -219,88 +317,113 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>File formats are being discussed in <a href="https://github.com/openpipelines-bio/openpipeline/issues/102">openpipelines-bio/openpipeline#102</a></p>
+<p>In these use-cases, <code>Interpretation</code>, <code>Conversion</code> and <code>Dataset</code> are omitted because they are the same in every use case.</p>
 </div>
 </div>
-<section id="dataset" class="level2">
-<h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obs</span><span class="kw">:</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at"> index</span><span class="co"> # cell id</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at"> sample</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at"> cell_type</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at"> organism</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at"> tissue</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mod</span><span class="kw">:</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="fu">rna</span><span class="kw">:</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="fu">rnav</span><span class="kw">:</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="fu">prot</span><span class="kw">:</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="fu">atac</span><span class="kw">:</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="fu">vdj</span><span class="kw">:</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="a-single-unimodal-sample" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="a-single-unimodal-sample">A single unimodal sample</h3>
+<div class="column-screen-inset-shaded">
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-example1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-example1">flowchart LR
+
+  Raw1[Sample 1] --&gt; Split1[/Split\nmodalities/] --&gt; ProcGEX1[/Process GEX\nprofile/]
+  ProcGEX1 --&gt; ConcatGEX[/Concatenate\nprofiles/] --&gt; ProcGEX[/Process GEX\nprofiles/]
+  ProcGEX --&gt; Merge[/Merge\nmodalities/] --&gt; Integration[/Integration/]
+
+</pre>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;2: Example of how the concatenation and merges work.<br>
+GEX: Gene-expression.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="rna-modality" class="level2">
-<h2 class="anchored" data-anchor-id="rna-modality">RNA modality</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mod</span><span class="kw">:</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="fu">rna</span><span class="kw">:</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">   </span><span class="fu">layers</span><span class="kw">:</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">     counts</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">     normalized</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">   </span><span class="fu">obs</span><span class="kw">:</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="at">     &lt;qc metrics&gt;</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">     doublet_score</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">     doublet_bool</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">     cluster</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="at">   </span><span class="fu">var</span><span class="kw">:</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="at">     index</span><span class="co"> # feature_id, preferably an ensembl id</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="at">     feature_name</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="at">     &lt;qc metrics&gt;</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="at">     highly_variable</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="at">     highly_variable_score</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="at">   </span><span class="fu">obsm</span><span class="kw">:</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="at">     X_pca</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="at">     X_integrated</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="at">     X_umap</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="at">     annotation</span><span class="co"> # scvi, bbknn, ...</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="at">   </span><span class="fu">obsp</span><span class="kw">:</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="at">     connectivities</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="at">     distances</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="multiple-unimodal-samples" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="multiple-unimodal-samples">Multiple unimodal samples</h3>
+<div class="column-screen-inset-shaded">
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-example3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-example3">flowchart LR
+
+  Raw1[Sample 1] --&gt; Split1[/Split\nmodalities/] --&gt; ProcGEX1[/Process GEX\nprofile/]
+  Raw2[Sample 2] --&gt; Split2[/Split\nmodalities/] --&gt; ProcGEX2[/Process GEX\nprofile/]
+  Raw3[Sample 3] --&gt; Split3[/Split\nmodalities/] --&gt; ProcGEX3[/Process GEX\nprofile/]
+  ProcGEX1 &amp; ProcGEX2 &amp; ProcGEX3 --&gt; ConcatGEX[/Concatenate\nprofiles/] --&gt; ProcGEX[/Process GEX\nprofiles/] 
+  ProcGEX --&gt; Merge[/Merge\nmodalities/] --&gt; Integration[/Integration/]
+
+</pre>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;3: Example of how the concatenation and merges work.<br>
+GEX: Gene-expression.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="adt-modality" class="level2">
-<h2 class="anchored" data-anchor-id="adt-modality">ADT modality</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mod</span><span class="kw">:</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="fu">prot</span><span class="kw">:</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">   </span><span class="fu">layers</span><span class="kw">:</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">     counts</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="at">   </span><span class="fu">var</span><span class="kw">:</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="at">      index</span><span class="co"> # feature_id</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">      feature_name</span><span class="co"> # Associated protein names</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="a-single-multimodal-sample" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="a-single-multimodal-sample">A single multimodal sample</h3>
+<div class="column-screen-inset-shaded">
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-example2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-example2">flowchart LR
+
+  Raw1[Sample 1] --&gt; Split1[/Split\nmodalities/] --&gt; ProcGEX1 &amp; ProcADT1 &amp; ProcRNAV1
+  ProcGEX1[/Process GEX\nprofile/] --&gt; ConcatGEX[/Concatenate\nprofiles/] --&gt; ProcGEX[/Process GEX\nprofiles/]
+  ProcADT1[/Process ADT\nprofile/] --&gt; ConcatADT[/Concatenate\nprofiles/] --&gt; ProcADT[/Process ADT\nprofiles/]
+  ProcRNAV1[/Process RNAV\nprofile/] --&gt; ConcatRNAV[/Concatenate\nprofiles/] --&gt; ProcRNAV[/Process RNAV\nprofiles/]
+  ProcGEX &amp; ProcADT &amp; ProcRNAV--&gt; Merge[/Merge\nmodalities/] --&gt; Integration[/Integration/]
+
+</pre>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;4: Example of how the concatenation and merges work.<br>
+GEX: Gene-expression. ADT: Antibody-Derived Tags. RNAV: RNA Velocity.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="vdj-modality" class="level2">
-<h2 class="anchored" data-anchor-id="vdj-modality">VDJ modality</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mod</span><span class="kw">:</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="fu">vdj</span><span class="kw">:</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">   </span><span class="fu">obsm</span><span class="kw">:</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">     vdj_t</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="at">     vdj_b</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="atac-modality" class="level2">
-<h2 class="anchored" data-anchor-id="atac-modality">ATAC modality</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mod</span><span class="kw">:</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="fu">atac</span><span class="kw">:</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">   </span><span class="fu">layers</span><span class="kw">:</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">     counts</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">   </span><span class="fu">var</span><span class="kw">:</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="at">     interval</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="rna-velocity-modality" class="level2">
-<h2 class="anchored" data-anchor-id="rna-velocity-modality">RNA velocity modality</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mod</span><span class="kw">:</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="fu">rnav</span><span class="kw">:</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="at">   </span><span class="fu">layers</span><span class="kw">:</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="at">     spliced</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="at">     unspliced</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="multiple-multimodal-samples" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="multiple-multimodal-samples">Multiple multimodal samples</h3>
+<div class="column-screen-inset-shaded">
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-example4" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-example4">flowchart LR
+
+  Raw1[Sample 1] --&gt; Split1[/Split\nmodalities/] --&gt; ProcGEX1 &amp; ProcADT1
+  Raw2[Sample 2] --&gt; Split2[/Split\nmodalities/] --&gt; ProcGEX2 &amp; ProcADT2
+  ProcGEX1[/Process GEX\nprofile/] &amp; ProcGEX2[/Process GEX\nprofile/] --&gt; ConcatGEX[/Concatenate\nprofiles/] --&gt; ProcGEX[/Process GEX\nprofiles/]
+  ProcADT1[/Process ADT\nprofile/] &amp; ProcADT2[/Process ADT\nprofile/] --&gt; ConcatADT[/Concatenate\nprofiles/] --&gt; ProcADT[/Process ADT\nprofiles/]
+  ProcGEX &amp; ProcADT --&gt; Merge[/Merge\nmodalities/] --&gt; Integration[/Integration/]
+
+</pre>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;5: Example of how the concat and merges work.<br>
+GEX: Gene-expression. ADT: Antibody-Derived Tags.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -540,10 +663,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">
+    <div class="nav-footer-left">© OpenPipelines.bio 2022</div>   
+    <div class="nav-footer-center">
       &nbsp;
-    </div>   
-    <div class="nav-footer-center">Copyright 2022, OpenPipelines.bio</div>
+    </div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

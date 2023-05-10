@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>OpenPipelines - Status</title>
+<title>OpenPipelines - Running pipelines</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -67,15 +101,12 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 </script>
-<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -83,7 +114,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../openpipelines.png" alt="" class="navbar-logo">
+    <img src="../images/logo.svg" alt="" class="navbar-logo">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -96,39 +127,24 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
     <a class="nav-link" href="../index.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-architecture" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
- <span class="menu-text">Architecture</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-architecture">    
-        <li>
-    <a class="dropdown-item" href="../architecture/index.html" rel="" target="">
- <span class="dropdown-text">Overview</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../architecture/status.html" rel="" target="">
- <span class="dropdown-text">Status</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../architecture/use-cases.html" rel="" target="">
- <span class="dropdown-text">Use-cases</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../architecture/file-formats.html" rel="" target="">
- <span class="dropdown-text">File formats</span></a>
-  </li>  
-    </ul>
-  </li>
   <li class="nav-item">
     <a class="nav-link" href="../components/index.html" rel="" target="">
  <span class="menu-text">Components</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../guide/index.html" rel="" target="">
+    <a class="nav-link active" href="../guide/index.html" rel="" target="" aria-current="page">
  <span class="menu-text">Guide</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../contributing/index.html" rel="" target="">
+ <span class="menu-text">Contributing</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../team/index.html" rel="" target="">
+ <span class="menu-text">Team</span></a>
+  </li>  
   <li class="nav-item">
     <a class="nav-link" href="https://github.com/openpipelines-bio/openpipeline" rel="" target="">
  <span class="menu-text">Source Code</span></a>
@@ -139,20 +155,89 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/index.html">Guide</a></li><li class="breadcrumb-item"><a href="../guide/running_pipelines.html">Running pipelines</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../guide/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Guide</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../guide/architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Architecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../guide/bug_reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bug reports</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../guide/data_api.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data API</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../guide/implementation_status.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Status</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../guide/running_pipelines.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Running pipelines</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#installing-viash-and-nextflow" id="toc-installing-viash-and-nextflow" class="nav-link active" data-scroll-target="#installing-viash-and-nextflow">Installing Viash and Nextflow</a>
+  <ul class="collapse">
+  <li><a href="#running-pipelines-from-the-cli" id="toc-running-pipelines-from-the-cli" class="nav-link" data-scroll-target="#running-pipelines-from-the-cli">Running pipelines from the CLI</a></li>
+  <li><a href="#running-pipelines-from-nextflow-tower" id="toc-running-pipelines-from-nextflow-tower" class="nav-link" data-scroll-target="#running-pipelines-from-nextflow-tower">Running pipelines from Nextflow Tower</a></li>
+  <li><a href="#using-param_list-to-pass-large-parameter-sets" id="toc-using-param_list-to-pass-large-parameter-sets" class="nav-link" data-scroll-target="#using-param_list-to-pass-large-parameter-sets">Using param_list to pass large parameter sets</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/guide/running_pipelines.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Status</h1>
+<h1 class="title">Running pipelines</h1>
 </div>
 
 
@@ -167,35 +252,58 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 
 </header>
 
-<div class="column-screen-inset-shaded">
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-status" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<div>
-<pre class="mermaid mermaid-js" data-label="fig-status">flowchart LR
-  classDef done fill:#a3f6cf,stroke:#000000;
-  classDef wip fill:#f4cb93,stroke:#000000;
-  classDef todo fill:#f0aeb2,stroke:#000000;
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>TODO: Fill in these sections.</p>
+<ul>
+<li>Examples should be using an OpenPipelines release or the <code>main_build</code> branch.</li>
+<li>Point to the “Components” tab</li>
+</ul>
+</div>
+</div>
+<section id="installing-viash-and-nextflow" class="level1">
+<h1>Installing Viash and Nextflow</h1>
+<p>Before you try running OpenPipelines, please install Viash and Nextflow first (<strong>?@sec-install-viash-nextflow</strong>).</p>
+<section id="running-pipelines-from-the-cli" class="level3">
+<h3 class="anchored" data-anchor-id="running-pipelines-from-the-cli">Running pipelines from the CLI</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bin/nextflow</span> run . <span class="dt">\</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> workflows/integration/multimodal_integration/main.nf <span class="dt">\</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-profile</span> docker <span class="dt">\</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-resume</span> </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--publish_dir</span> foo/</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--input</span> <span class="st">"bar"</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--output</span> <span class="st">"test.txt"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="running-pipelines-from-nextflow-tower" class="level3">
+<h3 class="anchored" data-anchor-id="running-pipelines-from-nextflow-tower">Running pipelines from Nextflow Tower</h3>
+</section>
+<section id="using-param_list-to-pass-large-parameter-sets" class="level3">
+<h3 class="anchored" data-anchor-id="using-param_list-to-pass-large-parameter-sets">Using param_list to pass large parameter sets</h3>
+<p>Using Viash’s VDSL3 nextflow platform, an optional <code>-param_list</code> argument can be used to pass a large number of inputs to a workflow. Additionally, the pipeline parameter values can be set for each input to the workflow independently. A <code>param_list</code> can either be a list of maps, a csv file, a json file, a yaml file, or simply a yaml blob:</p>
+<ul>
+<li>A csv file should have column names which correspond to the different arguments of this pipeline. Example: <code>--param_list data.csv</code> with columns <code>id,input</code>.</li>
+<li>A json or a yaml file should be a list of maps, each of which has keys corresponding to the arguments of the pipeline. Example: <code>--param_list data.json</code> with contents <code>[ {'id': 'foo', 'input': 'foo.txt'}, {'id': 'bar', 'input': 'bar.txt'} ]</code>.</li>
+<li>A yaml blob can also be passed directly as a string. Example: <code>--param_list "[ {'id': 'foo', 'input': 'foo.txt'}, {'id': 'bar', 'input': 'bar.txt'} ]"</code>.</li>
+<li>A list of maps can be in a <code>nextflow.config</code> file, where the keys of each map corresponds to the arguments of the pipeline. Example in a <code>nextflow.config</code> file: <code>param_list: [ ['id': 'foo', 'input': 'foo.txt'], ['id': 'bar', 'input': 'bar.txt'] ]</code>.</li>
+</ul>
+<p>When passing a csv, json or yaml file, relative path names are relativized to the location of the parameter file. No relativation is performed when <code>param_list</code> is a list of maps (as-is) or a yaml blob.</p>
+<p>Using a <code>param_list</code> can be combined with setting parameters that are set for all parameter sets. These ‘gobal’ parameters will always be overwritten with their counterpart that was specified in a more specific manner for a single parameter set. For example, using <code>--param_list "[ {'id': 'foo', 'input': 'foo.txt'}, {'id': 'bar'} ]" --input 'global.txt'</code> will result in the following parameter sets being processed:</p>
+<ul>
+<li><code>id</code>: <code>foo</code>, <code>input</code>: <code>foo.txt</code></li>
+<li><code>id</code>: <code>bar</code>, <code>input</code>: <code>global.txt</code></li>
+</ul>
 
-  Raw1[Sample 1] --&gt; Split1[/Split\nmodalities/]:::done --&gt; ProcGEX1 &amp; ProcRNAV1 &amp; ProcADT1 &amp; ProcATAC1 &amp; ProcVDJ1
-  ProcGEX1[/Process GEX\nprofile/]:::done --&gt; ConcatGEX[/Concatenate\nprofiles/]:::done --&gt; ProcGEX[/Process GEX\nprofiles/]:::done
-  ProcRNAV1[/Process RNAV\nprofile/]:::wip --&gt; ConcatRNAV[/Concatenate\nprofiles/]:::done --&gt; ProcRNAV[/Process RNAV\nprofiles/]:::wip
-  ProcADT1[/Process ADT\nprofile/]:::done --&gt; ConcatADT[/Concatenate\nprofiles/]:::done --&gt; ProcADT[/Process ADT\nprofiles/]:::todo
-  ProcATAC1[/Process ATAC\nprofile/]:::todo --&gt; ConcatATAC[/Concatenate\nprofiles/]:::done --&gt; ProcATAC[/Process ATAC\nprofiles/]:::todo
-  ProcVDJ1[/Process VDJ\nprofile/]:::todo --&gt; ConcatVDJ[/Concatenate\nprofiles/]:::done --&gt; ProcVDJ[/Process VDJ\nprofiles/]:::todo
-  ProcGEX &amp; ProcRNAV &amp; ProcADT &amp; ProcATAC &amp; ProcVDJ --&gt; Merge[/Merge\nmodalities/]:::done --&gt; Integration[/Integration/]:::done
-</pre>
-</div>
-<figcaption class="figure-caption">Figure&nbsp;1: Status of implemented components. Green: implemented, orange: work in progress,<br>
-GEX: Gene-expression. RNAV: RNA Velocity. ADT: Antibody-Derived Tags. ATAC: Assay for Transposase-Accessible Chromatin.</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
 
-
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -434,10 +542,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">
+    <div class="nav-footer-left">© OpenPipelines.bio 2022</div>   
+    <div class="nav-footer-center">
       &nbsp;
-    </div>   
-    <div class="nav-footer-center">Copyright 2022, OpenPipelines.bio<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/architecture/status.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    </div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
