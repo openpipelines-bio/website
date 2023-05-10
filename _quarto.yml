@@ -16,7 +16,7 @@ website:
     left: "&copy; OpenPipelines.bio 2022"
 
   navbar:
-    logo: "images/logo_source.svg"
+    logo: "images/logo.svg"
     title: false
     left:
       - href: index.qmd
