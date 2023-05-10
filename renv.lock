@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.1.3",
+    "Version": "4.2.3",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -8,11 +8,14 @@
       }
     ]
   },
-  "Python": {
-    "Version": "3.10.7",
-    "Type": "virtualenv",
-    "Name": "./renv/python/virtualenvs/renv-python"
-  },
   "Packages": {
+    "renv": {
+      "Package": "renv",
+      "Version": "0.16.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c9e8442ab69bc21c9697ecf856c1e6c7",
+      "Requirements": []
+    }
   }
 }
