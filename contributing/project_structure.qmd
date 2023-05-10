@@ -1,0 +1,67 @@
+---
+title: Project structure
+order: 10
+---
+
+## Project structure
+The root of the repository contains three main folders:
+
+1. `src`, which contains the source code for individual components.
+2. The `workflows` folder containing the implementations of the pipelines (combining one or more components).
+3. (optionally) the `target` folder 
+
+Each subfolder from `src` contains a Viash [namespace](https://viash.io/guides/projects/namespaces/), a logical grouping of pipeline components that perform a similar function. Within each namespace, subfolders designate individual pipeline components. For example `./src/convert/from_bdrhap_to_h5ad` contains the implementation for a component `from_bdrhap_to_h5ad` which is grouped together with other components such as `from_10xmtx_to_h5mu` into a namespace `convert`. In a similar manner as grouping components into `namespaces`, pipelines are grouped together into folders. However, these are not component namespaces and as such do not interact with `viash ns` commands.
+
+As will become apparent later on, Viash not only provides commands to perform operations on individual components, but also on groups of components in a namespace and all components in a project. As a rule of thumb, the basic Viash commands (like `./bin/viash test`) are designated for running commands on individual components, while `ns` commands are (`./bin/viash ns test`) are for namespaces.
+When cloning a fresh repository, there will be no `target` folder present. This is because the target folder will only be created after components have been build. 
+
+## Branching strategy
+
+```{mermaid}
+%%{init: { 'logLevel': 'debug', 'theme': 'default'} } }%%
+gitGraph
+  commit id: "initial commit"
+  branch main_build
+  commit id: "CI build"
+  checkout main
+  commit
+  checkout main_build
+  merge main
+  checkout main
+  branch feature_a
+  branch feature_b
+  checkout feature_a
+  commit
+  commit
+  checkout main
+  commit id: "#release 0.1" type: HIGHLIGHT
+  checkout main_build
+  merge main
+  checkout main
+  branch release
+  commit tag: "0.1"
+  checkout main
+  commit
+  checkout feature_b
+  commit
+  commit
+  checkout feature_a
+  commit
+  checkout main
+  merge feature_a
+  checkout main_build
+  merge main
+  checkout main
+  checkout feature_b
+  commit
+  checkout main
+  merge feature_b
+  checkout main_build
+  merge main
+  checkout release
+  merge main tag: "0.2"
+```
+
+The develoment version of openpipelines is available on the `main` branch. This is where all new code should be merged into by creating a pull request. 
+Once a pull request has been approved and merged, Github Actions CI will automatically build all components (creating the `target` directory) and push the result to the `main_build` branch.
+In essence, the `main_build` branch is a copy of the `main` branch, but also containing the build components. Once it is time to create a openpipelines release, the Github CI release workflow is manually triggered, the components on the `main` branch will be build and tested. Then, the result will be pushed to the `release` branch and the integration tests will be run. If all tests succeeded, a new github tag and release can be created manually from the `release` branch.

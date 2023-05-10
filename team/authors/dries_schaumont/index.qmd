@@ -1,0 +1,18 @@
+---
+title: Dries Schaumont
+image: https://www.github.com/DriesSchaumont.png
+organizations: []
+about:
+  template: jolla
+  links:
+  - icon: bi-envelope
+    text: E-mail
+    href: mailto:dries@data-intuitive.com
+  - icon: bi-github
+    text: GitHub
+    href: https://github.com/DriesSchaumont
+  - icon: fa-brands fa-orcid
+    text: ORCID
+    href: https://orcid.org/0000-0002-4389-0440
+---
+

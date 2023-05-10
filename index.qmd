@@ -1,10 +1,47 @@
 ---
-title: "About"
+title: "OpenPipelines"
+subtitle: "Best-practice workflows for single-cell single- and multi-omics data"
 sidebar: false
+page-layout: full
+title-block-banner: "#f0f5f5"
+title-block-banner-color: "#00cc99"
+listing:
+  - id: guide
+    type: default
+    template: templates/bullet_listing.ejs
+    contents: guide
+  - id: contributing
+    type: default
+    template: templates/bullet_listing.ejs
+    contents: contributing
 ---
 
-Breakthroughs in single-cell genomics have been made possible by the simultaneous advancement of experimental and computational technologies. While experimental techniques standardize quickly, computational analysis pipelines are more challenging to compare and thus vary. Analysis platforms such as Seurat and Scanpy have facilitated pipeline building and introduced basic quality standards. Furthermore, we have made first attempts at standardizing workflows for scRNA-seq to bridge the language-gap between these platforms and their users.
+```{r eval=FALSE, include=FALSE}
+library(rmarkdown)
+library(languageserver)
+```
 
-However, as new analysis methods are being proposed at an increasing rate, and novel multi-omic sequencing technologies are becoming commonplace, there is an urgent need for new analysis standards for single-cell (multi-)omics data. 
+::::{layout-nrow=1}
 
-OpenPipelines are best-practice workflows for single-cell single- and multi-omics data. To ensure these workflows are accessible to non-experts and can be deployed in a fast and reproducible way, we will build these into reproducible, modular, and updatable best-practice analysis pipelines using industry-standard workflow tools, high-performance versions of popular methods, and an interoperable, language-independent framework.
+:::{.column}
+Getting started
+
+:::{#guide}
+:::
+:::
+
+:::{.column}
+Contributing
+
+:::{#contributing}
+:::
+:::
+
+:::{.column}
+More resources
+
+- [Team](team/index.qmd)
+- [Source code](https://github.com/openpipelines-bio/openpipeline)
+:::
+
+::::

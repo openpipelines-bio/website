@@ -1,0 +1,8 @@
+# Which workflow is right for me
+
+# Executing pipelines or build components
+## Using the nf-tower user-interface
+
+## Using the nf-tower CLI (`tw`)
+
+## Using the `nextflow` CLI

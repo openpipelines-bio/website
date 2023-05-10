@@ -1,0 +1,80 @@
+---
+title: "Team"
+toc: false
+page-layout: full
+anchor-sections: false
+listing:
+  - id: authors
+    contents: authors/*/index.qmd
+    type: custom
+    template: members.ejs
+    sort: ''
+css: team.css
+---
+
+<!-- this is here to make sure fontawesome is loaded in-->
+{{< fa letter >}}
+
+{{< include ../_include/_clone_repo.qmd >}}
+
+```{r, include=FALSE}
+paths <- list.files("src/authors", pattern = ".yaml", full.names = TRUE, recursive = TRUE)
+authors <- lapply(paths, yaml::read_yaml)
+
+for (author in authors) {
+  author_id <- gsub("[^a-z_]", "", gsub(" ", "_", tolower(author$name)))
+  
+  out_path <- paste0(repo_path, "/team/authors/", author_id, "/index.qmd")
+  out_dir <- dirname(out_path)
+  if (!dir.exists(out_dir)) {
+    dir.create(out_dir, recursive = TRUE)
+  }
+
+  out <- list(
+    title = author$name,
+    image = "/images/avatar.svg",
+    organizations = list(),
+    about = list(
+      template = "jolla",
+      links = list()
+    )
+  )
+
+  if (!is.null(author$email)) {
+    email_clean <- tolower(stringr::str_trim(author$email))
+    checksum <- digest::digest(email_clean, algo = "md5", serialize = FALSE)
+    out$image <- paste0("https://www.gravatar.com/avatar/", checksum)
+    out$about$links <- c(out$about$links, list(list(
+      icon = "bi-envelope",
+      text = "E-mail",
+      href = paste0("mailto:", author$email)
+    )))
+  }
+
+  if (!is.null(author$props$github)) {
+    out$image <- paste0("https://www.github.com/", author$props$github, ".png")
+    out$about$links <- c(out$about$links, list(list(
+      icon = "bi-github",
+      text = "GitHub",
+      href = paste0("https://github.com/", author$props$github)
+    )))
+  }
+
+  if (!is.null(author$props$orcid)) {
+    out$about$links <- c(out$about$links, list(list(
+      icon = "fa-brands fa-orcid",
+      text = "ORCID",
+      href = paste0("https://orcid.org/", author$props$orcid)
+    )))
+  }
+
+  txt <- paste0("---\n", yaml::as.yaml(out), "---\n")
+
+  writeLines(txt, out_path)
+}
+```
+
+## Authors
+
+:::{#authors}
+:::

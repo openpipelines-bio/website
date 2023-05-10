@@ -1,0 +1,72 @@
+---
+title: Creating components
+order: 20
+---
+
+# A common file format
+
+One of the core principals of OpenPipelines is to use [MuData](https://mudata.readthedocs.io/) as a common data format troughout the whole pipeline. This means that the input and output for most components and workflows will be a MuData file and converters from and to other common data formats are provided to improve compatibility with downstream applications. Choosing a common data format greatly diminishes the development complexity because it facilitates interfacing between different tools in a pipeline without needing to convert multiple times.
+
+MuData is a format to store annotated multimodal data. It is derived from the [AnnData](https://anndata.readthedocs.io/en/latest/) format. If you are unfamiliar with AnnData or MuData, it is recommended to read up on AnnData first as it is the unimodal counterpart of MuData. MuData can be roughly described as collection of several AnnData objects (stored as a associative array in the `.mod` attribute). MuData provides a hierarchical way to store the data:
+
+```
+MuData
+├─ .mod
+│  ├─ modality_1 (AnnData Object)
+│     ├─ .X
+│     ├─ .layers
+│         ├─ layer_1 
+│         ├─ ...
+│     ├─ .var
+│     ├─ .obs
+│     ├─ .obsm
+│     ├─ .varm
+│     ├─ .uns
+│  ├─ modality_1 (AnnData Object)
+├─ .var
+├─ .obs
+├─ .obms
+├─ .varm
+├─ .uns
+```
+
+* `.mod`: an associative array of AnnData objects. Used in OpenPipelines to store the different modalities (CITE-seq, RNA abundance, ...)
+* `.X` and `.layers`: matrices storing the measurements with the columns being the variables measured and the rows being the observations (cells in most cases).
+* `.var`: metadata for the variables (i.e. annotation for the columns of `.X` or any matrix in `.layers`). The number of rows in the .var datafame (or the length of each entry in the dictionairy) is equal to the number of columns in the measurement matrices. 
+* `.obs`: metadata for the observations (i.e. annotation for the rows of `.X` or any matrix in `.layers`). The number of rows in the .obs datafame (or the length of each entry in the dictionairy) is equal to the number of rows in the measurement matrices.
+* `varm`: multi-dimensional the variable annotation. A key-dataframe mapping where the number of rows in each dataframe is equal to the number of columns in the measurement matrices.
+* `obsm`: multi-dimensional the observation annotation. A key-dataframe mapping where the number of rows in each dataframe is equal to the number of rows in the measurement matrices.
+* `.uns`: A mapping where no restrictions are enforced on the dimensions of the data.
+
+
+# Building components from their source
+When running or [testing individual components](#running-component-unittests), it is not necessary to execute an extra command to run the build step, `viash test` and `viash run` will build the component on the fly. However, before integrating components into a pipeline, you will need to build the components. More specifically, openpipelines uses Nextflow to combine components into pipelines, so we need to have at least the components build for `nextflow` platform as target. The easiest method to build the components is to use:
+
+```bash
+viash ns build --parallel --setup cachedbuild
+```
+After using `.viash ns build`, the target folder will be populated with three subfolders, corresponding to the build platforms that viash supports: `native`, `docker` and `nextflow`. In contrast to `./bin/viash build`, `viash_build` will use all of the platforms defined in each of the components configuration instead of the first one. Keep in mind that running `./bin/viash_build` will not always cause a component to be re-build completely. Caching mechanisms in the docker platform for example will make sure only components for which alterations have been made will be build, significantly reducing build times. In summary, using `./bin/viash_build` makes sure that the latest build of components are available before starting to integrate them in pipelines.
+
+Building an individual component can still be useful, for example when debugging a component for which the build fails or if you want to create a standalone executable for a component to execute it without the need to use `viash`. To build an individual component, `./bin/viash build` can be used. Note that the default build directory of this viash base command is `output`, which is not the location where build components will be imported from when integrating them in pipelines. Using the `--output` argument, you can set it to any directory you want, for example:
+
+```bash
+./bin/viash build ./src/filter/do_filter/config.vsh.yaml -o ./target/native/filter/do_filter/ -p native
+```
+
+# Containerization
+One of the key benefits of using Viash is that containers can be created that gather dependencies per component,
+which avoids building one container that has to encorporate all dependencies for a pipeline together. The containers for a single component can be reduced in size, defining the minimal requirements to run the component. That being said, building containers from scratch can be labour intensive and error prone, with base containers from reputable publishers often benefiting from improved reliability and security. Hence, a balance has to be made between reducing the container's size and adding many dependencies to a small base container.
+
+The preferred containerization setup in OpenPipelines uses the following guidelines:
+
+* Choose a base container from a reputable source and use its latest version
+* Do not use base containers that have not been updated in a while
+* Use package managers to install dependencies as much as possible
+* Avoid building depdencies from source.
+
+Examples of base containers that are currently being used are:
+
+* [python:3.11](https://hub.docker.com/_/python) for python environments
+* [ubuntu:focal](https://hub.docker.com/_/ubuntu) for general linux environments and bash scripts
+* [eddelbuettel/r2u:22.04](https://eddelbuettel.github.io/r2u/) for R
+* [nvcr.io/nvidia/pytorch:22.09-py3](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch) for using GPU accelerated calculations using pytorch in python
