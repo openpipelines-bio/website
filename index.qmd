@@ -5,6 +5,15 @@ sidebar: false
 page-layout: full
 title-block-banner: "#f0f5f5"
 title-block-banner-color: "#00cc99"
+listing:
+  - id: guide
+    type: default
+    template: templates/bullet_listing.ejs
+    contents: guide
+  - id: contributing
+    type: default
+    template: templates/bullet_listing.ejs
+    contents: contributing
 ---
 
 ```{r eval=FALSE, include=FALSE}
@@ -12,28 +21,27 @@ library(rmarkdown)
 library(languageserver)
 ```
 
-::: {layout-nrow=1}
+::::{layout-nrow=1}
 
 :::{.column}
 Getting started
 
- - [Finding a workflow](./components)
- - [Executing a workflow](./guide/running_pipelines.qmd)
- - [User guide](./guide/)
+:::{#guide}
+:::
 :::
 
 :::{.column}
-Contribute
+Contributing
 
+:::{#contributing}
+:::
+:::
+
+:::{.column}
+More resources
+
+- [Team](about.qmd)
 - [Source code](https://github.com/openpipelines-bio/openpipeline)
-- [Report a bug](https://github.com/openpipelines-bio/openpipeline/issues/new)
-- [Creating a component]()
 :::
 
-:::{.column}
-About OpenPipeline
-
-- [What is OpenPipelines?](./about/openpipelines.qmd)
-- [Team](./about/authors.qmd)
-:::
-:::
+::::
