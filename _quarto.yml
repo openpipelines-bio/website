@@ -10,17 +10,16 @@ website:
     logo: "images/logo_source.svg"
     title: false
     left:
-      - index.qmd
       # - text: Architecture
       #   menu: 
       #     - architecture/index.qmd
       #     - architecture/status.qmd
       #     - architecture/use-cases.qmd
       #     - architecture/file-formats.qmd
-      - href: components/index.qmd
-        text: Components
       - sidebar:guide
       - sidebar:contributing
+      - href: components/index.qmd
+        text: Reference
       - sidebar:About
 
     right:

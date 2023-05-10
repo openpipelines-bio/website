@@ -1,5 +1,5 @@
 ---
-title: "Openpipelines"
+title: "OpenPipelines"
 subtitle: "Best-practice workflows for single-cell single- and multi-omics data"
 sidebar: false
 page-layout: full
@@ -20,7 +20,7 @@ Getting started
 :::{.column}
 Contribute
 
-- [Sourcecode](https://github.com/openpipelines-bio/openpipeline)
+- [Source code](https://github.com/openpipelines-bio/openpipeline)
 - [Report a bug](https://github.com/openpipelines-bio/openpipeline/issues/new)
 - [Creating a component]()
 :::
