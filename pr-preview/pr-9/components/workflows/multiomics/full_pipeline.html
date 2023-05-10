@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.3.340">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -18,9 +18,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -47,43 +48,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -149,92 +120,89 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../../openpipelines_new.svg" alt="" class="navbar-logo">
+    <img src="../../../images/logo_source.svg" alt="" class="navbar-logo">
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../../../index.html">
- <span class="menu-text">Openpipelines</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="../../../components/index.html" aria-current="page">
- <span class="menu-text">Components</span></a>
-  </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-user-guide" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-user-guide" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
  <span class="menu-text">User Guide</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-user-guide">    
         <li class="dropdown-header">Guide</li>
         <li>
-    <a class="dropdown-item" href="../../../guide/architecture.html">
+    <a class="dropdown-item" href="../../../guide/architecture.html" rel="" target="">
  <span class="dropdown-text">Architecture</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../guide/bug_reports.html">
+    <a class="dropdown-item" href="../../../guide/bug_reports.html" rel="" target="">
  <span class="dropdown-text">Bug reports</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../guide/data_api.html">
+    <a class="dropdown-item" href="../../../guide/data_api.html" rel="" target="">
  <span class="dropdown-text">Data API</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../guide/running_pipelines.html">
- <span class="dropdown-text">Running pipelines</span></a>
+    <a class="dropdown-item" href="../../../guide/implementation_status.html" rel="" target="">
+ <span class="dropdown-text">Status</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../guide/implementation_status.html">
- <span class="dropdown-text">Status</span></a>
+    <a class="dropdown-item" href="../../../guide/running_pipelines.html" rel="" target="">
+ <span class="dropdown-text">Running pipelines</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-contributing" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-contributing" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
  <span class="menu-text">Contributing</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-contributing">    
         <li>
-    <a class="dropdown-item" href="../../../contributing/getting_started.html">
+    <a class="dropdown-item" href="../../../contributing/getting_started.html" rel="" target="">
  <span class="dropdown-text">Getting started</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../contributing/creating_components.html">
+    <a class="dropdown-item" href="../../../contributing/creating_components.html" rel="" target="">
  <span class="dropdown-text">Creating components</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../contributing/creating_pipelines.html">
+    <a class="dropdown-item" href="../../../contributing/creating_pipelines.html" rel="" target="">
  <span class="dropdown-text">Creating pipelines</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../contributing/project_structure.html">
+    <a class="dropdown-item" href="../../../contributing/project_structure.html" rel="" target="">
  <span class="dropdown-text">Project structure</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../contributing/running_tests.html">
+    <a class="dropdown-item" href="../../../contributing/running_tests.html" rel="" target="">
  <span class="dropdown-text">Running tests</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../contributing/pull_requests.html">
+    <a class="dropdown-item" href="../../../contributing/pull_requests.html" rel="" target="">
  <span class="dropdown-text">Publishing your changes</span></a>
   </li>  
     </ul>
   </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="../../../components/index.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Reference</span></a>
+  </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-about" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-about" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
  <span class="menu-text">About</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-about">    
         <li>
-    <a class="dropdown-item" href="../../../about/authors.html">
+    <a class="dropdown-item" href="../../../about/authors.html" rel="" target="">
  <span class="dropdown-text">Authors</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../about/openpipelines.html">
+    <a class="dropdown-item" href="../../../about/openpipelines.html" rel="" target="">
  <span class="dropdown-text">Openpipelines</span></a>
   </li>  
     </ul>
@@ -242,108 +210,143 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="https://github.com/openpipelines-bio/openpipeline">
+    <a class="nav-link" href="https://github.com/openpipelines-bio/openpipeline" rel="" target="">
  <span class="menu-text">Source Code</span></a>
   </li>  
 </ul>
-              <div id="quarto-search" class="" title="Search"></div>
+            <div class="quarto-navbar-tools">
+</div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Full pipeline</h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Workflows</li><li class="breadcrumb-item"><a href="../../../components/workflows/multiomics/full_pipeline.html">Multiomics</a></li><li class="breadcrumb-item"><a href="../../../components/workflows/multiomics/full_pipeline.html">Full pipeline</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
     </div>
   </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/index.html" class="sidebar-item-text sidebar-link">Reference</a>
+  <a href="../../../components/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reference</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#" aria-expanded="true">Workflows</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#" aria-expanded="true">
+ <span class="menu-text">Workflows</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Ingestion</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Ingestion</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/ingestion/bd_rhapsody.html" class="sidebar-item-text sidebar-link">BD Rhapsody</a>
+  <a href="../../../components/workflows/ingestion/bd_rhapsody.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">BD Rhapsody</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/ingestion/cellranger_mapping.html" class="sidebar-item-text sidebar-link">Cell Ranger mapping</a>
+  <a href="../../../components/workflows/ingestion/cellranger_mapping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cell Ranger mapping</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/ingestion/cellranger_postprocessing.html" class="sidebar-item-text sidebar-link">Cell Ranger post-processing</a>
+  <a href="../../../components/workflows/ingestion/cellranger_multi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cell Ranger multi</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/ingestion/conversion.html" class="sidebar-item-text sidebar-link">Conversion</a>
+  <a href="../../../components/workflows/ingestion/cellranger_postprocessing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cell Ranger post-processing</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/ingestion/demux.html" class="sidebar-item-text sidebar-link">Demux</a>
+  <a href="../../../components/workflows/ingestion/conversion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Conversion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/ingestion/make_reference.html" class="sidebar-item-text sidebar-link">Make reference</a>
+  <a href="../../../components/workflows/ingestion/demux.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Demux</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/ingestion/make_reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Make reference</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Multiomics</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Multiomics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/multiomics/full_pipeline.html" class="sidebar-item-text sidebar-link active">Full pipeline</a>
+  <a href="../../../components/workflows/multiomics/full_pipeline.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Full pipeline</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/multiomics/integration.html" class="sidebar-item-text sidebar-link">Integration</a>
+  <a href="../../../components/workflows/multiomics/integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Integration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/multiomics/rna_multisample.html" class="sidebar-item-text sidebar-link">Rna multisample</a>
+  <a href="../../../components/workflows/multiomics/prot_multisample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prot multisample</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/multiomics/rna_singlesample.html" class="sidebar-item-text sidebar-link">Rna singlesample</a>
+  <a href="../../../components/workflows/multiomics/prot_singlesample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prot singlesample</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/multiomics/rna_multisample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rna multisample</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/multiomics/rna_singlesample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rna singlesample</span></a>
   </div>
 </li>
       </ul>
@@ -352,478 +355,653 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#" aria-expanded="true">Modules</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#" aria-expanded="true">
+ <span class="menu-text">Modules</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Cluster</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Annotate</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/cluster/leiden.html" class="sidebar-item-text sidebar-link">Leiden</a>
+  <a href="../../../components/modules/annotate/popv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Popv</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Convert</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Cluster</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/convert/from_10xh5_to_h5mu.html" class="sidebar-item-text sidebar-link">From 10xh5 to h5mu</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/convert/from_10xmtx_to_h5mu.html" class="sidebar-item-text sidebar-link">From 10xmtx to h5mu</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/convert/from_bd_to_10x_molecular_barcode_tags.html" class="sidebar-item-text sidebar-link">From bd to 10x molecular barcode tags</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/convert/from_bdrhap_to_h5mu.html" class="sidebar-item-text sidebar-link">From bdrhap to h5mu</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/convert/from_cellranger_multi_to_h5mu.html" class="sidebar-item-text sidebar-link">From cellranger multi to h5mu</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/convert/from_h5ad_to_h5mu.html" class="sidebar-item-text sidebar-link">From h5ad to h5mu</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/convert/from_h5mu_to_h5ad.html" class="sidebar-item-text sidebar-link">From h5mu to h5ad</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/convert/from_velocyto_to_h5mu.html" class="sidebar-item-text sidebar-link">From velocyto to h5mu</a>
+  <a href="../../../components/modules/cluster/leiden.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Leiden</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Correction</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Convert</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/correction/cellbender_remove_background.html" class="sidebar-item-text sidebar-link">Cellbender remove background</a>
+  <a href="../../../components/modules/convert/from_10xh5_to_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">From 10xh5 to h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/convert/from_10xmtx_to_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">From 10xmtx to h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/convert/from_bd_to_10x_molecular_barcode_tags.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">From bd to 10x molecular barcode tags</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/convert/from_bdrhap_to_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">From bdrhap to h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/convert/from_cellranger_multi_to_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">From cellranger multi to h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/convert/from_h5ad_to_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">From h5ad to h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/convert/from_h5mu_to_h5ad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">From h5mu to h5ad</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/convert/velocyto_to_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Velocyto to h5mu</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">Dataflow</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Correction</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/dataflow/concat.html" class="sidebar-item-text sidebar-link">Concat</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/dataflow/merge.html" class="sidebar-item-text sidebar-link">Merge</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/dataflow/split_modalities.html" class="sidebar-item-text sidebar-link">Split modalities</a>
+  <a href="../../../components/modules/correction/cellbender_remove_background.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cellbender remove background</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">Demux</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text">Dataflow</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/demux/bcl_convert.html" class="sidebar-item-text sidebar-link">Bcl convert</a>
+  <a href="../../../components/modules/dataflow/concat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Concat</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/demux/bcl2fastq.html" class="sidebar-item-text sidebar-link">Bcl2fastq</a>
+  <a href="../../../components/modules/dataflow/merge.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Merge</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/demux/cellranger_mkfastq.html" class="sidebar-item-text sidebar-link">Cellranger mkfastq</a>
+  <a href="../../../components/modules/dataflow/split_modalities.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Split modalities</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">Dimred</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text">Demux</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/dimred/pca.html" class="sidebar-item-text sidebar-link">Pca</a>
+  <a href="../../../components/modules/demux/bcl_convert.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bcl convert</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/dimred/umap.html" class="sidebar-item-text sidebar-link">Umap</a>
+  <a href="../../../components/modules/demux/bcl2fastq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bcl2fastq</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/demux/cellranger_mkfastq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cellranger mkfastq</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">Download</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+ <span class="menu-text">Dimred</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/download/download_file.html" class="sidebar-item-text sidebar-link">Download file</a>
+  <a href="../../../components/modules/dimred/pca.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pca</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/download/sync_test_resources.html" class="sidebar-item-text sidebar-link">Sync test resources</a>
+  <a href="../../../components/modules/dimred/umap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Umap</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">Files</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
+ <span class="menu-text">Download</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/files/make_params.html" class="sidebar-item-text sidebar-link">Make params</a>
+  <a href="../../../components/modules/download/download_file.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Download file</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/download/sync_test_resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sync test resources</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">Filter</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">
+ <span class="menu-text">Files</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/filter/do_filter.html" class="sidebar-item-text sidebar-link">Do filter</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/filter/filter_with_counts.html" class="sidebar-item-text sidebar-link">Filter with counts</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/filter/filter_with_hvg.html" class="sidebar-item-text sidebar-link">Filter with hvg</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/filter/filter_with_scrublet.html" class="sidebar-item-text sidebar-link">Filter with scrublet</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/filter/subset_h5mu.html" class="sidebar-item-text sidebar-link">Subset h5mu</a>
+  <a href="../../../components/modules/files/make_params.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Make params</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">Integrate</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">
+ <span class="menu-text">Filter</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/integrate/harmonypy.html" class="sidebar-item-text sidebar-link">Harmonypy</a>
+  <a href="../../../components/modules/filter/do_filter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Do filter</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/integrate/scanorama.html" class="sidebar-item-text sidebar-link">Scanorama</a>
+  <a href="../../../components/modules/filter/filter_with_counts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filter with counts</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/integrate/scvi.html" class="sidebar-item-text sidebar-link">Scvi</a>
+  <a href="../../../components/modules/filter/filter_with_hvg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filter with hvg</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/filter/filter_with_scrublet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filter with scrublet</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/filter/remove_modality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Remove modality</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/filter/subset_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Subset h5mu</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">Mapping</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">
+ <span class="menu-text">Integrate</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/mapping/bd_rhapsody.html" class="sidebar-item-text sidebar-link">BD Rhapsody</a>
+  <a href="../../../components/modules/integrate/harmonypy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Harmonypy</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/mapping/cellranger_count.html" class="sidebar-item-text sidebar-link">Cellranger count</a>
+  <a href="../../../components/modules/integrate/scanorama.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scanorama</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/mapping/cellranger_count_split.html" class="sidebar-item-text sidebar-link">Cellranger count split</a>
+  <a href="../../../components/modules/integrate/scarches.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scarches</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/mapping/cellranger_multi.html" class="sidebar-item-text sidebar-link">Cellranger multi</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/mapping/star_align.html" class="sidebar-item-text sidebar-link">Star align</a>
+  <a href="../../../components/modules/integrate/scvi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scvi</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="true">Metadata</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="true">
+ <span class="menu-text">Interpret</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/metadata/add_id.html" class="sidebar-item-text sidebar-link">Add id</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/metadata/join_csv.html" class="sidebar-item-text sidebar-link">Join csv</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/metadata/join_uns_to_obs.html" class="sidebar-item-text sidebar-link">Join uns to obs</a>
+  <a href="../../../components/modules/interpret/lianapy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lianapy</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-expanded="true">Neighbors</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-expanded="true">
+ <span class="menu-text">Mapping</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/neighbors/bbknn.html" class="sidebar-item-text sidebar-link">Bbknn</a>
+  <a href="../../../components/modules/mapping/bd_rhapsody.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">BD Rhapsody</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/neighbors/find_neighbors.html" class="sidebar-item-text sidebar-link">Find neighbors</a>
+  <a href="../../../components/modules/mapping/cellranger_count.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cellranger count</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/mapping/cellranger_count_split.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cellranger count split</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/mapping/cellranger_multi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cellranger multi</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/mapping/htseq_count.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Htseq count</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/mapping/htseq_count_to_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Htseq count to h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/mapping/multi_star.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multi star</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/mapping/multi_star_to_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multi star to h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/mapping/samtools_sort.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Samtools sort</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/mapping/star_align.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Star align</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/mapping/star_align_v273a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Star align v273a</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/mapping/star_build_reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Star build reference</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" aria-expanded="true">Process 10xh5</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" aria-expanded="true">
+ <span class="menu-text">Metadata</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/process_10xh5/filter_10xh5.html" class="sidebar-item-text sidebar-link">Filter 10xh5</a>
+  <a href="../../../components/modules/metadata/add_id.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Add id</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/metadata/join_csv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Join csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/metadata/join_uns_to_obs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Join uns to obs</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" aria-expanded="true">Qc</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" aria-expanded="true">
+ <span class="menu-text">Neighbors</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/qc/fastqc.html" class="sidebar-item-text sidebar-link">Fastqc</a>
+  <a href="../../../components/modules/neighbors/bbknn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bbknn</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/qc/multiqc.html" class="sidebar-item-text sidebar-link">Multiqc</a>
+  <a href="../../../components/modules/neighbors/find_neighbors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Find neighbors</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" aria-expanded="true">Reference</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" aria-expanded="true">
+ <span class="menu-text">Process 10xh5</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/reference/build_bdrhap_reference.html" class="sidebar-item-text sidebar-link">Build bdrhap reference</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/reference/build_cellranger_reference.html" class="sidebar-item-text sidebar-link">Build cellranger reference</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/reference/make_reference.html" class="sidebar-item-text sidebar-link">Make reference</a>
+  <a href="../../../components/modules/process_10xh5/filter_10xh5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filter 10xh5</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" aria-expanded="true">Report</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" aria-expanded="true">
+ <span class="menu-text">Qc</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/report/mermaid.html" class="sidebar-item-text sidebar-link">Mermaid</a>
+  <a href="../../../components/modules/qc/calculate_qc_metrics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Calculate qc metrics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/qc/fastqc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fastqc</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/qc/multiqc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multiqc</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" aria-expanded="true">Transfer</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" aria-expanded="true">
+ <span class="menu-text">Reference</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-20" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/transfer/publish.html" class="sidebar-item-text sidebar-link">Publish</a>
+  <a href="../../../components/modules/reference/build_bdrhap_reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Build bdrhap reference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/reference/build_cellranger_reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Build cellranger reference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/reference/make_reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Make reference</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-21" aria-expanded="true">Transform</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-21" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-21" aria-expanded="true">
+ <span class="menu-text">Report</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-21" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-21" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/transform/delete_layer.html" class="sidebar-item-text sidebar-link">Delete layer</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/transform/log1p.html" class="sidebar-item-text sidebar-link">Log1p</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/transform/normalize_total.html" class="sidebar-item-text sidebar-link">Normalize total</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/transform/regress_out.html" class="sidebar-item-text sidebar-link">Regress out</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/transform/scale.html" class="sidebar-item-text sidebar-link">Scale</a>
+  <a href="../../../components/modules/report/mermaid.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mermaid</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-22" aria-expanded="true">Velocity</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-22" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-22" aria-expanded="true">
+ <span class="menu-text">Transfer</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-22" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-22" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/velocity/scvelo.html" class="sidebar-item-text sidebar-link">Scvelo</a>
+  <a href="../../../components/modules/transfer/publish.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Publish</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-23" aria-expanded="true">
+ <span class="menu-text">Transform</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-23" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-23" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/transform/clr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Clr</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/velocity/velocyto.html" class="sidebar-item-text sidebar-link">Velocyto</a>
+  <a href="../../../components/modules/transform/delete_layer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Delete layer</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/transform/log1p.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Log1p</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/transform/normalize_total.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Normalize total</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/transform/regress_out.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Regress out</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/transform/scale.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scale</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-24" aria-expanded="true">
+ <span class="menu-text">Velocity</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-24" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-24" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/velocity/scvelo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scvelo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/velocity/velocyto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Velocyto</span></a>
   </div>
 </li>
       </ul>
@@ -833,6 +1011,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
@@ -841,7 +1020,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Full pipeline</h1>
+<h1 class="title">Full pipeline</h1>
 </div>
 
 <div>
@@ -870,7 +1049,7 @@ Namespace: <code>multiomics</code></p>
 </section>
 <section id="links" class="level3">
 <h3 class="anchored" data-anchor-id="links">Links</h3>
-<p><a href="https://github.com/openpipelines-bio/openpipeline/blob/main/workflows/multiomics/full_pipeline" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
+<p><a href="https://github.com/openpipelines-bio/openpipeline/blob/main_build/workflows/multiomics/full_pipeline" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
 </section>
 </div></div><section id="example-commands" class="level2">
 <h2 class="anchored" data-anchor-id="example-commands">Example commands</h2>
@@ -892,23 +1071,55 @@ Example of <code>params.yaml</code>
 <div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inputs</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="co"> # please fill in - example: "foo"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">input</span><span class="kw">:</span><span class="co"> # please fill in - example: "input.h5mu"</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">obs_covariates</span><span class="kw">:</span><span class="co"> # please fill in - example: ["batch", "sample"]</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">obs_covariates</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"sample_id"</span><span class="kw">]</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Nextflow input-output arguments</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">publish_dir</span><span class="kw">:</span><span class="co"> # please fill in - example: "output/"</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># param_list: "my_params.yaml"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># RNA filtering options</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># rna_min_counts: 200</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># rna_max_counts: 5000000</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># rna_min_vars_per_cell: 200</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># rna_max_vars_per_cell: 1500000</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># min_cells_per_protein: 3</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># rna_min_fraction_mito: 0</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># rna_max_fraction_mito: 0.2</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># CITE-seq filtering options</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># prot_min_counts: 3</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># prot_max_counts: 5000000</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># prot_min_vars_per_cell: 200</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># prot_max_vars_per_cell: 100000000</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># prot_min_cells_per_protein: 3</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># prot_min_fraction_mito: 0</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># prot_max_fraction_mito: 0.2</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Highly variable gene detection</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">filter_with_hvg_var_output</span><span class="kw">:</span><span class="at"> </span><span class="st">"filter_with_hvg"</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="fu">filter_with_hvg_obs_batch_key</span><span class="kw">:</span><span class="at"> </span><span class="st">"sample_id"</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># QC metrics calculation options</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="fu">var_qc_metrics</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"filter_with_hvg"</span><span class="kw">]</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="fu">top_n_vars</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="dv">50</span><span class="kw">,</span><span class="at"> </span><span class="dv">100</span><span class="kw">,</span><span class="at"> </span><span class="dv">200</span><span class="kw">,</span><span class="at"> </span><span class="dv">500</span><span class="kw">]</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Harmony integration options</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="fu">rna_harmony_theta</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="dv">2</span><span class="kw">]</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Leiden Clustering Options</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="fu">leiden_resolution</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Nextflow input-output arguments</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="fu">publish_dir</span><span class="kw">:</span><span class="co"> # please fill in - example: "output/"</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="co"># param_list: "my_params.yaml"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> main_build <span class="at">-latest</span> <span class="dt">\</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-profile</span> docker <span class="dt">\</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> workflows/multiomics/full_pipeline/main.nf <span class="dt">\</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">-params-file</span> params.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -918,15 +1129,15 @@ Note
 </div>
 </section>
 </section>
-<section id="argument-group" class="level2">
-<h2 class="anchored" data-anchor-id="argument-group">Argument group</h2>
+<section id="argument-groups" class="level2">
+<h2 class="anchored" data-anchor-id="argument-groups">Argument groups</h2>
 <section id="inputs" class="level3">
 <h3 class="anchored" data-anchor-id="inputs">Inputs</h3>
 <table class="table">
 <colgroup>
-<col style="width: 13%">
-<col style="width: 44%">
-<col style="width: 42%">
+<col style="width: 12%">
+<col style="width: 40%">
+<col style="width: 47%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -949,7 +1160,221 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><code>--obs_covariates</code></td>
 <td style="text-align: left;">The .obs field(s) that define the covariate(s) to regress out.</td>
-<td style="text-align: left;"><code>string</code>, required, example: <code>"batch"</code>, example: <code>"sample"</code></td>
+<td style="text-align: left;"><code>string</code>, default: <code>"sample_id"</code>, example: <code>"batch"</code>, example: <code>"sample"</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="rna-filtering-options" class="level3">
+<h3 class="anchored" data-anchor-id="rna-filtering-options">RNA filtering options</h3>
+<table class="table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 46%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--rna_min_counts</code></td>
+<td style="text-align: left;">Minimum number of counts captured per cell.</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>200</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--rna_max_counts</code></td>
+<td style="text-align: left;">Maximum number of counts captured per cell.</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>5000000</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--rna_min_vars_per_cell</code></td>
+<td style="text-align: left;">Minimum of non-zero values per cell.</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>200</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--rna_max_vars_per_cell</code></td>
+<td style="text-align: left;">Maximum of non-zero values per cell.</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>1500000</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--min_cells_per_protein</code></td>
+<td style="text-align: left;">Minimum of non-zero values per antibody.</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>3</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--rna_min_fraction_mito</code></td>
+<td style="text-align: left;">Minimum fraction of UMIs that are mitochondrial.</td>
+<td style="text-align: left;"><code>double</code>, example: <code>0</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--rna_max_fraction_mito</code></td>
+<td style="text-align: left;">Maximum fraction of UMIs that are mitochondrial.</td>
+<td style="text-align: left;"><code>double</code>, example: <code>0.2</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cite-seq-filtering-options" class="level3">
+<h3 class="anchored" data-anchor-id="cite-seq-filtering-options">CITE-seq filtering options</h3>
+<table class="table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 45%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--prot_min_counts</code></td>
+<td style="text-align: left;">Minimum number of counts per cell.</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>3</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--prot_max_counts</code></td>
+<td style="text-align: left;">Minimum number of counts per cell.</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>5000000</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--prot_min_vars_per_cell</code></td>
+<td style="text-align: left;">Minimum of non-zero values per cell.</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>200</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--prot_max_vars_per_cell</code></td>
+<td style="text-align: left;">Maximum of non-zero values per cell.</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>100000000</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--prot_min_cells_per_protein</code></td>
+<td style="text-align: left;">Minimum of non-zero values per protein.</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>3</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--prot_min_fraction_mito</code></td>
+<td style="text-align: left;">Minimum fraction of proteins that are mitochondrial.</td>
+<td style="text-align: left;"><code>double</code>, example: <code>0</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--prot_max_fraction_mito</code></td>
+<td style="text-align: left;">Maximum fraction of proteins that are mitochondrial.</td>
+<td style="text-align: left;"><code>double</code>, example: <code>0.2</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="highly-variable-gene-detection" class="level3">
+<h3 class="anchored" data-anchor-id="highly-variable-gene-detection">Highly variable gene detection</h3>
+<table class="table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 73%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--filter_with_hvg_var_output</code></td>
+<td style="text-align: left;">In which .var slot to store a boolean array corresponding to the highly variable genes.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"filter_with_hvg"</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--filter_with_hvg_obs_batch_key</code></td>
+<td style="text-align: left;">If specified, highly-variable genes are selected within each batch separately and merged. This simple process avoids the selection of batch-specific genes and acts as a lightweight batch correction method.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"sample_id"</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="qc-metrics-calculation-options" class="level3">
+<h3 class="anchored" data-anchor-id="qc-metrics-calculation-options">QC metrics calculation options</h3>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 70%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--var_qc_metrics</code></td>
+<td style="text-align: left;">Keys to select a boolean (containing only True or False) column from .var. For each cell, calculate the proportion of total values for genes which are labeled ‘True’, compared to the total sum of the values for all genes.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"filter_with_hvg"</code>, example: <code>"ercc,highly_variable"</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--top_n_vars</code></td>
+<td style="text-align: left;">Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. <code>--top_n_vars 20,50</code> finds cumulative proportion to the 20th and 50th most expressed vars.</td>
+<td style="text-align: left;"><code>integer</code>, default: <code>50</code>, default: <code>100</code>, default: <code>200</code>, default: <code>500</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="harmony-integration-options" class="level3">
+<h3 class="anchored" data-anchor-id="harmony-integration-options">Harmony integration options</h3>
+<table class="table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 80%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--rna_harmony_theta</code></td>
+<td style="text-align: left;">Diversity clustering penalty parameter. Specify for each variable in group.by.vars. theta=0 does not encourage any diversity. Larger values of theta result in more diverse clusters.”</td>
+<td style="text-align: left;"><code>double</code>, default: <code>2</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="leiden-clustering-options" class="level3">
+<h3 class="anchored" data-anchor-id="leiden-clustering-options">Leiden Clustering Options</h3>
+<table class="table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 63%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--leiden_resolution</code></td>
+<td style="text-align: left;">Control the coarseness of the clustering. Higher values lead to more clusters.</td>
+<td style="text-align: left;"><code>double</code>, default: <code>1</code></td>
 </tr>
 </tbody>
 </table>
@@ -966,81 +1391,176 @@ Note
 <div class="cell page-columns page-full">
 <div class="cell-output-display column-screen-inset-shaded">
 <div>
-<p>
-</p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-1">flowchart LR
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
     p0(Input)
-    p8(add_id)
-    p15(split_modalities)
-    p18(flatMap)
-    p19(filter)
-    p25(filter_with_counts)
-    p32(do_filter)
-    p40(filter_with_scrublet)
-    p43(toSortedList)
-    p44(filter)
-    p51(concat)
-    p58(normalize_total)
-    p65(log1p)
-    p72(delete_layer)
-    p80(filter_with_hvg)
-    p105(concat)
-    p83(filter)
-    p84(toSortedList)
-    p85(filter)
-    p91(concat)
-    p94(filter)
-    p95(toSortedList)
-    p96(filter)
-    p102(test_wf:run_wf:concat:concat_process1)
-    p106(toSortedList)
-    p112(merge)
-    p122(pca)
-    p130(harmonypy)
-    p138(find_neighbors)
-    p146(leiden)
-    p154(umap)
-    p159(toSortedList)
-    p161(Output)
-    p18--&gt;p19
-    p43--&gt;p44
-    p18--&gt;p83
-    p83--&gt;p84
-    p84--&gt;p85
-    p18--&gt;p94
-    p94--&gt;p95
-    p95--&gt;p96
-    p105--&gt;p106
-    p0--&gt;p8
-    p8--&gt;p15
-    p15--&gt;p18
-    p19--&gt;p25
-    p25--&gt;p32
-    p32--&gt;p40
-    p40--&gt;p43
-    p44--&gt;p51
-    p51--&gt;p58
-    p58--&gt;p65
-    p65--&gt;p72
-    p72--&gt;p80
-    p80--&gt;p105
-    p85--&gt;p91
-    p91--&gt;p105
-    p96--&gt;p102
-    p102--&gt;p105
-    p106--&gt;p112
-    p112--&gt;p122
-    p122--&gt;p130
-    p130--&gt;p138
-    p138--&gt;p146
-    p146--&gt;p154
-    p154--&gt;p159
-    p159--&gt;p161
+    p2(toSortedList)
+    p4(flatMap)
+    p15(join)
+    p13(add_id)
+    p25(join)
+    p23(split_modalities)
+    p27(flatMap)
+    p28(filter)
+    p31(toSortedList)
+    p33(flatMap)
+    p43(join)
+    p41(filter_with_counts)
+    p53(join)
+    p51(do_filter)
+    p64(join)
+    p62(filter_with_scrublet)
+    p68(toSortedList)
+    p69(filter)
+    p73(toSortedList)
+    p75(flatMap)
+    p86(join)
+    p84(concat)
+    p96(join)
+    p94(normalize_total)
+    p106(join)
+    p104(log1p)
+    p116(join)
+    p114(delete_layer)
+    p126(join)
+    p124(filter_with_hvg)
+    p136(join)
+    p134(calculate_qc_metrics)
+    p202(concat)
+    p139(filter)
+    p142(toSortedList)
+    p144(flatMap)
+    p154(join)
+    p152(test_wf:run_wf:prot_singlesample:filter_with_counts:filter_with_counts_process1)
+    p164(join)
+    p162(test_wf:run_wf:prot_singlesample:do_filter:do_filter_process1)
+    p169(toSortedList)
+    p170(filter)
+    p174(toSortedList)
+    p176(flatMap)
+    p186(join)
+    p184(clr)
+    p189(filter)
+    p191(groupTuple)
+    p200(join)
+    p198(test_wf:run_wf:concat:concat_process1)
+    p203(toSortedList)
+    p212(join)
+    p210(merge)
+    p216(toSortedList)
+    p218(flatMap)
+    p229(join)
+    p227(pca)
+    p232(filter)
+    p243(concat)
+    p233(filter)
+    p241(join)
+    p239(harmonypy)
+    p252(join)
+    p250(find_neighbors)
+    p262(join)
+    p260(leiden)
+    p272(join)
+    p270(umap)
+    p277(toSortedList)
+    p279(Output)
+    p27--&gt;p28
+    p68--&gt;p69
+    p27--&gt;p139
+    p169--&gt;p170
+    p27--&gt;p189
+    p202--&gt;p203
+    p232--&gt;p243
+    p0--&gt;p2
+    p2--&gt;p4
+    p4--&gt;p15
+    p4--&gt;p13
+    p13--&gt;p15
+    p15--&gt;p25
+    p15--&gt;p23
+    p23--&gt;p25
+    p25--&gt;p27
+    p28--&gt;p31
+    p31--&gt;p33
+    p33--&gt;p43
+    p33--&gt;p41
+    p41--&gt;p43
+    p43--&gt;p53
+    p43--&gt;p51
+    p51--&gt;p53
+    p53--&gt;p64
+    p53--&gt;p62
+    p62--&gt;p64
+    p64--&gt;p68
+    p69--&gt;p73
+    p73--&gt;p75
+    p75--&gt;p86
+    p75--&gt;p84
+    p84--&gt;p86
+    p86--&gt;p96
+    p86--&gt;p94
+    p94--&gt;p96
+    p96--&gt;p106
+    p96--&gt;p104
+    p104--&gt;p106
+    p106--&gt;p116
+    p106--&gt;p114
+    p114--&gt;p116
+    p116--&gt;p126
+    p116--&gt;p124
+    p124--&gt;p126
+    p126--&gt;p136
+    p126--&gt;p134
+    p134--&gt;p136
+    p136--&gt;p202
+    p139--&gt;p142
+    p142--&gt;p144
+    p144--&gt;p154
+    p144--&gt;p152
+    p152--&gt;p154
+    p154--&gt;p164
+    p154--&gt;p162
+    p162--&gt;p164
+    p164--&gt;p169
+    p170--&gt;p174
+    p174--&gt;p176
+    p176--&gt;p186
+    p176--&gt;p184
+    p184--&gt;p186
+    p186--&gt;p202
+    p189--&gt;p191
+    p191--&gt;p200
+    p191--&gt;p198
+    p198--&gt;p200
+    p200--&gt;p202
+    p203--&gt;p212
+    p203--&gt;p210
+    p210--&gt;p212
+    p212--&gt;p216
+    p216--&gt;p218
+    p218--&gt;p229
+    p218--&gt;p227
+    p227--&gt;p229
+    p229--&gt;p232
+    p229--&gt;p233
+    p233--&gt;p241
+    p233--&gt;p239
+    p239--&gt;p241
+    p241--&gt;p243
+    p243--&gt;p252
+    p243--&gt;p250
+    p250--&gt;p252
+    p252--&gt;p262
+    p252--&gt;p260
+    p260--&gt;p262
+    p262--&gt;p272
+    p262--&gt;p270
+    p270--&gt;p272
+    p272--&gt;p277
+    p277--&gt;p279
 
 </pre>
-<div id="mermaid-tooltip-1" class="mermaidTooltip">
-
 </div>
-<p></p>
 </div>
 </div>
 </div>
@@ -1076,9 +1596,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1143,6 +1677,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -1185,7 +1805,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center">Copyright 2022, OpenPipelines.bio</div>
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">Copyright 2022, OpenPipelines.bio<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/components/workflows/multiomics/full_pipeline.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
 
