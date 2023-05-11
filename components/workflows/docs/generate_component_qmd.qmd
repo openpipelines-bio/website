@@ -1,0 +1,86 @@
+---
+title: "Generate component qmd"
+namespace: "Docs"
+description: "A pipeline for generating qmd files describing viash components."
+type: "workflow"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `generate_component_qmd`  
+Namespace: `docs`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.8.0/viash_tools/workflows/docs/generate_component_qmd){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 0.8.0 -latest \
+  -main-script viash_tools/workflows/docs/generate_component_qmd/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 0.8.0 -latest \
+  -profile docker \
+  -main-script viash_tools/workflows/docs/generate_component_qmd/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument group
+
+### Arguments
+
+|Name          |Description                                                                        |Attributes                                                                   |
+|:-------------|:----------------------------------------------------------------------------------|:----------------------------------------------------------------------------|
+|`--id`        |ID of the parsed repository.                                                       |`string`, required, example: `"foo"`                                         |
+|`--input`     |Repository url (currently only public repositories are supported)                  |`string`, required, example: `"https://github.com/viash-io/viash_tools.git"` |
+|`--build_dir` |Output location of build viash components, relative to the root of the repository. |`file`, required, example: `"foo"`                                           |
+
+## Authors
+
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) (author, maintainer)
+
+## Visualisation
+
+```{mermaid}
+%%| column: screen-inset-shaded
+flowchart LR
+    p0(Input)
+    p7(ns_list)
+    p14(viash_configs_to_qmd)
+    p20(Output)
+    p0-->p7
+    p7-->p14
+    p14-->p20
+
+```

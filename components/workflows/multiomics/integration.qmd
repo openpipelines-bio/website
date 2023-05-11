@@ -14,7 +14,7 @@ ID: `integration`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/workflows/multiomics/integration){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.8.0/workflows/multiomics/integration){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r 0.8.0 -latest \
   -main-script workflows/multiomics/integration/main.nf \
   --help
 ```
@@ -77,7 +77,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r 0.8.0 -latest \
   -profile docker \
   -main-script workflows/multiomics/integration/main.nf \
   -params-file params.yaml
