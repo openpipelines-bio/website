@@ -2447,7 +2447,7 @@
     "href": "index.html#proposed-structure",
     "title": "OpenPipelines",
     "section": "Proposed structure",
-    "text": "Proposed structure\n\n\n\nGuide\n\nConcepts and philosophy\nRequirements\nGetting started\nRunning pipelines\nDevelopment status\n\n\n\nTutorials\n\nFrom sequencing to count tables\nFrom count table to integrated data\nCelltyping and cell-cell communication\n\n(How to analyse your dataset and interpret the results)\n\n\nContributing\n\nGetting started\nProject structure\nCreate component\nCreate pipeline\nRun tests\nPublish your changes\n\n\n\nMore information\n\nCheat sheets\nCode of conduct\nFAQ"
+    "text": "Proposed structure\n\n\n\nGuide\n\nConcepts and philosophy\nRequirements\nGetting started\nRunning pipelines\nDevelopment status\n\n\n\nTutorials\n\nEnvironment setup\nFrom sequencing to count tables\nFrom count table to integrated data\nCelltyping and cell-cell communication\n\n(How to analyse your dataset and interpret the results)\n\n\nContributing\n\nGetting started\nProject structure\nCreate component\nCreate pipeline\nRun tests\nPublish your changes\n\n\n\nMore information\n\nCheat sheets\nCode of conduct\nFAQ"
   },
   {
     "objectID": "user_guide/index.html#using-the-nf-tower-user-interface",
