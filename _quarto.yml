@@ -20,15 +20,17 @@ website:
     title: false
     left:
       - href: index.qmd
-        text: About
-      - components/index.qmd
+        text: Home
       - guide/index.qmd
       - contributing/index.qmd
+      - href: components/index.qmd
+        text: Reference
+      - team/index.qmd
 
     right:
-      - team/index.qmd
-      - text: Source Code
+      - icon: github
         url: https://github.com/openpipelines-bio/openpipeline
+        aria-label: GitHub
   sidebar:
     - id: components
       collapse-level: 4
@@ -36,7 +38,7 @@ website:
       contents: components
     - id: guide
       collapse-level: 3
-      title: User Guide
+      title: Guide
       contents: guide
     - id: contributing
       collapse-level: 3
