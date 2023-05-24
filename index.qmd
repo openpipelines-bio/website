@@ -58,6 +58,7 @@ Guide
 :::{.column}
 Tutorials
 
+* Environment setup
 * From sequencing to count tables
 * From count table to integrated data
 * Celltyping and cell-cell communication
