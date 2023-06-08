@@ -14,7 +14,7 @@ ID: `lianapy`
 Namespace: `interpret`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/src/interpret/lianapy){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.8.0/src/interpret/lianapy){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r 0.8.0 -latest \
   -main-script target/nextflow/interpret/lianapy/main.nf \
   --help
 ```
@@ -48,6 +48,7 @@ modality: "rna"
 # layer: "foo"
 groupby: "bulk_labels"
 resource_name: "consensus"
+gene_symbol: "gene_symbol"
 expr_prop: 0.1
 min_cells: 5
 aggregate_method: "rra"
@@ -62,7 +63,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r 0.8.0 -latest \
   -profile docker \
   -main-script target/nextflow/interpret/lianapy/main.nf \
   -params-file params.yaml
@@ -85,6 +86,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--layer`              |Layer in anndata.AnnData.layers to use. If None, use mudata.mod[modality].X.                                                                                                                                                       |`string`                           |
 |`--groupby`            |The key of the observations grouping to consider.                                                                                                                                                                                  |`string`, default: `"bulk_labels"` |
 |`--resource_name`      |Name of the resource to be loaded and use for ligand-receptor inference.                                                                                                                                                           |`string`, default: `"consensus"`   |
+|`--gene_symbol`        |Column name in var DataFrame in which gene symbol are stored.                                                                                                                                                                      |`string`, default: `"gene_symbol"` |
 |`--expr_prop`          |Minimum expression proportion for the ligands/receptors (and their subunits) in the corresponding cell identities. Set to '0', to return unfiltered results.                                                                       |`double`, default: `0.1`           |
 |`--min_cells`          |Minimum cells per cell identity ('groupby') to be considered for downstream analysis.                                                                                                                                              |`integer`, default: `5`            |
 |`--aggregate_method`   |Method aggregation approach, one of ['mean', 'rra'], where 'mean' represents the mean rank, while 'rra' is the RobustRankAggregate (Kolde et al., 2014) of the interactions.                                                       |`string`, default: `"rra"`         |

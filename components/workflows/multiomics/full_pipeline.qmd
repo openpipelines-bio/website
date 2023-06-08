@@ -14,7 +14,7 @@ ID: `full_pipeline`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/workflows/multiomics/full_pipeline){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.8.0/workflows/multiomics/full_pipeline){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r 0.8.0 -latest \
   -main-script workflows/multiomics/full_pipeline/main.nf \
   --help
 ```
@@ -45,20 +45,25 @@ id: # please fill in - example: "foo"
 input: # please fill in - example: "input.h5mu"
 obs_covariates: ["sample_id"]
 
+# Sample ID options
+add_id_to_obs: true
+add_id_obs_output: "sample_id"
+add_id_make_observation_keys_unique: true
+
 # RNA filtering options
 # rna_min_counts: 200
 # rna_max_counts: 5000000
-# rna_min_vars_per_cell: 200
-# rna_max_vars_per_cell: 1500000
-# min_cells_per_protein: 3
+# rna_min_genes_per_cell: 200
+# rna_max_genes_per_cell: 1500000
+# rna_min_cells_per_gene: 3
 # rna_min_fraction_mito: 0
 # rna_max_fraction_mito: 0.2
 
 # CITE-seq filtering options
 # prot_min_counts: 3
 # prot_max_counts: 5000000
-# prot_min_vars_per_cell: 200
-# prot_max_vars_per_cell: 100000000
+# prot_min_proteins_per_cell: 200
+# prot_max_proteins_per_cell: 100000000
 # prot_min_cells_per_protein: 3
 # prot_min_fraction_mito: 0
 # prot_max_fraction_mito: 0.2
@@ -85,7 +90,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r main_build -latest \
+  -r 0.8.0 -latest \
   -profile docker \
   -main-script workflows/multiomics/full_pipeline/main.nf \
   -params-file params.yaml
@@ -106,17 +111,31 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--obs_covariates` |The .obs field(s) that define the covariate(s) to regress out. |`string`, default: `"sample_id"`, example: `"batch"`, example: `"sample"` |
 
 
+### Sample ID options
+
+Options for adding the id to .obs on the MuData object. Having a sample 
+id present in a requirement of several components for this pipeline.
+
+
+
+|Name                                    |Description                                                                                         |Attributes                       |
+|:---------------------------------------|:---------------------------------------------------------------------------------------------------|:--------------------------------|
+|`--add_id_to_obs`                       |Add the value passed with --id to .obs.                                                             |`boolean`, default: `TRUE`       |
+|`--add_id_obs_output`                   |.Obs column to add the sample IDs to. Required and only used when  --add_id_to_obs is set to 'true' |`string`, default: `"sample_id"` |
+|`--add_id_make_observation_keys_unique` |Join the id to the .obs index (.obs_names).  Only used when --add_id_to_obs is set to 'true'.       |`boolean`, default: `TRUE`       |
+
+
 ### RNA filtering options
 
-|Name                      |Description                                      |Attributes                    |
-|:-------------------------|:------------------------------------------------|:-----------------------------|
-|`--rna_min_counts`        |Minimum number of counts captured per cell.      |`integer`, example: `200`     |
-|`--rna_max_counts`        |Maximum number of counts captured per cell.      |`integer`, example: `5000000` |
-|`--rna_min_vars_per_cell` |Minimum of non-zero values per cell.             |`integer`, example: `200`     |
-|`--rna_max_vars_per_cell` |Maximum of non-zero values per cell.             |`integer`, example: `1500000` |
-|`--min_cells_per_protein` |Minimum of non-zero values per antibody.         |`integer`, example: `3`       |
-|`--rna_min_fraction_mito` |Minimum fraction of UMIs that are mitochondrial. |`double`, example: `0`        |
-|`--rna_max_fraction_mito` |Maximum fraction of UMIs that are mitochondrial. |`double`, example: `0.2`      |
+|Name                       |Description                                      |Attributes                    |
+|:--------------------------|:------------------------------------------------|:-----------------------------|
+|`--rna_min_counts`         |Minimum number of counts captured per cell.      |`integer`, example: `200`     |
+|`--rna_max_counts`         |Maximum number of counts captured per cell.      |`integer`, example: `5000000` |
+|`--rna_min_genes_per_cell` |Minimum of non-zero values per cell.             |`integer`, example: `200`     |
+|`--rna_max_genes_per_cell` |Maximum of non-zero values per cell.             |`integer`, example: `1500000` |
+|`--rna_min_cells_per_gene` |Minimum of non-zero values per gene.             |`integer`, example: `3`       |
+|`--rna_min_fraction_mito`  |Minimum fraction of UMIs that are mitochondrial. |`double`, example: `0`        |
+|`--rna_max_fraction_mito`  |Maximum fraction of UMIs that are mitochondrial. |`double`, example: `0.2`      |
 
 
 ### CITE-seq filtering options
@@ -125,8 +144,8 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |:------------------------------|:----------------------------------------------------|:-------------------------------|
 |`--prot_min_counts`            |Minimum number of counts per cell.                   |`integer`, example: `3`         |
 |`--prot_max_counts`            |Minimum number of counts per cell.                   |`integer`, example: `5000000`   |
-|`--prot_min_vars_per_cell`     |Minimum of non-zero values per cell.                 |`integer`, example: `200`       |
-|`--prot_max_vars_per_cell`     |Maximum of non-zero values per cell.                 |`integer`, example: `100000000` |
+|`--prot_min_proteins_per_cell` |Minimum of non-zero values per cell.                 |`integer`, example: `200`       |
+|`--prot_max_proteins_per_cell` |Maximum of non-zero values per cell.                 |`integer`, example: `100000000` |
 |`--prot_min_cells_per_protein` |Minimum of non-zero values per protein.              |`integer`, example: `3`         |
 |`--prot_min_fraction_mito`     |Minimum fraction of proteins that are mitochondrial. |`double`, example: `0`          |
 |`--prot_max_fraction_mito`     |Maximum fraction of proteins that are mitochondrial. |`double`, example: `0.2`        |
@@ -173,167 +192,222 @@ flowchart LR
     p0(Input)
     p2(toSortedList)
     p4(flatMap)
-    p15(join)
-    p13(add_id)
-    p25(join)
-    p23(split_modalities)
-    p27(flatMap)
-    p28(filter)
-    p31(toSortedList)
-    p33(flatMap)
-    p43(join)
-    p41(filter_with_counts)
+    p7(filter)
+    p16(join)
+    p14(add_id)
+    p19(mix)
+    p18(filter)
+    p21(Output)
+    p22(filter)
+    p30(join)
+    p28(split_modalities)
+    p36(concat)
+    p32(filter)
+    p34(test_wf:run_wf:splitStub)
+    p37(flatMap)
+    p38(filter)
+    p41(toSortedList)
+    p43(flatMap)
     p53(join)
-    p51(do_filter)
-    p64(join)
-    p62(filter_with_scrublet)
-    p68(toSortedList)
-    p69(filter)
-    p73(toSortedList)
-    p75(flatMap)
-    p86(join)
-    p84(concat)
-    p96(join)
-    p94(normalize_total)
-    p106(join)
-    p104(log1p)
-    p116(join)
-    p114(delete_layer)
-    p126(join)
-    p124(filter_with_hvg)
-    p136(join)
-    p134(calculate_qc_metrics)
-    p202(concat)
-    p139(filter)
-    p142(toSortedList)
-    p144(flatMap)
-    p154(join)
-    p152(test_wf:run_wf:prot_singlesample:filter_with_counts:filter_with_counts_process1)
-    p164(join)
-    p162(test_wf:run_wf:prot_singlesample:do_filter:do_filter_process1)
+    p51(filter_with_counts)
+    p63(join)
+    p61(do_filter)
+    p74(join)
+    p72(filter_with_scrublet)
+    p78(toSortedList)
+    p79(filter)
+    p83(toSortedList)
+    p85(flatMap)
+    p89(filter)
+    p91(flatMap)
+    p99(join)
+    p97(test_wf:run_wf:rna_multisample:add_id:add_id_process1)
+    p101(collect)
+    p104(mix)
+    p103(filter)
+    p113(join)
+    p111(concat)
+    p123(join)
+    p121(normalize_total)
+    p133(join)
+    p131(log1p)
+    p143(join)
+    p141(delete_layer)
+    p153(join)
+    p151(filter_with_hvg)
+    p163(join)
+    p161(calculate_qc_metrics)
+    p257(concat)
+    p166(filter)
     p169(toSortedList)
-    p170(filter)
-    p174(toSortedList)
-    p176(flatMap)
-    p186(join)
-    p184(clr)
-    p189(filter)
-    p191(groupTuple)
-    p200(join)
-    p198(test_wf:run_wf:concat:concat_process1)
-    p203(toSortedList)
-    p212(join)
-    p210(merge)
-    p216(toSortedList)
-    p218(flatMap)
-    p229(join)
-    p227(pca)
-    p232(filter)
-    p243(concat)
-    p233(filter)
+    p171(flatMap)
+    p181(join)
+    p179(test_wf:run_wf:prot_singlesample:filter_with_counts:filter_with_counts_process1)
+    p191(join)
+    p189(test_wf:run_wf:prot_singlesample:do_filter:do_filter_process1)
+    p196(toSortedList)
+    p197(filter)
+    p201(toSortedList)
+    p203(flatMap)
+    p207(filter)
+    p209(flatMap)
+    p217(join)
+    p215(test_wf:run_wf:prot_multisample:add_id:add_id_process2)
+    p219(collect)
+    p222(mix)
+    p221(filter)
+    p231(join)
+    p229(test_wf:run_wf:prot_multisample:concat:concat_process1)
     p241(join)
-    p239(harmonypy)
-    p252(join)
-    p250(find_neighbors)
-    p262(join)
-    p260(leiden)
-    p272(join)
-    p270(umap)
-    p277(toSortedList)
-    p279(Output)
-    p27-->p28
-    p68-->p69
-    p27-->p139
-    p169-->p170
-    p27-->p189
-    p202-->p203
-    p232-->p243
+    p239(clr)
+    p244(filter)
+    p246(groupTuple)
+    p255(join)
+    p253(test_wf:run_wf:concat:concat_process2)
+    p258(toSortedList)
+    p267(join)
+    p265(merge)
+    p271(toSortedList)
+    p273(flatMap)
+    p284(join)
+    p282(pca)
+    p287(filter)
+    p298(concat)
+    p288(filter)
+    p296(join)
+    p294(harmonypy)
+    p307(join)
+    p305(find_neighbors)
+    p317(join)
+    p315(leiden)
+    p327(join)
+    p325(umap)
+    p332(toSortedList)
+    p334(Output)
+    p18-->p19
+    p36-->p37
+    p37-->p38
+    p78-->p79
+    p103-->p104
+    p37-->p166
+    p196-->p197
+    p221-->p222
+    p37-->p244
+    p257-->p258
+    p287-->p298
     p0-->p2
     p2-->p4
-    p4-->p15
-    p4-->p13
-    p13-->p15
-    p15-->p25
-    p15-->p23
-    p23-->p25
-    p25-->p27
-    p28-->p31
-    p31-->p33
-    p33-->p43
-    p33-->p41
+    p4-->p7
+    p4-->p18
+    p7-->p16
+    p7-->p14
+    p14-->p16
+    p16-->p19
+    p16-->p22
+    p16-->p32
+    p19-->p21
+    p22-->p30
+    p22-->p28
+    p28-->p30
+    p30-->p36
+    p32-->p34
+    p34-->p36
+    p38-->p41
     p41-->p43
     p43-->p53
     p43-->p51
     p51-->p53
-    p53-->p64
-    p53-->p62
-    p62-->p64
-    p64-->p68
-    p69-->p73
-    p73-->p75
-    p75-->p86
-    p75-->p84
-    p84-->p86
-    p86-->p96
-    p86-->p94
-    p94-->p96
-    p96-->p106
-    p96-->p104
-    p104-->p106
-    p106-->p116
-    p106-->p114
-    p114-->p116
-    p116-->p126
-    p116-->p124
-    p124-->p126
-    p126-->p136
-    p126-->p134
-    p134-->p136
-    p136-->p202
-    p139-->p142
-    p142-->p144
-    p144-->p154
-    p144-->p152
-    p152-->p154
-    p154-->p164
-    p154-->p162
-    p162-->p164
-    p164-->p169
-    p170-->p174
-    p174-->p176
-    p176-->p186
-    p176-->p184
-    p184-->p186
-    p186-->p202
+    p53-->p63
+    p53-->p61
+    p61-->p63
+    p63-->p74
+    p63-->p72
+    p72-->p74
+    p74-->p78
+    p79-->p83
+    p83-->p85
+    p85-->p89
+    p85-->p103
+    p89-->p91
+    p91-->p99
+    p91-->p97
+    p97-->p99
+    p99-->p101
+    p101-->p104
+    p104-->p113
+    p104-->p111
+    p111-->p113
+    p113-->p123
+    p113-->p121
+    p121-->p123
+    p123-->p133
+    p123-->p131
+    p131-->p133
+    p133-->p143
+    p133-->p141
+    p141-->p143
+    p143-->p153
+    p143-->p151
+    p151-->p153
+    p153-->p163
+    p153-->p161
+    p161-->p163
+    p163-->p257
+    p166-->p169
+    p169-->p171
+    p171-->p181
+    p171-->p179
+    p179-->p181
+    p181-->p191
+    p181-->p189
     p189-->p191
-    p191-->p200
-    p191-->p198
-    p198-->p200
-    p200-->p202
-    p203-->p212
-    p203-->p210
-    p210-->p212
-    p212-->p216
-    p216-->p218
-    p218-->p229
-    p218-->p227
-    p227-->p229
-    p229-->p232
-    p229-->p233
-    p233-->p241
-    p233-->p239
+    p191-->p196
+    p197-->p201
+    p201-->p203
+    p203-->p207
+    p203-->p221
+    p207-->p209
+    p209-->p217
+    p209-->p215
+    p215-->p217
+    p217-->p219
+    p219-->p222
+    p222-->p231
+    p222-->p229
+    p229-->p231
+    p231-->p241
+    p231-->p239
     p239-->p241
-    p241-->p243
-    p243-->p252
-    p243-->p250
-    p250-->p252
-    p252-->p262
-    p252-->p260
-    p260-->p262
-    p262-->p272
-    p262-->p270
-    p270-->p272
-    p272-->p277
-    p277-->p279
+    p241-->p257
+    p244-->p246
+    p246-->p255
+    p246-->p253
+    p253-->p255
+    p255-->p257
+    p258-->p267
+    p258-->p265
+    p265-->p267
+    p267-->p271
+    p271-->p273
+    p273-->p284
+    p273-->p282
+    p282-->p284
+    p284-->p287
+    p284-->p288
+    p288-->p296
+    p288-->p294
+    p294-->p296
+    p296-->p298
+    p298-->p307
+    p298-->p305
+    p305-->p307
+    p307-->p317
+    p307-->p315
+    p315-->p317
+    p317-->p327
+    p317-->p325
+    p325-->p327
+    p327-->p332
+    p332-->p334
 
 ```
