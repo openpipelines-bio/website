@@ -2,7 +2,10 @@
 title: Mauro Saporita
 image: https://www.github.com/mauro-saporita.png
 role: Contributor
-organizations: ~
+organizations:
+- name: Ardigen
+  href: https://ardigen.com
+  role: Lead Nextflow Developer
 links:
 - icon: bi-envelope
   text: E-mail

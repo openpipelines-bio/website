@@ -2,7 +2,13 @@
 title: Robrecht Cannoodt
 image: https://www.github.com/rcannood.png
 role: Core Team Member
-organizations: ~
+organizations:
+- name: Data Intuitive
+  href: https://www.data-intuitive.com
+  role: Data Science Engineer
+- name: Open Problems
+  href: https://openproblems.bio
+  role: Core Member
 links:
 - icon: bi-envelope
   text: E-mail

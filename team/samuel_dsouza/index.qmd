@@ -2,7 +2,10 @@
 title: Samuel D'Souza
 image: https://www.github.com/srdsam.png
 role: Contributor
-organizations: ~
+organizations:
+- name: Chan Zuckerberg Biohub
+  href: https://www.czbiohub.org
+  role: Data Engineer
 links:
 - icon: bi-github
   text: GitHub

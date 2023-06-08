@@ -2,7 +2,10 @@
 title: Povilas Gibas
 image: https://www.github.com/PoGibas.png
 role: Contributor
-organizations: ~
+organizations:
+- name: Ardigen
+  href: https://ardigen.com
+  role: Bioinformatician
 links:
 - icon: bi-envelope
   text: E-mail
