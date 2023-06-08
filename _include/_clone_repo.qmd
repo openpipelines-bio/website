@@ -18,7 +18,7 @@ processx::run(
 )
 processx::run(
   "viash",
-  c("run", "src/common/sync_test_resources/config.vsh.yaml"),
+  c("run", "src/download/sync_test_resources/config.vsh.yaml"),
   wd = proj_dir
 )
 knitr::opts_knit$set(root.dir = proj_dir)
