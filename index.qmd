@@ -45,43 +45,46 @@ Contributing
 ::::{layout-nrow=1}
 
 :::{.column}
-Guide
+## Fundamentals
 
-* Concepts and philosophy
-* Requirements
-* Getting started
-* Running pipelines
-* Development status
+* Philosophy <!--What is OpenPipelines-->
+* Concepts <!--Viash and MuData-->
+* Architecture <!--What are the different pipelines-->
+* Road map <!--Progress-->
 
 :::
 
 :::{.column}
-Tutorials
+## User guide
 
+<!--How to analyse your dataset and interpret the results-->
+
+* Getting started
 * Environment setup
 * From sequencing to count tables
 * From count table to integrated data
 * Celltyping and cell-cell communication
 
-_(How to analyse your dataset and interpret the results)_
-
 :::
 
 :::{.column}
-Contributing
+## Contributing
+
+<!--How to contribute to OpenPipelines-->
 
 * Getting started
 * Project structure
-* Create component
-* Create pipeline
-* Run tests
-* Publish your changes
+* Creating components
+* Creating pipelines
+* Running tests
+* Publishing your changes
+* Report a bug
 
 :::
 
 
 :::{.column}
-More information
+## More information
 
 * Cheat sheets
 * Code of conduct
