@@ -1,0 +1,16 @@
+---
+title: Povilas Gibas
+image: https://www.github.com/PoGibas.png
+role: Contributor
+organizations: ~
+links:
+- icon: bi-envelope
+  text: E-mail
+  href: mailto:povilasgibas@gmail.com
+- icon: bi-github
+  text: GitHub
+  href: https://github.com/PoGibas
+about:
+  template: jolla
+---
+

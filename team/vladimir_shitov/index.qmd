@@ -1,0 +1,22 @@
+---
+title: Vladimir Shitov
+image: https://www.github.com/vladimirshitov.png
+role: Contributor
+organizations:
+- name: Helmholtz Munich
+  href: https://www.helmholtz-munich.de
+  role: PhD Candidate
+links:
+- icon: bi-envelope
+  text: E-mail
+  href: mailto:vladimir.shitov@helmholtz-muenchen.de
+- icon: bi-github
+  text: GitHub
+  href: https://github.com/vladimirshitov
+- icon: fa-brands fa-orcid
+  text: ORCID
+  href: https://orcid.org/0000-0002-1960-8812
+about:
+  template: jolla
+---
+

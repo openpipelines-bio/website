@@ -1,0 +1,13 @@
+---
+title: Samuel D'Souza
+image: https://www.github.com/srdsam.png
+role: Contributor
+organizations: ~
+links:
+- icon: bi-github
+  text: GitHub
+  href: https://github.com/srdsam
+about:
+  template: jolla
+---
+

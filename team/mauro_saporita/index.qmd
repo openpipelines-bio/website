@@ -1,0 +1,16 @@
+---
+title: Mauro Saporita
+image: https://www.github.com/mauro-saporita.png
+role: Contributor
+organizations: ~
+links:
+- icon: bi-envelope
+  text: E-mail
+  href: mailto:maurosaporita@gmail.com
+- icon: bi-github
+  text: GitHub
+  href: https://github.com/mauro-saporita
+about:
+  template: jolla
+---
+
