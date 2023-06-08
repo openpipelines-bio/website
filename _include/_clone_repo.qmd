@@ -7,20 +7,21 @@ proj_dir <- paste0(repo_path, "/_openpipeline")
 ```
 
 ```{bash include=FALSE}
+set -e
+
 REPO_PATH=`git rev-parse --show-toplevel`
 PROJ_DIR="$REPO_PATH/_openpipeline"
 
-cd "$REPO_PATH"
+echo "REPO_PATH: $REPO_PATH"
+echo "PROJ_DIR: $PROJ_DIR"
+
 # if submodule is not available, initialise it
 if [ ! -d "$PROJ_DIR" ]; then
-  git submodule update --init --recursive
+  $(cd "$REPO_PATH" && git submodule update --init --recursive)
 fi
 
-cd "$PROJ_DIR"
-# undo changes
-git clean -fxd -e resources_test
-# sync test resources
-viash run src/download/sync_test_resources/config.vsh.yaml
+# undo changes and sync test resources
+$(cd "$PROJ_DIR" && git clean -fxd -e resources_test && viash run src/download/sync_test_resources/config.vsh.yaml)
 ```
 
 ```{r include=FALSE}
