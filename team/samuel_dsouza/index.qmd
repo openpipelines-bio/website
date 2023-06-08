@@ -7,6 +7,9 @@ links:
 - icon: bi-github
   text: GitHub
   href: https://github.com/srdsam
+- icon: bi-linkedin
+  text: LinkedIn
+  href: https://www.linkedin.com/in/samuel-d-souza-887023150/
 about:
   template: jolla
 ---

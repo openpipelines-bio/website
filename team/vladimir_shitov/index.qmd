@@ -16,6 +16,9 @@ links:
 - icon: fa-brands fa-orcid
   text: ORCID
   href: https://orcid.org/0000-0002-1960-8812
+- icon: bi-linkedin
+  text: LinkedIn
+  href: https://www.linkedin.com/in/vladimir-shitov-9a659513b
 about:
   template: jolla
 ---

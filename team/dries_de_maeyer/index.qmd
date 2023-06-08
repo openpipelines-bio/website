@@ -1,7 +1,7 @@
 ---
 title: Dries De Maeyer
 image: https://www.github.com/ddemaeyer.png
-role: Core Team
+role: Core Team Member
 organizations:
 - name: Janssen Pharmaceuticals
   href: https://www.janssen.com
@@ -13,6 +13,9 @@ links:
 - icon: bi-github
   text: GitHub
   href: https://github.com/ddemaeyer
+- icon: bi-linkedin
+  text: LinkedIn
+  href: https://www.linkedin.com/in/dries-de-maeyer-b46a814
 about:
   template: jolla
 ---

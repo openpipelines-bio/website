@@ -16,6 +16,9 @@ links:
 - icon: bi-envelope
   text: E-mail
   href: mailto:matthias.beyens@gmail.com
+- icon: bi-linkedin
+  text: LinkedIn
+  href: https://www.linkedin.com/in/mbeyens
 about:
   template: jolla
 ---

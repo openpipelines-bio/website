@@ -10,6 +10,9 @@ links:
 - icon: fa-brands fa-orcid
   text: ORCID
   href: https://orcid.org/0000-0002-3097-5621
+- icon: bi-linkedin
+  text: LinkedIn
+  href: https://www.linkedin.com/in/marijke-van-moerbeke-84303a34
 about:
   template: jolla
 ---

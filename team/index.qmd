@@ -67,6 +67,13 @@ for (author in authors) {
         text = "ORCID",
         href = paste0("https://orcid.org/", value)
       )
+    },
+    linkedin = function(value) {
+      list(
+        icon = "bi-linkedin",
+        text = "LinkedIn",
+        href = paste0("https://www.linkedin.com/in/", value)
+      )
     }
   )
   out_links <- list()

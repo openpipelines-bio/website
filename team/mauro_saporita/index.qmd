@@ -10,6 +10,9 @@ links:
 - icon: bi-github
   text: GitHub
   href: https://github.com/mauro-saporita
+- icon: bi-linkedin
+  text: LinkedIn
+  href: https://www.linkedin.com/in/mauro-saporita-930b06a5
 about:
   template: jolla
 ---

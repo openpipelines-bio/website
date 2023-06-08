@@ -1,12 +1,15 @@
 ---
 title: Toni Verbeiren
 image: https://www.github.com/tverbeiren.png
-role: Core Team
+role: Core Team Member
 organizations: ~
 links:
 - icon: bi-github
   text: GitHub
   href: https://github.com/tverbeiren
+- icon: bi-linkedin
+  text: LinkedIn
+  href: https://www.linkedin.com/in/verbeiren
 about:
   template: jolla
 ---

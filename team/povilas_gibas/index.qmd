@@ -10,6 +10,9 @@ links:
 - icon: bi-github
   text: GitHub
   href: https://github.com/PoGibas
+- icon: bi-linkedin
+  text: LinkedIn
+  href: https://www.linkedin.com/in/povilas-gibas
 about:
   template: jolla
 ---
