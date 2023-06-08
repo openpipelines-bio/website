@@ -1,29 +1,25 @@
 
-```{r include=FALSE}
+```{r setup, include=FALSE}
 # discard local changes from the /_openpipeline repo and
 # sets the work directory to that directory.
 repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
 proj_dir <- paste0(repo_path, "/_openpipeline")
-```
-
-```{bash include=FALSE}
-set -e
-
-REPO_PATH=`git rev-parse --show-toplevel`
-PROJ_DIR="$REPO_PATH/_openpipeline"
-
-echo "REPO_PATH: $REPO_PATH"
-echo "PROJ_DIR: $PROJ_DIR"
-
-# if submodule is not available, initialise it
-if [ ! -d "$PROJ_DIR" ]; then
-  $(cd "$REPO_PATH" && git submodule update --init --recursive)
-fi
-
-# undo changes and sync test resources
-$(cd "$PROJ_DIR" && git clean -fxd -e resources_test && viash run src/download/sync_test_resources/config.vsh.yaml)
-```
-
-```{r include=FALSE}
+if (!dir.exists(proj_dir)) {
+  processx::run(
+    "git",
+    c("submodule", "update", "--init", "--recursive"),
+    wd = dirname(proj_dir)
+  )
+}
+processx::run(
+  "git", 
+  c("clean", "-fxd", "-e", "resources_test"),
+  wd = proj_dir
+)
+processx::run(
+  "viash",
+  c("run", "src/common/sync_test_resources/config.vsh.yaml"),
+  wd = proj_dir
+)
 knitr::opts_knit$set(root.dir = proj_dir)
 ```
