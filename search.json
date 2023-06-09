@@ -1,45 +1,24 @@
 [
   {
+    "objectID": "fundamentals/roadmap.html",
+    "href": "fundamentals/roadmap.html",
+    "title": "Roadmap",
+    "section": "",
+    "text": "flowchart LR\n  classDef done fill:#a3f6cf,stroke:#000000;\n  classDef wip fill:#f4cb93,stroke:#000000;\n  classDef todo fill:#f0aeb2,stroke:#000000;\n\n  Raw1[Sample 1] --&gt; Split1[/Split\\nmodalities/]:::done --&gt; ProcGEX1 & ProcRNAV1 & ProcADT1 & ProcATAC1 & ProcVDJ1\n  ProcGEX1[/Process GEX\\nprofile/]:::done --&gt; ConcatGEX[/Concatenate\\nprofiles/]:::done --&gt; ProcGEX[/Process GEX\\nprofiles/]:::done\n  ProcRNAV1[/Process RNAV\\nprofile/]:::wip --&gt; ConcatRNAV[/Concatenate\\nprofiles/]:::done --&gt; ProcRNAV[/Process RNAV\\nprofiles/]:::wip\n  ProcADT1[/Process ADT\\nprofile/]:::done --&gt; ConcatADT[/Concatenate\\nprofiles/]:::done --&gt; ProcADT[/Process ADT\\nprofiles/]:::todo\n  ProcATAC1[/Process ATAC\\nprofile/]:::todo --&gt; ConcatATAC[/Concatenate\\nprofiles/]:::done --&gt; ProcATAC[/Process ATAC\\nprofiles/]:::todo\n  ProcVDJ1[/Process VDJ\\nprofile/]:::todo --&gt; ConcatVDJ[/Concatenate\\nprofiles/]:::done --&gt; ProcVDJ[/Process VDJ\\nprofiles/]:::todo\n  ProcGEX & ProcRNAV & ProcADT & ProcATAC & ProcVDJ --&gt; Merge[/Merge\\nmodalities/]:::done --&gt; Integration[/Integration/]:::done\n\n\nFigure 1: Status of implemented components. Green: implemented, orange: work in progress,\nGEX: Gene-expression. RNAV: RNA Velocity. ADT: Antibody-Derived Tags. ATAC: Assay for Transposase-Accessible Chromatin."
+  },
+  {
+    "objectID": "fundamentals/architecture.html",
+    "href": "fundamentals/architecture.html",
+    "title": "Architecture",
+    "section": "",
+    "text": "The single-cell workflow is comprised of multiple (standalone) subworkflows.\n\n\n\n\n\n\n\nflowchart TD  \n  subgraph ingest [\"Ingestion\"]\n    direction LR\n    RawCounts1[\"Raw counts\"]\n    BCL[\"BCL\"]\n    Demux[\"Demux\"]\n    Fastq[\"Fastq\"]\n    Ref[\"Reference\"]\n    Mapping[\"Mapping\"]\n    RawDir[\"Raw out\"]\n    Convert[\"Convert\"]\n    RawCounts1[\"Raw counts\"]\n    BCL --&gt; Demux --&gt; Fastq\n    Fastq & Ref --&gt; Mapping --&gt; RawDir --&gt; Convert --&gt; RawCounts1\n  end\n  subgraph unimodalsinglesample [\"Unimodal Single Sample Processing\"]\n    direction LR\n    RawCounts2[\"Raw counts for one modality\"]\n    ProccessedCounts1[\"Processed\\nCounts\"]\n    AmbientRNACorr[/\"Ambient RNA\\ncorrection\"/]\n    RawCounts2 --&gt; CellFiltering --&gt; DoubletCalling --&gt; AmbientRNACorr --&gt; ProccessedCounts1\n  end\n  subgraph unimodalmultisample [\"Unimodal Multi Sample Processing\"]\n    direction LR\n    FeatureAnnotation[/\"Feature annotation\"/]\n    BatchCorrection[\"Batch correction\"]\n    Normalization[\"Normalisation\"]\n    FeatureSelection[\"Feature selection\"]\n    ProccessedCounts2[\"Processed\\nCounts\"]\n    DoubletCalling[\"Doublet\\ncalling\"]\n    CellFiltering[\"Cell\\nfiltering\"]\n    NormalisedOut[\"Normalised\\ncounts\"]\n\n    ProccessedCounts2 --&gt; FeatureAnnotation --&gt; BatchCorrection --&gt; Normalization --&gt; FeatureSelection --&gt; NormalisedOut\n  end\n  subgraph integration [\"Integration\"]\n    direction LR\n\n    Normalised[\"Normalised\\ncounts\"]\n    Integrated[\"Integrated\\ndata\"]\n\n    DataIntegration[/\"Data integration\"/]\n    DimRed[/\"Dimensionality\\nreduction\"/]\n  \n    Normalised --&gt; DataIntegration --&gt; DimRed --&gt; Integrated\n\n  end\n  subgraph downstreamprocessing [\"Downstream Processing\"]\n    direction LR\n    Interpretation[\"Interpretation\"]\n    Conversion[\"Conversion\"]\n    Dataset[\"Dataset\"]\n\n    Interpretation --&gt; Conversion --&gt; Dataset\n  end\n\n  ingest --&gt; split --&gt; unimodalsinglesample --&gt; concat --&gt; unimodalmultisample --&gt; merging --&gt; integration  --&gt; downstreamprocessing\n  %% Do not change the ID for these boxes because this is linked to custom css\n  titlebox_ingestion[\"Convert raw sequencing data\\nor count tables into MuData data\\nfor further processing.\"]\n  titlebox_empty[\" \"]\n  titlebox2[\"Per modality fitering pipelines\\nare available to select true\\nfrom false cells.\"]\n  titlebox_empty2[\" \"]\n  titlebox3[\"...\"]\n  titlebox_empty3[\" \"]\n  titlebox4[\"Performs an integration pipeline for single\\ncell data based on a single or multiple modalities.\"]\n  titlebox5[\"Take different dataset annotations and combine\\nthem together into a single enriched dataset.\\n The idea is to have a diff_muon object,\\n i.e. a muon object containing the  changes \\n of the original objectwhere data from the\\ndiff_muon will be pushed to the original muon object.\"]\n  titlebox_ingestion --&gt; titlebox_empty --&gt; titlebox2 --&gt; titlebox_empty2 --&gt; titlebox3 --&gt; titlebox_empty3--&gt; titlebox4 --&gt; titlebox5\n\n\nFigure 1: Overview single cell processing steps in OpenPipeline. Rectangles are data objects, parallelograms are Viash modules or subworkflows.\n\n\n\n\n\n\nUse-cases\n\n\n\n\n\n\nNote\n\n\n\nIn these use-cases, Interpretation, Conversion and Dataset are omitted because they are the same in every use case.\n\n\n\nA single unimodal sample\n\n\n\n\n\n\nflowchart LR\n\n  Raw1[Sample 1] --&gt; Split1[/Split\\nmodalities/] --&gt; ProcGEX1[/Process GEX\\nprofile/]\n  ProcGEX1 --&gt; ConcatGEX[/Concatenate\\nprofiles/] --&gt; ProcGEX[/Process GEX\\nprofiles/]\n  ProcGEX --&gt; Merge[/Merge\\nmodalities/] --&gt; Integration[/Integration/]\n\n\n\nFigure 2: Example of how the concatenation and merges work.\nGEX: Gene-expression.\n\n\n\n\n\n\n\nMultiple unimodal samples\n\n\n\n\n\n\nflowchart LR\n\n  Raw1[Sample 1] --&gt; Split1[/Split\\nmodalities/] --&gt; ProcGEX1[/Process GEX\\nprofile/]\n  Raw2[Sample 2] --&gt; Split2[/Split\\nmodalities/] --&gt; ProcGEX2[/Process GEX\\nprofile/]\n  Raw3[Sample 3] --&gt; Split3[/Split\\nmodalities/] --&gt; ProcGEX3[/Process GEX\\nprofile/]\n  ProcGEX1 & ProcGEX2 & ProcGEX3 --&gt; ConcatGEX[/Concatenate\\nprofiles/] --&gt; ProcGEX[/Process GEX\\nprofiles/] \n  ProcGEX --&gt; Merge[/Merge\\nmodalities/] --&gt; Integration[/Integration/]\n\n\n\nFigure 3: Example of how the concatenation and merges work.\nGEX: Gene-expression.\n\n\n\n\n\n\n\nA single multimodal sample\n\n\n\n\n\n\nflowchart LR\n\n  Raw1[Sample 1] --&gt; Split1[/Split\\nmodalities/] --&gt; ProcGEX1 & ProcADT1 & ProcRNAV1\n  ProcGEX1[/Process GEX\\nprofile/] --&gt; ConcatGEX[/Concatenate\\nprofiles/] --&gt; ProcGEX[/Process GEX\\nprofiles/]\n  ProcADT1[/Process ADT\\nprofile/] --&gt; ConcatADT[/Concatenate\\nprofiles/] --&gt; ProcADT[/Process ADT\\nprofiles/]\n  ProcRNAV1[/Process RNAV\\nprofile/] --&gt; ConcatRNAV[/Concatenate\\nprofiles/] --&gt; ProcRNAV[/Process RNAV\\nprofiles/]\n  ProcGEX & ProcADT & ProcRNAV--&gt; Merge[/Merge\\nmodalities/] --&gt; Integration[/Integration/]\n\n\n\nFigure 4: Example of how the concatenation and merges work.\nGEX: Gene-expression. ADT: Antibody-Derived Tags. RNAV: RNA Velocity.\n\n\n\n\n\n\n\nMultiple multimodal samples\n\n\n\n\n\n\nflowchart LR\n\n  Raw1[Sample 1] --&gt; Split1[/Split\\nmodalities/] --&gt; ProcGEX1 & ProcADT1\n  Raw2[Sample 2] --&gt; Split2[/Split\\nmodalities/] --&gt; ProcGEX2 & ProcADT2\n  ProcGEX1[/Process GEX\\nprofile/] & ProcGEX2[/Process GEX\\nprofile/] --&gt; ConcatGEX[/Concatenate\\nprofiles/] --&gt; ProcGEX[/Process GEX\\nprofiles/]\n  ProcADT1[/Process ADT\\nprofile/] & ProcADT2[/Process ADT\\nprofile/] --&gt; ConcatADT[/Concatenate\\nprofiles/] --&gt; ProcADT[/Process ADT\\nprofiles/]\n  ProcGEX & ProcADT --&gt; Merge[/Merge\\nmodalities/] --&gt; Integration[/Integration/]\n\n\n\nFigure 5: Example of how the concat and merges work.\nGEX: Gene-expression. ADT: Antibody-Derived Tags."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "OpenPipelines",
     "section": "",
-    "text": "Guide\n\n\n  \n    \n    Architecture\n    \n  \n  \n    \n    Bug reports\n    \n  \n  \n    \n    Data API\n    \n  \n  \n    \n    Guide\n    \n  \n  \n    \n    Running pipelines\n    \n  \n  \n    \n    Status\n    \n  \n\n\nNo matching items\n\n\n\n\nContributing\n\n\n  \n    \n    Getting started\n    \n  \n  \n    \n    Project structure\n    \n  \n  \n    \n    Creating components\n    \n  \n  \n    \n    Creating pipelines\n    \n  \n  \n    \n    Running tests\n    \n  \n  \n    \n    Publishing your changes\n    \n  \n  \n    \n    Contributing\n    \n  \n\n\nNo matching items"
-  },
-  {
-    "objectID": "index.html#proposed-structure",
-    "href": "index.html#proposed-structure",
-    "title": "OpenPipelines",
-    "section": "Proposed structure",
-    "text": "Proposed structure"
-  },
-  {
-    "objectID": "index.html#fundamentals",
-    "href": "index.html#fundamentals",
-    "title": "OpenPipelines",
-    "section": "Fundamentals",
-    "text": "Fundamentals\n\nPhilosophy \nConcepts \nArchitecture \nRoad map"
-  },
-  {
-    "objectID": "index.html#user-guide",
-    "href": "index.html#user-guide",
-    "title": "OpenPipelines",
-    "section": "User guide",
-    "text": "User guide\n\n\nGetting started\nEnvironment setup\nFrom sequencing to count tables\nFrom count table to integrated data\nCelltyping and cell-cell communication"
-  },
-  {
-    "objectID": "index.html#contributing",
-    "href": "index.html#contributing",
-    "title": "OpenPipelines",
-    "section": "Contributing",
-    "text": "Contributing\n\n\nGetting started\nProject structure\nCreating components\nCreating pipelines\nRunning tests\nPublishing your changes\nReport a bug"
-  },
-  {
-    "objectID": "index.html#more-information",
-    "href": "index.html#more-information",
-    "title": "OpenPipelines",
-    "section": "More information",
-    "text": "More information\n\nCheat sheets\nCode of conduct\nFAQ"
+    "text": "Fundamentals\n  \n  \n        \n  \n  Philosophy\n  \n    \n        \n  \n  Concepts\n  \n    \n        \n  \n  Architecture\n  \n    \n        \n  \n  Roadmap\n  \n    \n  \n\nNo matching items\n\n\n\n\n\n  \n  User Guide\n  \n  \n        \n  \n  Getting started\n  \n    \n        \n  \n  Ingestion\n  \n    \n        \n  \n  Processing\n  \n    \n        \n  \n  Running pipelines\n  \n    \n        \n  \n  Downstream\n  \n    \n        \n  \n  Bug reports\n  \n    \n  \n\nNo matching items\n\n\n\n\n\n  \n  Contributing\n  \n  \n        \n  \n  Getting started\n  \n    \n        \n  \n  Project structure\n  \n    \n        \n  \n  Creating components\n  \n    \n        \n  \n  Creating pipelines\n  \n    \n        \n  \n  Running tests\n  \n    \n        \n  \n  Publishing your changes\n  \n    \n  \n\nNo matching items\n\n\n\n\n\n  \n  More information\n  \n  \n        \n  \n  Cheat sheets\n  \n    \n        \n  \n  Code of conduct\n  \n    \n        \n  \n  Data API\n  \n    \n        \n  \n  FAQ\n  \n    \n  \n\nNo matching items"
   },
   {
     "objectID": "CHANGELOG.html",
@@ -56,25 +35,39 @@
     "text": "Update component documentation to v0.8.0 release.\nUse git submodule to access openpipeline repo\nPropose new website structure\nUpdate author page"
   },
   {
+    "objectID": "user_guide/bug_reports.html",
+    "href": "user_guide/bug_reports.html",
+    "title": "Bug reports",
+    "section": "",
+    "text": "Issues with Openpipelines are being tracked on Github. In order for an issue to be fixed in a timely manner, creating a complete and reproducable is essential."
+  },
+  {
     "objectID": "user_guide/index.html#using-the-nf-tower-user-interface",
     "href": "user_guide/index.html#using-the-nf-tower-user-interface",
-    "title": "Which workflow is right for me",
+    "title": "User Guide",
     "section": "Using the nf-tower user-interface",
     "text": "Using the nf-tower user-interface"
   },
   {
     "objectID": "user_guide/index.html#using-the-nf-tower-cli-tw",
     "href": "user_guide/index.html#using-the-nf-tower-cli-tw",
-    "title": "Which workflow is right for me",
+    "title": "User Guide",
     "section": "Using the nf-tower CLI (tw)",
     "text": "Using the nf-tower CLI (tw)"
   },
   {
     "objectID": "user_guide/index.html#using-the-nextflow-cli",
     "href": "user_guide/index.html#using-the-nextflow-cli",
-    "title": "Which workflow is right for me",
+    "title": "User Guide",
     "section": "Using the nextflow CLI",
     "text": "Using the nextflow CLI"
+  },
+  {
+    "objectID": "user_guide/running_pipelines.html",
+    "href": "user_guide/running_pipelines.html",
+    "title": "Running pipelines",
+    "section": "",
+    "text": "Note\n\n\n\nTODO: Fill in these sections.\n\nExamples should be using an OpenPipelines release or the main_build branch.\nPoint to the “Components” tab\n\n\n\n\nInstalling Viash and Nextflow\nBefore you try running OpenPipelines, please install Viash and Nextflow first (?@sec-install-viash-nextflow).\n\nRunning pipelines from the CLI\nbin/nextflow run . \\\n  -main-script workflows/integration/multimodal_integration/main.nf \\\n  -profile docker \\\n  -resume \n  --publish_dir foo/\n  --input \"bar\"\n  --output \"test.txt\"\n\n\nRunning pipelines from Nextflow Tower\n\n\nUsing param_list to pass large parameter sets\nUsing Viash’s VDSL3 nextflow platform, an optional -param_list argument can be used to pass a large number of inputs to a workflow. Additionally, the pipeline parameter values can be set for each input to the workflow independently. A param_list can either be a list of maps, a csv file, a json file, a yaml file, or simply a yaml blob:\n\nA csv file should have column names which correspond to the different arguments of this pipeline. Example: --param_list data.csv with columns id,input.\nA json or a yaml file should be a list of maps, each of which has keys corresponding to the arguments of the pipeline. Example: --param_list data.json with contents [ {'id': 'foo', 'input': 'foo.txt'}, {'id': 'bar', 'input': 'bar.txt'} ].\nA yaml blob can also be passed directly as a string. Example: --param_list \"[ {'id': 'foo', 'input': 'foo.txt'}, {'id': 'bar', 'input': 'bar.txt'} ]\".\nA list of maps can be in a nextflow.config file, where the keys of each map corresponds to the arguments of the pipeline. Example in a nextflow.config file: param_list: [ ['id': 'foo', 'input': 'foo.txt'], ['id': 'bar', 'input': 'bar.txt'] ].\n\nWhen passing a csv, json or yaml file, relative path names are relativized to the location of the parameter file. No relativation is performed when param_list is a list of maps (as-is) or a yaml blob.\nUsing a param_list can be combined with setting parameters that are set for all parameter sets. These ‘gobal’ parameters will always be overwritten with their counterpart that was specified in a more specific manner for a single parameter set. For example, using --param_list \"[ {'id': 'foo', 'input': 'foo.txt'}, {'id': 'bar'} ]\" --input 'global.txt' will result in the following parameter sets being processed:\n\nid: foo, input: foo.txt\nid: bar, input: global.txt"
   },
   {
     "objectID": "contributing/creating_components.html",
@@ -138,83 +131,6 @@
     "title": "Team",
     "section": "Authors",
     "text": "Authors\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "guide/implementation_status.html",
-    "href": "guide/implementation_status.html",
-    "title": "Status",
-    "section": "",
-    "text": "flowchart LR\n  classDef done fill:#a3f6cf,stroke:#000000;\n  classDef wip fill:#f4cb93,stroke:#000000;\n  classDef todo fill:#f0aeb2,stroke:#000000;\n\n  Raw1[Sample 1] --&gt; Split1[/Split\\nmodalities/]:::done --&gt; ProcGEX1 & ProcRNAV1 & ProcADT1 & ProcATAC1 & ProcVDJ1\n  ProcGEX1[/Process GEX\\nprofile/]:::done --&gt; ConcatGEX[/Concatenate\\nprofiles/]:::done --&gt; ProcGEX[/Process GEX\\nprofiles/]:::done\n  ProcRNAV1[/Process RNAV\\nprofile/]:::wip --&gt; ConcatRNAV[/Concatenate\\nprofiles/]:::done --&gt; ProcRNAV[/Process RNAV\\nprofiles/]:::wip\n  ProcADT1[/Process ADT\\nprofile/]:::done --&gt; ConcatADT[/Concatenate\\nprofiles/]:::done --&gt; ProcADT[/Process ADT\\nprofiles/]:::todo\n  ProcATAC1[/Process ATAC\\nprofile/]:::todo --&gt; ConcatATAC[/Concatenate\\nprofiles/]:::done --&gt; ProcATAC[/Process ATAC\\nprofiles/]:::todo\n  ProcVDJ1[/Process VDJ\\nprofile/]:::todo --&gt; ConcatVDJ[/Concatenate\\nprofiles/]:::done --&gt; ProcVDJ[/Process VDJ\\nprofiles/]:::todo\n  ProcGEX & ProcRNAV & ProcADT & ProcATAC & ProcVDJ --&gt; Merge[/Merge\\nmodalities/]:::done --&gt; Integration[/Integration/]:::done\n\n\nFigure 1: Status of implemented components. Green: implemented, orange: work in progress,\nGEX: Gene-expression. RNAV: RNA Velocity. ADT: Antibody-Derived Tags. ATAC: Assay for Transposase-Accessible Chromatin."
-  },
-  {
-    "objectID": "guide/bug_reports.html",
-    "href": "guide/bug_reports.html",
-    "title": "Bug reports",
-    "section": "",
-    "text": "Issues with Openpipelines are being tracked on Github. In order for an issue to be fixed in a timely manner, creating a complete and reproducable is essential."
-  },
-  {
-    "objectID": "guide/data_api.html",
-    "href": "guide/data_api.html",
-    "title": "Data API",
-    "section": "",
-    "text": "Note\n\n\n\nFile formats are being discussed in openpipelines-bio/openpipeline#102"
-  },
-  {
-    "objectID": "guide/data_api.html#dataset",
-    "href": "guide/data_api.html#dataset",
-    "title": "Data API",
-    "section": "Dataset",
-    "text": "Dataset\nobs:\n index # cell id\n sample\n cell_type\n organism\n tissue\n\nmod:\n rna:\n rnav:\n prot:\n atac:\n vdj:"
-  },
-  {
-    "objectID": "guide/data_api.html#rna-modality",
-    "href": "guide/data_api.html#rna-modality",
-    "title": "Data API",
-    "section": "RNA modality",
-    "text": "RNA modality\nmod:\n rna:\n   layers:\n     counts\n     normalized\n   obs:\n     &lt;qc metrics&gt;\n     doublet_score\n     doublet_bool\n     cluster\n   var:\n     index # feature_id, preferably an ensembl id\n     feature_name\n     &lt;qc metrics&gt;\n     highly_variable\n     highly_variable_score\n   obsm:\n     X_pca\n     X_integrated\n     X_umap\n     annotation # scvi, bbknn, ...\n   obsp:\n     connectivities\n     distances"
-  },
-  {
-    "objectID": "guide/data_api.html#adt-modality",
-    "href": "guide/data_api.html#adt-modality",
-    "title": "Data API",
-    "section": "ADT modality",
-    "text": "ADT modality\nmod:\n prot:\n   layers:\n     counts\n   var:\n      index # feature_id\n      feature_name # Associated protein names"
-  },
-  {
-    "objectID": "guide/data_api.html#vdj-modality",
-    "href": "guide/data_api.html#vdj-modality",
-    "title": "Data API",
-    "section": "VDJ modality",
-    "text": "VDJ modality\nmod:\n vdj:\n   obsm:\n     vdj_t\n     vdj_b"
-  },
-  {
-    "objectID": "guide/data_api.html#atac-modality",
-    "href": "guide/data_api.html#atac-modality",
-    "title": "Data API",
-    "section": "ATAC modality",
-    "text": "ATAC modality\nmod:\n atac:\n   layers:\n     counts\n   var:\n     interval"
-  },
-  {
-    "objectID": "guide/data_api.html#rna-velocity-modality",
-    "href": "guide/data_api.html#rna-velocity-modality",
-    "title": "Data API",
-    "section": "RNA velocity modality",
-    "text": "RNA velocity modality\nmod:\n rnav:\n   layers:\n     spliced\n     unspliced"
-  },
-  {
-    "objectID": "guide/architecture.html",
-    "href": "guide/architecture.html",
-    "title": "Architecture",
-    "section": "",
-    "text": "The single-cell workflow is comprised of multiple (standalone) subworkflows.\n\n\n\n\n\n\n\nflowchart TD  \n  subgraph ingest [\"Ingestion\"]\n    direction LR\n    RawCounts1[\"Raw counts\"]\n    BCL[\"BCL\"]\n    Demux[\"Demux\"]\n    Fastq[\"Fastq\"]\n    Ref[\"Reference\"]\n    Mapping[\"Mapping\"]\n    RawDir[\"Raw out\"]\n    Convert[\"Convert\"]\n    RawCounts1[\"Raw counts\"]\n    BCL --&gt; Demux --&gt; Fastq\n    Fastq & Ref --&gt; Mapping --&gt; RawDir --&gt; Convert --&gt; RawCounts1\n  end\n  subgraph unimodalsinglesample [\"Unimodal Single Sample Processing\"]\n    direction LR\n    RawCounts2[\"Raw counts for one modality\"]\n    ProccessedCounts1[\"Processed\\nCounts\"]\n    AmbientRNACorr[/\"Ambient RNA\\ncorrection\"/]\n    RawCounts2 --&gt; CellFiltering --&gt; DoubletCalling --&gt; AmbientRNACorr --&gt; ProccessedCounts1\n  end\n  subgraph unimodalmultisample [\"Unimodal Multi Sample Processing\"]\n    direction LR\n    FeatureAnnotation[/\"Feature annotation\"/]\n    BatchCorrection[\"Batch correction\"]\n    Normalization[\"Normalisation\"]\n    FeatureSelection[\"Feature selection\"]\n    ProccessedCounts2[\"Processed\\nCounts\"]\n    DoubletCalling[\"Doublet\\ncalling\"]\n    CellFiltering[\"Cell\\nfiltering\"]\n    NormalisedOut[\"Normalised\\ncounts\"]\n\n    ProccessedCounts2 --&gt; FeatureAnnotation --&gt; BatchCorrection --&gt; Normalization --&gt; FeatureSelection --&gt; NormalisedOut\n  end\n  subgraph integration [\"Integration\"]\n    direction LR\n\n    Normalised[\"Normalised\\ncounts\"]\n    Integrated[\"Integrated\\ndata\"]\n\n    DataIntegration[/\"Data integration\"/]\n    DimRed[/\"Dimensionality\\nreduction\"/]\n  \n    Normalised --&gt; DataIntegration --&gt; DimRed --&gt; Integrated\n\n  end\n  subgraph downstreamprocessing [\"Downstream Processing\"]\n    direction LR\n    Interpretation[\"Interpretation\"]\n    Conversion[\"Conversion\"]\n    Dataset[\"Dataset\"]\n\n    Interpretation --&gt; Conversion --&gt; Dataset\n  end\n\n  ingest --&gt; split --&gt; unimodalsinglesample --&gt; concat --&gt; unimodalmultisample --&gt; merging --&gt; integration  --&gt; downstreamprocessing\n  %% Do not change the ID for these boxes because this is linked to custom css\n  titlebox_ingestion[\"Convert raw sequencing data\\nor count tables into MuData data\\nfor further processing.\"]\n  titlebox_empty[\" \"]\n  titlebox2[\"Per modality fitering pipelines\\nare available to select true\\nfrom false cells.\"]\n  titlebox_empty2[\" \"]\n  titlebox3[\"...\"]\n  titlebox_empty3[\" \"]\n  titlebox4[\"Performs an integration pipeline for single\\ncell data based on a single or multiple modalities.\"]\n  titlebox5[\"Take different dataset annotations and combine\\nthem together into a single enriched dataset.\\n The idea is to have a diff_muon object,\\n i.e. a muon object containing the  changes \\n of the original objectwhere data from the\\ndiff_muon will be pushed to the original muon object.\"]\n  titlebox_ingestion --&gt; titlebox_empty --&gt; titlebox2 --&gt; titlebox_empty2 --&gt; titlebox3 --&gt; titlebox_empty3--&gt; titlebox4 --&gt; titlebox5\n\n\nFigure 1: Overview single cell processing steps in OpenPipeline. Rectangles are data objects, parallelograms are Viash modules or subworkflows.\n\n\n\n\n\n\nUse-cases\n\n\n\n\n\n\nNote\n\n\n\nIn these use-cases, Interpretation, Conversion and Dataset are omitted because they are the same in every use case.\n\n\n\nA single unimodal sample\n\n\n\n\n\n\nflowchart LR\n\n  Raw1[Sample 1] --&gt; Split1[/Split\\nmodalities/] --&gt; ProcGEX1[/Process GEX\\nprofile/]\n  ProcGEX1 --&gt; ConcatGEX[/Concatenate\\nprofiles/] --&gt; ProcGEX[/Process GEX\\nprofiles/]\n  ProcGEX --&gt; Merge[/Merge\\nmodalities/] --&gt; Integration[/Integration/]\n\n\n\nFigure 2: Example of how the concatenation and merges work.\nGEX: Gene-expression.\n\n\n\n\n\n\n\nMultiple unimodal samples\n\n\n\n\n\n\nflowchart LR\n\n  Raw1[Sample 1] --&gt; Split1[/Split\\nmodalities/] --&gt; ProcGEX1[/Process GEX\\nprofile/]\n  Raw2[Sample 2] --&gt; Split2[/Split\\nmodalities/] --&gt; ProcGEX2[/Process GEX\\nprofile/]\n  Raw3[Sample 3] --&gt; Split3[/Split\\nmodalities/] --&gt; ProcGEX3[/Process GEX\\nprofile/]\n  ProcGEX1 & ProcGEX2 & ProcGEX3 --&gt; ConcatGEX[/Concatenate\\nprofiles/] --&gt; ProcGEX[/Process GEX\\nprofiles/] \n  ProcGEX --&gt; Merge[/Merge\\nmodalities/] --&gt; Integration[/Integration/]\n\n\n\nFigure 3: Example of how the concatenation and merges work.\nGEX: Gene-expression.\n\n\n\n\n\n\n\nA single multimodal sample\n\n\n\n\n\n\nflowchart LR\n\n  Raw1[Sample 1] --&gt; Split1[/Split\\nmodalities/] --&gt; ProcGEX1 & ProcADT1 & ProcRNAV1\n  ProcGEX1[/Process GEX\\nprofile/] --&gt; ConcatGEX[/Concatenate\\nprofiles/] --&gt; ProcGEX[/Process GEX\\nprofiles/]\n  ProcADT1[/Process ADT\\nprofile/] --&gt; ConcatADT[/Concatenate\\nprofiles/] --&gt; ProcADT[/Process ADT\\nprofiles/]\n  ProcRNAV1[/Process RNAV\\nprofile/] --&gt; ConcatRNAV[/Concatenate\\nprofiles/] --&gt; ProcRNAV[/Process RNAV\\nprofiles/]\n  ProcGEX & ProcADT & ProcRNAV--&gt; Merge[/Merge\\nmodalities/] --&gt; Integration[/Integration/]\n\n\n\nFigure 4: Example of how the concatenation and merges work.\nGEX: Gene-expression. ADT: Antibody-Derived Tags. RNAV: RNA Velocity.\n\n\n\n\n\n\n\nMultiple multimodal samples\n\n\n\n\n\n\nflowchart LR\n\n  Raw1[Sample 1] --&gt; Split1[/Split\\nmodalities/] --&gt; ProcGEX1 & ProcADT1\n  Raw2[Sample 2] --&gt; Split2[/Split\\nmodalities/] --&gt; ProcGEX2 & ProcADT2\n  ProcGEX1[/Process GEX\\nprofile/] & ProcGEX2[/Process GEX\\nprofile/] --&gt; ConcatGEX[/Concatenate\\nprofiles/] --&gt; ProcGEX[/Process GEX\\nprofiles/]\n  ProcADT1[/Process ADT\\nprofile/] & ProcADT2[/Process ADT\\nprofile/] --&gt; ConcatADT[/Concatenate\\nprofiles/] --&gt; ProcADT[/Process ADT\\nprofiles/]\n  ProcGEX & ProcADT --&gt; Merge[/Merge\\nmodalities/] --&gt; Integration[/Integration/]\n\n\n\nFigure 5: Example of how the concat and merges work.\nGEX: Gene-expression. ADT: Antibody-Derived Tags."
-  },
-  {
-    "objectID": "guide/running_pipelines.html",
-    "href": "guide/running_pipelines.html",
-    "title": "Running pipelines",
-    "section": "",
-    "text": "Note\n\n\n\nTODO: Fill in these sections.\n\nExamples should be using an OpenPipelines release or the main_build branch.\nPoint to the “Components” tab\n\n\n\n\nInstalling Viash and Nextflow\nBefore you try running OpenPipelines, please install Viash and Nextflow first (?@sec-install-viash-nextflow).\n\nRunning pipelines from the CLI\nbin/nextflow run . \\\n  -main-script workflows/integration/multimodal_integration/main.nf \\\n  -profile docker \\\n  -resume \n  --publish_dir foo/\n  --input \"bar\"\n  --output \"test.txt\"\n\n\nRunning pipelines from Nextflow Tower\n\n\nUsing param_list to pass large parameter sets\nUsing Viash’s VDSL3 nextflow platform, an optional -param_list argument can be used to pass a large number of inputs to a workflow. Additionally, the pipeline parameter values can be set for each input to the workflow independently. A param_list can either be a list of maps, a csv file, a json file, a yaml file, or simply a yaml blob:\n\nA csv file should have column names which correspond to the different arguments of this pipeline. Example: --param_list data.csv with columns id,input.\nA json or a yaml file should be a list of maps, each of which has keys corresponding to the arguments of the pipeline. Example: --param_list data.json with contents [ {'id': 'foo', 'input': 'foo.txt'}, {'id': 'bar', 'input': 'bar.txt'} ].\nA yaml blob can also be passed directly as a string. Example: --param_list \"[ {'id': 'foo', 'input': 'foo.txt'}, {'id': 'bar', 'input': 'bar.txt'} ]\".\nA list of maps can be in a nextflow.config file, where the keys of each map corresponds to the arguments of the pipeline. Example in a nextflow.config file: param_list: [ ['id': 'foo', 'input': 'foo.txt'], ['id': 'bar', 'input': 'bar.txt'] ].\n\nWhen passing a csv, json or yaml file, relative path names are relativized to the location of the parameter file. No relativation is performed when param_list is a list of maps (as-is) or a yaml blob.\nUsing a param_list can be combined with setting parameters that are set for all parameter sets. These ‘gobal’ parameters will always be overwritten with their counterpart that was specified in a more specific manner for a single parameter set. For example, using --param_list \"[ {'id': 'foo', 'input': 'foo.txt'}, {'id': 'bar'} ]\" --input 'global.txt' will result in the following parameter sets being processed:\n\nid: foo, input: foo.txt\nid: bar, input: global.txt"
   },
   {
     "objectID": "components/modules/transform/normalize_total.html",
@@ -2567,5 +2483,54 @@
     "title": "Prot multisample",
     "section": "Visualisation",
     "text": "Visualisation\n\n\n\n\nflowchart LR\n    p0(Input)\n    p3(toSortedList)\n    p5(flatMap)\n    p9(filter)\n    p11(flatMap)\n    p19(join)\n    p17(add_id)\n    p21(collect)\n    p24(mix)\n    p23(filter)\n    p33(join)\n    p31(concat)\n    p43(join)\n    p41(clr)\n    p49(Output)\n    p23--&gt;p24\n    p0--&gt;p3\n    p3--&gt;p5\n    p5--&gt;p9\n    p5--&gt;p23\n    p9--&gt;p11\n    p11--&gt;p19\n    p11--&gt;p17\n    p17--&gt;p19\n    p19--&gt;p21\n    p21--&gt;p24\n    p24--&gt;p33\n    p24--&gt;p31\n    p31--&gt;p33\n    p33--&gt;p43\n    p33--&gt;p41\n    p41--&gt;p43\n    p43--&gt;p49"
+  },
+  {
+    "objectID": "more_information/data_api.html",
+    "href": "more_information/data_api.html",
+    "title": "Data API",
+    "section": "",
+    "text": "Note\n\n\n\nFile formats are being discussed in openpipelines-bio/openpipeline#102"
+  },
+  {
+    "objectID": "more_information/data_api.html#dataset",
+    "href": "more_information/data_api.html#dataset",
+    "title": "Data API",
+    "section": "Dataset",
+    "text": "Dataset\nobs:\n index # cell id\n sample\n cell_type\n organism\n tissue\n\nmod:\n rna:\n rnav:\n prot:\n atac:\n vdj:"
+  },
+  {
+    "objectID": "more_information/data_api.html#rna-modality",
+    "href": "more_information/data_api.html#rna-modality",
+    "title": "Data API",
+    "section": "RNA modality",
+    "text": "RNA modality\nmod:\n rna:\n   layers:\n     counts\n     normalized\n   obs:\n     &lt;qc metrics&gt;\n     doublet_score\n     doublet_bool\n     cluster\n   var:\n     index # feature_id, preferably an ensembl id\n     feature_name\n     &lt;qc metrics&gt;\n     highly_variable\n     highly_variable_score\n   obsm:\n     X_pca\n     X_integrated\n     X_umap\n     annotation # scvi, bbknn, ...\n   obsp:\n     connectivities\n     distances"
+  },
+  {
+    "objectID": "more_information/data_api.html#adt-modality",
+    "href": "more_information/data_api.html#adt-modality",
+    "title": "Data API",
+    "section": "ADT modality",
+    "text": "ADT modality\nmod:\n prot:\n   layers:\n     counts\n   var:\n      index # feature_id\n      feature_name # Associated protein names"
+  },
+  {
+    "objectID": "more_information/data_api.html#vdj-modality",
+    "href": "more_information/data_api.html#vdj-modality",
+    "title": "Data API",
+    "section": "VDJ modality",
+    "text": "VDJ modality\nmod:\n vdj:\n   obsm:\n     vdj_t\n     vdj_b"
+  },
+  {
+    "objectID": "more_information/data_api.html#atac-modality",
+    "href": "more_information/data_api.html#atac-modality",
+    "title": "Data API",
+    "section": "ATAC modality",
+    "text": "ATAC modality\nmod:\n atac:\n   layers:\n     counts\n   var:\n     interval"
+  },
+  {
+    "objectID": "more_information/data_api.html#rna-velocity-modality",
+    "href": "more_information/data_api.html#rna-velocity-modality",
+    "title": "Data API",
+    "section": "RNA velocity modality",
+    "text": "RNA velocity modality\nmod:\n rnav:\n   layers:\n     spliced\n     unspliced"
   }
 ]

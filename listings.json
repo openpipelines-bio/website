@@ -2,19 +2,30 @@
   {
     "listing": "/index.html",
     "items": [
-      "/guide/architecture.html",
-      "/guide/bug_reports.html",
-      "/guide/data_api.html",
-      "/guide/index.html",
-      "/guide/running_pipelines.html",
-      "/guide/implementation_status.html",
+      "/fundamentals/philosophy.html",
+      "/fundamentals/concepts.html",
+      "/fundamentals/architecture.html",
+      "/fundamentals/roadmap.html",
+      "/fundamentals/index.html",
+      "/user_guide/getting_started.html",
+      "/user_guide/ingestion.html",
+      "/user_guide/processing.html",
+      "/user_guide/running_pipelines.html",
+      "/user_guide/downstream.html",
+      "/user_guide/bug_reports.html",
+      "/user_guide/index.html",
       "/contributing/getting_started.html",
       "/contributing/project_structure.html",
       "/contributing/creating_components.html",
       "/contributing/creating_pipelines.html",
       "/contributing/running_tests.html",
       "/contributing/pull_requests.html",
-      "/contributing/index.html"
+      "/contributing/index.html",
+      "/more_information/cheat_sheets.html",
+      "/more_information/code_of_conduct.html",
+      "/more_information/data_api.html",
+      "/more_information/faq.html",
+      "/more_information/index.html"
     ]
   },
   {

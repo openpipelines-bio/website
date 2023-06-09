@@ -64,20 +64,48 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-guide .list');
+    const listingTargetEl = window.document.querySelector('#listing-fundamentals .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
     }
 
     const options = {
-      valueNames: ['listing-project','listing-website','listing-format','listing-language','listing-title','listing-path','listing-outputHref','listing-author','listing-description','listing-filename','listing-file-modified','listing-reading-time','listing-sidebar',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
+      valueNames: ['listing-project','listing-website','listing-format','listing-language','listing-title','listing-sidebar','listing-exclude_from_listing','listing-path','listing-outputHref','listing-author','listing-description','listing-filename','listing-file-modified','listing-reading-time','listing-order',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
       
-      searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-title","listing-path","listing-outputHref","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-sidebar"],
+      searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-title","listing-sidebar","listing-exclude_from_listing","listing-path","listing-outputHref","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-order"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-guide'] = new List('listing-guide', options);
+    window['quarto-listings']['listing-fundamentals'] = new List('listing-fundamentals', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-user_guide .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-project','listing-website','listing-format','listing-language','listing-title','listing-description','listing-order','listing-path','listing-outputHref','listing-author','listing-filename','listing-file-modified','listing-reading-time','listing-sidebar','listing-exclude_from_listing',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
+      
+      searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-title","listing-description","listing-order","listing-path","listing-outputHref","listing-author","listing-filename","listing-file-modified","listing-reading-time","listing-sidebar","listing-exclude_from_listing"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-user_guide'] = new List('listing-user_guide', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -99,13 +127,41 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-project','listing-website','listing-format','listing-language','listing-title','listing-order','listing-path','listing-outputHref','listing-author','listing-description','listing-filename','listing-file-modified','listing-reading-time','listing-sidebar',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
+      valueNames: ['listing-project','listing-website','listing-format','listing-language','listing-title','listing-order','listing-path','listing-outputHref','listing-author','listing-description','listing-filename','listing-file-modified','listing-reading-time','listing-sidebar','listing-exclude_from_listing',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
       
-      searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-title","listing-order","listing-path","listing-outputHref","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-sidebar"],
+      searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-title","listing-order","listing-path","listing-outputHref","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-sidebar","listing-exclude_from_listing"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
     window['quarto-listings']['listing-contributing'] = new List('listing-contributing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-more_information .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-project','listing-website','listing-format','listing-language','listing-title','listing-path','listing-outputHref','listing-author','listing-description','listing-filename','listing-file-modified','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
+      
+      searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-title","listing-path","listing-outputHref","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-more_information'] = new List('listing-more_information', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -173,8 +229,12 @@ background: #f0f5f5;
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./guide/index.html" rel="" target="">
- <span class="menu-text">Guide</span></a>
+    <a class="nav-link" href="./fundamentals/index.html" rel="" target="">
+ <span class="menu-text">Fundamentals</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./user_guide/index.html" rel="" target="">
+ <span class="menu-text">User Guide</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./contributing/index.html" rel="" target="">
@@ -205,7 +265,7 @@ background: #f0f5f5;
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
+    <div class="quarto-title column-page">
       <h1 class="title">OpenPipelines</h1>
             <p class="subtitle lead">Best-practice workflows for single-cell single- and multi-omics data</p>
                       </div>
@@ -223,163 +283,164 @@ background: #f0f5f5;
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#proposed-structure" id="toc-proposed-structure" class="nav-link active" data-scroll-target="#proposed-structure">Proposed structure</a></li>
-  </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
 
 
 
 
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
-<div class="column quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p>Guide</p>
-<div id="listing-guide" class="quarto-listing quarto-listing-container-custom">
-<ul>
-  <li>
-    <a href="./guide/architecture.html">
-    Architecture
-    </a>
-  </li>
-  <li>
-    <a href="./guide/bug_reports.html">
-    Bug reports
-    </a>
-  </li>
-  <li>
-    <a href="./guide/data_api.html">
-    Data API
-    </a>
-  </li>
-  <li>
-    <a href="./guide/index.html">
-    Guide
-    </a>
-  </li>
-  <li>
-    <a href="./guide/running_pipelines.html">
-    Running pipelines
-    </a>
-  </li>
-  <li>
-    <a href="./guide/implementation_status.html">
-    Status
-    </a>
-  </li>
-</ul>
+<div class="column quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<div id="listing-fundamentals" class="quarto-listing quarto-listing-container-custom">
+  <a href="./fundamentals/index.html">
+  Fundamentals
+  </a>
+  <ul>
+        <li>
+  <a href="./fundamentals/philosophy.html">
+  Philosophy
+  </a>
+    </li>
+        <li>
+  <a href="./fundamentals/concepts.html">
+  Concepts
+  </a>
+    </li>
+        <li>
+  <a href="./fundamentals/architecture.html">
+  Architecture
+  </a>
+    </li>
+        <li>
+  <a href="./fundamentals/roadmap.html">
+  Roadmap
+  </a>
+    </li>
+  </ul>
 <div class="listing-no-matching d-none">
 No matching items
 </div>
 </div>
 </div>
-<div class="column quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p>Contributing</p>
+<div class="column quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<div id="listing-user_guide" class="quarto-listing quarto-listing-container-custom">
+  <a href="./user_guide/index.html">
+  User Guide
+  </a>
+  <ul>
+        <li>
+  <a href="./user_guide/getting_started.html">
+  Getting started
+  </a>
+    </li>
+        <li>
+  <a href="./user_guide/ingestion.html">
+  Ingestion
+  </a>
+    </li>
+        <li>
+  <a href="./user_guide/processing.html">
+  Processing
+  </a>
+    </li>
+        <li>
+  <a href="./user_guide/running_pipelines.html">
+  Running pipelines
+  </a>
+    </li>
+        <li>
+  <a href="./user_guide/downstream.html">
+  Downstream
+  </a>
+    </li>
+        <li>
+  <a href="./user_guide/bug_reports.html">
+  Bug reports
+  </a>
+    </li>
+  </ul>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+</div>
+<div class="column quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
 <div id="listing-contributing" class="quarto-listing quarto-listing-container-custom">
-<ul>
-  <li>
-    <a href="./contributing/getting_started.html">
-    Getting started
-    </a>
-  </li>
-  <li>
-    <a href="./contributing/project_structure.html">
-    Project structure
-    </a>
-  </li>
-  <li>
-    <a href="./contributing/creating_components.html">
-    Creating components
-    </a>
-  </li>
-  <li>
-    <a href="./contributing/creating_pipelines.html">
-    Creating pipelines
-    </a>
-  </li>
-  <li>
-    <a href="./contributing/running_tests.html">
-    Running tests
-    </a>
-  </li>
-  <li>
-    <a href="./contributing/pull_requests.html">
-    Publishing your changes
-    </a>
-  </li>
-  <li>
-    <a href="./contributing/index.html">
-    Contributing
-    </a>
-  </li>
-</ul>
+  <a href="./contributing/index.html">
+  Contributing
+  </a>
+  <ul>
+        <li>
+  <a href="./contributing/getting_started.html">
+  Getting started
+  </a>
+    </li>
+        <li>
+  <a href="./contributing/project_structure.html">
+  Project structure
+  </a>
+    </li>
+        <li>
+  <a href="./contributing/creating_components.html">
+  Creating components
+  </a>
+    </li>
+        <li>
+  <a href="./contributing/creating_pipelines.html">
+  Creating pipelines
+  </a>
+    </li>
+        <li>
+  <a href="./contributing/running_tests.html">
+  Running tests
+  </a>
+    </li>
+        <li>
+  <a href="./contributing/pull_requests.html">
+  Publishing your changes
+  </a>
+    </li>
+  </ul>
 <div class="listing-no-matching d-none">
 No matching items
 </div>
 </div>
 </div>
-</div>
-</div>
-<section id="proposed-structure" class="level2">
-<h2 class="anchored" data-anchor-id="proposed-structure">Proposed structure</h2>
-</section>
-<div class="quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
 <div class="column quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
-<section id="fundamentals" class="level2">
-<h2 class="anchored" data-anchor-id="fundamentals">Fundamentals</h2>
-<ul>
-<li>Philosophy <!--What is OpenPipelines--></li>
-<li>Concepts <!--Viash and MuData--></li>
-<li>Architecture <!--What are the different pipelines--></li>
-<li>Road map <!--Progress--></li>
-</ul>
-</section>
+<div id="listing-more_information" class="quarto-listing quarto-listing-container-custom">
+  <a href="./more_information/index.html">
+  More information
+  </a>
+  <ul>
+        <li>
+  <a href="./more_information/cheat_sheets.html">
+  Cheat sheets
+  </a>
+    </li>
+        <li>
+  <a href="./more_information/code_of_conduct.html">
+  Code of conduct
+  </a>
+    </li>
+        <li>
+  <a href="./more_information/data_api.html">
+  Data API
+  </a>
+    </li>
+        <li>
+  <a href="./more_information/faq.html">
+  FAQ
+  </a>
+    </li>
+  </ul>
+<div class="listing-no-matching d-none">
+No matching items
 </div>
-<div class="column quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
-<section id="user-guide" class="level2">
-<h2 class="anchored" data-anchor-id="user-guide">User guide</h2>
-<!--How to analyse your dataset and interpret the results-->
-<ul>
-<li>Getting started</li>
-<li>Environment setup</li>
-<li>From sequencing to count tables</li>
-<li>From count table to integrated data</li>
-<li>Celltyping and cell-cell communication</li>
-</ul>
-</section>
 </div>
-<div class="column quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
-<section id="contributing" class="level2">
-<h2 class="anchored" data-anchor-id="contributing">Contributing</h2>
-<!--How to contribute to OpenPipelines-->
-<ul>
-<li>Getting started</li>
-<li>Project structure</li>
-<li>Creating components</li>
-<li>Creating pipelines</li>
-<li>Running tests</li>
-<li>Publishing your changes</li>
-<li>Report a bug</li>
-</ul>
-</section>
-</div>
-<div class="column quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
-<section id="more-information" class="level2">
-<h2 class="anchored" data-anchor-id="more-information">More information</h2>
-<ul>
-<li>Cheat sheets</li>
-<li>Code of conduct</li>
-<li>FAQ</li>
-</ul>
-</section>
 </div>
 </div>
 </div>
@@ -627,7 +688,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-left">© OpenPipelines.bio 2022</div>   
     <div class="nav-footer-center">
       &nbsp;
-    </div>
+    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
