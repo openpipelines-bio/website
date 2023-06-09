@@ -1,5 +1,6 @@
 ---
 title: Architecture
+order: 30
 ---
 
 The single-cell workflow is comprised of multiple (standalone) subworkflows.

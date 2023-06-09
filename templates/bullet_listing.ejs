@@ -1,14 +1,89 @@
 ```{=html}
-<ul>
-  <% for (const item of items) { %>
-  <li>
-    <a href="<%- item.path %>">
-    <%= item.title %>
-    <% if (item.subtitle) { %>
-    : <%= item.subtitle %>
+
+<%
+var strippedItems = items.map(item => {
+  item.path_stripped = item.path.replace(/\/index.qmd$/, "").replace(/.qmd$/, "");
+  item.dirname = item.path_stripped.substring(0,item.path_stripped.lastIndexOf("/"));
+  item.basename = item.path_stripped.substring(item.path_stripped.lastIndexOf("/")+1);
+  item.depth = (item.path_stripped.match(/\//g) || []).length;
+  return item;
+});
+var minDepth = 1;
+var pathTitles = {}
+// find min depth and build pathTitles object
+for (const item of strippedItems) {
+  if (minDepth > item.depth) {
+    minDepth = item.depth;
+  }
+  pathTitles[item.path_stripped] = item.title;
+}
+// find root item
+var rootItem = strippedItems.find(h => h.depth == minDepth);
+
+// add missing root items
+for (const item of strippedItems) {
+  var path_parts = item.path_stripped.split('/')
+  var str = ""
+  var depth = 0;
+
+  for (const part of path_parts) {
+    if (part != "") {
+      str = str + "/" + part;
+      depth += 1;
+      if (!(str in pathTitles)) {
+        pathTitles[str] = part;
+        strippedItems.push({
+          "path_stripped": str,
+          "dirname": str.substring(0,str.lastIndexOf("/")),
+          "basename": str.substring(str.lastIndexOf("/")+1),
+          "title": part,
+          "depth": depth
+        })
+      }
+    }
+  }
+}
+
+// helper function for sorting
+function sortItems(items) {
+  return items.sort((a, b) => {
+    if (a.order == undefined && b.order == undefined) {
+      return (a.title || a.basename).localeCompare((b.title || b.basename));
+    } else if (a.order == undefined) {
+      return 1;
+    } else if (b.order == undefined) {
+      return -1;
+    } else {
+      return a.order - b.order;
+    }
+  });
+}
+%>
+
+<%
+function renderList(item) {
+  if (item) {
+%>
+  <% if (item.path) { %><a href="<%= item.path %>"><% } %>
+  <%= item.title %>
+  <% if (item.path) { %></a><% } %>
+    <%
+    var children = sortItems(strippedItems.filter(h => h.dirname == item.path_stripped));
+    if (children.length != 0) {
+    %>
+  <ul>
+    <% for (const child of children) { %>
+        <li><% renderList(child) %></li>
     <% } %>
-    </a>
-  </li>
-  <% } %>
-</ul>
+  </ul>
+    <%
+    }
+  }
+}
+%>
+
+<%
+renderList(rootItem)
+%>
+
 ```

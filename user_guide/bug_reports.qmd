@@ -1,5 +1,6 @@
 ---
 title: Bug reports
+order: 80
 ---
 
 Issues with Openpipelines are being tracked on [Github](https://github.com/openpipelines-bio/openpipeline/issues).

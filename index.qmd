@@ -6,14 +6,22 @@ page-layout: full
 title-block-banner: "#f0f5f5"
 title-block-banner-color: "#00cc99"
 listing:
-  - id: guide
+  - id: fundamentals
     type: default
     template: templates/bullet_listing.ejs
-    contents: guide
+    contents: fundamentals
+  - id: user_guide
+    type: default
+    template: templates/bullet_listing.ejs
+    contents: user_guide
   - id: contributing
     type: default
     template: templates/bullet_listing.ejs
     contents: contributing
+  - id: more_information
+    type: default
+    template: templates/bullet_listing.ejs
+    contents: more_information
 ---
 
 ```{r eval=FALSE, include=FALSE}
@@ -21,76 +29,27 @@ library(rmarkdown)
 library(languageserver)
 ```
 
+
 ::::{layout-nrow=1}
 
 :::{.column}
-Guide
-
-:::{#guide}
+:::{#fundamentals}
 :::
 :::
 
 :::{.column}
-Contributing
+:::{#user_guide}
+:::
+:::
 
+:::{.column}
 :::{#contributing}
 :::
 :::
 
-
-::::
-
-## Proposed structure
-
-::::{layout-nrow=1}
-
 :::{.column}
-## Fundamentals
-
-* Philosophy <!--What is OpenPipelines-->
-* Concepts <!--Viash and MuData-->
-* Architecture <!--What are the different pipelines-->
-* Road map <!--Progress-->
-
+:::{#more_information}
 :::
-
-:::{.column}
-## User guide
-
-<!--How to analyse your dataset and interpret the results-->
-
-* Getting started
-* Environment setup
-* From sequencing to count tables
-* From count table to integrated data
-* Celltyping and cell-cell communication
-
 :::
-
-:::{.column}
-## Contributing
-
-<!--How to contribute to OpenPipelines-->
-
-* Getting started
-* Project structure
-* Creating components
-* Creating pipelines
-* Running tests
-* Publishing your changes
-* Report a bug
-
-:::
-
-
-:::{.column}
-## More information
-
-* Cheat sheets
-* Code of conduct
-* FAQ
-
-:::
-
 
 ::::

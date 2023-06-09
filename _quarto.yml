@@ -21,7 +21,8 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - guide/index.qmd
+      - fundamentals/index.qmd
+      - user_guide/index.qmd
       - contributing/index.qmd
       - href: components/index.qmd
         text: Reference

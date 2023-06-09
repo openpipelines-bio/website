@@ -1,5 +1,6 @@
 ---
 title: Running pipelines
+order: 30
 ---
 
 :::{.callout-note}
