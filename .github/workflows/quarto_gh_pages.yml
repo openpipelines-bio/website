@@ -36,26 +36,6 @@ jobs:
       - name: Install Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      - run: |
-          REPO_PATH=`git rev-parse --show-toplevel`
-          PROJ_DIR="$REPO_PATH/_openpipeline"
-
-          echo "REPO_PATH: $REPO_PATH"
-          ls -l $REPO_PATH
-          echo
-
-          echo "PROJ_DIR: $PROJ_DIR"
-          ls -l $PROJ_DIR
-          echo
-
-          # if submodule is not available, initialise it
-          if [ ! -d "$PROJ_DIR" ]; then
-            $(cd "$REPO_PATH" && git submodule update --init --recursive)
-          fi
-
-          # undo changes and sync test resources
-          $(cd "$PROJ_DIR" && git clean -fxd -e resources_test && viash run src/download/sync_test_resources/config.vsh.yaml)
-
       - name: Render Quarto Project
         uses: quarto-dev/quarto-actions/render@v2
 
