@@ -3,6 +3,7 @@ title: "Team"
 toc: false
 page-layout: full
 anchor-sections: false
+engine: knitr
 listing:
   - id: authors
     contents: ./*/index.qmd
@@ -15,7 +16,7 @@ css: team.css
 <!-- this is here to make sure fontawesome is loaded in-->
 {{< fa letter >}}
 
-{{< include ../_include/_clone_repo.qmd >}}
+{{< include /_include/_clone_repo.qmd >}}
 
 ```{r, include=FALSE}
 paths <- list.files("src/authors", pattern = ".yaml", full.names = TRUE, recursive = TRUE)
