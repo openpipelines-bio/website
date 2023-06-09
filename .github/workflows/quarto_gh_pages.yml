@@ -18,6 +18,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: recursive
 
       - uses: r-lib/actions/setup-r@v2
         with:
@@ -33,8 +35,6 @@ jobs:
           
       - name: Install Quarto
         uses: quarto-dev/quarto-actions/setup@v2
-        with:
-          tinytex: true 
 
       - name: Render Quarto Project
         uses: quarto-dev/quarto-actions/render@v2

@@ -1,0 +1,25 @@
+---
+title: Angela Oliveira Pisco
+image: https://www.github.com/aopisco.png
+role: Contributor
+organizations:
+- name: Insitro
+  href: https://insitro.com
+  role: Director of Computational Biology
+- name: Open Problems
+  href: https://openproblems.bio
+  role: Core Member
+links:
+- icon: bi-github
+  text: GitHub
+  href: https://github.com/aopisco
+- icon: fa-brands fa-orcid
+  text: ORCID
+  href: https://orcid.org/0000-0003-0142-2355
+- icon: bi-linkedin
+  text: LinkedIn
+  href: https://www.linkedin.com/in/aopisco
+about:
+  template: jolla
+---
+

@@ -1,0 +1,28 @@
+---
+title: Robrecht Cannoodt
+image: https://www.github.com/rcannood.png
+role: Core Team Member
+organizations:
+- name: Data Intuitive
+  href: https://www.data-intuitive.com
+  role: Data Science Engineer
+- name: Open Problems
+  href: https://openproblems.bio
+  role: Core Member
+links:
+- icon: bi-envelope
+  text: E-mail
+  href: mailto:robrecht@data-intuitive.com
+- icon: bi-github
+  text: GitHub
+  href: https://github.com/rcannood
+- icon: fa-brands fa-orcid
+  text: ORCID
+  href: https://orcid.org/0000-0003-3641-729X
+- icon: bi-linkedin
+  text: LinkedIn
+  href: https://www.linkedin.com/in/robrechtcannoodt
+about:
+  template: jolla
+---
+

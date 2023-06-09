@@ -1,0 +1,22 @@
+---
+title: Mauro Saporita
+image: https://www.github.com/mauro-saporita.png
+role: Contributor
+organizations:
+- name: Ardigen
+  href: https://ardigen.com
+  role: Lead Nextflow Developer
+links:
+- icon: bi-envelope
+  text: E-mail
+  href: mailto:maurosaporita@gmail.com
+- icon: bi-github
+  text: GitHub
+  href: https://github.com/mauro-saporita
+- icon: bi-linkedin
+  text: LinkedIn
+  href: https://www.linkedin.com/in/mauro-saporita-930b06a5
+about:
+  template: jolla
+---
+

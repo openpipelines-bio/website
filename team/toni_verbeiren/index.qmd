@@ -1,0 +1,19 @@
+---
+title: Toni Verbeiren
+image: https://www.github.com/tverbeiren.png
+role: Core Team Member
+organizations:
+- name: Data Intuitive
+  href: https://www.data-intuitive.com
+  role: Data Scientist and CEO
+links:
+- icon: bi-github
+  text: GitHub
+  href: https://github.com/tverbeiren
+- icon: bi-linkedin
+  text: LinkedIn
+  href: https://www.linkedin.com/in/verbeiren
+about:
+  template: jolla
+---
+

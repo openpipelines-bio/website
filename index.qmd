@@ -24,7 +24,7 @@ library(languageserver)
 ::::{layout-nrow=1}
 
 :::{.column}
-Getting started
+Guide
 
 :::{#guide}
 :::
@@ -37,11 +37,60 @@ Contributing
 :::
 :::
 
-:::{.column}
-More resources
 
-- [Team](team/index.qmd)
-- [Source code](https://github.com/openpipelines-bio/openpipeline)
+::::
+
+## Proposed structure
+
+::::{layout-nrow=1}
+
+:::{.column}
+## Fundamentals
+
+* Philosophy <!--What is OpenPipelines-->
+* Concepts <!--Viash and MuData-->
+* Architecture <!--What are the different pipelines-->
+* Road map <!--Progress-->
+
 :::
+
+:::{.column}
+## User guide
+
+<!--How to analyse your dataset and interpret the results-->
+
+* Getting started
+* Environment setup
+* From sequencing to count tables
+* From count table to integrated data
+* Celltyping and cell-cell communication
+
+:::
+
+:::{.column}
+## Contributing
+
+<!--How to contribute to OpenPipelines-->
+
+* Getting started
+* Project structure
+* Creating components
+* Creating pipelines
+* Running tests
+* Publishing your changes
+* Report a bug
+
+:::
+
+
+:::{.column}
+## More information
+
+* Cheat sheets
+* Code of conduct
+* FAQ
+
+:::
+
 
 ::::

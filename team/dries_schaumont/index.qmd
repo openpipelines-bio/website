@@ -1,0 +1,25 @@
+---
+title: Dries Schaumont
+image: https://www.github.com/DriesSchaumont.png
+role: Core Team Member
+organizations:
+- name: Data Intuitive
+  href: https://www.data-intuitive.com
+  role: Data Scientist
+links:
+- icon: bi-envelope
+  text: E-mail
+  href: mailto:dries@data-intuitive.com
+- icon: bi-github
+  text: GitHub
+  href: https://github.com/DriesSchaumont
+- icon: fa-brands fa-orcid
+  text: ORCID
+  href: https://orcid.org/0000-0002-4389-0440
+- icon: bi-linkedin
+  text: LinkedIn
+  href: https://www.linkedin.com/in/dries-schaumont
+about:
+  template: jolla
+---
+

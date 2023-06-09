@@ -1,0 +1,22 @@
+---
+title: Dries De Maeyer
+image: https://www.github.com/ddemaeyer.png
+role: Core Team Member
+organizations:
+- name: Janssen Pharmaceuticals
+  href: https://www.janssen.com
+  role: Principal Scientist
+links:
+- icon: bi-envelope
+  text: E-mail
+  href: mailto:ddemaeyer@gmail.com
+- icon: bi-github
+  text: GitHub
+  href: https://github.com/ddemaeyer
+- icon: bi-linkedin
+  text: LinkedIn
+  href: https://www.linkedin.com/in/dries-de-maeyer-b46a814
+about:
+  template: jolla
+---
+

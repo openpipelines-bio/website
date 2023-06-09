@@ -6,19 +6,27 @@
     <img loading="lazy" class="avatar avatar-circle" src="<%- item.image %>" />
     <%}%>
     <div class="portrait-title">
-      <h5><%= item.title %></h5>
+      <h4><%= item.title %></h4>
       <% if (item.role) { %>
-      <h6><%= item.role %></h6>
-      <% } %> <% for (const organization of item.organizations || []) { %>
-      <h6>
-        <%= organization.role %> <% if (organization.name) { %> at <%=
-        organization.name %> <% } %>
-      </h6>
-      <% } %> <% for (const link of item.about.links || []) { %>
+      <h5><%= item.role %></h5>
+      <% } %>
+      <% for (const link of item.links || []) { %>
       <a class="network-icon" href="<%- link.href %>">
         <i class="<%- link.icon %>"></i>
       </a>
       <% } %>
+      <% for (const organization of item.organizations || []) { %>
+      <h6>
+        <i>
+          <%= organization.role %> 
+          <% if (organization.name) { %> at 
+            <% if (organization.href) { %> <a href="<%= organization.href %>"> <% } %>
+              <%= organization.name %>
+            <% if (organization.href) { %> </a> <% } %>
+          <% } %>
+        </i>
+      </h6>
+      <% } %> 
     </div>
   </div>
   <% } %>
