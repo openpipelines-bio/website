@@ -13,7 +13,7 @@ TODO: Fill in these sections.
 
 # Installing Viash and Nextflow
 
-Before you try running OpenPipelines, please install Viash and Nextflow first (@sec-install-viash-nextflow).
+Before you try running OpenPipelines, please install Viash and Nextflow first.
 
 ### Running pipelines from the CLI
 
