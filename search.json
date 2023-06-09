@@ -126,11 +126,11 @@
     "text": "Fetching the test data.\nThe input data that is needed to run the tests will need to be downloaded from the openpipelines Amazon AWS s3 bucket first. To do so, the download/sync_test_resource component can be used, which will download the data to the correct location (resources_test) by default.\n./bin/viash run ./src/download/sync_test_resources/config.vsh.yaml -p docker -- --input s3://openpipelines-data\nOr, if you do not want to use Docker and have aws-cli tools installed natively:\n./bin/viash run ./src/download/sync_test_resources/config.vsh.yaml -p native -- --input s3://openpipelines-data\n\n\nRunning component unittests\nTo build and run tests for individual component that you are working on, use viash test with the config.vsh.yaml of the component you would like to test. For example:\n./bin/viash test ./src/convert/from_10xh5_to_h5mu/config.vsh.yaml\nKeep in mind that when no platform is passed to viash test, it will use the first platform that is specified in the config, which is docker for most of the components in openpipelines. Use -p native for example if you do not want to use docker.\nIt is also possible to execute the tests for all components in each namespace using ./bin/viash_test (note the underscore instead of a space).\n./bin/viash_test\n\n\nIntegration tests\nIndividual integration tests can be run by using the integration_test.sh scripts for a pipeline, located next to the main.nf in the workflows folder.\n./workflows/ingestion/cellranger_demux/integration_test.sh\nRunning all integration tests is also possible using a helper script that can be found at workflows/test/integration_test.sh. Using this script requires a working R installation with tidyverse installed. However, as pipelines are implemented by combining individual components\n./workflows/test/integration_test.sh"
   },
   {
-    "objectID": "team/index.html#authors",
-    "href": "team/index.html#authors",
+    "objectID": "team/index.html",
+    "href": "team/index.html",
     "title": "Team",
-    "section": "Authors",
-    "text": "Authors\n\n\n\n\nNo matching items"
+    "section": "",
+    "text": "No matching items"
   },
   {
     "objectID": "components/modules/transform/normalize_total.html",
