@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.340">
+<meta name="generator" content="quarto-1.3.361">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -58,7 +58,8 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script>
@@ -71,9 +72,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-project','listing-website','listing-format','listing-language','listing-title','listing-image','listing-organizations','listing-about','listing-path','listing-outputHref','listing-author','listing-description','listing-filename','listing-file-modified','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
+      valueNames: [{ data: ['index'] },{ data: ['categories'] }],
       
-      searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-title","listing-image","listing-organizations","listing-about","listing-path","listing-outputHref","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time"],
+      searchColumns: [],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -126,11 +127,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="../index.html" rel="" target="">
- <span class="menu-text">About</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../components/index.html" rel="" target="">
- <span class="menu-text">Components</span></a>
+ <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../guide/index.html" rel="" target="">
@@ -140,15 +137,20 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
     <a class="nav-link" href="../contributing/index.html" rel="" target="">
  <span class="menu-text">Contributing</span></a>
   </li>  
-</ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../components/index.html" rel="" target="">
+ <span class="menu-text">Reference</span></a>
+  </li>  
   <li class="nav-item">
     <a class="nav-link active" href="../team/index.html" rel="" target="" aria-current="page">
  <span class="menu-text">Team</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://github.com/openpipelines-bio/openpipeline" rel="" target="">
- <span class="menu-text">Source Code</span></a>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/openpipelines-bio/openpipeline" rel="" target=""><i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+ <span class="menu-text"></span></a>
   </li>  
 </ul>
             <div class="quarto-navbar-tools">
@@ -188,156 +190,6 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <h2 data-anchor-id="authors">Authors</h2>
 <div id="listing-authors" class="quarto-listing quarto-listing-container-custom">
 <div class="people-widget justify-content-evenly">
-  <div class="people-person">
-    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/aopisco.png">
-    <div class="portrait-title">
-      <h5>Angela Pisco</h5>
-      <a class="network-icon" href="https://github.com/aopisco">
-        <i class="bi-github"></i>
-      </a>
-      <a class="network-icon" href="https://orcid.org/0000-0003-0142-2355">
-        <i class="fa-brands fa-orcid"></i>
-      </a>
-    </div>
-  </div>
-  <div class="people-person">
-    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/ddemaeyer.png">
-    <div class="portrait-title">
-      <h5>Dries De Maeyer</h5>
-      <a class="network-icon" href="mailto:ddemaeyer@gmail.com">
-        <i class="bi-envelope"></i>
-      </a>
-      <a class="network-icon" href="https://github.com/ddemaeyer">
-        <i class="bi-github"></i>
-      </a>
-    </div>
-  </div>
-  <div class="people-person">
-    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/DriesSchaumont.png">
-    <div class="portrait-title">
-      <h5>Dries Schaumont</h5>
-      <a class="network-icon" href="mailto:dries@data-intuitive.com">
-        <i class="bi-envelope"></i>
-      </a>
-      <a class="network-icon" href="https://github.com/DriesSchaumont">
-        <i class="bi-github"></i>
-      </a>
-      <a class="network-icon" href="https://orcid.org/0000-0002-4389-0440">
-        <i class="fa-brands fa-orcid"></i>
-      </a>
-    </div>
-  </div>
-  <div class="people-person">
-    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/LuckyMD.png">
-    <div class="portrait-title">
-      <h5>Malte D. Luecken</h5>
-      <a class="network-icon" href="mailto:malte.luecken@helmholtz-muenchen.de">
-        <i class="bi-envelope"></i>
-      </a>
-      <a class="network-icon" href="https://github.com/LuckyMD">
-        <i class="bi-github"></i>
-      </a>
-      <a class="network-icon" href="https://orcid.org/0000-0001-7464-7921">
-        <i class="fa-brands fa-orcid"></i>
-      </a>
-    </div>
-  </div>
-  <div class="people-person">
-    <img loading="lazy" class="avatar avatar-circle" src="../images/avatar.svg">
-    <div class="portrait-title">
-      <h5>Marijke Van Moerbeke</h5>
-      <a class="network-icon" href="https://orcid.org/0000-0002-3097-5621">
-        <i class="fa-brands fa-orcid"></i>
-      </a>
-    </div>
-  </div>
-  <div class="people-person">
-    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/MatthiasBeyens.png">
-    <div class="portrait-title">
-      <h5>Matthias Beyens</h5>
-      <a class="network-icon" href="mailto:matthias.beyens@gmail.com">
-        <i class="bi-envelope"></i>
-      </a>
-      <a class="network-icon" href="https://github.com/MatthiasBeyens">
-        <i class="bi-github"></i>
-      </a>
-      <a class="network-icon" href="https://orcid.org/0000-0003-3304-0706">
-        <i class="fa-brands fa-orcid"></i>
-      </a>
-    </div>
-  </div>
-  <div class="people-person">
-    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/mauro-saporita.png">
-    <div class="portrait-title">
-      <h5>Mauro Saporita</h5>
-      <a class="network-icon" href="mailto:maurosaporita@gmail.com">
-        <i class="bi-envelope"></i>
-      </a>
-      <a class="network-icon" href="https://github.com/mauro-saporita">
-        <i class="bi-github"></i>
-      </a>
-    </div>
-  </div>
-  <div class="people-person">
-    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/PoGibas.png">
-    <div class="portrait-title">
-      <h5>Povilas Gibas</h5>
-      <a class="network-icon" href="mailto:povilasgibas@gmail.com">
-        <i class="bi-envelope"></i>
-      </a>
-      <a class="network-icon" href="https://github.com/PoGibas">
-        <i class="bi-github"></i>
-      </a>
-    </div>
-  </div>
-  <div class="people-person">
-    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/rcannood.png">
-    <div class="portrait-title">
-      <h5>Robrecht Cannoodt</h5>
-      <a class="network-icon" href="mailto:robrecht@data-intuitive.com">
-        <i class="bi-envelope"></i>
-      </a>
-      <a class="network-icon" href="https://github.com/rcannood">
-        <i class="bi-github"></i>
-      </a>
-      <a class="network-icon" href="https://orcid.org/0000-0003-3641-729X">
-        <i class="fa-brands fa-orcid"></i>
-      </a>
-    </div>
-  </div>
-  <div class="people-person">
-    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/srdsam.png">
-    <div class="portrait-title">
-      <h5>Samuel D'Souza</h5>
-      <a class="network-icon" href="https://github.com/srdsam">
-        <i class="bi-github"></i>
-      </a>
-    </div>
-  </div>
-  <div class="people-person">
-    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/tverbeiren.png">
-    <div class="portrait-title">
-      <h5>Toni Verbeiren</h5>
-      <a class="network-icon" href="https://github.com/tverbeiren">
-        <i class="bi-github"></i>
-      </a>
-    </div>
-  </div>
-  <div class="people-person">
-    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/vladimirshitov.png">
-    <div class="portrait-title">
-      <h5>Vladimir Shitov</h5>
-      <a class="network-icon" href="mailto:vladimir.shitov@helmholtz-muenchen.de">
-        <i class="bi-envelope"></i>
-      </a>
-      <a class="network-icon" href="https://github.com/vladimirshitov">
-        <i class="bi-github"></i>
-      </a>
-      <a class="network-icon" href="https://orcid.org/0000-0002-1960-8812">
-        <i class="fa-brands fa-orcid"></i>
-      </a>
-    </div>
-  </div>
 </div>
 <div class="listing-no-matching d-none">
 No matching items

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.340">
+<meta name="generator" content="quarto-1.3.361">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -57,7 +57,8 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script>
@@ -98,9 +99,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-project','listing-website','listing-format','listing-language','listing-title','listing-sidebar','listing-path','listing-outputHref','listing-author','listing-description','listing-filename','listing-file-modified','listing-reading-time','listing-order',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
+      valueNames: ['listing-project','listing-website','listing-format','listing-language','listing-title','listing-order','listing-path','listing-outputHref','listing-author','listing-description','listing-filename','listing-file-modified','listing-reading-time','listing-sidebar',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
       
-      searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-title","listing-sidebar","listing-path","listing-outputHref","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-order"],
+      searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-title","listing-order","listing-path","listing-outputHref","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-sidebar"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -169,11 +170,7 @@ background: #f0f5f5;
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
- <span class="menu-text">About</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./components/index.html" rel="" target="">
- <span class="menu-text">Components</span></a>
+ <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./guide/index.html" rel="" target="">
@@ -183,15 +180,20 @@ background: #f0f5f5;
     <a class="nav-link" href="./contributing/index.html" rel="" target="">
  <span class="menu-text">Contributing</span></a>
   </li>  
-</ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./components/index.html" rel="" target="">
+ <span class="menu-text">Reference</span></a>
+  </li>  
   <li class="nav-item">
     <a class="nav-link" href="./team/index.html" rel="" target="">
  <span class="menu-text">Team</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://github.com/openpipelines-bio/openpipeline" rel="" target="">
- <span class="menu-text">Source Code</span></a>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/openpipelines-bio/openpipeline" rel="" target=""><i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+ <span class="menu-text"></span></a>
   </li>  
 </ul>
             <div class="quarto-navbar-tools">
@@ -203,7 +205,7 @@ background: #f0f5f5;
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page">
+    <div class="quarto-title column-page-left">
       <h1 class="title">OpenPipelines</h1>
             <p class="subtitle lead">Best-practice workflows for single-cell single- and multi-omics data</p>
                       </div>
@@ -221,19 +223,25 @@ background: #f0f5f5;
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#proposed-structure" id="toc-proposed-structure" class="nav-link active" data-scroll-target="#proposed-structure">Proposed structure</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
 
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
-<div class="column quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p>Getting started</p>
+<div class="column quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p>Guide</p>
 <div id="listing-guide" class="quarto-listing quarto-listing-container-custom">
 <ul>
   <li>
@@ -272,7 +280,7 @@ No matching items
 </div>
 </div>
 </div>
-<div class="column quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="column quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p>Contributing</p>
 <div id="listing-contributing" class="quarto-listing quarto-listing-container-custom">
 <ul>
@@ -317,12 +325,61 @@ No matching items
 </div>
 </div>
 </div>
-<div class="column quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p>More resources</p>
+</div>
+</div>
+<section id="proposed-structure" class="level2">
+<h2 class="anchored" data-anchor-id="proposed-structure">Proposed structure</h2>
+</section>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="column quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<section id="fundamentals" class="level2">
+<h2 class="anchored" data-anchor-id="fundamentals">Fundamentals</h2>
 <ul>
-<li><a href="./team/index.html">Team</a></li>
-<li><a href="https://github.com/openpipelines-bio/openpipeline">Source code</a></li>
+<li>Philosophy <!--What is OpenPipelines--></li>
+<li>Concepts <!--Viash and MuData--></li>
+<li>Architecture <!--What are the different pipelines--></li>
+<li>Road map <!--Progress--></li>
 </ul>
+</section>
+</div>
+<div class="column quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<section id="user-guide" class="level2">
+<h2 class="anchored" data-anchor-id="user-guide">User guide</h2>
+<!--How to analyse your dataset and interpret the results-->
+<ul>
+<li>Getting started</li>
+<li>Environment setup</li>
+<li>From sequencing to count tables</li>
+<li>From count table to integrated data</li>
+<li>Celltyping and cell-cell communication</li>
+</ul>
+</section>
+</div>
+<div class="column quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<section id="contributing" class="level2">
+<h2 class="anchored" data-anchor-id="contributing">Contributing</h2>
+<!--How to contribute to OpenPipelines-->
+<ul>
+<li>Getting started</li>
+<li>Project structure</li>
+<li>Creating components</li>
+<li>Creating pipelines</li>
+<li>Running tests</li>
+<li>Publishing your changes</li>
+<li>Report a bug</li>
+</ul>
+</section>
+</div>
+<div class="column quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<section id="more-information" class="level2">
+<h2 class="anchored" data-anchor-id="more-information">More information</h2>
+<ul>
+<li>Cheat sheets</li>
+<li>Code of conduct</li>
+<li>FAQ</li>
+</ul>
+</section>
 </div>
 </div>
 </div>
@@ -570,7 +627,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-left">© OpenPipelines.bio 2022</div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    </div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
