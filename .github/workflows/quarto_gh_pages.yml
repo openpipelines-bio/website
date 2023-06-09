@@ -41,7 +41,12 @@ jobs:
           PROJ_DIR="$REPO_PATH/_openpipeline"
 
           echo "REPO_PATH: $REPO_PATH"
+          ls -l $REPO_PATH
+          echo
+
           echo "PROJ_DIR: $PROJ_DIR"
+          ls -l $PROJ_DIR
+          echo
 
           # if submodule is not available, initialise it
           if [ ! -d "$PROJ_DIR" ]; then
