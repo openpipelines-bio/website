@@ -1,5 +1,22 @@
 [
   {
+    "listing": "/team/index.html",
+    "items": [
+      "/team/angela_oliveira_pisco/index.html",
+      "/team/dries_de_maeyer/index.html",
+      "/team/dries_schaumont/index.html",
+      "/team/malte_d_luecken/index.html",
+      "/team/marijke_van_moerbeke/index.html",
+      "/team/matthias_beyens/index.html",
+      "/team/mauro_saporita/index.html",
+      "/team/povilas_gibas/index.html",
+      "/team/robrecht_cannoodt/index.html",
+      "/team/samuel_dsouza/index.html",
+      "/team/toni_verbeiren/index.html",
+      "/team/vladimir_shitov/index.html"
+    ]
+  },
+  {
     "listing": "/index.html",
     "items": [
       "/fundamentals/philosophy.html",
@@ -27,10 +44,6 @@
       "/more_information/faq.html",
       "/more_information/index.html"
     ]
-  },
-  {
-    "listing": "/team/index.html",
-    "items": []
   },
   {
     "listing": "/components/index.html",
