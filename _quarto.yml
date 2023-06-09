@@ -37,10 +37,14 @@ website:
       collapse-level: 4
       title: Components
       contents: components
-    - id: guide
+    - id: user_guide
       collapse-level: 3
-      title: Guide
-      contents: guide
+      title: User guide
+      contents: user_guide
+    - id: fundamentals
+      collapse-level: 3
+      title: Fundamentals
+      contents: fundamentals
     - id: contributing
       collapse-level: 3
       title: Contributing

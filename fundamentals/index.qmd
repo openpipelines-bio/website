@@ -1,5 +1,4 @@
 ---
 title: Fundamentals
 sidebar: true
-exclude_from_listing: true
 ---

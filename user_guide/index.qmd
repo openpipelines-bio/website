@@ -1,7 +1,6 @@
 ---
 title: User Guide
 sidebar: true
-exclude_from_listing: true
 ---
 
 # Which workflow is right for me
