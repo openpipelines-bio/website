@@ -14,7 +14,7 @@ ID: `cellbender_remove_background`
 Namespace: `correction`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.8.0/src/correction/cellbender_remove_background){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/correction/cellbender_remove_background){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -35,7 +35,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r 0.9.0 -latest \
   -main-script target/nextflow/correction/cellbender_remove_background/main.nf \
   --help
 ```
@@ -83,7 +83,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r 0.9.0 -latest \
   -profile docker \
   -main-script target/nextflow/correction/cellbender_remove_background/main.nf \
   -params-file params.yaml
@@ -135,6 +135,3 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--exclude_antibody_capture`     |Including the flag --exclude-antibody-capture will cause remove-background to operate on gene counts only, ignoring other features.                                                                                                                                                                                                                   |`boolean_true`              |
 |`--learning_rate`                |Training detail: lower learning rate for inference. A OneCycle learning rate schedule is used, where the upper learning rate is ten times this value. (For this value, probably do not exceed 1e-3).                                                                                                                                                  |`double`, example: `1e-04`  |
 |`--cuda`                         |Including the flag --cuda will run the inference on a GPU.                                                                                                                                                                                                                                                                                            |`boolean_true`              |
-
-## Authors
-

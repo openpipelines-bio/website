@@ -1,7 +1,7 @@
 ---
-title: "Join uns to obs"
+title: "Move obsm to obs"
 namespace: "Metadata"
-description: "Join a data frame in .uns containing metadata to the .obs of a mudata file."
+description: "Move a matrix from .obsm to .obs."
 type: "module"
 toc: false
 ---
@@ -10,15 +10,17 @@ toc: false
 
 ### Info
 
-ID: `join_uns_to_obs`  
+ID: `move_obsm_to_obs`  
 Namespace: `metadata`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/metadata/join_uns_to_obs){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/metadata/move_obsm_to_obs){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
-
+Newly created columns in .obs will 
+be created from the .obsm key suffixed with an underscore and the name of the columns
+of the specified .obsm matrix
 
 ## Example commands
 
@@ -31,7 +33,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 ```bash
 nextflow run openpipelines-bio/openpipeline \
   -r 0.9.0 -latest \
-  -main-script target/nextflow/metadata/join_uns_to_obs/main.nf \
+  -main-script target/nextflow/metadata/move_obsm_to_obs/main.nf \
   --help
 ```
 
@@ -40,10 +42,12 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
+# MuData Input
 input: # please fill in - example: "input.h5mu"
 modality: "rna"
-uns_key: # please fill in - example: "foo"
+obsm_key: # please fill in - example: "foo"
+
+# MuData Output
 # output: "$id.$key.output.h5mu"
 # output_compression: "gzip"
 
@@ -57,7 +61,7 @@ publish_dir: # please fill in - example: "output/"
 nextflow run openpipelines-bio/openpipeline \
   -r 0.9.0 -latest \
   -profile docker \
-  -main-script target/nextflow/metadata/join_uns_to_obs/main.nf \
+  -main-script target/nextflow/metadata/move_obsm_to_obs/main.nf \
   -params-file params.yaml
 ```
 
@@ -65,14 +69,25 @@ nextflow run openpipelines-bio/openpipeline \
 Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
 :::
 
-## Argument group
+## Argument groups
 
-### Arguments
+### MuData Input
+
+|Name         |Description                 |Attributes                                |
+|:------------|:---------------------------|:-----------------------------------------|
+|`--input`    |Input h5mu file             |`file`, required, example: `"input.h5mu"` |
+|`--modality` |                            |`string`, default: `"rna"`                |
+|`--obsm_key` |.obms entry to move to .obs |`string`, required                        |
+
+
+### MuData Output
 
 |Name                   |Description                                                  |Attributes                                 |
 |:----------------------|:------------------------------------------------------------|:------------------------------------------|
-|`--input`              |Input h5mu file                                              |`file`, required, example: `"input.h5mu"`  |
-|`--modality`           |                                                             |`string`, default: `"rna"`                 |
-|`--uns_key`            |                                                             |`string`, required                         |
 |`--output`             |Output h5mu file.                                            |`file`, required, example: `"output.h5mu"` |
 |`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`                |
+
+## Authors
+
+
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (author)

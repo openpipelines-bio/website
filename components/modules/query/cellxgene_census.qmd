@@ -1,0 +1,124 @@
+---
+title: "Cellxgene census"
+namespace: "Query"
+description: "Query CellxGene Census or user-specified TileDBSoma object, and eventually fetch cell and gene metadata or/and expression counts."
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `cellxgene_census`  
+Namespace: `query`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/query/cellxgene_census){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 0.9.0 -latest \
+  -main-script target/nextflow/query/cellxgene_census/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Inputs
+input_database: "CellxGene"
+modality: "rna"
+cellxgene_release: "2023-05-15"
+
+# Outputs
+# output: "$id.$key.output.h5mu"
+# output_compression: "gzip"
+
+# Query
+species: "homo_sapiens"
+# cell_type: ["mesothelial fibroblast"]
+# tissue: ["lung"]
+# technology: ["10x 3' v3"]
+# suspension: ["cell"]
+is_primary_data: true
+# obs_column_names: ["foo"]
+metadata_only: true
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 0.9.0 -latest \
+  -profile docker \
+  -main-script target/nextflow/query/cellxgene_census/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Inputs
+
+Arguments related to the input (aka query) dataset.
+
+
+|Name                  |Description                                                                                                                                        |Attributes                                           |
+|:---------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------|
+|`--input_database`    |Full input database S3 prefix URL. Default: CellxGene Census                                                                                       |`string`, default: `"CellxGene"`, example: `"s3://"` |
+|`--modality`          |Which modality to store the output in.                                                                                                             |`string`, default: `"rna"`                           |
+|`--cellxgene_release` |CellxGene Census release date. More information: https://chanzuckerberg.github.io/cellxgene-census/cellxgene_census_docsite_data_release_info.html |`string`, default: `"2023-05-15"`                    |
+
+
+### Query
+
+Arguments related to the query.
+
+
+|Name                 |Description                                                                                                                         |Attributes                                                     |
+|:--------------------|:-----------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------|
+|`--species`          |Specie(s) of interest. If not specified, Homo Sapiens will be queried.                                                              |`string`, default: `"homo_sapiens"`, example: `"homo_sapiens"` |
+|`--cell_type`        |Cell type(s) of interest. Cell type should be one of the Cell Ontology terms. If not specified, all cell types will be queried.     |`string`, example: `"mesothelial fibroblast"`                  |
+|`--tissue`           |Tissue(s) of interest. If not specified, all tissues will be queried.                                                               |`string`, example: `"lung"`                                    |
+|`--technology`       |Technology(ies) of interest. If not specified, all technologies will be queried.                                                    |`string`, example: `"10x 3' v3"`                               |
+|`--suspension`       |Suspension(s) of interest. If not specified, all suspensions will be queried.                                                       |`string`, example: `"cell"`                                    |
+|`--is_primary_data`  |Allow only primary data in the query in order to prevent of data duplication.                                                       |`boolean`, default: `TRUE`                                     |
+|`--obs_column_names` |obs columns of interest. If not specified, all columns will be returned.                                                            |`string`                                                       |
+|`--metadata_only`    |By default only returns metadata of obs layer of query. If False, returns metadata of obs layer and gene expression matrix of query |`boolean`, default: `TRUE`                                     |
+
+
+### Outputs
+
+Output arguments.
+
+
+|Name                   |Description       |Attributes                                 |
+|:----------------------|:-----------------|:------------------------------------------|
+|`--output`             |Output h5mu file. |`file`, required, example: `"output.h5mu"` |
+|`--output_compression` |                  |`string`, example: `"gzip"`                |
+
+## Authors
+
+
+  * Matthias Beyens [{{< fa brands github >}}](https://github.com/MatthiasBeyens) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3304-0706) [{{< fa brands linkedin >}}](https://linkedin.com/in/mbeyens) (author)

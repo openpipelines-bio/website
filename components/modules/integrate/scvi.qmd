@@ -14,7 +14,7 @@ ID: `scvi`
 Namespace: `integrate`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.8.0/src/integrate/scvi){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/integrate/scvi){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r 0.9.0 -latest \
   -main-script target/nextflow/integrate/scvi/main.nf \
   --help
 ```
@@ -60,10 +60,14 @@ early_stopping_patience: 45
 early_stopping_min_delta: 0.0
 
 # Learning parameters
-max_epochs: # please fill in - example: 123
+# max_epochs: 123
 reduce_lr_on_plateau: true
 lr_factor: 0.6
 lr_patience: 30
+
+# Data validition
+n_obs_min_count: 0
+n_var_min_count: 0
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
@@ -73,7 +77,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r 0.9.0 -latest \
   -profile docker \
   -main-script target/nextflow/integrate/scvi/main.nf \
   -params-file params.yaml
@@ -120,12 +124,24 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 |Name                     |Description                                                                                                      |Attributes                 |
 |:------------------------|:----------------------------------------------------------------------------------------------------------------|:--------------------------|
-|`--max_epochs`           |Number of passes through the dataset, defaults to (20000 / number of cells) * 400 or 400; whichever is smallest. |`integer`, required        |
+|`--max_epochs`           |Number of passes through the dataset, defaults to (20000 / number of cells) * 400 or 400; whichever is smallest. |`integer`                  |
 |`--reduce_lr_on_plateau` |Whether to monitor validation loss and reduce learning rate when validation set `lr_scheduler_metric` plateaus.  |`boolean`, default: `TRUE` |
 |`--lr_factor`            |Factor to reduce learning rate.                                                                                  |`double`, default: `0.6`   |
 |`--lr_patience`          |Number of epochs with no improvement after which learning rate will be reduced.                                  |`double`, default: `30`    |
 
+
+### Data validition
+
+|Name                |Description                                                                                                                      |Attributes              |
+|:-------------------|:--------------------------------------------------------------------------------------------------------------------------------|:-----------------------|
+|`--n_obs_min_count` |Minimum number of cells threshold ensuring that every obs_batch category has sufficient observations (cells) for model training. |`integer`, default: `0` |
+|`--n_var_min_count` |Minimum number of genes threshold ensuring that every var_input filter has sufficient observations (genes) for model training.   |`integer`, default: `0` |
+
 ## Authors
 
-  * Malte D. Luecken [{{< fa brands github >}}](https://github.com/LuckyMD) [{{< fa brands orcid >}}](https://orcid.org/0000-0001-7464-7921) (author)
-  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (maintainer)
+
+  * Malte D. Luecken [{{< fa brands github >}}](https://github.com/LuckyMD) [{{< fa brands orcid >}}](https://orcid.org/0000-0001-7464-7921) [{{< fa brands linkedin >}}](https://linkedin.com/in/malte-l%C3%BCcken-b8b21049) (author)
+
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (maintainer)
+
+  * Matthias Beyens [{{< fa brands github >}}](https://github.com/MatthiasBeyens) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3304-0706) [{{< fa brands linkedin >}}](https://linkedin.com/in/mbeyens) (contributor)

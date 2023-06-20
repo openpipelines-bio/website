@@ -14,7 +14,7 @@ ID: `cellranger_count_split`
 Namespace: `mapping`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.8.0/src/mapping/cellranger_count_split){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/mapping/cellranger_count_split){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r 0.9.0 -latest \
   -main-script target/nextflow/mapping/cellranger_count_split/main.nf \
   --help
 ```
@@ -57,7 +57,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r 0.9.0 -latest \
   -profile docker \
   -main-script target/nextflow/mapping/cellranger_count_split/main.nf \
   -params-file params.yaml
@@ -83,6 +83,9 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ## Authors
 
-  * Angela Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) (author)
-  * Samuel D'Souza [{{< fa brands github >}}](https://github.com/srdsam) (author)
-  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author, maintainer)
+
+  * Angela Oliveira Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) [{{< fa brands linkedin >}}](https://linkedin.com/in/aopisco) (author)
+
+  * Samuel D'Souza [{{< fa brands github >}}](https://github.com/srdsam) [{{< fa brands linkedin >}}](https://linkedin.com/in/samuel-d-souza-887023150/) (author)
+
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (author, maintainer)
