@@ -1,3 +1,7 @@
+# OpenPipelines.bio v0.9.0
+
+* Update component documentation to v0.8.0 release.
+
 # OpenPipelines.bio v0.8.0
 
 ## MAJOR CHANGES
