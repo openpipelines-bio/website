@@ -1,0 +1,72 @@
+---
+title: "Join uns to obs"
+namespace: "Metadata"
+description: "Join a data frame in .uns containing metadata to the .obs of a mudata file."
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `join_uns_to_obs`  
+Namespace: `metadata`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/metadata/join_uns_to_obs){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 0.9.0 -latest \
+  -main-script target/nextflow/metadata/join_uns_to_obs/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 0.9.0 -latest \
+  -profile docker \
+  -main-script target/nextflow/metadata/join_uns_to_obs/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument group
+
+### Arguments
+
+|Name                   |Description                                                  |Attributes                                 |
+|:----------------------|:------------------------------------------------------------|:------------------------------------------|
+|`--input`              |Input h5mu file                                              |`file`, required, example: `"input.h5mu"`  |
+|`--modality`           |                                                             |`string`, default: `"rna"`                 |
+|`--uns_key`            |                                                             |`string`, required                         |
+|`--output`             |Output h5mu file.                                            |`file`, required, example: `"output.h5mu"` |
+|`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`                |
+
+## Authors
+
