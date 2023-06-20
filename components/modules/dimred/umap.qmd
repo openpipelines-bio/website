@@ -14,7 +14,7 @@ ID: `umap`
 Namespace: `dimred`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.8.0/src/dimred/umap){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/dimred/umap){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r main -latest \
   -main-script target/nextflow/dimred/umap/main.nf \
   --help
 ```
@@ -40,35 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Inputs
-input: # please fill in - example: "input.h5mu"
-modality: "rna"
-uns_neighbors: "neighbors"
 
-# Outputs
-# output: "$id.$key.output.h5mu"
-# output_compression: "gzip"
-obsm_output: "umap"
-
-# Arguments
-min_dist: 0.5
-spread: 1.0
-num_components: 2
-# max_iter: 123
-alpha: 1.0
-gamma: 1.0
-negative_sample_rate: 5
-init_pos: "spectral"
-
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r main -latest \
   -profile docker \
   -main-script target/nextflow/dimred/umap/main.nf \
   -params-file params.yaml
@@ -113,4 +91,5 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ## Authors
 
-  * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) (maintainer)
+
+  * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-de-maeyer-b46a814) (maintainer)

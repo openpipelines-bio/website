@@ -14,7 +14,7 @@ ID: `join_csv`
 Namespace: `metadata`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.8.0/src/metadata/join_csv){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/metadata/join_csv){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r main -latest \
   -main-script target/nextflow/metadata/join_csv/main.nf \
   --help
 ```
@@ -40,29 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# MuData Input
-input: # please fill in - example: "input.h5mu"
-modality: "rna"
-# obs_key: "foo"
-# var_key: "foo"
 
-# MuData Output
-# output: "$id.$key.output.h5mu"
-# output_compression: "gzip"
-
-# Metadata Input
-input_csv: # please fill in - example: "metadata.csv"
-csv_key: "id"
-
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r main -latest \
   -profile docker \
   -main-script target/nextflow/metadata/join_csv/main.nf \
   -params-file params.yaml
@@ -101,4 +85,5 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ## Authors
 
-  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (author)
+
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (author)

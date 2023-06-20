@@ -14,7 +14,7 @@ ID: `cellranger_multi`
 Namespace: `mapping`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.8.0/src/mapping/cellranger_multi){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/mapping/cellranger_multi){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r main -latest \
   -main-script target/nextflow/mapping/cellranger_multi/main.nf \
   --help
 ```
@@ -40,45 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Outputs
-# output: "$id.$key.output.output"
 
-# Input files
-input: # please fill in - example: ["mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"]
-gex_reference: # please fill in - example: "reference_genome.tar.gz"
-# vdj_reference: "reference_vdj.tar.gz"
-# feature_reference: "feature_reference.csv"
-
-# Library arguments
-library_id: # please fill in - example: ["mysample1"]
-library_type: # please fill in - example: ["Gene Expression"]
-# library_subsample: ["0.5"]
-# library_lanes: ["1-4"]
-
-# Gene expression arguments
-# gex_expect_cells: 3000
-gex_chemistry: "auto"
-gex_secondary_analysis: false
-gex_generate_bam: false
-gex_include_introns: true
-
-# Cell multiplexing parameters
-# cell_multiplex_sample_id: "foo"
-# cell_multiplex_oligo_ids: "foo"
-# cell_multiplex_description: "foo"
-
-# Executor arguments
-dryrun: false
-
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r main -latest \
   -profile docker \
   -main-script target/nextflow/mapping/cellranger_multi/main.nf \
   -params-file params.yaml
@@ -92,12 +60,13 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Input files
 
-|Name                  |Description                                                                                                                                                                                                                                                                                                                       |Attributes                                                                                                     |
-|:---------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------|
-|`--input`             |The FASTQ files to be analyzed. FASTQ files should conform to the naming conventions of bcl2fastq and mkfastq: `[Sample Name]_S[Sample Index]_L00[Lane Number]_[Read Type]_001.fastq.gz`                                                                                                                                          |`file`, required, example: `"mysample_S1_L001_R1_001.fastq.gz"`, example: `"mysample_S1_L001_R2_001.fastq.gz"` |
-|`--gex_reference`     |Genome refence index built by Cell Ranger mkref.                                                                                                                                                                                                                                                                                  |`file`, required, example: `"reference_genome.tar.gz"`                                                         |
-|`--vdj_reference`     |VDJ refence index built by Cell Ranger mkref.                                                                                                                                                                                                                                                                                     |`file`, example: `"reference_vdj.tar.gz"`                                                                      |
-|`--feature_reference` |Path to the Feature reference CSV file, declaring Feature Barcode constructs and associated barcodes. Required only for Antibody Capture or CRISPR Guide Capture libraries. See https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/using/feature-bc-analysis#feature-ref for more information. |`file`, example: `"feature_reference.csv"`                                                                     |
+|Name                             |Description                                                                                                                                                                                                                                                                                                                       |Attributes                                                                                                     |
+|:--------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------|
+|`--input`                        |The FASTQ files to be analyzed. FASTQ files should conform to the naming conventions of bcl2fastq and mkfastq: `[Sample Name]_S[Sample Index]_L00[Lane Number]_[Read Type]_001.fastq.gz`                                                                                                                                          |`file`, required, example: `"mysample_S1_L001_R1_001.fastq.gz"`, example: `"mysample_S1_L001_R2_001.fastq.gz"` |
+|`--gex_reference`                |Genome refence index built by Cell Ranger mkref.                                                                                                                                                                                                                                                                                  |`file`, required, example: `"reference_genome.tar.gz"`                                                         |
+|`--vdj_reference`                |VDJ refence index built by Cell Ranger mkref.                                                                                                                                                                                                                                                                                     |`file`, example: `"reference_vdj.tar.gz"`                                                                      |
+|`--vdj_inner_enrichment_primers` |V(D)J Immune Profiling libraries: if inner enrichment primers other than those provided  in the 10x Genomics kits are used, they need to be specified here as a text file with one primer per line.                                                                                                                               |`file`, example: `"enrichment_primers.txt"`                                                                    |
+|`--feature_reference`            |Path to the Feature reference CSV file, declaring Feature Barcode constructs and associated barcodes. Required only for Antibody Capture or CRISPR Guide Capture libraries. See https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/using/feature-bc-analysis#feature-ref for more information. |`file`, example: `"feature_reference.csv"`                                                                     |
 
 
 ### Library arguments
@@ -151,6 +120,9 @@ Arguments related to cell multiplexing.
 
 ## Authors
 
-  * Angela Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) (author)
-  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author, maintainer)
-  * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) (author)
+
+  * Angela Oliveira Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) [{{< fa brands linkedin >}}](https://linkedin.com/in/aopisco) (author)
+
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (author, maintainer)
+
+  * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-de-maeyer-b46a814) (author)

@@ -14,7 +14,7 @@ ID: `lianapy`
 Namespace: `interpret`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.8.0/src/interpret/lianapy){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/interpret/lianapy){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r main -latest \
   -main-script target/nextflow/interpret/lianapy/main.nf \
   --help
 ```
@@ -40,30 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-input: # please fill in - example: "path/to/file"
-# output: "$id.$key.output.output"
-output_compression: "gzip"
-modality: "rna"
-# layer: "foo"
-groupby: "bulk_labels"
-resource_name: "consensus"
-gene_symbol: "gene_symbol"
-expr_prop: 0.1
-min_cells: 5
-aggregate_method: "rra"
-return_all_lrs: false
-n_perms: 100
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r main -latest \
   -profile docker \
   -main-script target/nextflow/interpret/lianapy/main.nf \
   -params-file params.yaml
@@ -95,5 +78,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ## Authors
 
-  * Mauro Saporita [{{< fa brands github >}}](https://github.com/mauro-saporita) (author)
-  * Povilas Gibas [{{< fa brands github >}}](https://github.com/PoGibas) (author)
+
+  * Mauro Saporita [{{< fa brands github >}}](https://github.com/mauro-saporita) [{{< fa brands linkedin >}}](https://linkedin.com/in/mauro-saporita-930b06a5) (author)
+
+  * Povilas Gibas [{{< fa brands github >}}](https://github.com/PoGibas) [{{< fa brands linkedin >}}](https://linkedin.com/in/povilas-gibas) (author)

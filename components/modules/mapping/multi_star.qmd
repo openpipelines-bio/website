@@ -14,7 +14,7 @@ ID: `multi_star`
 Namespace: `mapping`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.8.0/src/mapping/multi_star){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/mapping/multi_star){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r main -latest \
   -main-script target/nextflow/mapping/multi_star/main.nf \
   --help
 ```
@@ -40,27 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Input/Output
-input_id: # please fill in - example: ["mysample", "mysample"]
-input_r1: # please fill in - example: ["mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L002_R1_001.fastq.gz"]
-# input_r2: ["mysample_S1_L001_R2_001.fastq.gz", "mysample_S1_L002_R2_001.fastq.gz"]
-reference_index: # please fill in - example: "/path/to/reference"
-reference_gtf: # please fill in - example: "genes.gtf"
-# output: "$id.$key.output.output"
 
-# Processing arguments
-run_htseq_count: true
-run_multiqc: true
-
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r main -latest \
   -profile docker \
   -main-script target/nextflow/mapping/multi_star/main.nf \
   -params-file params.yaml
@@ -86,10 +72,11 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Processing arguments
 
-|Name                |Description                                        |Attributes                 |
-|:-------------------|:--------------------------------------------------|:--------------------------|
-|`--run_htseq_count` |Whether or not to also run htseq-count after STAR. |`boolean`, default: `TRUE` |
-|`--run_multiqc`     |Whether or not to also run MultiQC at the end.     |`boolean`, default: `TRUE` |
+|Name                 |Description                                         |Attributes                 |
+|:--------------------|:---------------------------------------------------|:--------------------------|
+|`--run_htseq_count`  |Whether or not to also run htseq-count after STAR.  |`boolean`, default: `TRUE` |
+|`--run_multiqc`      |Whether or not to also run MultiQC at the end.      |`boolean`, default: `TRUE` |
+|`--min_success_rate` |Fail when the success rate is below this threshold. |`double`, default: `0.5`   |
 
 
 ### Run Parameters
@@ -422,5 +409,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ## Authors
 
-  * Angela Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) (author)
-  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author, maintainer)
+
+  * Angela Oliveira Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) [{{< fa brands linkedin >}}](https://linkedin.com/in/aopisco) (author)
+
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (author, maintainer)

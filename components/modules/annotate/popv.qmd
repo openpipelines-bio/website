@@ -1,7 +1,7 @@
 ---
 title: "Popv"
 namespace: "Annotate"
-description: "Performs popular major vote cell typing on single cell sequence data https://github.com/czbiohub/PopV"
+description: "Performs popular major vote cell typing on single cell sequence data using multiple algorithms."
 type: "module"
 toc: false
 ---
@@ -14,11 +14,11 @@ ID: `popv`
 Namespace: `annotate`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.8.0/src/annotate/popv){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main/src/annotate/popv){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
-
+Note that this is a one-shot version of PopV.
 
 ## Example commands
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r main -latest \
   -main-script target/nextflow/annotate/popv/main.nf \
   --help
 ```
@@ -40,36 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Inputs
-input: # please fill in - example: "input.h5mu"
-modality: "rna"
-# input_layer: "foo"
-# input_obs_batch: "foo"
-# input_var_subset: "foo"
-# input_obs_label: "foo"
-unknown_celltype_label: "unknown"
 
-# Outputs
-# output: "$id.$key.output.h5mu"
-# output_compression: "gzip"
-
-# Arguments
-methods: # please fill in - example: ["knn_on_scvi", "scanvi"]
-
-# Reference
-reference: # please fill in - example: "TS_Bladder_filtered.h5ad"
-reference_obs_label: "cell_ontology_class"
-reference_obs_batch: "donor_assay"
-
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r main -latest \
   -profile docker \
   -main-script target/nextflow/annotate/popv/main.nf \
   -params-file params.yaml
@@ -102,11 +79,12 @@ Arguments related to the input (aka query) dataset.
 Arguments related to the reference dataset.
 
 
-|Name                    |Description                                                                                 |Attributes                                              |
-|:-----------------------|:-------------------------------------------------------------------------------------------|:-------------------------------------------------------|
-|`--reference`           |User-provided reference tissue. The data that will be used as reference to call cell types. |`file`, required, example: `"TS_Bladder_filtered.h5ad"` |
-|`--reference_obs_label` |Key in obs field of reference AnnData with cell-type information.                           |`string`, default: `"cell_ontology_class"`              |
-|`--reference_obs_batch` |Key in obs field of input adata for batch information.                                      |`string`, default: `"donor_assay"`                      |
+|Name                    |Description                                                                                                                                                        |Attributes                                              |
+|:-----------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------|
+|`--reference`           |User-provided reference tissue. The data that will be used as reference to call cell types.                                                                        |`file`, required, example: `"TS_Bladder_filtered.h5ad"` |
+|`--reference_layer`     |Which layer to use. If no value is provided, the counts are assumed to be in the `.X` slot. Otherwise, count data is expected to be in `.layers[reference_layer]`. |`string`                                                |
+|`--reference_obs_label` |Key in obs field of reference AnnData with cell-type information.                                                                                                  |`string`, default: `"cell_ontology_class"`              |
+|`--reference_obs_batch` |Key in obs field of input adata for batch information.                                                                                                             |`string`, default: `"donor_assay"`                      |
 
 
 ### Outputs
@@ -131,5 +109,7 @@ Other arguments.
 
 ## Authors
 
-  * Matthias Beyens [{{< fa brands github >}}](https://github.com/MatthiasBeyens) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3304-0706) (author)
-  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author)
+
+  * Matthias Beyens [{{< fa brands github >}}](https://github.com/MatthiasBeyens) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3304-0706) [{{< fa brands linkedin >}}](https://linkedin.com/in/mbeyens) (author)
+
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (author)
