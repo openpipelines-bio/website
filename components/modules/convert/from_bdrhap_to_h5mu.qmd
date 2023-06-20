@@ -14,7 +14,7 @@ ID: `from_bdrhap_to_h5mu`
 Namespace: `convert`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.8.0/src/convert/from_bdrhap_to_h5mu){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/convert/from_bdrhap_to_h5mu){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r 0.9.0 -latest \
   -main-script target/nextflow/convert/from_bdrhap_to_h5mu/main.nf \
   --help
 ```
@@ -56,7 +56,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r 0.9.0 -latest \
   -profile docker \
   -main-script target/nextflow/convert/from_bdrhap_to_h5mu/main.nf \
   -params-file params.yaml
@@ -85,4 +85,5 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ## Authors
 
-  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (maintainer)
+
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (maintainer)
