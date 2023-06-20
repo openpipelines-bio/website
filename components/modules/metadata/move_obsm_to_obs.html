@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Convert a velocyto loom file to a h5mu file.">
+<meta name="description" content="Move a matrix from .obsm to .obs.">
 
-<title>OpenPipelines - Velocyto to h5mu</title>
+<title>OpenPipelines - Move obsm to obs</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -174,7 +174,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../components/index.html">Components</a></li><li class="breadcrumb-item"><a href="../../../components/modules/index.html">Modules</a></li><li class="breadcrumb-item"><a href="../../../components/modules/convert/from_10xh5_to_h5mu.html">Convert</a></li><li class="breadcrumb-item"><a href="../../../components/modules/convert/velocyto_to_h5mu.html">Velocyto to h5mu</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../components/index.html">Components</a></li><li class="breadcrumb-item"><a href="../../../components/modules/index.html">Modules</a></li><li class="breadcrumb-item"><a href="../../../components/modules/metadata/add_id.html">Metadata</a></li><li class="breadcrumb-item"><a href="../../../components/modules/metadata/move_obsm_to_obs.html">Move obsm to obs</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -402,7 +402,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/convert/velocyto_to_h5mu.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../components/modules/convert/velocyto_to_h5mu.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Velocyto to h5mu</span></a>
   </div>
 </li>
@@ -757,7 +757,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/metadata/move_obsm_to_obs.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../components/modules/metadata/move_obsm_to_obs.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Move obsm to obs</span></a>
   </div>
 </li>
@@ -998,12 +998,12 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Velocyto to h5mu</h1>
+<h1 class="title">Move obsm to obs</h1>
 </div>
 
 <div>
   <div class="description">
-    Convert a velocyto loom file to a h5mu file.
+    Move a matrix from .obsm to .obs.
   </div>
 </div>
 
@@ -1022,14 +1022,14 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <div class="no-row-height column-margin column-container"><div class="">
 <section id="info" class="level3">
 <h3 class="anchored" data-anchor-id="info">Info</h3>
-<p>ID: <code>velocyto_to_h5mu</code><br>
-Namespace: <code>convert</code></p>
+<p>ID: <code>move_obsm_to_obs</code><br>
+Namespace: <code>metadata</code></p>
 </section>
 <section id="links" class="level3">
 <h3 class="anchored" data-anchor-id="links">Links</h3>
-<p><a href="https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/velocity/velocyto_to_h5mu" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
+<p><a href="https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/metadata/move_obsm_to_obs" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
 </section>
-</div></div><p>If an input h5mu file is also provided, the velocity h5ad object will get added to that h5mu instead.</p>
+</div></div><p>Newly created columns in .obs will be created from the .obsm key suffixed with an underscore and the name of the columns of the specified .obsm matrix</p>
 <section id="example-commands" class="level2">
 <h2 class="anchored" data-anchor-id="example-commands">Example commands</h2>
 <p>You can run the pipeline using <code>nextflow run</code>.</p>
@@ -1038,7 +1038,7 @@ Namespace: <code>convert</code></p>
 <p>You can use <code>--help</code> as a parameter to get an overview of the possible parameters.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> 0.9.0 <span class="at">-latest</span> <span class="dt">\</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> target/nextflow/convert/velocyto_to_h5mu/main.nf <span class="dt">\</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> target/nextflow/metadata/move_obsm_to_obs/main.nf <span class="dt">\</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="run-command" class="level3">
@@ -1047,26 +1047,23 @@ Namespace: <code>convert</code></p>
 <summary>
 Example of <code>params.yaml</code>
 </summary>
-<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inputs</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">input_loom</span><span class="kw">:</span><span class="co"> # please fill in - example: "input.loom"</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># input_h5mu: "input.h5mu"</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">modality</span><span class="kw">:</span><span class="at"> </span><span class="st">"rna_velocity"</span></span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># MuData Input</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">input</span><span class="kw">:</span><span class="co"> # please fill in - example: "input.h5mu"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">modality</span><span class="kw">:</span><span class="at"> </span><span class="st">"rna"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">obsm_key</span><span class="kw">:</span><span class="co"> # please fill in - example: "foo"</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Outputs</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># MuData Output</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># output: "$id.$key.output.h5mu"</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># output_compression: "gzip"</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">layer_spliced</span><span class="kw">:</span><span class="at"> </span><span class="st">"velo_spliced"</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">layer_unspliced</span><span class="kw">:</span><span class="at"> </span><span class="st">"velo_unspliced"</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">layer_ambiguous</span><span class="kw">:</span><span class="at"> </span><span class="st">"velo_ambiguous"</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Nextflow input-output arguments</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">publish_dir</span><span class="kw">:</span><span class="co"> # please fill in - example: "output/"</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># param_list: "my_params.yaml"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Nextflow input-output arguments</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">publish_dir</span><span class="kw">:</span><span class="co"> # please fill in - example: "output/"</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># param_list: "my_params.yaml"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> 0.9.0 <span class="at">-latest</span> <span class="dt">\</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-profile</span> docker <span class="dt">\</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> target/nextflow/convert/velocyto_to_h5mu/main.nf <span class="dt">\</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> target/nextflow/metadata/move_obsm_to_obs/main.nf <span class="dt">\</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">-params-file</span> params.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1085,13 +1082,13 @@ Note
 </section>
 <section id="argument-groups" class="level2">
 <h2 class="anchored" data-anchor-id="argument-groups">Argument groups</h2>
-<section id="inputs" class="level3">
-<h3 class="anchored" data-anchor-id="inputs">Inputs</h3>
+<section id="mudata-input" class="level3">
+<h3 class="anchored" data-anchor-id="mudata-input">MuData Input</h3>
 <table class="table">
 <colgroup>
 <col style="width: 15%">
-<col style="width: 41%">
-<col style="width: 43%">
+<col style="width: 33%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1102,30 +1099,30 @@ Note
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><code>--input_loom</code></td>
-<td style="text-align: left;">Path to the input loom file.</td>
-<td style="text-align: left;"><code>file</code>, required, example: <code>"input.loom"</code></td>
+<td style="text-align: left;"><code>--input</code></td>
+<td style="text-align: left;">Input h5mu file</td>
+<td style="text-align: left;"><code>file</code>, required, example: <code>"input.h5mu"</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>--input_h5mu</code></td>
-<td style="text-align: left;">If a MuData file is provided,</td>
-<td style="text-align: left;"><code>file</code>, example: <code>"input.h5mu"</code></td>
+<td style="text-align: left;"><code>--modality</code></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>string</code>, default: <code>"rna"</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>--modality</code></td>
-<td style="text-align: left;">The name of the modality to operate on.</td>
-<td style="text-align: left;"><code>string</code>, default: <code>"rna_velocity"</code></td>
+<td style="text-align: left;"><code>--obsm_key</code></td>
+<td style="text-align: left;">.obms entry to move to .obs</td>
+<td style="text-align: left;"><code>string</code>, required</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="outputs" class="level3">
-<h3 class="anchored" data-anchor-id="outputs">Outputs</h3>
+<section id="mudata-output" class="level3">
+<h3 class="anchored" data-anchor-id="mudata-output">MuData Output</h3>
 <table class="table">
 <colgroup>
 <col style="width: 18%">
-<col style="width: 50%">
-<col style="width: 31%">
+<col style="width: 48%">
+<col style="width: 33%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1137,28 +1134,13 @@ Note
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"><code>--output</code></td>
-<td style="text-align: left;">Path to the output MuData file.</td>
-<td style="text-align: left;"><code>file</code>, example: <code>"output.h5mu"</code></td>
+<td style="text-align: left;">Output h5mu file.</td>
+<td style="text-align: left;"><code>file</code>, required, example: <code>"output.h5mu"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--output_compression</code></td>
 <td style="text-align: left;">The compression format to be used on the output h5mu object.</td>
 <td style="text-align: left;"><code>string</code>, example: <code>"gzip"</code></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>--layer_spliced</code></td>
-<td style="text-align: left;">Output layer for the spliced reads.</td>
-<td style="text-align: left;"><code>string</code>, default: <code>"velo_spliced"</code></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>--layer_unspliced</code></td>
-<td style="text-align: left;">Output layer for the unspliced reads.</td>
-<td style="text-align: left;"><code>string</code>, default: <code>"velo_unspliced"</code></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>--layer_ambiguous</code></td>
-<td style="text-align: left;">Output layer for the ambiguous reads.</td>
-<td style="text-align: left;"><code>string</code>, default: <code>"velo_ambiguous"</code></td>
 </tr>
 </tbody>
 </table>
@@ -1167,9 +1149,7 @@ Note
 <section id="authors" class="level2">
 <h2 class="anchored" data-anchor-id="authors">Authors</h2>
 <ul>
-<li><p>Dries Schaumont <a href="https://github.com/DriesSchaumont"><i class="fa-brands fa-github" aria-label="github"></i></a> <a href="https://orcid.org/0000-0002-4389-0440"><i class="fa-brands fa-orcid" aria-label="orcid"></i></a> <a href="https://linkedin.com/in/dries-schaumont"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a> (maintainer, author)</p></li>
-<li><p>Robrecht Cannoodt <a href="https://github.com/rcannood"><i class="fa-brands fa-github" aria-label="github"></i></a> <a href="https://orcid.org/0000-0003-3641-729X"><i class="fa-brands fa-orcid" aria-label="orcid"></i></a> <a href="https://linkedin.com/in/robrechtcannoodt"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a> (author)</p></li>
-<li><p>Angela Oliveira Pisco <a href="https://github.com/aopisco"><i class="fa-brands fa-github" aria-label="github"></i></a> <a href="https://orcid.org/0000-0003-0142-2355"><i class="fa-brands fa-orcid" aria-label="orcid"></i></a> <a href="https://linkedin.com/in/aopisco"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a> (contributor)</p></li>
+<li>Dries Schaumont <a href="https://github.com/DriesSchaumont"><i class="fa-brands fa-github" aria-label="github"></i></a> <a href="https://orcid.org/0000-0002-4389-0440"><i class="fa-brands fa-orcid" aria-label="orcid"></i></a> <a href="https://linkedin.com/in/dries-schaumont"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a> (author)</li>
 </ul>
 
 
@@ -1481,7 +1461,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/components/modules/convert/velocyto_to_h5mu.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/components/modules/metadata/move_obsm_to_obs.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
