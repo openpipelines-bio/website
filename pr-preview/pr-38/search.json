@@ -23,16 +23,16 @@
   {
     "objectID": "CHANGELOG.html",
     "href": "CHANGELOG.html",
-    "title": "OpenPipelines.bio v0.8.0",
+    "title": "OpenPipelines.bio v0.9.0",
     "section": "",
-    "text": "Update component documentation to v0.8.0 release.\nUse git submodule to access openpipeline repo\nPropose new website structure\nUpdate author page"
+    "text": "Update component documentation to v0.8.0 release."
   },
   {
     "objectID": "CHANGELOG.html#major-changes",
     "href": "CHANGELOG.html#major-changes",
-    "title": "OpenPipelines.bio v0.8.0",
-    "section": "",
-    "text": "Update component documentation to v0.8.0 release.\nUse git submodule to access openpipeline repo\nPropose new website structure\nUpdate author page"
+    "title": "OpenPipelines.bio v0.9.0",
+    "section": "MAJOR CHANGES",
+    "text": "MAJOR CHANGES\n\nUpdate component documentation to v0.8.0 release.\nUse git submodule to access openpipeline repo\nPropose new website structure\nUpdate author page"
   },
   {
     "objectID": "team/index.html",
