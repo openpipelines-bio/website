@@ -14,7 +14,7 @@ ID: `htseq_count`
 Namespace: `mapping`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/mapping/htseq_count){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/./src/mapping/htseq_count){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -43,33 +43,7 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-order: "name"
-stranded: "yes"
-minimum_alignment_quality: 10
-# type: "exon"
-# id_attribute: ["gene_id"]
-# additional_attributes: ["gene_name"]
-add_chromosome_info: false
-mode: "union"
-non_unique: "none"
-# secondary_alignments: "foo"
-# supplementary_alignments: "foo"
-counts_output_sparse: false
 
-# Input
-input: # please fill in - example: ["mysample1.BAM", "mysample2.BAM"]
-reference: # please fill in - example: "reference.gtf"
-
-# Output
-# output: "$id.$key.output.tsv"
-# output_delimiter: "	"
-# output_sam: ["$id.$key.output_sam_*.BAM"]
-# output_sam_format: "foo"
-
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 

@@ -14,7 +14,7 @@ ID: `fastqc`
 Namespace: `qc`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/qc/fastqc){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/./src/qc/fastqc){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -40,14 +40,7 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-mode: "files"
-input: # please fill in - example: "fastq_dir/"
-# output: "$id.$key.output.output"
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 

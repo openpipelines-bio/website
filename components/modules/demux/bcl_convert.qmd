@@ -14,7 +14,7 @@ ID: `bcl_convert`
 Namespace: `demux`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/demux/bcl_convert){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/./src/demux/bcl_convert){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -43,16 +43,7 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-input: # please fill in - example: "bcl_dir"
-sample_sheet: # please fill in - example: "bcl_dir"
-# output: "$id.$key.output.output"
-# reports: "$id.$key.reports.reports"
-test_mode: false
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 

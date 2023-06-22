@@ -14,7 +14,7 @@ ID: `bbknn`
 Namespace: `neighbors`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/neighbors/bbknn){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/./src/neighbors/bbknn){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -40,23 +40,7 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-# input: "path/to/file"
-modality: "rna"
-obsm_input: "X_pca"
-obs_batch: "batch"
-# output: "$id.$key.output.output"
-# output_compression: "gzip"
-uns_output: "neighbors"
-obsp_distances: "distances"
-obsp_connectivities: "connectivities"
-n_neighbors_within_batch: 3
-n_pcs: 50
-# n_trim: 123
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 

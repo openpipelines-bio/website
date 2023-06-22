@@ -14,7 +14,7 @@ ID: `join_csv`
 Namespace: `metadata`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/metadata/join_csv){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/./src/metadata/join_csv){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -40,23 +40,7 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# MuData Input
-input: # please fill in - example: "input.h5mu"
-modality: "rna"
-# obs_key: "foo"
-# var_key: "foo"
 
-# MuData Output
-# output: "$id.$key.output.h5mu"
-# output_compression: "gzip"
-
-# Metadata Input
-input_csv: # please fill in - example: "metadata.csv"
-csv_key: "id"
-
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 

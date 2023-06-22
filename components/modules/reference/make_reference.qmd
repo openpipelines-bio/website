@@ -14,7 +14,7 @@ ID: `make_reference`
 Namespace: `reference`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/reference/make_reference){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/./src/reference/make_reference){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -44,17 +44,7 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-genome_fasta: # please fill in - example: "genome_fasta.fa.gz"
-transcriptome_gtf: # please fill in - example: "transcriptome.gtf.gz"
-# ercc: "ercc.zip"
-# subset_regex: "(ERCC-00002|chr1)"
-# output_fasta: "$id.$key.output_fasta.gz"
-# output_gtf: "$id.$key.output_gtf.gz"
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 

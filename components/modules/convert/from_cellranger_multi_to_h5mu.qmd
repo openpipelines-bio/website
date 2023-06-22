@@ -14,7 +14,7 @@ ID: `from_cellranger_multi_to_h5mu`
 Namespace: `convert`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/convert/from_cellranger_multi_to_h5mu){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/./src/convert/from_cellranger_multi_to_h5mu){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -54,15 +54,7 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-input: # please fill in - example: "input_dir_containing_modalities"
-# output: "$id.$key.output.h5mu"
-# output_compression: "gzip"
-uns_metrics: "metrics_cellranger"
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 

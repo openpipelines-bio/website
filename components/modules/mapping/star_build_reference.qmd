@@ -14,7 +14,7 @@ ID: `star_build_reference`
 Namespace: `mapping`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/mapping/star_build_reference){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/./src/mapping/star_build_reference){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -40,17 +40,7 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Input/Output
-genome_fasta: # please fill in - example: ["chr1.fasta", "chr2.fasta"]
-# transcriptome_gtf: "path/to/file"
-# output: "$id.$key.output.output"
 
-# Genome indexing arguments
-genomeSAindexNbases: 14
-
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 

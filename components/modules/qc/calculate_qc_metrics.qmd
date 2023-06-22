@@ -14,7 +14,7 @@ ID: `calculate_qc_metrics`
 Namespace: `qc`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/qc/calculate_qc_metrics){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/./src/qc/calculate_qc_metrics){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -56,20 +56,7 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Inputs
-input: # please fill in - example: "input.h5mu"
-modality: "rna"
-# layer: "raw_counts"
-# var_qc_metrics: ["ercc", "highly_variable"]
-# top_n_vars: [123]
 
-# Outputs
-# output: "$id.$key.output.h5mu"
-# output_compression: "gzip"
-
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 

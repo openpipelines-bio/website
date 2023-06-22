@@ -14,7 +14,7 @@ ID: `remove_modality`
 Namespace: `filter`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/filter/remove_modality){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/./src/filter/remove_modality){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -40,15 +40,7 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Arguments
-input: # please fill in - example: "input.h5mu"
-modality: # please fill in - example: ["foo"]
-# output: "$id.$key.output.h5mu"
-# output_compression: "gzip"
 
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
 ```
 </details>
 
