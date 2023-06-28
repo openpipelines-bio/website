@@ -14,7 +14,7 @@ ID: `rna_multisample`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.8.0/workflows/multiomics/rna_multisample){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/./workflows/multiomics/rna_multisample){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,8 +30,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
-  -main-script workflows/multiomics/rna_multisample/main.nf \
+  -r 0.9.0 -latest \
+  -main-script ./workflows/multiomics/rna_multisample/main.nf \
   --help
 ```
 
@@ -68,9 +68,9 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r 0.9.0 -latest \
   -profile docker \
-  -main-script workflows/multiomics/rna_multisample/main.nf \
+  -main-script ./workflows/multiomics/rna_multisample/main.nf \
   -params-file params.yaml
 ```
 
@@ -122,9 +122,12 @@ id present in a requirement of several components for this pipeline.
 
 ## Authors
 
-  * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) (author)
-  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author, maintainer)
-  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (author)
+
+  * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-de-maeyer-b46a814) (author)
+
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (author, maintainer)
+
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (author)
 
 ## Visualisation
 
@@ -136,22 +139,15 @@ flowchart LR
     p5(flatMap)
     p9(filter)
     p11(flatMap)
-    p19(join)
     p17(add_id)
     p21(collect)
     p24(mix)
     p23(filter)
-    p33(join)
     p31(concat)
-    p43(join)
     p41(normalize_total)
-    p53(join)
     p51(log1p)
-    p63(join)
     p61(delete_layer)
-    p73(join)
     p71(filter_with_hvg)
-    p83(join)
     p81(calculate_qc_metrics)
     p89(Output)
     p23-->p24
@@ -160,29 +156,15 @@ flowchart LR
     p5-->p9
     p5-->p23
     p9-->p11
-    p11-->p19
     p11-->p17
-    p17-->p19
-    p19-->p21
+    p17-->p21
     p21-->p24
-    p24-->p33
     p24-->p31
-    p31-->p33
-    p33-->p43
-    p33-->p41
-    p41-->p43
-    p43-->p53
-    p43-->p51
-    p51-->p53
-    p53-->p63
-    p53-->p61
-    p61-->p63
-    p63-->p73
-    p63-->p71
-    p71-->p73
-    p73-->p83
-    p73-->p81
-    p81-->p83
-    p83-->p89
+    p31-->p41
+    p41-->p51
+    p51-->p61
+    p61-->p71
+    p71-->p81
+    p81-->p89
 
 ```

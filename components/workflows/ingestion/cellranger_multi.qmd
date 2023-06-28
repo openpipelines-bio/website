@@ -14,7 +14,7 @@ ID: `cellranger_multi`
 Namespace: `ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.8.0/workflows/ingestion/cellranger_multi){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/./workflows/ingestion/cellranger_multi){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,8 +30,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
-  -main-script workflows/ingestion/cellranger_multi/main.nf \
+  -r 0.9.0 -latest \
+  -main-script ./workflows/ingestion/cellranger_multi/main.nf \
   --help
 ```
 
@@ -46,6 +46,7 @@ input: # please fill in - example: ["sample_S1_L001_R1_001.fastq.gz", "sample_S1
 gex_reference: # please fill in - example: "reference_genome.tar.gz"
 # vdj_reference: "reference_vdj.tar.gz"
 # feature_reference: "feature_reference.csv"
+# vdj_inner_enrichment_primers: "enrichment_primers.txt"
 
 # Outputs
 # output_raw: "$id.$key.output_raw.output_raw"
@@ -78,9 +79,9 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r 0.9.0 -latest \
   -profile docker \
-  -main-script workflows/ingestion/cellranger_multi/main.nf \
+  -main-script ./workflows/ingestion/cellranger_multi/main.nf \
   -params-file params.yaml
 ```
 
@@ -92,13 +93,14 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Inputs
 
-|Name                  |Description                                                                                                                                                                                                                                                                                                                          |Attributes                                                                                                 |
-|:---------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------|
-|`--id`                |ID of the sample.                                                                                                                                                                                                                                                                                                                    |`string`, required, example: `"foo"`                                                                       |
-|`--input`             |The fastq.gz files to align. Can also be a single directory containing fastq.gz files.                                                                                                                                                                                                                                               |`file`, required, example: `"sample_S1_L001_R1_001.fastq.gz"`, example: `"sample_S1_L001_R2_001.fastq.gz"` |
-|`--gex_reference`     |Genome refence index built by Cell Ranger mkref.                                                                                                                                                                                                                                                                                     |`file`, required, example: `"reference_genome.tar.gz"`                                                     |
-|`--vdj_reference`     |VDJ refence index built by Cell Ranger mkref.                                                                                                                                                                                                                                                                                        |`file`, example: `"reference_vdj.tar.gz"`                                                                  |
-|`--feature_reference` |Path to the Feature reference CSV file, declaring Feature Barcode constructs and associated barcodes. Required only for Antibody Capture  or CRISPR Guide Capture libraries. See  https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/using/feature-bc-analysis#feature-ref  for more information. |`file`, example: `"feature_reference.csv"`                                                                 |
+|Name                             |Description                                                                                                                                                                                                                                                                                                                          |Attributes                                                                                                 |
+|:--------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------|
+|`--id`                           |ID of the sample.                                                                                                                                                                                                                                                                                                                    |`string`, required, example: `"foo"`                                                                       |
+|`--input`                        |The fastq.gz files to align. Can also be a single directory containing fastq.gz files.                                                                                                                                                                                                                                               |`file`, required, example: `"sample_S1_L001_R1_001.fastq.gz"`, example: `"sample_S1_L001_R2_001.fastq.gz"` |
+|`--gex_reference`                |Genome refence index built by Cell Ranger mkref.                                                                                                                                                                                                                                                                                     |`file`, required, example: `"reference_genome.tar.gz"`                                                     |
+|`--vdj_reference`                |VDJ refence index built by Cell Ranger mkref.                                                                                                                                                                                                                                                                                        |`file`, example: `"reference_vdj.tar.gz"`                                                                  |
+|`--feature_reference`            |Path to the Feature reference CSV file, declaring Feature Barcode constructs and associated barcodes. Required only for Antibody Capture  or CRISPR Guide Capture libraries. See  https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/using/feature-bc-analysis#feature-ref  for more information. |`file`, example: `"feature_reference.csv"`                                                                 |
+|`--vdj_inner_enrichment_primers` |V(D)J Immune Profiling libraries: if inner enrichment primers other than those provided  in the 10x Genomics kits are used, they need to be specified here as a text file with one primer per line.                                                                                                                                  |`file`, example: `"enrichment_primers.txt"`                                                                |
 
 
 ### Outputs
@@ -147,7 +149,8 @@ Arguments relevant to the analysis of gene expression data.
 
 ## Authors
 
-  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (author)
+
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (author)
 
 ## Visualisation
 
@@ -157,19 +160,13 @@ flowchart LR
     p0(Input)
     p2(toSortedList)
     p4(flatMap)
-    p14(join)
     p12(cellranger_multi)
-    p23(join)
     p21(from_cellranger_multi_to_h5mu)
     p29(Output)
     p0-->p2
     p2-->p4
-    p4-->p14
     p4-->p12
-    p12-->p14
-    p14-->p23
-    p14-->p21
-    p21-->p23
-    p23-->p29
+    p12-->p21
+    p21-->p29
 
 ```

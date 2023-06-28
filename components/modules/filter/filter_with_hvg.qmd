@@ -14,7 +14,7 @@ ID: `filter_with_hvg`
 Namespace: `filter`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/filter/filter_with_hvg){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/./src/filter/filter_with_hvg){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

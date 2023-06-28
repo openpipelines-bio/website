@@ -14,7 +14,7 @@ ID: `full_pipeline`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.8.0/workflows/multiomics/full_pipeline){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/./workflows/multiomics/full_pipeline){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,8 +30,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
-  -main-script workflows/multiomics/full_pipeline/main.nf \
+  -r 0.9.0 -latest \
+  -main-script ./workflows/multiomics/full_pipeline/main.nf \
   --help
 ```
 
@@ -43,7 +43,6 @@ nextflow run openpipelines-bio/openpipeline \
 # Inputs
 id: # please fill in - example: "foo"
 input: # please fill in - example: "input.h5mu"
-obs_covariates: ["sample_id"]
 
 # Sample ID options
 add_id_to_obs: true
@@ -76,12 +75,6 @@ filter_with_hvg_obs_batch_key: "sample_id"
 var_qc_metrics: ["filter_with_hvg"]
 top_n_vars: [50, 100, 200, 500]
 
-# Harmony integration options
-rna_harmony_theta: [2]
-
-# Leiden Clustering Options
-leiden_resolution: 1
-
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
 # param_list: "my_params.yaml"
@@ -90,9 +83,9 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r 0.9.0 -latest \
   -profile docker \
-  -main-script workflows/multiomics/full_pipeline/main.nf \
+  -main-script ./workflows/multiomics/full_pipeline/main.nf \
   -params-file params.yaml
 ```
 
@@ -104,11 +97,10 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Inputs
 
-|Name               |Description                                                    |Attributes                                                                |
-|:------------------|:--------------------------------------------------------------|:-------------------------------------------------------------------------|
-|`--id`             |ID of the sample.                                              |`string`, required, example: `"foo"`                                      |
-|`--input`          |Path to the sample.                                            |`file`, required, example: `"input.h5mu"`                                 |
-|`--obs_covariates` |The .obs field(s) that define the covariate(s) to regress out. |`string`, default: `"sample_id"`, example: `"batch"`, example: `"sample"` |
+|Name      |Description         |Attributes                                |
+|:---------|:-------------------|:-----------------------------------------|
+|`--id`    |ID of the sample.   |`string`, required, example: `"foo"`      |
+|`--input` |Path to the sample. |`file`, required, example: `"input.h5mu"` |
 
 
 ### Sample ID options
@@ -166,23 +158,10 @@ id present in a requirement of several components for this pipeline.
 |`--var_qc_metrics` |Keys to select a boolean (containing only True or False) column from .var. For each cell, calculate the proportion of total values for genes which are labeled 'True',  compared to the total sum of the values for all genes. |`string`, default: `"filter_with_hvg"`, example: `"ercc,highly_variable"` |
 |`--top_n_vars`     |Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. `--top_n_vars 20,50` finds cumulative proportion to the 20th and 50th most expressed vars.                |`integer`, default: `50`, default: `100`, default: `200`, default: `500`  |
 
-
-### Harmony integration options
-
-|Name                  |Description                                                                                                                                                                             |Attributes             |
-|:---------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------|
-|`--rna_harmony_theta` |Diversity clustering penalty parameter. Specify for each variable in group.by.vars.  theta=0 does not encourage any diversity. Larger values of theta result in more diverse clusters." |`double`, default: `2` |
-
-
-### Leiden Clustering Options
-
-|Name                  |Description                                                                    |Attributes             |
-|:---------------------|:------------------------------------------------------------------------------|:----------------------|
-|`--leiden_resolution` |Control the coarseness of the clustering. Higher values lead to more clusters. |`double`, default: `1` |
-
 ## Authors
 
-  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (author, maintainer)
+
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (author, maintainer)
 
 ## Visualisation
 
@@ -193,221 +172,162 @@ flowchart LR
     p2(toSortedList)
     p4(flatMap)
     p7(filter)
-    p16(join)
     p14(add_id)
     p19(mix)
     p18(filter)
-    p21(Output)
-    p22(filter)
-    p30(join)
-    p28(split_modalities)
-    p36(concat)
-    p32(filter)
-    p34(test_wf:run_wf:splitStub)
-    p37(flatMap)
-    p38(filter)
-    p41(toSortedList)
-    p43(flatMap)
-    p53(join)
-    p51(filter_with_counts)
-    p63(join)
-    p61(do_filter)
-    p74(join)
-    p72(filter_with_scrublet)
-    p78(toSortedList)
-    p79(filter)
+    p20(Output)
+    p21(filter)
+    p27(split_modalities)
+    p35(concat)
+    p31(filter)
+    p33(test_wf:run_wf:splitStub)
+    p36(flatMap)
+    p37(filter)
+    p40(toSortedList)
+    p42(flatMap)
+    p50(filter_with_counts)
+    p60(do_filter)
+    p71(filter_with_scrublet)
+    p77(toSortedList)
+    p78(filter)
     p83(toSortedList)
     p85(flatMap)
     p89(filter)
     p91(flatMap)
-    p99(join)
     p97(test_wf:run_wf:rna_multisample:add_id:add_id_process1)
     p101(collect)
     p104(mix)
     p103(filter)
-    p113(join)
     p111(concat)
-    p123(join)
     p121(normalize_total)
-    p133(join)
     p131(log1p)
-    p143(join)
     p141(delete_layer)
-    p153(join)
     p151(filter_with_hvg)
-    p163(join)
     p161(calculate_qc_metrics)
-    p257(concat)
+    p258(concat)
     p166(filter)
     p169(toSortedList)
     p171(flatMap)
-    p181(join)
     p179(test_wf:run_wf:prot_singlesample:filter_with_counts:filter_with_counts_process1)
-    p191(join)
     p189(test_wf:run_wf:prot_singlesample:do_filter:do_filter_process1)
     p196(toSortedList)
     p197(filter)
-    p201(toSortedList)
-    p203(flatMap)
-    p207(filter)
-    p209(flatMap)
-    p217(join)
-    p215(test_wf:run_wf:prot_multisample:add_id:add_id_process2)
-    p219(collect)
-    p222(mix)
-    p221(filter)
-    p231(join)
-    p229(test_wf:run_wf:prot_multisample:concat:concat_process1)
-    p241(join)
-    p239(clr)
-    p244(filter)
-    p246(groupTuple)
-    p255(join)
-    p253(test_wf:run_wf:concat:concat_process2)
-    p258(toSortedList)
-    p267(join)
-    p265(merge)
-    p271(toSortedList)
-    p273(flatMap)
-    p284(join)
+    p202(toSortedList)
+    p204(flatMap)
+    p208(filter)
+    p210(flatMap)
+    p216(test_wf:run_wf:prot_multisample:add_id:add_id_process2)
+    p220(collect)
+    p223(mix)
+    p222(filter)
+    p230(test_wf:run_wf:prot_multisample:concat:concat_process1)
+    p240(clr)
+    p245(filter)
+    p247(groupTuple)
+    p254(test_wf:run_wf:concat:concat_process2)
+    p259(toSortedList)
+    p266(merge)
+    p270(filter)
+    p272(toSortedList)
+    p274(flatMap)
     p282(pca)
-    p287(filter)
-    p298(concat)
-    p288(filter)
-    p296(join)
-    p294(harmonypy)
-    p307(join)
-    p305(find_neighbors)
-    p317(join)
-    p315(leiden)
-    p327(join)
-    p325(umap)
-    p332(toSortedList)
-    p334(Output)
+    p292(find_neighbors)
+    p302(umap)
+    p308(concat)
+    p307(filter)
+    p309(filter)
+    p311(toSortedList)
+    p313(flatMap)
+    p321(pca)
+    p331(find_neighbors)
+    p341(test_wf:run_wf:initialize_integration_prot:umap:umap_process1)
+    p347(concat)
+    p346(filter)
+    p350(toSortedList)
+    p352(Output)
     p18-->p19
+    p19-->p20
+    p35-->p36
     p36-->p37
-    p37-->p38
-    p78-->p79
+    p77-->p78
     p103-->p104
-    p37-->p166
+    p36-->p166
     p196-->p197
-    p221-->p222
-    p37-->p244
-    p257-->p258
-    p287-->p298
+    p222-->p223
+    p36-->p245
+    p258-->p259
+    p307-->p308
+    p308-->p309
+    p308-->p346
+    p346-->p347
     p0-->p2
     p2-->p4
     p4-->p7
     p4-->p18
-    p7-->p16
     p7-->p14
-    p14-->p16
-    p16-->p19
-    p16-->p22
-    p16-->p32
-    p19-->p21
-    p22-->p30
-    p22-->p28
-    p28-->p30
-    p30-->p36
-    p32-->p34
-    p34-->p36
-    p38-->p41
-    p41-->p43
-    p43-->p53
-    p43-->p51
-    p51-->p53
-    p53-->p63
-    p53-->p61
-    p61-->p63
-    p63-->p74
-    p63-->p72
-    p72-->p74
-    p74-->p78
-    p79-->p83
+    p14-->p19
+    p14-->p21
+    p14-->p31
+    p21-->p27
+    p27-->p35
+    p31-->p33
+    p33-->p35
+    p37-->p40
+    p40-->p42
+    p42-->p50
+    p50-->p60
+    p60-->p71
+    p71-->p77
+    p78-->p83
     p83-->p85
     p85-->p89
     p85-->p103
     p89-->p91
-    p91-->p99
     p91-->p97
-    p97-->p99
-    p99-->p101
+    p97-->p101
     p101-->p104
-    p104-->p113
     p104-->p111
-    p111-->p113
-    p113-->p123
-    p113-->p121
-    p121-->p123
-    p123-->p133
-    p123-->p131
-    p131-->p133
-    p133-->p143
-    p133-->p141
-    p141-->p143
-    p143-->p153
-    p143-->p151
-    p151-->p153
-    p153-->p163
-    p153-->p161
-    p161-->p163
-    p163-->p257
+    p111-->p121
+    p121-->p131
+    p131-->p141
+    p141-->p151
+    p151-->p161
+    p161-->p258
     p166-->p169
     p169-->p171
-    p171-->p181
     p171-->p179
-    p179-->p181
-    p181-->p191
-    p181-->p189
-    p189-->p191
-    p191-->p196
-    p197-->p201
-    p201-->p203
-    p203-->p207
-    p203-->p221
-    p207-->p209
-    p209-->p217
-    p209-->p215
-    p215-->p217
-    p217-->p219
-    p219-->p222
-    p222-->p231
-    p222-->p229
-    p229-->p231
-    p231-->p241
-    p231-->p239
-    p239-->p241
-    p241-->p257
-    p244-->p246
-    p246-->p255
-    p246-->p253
-    p253-->p255
-    p255-->p257
-    p258-->p267
-    p258-->p265
-    p265-->p267
-    p267-->p271
-    p271-->p273
-    p273-->p284
-    p273-->p282
-    p282-->p284
-    p284-->p287
-    p284-->p288
-    p288-->p296
-    p288-->p294
-    p294-->p296
-    p296-->p298
-    p298-->p307
-    p298-->p305
-    p305-->p307
-    p307-->p317
-    p307-->p315
-    p315-->p317
-    p317-->p327
-    p317-->p325
-    p325-->p327
-    p327-->p332
-    p332-->p334
+    p179-->p189
+    p189-->p196
+    p197-->p202
+    p202-->p204
+    p204-->p208
+    p204-->p222
+    p208-->p210
+    p210-->p216
+    p216-->p220
+    p220-->p223
+    p223-->p230
+    p230-->p240
+    p240-->p258
+    p245-->p247
+    p247-->p254
+    p254-->p258
+    p259-->p266
+    p266-->p270
+    p266-->p307
+    p270-->p272
+    p272-->p274
+    p274-->p282
+    p282-->p292
+    p292-->p302
+    p302-->p308
+    p309-->p311
+    p311-->p313
+    p313-->p321
+    p321-->p331
+    p331-->p341
+    p341-->p347
+    p347-->p350
+    p350-->p352
 
 ```

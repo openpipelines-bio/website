@@ -14,7 +14,7 @@ ID: `rna_singlesample`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.8.0/workflows/multiomics/rna_singlesample){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/./workflows/multiomics/rna_singlesample){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,8 +30,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
-  -main-script workflows/multiomics/rna_singlesample/main.nf \
+  -r 0.9.0 -latest \
+  -main-script ./workflows/multiomics/rna_singlesample/main.nf \
   --help
 ```
 
@@ -64,9 +64,9 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r 0.9.0 -latest \
   -profile docker \
-  -main-script workflows/multiomics/rna_singlesample/main.nf \
+  -main-script ./workflows/multiomics/rna_singlesample/main.nf \
   -params-file params.yaml
 ```
 
@@ -105,9 +105,12 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ## Authors
 
-  * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) (author)
-  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author, maintainer)
-  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (author)
+
+  * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-de-maeyer-b46a814) (author)
+
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (author, maintainer)
+
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (author)
 
 ## Visualisation
 
@@ -117,24 +120,15 @@ flowchart LR
     p0(Input)
     p3(toSortedList)
     p5(flatMap)
-    p15(join)
     p13(filter_with_counts)
-    p25(join)
     p23(do_filter)
-    p36(join)
     p34(filter_with_scrublet)
     p43(Output)
     p0-->p3
     p3-->p5
-    p5-->p15
     p5-->p13
-    p13-->p15
-    p15-->p25
-    p15-->p23
-    p23-->p25
-    p25-->p36
-    p25-->p34
-    p34-->p36
-    p36-->p43
+    p13-->p23
+    p23-->p34
+    p34-->p43
 
 ```

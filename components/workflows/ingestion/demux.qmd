@@ -14,7 +14,7 @@ ID: `demux`
 Namespace: `ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.8.0/workflows/ingestion/demux){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/./workflows/ingestion/demux){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -31,8 +31,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
-  -main-script workflows/ingestion/demux/main.nf \
+  -r 0.9.0 -latest \
+  -main-script ./workflows/ingestion/demux/main.nf \
   --help
 ```
 
@@ -56,9 +56,9 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r 0.9.0 -latest \
   -profile docker \
-  -main-script workflows/ingestion/demux/main.nf \
+  -main-script ./workflows/ingestion/demux/main.nf \
   -params-file params.yaml
 ```
 
@@ -80,11 +80,16 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ## Authors
 
-  * Toni Verbeiren [{{< fa brands github >}}](https://github.com/tverbeiren) (author, maintainer)
-  * Marijke Van Moerbeke [{{< fa brands orcid >}}](https://orcid.org/0000-0002-3097-5621) (author)
-  * Angela Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) (author)
-  * Samuel D'Souza [{{< fa brands github >}}](https://github.com/srdsam) (author)
-  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author)
+
+  * Toni Verbeiren [{{< fa brands github >}}](https://github.com/tverbeiren) [{{< fa brands linkedin >}}](https://linkedin.com/in/verbeiren) (author, maintainer)
+
+  * Marijke Van Moerbeke [{{< fa brands github >}}](https://github.com/mvanmoerbeke) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-3097-5621) [{{< fa brands linkedin >}}](https://linkedin.com/in/marijke-van-moerbeke-84303a34) (author)
+
+  * Angela Oliveira Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) [{{< fa brands linkedin >}}](https://linkedin.com/in/aopisco) (author)
+
+  * Samuel D'Souza [{{< fa brands github >}}](https://github.com/srdsam) [{{< fa brands linkedin >}}](https://linkedin.com/in/samuel-d-souza-887023150/) (author)
+
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (author)
 
 ## Visualisation
 
@@ -95,20 +100,15 @@ flowchart LR
     p2(toSortedList)
     p4(flatMap)
     p5(filter)
-    p13(join)
     p11(cellranger_mkfastq)
     p35(mix)
     p15(filter)
-    p23(join)
     p21(bcl_convert)
     p25(filter)
-    p33(join)
     p31(bcl2fastq)
-    p44(join)
     p42(fastqc)
     p46(Output)
     p48(toSortedList)
-    p57(join)
     p55(multiqc)
     p59(Output)
     p63(Output)
@@ -117,27 +117,17 @@ flowchart LR
     p4-->p25
     p0-->p2
     p2-->p4
-    p5-->p13
     p5-->p11
-    p11-->p13
-    p13-->p35
-    p15-->p23
+    p11-->p35
     p15-->p21
-    p21-->p23
-    p23-->p35
-    p25-->p33
+    p21-->p35
     p25-->p31
-    p31-->p33
-    p33-->p35
-    p35-->p44
+    p31-->p35
     p35-->p42
-    p42-->p44
-    p44-->p46
+    p42-->p46
     p35-->p48
-    p48-->p57
     p48-->p55
-    p55-->p57
-    p57-->p59
+    p55-->p59
     p35-->p63
 
 ```

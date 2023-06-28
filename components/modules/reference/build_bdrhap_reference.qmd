@@ -14,7 +14,7 @@ ID: `build_bdrhap_reference`
 Namespace: `reference`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/reference/build_bdrhap_reference){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/./src/reference/build_bdrhap_reference){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

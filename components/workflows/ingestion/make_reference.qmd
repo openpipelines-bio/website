@@ -14,7 +14,7 @@ ID: `make_reference`
 Namespace: `ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.8.0/workflows/ingestion/make_reference){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/./workflows/ingestion/make_reference){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,8 +30,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
-  -main-script workflows/ingestion/make_reference/main.nf \
+  -r 0.9.0 -latest \
+  -main-script ./workflows/ingestion/make_reference/main.nf \
   --help
 ```
 
@@ -65,9 +65,9 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r 0.9.0 -latest \
   -profile docker \
-  -main-script workflows/ingestion/make_reference/main.nf \
+  -main-script ./workflows/ingestion/make_reference/main.nf \
   -params-file params.yaml
 ```
 
@@ -107,8 +107,10 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ## Authors
 
-  * Angela Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) (author)
-  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) (author, maintainer)
+
+  * Angela Oliveira Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) [{{< fa brands linkedin >}}](https://linkedin.com/in/aopisco) (author)
+
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (author, maintainer)
 
 ## Visualisation
 
@@ -118,18 +120,14 @@ flowchart LR
     p0(Input)
     p2(toSortedList)
     p4(flatMap)
-    p14(join)
     p12(make_reference)
     p17(filter)
-    p25(join)
     p23(build_cellranger_reference)
     p54(join)
     p29(filter)
-    p37(join)
     p35(build_bdrhap_reference)
     p55(join)
     p41(filter)
-    p49(join)
     p47(star_build_reference)
     p56(join)
     p57(join)
@@ -139,26 +137,18 @@ flowchart LR
     p56-->p57
     p0-->p2
     p2-->p4
-    p4-->p14
     p4-->p12
-    p12-->p14
-    p14-->p17
-    p17-->p25
+    p12-->p17
     p17-->p23
-    p23-->p25
-    p25-->p54
-    p14-->p29
-    p29-->p37
+    p23-->p54
+    p12-->p29
     p29-->p35
-    p35-->p37
-    p37-->p55
-    p14-->p41
-    p41-->p49
+    p35-->p55
+    p12-->p41
     p41-->p47
-    p47-->p49
-    p49-->p56
+    p47-->p56
     p0-->p57
-    p14-->p54
+    p12-->p54
     p57-->p62
 
 ```
