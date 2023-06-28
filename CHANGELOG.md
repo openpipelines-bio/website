@@ -1,3 +1,13 @@
+# OpenPipelines.bio v0.9.0
+
+## MAJOR CHANGES
+
+* Update component documentation to v0.9.0 release.
+
+## MINOR CHANGES
+
+* Update to Viash actions 0.4.0.
+
 # OpenPipelines.bio v0.8.0
 
 ## MAJOR CHANGES
