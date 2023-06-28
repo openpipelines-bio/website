@@ -14,7 +14,7 @@ ID: `conversion`
 Namespace: `ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.8.0/workflows/ingestion/conversion){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/workflows/ingestion/conversion){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r 0.9.0 -latest \
   -main-script workflows/ingestion/conversion/main.nf \
   --help
 ```
@@ -59,7 +59,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.8.0 -latest \
+  -r 0.9.0 -latest \
   -profile docker \
   -main-script workflows/ingestion/conversion/main.nf \
   -params-file params.yaml
@@ -95,8 +95,10 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ## Authors
 
-  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) (author, maintainer)
-  * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) (author)
+
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (author, maintainer)
+
+  * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-de-maeyer-b46a814) (author)
 
 ## Visualisation
 
@@ -107,14 +109,11 @@ flowchart LR
     p2(toSortedList)
     p4(flatMap)
     p5(filter)
-    p13(join)
     p11(from_10xh5_to_h5mu)
     p35(mix)
     p15(filter)
-    p23(join)
     p21(from_10xmtx_to_h5mu)
     p25(filter)
-    p33(join)
     p31(from_h5ad_to_h5mu)
     p37(toSortedList)
     p39(Output)
@@ -123,18 +122,12 @@ flowchart LR
     p4-->p25
     p0-->p2
     p2-->p4
-    p5-->p13
     p5-->p11
-    p11-->p13
-    p13-->p35
-    p15-->p23
+    p11-->p35
     p15-->p21
-    p21-->p23
-    p23-->p35
-    p25-->p33
+    p21-->p35
     p25-->p31
-    p31-->p33
-    p33-->p35
+    p31-->p35
     p35-->p37
     p37-->p39
 
