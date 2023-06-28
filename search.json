@@ -1395,16 +1395,30 @@
   {
     "objectID": "CHANGELOG.html",
     "href": "CHANGELOG.html",
-    "title": "OpenPipelines.bio v0.8.0",
+    "title": "OpenPipelines.bio v0.9.0",
     "section": "",
-    "text": "Update component documentation to v0.8.0 release.\nUse git submodule to access openpipeline repo\nPropose new website structure\nUpdate author page"
+    "text": "Update component documentation to v0.9.0 release.\n\n\n\n\n\nUpdate to Viash actions 0.4.0."
   },
   {
     "objectID": "CHANGELOG.html#major-changes",
     "href": "CHANGELOG.html#major-changes",
-    "title": "OpenPipelines.bio v0.8.0",
+    "title": "OpenPipelines.bio v0.9.0",
     "section": "",
-    "text": "Update component documentation to v0.8.0 release.\nUse git submodule to access openpipeline repo\nPropose new website structure\nUpdate author page"
+    "text": "Update component documentation to v0.9.0 release."
+  },
+  {
+    "objectID": "CHANGELOG.html#minor-changes",
+    "href": "CHANGELOG.html#minor-changes",
+    "title": "OpenPipelines.bio v0.9.0",
+    "section": "",
+    "text": "Update to Viash actions 0.4.0."
+  },
+  {
+    "objectID": "CHANGELOG.html#major-changes-1",
+    "href": "CHANGELOG.html#major-changes-1",
+    "title": "OpenPipelines.bio v0.9.0",
+    "section": "MAJOR CHANGES",
+    "text": "MAJOR CHANGES\n\nUpdate component documentation to v0.8.0 release.\nUse git submodule to access openpipeline repo\nPropose new website structure\nUpdate author page"
   },
   {
     "objectID": "user_guide/running_pipelines.html",
