@@ -14,7 +14,7 @@ ID: `bcl2fastq`
 Namespace: `demux`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/./src/demux/bcl2fastq){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/demux/bcl2fastq){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

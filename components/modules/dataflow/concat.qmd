@@ -14,7 +14,7 @@ ID: `concat`
 Namespace: `dataflow`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/./src/dataflow/concat){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/dataflow/concat){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
