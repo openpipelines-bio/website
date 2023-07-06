@@ -10,73 +10,87 @@ The single-cell workflow is comprised of multiple (standalone) subworkflows.
 ```{mermaid}
 %%| label: fig-architecture
 %%| fig-cap: Overview single cell processing steps in OpenPipeline. Rectangles are data objects, parallelograms are Viash modules or subworkflows.
-flowchart TD  
-  subgraph ingest ["Ingestion"]
-    direction LR
-    RawCounts1["Raw counts"]
-    BCL["BCL"]
-    Demux["Demux"]
-    Fastq["Fastq"]
-    Ref["Reference"]
-    Mapping["Mapping"]
-    RawDir["Raw out"]
-    Convert["Convert"]
-    RawCounts1["Raw counts"]
-    BCL --> Demux --> Fastq
-    Fastq & Ref --> Mapping --> RawDir --> Convert --> RawCounts1
-  end
-  subgraph unimodalsinglesample ["Unimodal Single Sample Processing"]
-    direction LR
-    RawCounts2["Raw counts for one modality"]
-    ProccessedCounts1["Processed\nCounts"]
-    AmbientRNACorr[/"Ambient RNA\ncorrection"/]
-    RawCounts2 --> CellFiltering --> DoubletCalling --> AmbientRNACorr --> ProccessedCounts1
-  end
-  subgraph unimodalmultisample ["Unimodal Multi Sample Processing"]
-    direction LR
-    FeatureAnnotation[/"Feature annotation"/]
-    BatchCorrection["Batch correction"]
-    Normalization["Normalisation"]
-    FeatureSelection["Feature selection"]
-    ProccessedCounts2["Processed\nCounts"]
-    DoubletCalling["Doublet\ncalling"]
-    CellFiltering["Cell\nfiltering"]
-    NormalisedOut["Normalised\ncounts"]
 
-    ProccessedCounts2 --> FeatureAnnotation --> BatchCorrection --> Normalization --> FeatureSelection --> NormalisedOut
-  end
-  subgraph integration ["Integration"]
-    direction LR
 
-    Normalised["Normalised\ncounts"]
-    Integrated["Integrated\ndata"]
+flowchart TB
+  Raw1[/Sample 1/]:::file --> Split
+  subgraph FullPipeline [Full Pipeline]
+    Split([Split\nmodalities]):::component --> ProcGEX1 & ProcADT1 & ConcatVDJ
+    subgraph MultisampleRNA [Multisample RNA]
+        ConcatGEX([Concatenate]):::component --> ProcGEX2((Process GEX\nMulti Sample)):::component
+    end
+    MultisampleRNA:::workflow
+    subgraph MultisampleADT [Multisample ADT]
+        ConcatADT([Concatenate]):::component -->  ProcADT2((Process ADT\nMulti Sample)):::component
+    end
+    MultisampleADT:::workflow
+    ConcatVDJ([Concatenate]):::component
+    NoIntegration[Multisample Multimodality]
 
-    DataIntegration[/"Data integration"/]
-    DimRed[/"Dimensionality\nreduction"/]
+    subgraph Unknown["Untreated modality (e.g. VDJ)"]
+        ConcatVDJ
+    end
+    Unknown:::logicalgrouping
+    Sample2VDJ[/Sample 2 VDJ/]:::file --> ConcatVDJ
+    Sample2Gex[/Sample 2 Gex/]:::file --> ConcatGEX
+    Sample2ADT[/Sample 2 ADT/]:::file --> ConcatADT
   
-    Normalised --> DataIntegration --> DimRed --> Integrated
-
-  end
-  subgraph downstreamprocessing ["Downstream Processing"]
-    direction LR
-    Interpretation["Interpretation"]
-    Conversion["Conversion"]
-    Dataset["Dataset"]
-
-    Interpretation --> Conversion --> Dataset
+    ProcGEX2 & ProcADT2 --> Merge([Merge\nmodalities]):::component --> NoIntegration:::workflow
+    ConcatVDJ ---> Merge
   end
 
-  ingest --> split --> unimodalsinglesample --> concat --> unimodalmultisample --> merging --> integration  --> downstreamprocessing
-  %% Do not change the ID for these boxes because this is linked to custom css
-  titlebox_ingestion["Convert raw sequencing data\nor count tables into MuData data\nfor further processing."]
-  titlebox_empty[" "]
-  titlebox2["Per modality fitering pipelines\nare available to select true\nfrom false cells."]
-  titlebox_empty2[" "]
-  titlebox3["..."]
-  titlebox_empty3[" "]
-  titlebox4["Performs an integration pipeline for single\ncell data based on a single or multiple modalities."]
-  titlebox5["Take different dataset annotations and combine\nthem together into a single enriched dataset.\n The idea is to have a diff_muon object,\n i.e. a muon object containing the  changes \n of the original objectwhere data from the\ndiff_muon will be pushed to the original muon object."]
-  titlebox_ingestion --> titlebox_empty --> titlebox2 --> titlebox_empty2 --> titlebox3 --> titlebox_empty3--> titlebox4 --> titlebox5
+
+  subgraph Wrapper
+    subgraph Integration [Integration]
+      subgraph IntegrationRNA[Integration RNA]
+          direction LR
+          hamony_leiden_rna[Harmony + Leiden]:::workflow
+          scvi_rna[scVI]:::workflow
+          scanorama[Scanorama]:::workflow
+          other[...]:::workflow
+      end
+      subgraph IntegrationProt[Integration ADT]
+          direction LR
+          hamony_leiden_prot[Harmony + Leiden]:::workflow
+          otherprot[...]:::workflow
+      end
+      subgraph multimodal_integration[Multimodal integration]
+          totalVI([totalVI]):::component
+      end
+      multimodal_integration:::logicalgrouping
+      IntegrationRNA:::logicalgrouping --choose from--> IntegrationProt:::logicalgrouping
+      NoIntegration ---> totalVI
+    end
+    Integration:::logicalgrouping
+    subgraph LegendBox[Legend]
+      direction LR
+      component([component]):::component
+      multiple_component((Multiple Components)):::component
+      workflow["(Sub)workflow"]:::workflow
+      file[/file/]:::file
+      Logicalgrouping[Logical grouping]:::logicalgrouping
+    end
+  LegendBox:::legend
+  end
+  Wrapper:::hide
+
+
+  NoIntegration --choose from--> IntegrationRNA
+  %% NoIntegration ~~~ LegendBox
+
+  ProcGEX1[Process GEX\nSingle Sample]:::workflow --> ConcatGEX
+  ProcADT1[Process ADT\nSingle Sample]:::workflow --> ConcatADT
+
+
+
+  style FullPipeline fill: #5cc,font-size:1.4em,color:#000;
+  classDef hide fill:transparent,color:transparent,stroke:transparent;
+  classDef legend fill:transparent;
+  classDef file fill: #5c5c5c,color:#fff,stroke-dasharray: 5 5;
+  classDef logicalgrouping fill:transparent,stroke-dasharray: 5 5;
+  classDef workflow fill:#ffffde,color:#000;
+  classDef component fill:#ececff,color:#000;
+
 ```
 
 :::
