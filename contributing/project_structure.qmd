@@ -15,7 +15,7 @@ Each subfolder from `src` contains a Viash [namespace](https://viash.io/guides/p
 As will become apparent later on, Viash not only provides commands to perform operations on individual components, but also on groups of components in a namespace and all components in a project. As a rule of thumb, the basic Viash commands (like `./bin/viash test`) are designated for running commands on individual components, while `ns` commands are (`./bin/viash ns test`) are for namespaces.
 When cloning a fresh repository, there will be no `target` folder present. This is because the target folder will only be created after components have been build. 
 
-## Versionning and branching strategy {#sec-versionning}
+## Versioning and branching strategy {#sec-versioning}
 
 OpenPipeline tries to use of [semantic versioning](https://semver.org/) to govern changes between versions. An release of openpipelines uses a version number in the format `MAJOR.MINOR.PATCH`. Currenly, openpipelines is still at major version `0.x.y`, meaning that public-facing breaking changes are possible on `MINOR` releases. These breaking changes will be documented in a dedicated section of the CHANGELOG that is published with each release. A `PATCH` release (i.e. a release where the `MAJOR` and `MINOR` version number stay the same), is used to resolve bugs with the pipeline but should not introduce breaking changes. Keep in mind that patches might introduce behavioral changes that may look breaking but are actually rectifying changes that were inadvertently introduced previously (and were in fact also 'breaking changes'). In this case, a bug can also be released without changing the `MINOR` version, in a `PATH` release.
 

@@ -5,7 +5,7 @@ order: 20
 
 # Goals
 
-Openpipelines strives to provide easy ways to interact with the pipeline and/or codebase for three types of users:
+OpenPipelines strives to provide easy ways to interact with the pipeline and/or codebase for three types of users:
 
 * Pipeline executor: runs the pipeline from a GUI side
 * Pipeline editor: adapts pipelines with existing components for specific projects
@@ -27,7 +27,7 @@ To meet these demands, the following concepts have been implemented at the core 
 * 💾 [A versitile storage solution](#sec-common-file-format)
 * 🔳 Modularity
 * 🔀 [A best-practice pipeline layout](architecture.qmd)
-* ⌛ [Versionning](../contributing/project_structure.qmd#sec-versionning)
+* ⌛ [Versioning](../contributing/project_structure.qmd#sec-versioning)
 * ✅ [Automatic testing](../contributing/project_structure.qmd)
 * 💬 [Community input](../contributing/index.qmd)
 * 📺 A graphical interace
@@ -71,6 +71,6 @@ MuData
 
 TODO
 
-# A graphical interace 📺
+# A graphical interface 📺
 
 TODO
