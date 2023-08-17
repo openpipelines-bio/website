@@ -209,8 +209,8 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#project-structure" id="toc-project-structure" class="nav-link active" data-scroll-target="#project-structure">Project structure</a></li>
-  <li><a href="#branching-strategy" id="toc-branching-strategy" class="nav-link" data-scroll-target="#branching-strategy">Branching strategy</a></li>
+  <li><a href="#sec-project-structure" id="toc-sec-project-structure" class="nav-link active" data-scroll-target="#sec-project-structure">Project structure</a></li>
+  <li><a href="#sec-versionning" id="toc-sec-versionning" class="nav-link" data-scroll-target="#sec-versionning">Versionning and branching strategy</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/contributing/project_structure.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -234,8 +234,8 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 
 </header>
 
-<section id="project-structure" class="level2">
-<h2 class="anchored" data-anchor-id="project-structure">Project structure</h2>
+<section id="sec-project-structure" class="level2">
+<h2 class="anchored" data-anchor-id="sec-project-structure">Project structure</h2>
 <p>The root of the repository contains three main folders:</p>
 <ol type="1">
 <li><code>src</code>, which contains the source code for individual components.</li>
@@ -245,8 +245,11 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <p>Each subfolder from <code>src</code> contains a Viash <a href="https://viash.io/guides/projects/namespaces/">namespace</a>, a logical grouping of pipeline components that perform a similar function. Within each namespace, subfolders designate individual pipeline components. For example <code>./src/convert/from_bdrhap_to_h5ad</code> contains the implementation for a component <code>from_bdrhap_to_h5ad</code> which is grouped together with other components such as <code>from_10xmtx_to_h5mu</code> into a namespace <code>convert</code>. In a similar manner as grouping components into <code>namespaces</code>, pipelines are grouped together into folders. However, these are not component namespaces and as such do not interact with <code>viash ns</code> commands.</p>
 <p>As will become apparent later on, Viash not only provides commands to perform operations on individual components, but also on groups of components in a namespace and all components in a project. As a rule of thumb, the basic Viash commands (like <code>./bin/viash test</code>) are designated for running commands on individual components, while <code>ns</code> commands are (<code>./bin/viash ns test</code>) are for namespaces. When cloning a fresh repository, there will be no <code>target</code> folder present. This is because the target folder will only be created after components have been build.</p>
 </section>
-<section id="branching-strategy" class="level2">
-<h2 class="anchored" data-anchor-id="branching-strategy">Branching strategy</h2>
+<section id="sec-versionning" class="level2">
+<h2 class="anchored" data-anchor-id="sec-versionning">Versionning and branching strategy</h2>
+<p>OpenPipeline tries to use of <a href="https://semver.org/">semantic versioning</a> to govern changes between versions. An release of openpipelines uses a version number in the format <code>MAJOR.MINOR.PATCH</code>. Currenly, openpipelines is still at major version <code>0.x.y</code>, meaning that public-facing breaking changes are possible on <code>MINOR</code> releases. These breaking changes will be documented in a dedicated section of the CHANGELOG that is published with each release. A <code>PATCH</code> release (i.e.&nbsp;a release where the <code>MAJOR</code> and <code>MINOR</code> version number stay the same), is used to resolve bugs with the pipeline but should not introduce breaking changes. Keep in mind that patches might introduce behavioral changes that may look breaking but are actually rectifying changes that were inadvertently introduced previously (and were in fact also ‘breaking changes’). In this case, a bug can also be released without changing the <code>MINOR</code> version, in a <code>PATH</code> release.</p>
+<p>Between releases, development progress is tracked on Git branches. A git branch represents a snapshot of a codebase in time, to which changes can be added (i.e.&nbsp;committed). Eventually, all new feature or bugfixes must be reconsiled into a single branch so that a new release can be created. This process is called merging and the process of requesting the merging of two branches is called a pull request. Openpipelines follows the convention that the target branch for all pull requests is the <code>main</code> branch. Thus, the <code>main</code> branch contains the latest changes for the code and it can be considered the development branch.</p>
+<p>Once a pull request has been approved and merged, Github Actions CI will automatically build all components (creating the <code>target</code> directory) and push the result to the <code>main_build</code> branch. In essence, the <code>main_build</code> branch is a copy of the <code>main</code> branch, but also containing the build components. Once it is time to create a openpipelines release, the Github CI release workflow is manually triggered, the components on the <code>main</code> branch will be build and tested. Then, the result will be pushed to the <code>release</code> branch and the integration tests will be run. If all tests succeeded, a new github tag and release can be created manually from the <code>release</code> branch.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -298,7 +301,6 @@ gitGraph
 </div>
 </div>
 </div>
-<p>The develoment version of openpipelines is available on the <code>main</code> branch. This is where all new code should be merged into by creating a pull request. Once a pull request has been approved and merged, Github Actions CI will automatically build all components (creating the <code>target</code> directory) and push the result to the <code>main_build</code> branch. In essence, the <code>main_build</code> branch is a copy of the <code>main</code> branch, but also containing the build components. Once it is time to create a openpipelines release, the Github CI release workflow is manually triggered, the components on the <code>main</code> branch will be build and tested. Then, the result will be pushed to the <code>release</code> branch and the integration tests will be run. If all tests succeeded, a new github tag and release can be created manually from the <code>release</code> branch.</p>
 
 
 </section>

@@ -190,7 +190,17 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#goals" id="toc-goals" class="nav-link active" data-scroll-target="#goals">Goals</a></li>
+  <li><a href="#requirements" id="toc-requirements" class="nav-link" data-scroll-target="#requirements">Requirements</a></li>
+  <li><a href="#sec-common-file-format" id="toc-sec-common-file-format" class="nav-link" data-scroll-target="#sec-common-file-format">A common file format: AnnData and MuData 💾</a></li>
+  <li><a href="#modularity-and-a-language-independent-framework" id="toc-modularity-and-a-language-independent-framework" class="nav-link" data-scroll-target="#modularity-and-a-language-independent-framework">Modularity and a language independent framework 🔳</a></li>
+  <li><a href="#a-graphical-interace" id="toc-a-graphical-interace" class="nav-link" data-scroll-target="#a-graphical-interace">A graphical interace 📺</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/fundamentals/concepts.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -212,8 +222,79 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 
 </header>
 
+<section id="goals" class="level1">
+<h1>Goals</h1>
+<p>Openpipelines strives to provide easy ways to interact with the pipeline and/or codebase for three types of users:</p>
+<ul>
+<li>Pipeline executor: runs the pipeline from a GUI side</li>
+<li>Pipeline editor: adapts pipelines with existing components for specific projects</li>
+<li>Component developer: develops novel components and or pipelines</li>
+</ul>
+<p>This means that openpipelines must be:</p>
+<ul>
+<li>Usable by non-experts</li>
+<li>Easy to deploy</li>
+<li>Provide reproducable results</li>
+<li>Scalable</li>
+<li>Easy to maintain and adapt</li>
+</ul>
+</section>
+<section id="requirements" class="level1">
+<h1>Requirements</h1>
+<p>To meet these demands, the following concepts have been implemented at the core of Openpipeline:</p>
+<ul>
+<li>🌍 A language independent framework</li>
+<li>💾 <a href="#sec-common-file-format">A versitile storage solution</a></li>
+<li>🔳 Modularity</li>
+<li>🔀 <a href="../fundamentals/architecture.html">A best-practice pipeline layout</a></li>
+<li>⌛ <a href="../contributing/project_structure.html#sec-versionning">Versionning</a></li>
+<li>✅ <a href="../contributing/project_structure.html">Automatic testing</a></li>
+<li>💬 <a href="../contributing/index.html">Community input</a></li>
+<li>📺 A graphical interace</li>
+</ul>
+</section>
+<section id="sec-common-file-format" class="level1">
+<h1>A common file format: AnnData and MuData 💾</h1>
+<p>One of the core principals of OpenPipelines is to use <a href="https://mudata.readthedocs.io/">MuData</a> as a common data format throughout the whole pipeline. This means that the input and output for most components and workflows will be a MuData file and converters from and to other common data formats are provided to improve compatibility with up-and downstream applications. Choosing a common data format greatly diminishes the development complexity because it facilitates interfacing between different tools in a pipeline without needing to convert multiple times.</p>
+<p>MuData is a format to store annotated multimodal data. It is derived from the <a href="https://anndata.readthedocs.io/en/latest/">AnnData</a> format. If you are unfamiliar with AnnData or MuData, it is recommended to read up on AnnData first as it is the unimodal counterpart of MuData. MuData can be roughly described as collection of several AnnData objects (stored as a associative array in the <code>.mod</code> attribute). MuData provides a hierarchical way to store the data:</p>
+<pre><code>MuData
+├─ .mod
+│  ├─ modality_1 (AnnData Object)
+│     ├─ .X
+│     ├─ .layers
+│         ├─ layer_1 
+│         ├─ ...
+│     ├─ .var
+│     ├─ .obs
+│     ├─ .obsm
+│     ├─ .varm
+│     ├─ .uns
+│  ├─ modality_1 (AnnData Object)
+├─ .var
+├─ .obs
+├─ .obms
+├─ .varm
+├─ .uns</code></pre>
+<ul>
+<li><code>.mod</code>: an associative array of AnnData objects. Used in OpenPipelines to store the different modalities (CITE-seq, RNA abundance, …)</li>
+<li><code>.X</code> and <code>.layers</code>: matrices storing the measurements with the columns being the variables measured and the rows being the observations (cells in most cases).</li>
+<li><code>.var</code>: metadata for the variables (i.e.&nbsp;annotation for the columns of <code>.X</code> or any matrix in <code>.layers</code>). The number of rows in the .var datafame (or the length of each entry in the dictionairy) is equal to the number of columns in the measurement matrices.</li>
+<li><code>.obs</code>: metadata for the observations (i.e.&nbsp;annotation for the rows of <code>.X</code> or any matrix in <code>.layers</code>). The number of rows in the .obs datafame (or the length of each entry in the dictionairy) is equal to the number of rows in the measurement matrices.</li>
+<li><code>varm</code>: multi-dimensional the variable annotation. A key-dataframe mapping where the number of rows in each dataframe is equal to the number of columns in the measurement matrices.</li>
+<li><code>obsm</code>: multi-dimensional the observation annotation. A key-dataframe mapping where the number of rows in each dataframe is equal to the number of rows in the measurement matrices.</li>
+<li><code>.uns</code>: A mapping where no restrictions are enforced on the dimensions of the data.</li>
+</ul>
+</section>
+<section id="modularity-and-a-language-independent-framework" class="level1">
+<h1>Modularity and a language independent framework 🔳</h1>
+<p>TODO</p>
+</section>
+<section id="a-graphical-interace" class="level1">
+<h1>A graphical interace 📺</h1>
+<p>TODO</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -521,7 +602,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/fundamentals/concepts.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    </div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

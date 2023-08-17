@@ -73,6 +73,9 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 </script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -190,7 +193,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#mission" id="toc-mission" class="nav-link active" data-scroll-target="#mission">Mission</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/fundamentals/philosophy.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -212,8 +221,26 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 
 </header>
 
+<section id="mission" class="level1">
+<h1>Mission</h1>
+<p>OpenPipelines are best-practice living workflows for single-cell uni- and multi-omics data. Building a best-practice pipeline requires knowledge and time that not one single person can provide, but rather requires input from a community. Additionally, a best-pratice pipeline needs constant maintenance to keep up to date with the latest standards, ideally sourcing input from a ‘living’ benchmark. Continuous improvement necessitates a robust system for sourcing and applying community input both from a technical and organisational standpoint.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">graph TB
+  ben["🌱📈 Living benchmarks"]
+  pra["🌱📖 Living best practices"]
+  pip["🌱⚙️ Living reproducible pipelines"]
+  ben --&gt; pra --&gt; pip
+</pre>
+</div>
+</div>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -521,7 +548,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/fundamentals/philosophy.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    </div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
