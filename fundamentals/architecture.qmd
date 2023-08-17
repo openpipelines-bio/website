@@ -3,7 +3,571 @@ title: Architecture
 order: 30
 ---
 
-The single-cell workflow is comprised of multiple (standalone) subworkflows.
+Openpipeline is a pipeline for the processing of multimodal single-cell data that scales to a great many of samples. Covering the architecture requires us to explain many angles: what the expected inputs and outputs are for each workflow are, how do the workflows relate to each other, what the state of the data is at each step of the pipeline, etc... Here is an overview of the general steps involved in processing sequencing data into a single integrated object. We will discuss each of the steps further below.
+
+```{mermaid}
+%%| label: fig-architecture
+%%| fig-cap: Overview single cell processing steps in OpenPipeline.
+flowchart TD  
+  ingest["Ingestion"] --> split --> unimodalsinglesample["Unimodal Single Sample Processing"] --> concat --> unimodalmultisample["Unimodal Multi Sample Processing"] --> merging --> integration["Integration"]  --> downstreamprocessing["Downstream Processing"]
+```
+
+1. [Ingestion](#ingestion): Convert raw sequencing data or count tables into MuData data for further processing.
+2. [Splitting modalities](#sec-splitting): Creating several MuData objects, one per modality, out of a multimodal input sample.
+3. [Unimodal Single Sample Processing](#sec-single-sample): tools applied to each modality of samples individually. Mostly involes the selection of true from false cells.
+4. [Unimodal Multi Sample Processing](#sec-multisample-processing): steps that require information from all samples together. Processing is still performed per-modality.
+5. [Merging](#sec-merging): Creating one MuData object from several unimodal MuData input files. Can be considered the reciprocal operation of splitting.
+6. [Integration](#sec-intergration): The alignment of cell types across samples. Can be performed per modality or based on multiple modalities.
+7. Downstream Processing: Extra analyses performed on the integrated dataset and conversion to other file formats.
+
+# Important dataflow components
+While most components included in openpipelines are involved in data analysis, the sole purpose of other components is to facilitate data flow throughout the pipelines. In a workflow, output for a component is written to disk after it is done performing its task, and is read back in by the next component. However, the relation between the component and the next component is not always a clear one to one relationship. For example: some tools are capable of analyzing a single sample, while others require the input of all samples together. Additionally, not only are the input requirement of tools limiting, performance also needs to be taken into account. Tasks which are performed on each sample separately can be executed in parallel, while if the same task is performed on a single file that contains the data for all samples. In order to facilitate one-to-many or many-to-one relations between components and to allow parallel execution of tasks, component that are specialized in dataflow were implemented.  
+
+## Splitting modalities {#sec-splitting}
+We refer to splitting modalities when multimodal MuData file is split into several unimodal MuData files. The number of output files is equal to the number of modalities present in the input file. Splitting the modalities works on MuData files containing data for multiple samples or for single-sample files.
+
+~~~{.d2 layout=elk}
+file_input: MuData Input{
+  shape: page
+}
+
+file_input.mudata_input: |||md
+  ```
+  └─.mod
+     └─ rna
+     └─ prot
+     └─ ...
+  ```
+|||
+file_input.style.font-size: 20
+
+file_output_rna: MuData Output\nGene Expression{
+  shape: page
+}
+file_output_rna.mudata_output_rna: |||md
+  ```
+  └─.mod
+     └─ rna
+  ```
+|||
+file_output_rna.style.font-size: 20
+
+file_output_prot: MuData Output\nAntibody Capture{
+  shape: page
+}
+file_output_prot.mudata_output_prot: |||md
+  ```
+  └─.mod
+     └─ prot
+  ```
+|||
+file_output_prot.style.font-size: 20
+
+file_output_other: MuData Output\nOther{
+  shape: page
+}
+file_output_other.mudata_output_other: |||md
+  ```
+  └─.mod
+     └─ ...
+  ```
+|||
+file_output_other.style.font-size: 20
+
+split_modalities: Split Modalities {
+  shape: parallelogram
+}
+
+
+file_input -> split_modalities
+split_modalities -> file_output_rna
+split_modalities -> file_output_prot
+split_modalities -> file_output_other
+
+style: {
+  fill: "#FCFCFC"
+}
+
+~~~
+
+## Merging of modalities {#sec-merging}
+Merging refers to combining multiple files with data for one modality into a single output file that contains all input modalities. It is the inverse operation of splitting the modalities.
+
+~~~{.d2 layout=elk}
+file_output: MuData Output{
+  shape: page
+}
+
+file_output.mudata_input: |||md
+  ```
+  └─.mod
+     └─ rna
+     └─ prot
+     └─ ...
+  ```
+|||
+file_output.style.font-size: 20
+
+file_input_rna: MuData Input\nGene Expression{
+  shape: page
+}
+file_input_rna.mudata_input_rna: |||md
+  ```
+  └─.mod
+     └─ rna
+  ```
+|||
+file_input_rna.style.font-size: 20
+
+file_input_prot: MuData Input\nAntibody Capture{
+  shape: page
+}
+file_input_prot.mudata_input_prot: |||md
+  ```
+  └─.mod
+     └─ prot
+  ```
+|||
+file_input_prot.style.font-size: 20
+
+file_input_other: "MuData Input\nOther"{
+  shape: page
+}
+file_input_other.mudata_input_other: |||md
+  ```
+  └─.mod
+     └─ ...
+  ```
+|||
+file_input_other.style.font-size: 20
+
+merge_modalities: Merge Modalities {
+  shape: parallelogram
+}
+
+file_input_rna -> merge_modalities
+file_input_prot -> merge_modalities
+file_input_other -> merge_modalities
+merge_modalities -> file_output
+
+style: {
+  fill: "#FCFCFC"
+}
+
+~~~
+
+## Concatenation of samples
+
+Joining of observations for different samples, stored in their respective MuData file, into a single MuData file for all samples together is called sample concatenation. In practice, this operation is performed for each modality separately. An extra column (with default name `sample_id`) is added to the annotation of the observations (`.obs`) to indicate where each observation originated from.
+
+~~~{.d2 layout=elk}
+file_output: MuData Output{
+  shape: page
+}
+
+file_output.mudata_input: |||md
+  ```
+  └─.mod
+     └─ rna
+     └─ prot
+     └─ vdj
+  
+  └─.obs
+    [sample_id]
+  ```
+|||
+file_output.style.font-size: 20
+
+file_input_sample1: "MuData Input\nSample 1"{
+  shape: page
+}
+file_input_sample1.mudata_input_sample1: |||md
+  ```
+  └─.mod
+     └─ rna
+     └─ vdj
+  ```
+|||
+file_input_sample1.style.font-size: 20
+
+file_input_sample2: "MuData Input\nSample 2"{
+  shape: page
+}
+file_input_sample2.mudata_input_prot: |||md
+  ```
+  └─.mod
+     └─ rna
+     └─ prot
+  ```
+|||
+file_input_sample2.style.font-size: 20
+
+file_input_sample3: "MuData Input\nSample 3"{
+  shape: page
+}
+file_input_sample3.mudata_input_sample3: |||md
+  ```
+  └─.mod
+     └─ rna
+  ```
+|||
+file_input_sample3.style.font-size: 20
+
+concatenate_samples: Concatenation {
+  shape: parallelogram
+}
+
+file_input_sample1 -> concatenate_samples
+file_input_sample2 -> concatenate_samples
+file_input_sample3 -> concatenate_samples
+concatenate_samples -> file_output
+
+style: {
+  fill: "#FCFCFC"
+}
+~~~
+
+Special care must be taken when considering annotations for observations and features while concatenating the samples. Indeed, the data from different samples can contain conflicting information. Openpipeline's `concat` component provides an argument `other_axis_mode` that allows a user to specify what happens when conflicting information is found. The `move` option for this argument is the default behavior. In this mode, each annotation column (from `.obs` and `.var`) is compared across samples. When no conflicts are found or the column is unique for a sample, the column is added output object. When a conflict does occur, all of the columns are gathered from the samples and stored into a dataframe. This dataframe is then stored into `.obsm` for annotations for the observations and `.varm` for feature annotations. This way, a user can have a look at the conflicts and decide what to do with them.
+
+# Ingestion
+
+Ingestion is the conversion of raw sequencing data or count tables into MuData objects that can be used for further processing.
+
+```{mermaid}
+flowchart LR
+    RawCounts1["Raw counts"]
+    BCL[/"BCL"/]
+    Demux[/"Demultiplexing"/]
+    Fastq["Fastq"]
+    Ref["Reference"]
+    Mapping[/"Mapping"/]
+    RawDir["Raw out"]
+    Convert[/"Convert"/]
+    RawCounts1["Raw counts"]
+    BCL --> Demux --> Fastq
+    Fastq & Ref --> Mapping --> RawDir --> Convert --> RawCounts1
+```
+
+Demultiplexing refers to a two-step process:
+
+(@) The conversion of the binary base call (BCL) files, output by the sequencing machines, into the text-based FASTQ format.
+(@) The sorting of reads into different FASTQ files for different libraries pooled together into a single sequencing run.
+
+In order to perform demultiplexing, several tools have been made available in the [demux](../components/workflows/ingestion/demux.qmd) workflow, where the `--demultiplexer` can be used to choose your demultiplexer of choice. Currently, three options have been made available:
+
+* [bcl2fastq(2)](../components/modules/demux/bcl2fastq.qmd): a legacy tool from Illumina that has been replaced by BCL Convert
+* [BCL Convert](../components/modules/demux/bcl_convert.qmd): general demultiplexing software by Illumina. 
+* Cellranger's [mkfastq](../components/modules/demux/cellranger_mkfastq.qmd): a wrapper around BCL Convert that provides extra convenience features for the processing of 10X single-cell data.
+
+The alignment of reads from the FASTQ files to an appropriate genome reference is called mapping. The result of the mapping process are tables that count the number of times a read has been mapped to a certain feature and metadata information for the cells (observations) and features. There are different format that can be used to store this information together. Since OpenPipeline uses [MuData](./concepts.qmd#sec-common-file-format) as a common file format throughout its pipelines, a conversion to MuData is included in the mapping pipelines.The choice between workflows for mapping is dependant on your single-cell library provider and technology:
+
+* For DB Genomics libraries, the [BD Rhapsody](../components/workflows/ingestion/bd_rhapsody.qmd) pipeline can be used.
+* For 10X based libraries, either [cellranger count](../components/workflows/ingestion/cellranger_mapping.qmd) or [cellranger multi](../components/workflows/ingestion/cellranger_multi.qmd) is provided. For more information about the differences between the two and when to use which mapping software, please consult the [10X genomics website](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/using/multi#when-to-use-multi).
+
+# Processing a single sample {#sec-single-sample}
+
+Some processing can (or must) be performed without concatenating samples together. Even when having the choice, adding a tool to the single-sample processing is preferred because multiple samples can be processed in parallel, improving the processing speed. In general, the processing is modality specific, meaning that a multi-modal sample is first split into its unimodal counterparts. As described in the [multi-sample processing](#sec-multisample-processing), the resulting files are _not_ merged back together after the single-sample processing is done. Instead, the output files for all samples are gathered per modality and concatenated to create a multi-sample unimodal object.
+
+
+~~~{.d2 layout=elk}
+file_input: Input File{
+  shape: page
+}
+
+split: Split Modalities {
+  shape: parallelogram
+}
+
+
+unimodal_gex: "Unimodal Processing\nGene Expression"{
+  shape: parallelogram
+}
+
+unimodal_prot: "Unimodal Processing\nAntibody Capture"{
+  shape: parallelogram
+}
+
+
+multisample: "To Multi-sample Processing"{
+  shape: parallelogram
+  style.stroke-dash: 5
+}
+
+
+file_input -> split
+split -> unimodal_gex
+split -> unimodal_prot
+split -> multisample
+
+unimodal_gex -> multisample {
+  style.stroke-dash: 3
+}
+
+unimodal_prot -> multisample {
+  style.stroke-dash: 3
+}
+
+style: {
+  fill: "#FCFCFC"
+}
+
+~~~
+
+
+## Single-sample Gene Expression Processing {#sec-single-sample-gex}
+
+Single-sample gene expression processing involves two steps: removing cells based on count statistics and flagging observations originating from doublets. 
+
+The removal of cells based on basic count statistics is split up into two parts: first, cells are flagged for removal by [filter_with_counts](../components/modules/filter/filter_with_counts.qmd). It flags observations based on several thresholds:
+
+* The number of genes that have a least a single count. Both a maximum and minimum number of genes for a cell to be removed can be specified.
+* The percentage of read counts that originated from a mitochodrial genes. Cells can be filtered based on both a maximum or minimum fraction of mitochondrial genes.
+* The minimum or maximum total number of counts captured per cell. Cells with 0 total counts are always removed.
+
+Flagging cells for removal involved adding a boolean column to the `.obs` dataframe. After the cells have been flagged for removal, the cells are actually filtered using [do_filter](../components/modules/filter/do_filter.qmd), which reads the values in `.obs` and removed the cells labeled `True`. This applies the general phylosophy of "separation of concerns": one component is responsible for labeling the cells, another for removing them. This keeps the codebase for a single component small and its functionality testable.
+
+The next and final step in the single-sample gene expression processing is doublet detection using [filter_with_scrublet](../components/modules/filter/filter_with_scrublet.qmd). Like `filter_with_counts`, it will not remove cells but add a column to `.obs` (which have the name `filter_with_scrublet` by default). The single-sample GEX workflow will not remove not be removed during the processing (hence no `do_filter`). Howver, you can choose to remove them yourself before doing your analyses by applying a filter with the column in `.obs` yourself. 
+
+~~~{.d2 layout=elk}
+direction: right
+file_input: "Input File" {
+  shape: page
+}
+
+count_filtering: "Count Filtering" {
+  shape: parallelogram
+}
+
+doublet_removal: "Doublet Removal" {
+  shape: parallelogram
+}
+
+doublet_removal.filter_with_scrublet {
+  shape: parallelogram
+}
+
+file_output: "Output File" {
+  shape: page
+}
+
+count_filtering.filter_with_counts {
+    shape: parallelogram
+}
+
+count_filtering.do_filter {
+    shape: parallelogram
+}
+
+file_input -> count_filtering
+count_filtering -> doublet_removal
+doublet_removal -> file_output
+
+
+style: {
+  fill: "#FCFCFC"
+}
+
+~~~
+
+
+## Single-sample Antibody Capture Processing
+
+The process of filtering antibody capture data is similar to the filtering in [the single-sample gene-expression processing](#sec-single-sample-gex), but without doublet detection. In some particular cases you can use your ADT data to perform doublet detection using for example cell-type maskers. More information can be found in [the single-cell best practices book](https://www.sc-best-practices.org/surface_protein/doublet_detection.html).
+
+~~~{.d2 layout=elk}
+direction: right
+file_input: "Input File" {
+  shape: page
+}
+
+count_filtering: "Count Filtering" {
+  shape: parallelogram
+}
+
+file_output: "Output File" {
+  shape: page
+}
+
+count_filtering.filter_with_counts {
+    shape: parallelogram
+}
+
+count_filtering.do_filter {
+    shape: parallelogram
+}
+
+file_input -> count_filtering
+count_filtering -> file_output
+
+
+style: {
+  fill: "#FCFCFC"
+}
+
+~~~
+
+# Multisample Processing {#sec-multisample-processing}
+
+After the processing of individual samples has been concluded, samples can be concatenated for further processing. Like with the single-sample processing the multisample processing is not performed on multimodal objects, but each modality separately in order to tailor for the specific modality in question. This means that the result from the singlesample processing is merged together per-modality to create unimodal multisample objects. After processing each modality, all of the modalities can finally be merged and a single object is created that is ready for the integration.
+
+~~~{.d2 layout=elk}
+direction: down
+
+
+input_gex_2: "Processed Sample 2\nGene Expression" {
+  shape: page
+}
+input_adt_2: "Processed Sample 1\nAntibody Capture" {
+  shape: page
+}
+
+input_gex_1: "Processed Sample 1\nGene Expression" {
+  shape: page
+}
+input_adt_1: "Processed Sample 2\nAntibody Capture" {
+  shape: page
+}
+
+input_other_1: "Processed Sample 1\nOther Modality" {
+  shape: page
+}
+input_other_2: "Processed Sample 2\nOther Modality" {
+  shape: page
+}
+
+
+concat_gex: "Concatenate\nGene Expression" {
+  shape: parallelogram
+}
+
+concat_adt: "Concatenate\nAntibody Capture" {
+  shape: parallelogram
+}
+
+concat_other: "Concatenate\nOther Modality" {
+  shape: parallelogram
+}
+
+multisample_gex: "Multisample Processing\nGene Expression" {
+  shape: parallelogram
+}
+
+multisample_adt: "Multisample Processing\nAntibody Capture" {
+  shape: parallelogram
+}
+
+merge {
+  shape: parallelogram
+}
+
+integration: "To Integration"{
+  shape: parallelogram
+  style.stroke-dash: 5
+}
+
+input_gex_1 -> concat_gex: "unimodal\nsingle-sample"
+input_gex_2 -> concat_gex: "unimodal\nsingle-sample"
+input_adt_1 -> concat_adt: "unimodal\nsingle-sample"
+input_adt_2 -> concat_adt: "unimodal\nsingle-sample" 
+input_other_1 -> concat_other: "unimodal\nsingle-sample"
+input_other_2 -> concat_other: "unimodal\nsingle-sample"
+concat_gex -> multisample_gex: unimodal multi-sample
+concat_adt -> multisample_adt: unimodal multi-sample
+concat_other -> merge: unimodal multi-sample
+multisample_gex -> merge
+multisample_adt -> merge
+merge -> integration: "multimodal multisample" {
+  style.stroke-dash: 3
+}
+
+style: {
+  fill: "#FCFCFC"
+}
+
+~~~
+
+
+## Multisample Gene Expression Processing
+
+Processing multisample gene expression involved the following steps:
+
+1. [Normalization](../components/modules/transform/normalize_total.qmd): Normalization aims to adjust the raw counts in the dataset for variable sampling effects by scaling the observable variance to a specified range. There are different ways to transform the data, but the normalization method is to make sure each observation (cell) has a total count equal to the median of total counts over all genes for observations (cells) before normalization.
+2. [Log transformation](../components/modules/transform/log1p.qmd): Calculates $X = ln(X + 1)$, which converts multiplicative relative changes to additive differences. This allows for interpreting the gene expression in terms of relative, rather than absolute, abundances of genes. 
+3. [Highly variable gene detection](../components/modules/filter/filter_with_hvg.qmd): Detects genes that have a large change in expression between samples. By default, OpenPipeline uses the method from Seurat [(Satija et al.)](https://doi.org/10.1038/nbt.3192). As with other "filtering" components, the `filter_with_hvg` component does not remove features, but rather annotates genes of interest by adding a boolean column to `.var`.
+4. [QC metric calculations](../components/modules/qc/calculate_qc_metrics.qmd)
+
+~~~{.d2 layout=elk height=1000px}
+direction: down
+
+input: "Input" {
+  shape: page
+}
+
+output: "Output" {
+  shape: page
+}
+
+normalize: "Normalization" {
+  shape: parallelogram
+}
+
+log: "Log Transformation" {
+  shape: parallelogram
+}
+
+filter_with_hvg: "Highly Variable\nGene Detection" {
+  shape: parallelogram
+}
+
+qc_metrics: "Calculating QC Metrics" {
+  shape: parallelogram
+}
+
+input -> normalize -> log -> filter_with_hvg -> qc_metrics -> output
+
+style: {
+  fill: "#FCFCFC"
+}
+
+~~~
+
+
+## Multisample Antibody Capture Processing
+
+Processing the ADT modality for multiple samples 
+
+~~~{.d2 layout=elk height=750px}
+direction: down
+
+input: "Input" {
+  shape: page
+}
+
+output: "Output" {
+  shape: page
+}
+
+normalize: "Normalization" {
+  shape: parallelogram
+}
+
+
+qc_metrics: "Calculating QC Metrics" {
+  shape: parallelogram
+}
+
+input -> normalize -> qc_metrics -> output
+
+style: {
+  fill: "#FCFCFC"
+}
+
+~~~
+
+# Integration {#sec-intergration}
+Integration is the alignment of cell types across samples. Some tools align the cells per modality, but other do it based on multiple modalities together. 
+
+# Putting it all together: the "Full Pipeline"
 
 :::{.column-screen-inset-shaded}
 
@@ -14,39 +578,47 @@ The single-cell workflow is comprised of multiple (standalone) subworkflows.
 
 flowchart TB
   Raw1[/Sample 1/]:::file --> Split
+  Raw2[/Sample 2/]:::file --> Split2
   subgraph FullPipeline [Full Pipeline]
-    Split([Split\nmodalities]):::component --> ProcGEX1 & ProcADT1 & ConcatVDJ
-    subgraph MultisampleRNA [Multisample RNA]
-        ConcatGEX([Concatenate]):::component --> ProcGEX2((Process GEX\nMulti Sample)):::component
+    NoIntegration -.-> MultimodalFile[/Multisample\nMultimodal File/]:::file -.-> MultiSample
+    Split([Split\nmodalities]):::component --gex modality--> ProcGEX1
+    Split([Split\nmodalities]):::component --prot modality--> ProcADT1
+    Split([Split\nmodalities]):::component -- other--> ConcatVDJ
+
+    Split2([Split\nmodalities]):::component --gex modality--> ProcGEX1 
+    Split2([Split\nmodalities]):::component --prot modality--> ProcADT1
+    Split2([Split\nmodalities]):::component -- other--> ConcatVDJ
+    
+
+    subgraph MultiSample [Multisample]
+      subgraph MultisampleRNA [Multisample RNA]
+      end
+      MultisampleRNA:::workflow
+      subgraph MultisampleADT [Multisample ADT]
+      end
+      MultisampleADT:::workflow
+      subgraph Unknown["Untreated modality (e.g. VDJ)"]
+      end
+      Unknown:::logicalgrouping
     end
-    MultisampleRNA:::workflow
-    subgraph MultisampleADT [Multisample ADT]
-        ConcatADT([Concatenate]):::component -->  ProcADT2((Process ADT\nMulti Sample)):::component
-    end
-    MultisampleADT:::workflow
     ConcatVDJ([Concatenate]):::component
     NoIntegration[Multisample Multimodality]
 
-    subgraph Unknown["Untreated modality (e.g. VDJ)"]
-        ConcatVDJ
-    end
-    Unknown:::logicalgrouping
-    Sample2VDJ[/Sample 2 VDJ/]:::file --> ConcatVDJ
-    Sample2Gex[/Sample 2 Gex/]:::file --> ConcatGEX
-    Sample2ADT[/Sample 2 ADT/]:::file --> ConcatADT
-  
-    ProcGEX2 & ProcADT2 --> Merge([Merge\nmodalities]):::component --> NoIntegration:::workflow
-    ConcatVDJ ---> Merge
+    ConcatVDJ([Concatenate]):::component --> Unknown
+    ConcatGEX([Concatenate]):::component --> MultisampleRNA
+    ConcatADT([Concatenate]):::component --> MultisampleADT
+
+    MultisampleRNA & MultisampleADT & Unknown--> Merge([Merge\nmodalities]):::component --> NoIntegration:::workflow
+    
   end
 
-
   subgraph Wrapper
-    subgraph Integration [Integration]
+    subgraph Integration[Integration]
       subgraph IntegrationRNA[Integration RNA]
           direction LR
           hamony_leiden_rna[Harmony + Leiden]:::workflow
-          scvi_rna[scVI]:::workflow
-          scanorama[Scanorama]:::workflow
+          scvi_rna[scVI + Leiden]:::workflow
+          scanorama[Scanorama + Leiden]:::workflow
           other[...]:::workflow
       end
       subgraph IntegrationProt[Integration ADT]
@@ -95,96 +667,5 @@ flowchart TB
 
 :::
 
-# Use-cases
+# Pipeline Entrypoints
 
-
-
-:::{.callout-note}
-In these use-cases, `Interpretation`, `Conversion` and `Dataset` are omitted because they are the same in every use case.
-:::
-
-
-### A single unimodal sample
-
-:::{.column-screen-inset-shaded}
-
-```{mermaid}
-%%| label: fig-example1
-%%| fig-cap: "Example of how the concatenation and merges work.  \nGEX: Gene-expression."
-
-flowchart LR
-
-  Raw1[Sample 1] --> Split1[/Split\nmodalities/] --> ProcGEX1[/Process GEX\nprofile/]
-  ProcGEX1 --> ConcatGEX[/Concatenate\nprofiles/] --> ProcGEX[/Process GEX\nprofiles/]
-  ProcGEX --> Merge[/Merge\nmodalities/] --> Integration[/Integration/]
-
-```
-
-:::
-
-
-### Multiple unimodal samples
-
-:::{.column-screen-inset-shaded}
-
-```{mermaid}
-%%| label: fig-example3
-%%| fig-cap: "Example of how the concatenation and merges work.  \nGEX: Gene-expression."
-
-flowchart LR
-
-  Raw1[Sample 1] --> Split1[/Split\nmodalities/] --> ProcGEX1[/Process GEX\nprofile/]
-  Raw2[Sample 2] --> Split2[/Split\nmodalities/] --> ProcGEX2[/Process GEX\nprofile/]
-  Raw3[Sample 3] --> Split3[/Split\nmodalities/] --> ProcGEX3[/Process GEX\nprofile/]
-  ProcGEX1 & ProcGEX2 & ProcGEX3 --> ConcatGEX[/Concatenate\nprofiles/] --> ProcGEX[/Process GEX\nprofiles/] 
-  ProcGEX --> Merge[/Merge\nmodalities/] --> Integration[/Integration/]
-
-```
-
-:::
-
-
-### A single multimodal sample
-
-
-:::{.column-screen-inset-shaded}
-
-```{mermaid}
-%%| label: fig-example2
-%%| fig-cap: "Example of how the concatenation and merges work.  \nGEX: Gene-expression. ADT: Antibody-Derived Tags. RNAV: RNA Velocity."
-
-flowchart LR
-
-  Raw1[Sample 1] --> Split1[/Split\nmodalities/] --> ProcGEX1 & ProcADT1 & ProcRNAV1
-  ProcGEX1[/Process GEX\nprofile/] --> ConcatGEX[/Concatenate\nprofiles/] --> ProcGEX[/Process GEX\nprofiles/]
-  ProcADT1[/Process ADT\nprofile/] --> ConcatADT[/Concatenate\nprofiles/] --> ProcADT[/Process ADT\nprofiles/]
-  ProcRNAV1[/Process RNAV\nprofile/] --> ConcatRNAV[/Concatenate\nprofiles/] --> ProcRNAV[/Process RNAV\nprofiles/]
-  ProcGEX & ProcADT & ProcRNAV--> Merge[/Merge\nmodalities/] --> Integration[/Integration/]
-
-```
-
-:::
-
-
-
-
-
-### Multiple multimodal samples
-
-:::{.column-screen-inset-shaded}
-
-```{mermaid}
-%%| label: fig-example4
-%%| fig-cap: "Example of how the concat and merges work.  \nGEX: Gene-expression. ADT: Antibody-Derived Tags."
-
-flowchart LR
-
-  Raw1[Sample 1] --> Split1[/Split\nmodalities/] --> ProcGEX1 & ProcADT1
-  Raw2[Sample 2] --> Split2[/Split\nmodalities/] --> ProcGEX2 & ProcADT2
-  ProcGEX1[/Process GEX\nprofile/] & ProcGEX2[/Process GEX\nprofile/] --> ConcatGEX[/Concatenate\nprofiles/] --> ProcGEX[/Process GEX\nprofiles/]
-  ProcADT1[/Process ADT\nprofile/] & ProcADT2[/Process ADT\nprofile/] --> ConcatADT[/Concatenate\nprofiles/] --> ProcADT[/Process ADT\nprofiles/]
-  ProcGEX & ProcADT --> Merge[/Merge\nmodalities/] --> Integration[/Integration/]
-
-```
-
-:::

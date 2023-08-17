@@ -2,3 +2,16 @@
 title: Philosophy
 order: 10
 ---
+
+# Mission
+
+OpenPipelines are best-practice living workflows for single-cell uni- and multi-omics data. Building a best-practice pipeline requires knowledge and time that not one single person can provide, but rather requires input from a community. Additionally, a best-pratice pipeline needs constant maintenance to keep up to date with the latest standards, ideally sourcing input from a 'living' benchmark. Continuous improvement necessitates a robust system for sourcing and applying community input both from a technical and organisational standpoint.
+
+```{mermaid}
+graph TB
+  ben["🌱📈 Living benchmarks"]
+  pra["🌱📖 Living best practices"]
+  pip["🌱⚙️ Living reproducible pipelines"]
+  ben --> pra --> pip
+```
+

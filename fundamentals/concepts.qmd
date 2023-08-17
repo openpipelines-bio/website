@@ -2,3 +2,75 @@
 title: Concepts
 order: 20
 ---
+
+# Goals
+
+Openpipelines strives to provide easy ways to interact with the pipeline and/or codebase for three types of users:
+
+* Pipeline executor: runs the pipeline from a GUI side
+* Pipeline editor: adapts pipelines with existing components for specific projects
+* Component developer: develops novel components and or pipelines
+
+This means that openpipelines must be:
+
+* Usable by non-experts
+* Easy to deploy
+* Provide reproducable results
+* Scalable
+* Easy to maintain and adapt
+
+# Requirements
+
+To meet these demands, the following concepts have been implemented at the core of Openpipeline:
+
+* 🌍 A language independent framework
+* 💾 [A versitile storage solution](#sec-common-file-format)
+* 🔳 Modularity
+* 🔀 [A best-practice pipeline layout](architecture.qmd)
+* ⌛ [Versionning](../contributing/project_structure.qmd#sec-versionning)
+* ✅ [Automatic testing](../contributing/project_structure.qmd)
+* 💬 [Community input](../contributing/index.qmd)
+* 📺 A graphical interace
+
+# A common file format: AnnData and MuData 💾 {#sec-common-file-format}
+
+One of the core principals of OpenPipelines is to use [MuData](https://mudata.readthedocs.io/) as a common data format throughout the whole pipeline. This means that the input and output for most components and workflows will be a MuData file and converters from and to other common data formats are provided to improve compatibility with up-and downstream applications. Choosing a common data format greatly diminishes the development complexity because it facilitates interfacing between different tools in a pipeline without needing to convert multiple times.
+
+MuData is a format to store annotated multimodal data. It is derived from the [AnnData](https://anndata.readthedocs.io/en/latest/) format. If you are unfamiliar with AnnData or MuData, it is recommended to read up on AnnData first as it is the unimodal counterpart of MuData. MuData can be roughly described as collection of several AnnData objects (stored as a associative array in the `.mod` attribute). MuData provides a hierarchical way to store the data:
+
+```
+MuData
+├─ .mod
+│  ├─ modality_1 (AnnData Object)
+│     ├─ .X
+│     ├─ .layers
+│         ├─ layer_1 
+│         ├─ ...
+│     ├─ .var
+│     ├─ .obs
+│     ├─ .obsm
+│     ├─ .varm
+│     ├─ .uns
+│  ├─ modality_1 (AnnData Object)
+├─ .var
+├─ .obs
+├─ .obms
+├─ .varm
+├─ .uns
+```
+
+* `.mod`: an associative array of AnnData objects. Used in OpenPipelines to store the different modalities (CITE-seq, RNA abundance, ...)
+* `.X` and `.layers`: matrices storing the measurements with the columns being the variables measured and the rows being the observations (cells in most cases).
+* `.var`: metadata for the variables (i.e. annotation for the columns of `.X` or any matrix in `.layers`). The number of rows in the .var datafame (or the length of each entry in the dictionairy) is equal to the number of columns in the measurement matrices. 
+* `.obs`: metadata for the observations (i.e. annotation for the rows of `.X` or any matrix in `.layers`). The number of rows in the .obs datafame (or the length of each entry in the dictionairy) is equal to the number of rows in the measurement matrices.
+* `varm`: multi-dimensional the variable annotation. A key-dataframe mapping where the number of rows in each dataframe is equal to the number of columns in the measurement matrices.
+* `obsm`: multi-dimensional the observation annotation. A key-dataframe mapping where the number of rows in each dataframe is equal to the number of rows in the measurement matrices.
+* `.uns`: A mapping where no restrictions are enforced on the dimensions of the data.
+
+# Modularity and a language independent framework 🔳
+
+TODO
+
+# A graphical interace 📺
+
+TODO
