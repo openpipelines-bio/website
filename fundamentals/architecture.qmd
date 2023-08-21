@@ -93,6 +93,7 @@ flowchart TD
 
 ## Integration workflows
 For each of the integration methods (and their optional combination with other tools), a seperate pipeline is defined. More information for each of the pipelines is available in the [integration methods section](#sec-integration-methods).
+
 * [multiomics/integration/bbknn_leiden](../components/workflows/multiomics/integration/bbknn_leiden.qmd)
 * [multiomics/integration/harmony_leiden](../components/workflows/multiomics/integration/harmony_leiden.qmd)
 * [multiomics/integration/scanorama_leiden](../components/workflows/multiomics/integration/scanorama_leiden.qmd)
