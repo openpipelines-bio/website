@@ -224,18 +224,18 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <pre class="mermaid mermaid-js" data-label="fig-status">flowchart LR
   classDef done fill:#a3f6cf,stroke:#000000;
   classDef wip fill:#f4cb93,stroke:#000000;
-  classDef todo fill:#f0aeb2,stroke:#000000;
+  classDef unprocessed fill:#afadff,stroke:#000000;
 
   Raw1[Sample 1] --&gt; Split1[/Split\nmodalities/]:::done --&gt; ProcGEX1 &amp; ProcRNAV1 &amp; ProcADT1 &amp; ProcATAC1 &amp; ProcVDJ1
   ProcGEX1[/Process GEX\nprofile/]:::done --&gt; ConcatGEX[/Concatenate\nprofiles/]:::done --&gt; ProcGEX[/Process GEX\nprofiles/]:::done
   ProcRNAV1[/Process RNAV\nprofile/]:::wip --&gt; ConcatRNAV[/Concatenate\nprofiles/]:::done --&gt; ProcRNAV[/Process RNAV\nprofiles/]:::wip
-  ProcADT1[/Process ADT\nprofile/]:::done --&gt; ConcatADT[/Concatenate\nprofiles/]:::done --&gt; ProcADT[/Process ADT\nprofiles/]:::todo
-  ProcATAC1[/Process ATAC\nprofile/]:::todo --&gt; ConcatATAC[/Concatenate\nprofiles/]:::done --&gt; ProcATAC[/Process ATAC\nprofiles/]:::todo
-  ProcVDJ1[/Process VDJ\nprofile/]:::todo --&gt; ConcatVDJ[/Concatenate\nprofiles/]:::done --&gt; ProcVDJ[/Process VDJ\nprofiles/]:::todo
-  ProcGEX &amp; ProcRNAV &amp; ProcADT &amp; ProcATAC &amp; ProcVDJ --&gt; Merge[/Merge\nmodalities/]:::done --&gt; Integration[/Integration/]:::done
+  ProcADT1[/Process ADT\nprofile/]:::done --&gt; ConcatADT[/Concatenate\nprofiles/]:::done --&gt; ProcADT[/Process ADT\nprofiles/]:::done
+  ProcATAC1[/Process ATAC\nprofile/]:::unprocessed --&gt; ConcatATAC[/Concatenate\nprofiles/]:::done --&gt; ProcATAC[/Process ATAC\nprofiles/]:::unprocessed
+  ProcVDJ1[/Process VDJ\nprofile/]:::unprocessed --&gt; ConcatVDJ[/Concatenate\nprofiles/]:::done --&gt; ProcVDJ[/Process VDJ\nprofiles/]:::unprocessed
+  ProcGEX &amp; ProcRNAV &amp; ProcADT &amp; ProcATAC &amp; ProcVDJ --&gt; Merge[/Merge\nmodalities/]:::done --&gt; SetupIntegration[/Setup\nintegration/]:::done --&gt; Integration[/Integration/]:::done
 </pre>
 </div>
-<figcaption class="figure-caption">Figure&nbsp;1: Status of implemented components. Green: implemented, orange: work in progress,<br>
+<figcaption class="figure-caption">Figure&nbsp;1: Status of implemented components. Green: implemented, orange: work in progress, purple: modality included in output but unprocessed,<br>
 GEX: Gene-expression. RNAV: RNA Velocity. ADT: Antibody-Derived Tags. ATAC: Assay for Transposase-Accessible Chromatin.</figcaption>
 </figure>
 </div>
