@@ -3,7 +3,7 @@ title: Architecture
 order: 30
 ---
 
-Openpipeline is a pipeline for the processing of multimodal single-cell data that scales to a great many of samples. Covering the architecture requires us to explain many angles: what the expected inputs and outputs are for each workflow are, how do the workflows relate to each other, what the state of the data is at each step of the pipeline, etc... Here is an overview of the general steps involved in processing sequencing data into a single integrated object. We will discuss each of the steps further below.
+OpenPipeline is a pipeline for the processing of multimodal single-cell data that scales to a great many of samples. Covering the architecture requires us to explain many angles, including: what the expected inputs and outputs are for each workflow are, how do the workflows relate to each other, and what the state of the data is at each step of the pipeline. Here is an overview of the general steps involved in processing sequencing data into a single integrated object. We will discuss each of the steps further below.
 
 ```{mermaid}
 %%| label: fig-architecture
@@ -35,7 +35,7 @@ All of the following workflows from the ingestion namespace have been discussed 
 
 
 ## Multiomics workflows
-There exists no `singlesample` workflow. However, the `prot_singlesample` and `rna_singlesample` pipelines do exist and they map identically to the functionality described in the [single-sample antibody capture Processing](#sec-single-sample-adt).qmd and [single-sample gene Expression processing](#sec-single-sample-gex) sections respectively. If you would like to process your samples as described in the [unimodal single sample processing](#sec-single-sample) section, you can execute both workflows in tandem for the two modalities.
+There exists no `singlesample` workflow. However, the `prot_singlesample` and `rna_singlesample` pipelines do exist and they map identically to the functionality described in the [single-sample antibody capture processing](#sec-single-sample-adt) and [single-sample gene expression processing](#sec-single-sample-gex) sections respectively. If you would like to process your samples as described in the [unimodal single sample processing](#sec-single-sample) section, you can execute both workflows in tandem for the two modalities.
 
 Contrary to the workflows for single sample processing, there exists a [multiomics/multisample](../components/workflows/multiomics/multisample.qmd) workflow. However this workflow is not just the [multiomics/prot_multisample](../components/workflows/multiomics/prot_multisample.qmd) and [multiomics/rna_multisample](../components/workflows/multiomics/rna_multisample.qmd) workflows that have been combined. Instead, it combines the [multiomics/prot_multisample](../components/workflows/multiomics/prot_multisample.qmd), [multiomics/rna_multisample](../components/workflows/multiomics/rna_multisample.qmd) and [multiomics/integration/initialize_integration](../components/workflows/multiomics/integration/initialize_integration.qmd) workflows. The purpose of this pipeline is to provide an extra 'entrypoint' into the full pipeline that skips the singlesample processing, allowing reprocessing samples that have already been processed before. A popular usecase is to manually select one or more celltypes which need to be processed again or the integration of observations from multiple experiments into a single dataset. Keep in mind that concatenation is not included in the multisample pipeline, so when multiple input files are specified they are processed in parallel. If you would like to integrate multiple experiments, you need to first concatenate them in a seperate step:
 
@@ -52,12 +52,12 @@ file_output: "Output" {
   shape: page
 }
 
-pipeline_out_1: "Full pipeline \\ integration \\..." {
+pipeline_out_1: "Full pipeline \n integration \n..." {
   shape: parallelogram
   style.stroke-dash: 5
 }
 
-pipeline_out_2: "Full pipeline \\ integration  \\..." {
+pipeline_out_2: "Full pipeline \n integration  \n..." {
   shape: parallelogram
   style.stroke-dash: 5
 }
