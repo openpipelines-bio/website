@@ -5,39 +5,106 @@ order: 20
 
 # A common file format
 
-One of the core principals of OpenPipelines is to use [MuData](https://mudata.readthedocs.io/) as a common data format troughout the whole pipeline. This means that the input and output for most components and workflows will be a MuData file and converters from and to other common data formats are provided to improve compatibility with downstream applications. Choosing a common data format greatly diminishes the development complexity because it facilitates interfacing between different tools in a pipeline without needing to convert multiple times.
+One of the core principals of OpenPipelines is to use [MuData](https://mudata.readthedocs.io/) as a common data format troughout the whole pipeline. See [the concepts page](../fundamentals/concepts.qmd#sec-common-file-format) for more information on openpipelines uses MuData to store single-cell data.
 
-MuData is a format to store annotated multimodal data. It is derived from the [AnnData](https://anndata.readthedocs.io/en/latest/) format. If you are unfamiliar with AnnData or MuData, it is recommended to read up on AnnData first as it is the unimodal counterpart of MuData. MuData can be roughly described as collection of several AnnData objects (stored as a associative array in the `.mod` attribute). MuData provides a hierarchical way to store the data:
+# Component location
+As discussed in [the project structure](project_structure.qmd#sec-project-structure), components in the repository are stored within `src`. Additionally, components are grouped into namespaces, according to a common functionality. An example of such a namespace is the dimensionality reduction namespace (`dimred`), of which the components `pca` and `umap` are members. This means that within `src`, the namespace folders can be found that stores the components that belong to these namespaces. 
 
-```
-MuData
-├─ .mod
-│  ├─ modality_1 (AnnData Object)
-│     ├─ .X
-│     ├─ .layers
-│         ├─ layer_1 
-│         ├─ ...
-│     ├─ .var
-│     ├─ .obs
-│     ├─ .obsm
-│     ├─ .varm
-│     ├─ .uns
-│  ├─ modality_1 (AnnData Object)
-├─ .var
-├─ .obs
-├─ .obms
-├─ .varm
-├─ .uns
+In order to create a new component in OpenPipelines, you will need to create a new folder that will contain the different elements of the component:
+
+```bash
+mkdir src/my_namespace/my_component
 ```
 
-* `.mod`: an associative array of AnnData objects. Used in OpenPipelines to store the different modalities (CITE-seq, RNA abundance, ...)
-* `.X` and `.layers`: matrices storing the measurements with the columns being the variables measured and the rows being the observations (cells in most cases).
-* `.var`: metadata for the variables (i.e. annotation for the columns of `.X` or any matrix in `.layers`). The number of rows in the .var datafame (or the length of each entry in the dictionairy) is equal to the number of columns in the measurement matrices. 
-* `.obs`: metadata for the observations (i.e. annotation for the rows of `.X` or any matrix in `.layers`). The number of rows in the .obs datafame (or the length of each entry in the dictionairy) is equal to the number of rows in the measurement matrices.
-* `varm`: multi-dimensional the variable annotation. A key-dataframe mapping where the number of rows in each dataframe is equal to the number of columns in the measurement matrices.
-* `obsm`: multi-dimensional the observation annotation. A key-dataframe mapping where the number of rows in each dataframe is equal to the number of rows in the measurement matrices.
-* `.uns`: A mapping where no restrictions are enforced on the dimensions of the data.
+:::{.callout-tip}
+Take a look at the components that are already in `src/`! There might be a component that already does something similar to what you need.
+:::
 
+# The elements of a component
+A component consists of one or more scripts that provide the functionality of the component together with metadata of the component in a configuration file. The [Viash config](https://viash.io/reference/config/) contains metadata of your dataset, which script is used to run it, and the required dependencies. An in-depth guide on how to create components is available on the [viash website](https://viash.io/guide/component/create-component.html), but a few specifics and guidelines will be discussed here.
+
+## The config
+
+```yaml
+functionality:
+  name: "my_component"
+  namespace: "my_namespace"
+  description: "My new custom component"
+  authors:
+    - __merge__: ../../authors/my_name.yaml
+      roles: [ author ]
+  arguments:
+    - name: "--output"
+      type: file
+      example: "output_file.h5mu"
+      description: "Location were the output file should be written to."
+      direction: "output"
+  resources:
+    - type: python_script
+      path: script.py
+platforms:
+  - type: docker
+    image: python:3.11
+    setup:
+      - type: python
+        packages: mudata~=0.2.3
+  - type: nextflow
+    directives:
+      label: [highcpu, midmem]
+```
+### Basic information
+
+Each component should have the name, a namespace, a description and author information defined in the config. Because a single author can contribute to multiple components, the author information is often duplicated across components, which was causing issues with the author information being out of date and not easy to maintain. Therefore, it was decided to move author information to `./src/authors`. Each author has a `yaml` file containing the author information, and the viash `__merge__` property is used to merge this information into the viash configs.
+
+Basic information checklist:
+
+  - Give the component a name
+  - Add the component to an appropriate namespace
+  - Add a description
+  - Add author information
+
+### Arguments and argument groups
+
+If you component requires arguments, they should be defined in `arguments` or `argument_groups`. Try tro group individual arguments into `argument_groups` when the number of arguments become too larg  (10 or more as a rule of thumb). 
+
+Argument checklist:
+
+ - Add a description and name
+ - Each argument should have the appropriate type.
+ - Input and output files should be of type `file` instead of `string` and use the appropriate `direction:` 
+ - If possible: add an example
+ - If the argument can accept multiple values, add `multiple: true`
+ - If the possible input for an argument is limited to certain set of values, use `choices:`
+
+### (Test)resources
+
+Resources define files that are required for a component to perform its function. These can be scripts, but also additional files like settings for tools you might require. Defining resources is both a necessity because viash needs to know what code to execute, but defining resources also has the added benefit that these resources are automatically made available, regardless of the build environment. For example: resources are automatically mounted within a running docker container. 
+
+There is a difference between defining `resources` and `test_resources`. While resources are required for a component to function, `test_resources` only need to be included when testing the component (with for example `viash test`) in addition to the regular resources. Having a look at the example above, resources are defined using the `resources:` property. It takes a list of multiple files or folders.
+
+In openpipelines, it was decided to not use a service like `git lfs` to include large resources into the repository. Instead, if large resources are required, there are two possibilities:
+  * Large resources required for _testing_ are to uploaded into an `s3` bucket that is synced automatically before running tests (both locally and on github). Please ping a maintainer when you open a PR and ask them to upload the files for you.
+  * Other large resources that are not needed for testing can be considered as input. This means that an argument of `type: file` needs to be created. The downside of this method is that viash is not able to natively support remote files f
+
+Resources checklist:
+  - Script resources are located next to the config and added to the config with the correct type (`python_script`, `r_script`, ...)
+  - Small resources (<50MB) that are not scripts can also be checked in into the repo, next to the 
+
+### Build information
+
+TODO
+
+## The script file
+
+TODO
+
+## Author information
+
+TODO
+
+# Adding dependencies
+
+TODO
 
 # Building components from their source
 When running or [testing individual components](#running-component-unittests), it is not necessary to execute an extra command to run the build step, `viash test` and `viash run` will build the component on the fly. However, before integrating components into a pipeline, you will need to build the components. More specifically, openpipelines uses Nextflow to combine components into pipelines, so we need to have at least the components build for `nextflow` platform as target. The easiest method to build the components is to use:

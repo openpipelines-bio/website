@@ -30,6 +30,10 @@ jobs:
 
       - uses: viash-io/viash-actions/setup@v4
       
+      - name: "Install d2"
+        run: |
+          curl -fsSL https://d2lang.com/install.sh | sh -s --
+
       - name: Install Viash
         uses: viash-io/viash-actions/setup@main
           
