@@ -1404,7 +1404,7 @@
     "href": "fundamentals/architecture.html#integration-workflows",
     "title": "Architecture",
     "section": "Integration workflows",
-    "text": "Integration workflows\nFor each of the integration methods (and their optional combination with other tools), a seperate pipeline is defined. More information for each of the pipelines is available in the integration methods section. * multiomics/integration/bbknn_leiden * multiomics/integration/harmony_leiden * multiomics/integration/scanorama_leiden * multiomics/integration/scvi_leiden * multiomics/integration/totalvi_leiden * multiomics/integration/initialize_integration"
+    "text": "Integration workflows\nFor each of the integration methods (and their optional combination with other tools), a seperate pipeline is defined. More information for each of the pipelines is available in the integration methods section.\n\nmultiomics/integration/bbknn_leiden\nmultiomics/integration/harmony_leiden\nmultiomics/integration/scanorama_leiden\nmultiomics/integration/scvi_leiden\nmultiomics/integration/totalvi_leiden\nmultiomics/integration/initialize_integration"
   },
   {
     "objectID": "fundamentals/architecture.html#sec-splitting",
