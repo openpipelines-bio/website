@@ -7,18 +7,99 @@ Openpipeline is a pipeline for the processing of multimodal single-cell data tha
 
 ```{mermaid}
 %%| label: fig-architecture
-%%| fig-cap: Overview single cell processing steps in OpenPipeline.
+%%| fig-cap: Overview of the steps included in OpenPipeline for the analysis of single cell multiomics data.
 flowchart TD  
-  ingest["Ingestion"] --> split --> unimodalsinglesample["Unimodal Single Sample Processing"] --> concat --> unimodalmultisample["Unimodal Multi Sample Processing"] --> merging --> integration["Integration"]  --> downstreamprocessing["Downstream Processing"]
+  ingest["Ingestion"] --> split --> unimodalsinglesample["Unimodal Single Sample Processing"] --> concat --> unimodalmultisample["Unimodal Multi Sample Processing"] --> merging --> integation_setup["Integration Setup"] --> integration["Integration"]  --> downstreamprocessing["Downstream Processing"]
 ```
 
 1. [Ingestion](#ingestion): Convert raw sequencing data or count tables into MuData data for further processing.
 2. [Splitting modalities](#sec-splitting): Creating several MuData objects, one per modality, out of a multimodal input sample.
 3. [Unimodal Single Sample Processing](#sec-single-sample): tools applied to each modality of samples individually. Mostly involes the selection of true from false cells.
 4. [Unimodal Multi Sample Processing](#sec-multisample-processing): steps that require information from all samples together. Processing is still performed per-modality.
-5. [Merging](#sec-merging): Creating one MuData object from several unimodal MuData input files. Can be considered the reciprocal operation of splitting.
-6. [Integration](#sec-intergration): The alignment of cell types across samples. Can be performed per modality or based on multiple modalities.
-7. Downstream Processing: Extra analyses performed on the integrated dataset and conversion to other file formats.
+5. [Merging](#sec-merging): Creating one MuData object from several unimodal MuData input files. 
+6. [Initializing Integration](#sec-initializing-integration): Performs dimensionality reduction and cell type clustering on non-integrated samples. These are popular steps that would otherwise be executed manually or they provide input for downstream integration methods.
+7. [Integration](#sec-intergration): The alignment of cell types across samples. Can be performed per modality or based on multiple modalities.
+8. Downstream Processing: Extra analyses performed on the integrated dataset and conversion to other file formats.
+
+# Available workflows
+The structure of the sections that have been laid out below follow a logical grouping of the processing according to the state _of the data_. However, even though this grouping makes sense from a data perspective, it does not mean that a workflow exist for each section. For example, the [processing a single sample](#sec-single-sample) section describes how processing of single sample is performed as part of the [full pipeline](#sec-full-pipeline), but there is no `singlesample` workflow that a user can execute. The inverse is also possible: while there exists an [multisample](../components/workflows/multiomics/mutlisample.qmd) pipeline, it's functionality is not limited to what has been described in the section [Multisample Processing](#sec-multisample-processing). This section lists all the available workflows and will try to describe the link with the relevant sections below.
+
+## Ingestion workflows
+All of the following workflows from the ingestion namespace have been discussed in more detail in the [ingestion](#sec-ingestion) section:
+
+* [ingestion/bd_rhapsody](../components/workflows/ingestion/bd_rhapsody.qmd)
+* [ingestion/cellranger_mapping](../components/workflows/ingestion/cellranger_mapping.qmd)
+* [ingestion/cellranger_multi](../components/workflows/ingestion/cellranger_multi.qmd)
+* [ingestion/demux](../components/workflows/ingestion/demux.qmd)
+* [ingestion/make_reference](../components/workflows/ingestion/make_reference.qmd) 
+
+
+## Multiomics workflows
+There exists no `singlesample` workflow. However, the `prot_singlesample` and `rna_singlesample` pipelines do exist and they map identically to the functionality described in the [single-sample antibody capture Processing](#sec-single-sample-adt).qmd and [single-sample gene Expression processing](#sec-single-sample-gex) sections respectively. If you would like to process your samples as described in the [unimodal single sample processing](#sec-single-sample) section, you can execute both workflows in tandem for the two modalities.
+
+Contrary to the workflows for single sample processing, there exists a [multiomics/multisample](../components/workflows/multiomics/multisample.qmd) workflow. However this workflow is not just the [multiomics/prot_multisample](../components/workflows/multiomics/prot_multisample.qmd) and [multiomics/rna_multisample](../components/workflows/multiomics/rna_multisample.qmd) workflows that have been combined. Instead, it combines the [multiomics/prot_multisample](../components/workflows/multiomics/prot_multisample.qmd), [multiomics/rna_multisample](../components/workflows/multiomics/rna_multisample.qmd) and [multiomics/integration/initialize_integration](../components/workflows/multiomics/integration/initialize_integration.qmd) workflows. The purpose of this pipeline is to provide an extra 'entrypoint' into the full pipeline that skips the singlesample processing, allowing reprocessing samples that have already been processed before. A popular usecase is to manually select one or more celltypes which need to be processed again or the integration of observations from multiple experiments into a single dataset. Keep in mind that concatenation is not included in the multisample pipeline, so when multiple input files are specified they are processed in parallel. If you would like to integrate multiple experiments, you need to first concatenate them in a seperate step:
+
+```{.d2}
+file_input_1: "Experiment 1\n(multisample)" {
+  shape: page
+}
+
+file_input_2: "Experiment 2\n(multisample)" {
+  shape: page
+}
+
+file_output: "Output" {
+  shape: page
+}
+
+pipeline_out_1: "Full pipeline \\ integration \\..." {
+  shape: parallelogram
+  style.stroke-dash: 5
+}
+
+pipeline_out_2: "Full pipeline \\ integration  \\..." {
+  shape: parallelogram
+  style.stroke-dash: 5
+}
+
+concat: "Concatenation" {
+  shape: parallelogram
+}
+
+multisample: "Multisample" {
+  shape: parallelogram
+}
+
+pipeline_out_1 -> file_input_1
+pipeline_out_2 -> file_input_2
+file_input_1 -> concat <- file_input_2
+
+concat -> multisample -> file_output
+
+style: {
+  fill: "#FCFCFC"
+}
+```
+
+## The "full" pipeline
+The name of this pipeline is a bit of a misnomer, because it does not include all the steps from ingestion to integration. As will be discussed in the [ingestion](#sec-ingestion) section, which ingestion strategy you need is dependant on your technology provider and the chosen platform. For [integration](#sec-integration-methods), there exist many methods and combination of methods, and you may wish to choose which integration methods are applicable for your usecase. As a consequence, these two stages in the analysis of single-cell need to be executed seperatly and not as part of a single unified pipeline. All other steps outlined below on the other hand are included into the "full" pipeline, which can therefore be summarized in the following figure:
+
+```{mermaid}
+%%| label: fig-full-pipeline
+%%| fig-cap: Overview of the steps included in the full pipelines from OpenPipeline.
+flowchart TD  
+  split --> unimodalsinglesample["Unimodal Single Sample Processing"] --> concat --> unimodalmultisample["Unimodal Multi Sample Processing"] --> merging --> integation_setup
+```
+
+## Integration workflows
+For each of the integration methods (and their optional combination with other tools), a seperate pipeline is defined. More information for each of the pipelines is available in the [integration methods section](#sec-integration-methods).
+* [multiomics/integration/bbknn_leiden](../components/workflows/multiomics/integration/bbknn_leiden.qmd)
+* [multiomics/integration/harmony_leiden](../components/workflows/multiomics/integration/harmony_leiden.qmd)
+* [multiomics/integration/scanorama_leiden](../components/workflows/multiomics/integration/scanorama_leiden.qmd)
+* [multiomics/integration/scvi_leiden](../components/workflows/multiomics/integration/scvi_leiden.qmd)
+* [multiomics/integration/totalvi_leiden](../components/workflows/multiomics/integration/totalvi_leiden.qmd)
+* [multiomics/integration/initialize_integration](../components/workflows/multiomics/integration/initialize_integration.qmd)
+
 
 # Important dataflow components
 While most components included in openpipelines are involved in data analysis, the sole purpose of other components is to facilitate data flow throughout the pipelines. In a workflow, output for a component is written to disk after it is done performing its task, and is read back in by the next component. However, the relation between the component and the next component is not always a clear one to one relationship. For example: some tools are capable of analyzing a single sample, while others require the input of all samples together. Additionally, not only are the input requirement of tools limiting, performance also needs to be taken into account. Tasks which are performed on each sample separately can be executed in parallel, while if the same task is performed on a single file that contains the data for all samples. In order to facilitate one-to-many or many-to-one relations between components and to allow parallel execution of tasks, component that are specialized in dataflow were implemented.  
@@ -229,7 +310,7 @@ style: {
 
 Special care must be taken when considering annotations for observations and features while concatenating the samples. Indeed, the data from different samples can contain conflicting information. Openpipeline's `concat` component provides an argument `other_axis_mode` that allows a user to specify what happens when conflicting information is found. The `move` option for this argument is the default behavior. In this mode, each annotation column (from `.obs` and `.var`) is compared across samples. When no conflicts are found or the column is unique for a sample, the column is added output object. When a conflict does occur, all of the columns are gathered from the samples and stored into a dataframe. This dataframe is then stored into `.obsm` for annotations for the observations and `.varm` for feature annotations. This way, a user can have a look at the conflicts and decide what to do with them.
 
-# Ingestion
+# Ingestion {#sec-ingestion}
 
 Ingestion is the conversion of raw sequencing data or count tables into MuData objects that can be used for further processing.
 
@@ -264,8 +345,11 @@ The alignment of reads from the FASTQ files to an appropriate genome reference i
 * For DB Genomics libraries, the [BD Rhapsody](../components/workflows/ingestion/bd_rhapsody.qmd) pipeline can be used.
 * For 10X based libraries, either [cellranger count](../components/workflows/ingestion/cellranger_mapping.qmd) or [cellranger multi](../components/workflows/ingestion/cellranger_multi.qmd) is provided. For more information about the differences between the two and when to use which mapping software, please consult the [10X genomics website](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/using/multi#when-to-use-multi).
 
-# Processing a single sample {#sec-single-sample}
+## Creating a transcriptomics reference
+Mapping reads from the FASTQ files to features requires a reference that needs to be provided to the mapping component. Depending on the usecase, you might even need to provide references specific for the modalities that you are trying to analyze. For gene expression data, the reference is a reference genome, together with its appropriate gene annotation. A genome reference is often indexed in order to improve the mapping speed. Additionally, some mapping frameworks provided by the single-cell technology providers require extra preprocessing of the reference before they can be used with their worklow. OpenPipelines provides a [make_reference](../components/workflows/ingestion/make_reference.qmd) that allows you to create references in many formats which can be used to map your reads to.
 
+
+# Processing a single sample {#sec-single-sample}
 Some processing can (or must) be performed without concatenating samples together. Even when having the choice, adding a tool to the single-sample processing is preferred because multiple samples can be processed in parallel, improving the processing speed. In general, the processing is modality specific, meaning that a multi-modal sample is first split into its unimodal counterparts. As described in the [multi-sample processing](#sec-multisample-processing), the resulting files are _not_ merged back together after the single-sample processing is done. Instead, the output files for all samples are gathered per modality and concatenated to create a multi-sample unimodal object.
 
 
@@ -313,9 +397,7 @@ style: {
 
 ~~~
 
-
 ## Single-sample Gene Expression Processing {#sec-single-sample-gex}
-
 Single-sample gene expression processing involves two steps: removing cells based on count statistics and flagging observations originating from doublets. 
 
 The removal of cells based on basic count statistics is split up into two parts: first, cells are flagged for removal by [filter_with_counts](../components/modules/filter/filter_with_counts.qmd). It flags observations based on several thresholds:
@@ -366,12 +448,9 @@ doublet_removal -> file_output
 style: {
   fill: "#FCFCFC"
 }
-
 ~~~
 
-
-## Single-sample Antibody Capture Processing
-
+## Single-sample Antibody Capture Processing {#sec-single-sample-adt}
 The process of filtering antibody capture data is similar to the filtering in [the single-sample gene-expression processing](#sec-single-sample-gex), but without doublet detection. In some particular cases you can use your ADT data to perform doublet detection using for example cell-type maskers. More information can be found in [the single-cell best practices book](https://www.sc-best-practices.org/surface_protein/doublet_detection.html).
 
 ~~~{.d2 layout=elk}
@@ -407,7 +486,6 @@ style: {
 ~~~
 
 # Multisample Processing {#sec-multisample-processing}
-
 After the processing of individual samples has been concluded, samples can be concatenated for further processing. Like with the single-sample processing the multisample processing is not performed on multimodal objects, but each modality separately in order to tailor for the specific modality in question. This means that the result from the singlesample processing is merged together per-modality to create unimodal multisample objects. After processing each modality, all of the modalities can finally be merged and a single object is created that is ready for the integration.
 
 ~~~{.d2 layout=elk}
@@ -488,7 +566,6 @@ style: {
 
 
 ## Multisample Gene Expression Processing
-
 Processing multisample gene expression involved the following steps:
 
 1. [Normalization](../components/modules/transform/normalize_total.qmd): Normalization aims to adjust the raw counts in the dataset for variable sampling effects by scaling the observable variance to a specified range. There are different ways to transform the data, but the normalization method is to make sure each observation (cell) has a total count equal to the median of total counts over all genes for observations (cells) before normalization.
@@ -533,7 +610,6 @@ style: {
 
 
 ## Multisample Antibody Capture Processing
-
 Processing the ADT modality for multiple samples 
 
 ~~~{.d2 layout=elk pad=0}
@@ -561,13 +637,11 @@ input -> normalize -> qc_metrics -> output
 style: {
   fill: "#FCFCFC"
 }
-
 ~~~
 
 # Integration {#sec-intergration}
 
 ## Dimensionality Reduction {#sec-dimensionality-reduction}
-
 scRNA-seq is a high-throughput sequencing technology that produces datasets with high dimensions in the number of cells and genes. It is true that the data should provide more information, but it also contains more noise and redudant information, making it harder to distill the usefull information. The number of genes and cells can already reduced by gene filtering, but further reduction is a necessity for downstream analysis. Dimensionality reduction projects high-dimensional data into a lower dimensional space (like taking a photo (2D) of some 3D structure). The lower dimensional representation still captures the underlying information of the data, while having fewer dimensions.
 
 Several dimensionality reduction methods have been developed and applied to single-cell data analysis. Two of which are being applied in OpenPipeline:
@@ -577,8 +651,7 @@ Several dimensionality reduction methods have been developed and applied to sing
 3. t-SNE is another popular non-linear, graph based dimensionality technique which is very similar to UMAP, but it has not yet been implemented in OpenPipeline.
 
 ## Initializing integration {#sec-initializing-integration}
-
-As will be descibed in more details [later on](#sec-intergration), many integration methods exist and therefore there is no single integration which is executed by default. However, there are common tasks which are run before integration either because they provide required input for many downstream integration methods or because they popular steps that would otherwise be done manually. These operations _are_ executed by default when using the "full pipeline" as part of the [initialize_integration](../components/workflows/integration/initialize_integration/initialize_integration.qmd) subworkflow.
+As will be descibed in more details [later on](#sec-integration-methods), many integration methods exist and therefore there is no single integration which is executed by default. However, there are common tasks which are run before integration either because they provide required input for many downstream integration methods or because they popular steps that would otherwise be done manually. These operations _are_ executed by default when using the "full pipeline" as part of the [initialize_integration](../components/workflows/integration/initialize_integration/initialize_integration.qmd) subworkflow.
 
 [PCA](../components/modules/dimred/pca.qmd) is used to reduce the dimensionality of the dataset [as described previously](#sec-dimensionality-reduction). [Find Neighbors](../components/modules/neighbors/find_neighbors.qmd) and [Leiden Clustering](../components/modules/cluster/leiden.qmd) are useful for the identification of cell types or states in the data. Here we apply a popular method to accomplish this is to first calculate a neighborhood graph on a [low dimensinonal representation](#sec-dimensionality-reduction) of the data and then cluster the data based on similarity between data points. Finally, [UMAP](../components/modules/dimred/umap.qmd) allows us to visualise the clusters by reducing the dimensionality of the data while still providing an accurate representation of the underlying cell population structure. 
 
@@ -613,8 +686,7 @@ style: {
 
 ~~~
 
-## Integration Methods
-
+## Integration Mehods {#sec-integration-methods}
 Integration is the alignment of cell types across samples. There exist three different types of integration methods, based on the degree of integration across modalities:
 
 1. Unimodal integration across batches. For example: [scVI](../components/modules/integrate/scvi.qmd), [scanorama](../components/modules/integrate/scanorama.qmd), [harmony](../components/modules/integrate/harmonypy.qmd)
@@ -624,9 +696,7 @@ Integration is the alignment of cell types across samples. There exist three dif
 In either of the three cases, concatenated samples are required, and merged modalities preferred. A plethora of integration methods exist, which in turn interact with other functionality (like clustering and dimensionality reduction methods) to generate a large number of possible usecases which one pipeline cannot cover in an easy manner. Therefore, there is no single integration step that is part of a global pipeline which is executed by default. Instead, a user can choose from the integration workflows provided, and 'stack' integration methods by adding the outputs to different output slots of the MuData object. The following sections will descibe the integration workflows that are available in OpenPipeline.
 
 ### Unimodal integration
-
 For unimodal integration, [scVI](../components/modules/integrate/scvi.qmd), [scanorama](../components/modules/integrate/scanorama.qmd) and [harmony](../components/modules/integrate/harmonypy.qmd) have been added to the [scvi_leiden](../components/workflows/integration/scvi_leiden.qmd), [scanorama_leiden](../components/workflows/integration/scanorama_leiden.qmd), and [harmony_leiden](../components/workflows/integration/harmony_leiden.qmd) workflows respectively. After executing the integration methods themselves, [Find Neighbors](../components/modules/neighbors/find_neighbors.qmd) and [Leiden Clustering](../components/modules/cluster/leiden.qmd) are run the results of the integration as wel as [UMAP](../components/modules/dimred/umap.qmd) in order to be able to visualise the results. The functioning of these components has already been described [here](#sec-initializing-integration).
-
 
 ~~~{.d2 layout=elk pad=0}
 direction: right
@@ -676,7 +746,6 @@ style: {
 ~~~
 
 ### Multimodal Integration
-
 A single multimodal integration method is currently avaiable in OpenPipeline: [totalVI](../components/modules/integrate/totalvi.qmd). It allows using information from both the gene-expression data and the antibody-capture data together to integrate the cell types. As with the other integration workflows, after running totalVI, [Find Neighbors](../components/modules/neighbors/find_neighbors.qmd), [Leiden Clustering](../components/modules/cluster/leiden.qmd) and [UMAP](../components/modules/dimred/umap.qmd) are run on the result. However in this case the three components are executed on both of the integrated modalities.
 
 ~~~{.d2 layout=elk pad=0}
@@ -719,7 +788,7 @@ style: {
 ~~~
 
 
-# Putting it all together: the "Full Pipeline"
+# Putting it all together: the "Full Pipeline" {#sec-full-pipeline}
 
 :::{.column-screen-inset-shaded}
 
@@ -818,6 +887,3 @@ flowchart TB
 ```
 
 :::
-
-# Pipeline Entrypoints
-
