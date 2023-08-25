@@ -14,7 +14,7 @@ flowchart TD
 
 1. [Ingestion](#ingestion): Convert raw sequencing data or count tables into MuData data for further processing.
 2. [Splitting modalities](#sec-splitting): Creating several MuData objects, one per modality, out of a multimodal input sample.
-3. [Unimodal Single Sample Processing](#sec-single-sample): tools applied to each modality of samples individually. Mostly involes the selection of true from false cells.
+3. [Unimodal Single Sample Processing](#sec-single-sample): tools applied to each modality of samples individually. Mostly involves the selection of true from false cells.
 4. [Unimodal Multi Sample Processing](#sec-multisample-processing): steps that require information from all samples together. Processing is still performed per-modality.
 5. [Merging](#sec-merging): Creating one MuData object from several unimodal MuData input files. 
 6. [Initializing Integration](#sec-initializing-integration): Performs dimensionality reduction and cell type clustering on non-integrated samples. These are popular steps that would otherwise be executed manually or they provide input for downstream integration methods.
@@ -341,7 +341,7 @@ In order to perform demultiplexing, several tools have been made available in th
 * [BCL Convert](../components/modules/demux/bcl_convert.qmd): general demultiplexing software by Illumina. 
 * Cellranger's [mkfastq](../components/modules/demux/cellranger_mkfastq.qmd): a wrapper around BCL Convert that provides extra convenience features for the processing of 10X single-cell data.
 
-The alignment of reads from the FASTQ files to an appropriate genome reference is called mapping. The result of the mapping process are tables that count the number of times a read has been mapped to a certain feature and metadata information for the cells (observations) and features. There are different format that can be used to store this information together. Since OpenPipeline uses [MuData](./concepts.qmd#sec-common-file-format) as a common file format throughout its pipelines, a conversion to MuData is included in the mapping pipelines.The choice between workflows for mapping is dependant on your single-cell library provider and technology:
+The alignment of reads from the FASTQ files to an appropriate genome reference is called mapping. The result of the mapping process are tables that count the number of times a read has been mapped to a certain feature and metadata information for the cells (observations) and features. There are different format that can be used to store this information together. Since OpenPipeline uses [MuData](./concepts.qmd#sec-common-file-format) as a common file format throughout its pipelines, a conversion to MuData is included in the mapping pipelines. The choice between workflows for mapping is dependant on your single-cell library provider and technology:
 
 * For DB Genomics libraries, the [BD Rhapsody](../components/workflows/ingestion/bd_rhapsody.qmd) pipeline can be used.
 * For 10X based libraries, either [cellranger count](../components/workflows/ingestion/cellranger_mapping.qmd) or [cellranger multi](../components/workflows/ingestion/cellranger_multi.qmd) is provided. For more information about the differences between the two and when to use which mapping software, please consult the [10X genomics website](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/using/multi#when-to-use-multi).
@@ -409,7 +409,7 @@ The removal of cells based on basic count statistics is split up into two parts:
 
 Flagging cells for removal involved adding a boolean column to the `.obs` dataframe. After the cells have been flagged for removal, the cells are actually filtered using [do_filter](../components/modules/filter/do_filter.qmd), which reads the values in `.obs` and removed the cells labeled `True`. This applies the general phylosophy of "separation of concerns": one component is responsible for labeling the cells, another for removing them. This keeps the codebase for a single component small and its functionality testable.
 
-The next and final step in the single-sample gene expression processing is doublet detection using [filter_with_scrublet](../components/modules/filter/filter_with_scrublet.qmd). Like `filter_with_counts`, it will not remove cells but add a column to `.obs` (which have the name `filter_with_scrublet` by default). The single-sample GEX workflow will not remove not be removed during the processing (hence no `do_filter`). Howver, you can choose to remove them yourself before doing your analyses by applying a filter with the column in `.obs` yourself. 
+The next and final step in the single-sample gene expression processing is doublet detection using [filter_with_scrublet](../components/modules/filter/filter_with_scrublet.qmd). Like `filter_with_counts`, it will not remove cells but add a column to `.obs` (which have the name `filter_with_scrublet` by default). The single-sample GEX workflow will not remove not be removed during the processing (hence no `do_filter`). However, you can choose to remove them yourself before doing your analyses by applying a filter with the column in `.obs` yourself. 
 
 ~~~{.d2 layout=elk}
 direction: right
@@ -687,7 +687,7 @@ style: {
 
 ~~~
 
-## Integration Mehods {#sec-integration-methods}
+## Integration Methods {#sec-integration-methods}
 Integration is the alignment of cell types across samples. There exist three different types of integration methods, based on the degree of integration across modalities:
 
 1. Unimodal integration across batches. For example: [scVI](../components/modules/integrate/scvi.qmd), [scanorama](../components/modules/integrate/scanorama.qmd), [harmony](../components/modules/integrate/harmonypy.qmd)
