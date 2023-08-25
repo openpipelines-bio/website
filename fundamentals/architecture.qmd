@@ -14,7 +14,7 @@ flowchart TD
 
 1. [Ingestion](#ingestion): Convert raw sequencing data or count tables into MuData data for further processing.
 2. [Splitting modalities](#sec-splitting): Creating several MuData objects, one per modality, out of a multimodal input sample.
-3. [Unimodal Single Sample Processing](#sec-single-sample): tools applied to each modality of samples individually. Mostly involes the selection of true from false cells.
+3. [Unimodal Single Sample Processing](#sec-single-sample): tools applied to each modality of samples individually. Mostly involves the selection of true from false cells.
 4. [Unimodal Multi Sample Processing](#sec-multisample-processing): steps that require information from all samples together. Processing is still performed per-modality.
 5. [Merging](#sec-merging): Creating one MuData object from several unimodal MuData input files. 
 6. [Initializing Integration](#sec-initializing-integration): Performs dimensionality reduction and cell type clustering on non-integrated samples. These are popular steps that would otherwise be executed manually or they provide input for downstream integration methods.
