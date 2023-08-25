@@ -409,7 +409,7 @@ The removal of cells based on basic count statistics is split up into two parts:
 
 Flagging cells for removal involved adding a boolean column to the `.obs` dataframe. After the cells have been flagged for removal, the cells are actually filtered using [do_filter](../components/modules/filter/do_filter.qmd), which reads the values in `.obs` and removed the cells labeled `True`. This applies the general phylosophy of "separation of concerns": one component is responsible for labeling the cells, another for removing them. This keeps the codebase for a single component small and its functionality testable.
 
-The next and final step in the single-sample gene expression processing is doublet detection using [filter_with_scrublet](../components/modules/filter/filter_with_scrublet.qmd). Like `filter_with_counts`, it will not remove cells but add a column to `.obs` (which have the name `filter_with_scrublet` by default). The single-sample GEX workflow will not remove not be removed during the processing (hence no `do_filter`). Howver, you can choose to remove them yourself before doing your analyses by applying a filter with the column in `.obs` yourself. 
+The next and final step in the single-sample gene expression processing is doublet detection using [filter_with_scrublet](../components/modules/filter/filter_with_scrublet.qmd). Like `filter_with_counts`, it will not remove cells but add a column to `.obs` (which have the name `filter_with_scrublet` by default). The single-sample GEX workflow will not remove not be removed during the processing (hence no `do_filter`). However, you can choose to remove them yourself before doing your analyses by applying a filter with the column in `.obs` yourself. 
 
 ~~~{.d2 layout=elk}
 direction: right
