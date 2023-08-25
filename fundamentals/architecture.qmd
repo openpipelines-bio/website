@@ -687,7 +687,7 @@ style: {
 
 ~~~
 
-## Integration Mehods {#sec-integration-methods}
+## Integration Methods {#sec-integration-methods}
 Integration is the alignment of cell types across samples. There exist three different types of integration methods, based on the degree of integration across modalities:
 
 1. Unimodal integration across batches. For example: [scVI](../components/modules/integrate/scvi.qmd), [scanorama](../components/modules/integrate/scanorama.qmd), [harmony](../components/modules/integrate/harmonypy.qmd)
