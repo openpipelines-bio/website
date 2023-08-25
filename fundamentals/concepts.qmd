@@ -51,7 +51,7 @@ MuData
 │     ├─ .obsm
 │     ├─ .varm
 │     ├─ .uns
-│  ├─ modality_1 (AnnData Object)
+│  ├─ modality_2 (AnnData Object)
 ├─ .var
 ├─ .obs
 ├─ .obms
