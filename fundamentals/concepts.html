@@ -269,7 +269,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 │     ├─ .obsm
 │     ├─ .varm
 │     ├─ .uns
-│  ├─ modality_1 (AnnData Object)
+│  ├─ modality_2 (AnnData Object)
 ├─ .var
 ├─ .obs
 ├─ .obms
@@ -280,8 +280,8 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <li><code>.X</code> and <code>.layers</code>: matrices storing the measurements with the columns being the variables measured and the rows being the observations (cells in most cases).</li>
 <li><code>.var</code>: metadata for the variables (i.e.&nbsp;annotation for the columns of <code>.X</code> or any matrix in <code>.layers</code>). The number of rows in the .var datafame (or the length of each entry in the dictionairy) is equal to the number of columns in the measurement matrices.</li>
 <li><code>.obs</code>: metadata for the observations (i.e.&nbsp;annotation for the rows of <code>.X</code> or any matrix in <code>.layers</code>). The number of rows in the .obs datafame (or the length of each entry in the dictionairy) is equal to the number of rows in the measurement matrices.</li>
-<li><code>varm</code>: multi-dimensional the variable annotation. A key-dataframe mapping where the number of rows in each dataframe is equal to the number of columns in the measurement matrices.</li>
-<li><code>obsm</code>: multi-dimensional the observation annotation. A key-dataframe mapping where the number of rows in each dataframe is equal to the number of rows in the measurement matrices.</li>
+<li><code>varm</code>: the multi-dimensional variable annotation. A key-dataframe mapping where the number of rows in each dataframe is equal to the number of columns in the measurement matrices.</li>
+<li><code>obsm</code>: the multi-dimensional observation annotation. A key-dataframe mapping where the number of rows in each dataframe is equal to the number of rows in the measurement matrices.</li>
 <li><code>.uns</code>: A mapping where no restrictions are enforced on the dimensions of the data.</li>
 </ul>
 </section>
