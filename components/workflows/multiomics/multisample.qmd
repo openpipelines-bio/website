@@ -1,0 +1,283 @@
+---
+title: "Multisample"
+namespace: "Multiomics"
+description: "This workflow serves as an entrypoint into the 'full_pipeline' in order to re-run the multisample processing and the integration setup."
+type: "workflow"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `multisample`  
+Namespace: `multiomics`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/./workflows/multiomics/multisample){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+An input .h5mu file will 
+first be split in order to run the multisample processing per modality. Next, the modalities
+are merged again and the integration setup pipeline is executed. Please note that this workflow
+assumes that samples from multiple pipelines are already concatenated. 
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 0.10.0 -latest \
+  -main-script ./workflows/multiomics/multisample/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Inputs
+id: # please fill in - example: "foo"
+input: # please fill in - example: "input.h5mu"
+
+# Outputs
+# output: "$id.$key.output.h5mu"
+
+# Highly variable gene detection
+filter_with_hvg_var_output: "filter_with_hvg"
+filter_with_hvg_obs_batch_key: "sample_id"
+
+# QC metrics calculation options
+var_qc_metrics: ["filter_with_hvg"]
+top_n_vars: [50, 100, 200, 500]
+
+# PCA options
+pca_overwrite: false
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 0.10.0 -latest \
+  -profile docker \
+  -main-script ./workflows/multiomics/multisample/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Inputs
+
+|Name      |Description         |Attributes                                |
+|:---------|:-------------------|:-----------------------------------------|
+|`--id`    |ID of the sample.   |`string`, required, example: `"foo"`      |
+|`--input` |Path to the sample. |`file`, required, example: `"input.h5mu"` |
+
+
+### Outputs
+
+|Name       |Description                     |Attributes                                 |
+|:----------|:-------------------------------|:------------------------------------------|
+|`--output` |Destination path to the output. |`file`, required, example: `"output.h5mu"` |
+
+
+### Highly variable gene detection
+
+|Name                              |Description                                                                                                                                                                                                    |Attributes                             |
+|:---------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------|
+|`--filter_with_hvg_var_output`    |In which .var slot to store a boolean array corresponding to the highly variable genes.                                                                                                                        |`string`, default: `"filter_with_hvg"` |
+|`--filter_with_hvg_obs_batch_key` |If specified, highly-variable genes are selected within each batch separately and merged. This simple  process avoids the selection of batch-specific genes and acts as a lightweight batch correction method. |`string`, default: `"sample_id"`       |
+
+
+### QC metrics calculation options
+
+|Name               |Description                                                                                                                                                                                                                    |Attributes                                                                |
+|:------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------|
+|`--var_qc_metrics` |Keys to select a boolean (containing only True or False) column from .var. For each cell, calculate the proportion of total values for genes which are labeled 'True',  compared to the total sum of the values for all genes. |`string`, default: `"filter_with_hvg"`, example: `"ercc,highly_variable"` |
+|`--top_n_vars`     |Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. `--top_n_vars 20,50` finds cumulative proportion to the 20th and 50th most expressed vars.                |`integer`, default: `50`, default: `100`, default: `200`, default: `500`  |
+
+
+### PCA options
+
+|Name              |Description                             |Attributes     |
+|:-----------------|:---------------------------------------|:--------------|
+|`--pca_overwrite` |Allow overwriting slots for PCA output. |`boolean_true` |
+
+## Authors
+
+
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (author, maintainer)
+
+## Visualisation
+
+```{mermaid}
+%%| column: screen-inset-shaded
+flowchart LR
+    p0(Input)
+    p2(toSortedList)
+    p4(flatMap)
+    p7(filter)
+    p12(split_modalities)
+    p14(join)
+    p21(concat)
+    p17(filter)
+    p19(test_wf:run_wf:split_modalities_workflow:splitStub)
+    p22(flatMap)
+    p23(filter)
+    p26(toSortedList)
+    p28(flatMap)
+    p30(toSortedList)
+    p32(Output)
+    p38(normalize_total)
+    p40(join)
+    p48(log1p)
+    p50(join)
+    p58(delete_layer)
+    p60(join)
+    p68(filter_with_hvg)
+    p70(join)
+    p78(rna_calculate_qc_metrics)
+    p80(join)
+    p121(concat)
+    p86(filter)
+    p89(toSortedList)
+    p91(flatMap)
+    p93(toSortedList)
+    p95(Output)
+    p101(clr)
+    p103(join)
+    p111(prot_calculate_qc_metrics)
+    p113(join)
+    p119(filter)
+    p122(groupTuple)
+    p128(merge)
+    p130(join)
+    p133(filter)
+    p137(toSortedList)
+    p139(flatMap)
+    p146(pca)
+    p148(join)
+    p156(find_neighbors)
+    p158(join)
+    p166(umap)
+    p168(join)
+    p173(concat)
+    p172(filter)
+    p174(filter)
+    p178(toSortedList)
+    p180(flatMap)
+    p187(pca)
+    p189(join)
+    p197(find_neighbors)
+    p199(join)
+    p207(test_wf:run_wf:integration_setup_workflow:initialize_integration_prot:umap:umap_process1)
+    p209(join)
+    p214(concat)
+    p213(filter)
+    p220(publish)
+    p222(join)
+    p227(toSortedList)
+    p229(Output)
+    p21-->p22
+    p22-->p23
+    p22-->p86
+    p22-->p119
+    p121-->p122
+    p172-->p173
+    p173-->p174
+    p173-->p213
+    p213-->p214
+    p0-->p2
+    p2-->p4
+    p4-->p7
+    p4-->p17
+    p7-->p14
+    p7-->p12
+    p12-->p14
+    p14-->p21
+    p17-->p19
+    p19-->p21
+    p23-->p26
+    p26-->p28
+    p28-->p30
+    p30-->p32
+    p28-->p40
+    p28-->p38
+    p38-->p40
+    p40-->p50
+    p40-->p48
+    p48-->p50
+    p50-->p60
+    p50-->p58
+    p58-->p60
+    p60-->p70
+    p60-->p68
+    p68-->p70
+    p70-->p80
+    p70-->p78
+    p78-->p80
+    p80-->p121
+    p86-->p89
+    p89-->p91
+    p91-->p93
+    p93-->p95
+    p91-->p103
+    p91-->p101
+    p101-->p103
+    p103-->p113
+    p103-->p111
+    p111-->p113
+    p113-->p121
+    p119-->p121
+    p122-->p130
+    p122-->p128
+    p128-->p130
+    p130-->p133
+    p130-->p172
+    p133-->p137
+    p137-->p139
+    p139-->p148
+    p139-->p146
+    p146-->p148
+    p148-->p158
+    p148-->p156
+    p156-->p158
+    p158-->p168
+    p158-->p166
+    p166-->p168
+    p168-->p173
+    p174-->p178
+    p178-->p180
+    p180-->p189
+    p180-->p187
+    p187-->p189
+    p189-->p199
+    p189-->p197
+    p197-->p199
+    p199-->p209
+    p199-->p207
+    p207-->p209
+    p209-->p214
+    p214-->p222
+    p214-->p220
+    p220-->p222
+    p222-->p227
+    p227-->p229
+
+```

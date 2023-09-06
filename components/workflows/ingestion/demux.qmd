@@ -14,7 +14,7 @@ ID: `demux`
 Namespace: `ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/workflows/ingestion/demux){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/./workflows/ingestion/demux){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -31,8 +31,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.9.0 -latest \
-  -main-script workflows/ingestion/demux/main.nf \
+  -r 0.10.0 -latest \
+  -main-script ./workflows/ingestion/demux/main.nf \
   --help
 ```
 
@@ -56,9 +56,9 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.9.0 -latest \
+  -r 0.10.0 -latest \
   -profile docker \
-  -main-script workflows/ingestion/demux/main.nf \
+  -main-script ./workflows/ingestion/demux/main.nf \
   -params-file params.yaml
 ```
 
@@ -100,16 +100,21 @@ flowchart LR
     p2(toSortedList)
     p4(flatMap)
     p5(filter)
-    p11(cellranger_mkfastq)
+    p10(cellranger_mkfastq)
+    p12(join)
     p35(mix)
     p15(filter)
-    p21(bcl_convert)
+    p20(bcl_convert)
+    p22(join)
     p25(filter)
-    p31(bcl2fastq)
-    p42(fastqc)
+    p30(bcl2fastq)
+    p32(join)
+    p41(fastqc)
+    p43(join)
     p46(Output)
     p48(toSortedList)
-    p55(multiqc)
+    p54(multiqc)
+    p56(join)
     p59(Output)
     p63(Output)
     p4-->p5
@@ -117,17 +122,27 @@ flowchart LR
     p4-->p25
     p0-->p2
     p2-->p4
-    p5-->p11
-    p11-->p35
-    p15-->p21
-    p21-->p35
-    p25-->p31
-    p31-->p35
-    p35-->p42
-    p42-->p46
+    p5-->p12
+    p5-->p10
+    p10-->p12
+    p12-->p35
+    p15-->p22
+    p15-->p20
+    p20-->p22
+    p22-->p35
+    p25-->p32
+    p25-->p30
+    p30-->p32
+    p32-->p35
+    p35-->p43
+    p35-->p41
+    p41-->p43
+    p43-->p46
     p35-->p48
-    p48-->p55
-    p55-->p59
+    p48-->p56
+    p48-->p54
+    p54-->p56
+    p56-->p59
     p35-->p63
 
 ```

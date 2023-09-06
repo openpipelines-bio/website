@@ -14,7 +14,7 @@ ID: `rna_singlesample`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/workflows/multiomics/rna_singlesample){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/./workflows/multiomics/rna_singlesample){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,8 +30,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.9.0 -latest \
-  -main-script workflows/multiomics/rna_singlesample/main.nf \
+  -r 0.10.0 -latest \
+  -main-script ./workflows/multiomics/rna_singlesample/main.nf \
   --help
 ```
 
@@ -56,6 +56,11 @@ input: # please fill in - example: "dataset.h5mu"
 # min_fraction_mito: 0
 # max_fraction_mito: 0.2
 
+# Mitochondrial gene detection
+# var_name_mitochondrial_genes: "foo"
+# var_gene_names: "gene_symbol"
+mitochondrial_gene_regex: "^[mM][tT]-"
+
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
 # param_list: "my_params.yaml"
@@ -64,9 +69,9 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.9.0 -latest \
+  -r 0.10.0 -latest \
   -profile docker \
-  -main-script workflows/multiomics/rna_singlesample/main.nf \
+  -main-script ./workflows/multiomics/rna_singlesample/main.nf \
   -params-file params.yaml
 ```
 
@@ -103,6 +108,15 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--min_fraction_mito`  |Minimum fraction of UMIs that are mitochondrial. |`double`, example: `0`        |
 |`--max_fraction_mito`  |Maximum fraction of UMIs that are mitochondrial. |`double`, example: `0.2`      |
 
+
+### Mitochondrial gene detection
+
+|Name                             |Description                                                                                                                                                                                                                |Attributes                         |
+|:--------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------|
+|`--var_name_mitochondrial_genes` |In which .var slot to store a boolean array corresponding the mitochondrial genes.                                                                                                                                         |`string`                           |
+|`--var_gene_names`               |.var column name to be used to detect mitochondrial genes instead of .var_names (default if not set). Gene names matching with the regex value from --mitochondrial_gene_regex will be identified as a mitochondrial gene. |`string`, example: `"gene_symbol"` |
+|`--mitochondrial_gene_regex`     |Regex string that identifies mitochondrial genes from --var_gene_names. By default will detect human and mouse mitochondrial genes from a gene symbol.                                                                     |`string`, default: `"^[mM][tT]-"`  |
+
 ## Authors
 
 
@@ -120,15 +134,24 @@ flowchart LR
     p0(Input)
     p3(toSortedList)
     p5(flatMap)
-    p13(filter_with_counts)
-    p23(do_filter)
-    p34(filter_with_scrublet)
-    p43(Output)
+    p12(filter_with_counts)
+    p14(join)
+    p22(do_filter)
+    p24(join)
+    p32(filter_with_scrublet)
+    p34(join)
+    p42(Output)
     p0-->p3
     p3-->p5
-    p5-->p13
-    p13-->p23
-    p23-->p34
-    p34-->p43
+    p5-->p14
+    p5-->p12
+    p12-->p14
+    p14-->p24
+    p14-->p22
+    p22-->p24
+    p24-->p34
+    p24-->p32
+    p32-->p34
+    p34-->p42
 
 ```

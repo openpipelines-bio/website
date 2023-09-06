@@ -14,7 +14,7 @@ ID: `cellranger_postprocessing`
 Namespace: `ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/workflows/ingestion/cellranger_postprocessing){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/./workflows/ingestion/cellranger_postprocessing){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,8 +30,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.9.0 -latest \
-  -main-script workflows/ingestion/cellranger_postprocessing/main.nf \
+  -r 0.10.0 -latest \
+  -main-script ./workflows/ingestion/cellranger_postprocessing/main.nf \
   --help
 ```
 
@@ -49,6 +49,7 @@ input: # please fill in - example: "input.h5mu"
 
 # Correction arguments
 perform_correction: false
+cellbender_epochs: 150
 
 # Filtering arguments
 # min_genes: 100
@@ -62,9 +63,9 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.9.0 -latest \
+  -r 0.10.0 -latest \
   -profile docker \
-  -main-script workflows/ingestion/cellranger_postprocessing/main.nf \
+  -main-script ./workflows/ingestion/cellranger_postprocessing/main.nf \
   -params-file params.yaml
 ```
 
@@ -91,9 +92,10 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Correction arguments
 
-|Name                   |Description                                                   |Attributes     |
-|:----------------------|:-------------------------------------------------------------|:--------------|
-|`--perform_correction` |Whether or not to run CellBender to perform count correction. |`boolean_true` |
+|Name                   |Description                                                   |Attributes                |
+|:----------------------|:-------------------------------------------------------------|:-------------------------|
+|`--perform_correction` |Whether or not to run CellBender to perform count correction. |`boolean_true`            |
+|`--cellbender_epochs`  |Number of epochs to run CellBender for.                       |`integer`, default: `150` |
 
 
 ### Filtering arguments
@@ -116,35 +118,45 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 %%| column: screen-inset-shaded
 flowchart LR
     p0(Input)
-    p7(from_10xh5_to_h5mu)
-    p17(subset_h5mu)
-    p23(toSortedList)
-    p25(flatMap)
-    p27(filter)
-    p33(cellbender_remove_background)
-    p39(mix)
-    p38(filter)
-    p40(filter)
-    p47(filter_with_counts)
-    p52(mix)
-    p51(filter)
-    p59(publish)
-    p66(Output)
-    p38-->p39
+    p6(from_10xh5_to_h5mu)
+    p8(join)
+    p12(toSortedList)
+    p14(flatMap)
+    p15(filter)
+    p21(cellbender_remove_background)
+    p23(join)
+    p27(mix)
+    p26(filter)
+    p28(filter)
+    p34(filter_with_counts)
+    p36(join)
+    p40(mix)
+    p39(filter)
+    p46(publish)
+    p48(join)
+    p54(Output)
+    p14-->p15
+    p14-->p26
+    p26-->p27
+    p27-->p28
+    p27-->p39
     p39-->p40
-    p39-->p51
-    p51-->p52
-    p0-->p7
-    p7-->p17
-    p17-->p23
-    p23-->p25
-    p25-->p27
-    p25-->p38
-    p27-->p33
-    p33-->p39
-    p40-->p47
-    p47-->p52
-    p52-->p59
-    p59-->p66
+    p0-->p8
+    p0-->p6
+    p6-->p8
+    p8-->p12
+    p12-->p14
+    p15-->p23
+    p15-->p21
+    p21-->p23
+    p23-->p27
+    p28-->p36
+    p28-->p34
+    p34-->p36
+    p36-->p40
+    p40-->p48
+    p40-->p46
+    p46-->p48
+    p48-->p54
 
 ```

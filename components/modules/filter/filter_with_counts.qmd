@@ -14,7 +14,7 @@ ID: `filter_with_counts`
 Namespace: `filter`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/filter/filter_with_counts){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/./src/filter/filter_with_counts){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -32,7 +32,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.9.0 -latest \
+  -r 0.10.0 -latest \
   -main-script target/nextflow/filter/filter_with_counts/main.nf \
   --help
 ```
@@ -55,6 +55,7 @@ mitochondrial_gene_regex: "^[mM][tT]-"
 do_subset: false
 obs_name_filter: "filter_with_counts"
 var_name_filter: "filter_with_counts"
+# var_name_mitochondrial_genes: "foo"
 
 # Arguments
 # min_counts: 200
@@ -73,7 +74,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.9.0 -latest \
+  -r 0.10.0 -latest \
   -profile docker \
   -main-script target/nextflow/filter/filter_with_counts/main.nf \
   -params-file params.yaml
@@ -98,13 +99,14 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Outputs
 
-|Name                   |Description                                                                                        |Attributes                                |
-|:----------------------|:--------------------------------------------------------------------------------------------------|:-----------------------------------------|
-|`--output`             |Output h5mu file.                                                                                  |`file`, example: `"output.h5mu"`          |
-|`--output_compression` |The compression format to be used on the output h5mu object.                                       |`string`, example: `"gzip"`               |
-|`--do_subset`          |Whether to subset before storing the output.                                                       |`boolean_true`                            |
-|`--obs_name_filter`    |In which .obs slot to store a boolean array corresponding to which observations should be removed. |`string`, default: `"filter_with_counts"` |
-|`--var_name_filter`    |In which .var slot to store a boolean array corresponding to which variables should be removed.    |`string`, default: `"filter_with_counts"` |
+|Name                             |Description                                                                                                                                                       |Attributes                                |
+|:--------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------|
+|`--output`                       |Output h5mu file.                                                                                                                                                 |`file`, example: `"output.h5mu"`          |
+|`--output_compression`           |The compression format to be used on the output h5mu object.                                                                                                      |`string`, example: `"gzip"`               |
+|`--do_subset`                    |Whether to subset before storing the output.                                                                                                                      |`boolean_true`                            |
+|`--obs_name_filter`              |In which .obs slot to store a boolean array corresponding to which observations should be removed.                                                                |`string`, default: `"filter_with_counts"` |
+|`--var_name_filter`              |In which .var slot to store a boolean array corresponding to which variables should be removed.                                                                   |`string`, default: `"filter_with_counts"` |
+|`--var_name_mitochondrial_genes` |In which .var slot to store a boolean array corresponding the mitochondrial genes. Will only be used if --min_fraction_mito or --max_fraction_mito are specified. |`string`                                  |
 
 
 ### Arguments
