@@ -1,6 +1,8 @@
 ---
 title: Architecture
 order: 30
+d2:
+  layout: elk
 ---
 
 OpenPipeline is a pipeline for the processing of multimodal single-cell data that scales to a great many of samples. Covering the architecture requires us to explain many angles, including: what the expected inputs and outputs are for each workflow are, how do the workflows relate to each other, and what the state of the data is at each step of the pipeline. Here is an overview of the general steps involved in processing sequencing data into a single integrated object. We will discuss each of the steps further below.
@@ -108,7 +110,7 @@ While most components included in openpipelines are involved in data analysis, t
 ## Splitting modalities {#sec-splitting}
 We refer to splitting modalities when multimodal MuData file is split into several unimodal MuData files. The number of output files is equal to the number of modalities present in the input file. Splitting the modalities works on MuData files containing data for multiple samples or for single-sample files.
 
-~~~{.d2 layout=elk}
+~~~{.d2}
 file_input: MuData Input{
   shape: page
 }
@@ -175,7 +177,7 @@ style: {
 ## Merging of modalities {#sec-merging}
 Merging refers to combining multiple files with data for one modality into a single output file that contains all input modalities. It is the inverse operation of splitting the modalities.
 
-~~~{.d2 layout=elk}
+~~~{.d2}
 file_output: MuData Output{
   shape: page
 }
@@ -242,7 +244,7 @@ style: {
 
 Joining of observations for different samples, stored in their respective MuData file, into a single MuData file for all samples together is called sample concatenation. In practice, this operation is performed for each modality separately. An extra column (with default name `sample_id`) is added to the annotation of the observations (`.obs`) to indicate where each observation originated from.
 
-~~~{.d2 layout=elk}
+~~~{.d2}
 file_output: MuData Output{
   shape: page
 }
@@ -354,7 +356,7 @@ Mapping reads from the FASTQ files to features requires a reference that needs t
 Some processing can (or must) be performed without concatenating samples together. Even when having the choice, adding a tool to the single-sample processing is preferred because multiple samples can be processed in parallel, improving the processing speed. In general, the processing is modality specific, meaning that a multi-modal sample is first split into its unimodal counterparts. As described in the [multi-sample processing](#sec-multisample-processing), the resulting files are _not_ merged back together after the single-sample processing is done. Instead, the output files for all samples are gathered per modality and concatenated to create a multi-sample unimodal object.
 
 
-~~~{.d2 layout=elk}
+~~~{.d2}
 file_input: Input File{
   shape: page
 }
@@ -411,7 +413,7 @@ Flagging cells for removal involved adding a boolean column to the `.obs` datafr
 
 The next and final step in the single-sample gene expression processing is doublet detection using [filter_with_scrublet](../components/modules/filter/filter_with_scrublet.qmd). Like `filter_with_counts`, it will not remove cells but add a column to `.obs` (which have the name `filter_with_scrublet` by default). The single-sample GEX workflow will not remove not be removed during the processing (hence no `do_filter`). However, you can choose to remove them yourself before doing your analyses by applying a filter with the column in `.obs` yourself. 
 
-~~~{.d2 layout=elk}
+~~~{.d2}
 direction: right
 file_input: "Input File" {
   shape: page
@@ -454,7 +456,7 @@ style: {
 ## Single-sample Antibody Capture Processing {#sec-single-sample-adt}
 The process of filtering antibody capture data is similar to the filtering in [the single-sample gene-expression processing](#sec-single-sample-gex), but without doublet detection. In some particular cases you can use your ADT data to perform doublet detection using for example cell-type maskers. More information can be found in [the single-cell best practices book](https://www.sc-best-practices.org/surface_protein/doublet_detection.html).
 
-~~~{.d2 layout=elk}
+~~~{.d2}
 direction: right
 file_input: "Input File" {
   shape: page
@@ -489,7 +491,7 @@ style: {
 # Multisample Processing {#sec-multisample-processing}
 After the processing of individual samples has been concluded, samples can be concatenated for further processing. Like with the single-sample processing the multisample processing is not performed on multimodal objects, but each modality separately in order to tailor for the specific modality in question. This means that the result from the singlesample processing is merged together per-modality to create unimodal multisample objects. After processing each modality, all of the modalities can finally be merged and a single object is created that is ready for the integration.
 
-~~~{.d2 layout=elk}
+~~~{.d2}
 direction: down
 
 
@@ -574,7 +576,7 @@ Processing multisample gene expression involved the following steps:
 3. [Highly variable gene detection](../components/modules/filter/filter_with_hvg.qmd): Detects genes that have a large change in expression between samples. By default, OpenPipeline uses the method from Seurat [(Satija et al.)](https://doi.org/10.1038/nbt.3192). As with other "filtering" components, the `filter_with_hvg` component does not remove features, but rather annotates genes of interest by adding a boolean column to `.var`.
 4. [QC metric calculations](../components/modules/qc/calculate_qc_metrics.qmd)
 
-~~~{.d2 layout=elk height=1000px}
+~~~{.d2 height=1000px}
 direction: down
 
 input: "Input" {
@@ -613,7 +615,7 @@ style: {
 ## Multisample Antibody Capture Processing
 Processing the ADT modality for multiple samples 
 
-~~~{.d2 layout=elk pad=0}
+~~~{.d2 pad=0}
 direction: right
 
 input: "Input" {
@@ -656,7 +658,7 @@ As will be descibed in more details [later on](#sec-integration-methods), many i
 
 [PCA](../components/modules/dimred/pca.qmd) is used to reduce the dimensionality of the dataset [as described previously](#sec-dimensionality-reduction). [Find Neighbors](../components/modules/neighbors/find_neighbors.qmd) and [Leiden Clustering](../components/modules/cluster/leiden.qmd) are useful for the identification of cell types or states in the data. Here we apply a popular method to accomplish this is to first calculate a neighborhood graph on a [low dimensinonal representation](#sec-dimensionality-reduction) of the data and then cluster the data based on similarity between data points. Finally, [UMAP](../components/modules/dimred/umap.qmd) allows us to visualise the clusters by reducing the dimensionality of the data while still providing an accurate representation of the underlying cell population structure. 
 
-~~~{.d2 layout=elk pad=0}
+~~~{.d2 pad=0}
 direction: right
 
 input: "Input" {
@@ -699,7 +701,7 @@ In either of the three cases, concatenated samples are required, and merged moda
 ### Unimodal integration
 For unimodal integration, [scVI](../components/modules/integrate/scvi.qmd), [scanorama](../components/modules/integrate/scanorama.qmd) and [harmony](../components/modules/integrate/harmonypy.qmd) have been added to the [scvi_leiden](../components/workflows/integration/scvi_leiden.qmd), [scanorama_leiden](../components/workflows/integration/scanorama_leiden.qmd), and [harmony_leiden](../components/workflows/integration/harmony_leiden.qmd) workflows respectively. After executing the integration methods themselves, [Find Neighbors](../components/modules/neighbors/find_neighbors.qmd) and [Leiden Clustering](../components/modules/cluster/leiden.qmd) are run the results of the integration as wel as [UMAP](../components/modules/dimred/umap.qmd) in order to be able to visualise the results. The functioning of these components has already been described [here](#sec-initializing-integration).
 
-~~~{.d2 layout=elk pad=0}
+~~~{.d2 pad=0}
 direction: right
 
 input: "Input" {
@@ -749,7 +751,7 @@ style: {
 ### Multimodal Integration
 A single multimodal integration method is currently avaiable in OpenPipeline: [totalVI](../components/modules/integrate/totalvi.qmd). It allows using information from both the gene-expression data and the antibody-capture data together to integrate the cell types. As with the other integration workflows, after running totalVI, [Find Neighbors](../components/modules/neighbors/find_neighbors.qmd), [Leiden Clustering](../components/modules/cluster/leiden.qmd) and [UMAP](../components/modules/dimred/umap.qmd) are run on the result. However in this case the three components are executed on both of the integrated modalities.
 
-~~~{.d2 layout=elk pad=0}
+~~~{.d2 pad=0}
 direction: right
 
 input: "Input" {
