@@ -14,7 +14,7 @@ ID: `harmony_leiden`
 Namespace: `multiomics/integration`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/./workflows/multiomics/integration/harmony_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/workflows/multiomics/integration/harmony_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

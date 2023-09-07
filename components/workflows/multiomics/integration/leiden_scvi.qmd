@@ -14,7 +14,7 @@ ID: `leiden_scvi`
 Namespace: `multiomics/integration`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/./workflows/multiomics/integration/scvi_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/workflows/multiomics/integration/scvi_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
