@@ -71,11 +71,11 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Input
 
-|Name             |Description                                  |Attributes                                      |
-|:----------------|:--------------------------------------------|:-----------------------------------------------|
-|`--input_id`     |The obs index for the counts                 |`string`, required, example: `"foo"`            |
-|`--input_counts` |The counts as a TSV file as output by HTSeq. |`file`, required, example: `"counts.tsv"`       |
-|`--reference`    |The GTF file.                                |`file`, required, example: `"gencode_v41_star"` |
+|Name             |Description                                  |Attributes                                                             |
+|:----------------|:--------------------------------------------|:----------------------------------------------------------------------|
+|`--input_id`     |The obs index for the counts                 |List of `string`, required, example: `"foo"`, multiple_sep: `";"`      |
+|`--input_counts` |The counts as a TSV file as output by HTSeq. |List of `file`, required, example: `"counts.tsv"`, multiple_sep: `";"` |
+|`--reference`    |The GTF file.                                |`file`, required, example: `"gencode_v41_star"`                        |
 
 
 ### Outputs

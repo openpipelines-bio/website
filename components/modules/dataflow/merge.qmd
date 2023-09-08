@@ -67,11 +67,11 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name                   |Description                                                       |Attributes                                  |
-|:----------------------|:-----------------------------------------------------------------|:-------------------------------------------|
-|`--input`              |Paths to the single-modality .h5mu files that need to be combined |`file`, required, default: `"sample_paths"` |
-|`--output`             |Path to the output file.                                          |`file`, default: `"output.h5mu"`            |
-|`--output_compression` |The compression format to be used on the output h5mu object.      |`string`, example: `"gzip"`                 |
+|Name                   |Description                                                       |Attributes                                                               |
+|:----------------------|:-----------------------------------------------------------------|:------------------------------------------------------------------------|
+|`--input`              |Paths to the single-modality .h5mu files that need to be combined |List of `file`, required, default: `"sample_paths"`, multiple_sep: `","` |
+|`--output`             |Path to the output file.                                          |`file`, default: `"output.h5mu"`                                         |
+|`--output_compression` |The compression format to be used on the output h5mu object.      |`string`, example: `"gzip"`                                              |
 
 ## Authors
 

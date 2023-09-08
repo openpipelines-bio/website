@@ -80,15 +80,15 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name                    |Description                                                                                                                                                                    |Attributes                                 |
-|:-----------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------|
-|`--input`               |Input file.                                                                                                                                                                    |`file`, required, example: `"input.h5mu"`  |
-|`--modality`            |                                                                                                                                                                               |`string`, default: `"rna"`                 |
-|`--obsp_connectivities` |In which .obsp slot the neighbor connectivities can be found.                                                                                                                  |`string`, default: `"connectivities"`      |
-|`--output`              |Output file.                                                                                                                                                                   |`file`, required, example: `"output.h5mu"` |
-|`--output_compression`  |                                                                                                                                                                               |`string`, example: `"gzip"`                |
-|`--obsm_name`           |Name of the .obsm key under which to add the cluster labels. The name of the columns in the matrix will correspond to the resolutions.                                         |`string`, default: `"leiden"`              |
-|`--resolution`          |A parameter value controlling the coarseness of the clustering. Higher values lead to more clusters. Multiple values will result in clustering being performed multiple times. |`double`, default: `1`                     |
+|Name                    |Description                                                                                                                                                                    |Attributes                                          |
+|:-----------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------|
+|`--input`               |Input file.                                                                                                                                                                    |`file`, required, example: `"input.h5mu"`           |
+|`--modality`            |                                                                                                                                                                               |`string`, default: `"rna"`                          |
+|`--obsp_connectivities` |In which .obsp slot the neighbor connectivities can be found.                                                                                                                  |`string`, default: `"connectivities"`               |
+|`--output`              |Output file.                                                                                                                                                                   |`file`, required, example: `"output.h5mu"`          |
+|`--output_compression`  |                                                                                                                                                                               |`string`, example: `"gzip"`                         |
+|`--obsm_name`           |Name of the .obsm key under which to add the cluster labels. The name of the columns in the matrix will correspond to the resolutions.                                         |`string`, default: `"leiden"`                       |
+|`--resolution`          |A parameter value controlling the coarseness of the clustering. Higher values lead to more clusters. Multiple values will result in clustering being performed multiple times. |List of `double`, default: `1`, multiple_sep: `":"` |
 
 ## Authors
 

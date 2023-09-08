@@ -76,7 +76,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--output`             |Output h5 file.                                        |`file`, required, example: `"pbmc_1k_protein_v3_raw_feature_bc_matrix_filtered.h5"` |
 |`--min_library_size`   |Minimum library size.                                  |`integer`, default: `0`                                                             |
 |`--min_cells_per_gene` |Minimum number of cells per gene.                      |`integer`, default: `0`                                                             |
-|`--keep_feature_types` |Specify which feature types will never be filtered out |`string`, example: `"Antibody Capture"`                                             |
+|`--keep_feature_types` |Specify which feature types will never be filtered out |List of `string`, example: `"Antibody Capture"`, multiple_sep: `":"`                |
 |`--verbose`            |Increase verbosity                                     |`boolean_true`                                                                      |
 
 ## Authors

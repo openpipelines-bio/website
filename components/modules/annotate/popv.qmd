@@ -127,9 +127,9 @@ Output arguments.
 Other arguments.
 
 
-|Name        |Description                                                             |Attributes                                                        |
-|:-----------|:-----------------------------------------------------------------------|:-----------------------------------------------------------------|
-|`--methods` |Methods to call cell types. By default, runs to knn_on_scvi and scanvi. |`string`, required, example: `"knn_on_scvi"`, example: `"scanvi"` |
+|Name        |Description                                                             |Attributes                                                                          |
+|:-----------|:-----------------------------------------------------------------------|:-----------------------------------------------------------------------------------|
+|`--methods` |Methods to call cell types. By default, runs to knn_on_scvi and scanvi. |List of `string`, required, example: `"knn_on_scvi", "scanvi"`, multiple_sep: `":"` |
 
 ## Authors
 

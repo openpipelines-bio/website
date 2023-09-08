@@ -76,10 +76,10 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Inputs
 
-|Name          |Description                                                                            |Attributes                                                                                                 |
-|:-------------|:--------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------|
-|`--input`     |The fastq.gz files to align. Can also be a single directory containing fastq.gz files. |`file`, required, example: `"sample_S1_L001_R1_001.fastq.gz"`, example: `"sample_S1_L001_R2_001.fastq.gz"` |
-|`--reference` |The path to Cell Ranger reference tar.gz file. Can also be a directory.                |`file`, required, example: `"reference.tar.gz"`                                                            |
+|Name          |Description                                                                            |Attributes                                                                                                                   |
+|:-------------|:--------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------|
+|`--input`     |The fastq.gz files to align. Can also be a single directory containing fastq.gz files. |List of `file`, required, example: `"sample_S1_L001_R1_001.fastq.gz", "sample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
+|`--reference` |The path to Cell Ranger reference tar.gz file. Can also be a directory.                |`file`, required, example: `"reference.tar.gz"`                                                                              |
 
 
 ### Outputs

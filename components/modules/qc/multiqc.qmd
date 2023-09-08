@@ -66,7 +66,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name       |Description                                      |Attributes                               |
-|:----------|:------------------------------------------------|:----------------------------------------|
-|`--input`  |Inputs for MultiQC.                              |`file`, required, example: `"input.txt"` |
-|`--output` |Create report in the specified output directory. |`file`, required, example: `"report"`    |
+|Name       |Description                                      |Attributes                                                            |
+|:----------|:------------------------------------------------|:---------------------------------------------------------------------|
+|`--input`  |Inputs for MultiQC.                              |List of `file`, required, example: `"input.txt"`, multiple_sep: `":"` |
+|`--output` |Create report in the specified output directory. |`file`, required, example: `"report"`                                 |

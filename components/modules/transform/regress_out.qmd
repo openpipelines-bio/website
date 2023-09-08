@@ -76,7 +76,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--output`             |Output h5mu file.                                            |`file`, required, default: `"output.h5mu"` |
 |`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`                |
 |`--modality`           |Which modality (one or more) to run this component on.       |`string`, default: `"rna"`                 |
-|`--obs_keys`           |Which .obs keys to regress on.                               |`string`                                   |
+|`--obs_keys`           |Which .obs keys to regress on.                               |List of `string`, multiple_sep: `":"`      |
 
 ## Authors
 
