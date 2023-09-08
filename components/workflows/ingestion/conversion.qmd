@@ -14,7 +14,7 @@ ID: `conversion`
 Namespace: `ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/workflows/ingestion/conversion){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/./workflows/ingestion/conversion){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -73,11 +73,11 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Inputs
 
-|Name           |Description            |Attributes                                |
-|:--------------|:----------------------|:-----------------------------------------|
-|`--id`         |ID of the sample.      |`string`, required, example: `"foo"`      |
-|`--input`      |Path to the sample.    |`file`, required, example: `"input.h5mu"` |
-|`--input_type` |Type of the input file |`string`, required                        |
+|Name           |Description            |Attributes                                                             |
+|:--------------|:----------------------|:----------------------------------------------------------------------|
+|`--id`         |ID of the sample.      |`string`, required, example: `"foo"`                                   |
+|`--input`      |Path to the sample.    |List of `file`, required, example: `"input.h5mu"`, multiple_sep: `";"` |
+|`--input_type` |Type of the input file |`string`, required                                                     |
 
 
 ### Outputs
@@ -89,9 +89,9 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Conversion from h5ad
 
-|Name         |Description                                                       |Attributes |
-|:------------|:-----------------------------------------------------------------|:----------|
-|`--modality` |Name of the modality where the h5ad is stored in the h5mu object. |`string`   |
+|Name         |Description                                                       |Attributes                            |
+|:------------|:-----------------------------------------------------------------|:-------------------------------------|
+|`--modality` |Name of the modality where the h5ad is stored in the h5mu object. |List of `string`, multiple_sep: `":"` |
 
 ## Authors
 

@@ -14,7 +14,7 @@ ID: `filter_with_scrublet`
 Namespace: `filter`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/src/filter/filter_with_scrublet){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/./src/filter/filter_with_scrublet){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

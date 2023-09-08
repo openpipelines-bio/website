@@ -14,7 +14,7 @@ ID: `make_params`
 Namespace: `files`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/src/files/make_params){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/./src/files/make_params){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

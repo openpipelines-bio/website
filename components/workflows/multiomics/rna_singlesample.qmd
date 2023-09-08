@@ -14,7 +14,7 @@ ID: `rna_singlesample`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/workflows/multiomics/rna_singlesample){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/./workflows/multiomics/rna_singlesample){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

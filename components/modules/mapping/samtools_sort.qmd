@@ -14,7 +14,7 @@ ID: `samtools_sort`
 Namespace: `mapping`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/src/mapping/samtools_sort){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/./src/mapping/samtools_sort){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

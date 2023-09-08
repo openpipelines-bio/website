@@ -14,7 +14,7 @@ ID: `make_reference`
 Namespace: `ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/workflows/ingestion/make_reference){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/./workflows/ingestion/make_reference){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -89,14 +89,14 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Outputs
 
-|Name                   |Description                          |Attributes                                           |
-|:----------------------|:------------------------------------|:----------------------------------------------------|
-|`--target`             |Which reference indices to generate. |`string`, default: `"star"`                          |
-|`--output_fasta`       |Output genome sequence fasta.        |`file`, example: `"genome_sequence.fa.gz"`           |
-|`--output_gtf`         |Output transcriptome annotation gtf. |`file`, example: `"transcriptome_annotation.gtf.gz"` |
-|`--output_cellranger`  |Output index                         |`file`, example: `"cellranger_index.tar.gz"`         |
-|`--output_bd_rhapsody` |Output index                         |`file`, example: `"bdrhap_index.tar.gz"`             |
-|`--output_star`        |Output index                         |`file`, example: `"star_index.tar.gz"`               |
+|Name                   |Description                          |Attributes                                               |
+|:----------------------|:------------------------------------|:--------------------------------------------------------|
+|`--target`             |Which reference indices to generate. |List of `string`, default: `"star"`, multiple_sep: `":"` |
+|`--output_fasta`       |Output genome sequence fasta.        |`file`, example: `"genome_sequence.fa.gz"`               |
+|`--output_gtf`         |Output transcriptome annotation gtf. |`file`, example: `"transcriptome_annotation.gtf.gz"`     |
+|`--output_cellranger`  |Output index                         |`file`, example: `"cellranger_index.tar.gz"`             |
+|`--output_bd_rhapsody` |Output index                         |`file`, example: `"bdrhap_index.tar.gz"`                 |
+|`--output_star`        |Output index                         |`file`, example: `"star_index.tar.gz"`                   |
 
 
 ### Arguments

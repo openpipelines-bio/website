@@ -14,7 +14,7 @@ ID: `cellbender_remove_background`
 Namespace: `correction`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/src/correction/cellbender_remove_background){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/./src/correction/cellbender_remove_background){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

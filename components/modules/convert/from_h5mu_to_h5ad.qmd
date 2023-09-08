@@ -14,7 +14,7 @@ ID: `from_h5mu_to_h5ad`
 Namespace: `convert`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/src/convert/from_h5mu_to_h5ad){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/./src/convert/from_h5mu_to_h5ad){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

@@ -14,7 +14,7 @@ ID: `cellranger_mkfastq`
 Namespace: `demux`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/src/demux/cellranger_mkfastq){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/./src/demux/cellranger_mkfastq){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

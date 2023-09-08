@@ -14,7 +14,7 @@ ID: `leiden`
 Namespace: `cluster`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/src/cluster/leiden){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/./src/cluster/leiden){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

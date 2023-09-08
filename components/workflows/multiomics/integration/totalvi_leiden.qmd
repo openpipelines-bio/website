@@ -14,7 +14,7 @@ ID: `totalvi_leiden`
 Namespace: `multiomics/integration`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/workflows/multiomics/integration/totalvi_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/./workflows/multiomics/integration/totalvi_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -179,18 +179,18 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Clustering options RNA
 
-|Name                      |Description                                                                                                                                                                                                                                                        |Attributes                                        |
-|:-------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------|
-|`--rna_obs_cluster`       |Prefix for the .obs keys under which to add the cluster labels. Newly created columns in .obs will  be created from the specified value for '--obs_cluster' suffixed with an underscore and one of the resolutions resolutions specified in '--leiden_resolution'. |`string`, default: `"totalvi_integration_leiden"` |
-|`--rna_leiden_resolution` |Control the coarseness of the clustering. Higher values lead to more clusters.                                                                                                                                                                                     |`double`, default: `1`                            |
+|Name                      |Description                                                                                                                                                                                                                                                        |Attributes                                          |
+|:-------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------|
+|`--rna_obs_cluster`       |Prefix for the .obs keys under which to add the cluster labels. Newly created columns in .obs will  be created from the specified value for '--obs_cluster' suffixed with an underscore and one of the resolutions resolutions specified in '--leiden_resolution'. |`string`, default: `"totalvi_integration_leiden"`   |
+|`--rna_leiden_resolution` |Control the coarseness of the clustering. Higher values lead to more clusters.                                                                                                                                                                                     |List of `double`, default: `1`, multiple_sep: `":"` |
 
 
 ### Clustering options ADT
 
-|Name                       |Description                                                                                                                                                                                                                                                        |Attributes                                        |
-|:--------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------|
-|`--prot_obs_cluster`       |Prefix for the .obs keys under which to add the cluster labels. Newly created columns in .obs will  be created from the specified value for '--obs_cluster' suffixed with an underscore and one of the resolutions resolutions specified in '--leiden_resolution'. |`string`, default: `"totalvi_integration_leiden"` |
-|`--prot_leiden_resolution` |Control the coarseness of the clustering. Higher values lead to more clusters.                                                                                                                                                                                     |`double`, default: `1`                            |
+|Name                       |Description                                                                                                                                                                                                                                                        |Attributes                                          |
+|:--------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------|
+|`--prot_obs_cluster`       |Prefix for the .obs keys under which to add the cluster labels. Newly created columns in .obs will  be created from the specified value for '--obs_cluster' suffixed with an underscore and one of the resolutions resolutions specified in '--leiden_resolution'. |`string`, default: `"totalvi_integration_leiden"`   |
+|`--prot_leiden_resolution` |Control the coarseness of the clustering. Higher values lead to more clusters.                                                                                                                                                                                     |List of `double`, default: `1`, multiple_sep: `":"` |
 
 
 ### Umap options

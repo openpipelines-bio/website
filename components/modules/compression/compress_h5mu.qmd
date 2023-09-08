@@ -14,7 +14,7 @@ ID: `compress_h5mu`
 Namespace: `compression`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/src/compression/compress_h5mu){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/./src/compression/compress_h5mu){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 

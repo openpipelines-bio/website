@@ -14,7 +14,7 @@ ID: `xgboost`
 Namespace: `labels_transfer`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/src/labels_transfer/xgboost){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/./src/labels_transfer/xgboost){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
