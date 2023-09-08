@@ -14,7 +14,7 @@ ID: `scvi`
 Namespace: `integrate`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/integrate/scvi){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/src/integrate/scvi){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.9.0 -latest \
+  -r 0.10.0 -latest \
   -main-script target/nextflow/integrate/scvi/main.nf \
   --help
 ```
@@ -46,12 +46,31 @@ modality: "rna"
 # input_layer: "foo"
 obs_batch: "sample_id"
 # var_input: "foo"
+# obs_labels: "foo"
+# obs_size_factor: "foo"
+# obs_categorical_covariate: ["foo"]
+# obs_continuous_covariate: ["foo"]
 
 # Outputs
 # output: "$id.$key.output.output"
 # model_output: "$id.$key.model_output.model_output"
 # output_compression: "gzip"
 obsm_output: "X_scvi_integrated"
+
+# SCVI options
+n_hidden_nodes: 128
+n_dimensions_latent_space: 30
+n_hidden_layers: 2
+dropout_rate: 0.1
+dispersion: "gene"
+gene_likelihood: "nb"
+
+# Variational auto-encoder model options
+use_layer_normalization: "both"
+use_batch_normalization: "none"
+encode_covariates: true
+deeply_inject_covariates: false
+use_observed_lib_size: false
 
 # Early stopping arguments
 # early_stopping: true
@@ -77,7 +96,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.9.0 -latest \
+  -r 0.10.0 -latest \
   -profile docker \
   -main-script target/nextflow/integrate/scvi/main.nf \
   -params-file params.yaml
@@ -91,13 +110,17 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Inputs
 
-|Name            |Description                                                                    |Attributes                       |
-|:---------------|:------------------------------------------------------------------------------|:--------------------------------|
-|`--input`       |Input h5mu file                                                                |`file`, required                 |
-|`--modality`    |                                                                               |`string`, default: `"rna"`       |
-|`--input_layer` |Input layer to use. If None, X is used                                         |`string`                         |
-|`--obs_batch`   |Column name discriminating between your batches.                               |`string`, default: `"sample_id"` |
-|`--var_input`   |.var column containing highly variable genes. By default, do not subset genes. |`string`                         |
+|Name                          |Description                                                                                                                                                                                                                                                                                                                                     |Attributes                       |
+|:-----------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------|
+|`--input`                     |Input h5mu file                                                                                                                                                                                                                                                                                                                                 |`file`, required                 |
+|`--modality`                  |                                                                                                                                                                                                                                                                                                                                                |`string`, default: `"rna"`       |
+|`--input_layer`               |Input layer to use. If None, X is used                                                                                                                                                                                                                                                                                                          |`string`                         |
+|`--obs_batch`                 |Column name discriminating between your batches.                                                                                                                                                                                                                                                                                                |`string`, default: `"sample_id"` |
+|`--var_input`                 |.var column containing highly variable genes. By default, do not subset genes.                                                                                                                                                                                                                                                                  |`string`                         |
+|`--obs_labels`                |Key in adata.obs for label information. Categories will automatically be  converted into integer categories and saved to adata.obs['_scvi_labels']. If None, assigns the same label to all the data.                                                                                                                                            |`string`                         |
+|`--obs_size_factor`           |Key in adata.obs for size factor information. Instead of using library size as a size factor, the provided size factor column will be used as offset in the mean of the likelihood. Assumed to be on linear scale.                                                                                                                              |`string`                         |
+|`--obs_categorical_covariate` |Keys in adata.obs that correspond to categorical data. These covariates can be added in addition to the batch covariate and are also treated as nuisance factors (i.e., the model tries to minimize their effects on the latent space). Thus, these should not be used for biologically-relevant factors that you do _not_ want to correct for. |`string`                         |
+|`--obs_continuous_covariate`  |Keys in adata.obs that correspond to continuous data. These covariates can be added in addition to the batch covariate and are also treated as nuisance factors (i.e., the model tries to minimize their effects on the latent space). Thus, these should not be used for biologically-relevant factors that you do _not_ want to correct for.  |`string`                         |
 
 
 ### Outputs
@@ -108,6 +131,29 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--model_output`       |Folder where the state of the trained model will be saved to.    |`file`                                   |
 |`--output_compression` |The compression format to be used on the output h5mu object.     |`string`, example: `"gzip"`              |
 |`--obsm_output`        |In which .obsm slot to store the resulting integrated embedding. |`string`, default: `"X_scvi_integrated"` |
+
+
+### SCVI options
+
+|Name                          |Description                                                                                                                                                                                                                                                                                                                                              |Attributes                  |
+|:-----------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------|
+|`--n_hidden_nodes`            |Number of nodes per hidden layer.                                                                                                                                                                                                                                                                                                                        |`integer`, default: `128`   |
+|`--n_dimensions_latent_space` |Dimensionality of the latent space.                                                                                                                                                                                                                                                                                                                      |`integer`, default: `30`    |
+|`--n_hidden_layers`           |Number of hidden layers used for encoder and decoder neural-networks.                                                                                                                                                                                                                                                                                    |`integer`, default: `2`     |
+|`--dropout_rate`              |Dropout rate for the neural networks.                                                                                                                                                                                                                                                                                                                    |`double`, default: `0.1`    |
+|`--dispersion`                |Set the behavior for the dispersion for negative binomial distributions: - gene: dispersion parameter of negative binomial is constant per gene across cells - gene-batch: dispersion can differ between different batches - gene-label: dispersion can differ between different labels - gene-cell:  dispersion can differ for every gene in every cell |`string`, default: `"gene"` |
+|`--gene_likelihood`           |Model used to generate the expression data from a count-based likelihood distribution. - nb: Negative binomial distribution - zinb: Zero-inflated negative binomial distribution - poisson: Poisson distribution                                                                                                                                         |`string`, default: `"nb"`   |
+
+
+### Variational auto-encoder model options
+
+|Name                         |Description                                                                                                                                                                                               |Attributes                  |
+|:----------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------|
+|`--use_layer_normalization`  |Neural networks for which to enable layer normalization.                                                                                                                                                  |`string`, default: `"both"` |
+|`--use_batch_normalization`  |Neural networks for which to enable batch normalization.                                                                                                                                                  |`string`, default: `"none"` |
+|`--encode_covariates`        |Whether to concatenate covariates to expression in encoder                                                                                                                                                |`boolean_false`             |
+|`--deeply_inject_covariates` |Whether to concatenate covariates into output of hidden layers in encoder/decoder.  This option only applies when n_layers > 1. The covariates are concatenated to the input of subsequent hidden layers. |`boolean_true`              |
+|`--use_observed_lib_size`    |Use observed library size for RNA as scaling factor in mean of conditional distribution.                                                                                                                  |`boolean_true`              |
 
 
 ### Early stopping arguments

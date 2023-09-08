@@ -14,7 +14,7 @@ ID: `calculate_qc_metrics`
 Namespace: `qc`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/qc/calculate_qc_metrics){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/src/qc/calculate_qc_metrics){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -46,7 +46,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.9.0 -latest \
+  -r 0.10.0 -latest \
   -main-script target/nextflow/qc/calculate_qc_metrics/main.nf \
   --help
 ```
@@ -60,7 +60,8 @@ nextflow run openpipelines-bio/openpipeline \
 input: # please fill in - example: "input.h5mu"
 modality: "rna"
 # layer: "raw_counts"
-# var_qc_metrics: ["ercc", "highly_variable"]
+# var_qc_metrics: ["ercc", "highly_variable", "mitochondrial"]
+# var_qc_metrics_fill_na_value: true
 # top_n_vars: [123]
 
 # Outputs
@@ -75,7 +76,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.9.0 -latest \
+  -r 0.10.0 -latest \
   -profile docker \
   -main-script target/nextflow/qc/calculate_qc_metrics/main.nf \
   -params-file params.yaml
@@ -89,13 +90,14 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Inputs
 
-|Name               |Description                                                                                                                                                                                                                    |Attributes                                  |
-|:------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------|
-|`--input`          |Input h5mu file                                                                                                                                                                                                                |`file`, required, example: `"input.h5mu"`   |
-|`--modality`       |                                                                                                                                                                                                                               |`string`, default: `"rna"`                  |
-|`--layer`          |                                                                                                                                                                                                                               |`string`, example: `"raw_counts"`           |
-|`--var_qc_metrics` |Keys to select a boolean (containing only True or False) column from .var. For each cell, calculate the proportion of total values for genes which are labeled 'True',  compared to the total sum of the values for all genes. |`string`, example: `"ercc,highly_variable"` |
-|`--top_n_vars`     |Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. `--top_n_vars 20,50` finds cumulative proportion to the 20th and 50th most expressed vars.                |`integer`                                   |
+|Name                             |Description                                                                                                                                                                                                                    |Attributes                                                |
+|:--------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------|
+|`--input`                        |Input h5mu file                                                                                                                                                                                                                |`file`, required, example: `"input.h5mu"`                 |
+|`--modality`                     |                                                                                                                                                                                                                               |`string`, default: `"rna"`                                |
+|`--layer`                        |                                                                                                                                                                                                                               |`string`, example: `"raw_counts"`                         |
+|`--var_qc_metrics`               |Keys to select a boolean (containing only True or False) column from .var. For each cell, calculate the proportion of total values for genes which are labeled 'True',  compared to the total sum of the values for all genes. |`string`, example: `"ercc,highly_variable,mitochondrial"` |
+|`--var_qc_metrics_fill_na_value` |Fill any 'NA' values found in the columns specified with --var_qc_metrics to 'True' or 'False'. as False.                                                                                                                      |`boolean`                                                 |
+|`--top_n_vars`                   |Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. `--top_n_vars 20,50` finds cumulative proportion to the 20th and 50th most expressed vars.                |`integer`                                                 |
 
 
 ### Outputs

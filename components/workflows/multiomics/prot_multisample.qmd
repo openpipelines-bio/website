@@ -14,7 +14,7 @@ ID: `prot_multisample`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/workflows/multiomics/prot_multisample){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/workflows/multiomics/prot_multisample){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,8 +30,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.9.0 -latest \
-  -main-script workflows/multiomics/prot_multisample/main.nf \
+  -r 0.10.0 -latest \
+  -main-script ./workflows/multiomics/prot_multisample/main.nf \
   --help
 ```
 
@@ -42,13 +42,13 @@ nextflow run openpipelines-bio/openpipeline \
 ```yaml
 # Inputs
 id: # please fill in - example: "concatenated"
-sample_id: # please fill in - example: ["foo"]
-input: # please fill in - example: ["dataset.h5mu"]
+input: # please fill in - example: "dataset.h5mu"
 
-# Sample ID options
-add_id_to_obs: true
-add_id_obs_output: "sample_id"
-add_id_make_observation_keys_unique: true
+# Outputs
+# output: "$id.$key.output.h5mu"
+
+# QC metrics calculation options
+top_n_vars: [50, 100, 200, 500]
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
@@ -58,9 +58,9 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.9.0 -latest \
+  -r 0.10.0 -latest \
   -profile docker \
-  -main-script workflows/multiomics/prot_multisample/main.nf \
+  -main-script ./workflows/multiomics/prot_multisample/main.nf \
   -params-file params.yaml
 ```
 
@@ -72,25 +72,24 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Inputs
 
-|Name          |Description                 |Attributes                                    |
-|:-------------|:---------------------------|:---------------------------------------------|
-|`--id`        |ID of the concatenated file |`string`, required, example: `"concatenated"` |
-|`--sample_id` |IDs of the sample.          |`string`, required, example: `"foo"`          |
-|`--input`     |Path to the samples.        |`file`, required, example: `"dataset.h5mu"`   |
+|Name      |Description                 |Attributes                                    |
+|:---------|:---------------------------|:---------------------------------------------|
+|`--id`    |ID of the concatenated file |`string`, required, example: `"concatenated"` |
+|`--input` |Path to the samples.        |`file`, required, example: `"dataset.h5mu"`   |
 
 
-### Sample ID options
+### Outputs
 
-Options for adding the id to .obs on the MuData object. Having a sample 
-id present in a requirement of several components for this pipeline.
+|Name       |Description                     |Attributes                                 |
+|:----------|:-------------------------------|:------------------------------------------|
+|`--output` |Destination path to the output. |`file`, required, example: `"output.h5mu"` |
 
 
+### QC metrics calculation options
 
-|Name                                    |Description                                                                                         |Attributes                       |
-|:---------------------------------------|:---------------------------------------------------------------------------------------------------|:--------------------------------|
-|`--add_id_to_obs`                       |Add the value passed with --id to .obs.                                                             |`boolean`, default: `TRUE`       |
-|`--add_id_obs_output`                   |.Obs column to add the sample IDs to. Required and only used when  --add_id_to_obs is set to 'true' |`string`, default: `"sample_id"` |
-|`--add_id_make_observation_keys_unique` |Join the id to the .obs index (.obs_names).  Only used when --add_id_to_obs is set to 'true'.       |`boolean`, default: `TRUE`       |
+|Name           |Description                                                                                                                                                                                                     |Attributes                                                               |
+|:--------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------|
+|`--top_n_vars` |Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. `--top_n_vars 20,50` finds cumulative proportion to the 20th and 50th most expressed vars. |`integer`, default: `50`, default: `100`, default: `200`, default: `500` |
 
 ## Authors
 
@@ -105,26 +104,23 @@ flowchart LR
     p0(Input)
     p3(toSortedList)
     p5(flatMap)
-    p9(filter)
-    p11(flatMap)
-    p17(add_id)
-    p21(collect)
-    p24(mix)
-    p23(filter)
-    p31(concat)
-    p41(clr)
-    p49(Output)
-    p23-->p24
+    p7(toSortedList)
+    p9(Output)
+    p15(clr)
+    p17(join)
+    p25(prot_calculate_qc_metrics)
+    p27(join)
+    p34(Output)
     p0-->p3
     p3-->p5
-    p5-->p9
-    p5-->p23
-    p9-->p11
-    p11-->p17
-    p17-->p21
-    p21-->p24
-    p24-->p31
-    p31-->p41
-    p41-->p49
+    p5-->p7
+    p7-->p9
+    p5-->p17
+    p5-->p15
+    p15-->p17
+    p17-->p27
+    p17-->p25
+    p25-->p27
+    p27-->p34
 
 ```

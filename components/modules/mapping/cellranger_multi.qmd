@@ -14,7 +14,7 @@ ID: `cellranger_multi`
 Namespace: `mapping`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/src/mapping/cellranger_multi){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/src/mapping/cellranger_multi){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.9.0 -latest \
+  -r 0.10.0 -latest \
   -main-script target/nextflow/mapping/cellranger_multi/main.nf \
   --help
 ```
@@ -79,7 +79,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.9.0 -latest \
+  -r 0.10.0 -latest \
   -profile docker \
   -main-script target/nextflow/mapping/cellranger_multi/main.nf \
   -params-file params.yaml

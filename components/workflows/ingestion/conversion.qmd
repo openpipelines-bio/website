@@ -14,7 +14,7 @@ ID: `conversion`
 Namespace: `ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.9.0/workflows/ingestion/conversion){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/workflows/ingestion/conversion){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,8 +30,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.9.0 -latest \
-  -main-script workflows/ingestion/conversion/main.nf \
+  -r 0.10.0 -latest \
+  -main-script ./workflows/ingestion/conversion/main.nf \
   --help
 ```
 
@@ -59,9 +59,9 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.9.0 -latest \
+  -r 0.10.0 -latest \
   -profile docker \
-  -main-script workflows/ingestion/conversion/main.nf \
+  -main-script ./workflows/ingestion/conversion/main.nf \
   -params-file params.yaml
 ```
 
@@ -109,12 +109,15 @@ flowchart LR
     p2(toSortedList)
     p4(flatMap)
     p5(filter)
-    p11(from_10xh5_to_h5mu)
+    p10(from_10xh5_to_h5mu)
+    p12(join)
     p35(mix)
     p15(filter)
-    p21(from_10xmtx_to_h5mu)
+    p20(from_10xmtx_to_h5mu)
+    p22(join)
     p25(filter)
-    p31(from_h5ad_to_h5mu)
+    p30(from_h5ad_to_h5mu)
+    p32(join)
     p37(toSortedList)
     p39(Output)
     p4-->p5
@@ -122,12 +125,18 @@ flowchart LR
     p4-->p25
     p0-->p2
     p2-->p4
-    p5-->p11
-    p11-->p35
-    p15-->p21
-    p21-->p35
-    p25-->p31
-    p31-->p35
+    p5-->p12
+    p5-->p10
+    p10-->p12
+    p12-->p35
+    p15-->p22
+    p15-->p20
+    p20-->p22
+    p22-->p35
+    p25-->p32
+    p25-->p30
+    p30-->p32
+    p32-->p35
     p35-->p37
     p37-->p39
 
