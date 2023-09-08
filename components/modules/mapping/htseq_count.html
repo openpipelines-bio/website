@@ -1286,9 +1286,9 @@ Note
 <h3 class="anchored" data-anchor-id="input">Input</h3>
 <table class="table">
 <colgroup>
-<col style="width: 9%">
-<col style="width: 38%">
-<col style="width: 51%">
+<col style="width: 8%">
+<col style="width: 34%">
+<col style="width: 56%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1301,7 +1301,7 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><code>--input</code></td>
 <td style="text-align: left;">Path to the SAM/BAM files containing the mapped reads.</td>
-<td style="text-align: left;"><code>file</code>, required, example: <code>"mysample1.BAM"</code>, example: <code>"mysample2.BAM"</code></td>
+<td style="text-align: left;">List of <code>file</code>, required, example: <code>"mysample1.BAM", "mysample2.BAM"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--reference</code></td>
@@ -1315,9 +1315,9 @@ Note
 <h3 class="anchored" data-anchor-id="output">Output</h3>
 <table class="table">
 <colgroup>
-<col style="width: 7%">
-<col style="width: 70%">
-<col style="width: 22%">
+<col style="width: 6%">
+<col style="width: 66%">
+<col style="width: 27%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1340,7 +1340,7 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><code>--output_sam</code></td>
 <td style="text-align: left;">Write out all SAM alignment records into SAM/BAM files (one per input file needed), annotating each line with its feature assignment (as an optional field with tag ‘XF’). See the -p option to use BAM instead of SAM.</td>
-<td style="text-align: left;"><code>file</code>, example: <code>"mysample1_out.BAM"</code>, example: <code>"mysample2_out.BAM"</code></td>
+<td style="text-align: left;">List of <code>file</code>, example: <code>"mysample1_out.BAM", "mysample2_out.BAM"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--output_sam_format</code></td>
@@ -1354,9 +1354,9 @@ Note
 <h3 class="anchored" data-anchor-id="arguments">Arguments</h3>
 <table class="table">
 <colgroup>
-<col style="width: 5%">
-<col style="width: 89%">
-<col style="width: 5%">
+<col style="width: 4%">
+<col style="width: 85%">
+<col style="width: 9%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1389,12 +1389,12 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><code>--id_attribute</code></td>
 <td style="text-align: left;">GTF attribute to be used as feature ID (default, suitable for Ensembl GTF files: gene_id). All feature of the right type (see -t option) within the same GTF attribute will be added together. The typical way of using this option is to count all exonic reads from each gene and add the exons but other uses are possible as well. You can call this option multiple times: in that case, the combination of all attributes separated by colons (:) will be used as a unique identifier, e.g.&nbsp;for exons you might use -i gene_id -i exon_number.</td>
-<td style="text-align: left;"><code>string</code>, example: <code>"gene_id"</code></td>
+<td style="text-align: left;">List of <code>string</code>, example: <code>"gene_id"</code>, multiple_sep: <code>":"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--additional_attributes</code></td>
 <td style="text-align: left;">Additional feature attributes (suitable for Ensembl GTF files: gene_name). Use multiple times for more than one additional attribute. These attributes are only used as annotations in the output, while the determination of how the counts are added together is done based on option -i.</td>
-<td style="text-align: left;"><code>string</code>, example: <code>"gene_name"</code></td>
+<td style="text-align: left;">List of <code>string</code>, example: <code>"gene_name"</code>, multiple_sep: <code>":"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--add_chromosome_info</code></td>

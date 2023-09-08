@@ -1305,9 +1305,9 @@ Note
 <h3 class="anchored" data-anchor-id="inputs">Inputs</h3>
 <table class="table">
 <colgroup>
-<col style="width: 9%">
-<col style="width: 67%">
-<col style="width: 23%">
+<col style="width: 8%">
+<col style="width: 61%">
+<col style="width: 30%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1325,12 +1325,12 @@ Note
 <tr class="even">
 <td style="text-align: left;"><code>--input</code></td>
 <td style="text-align: left;">Path to your read files in the FASTQ.GZ format. You may specify as many R1/R2 read pairs as you want.</td>
-<td style="text-align: left;"><code>file</code>, required, example: <code>"input.fastq.gz"</code></td>
+<td style="text-align: left;">List of <code>file</code>, required, example: <code>"input.fastq.gz"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--reference</code></td>
 <td style="text-align: left;">Refence to map to. For <code>--mode wta</code>, this is the path to STAR index as a tar.gz file. For <code>--mode targeted</code>, this is the path to mRNA reference file for pre-designed, supplemental, or custom panel, in FASTA format</td>
-<td style="text-align: left;"><code>file</code>, required, example: <code>"reference_genome.tar.gz&amp;#124;reference.fasta"</code></td>
+<td style="text-align: left;">List of <code>file</code>, required, example: <code>"reference_genome.tar.gz&amp;#124;reference.fasta"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--transcriptome_annotation</code></td>
@@ -1340,12 +1340,12 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><code>--abseq_reference</code></td>
 <td style="text-align: left;">Path to the AbSeq reference file in FASTA format. Only needed if BD AbSeq Ab-Oligos are used.</td>
-<td style="text-align: left;"><code>file</code>, example: <code>"abseq_reference.fasta"</code></td>
+<td style="text-align: left;">List of <code>file</code>, example: <code>"abseq_reference.fasta"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--supplemental_reference</code></td>
 <td style="text-align: left;">Path to the supplemental reference file in FASTA format. Only needed if there are additional transgene sequences used in the experiment (only for <code>--mode wta</code>).</td>
-<td style="text-align: left;"><code>file</code>, example: <code>"supplemental_reference.fasta"</code></td>
+<td style="text-align: left;">List of <code>file</code>, example: <code>"supplemental_reference.fasta"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--sample_prefix</code></td>
@@ -1447,8 +1447,8 @@ Note
 <table class="table">
 <colgroup>
 <col style="width: 7%">
-<col style="width: 61%">
-<col style="width: 30%">
+<col style="width: 60%">
+<col style="width: 32%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1466,7 +1466,7 @@ Note
 <tr class="even">
 <td style="text-align: left;"><code>--tag_names</code></td>
 <td style="text-align: left;">Tag_Names (optional) - Specify the tag number followed by ‘-’ and the desired sample name to appear in Sample_Tag_Metrics.csv. Do not use the special characters: &amp;, (), [], {}, &lt;&gt;, ?, |</td>
-<td style="text-align: left;"><code>string</code>, example: <code>"4-mySample"</code>, example: <code>"9-myOtherSample"</code>, example: <code>"6-alsoThisSample"</code></td>
+<td style="text-align: left;">List of <code>string</code>, example: <code>"4-mySample", "9-myOtherSample", "6-alsoThisSample"</code>, multiple_sep: <code>":"</code></td>
 </tr>
 </tbody>
 </table>

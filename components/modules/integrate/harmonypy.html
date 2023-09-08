@@ -1272,8 +1272,8 @@ Note
 <table class="table">
 <colgroup>
 <col style="width: 8%">
-<col style="width: 68%">
-<col style="width: 22%">
+<col style="width: 64%">
+<col style="width: 27%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1316,12 +1316,12 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><code>--theta</code></td>
 <td style="text-align: left;">Diversity clustering penalty parameter. Specify for each variable in group.by.vars. theta=0 does not encourage any diversity. Larger values of theta result in more diverse clusters.</td>
-<td style="text-align: left;"><code>double</code>, default: <code>2</code></td>
+<td style="text-align: left;">List of <code>double</code>, default: <code>2</code>, multiple_sep: <code>":"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--obs_covariates</code></td>
 <td style="text-align: left;">The .obs field(s) that define the covariate(s) to regress out.</td>
-<td style="text-align: left;"><code>string</code>, required, example: <code>"batch"</code>, example: <code>"sample"</code></td>
+<td style="text-align: left;">List of <code>string</code>, required, example: <code>"batch", "sample"</code>, multiple_sep: <code>":"</code></td>
 </tr>
 </tbody>
 </table>

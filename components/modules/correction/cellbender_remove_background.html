@@ -1407,8 +1407,8 @@ Note
 <table class="table">
 <colgroup>
 <col style="width: 6%">
-<col style="width: 88%">
-<col style="width: 4%">
+<col style="width: 84%">
+<col style="width: 9%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1466,7 +1466,7 @@ Note
 <tr class="even">
 <td style="text-align: left;"><code>--z_layers</code></td>
 <td style="text-align: left;">Dimension of hidden layers in the encoder for z.</td>
-<td style="text-align: left;"><code>integer</code>, default: <code>512</code></td>
+<td style="text-align: left;">List of <code>integer</code>, default: <code>512</code>, multiple_sep: <code>":"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--training_fraction</code></td>
@@ -1481,17 +1481,17 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><code>--ignore_features</code></td>
 <td style="text-align: left;">Integer indices of features to ignore entirely. In the output count matrix, the counts for these features will be unchanged.</td>
-<td style="text-align: left;"><code>integer</code></td>
+<td style="text-align: left;">List of <code>integer</code>, multiple_sep: <code>":"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--fpr</code></td>
 <td style="text-align: left;">Target ‘delta’ false positive rate in [0, 1). Use 0 for a cohort of samples which will be jointly analyzed for differential expression. A false positive is a true signal count that is erroneously removed. More background removal is accompanied by more signal removal at high values of FPR. You can specify multiple values, which will create multiple output files.</td>
-<td style="text-align: left;"><code>double</code>, default: <code>0.01</code></td>
+<td style="text-align: left;">List of <code>double</code>, default: <code>0.01</code>, multiple_sep: <code>":"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--exclude_feature_types</code></td>
 <td style="text-align: left;">Feature types to ignore during the analysis. These features will be left unchanged in the output file.</td>
-<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">List of <code>string</code>, multiple_sep: <code>":"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--projected_ambient_count_threshold</code></td>

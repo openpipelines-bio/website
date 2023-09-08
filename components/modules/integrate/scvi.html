@@ -1309,8 +1309,8 @@ Note
 <table class="table">
 <colgroup>
 <col style="width: 7%">
-<col style="width: 84%">
-<col style="width: 8%">
+<col style="width: 83%">
+<col style="width: 9%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1358,12 +1358,12 @@ Note
 <tr class="even">
 <td style="text-align: left;"><code>--obs_categorical_covariate</code></td>
 <td style="text-align: left;">Keys in adata.obs that correspond to categorical data. These covariates can be added in addition to the batch covariate and are also treated as nuisance factors (i.e., the model tries to minimize their effects on the latent space). Thus, these should not be used for biologically-relevant factors that you do <em>not</em> want to correct for.</td>
-<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">List of <code>string</code>, multiple_sep: <code>":"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--obs_continuous_covariate</code></td>
 <td style="text-align: left;">Keys in adata.obs that correspond to continuous data. These covariates can be added in addition to the batch covariate and are also treated as nuisance factors (i.e., the model tries to minimize their effects on the latent space). Thus, these should not be used for biologically-relevant factors that you do <em>not</em> want to correct for.</td>
-<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">List of <code>string</code>, multiple_sep: <code>":"</code></td>
 </tr>
 </tbody>
 </table>

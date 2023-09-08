@@ -1378,9 +1378,9 @@ Note
 <h3 class="anchored" data-anchor-id="arguments">Arguments</h3>
 <table class="table">
 <colgroup>
-<col style="width: 8%">
-<col style="width: 84%">
-<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 79%">
+<col style="width: 12%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1428,7 +1428,7 @@ Note
 <tr class="even">
 <td style="text-align: left;"><code>--z_layers</code></td>
 <td style="text-align: left;">Dimension of hidden layers in the encoder for z.</td>
-<td style="text-align: left;"><code>integer</code>, default: <code>500</code></td>
+<td style="text-align: left;">List of <code>integer</code>, default: <code>500</code>, multiple_sep: <code>":"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--training_fraction</code></td>
@@ -1443,7 +1443,7 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><code>--fpr</code></td>
 <td style="text-align: left;">Target false positive rate in (0, 1). A false positive is a true signal count that is erroneously removed. More background removal is accompanied by more signal removal at high values of FPR. You can specify multiple values, which will create multiple output files.</td>
-<td style="text-align: left;"><code>double</code>, default: <code>0.01</code></td>
+<td style="text-align: left;">List of <code>double</code>, default: <code>0.01</code>, multiple_sep: <code>":"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--exclude_antibody_capture</code></td>

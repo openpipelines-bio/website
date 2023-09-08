@@ -1268,8 +1268,8 @@ Note
 <table class="table">
 <colgroup>
 <col style="width: 5%">
-<col style="width: 47%">
-<col style="width: 46%">
+<col style="width: 44%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1282,7 +1282,7 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><code>--input</code></td>
 <td style="text-align: left;">The FASTQ files to be analyzed. Corresponds to the –readFilesIn argument in the STAR command.</td>
-<td style="text-align: left;"><code>file</code>, required, example: <code>"mysample_S1_L001_R1_001.fastq.gz"</code>, example: <code>"mysample_S1_L001_R2_001.fastq.gz"</code></td>
+<td style="text-align: left;">List of <code>file</code>, required, example: <code>"mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--reference</code></td>
@@ -1326,8 +1326,8 @@ Note
 <table class="table">
 <colgroup>
 <col style="width: 4%">
-<col style="width: 85%">
-<col style="width: 9%">
+<col style="width: 84%">
+<col style="width: 10%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1345,22 +1345,22 @@ Note
 <tr class="even">
 <td style="text-align: left;"><code>--genomeFastaFiles</code></td>
 <td style="text-align: left;">path(s) to the fasta files with the genome sequences, separated by spaces. These files should be plain text FASTA files, they <em>cannot</em> be zipped. Required for the genome generation (–runMode genomeGenerate). Can also be used in the mapping (–runMode alignReads) to add extra (new) sequences to the genome (e.g.&nbsp;spike-ins).</td>
-<td style="text-align: left;"><code>file</code></td>
+<td style="text-align: left;">List of <code>file</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--genomeFileSizes</code></td>
 <td style="text-align: left;">genome files exact sizes in bytes. Typically, this should not be defined by the user.</td>
-<td style="text-align: left;"><code>integer</code>, example: <code>0</code></td>
+<td style="text-align: left;">List of <code>integer</code>, example: <code>0</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--genomeTransformOutput</code></td>
 <td style="text-align: left;">which output to transform back to original genome - SAM … SAM/BAM alignments - SJ … splice junctions (SJ.out.tab) - None … no transformation of the output</td>
-<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">List of <code>string</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--genomeChrSetMitochondrial</code></td>
 <td style="text-align: left;">names of the mitochondrial chromosomes. Presently only used for STARsolo statistics output/</td>
-<td style="text-align: left;"><code>string</code>, example: <code>"chrM"</code>, example: <code>"M"</code>, example: <code>"MT"</code></td>
+<td style="text-align: left;">List of <code>string</code>, example: <code>"chrM", "M", "MT"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 </tbody>
 </table>
@@ -1369,9 +1369,9 @@ Note
 <h3 class="anchored" data-anchor-id="splice-junctions-database">Splice Junctions Database</h3>
 <table class="table">
 <colgroup>
-<col style="width: 10%">
-<col style="width: 71%">
-<col style="width: 17%">
+<col style="width: 9%">
+<col style="width: 68%">
+<col style="width: 21%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1384,7 +1384,7 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><code>--sjdbFileChrStartEnd</code></td>
 <td style="text-align: left;">path to the files with genomic coordinates (chr <tab> start <tab> end <tab> strand) for the splice junction introns. Multiple files can be supplied and will be concatenated.</tab></tab></tab></td>
-<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">List of <code>string</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--sjdbGTFfile</code></td>
@@ -1414,12 +1414,12 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><code>--sjdbGTFtagExonParentGeneName</code></td>
 <td style="text-align: left;">GTF attribute name for parent gene name</td>
-<td style="text-align: left;"><code>string</code>, example: <code>"gene_name"</code></td>
+<td style="text-align: left;">List of <code>string</code>, example: <code>"gene_name"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--sjdbGTFtagExonParentGeneType</code></td>
 <td style="text-align: left;">GTF attribute name for parent gene type</td>
-<td style="text-align: left;"><code>string</code>, example: <code>"gene_type"</code>, example: <code>"gene_biotype"</code></td>
+<td style="text-align: left;">List of <code>string</code>, example: <code>"gene_type", "gene_biotype"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--sjdbOverhang</code></td>
@@ -1468,8 +1468,8 @@ Note
 <table class="table">
 <colgroup>
 <col style="width: 3%">
-<col style="width: 91%">
-<col style="width: 4%">
+<col style="width: 87%">
+<col style="width: 8%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1487,7 +1487,7 @@ Note
 <tr class="even">
 <td style="text-align: left;"><code>--readFilesSAMattrKeep</code></td>
 <td style="text-align: left;">for –readFilesType SAM SE/PE, which SAM tags to keep in the output BAM, e.g.: –readFilesSAMtagsKeep RG PL - All … keep all tags - None … do not keep any tags</td>
-<td style="text-align: left;"><code>string</code>, example: <code>"All"</code></td>
+<td style="text-align: left;">List of <code>string</code>, example: <code>"All"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--readFilesManifest</code></td>
@@ -1502,7 +1502,7 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><code>--readFilesCommand</code></td>
 <td style="text-align: left;">command line to execute for each of the input file. This command should generate FASTA or FASTQ text and send it to stdout For example: zcat - to uncompress .gz files, bzcat - to uncompress .bz2 files, etc.</td>
-<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">List of <code>string</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--readMapNumber</code></td>
@@ -1517,7 +1517,7 @@ Note
 <tr class="even">
 <td style="text-align: left;"><code>--readNameSeparator</code></td>
 <td style="text-align: left;">character(s) separating the part of the read names that will be trimmed in output (read name after space is always trimmed)</td>
-<td style="text-align: left;"><code>string</code>, example: <code>"/"</code></td>
+<td style="text-align: left;">List of <code>string</code>, example: <code>"/"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--readQualityScoreBase</code></td>
@@ -1532,8 +1532,8 @@ Note
 <table class="table">
 <colgroup>
 <col style="width: 6%">
-<col style="width: 85%">
-<col style="width: 7%">
+<col style="width: 81%">
+<col style="width: 12%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1551,27 +1551,27 @@ Note
 <tr class="even">
 <td style="text-align: left;"><code>--clip3pNbases</code></td>
 <td style="text-align: left;">number(s) of bases to clip from 3p of each mate. If one value is given, it will be assumed the same for both mates.</td>
-<td style="text-align: left;"><code>integer</code>, example: <code>0</code></td>
+<td style="text-align: left;">List of <code>integer</code>, example: <code>0</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--clip3pAdapterSeq</code></td>
 <td style="text-align: left;">adapter sequences to clip from 3p of each mate. If one value is given, it will be assumed the same for both mates. - polyA … polyA sequence with the length equal to read length</td>
-<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">List of <code>string</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--clip3pAdapterMMp</code></td>
 <td style="text-align: left;">max proportion of mismatches for 3p adapter clipping for each mate. If one value is given, it will be assumed the same for both mates.</td>
-<td style="text-align: left;"><code>double</code>, example: <code>0.1</code></td>
+<td style="text-align: left;">List of <code>double</code>, example: <code>0.1</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--clip3pAfterAdapterNbases</code></td>
 <td style="text-align: left;">number of bases to clip from 3p of each mate after the adapter clipping. If one value is given, it will be assumed the same for both mates.</td>
-<td style="text-align: left;"><code>integer</code>, example: <code>0</code></td>
+<td style="text-align: left;">List of <code>integer</code>, example: <code>0</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--clip5pNbases</code></td>
 <td style="text-align: left;">number(s) of bases to clip from 5p of each mate. If one value is given, it will be assumed the same for both mates.</td>
-<td style="text-align: left;"><code>integer</code>, example: <code>0</code></td>
+<td style="text-align: left;">List of <code>integer</code>, example: <code>0</code>, multiple_sep: <code>";"</code></td>
 </tr>
 </tbody>
 </table>
@@ -1580,9 +1580,9 @@ Note
 <h3 class="anchored" data-anchor-id="limits">Limits</h3>
 <table class="table">
 <colgroup>
-<col style="width: 11%">
-<col style="width: 69%">
-<col style="width: 19%">
+<col style="width: 10%">
+<col style="width: 64%">
+<col style="width: 24%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1600,7 +1600,7 @@ Note
 <tr class="even">
 <td style="text-align: left;"><code>--limitIObufferSize</code></td>
 <td style="text-align: left;">max available buffers size (bytes) for input/output, per thread</td>
-<td style="text-align: left;"><code>long</code>, example: <code>30000000</code>, example: <code>50000000</code></td>
+<td style="text-align: left;">List of <code>long</code>, example: <code>30000000, 50000000</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--limitOutSAMoneReadBytes</code></td>
@@ -1684,8 +1684,8 @@ Note
 <table class="table">
 <colgroup>
 <col style="width: 1%">
-<col style="width: 97%">
-<col style="width: 1%">
+<col style="width: 96%">
+<col style="width: 2%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1698,7 +1698,7 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><code>--outSAMtype</code></td>
 <td style="text-align: left;">type of SAM/BAM output 1st word: - BAM … output BAM without sorting - SAM … output SAM without sorting - None … no SAM/BAM output 2nd, 3rd: - Unsorted … standard unsorted - SortedByCoordinate … sorted by coordinate. This option will allocate extra memory for sorting which can be specified by –limitBAMsortRAM.</td>
-<td style="text-align: left;"><code>string</code>, example: <code>"SAM"</code></td>
+<td style="text-align: left;">List of <code>string</code>, example: <code>"SAM"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--outSAMmode</code></td>
@@ -1713,7 +1713,7 @@ Note
 <tr class="even">
 <td style="text-align: left;"><code>--outSAMattributes</code></td>
 <td style="text-align: left;">a string of desired SAM attributes, in the order desired for the output SAM. Tags can be listed in any combination/order. <strong><em>Presets: - None … no attributes - Standard … NH HI AS nM - All … NH HI AS nM NM MD jM jI MC ch </em></strong>Alignment: - NH … number of loci the reads maps to: =1 for unique mappers, &gt;1 for multimappers. Standard SAM tag. - HI … multiple alignment index, starts with –outSAMattrIHstart (=1 by default). Standard SAM tag. - AS … local alignment score, +1/-1 for matches/mismateches, score* penalties for indels and gaps. For PE reads, total score for two mates. Stadnard SAM tag. - nM … number of mismatches. For PE reads, sum over two mates. - NM … edit distance to the reference (number of mismatched + inserted + deleted bases) for each mate. Standard SAM tag. - MD … string encoding mismatched and deleted reference bases (see standard SAM specifications). Standard SAM tag. - jM … intron motifs for all junctions (i.e.&nbsp;N in CIGAR): 0: non-canonical; 1: GT/AG, 2: CT/AC, 3: GC/AG, 4: CT/GC, 5: AT/AC, 6: GT/AT. If splice junctions database is used, and a junction is annotated, 20 is added to its motif value. - jI … start and end of introns for all junctions (1-based). - XS … alignment strand according to –outSAMstrandField. - MC … mate’s CIGAR string. Standard SAM tag. - ch … marks all segment of all chimeric alingments for –chimOutType WithinBAM output. - cN … number of bases clipped from the read ends: 5’ and 3’ <strong><em>Variation: - vA … variant allele - vG … genomic coordinate of the variant overlapped by the read. - vW … 1 - alignment passes WASP filtering; 2,3,4,5,6,7 - alignment does not pass WASP filtering. Requires –waspOutputMode SAMtag. </em></strong>STARsolo: - CR CY UR UY … sequences and quality scores of cell barcodes and UMIs for the solo* demultiplexing. - GX GN … gene ID and gene name for unique-gene reads. - gx gn … gene IDs and gene names for unique- and multi-gene reads. - CB UB … error-corrected cell barcodes and UMIs for solo* demultiplexing. Requires –outSAMtype BAM SortedByCoordinate. - sM … assessment of CB and UMI. - sS … sequence of the entire barcode (CB,UMI,adapter). - sQ … quality of the entire barcode. ***Unsupported/undocumented: - ha … haplotype (1/2) when mapping to the diploid genome. Requires genome generated with –genomeTransformType Diploid . - rB … alignment block read/genomic coordinates. - vR … read coordinate of the variant.</td>
-<td style="text-align: left;"><code>string</code>, example: <code>"Standard"</code></td>
+<td style="text-align: left;">List of <code>string</code>, example: <code>"Standard"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--outSAMattrIHstart</code></td>
@@ -1723,7 +1723,7 @@ Note
 <tr class="even">
 <td style="text-align: left;"><code>--outSAMunmapped</code></td>
 <td style="text-align: left;">output of unmapped reads in the SAM format 1st word: - None … no output - Within … output unmapped reads within the main SAM file (i.e.&nbsp;Aligned.out.sam) 2nd word: - KeepPairs … record unmapped mate for each alignment, and, in case of unsorted output, keep it adjacent to its mapped mate. Only affects multi-mapping reads.</td>
-<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">List of <code>string</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--outSAMorder</code></td>
@@ -1758,17 +1758,17 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><code>--outSAMattrRGline</code></td>
 <td style="text-align: left;">SAM/BAM read group line. The first word contains the read group identifier and must start with “ID:”, e.g.&nbsp;–outSAMattrRGline ID:xxx CN:yy “DS:z z z”. xxx will be added as RG tag to each output alignment. Any spaces in the tag values have to be double quoted. Comma separated RG lines correspons to different (comma separated) input files in –readFilesIn. Commas have to be surrounded by spaces, e.g.&nbsp;–outSAMattrRGline ID:xxx , ID:zzz “DS:z z” , ID:yyy DS:yyyy</td>
-<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">List of <code>string</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--outSAMheaderHD</code></td>
 <td style="text-align: left;"><span class="citation" data-cites="HD">@HD</span> (header) line of the SAM header</td>
-<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">List of <code>string</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--outSAMheaderPG</code></td>
 <td style="text-align: left;">extra <span class="citation" data-cites="PG">@PG</span> (software) line of the SAM header (in addition to STAR)</td>
-<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">List of <code>string</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--outSAMheaderCommentFile</code></td>
@@ -1778,7 +1778,7 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><code>--outSAMfilter</code></td>
 <td style="text-align: left;">filter the output into main SAM/BAM files - KeepOnlyAddedReferences … only keep the reads for which all alignments are to the extra reference sequences added with –genomeFastaFiles at the mapping stage. - KeepAllAddedReferences … keep all alignments to the extra reference sequences added with –genomeFastaFiles at the mapping stage.</td>
-<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">List of <code>string</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--outSAMmultNmax</code></td>
@@ -1842,8 +1842,8 @@ Note
 <table class="table">
 <colgroup>
 <col style="width: 6%">
-<col style="width: 86%">
-<col style="width: 7%">
+<col style="width: 84%">
+<col style="width: 8%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1856,7 +1856,7 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><code>--outWigType</code></td>
 <td style="text-align: left;">type of signal output, e.g.&nbsp;“bedGraph” OR “bedGraph read1_5p”. Requires sorted BAM: –outSAMtype BAM SortedByCoordinate . 1st word: - None … no signal output - bedGraph … bedGraph format - wiggle … wiggle format 2nd word: - read1_5p … signal from only 5’ of the 1st read, useful for CAGE/RAMPAGE etc - read2 … signal from only 2nd read</td>
-<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">List of <code>string</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--outWigStrand</code></td>
@@ -2003,27 +2003,27 @@ Note
 <tr class="even">
 <td style="text-align: left;"><code>--outSJfilterOverhangMin</code></td>
 <td style="text-align: left;">minimum overhang length for splice junctions on both sides for: (1) non-canonical motifs, (2) GT/AG and CT/AC motif, (3) GC/AG and CT/GC motif, (4) AT/AC and GT/AT motif. -1 means no output for that motif does not apply to annotated junctions</td>
-<td style="text-align: left;"><code>integer</code>, example: <code>30</code>, example: <code>12</code>, example: <code>12</code>, example: <code>12</code></td>
+<td style="text-align: left;">List of <code>integer</code>, example: <code>30, 12, 12, 12</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--outSJfilterCountUniqueMin</code></td>
 <td style="text-align: left;">minimum uniquely mapping read count per junction for: (1) non-canonical motifs, (2) GT/AG and CT/AC motif, (3) GC/AG and CT/GC motif, (4) AT/AC and GT/AT motif. -1 means no output for that motif Junctions are output if one of outSJfilterCountUniqueMin OR outSJfilterCountTotalMin conditions are satisfied does not apply to annotated junctions</td>
-<td style="text-align: left;"><code>integer</code>, example: <code>3</code>, example: <code>1</code>, example: <code>1</code>, example: <code>1</code></td>
+<td style="text-align: left;">List of <code>integer</code>, example: <code>3, 1, 1, 1</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--outSJfilterCountTotalMin</code></td>
 <td style="text-align: left;">minimum total (multi-mapping+unique) read count per junction for: (1) non-canonical motifs, (2) GT/AG and CT/AC motif, (3) GC/AG and CT/GC motif, (4) AT/AC and GT/AT motif. -1 means no output for that motif Junctions are output if one of outSJfilterCountUniqueMin OR outSJfilterCountTotalMin conditions are satisfied does not apply to annotated junctions</td>
-<td style="text-align: left;"><code>integer</code>, example: <code>3</code>, example: <code>1</code>, example: <code>1</code>, example: <code>1</code></td>
+<td style="text-align: left;">List of <code>integer</code>, example: <code>3, 1, 1, 1</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--outSJfilterDistToOtherSJmin</code></td>
 <td style="text-align: left;">minimum allowed distance to other junctions’ donor/acceptor does not apply to annotated junctions</td>
-<td style="text-align: left;"><code>integer</code>, example: <code>10</code>, example: <code>0</code>, example: <code>5</code>, example: <code>10</code></td>
+<td style="text-align: left;">List of <code>integer</code>, example: <code>10, 0, 5, 10</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--outSJfilterIntronMaxVsReadN</code></td>
 <td style="text-align: left;">maximum gap allowed for junctions supported by 1,2,3,,,N reads i.e.&nbsp;by default junctions supported by 1 read can have gaps &lt;=50000b, by 2 reads: &lt;=100000b, by 3 reads: &lt;=200000. by &gt;=4 reads any gap &lt;=alignIntronMax does not apply to annotated junctions</td>
-<td style="text-align: left;"><code>integer</code>, example: <code>50000</code>, example: <code>100000</code>, example: <code>200000</code></td>
+<td style="text-align: left;">List of <code>integer</code>, example: <code>50000, 100000, 200000</code>, multiple_sep: <code>";"</code></td>
 </tr>
 </tbody>
 </table>
@@ -2102,8 +2102,8 @@ Note
 <table class="table">
 <colgroup>
 <col style="width: 7%">
-<col style="width: 79%">
-<col style="width: 13%">
+<col style="width: 80%">
+<col style="width: 12%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -2181,7 +2181,7 @@ Note
 <tr class="even">
 <td style="text-align: left;"><code>--alignSJstitchMismatchNmax</code></td>
 <td style="text-align: left;">maximum number of mismatches for stitching of the splice junctions (-1: no limit). (1) non-canonical motifs, (2) GT/AG and CT/AC motif, (3) GC/AG and CT/GC motif, (4) AT/AC and GT/AT motif.</td>
-<td style="text-align: left;"><code>integer</code>, example: <code>0</code>, example: <code>-1</code>, example: <code>0</code>, example: <code>0</code></td>
+<td style="text-align: left;">List of <code>integer</code>, example: <code>0, -1, 0, 0</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--alignSJDBoverhangMin</code></td>
@@ -2319,8 +2319,8 @@ Note
 <table class="table">
 <colgroup>
 <col style="width: 5%">
-<col style="width: 87%">
-<col style="width: 6%">
+<col style="width: 82%">
+<col style="width: 11%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -2333,7 +2333,7 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><code>--chimOutType</code></td>
 <td style="text-align: left;">type of chimeric output - Junctions … Chimeric.out.junction - SeparateSAMold … output old SAM into separate Chimeric.out.sam file - WithinBAM … output into main aligned BAM files (Aligned.*.bam) - WithinBAM HardClip … (default) hard-clipping in the CIGAR for supplemental chimeric alignments (default if no 2nd word is present) - WithinBAM SoftClip … soft-clipping in the CIGAR for supplemental chimeric alignments</td>
-<td style="text-align: left;"><code>string</code>, example: <code>"Junctions"</code></td>
+<td style="text-align: left;">List of <code>string</code>, example: <code>"Junctions"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--chimSegmentMin</code></td>
@@ -2373,7 +2373,7 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><code>--chimFilter</code></td>
 <td style="text-align: left;">different filters for chimeric alignments - None … no filtering - banGenomicN … Ns are not allowed in the genome sequence around the chimeric junction</td>
-<td style="text-align: left;"><code>string</code>, example: <code>"banGenomicN"</code></td>
+<td style="text-align: left;">List of <code>string</code>, example: <code>"banGenomicN"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--chimMainSegmentMultNmax</code></td>
@@ -2422,7 +2422,7 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><code>--quantMode</code></td>
 <td style="text-align: left;">types of quantification requested - - … none - TranscriptomeSAM … output SAM/BAM alignments to transcriptome into a separate file - GeneCounts … count reads per gene</td>
-<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">List of <code>string</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--quantTranscriptomeBAMcompression</code></td>
@@ -2509,12 +2509,12 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><code>--soloType</code></td>
 <td style="text-align: left;">type of single-cell RNA-seq - CB_UMI_Simple … (a.k.a. Droplet) one UMI and one Cell Barcode of fixed length in read2, e.g.&nbsp;Drop-seq and 10X Chromium. - CB_UMI_Complex … multiple Cell Barcodes of varying length, one UMI of fixed length and one adapter sequence of fixed length are allowed in read2 only (e.g.&nbsp;inDrop, ddSeq). - CB_samTagOut … output Cell Barcode as CR and/or CB SAm tag. No UMI counting. –readFilesIn cDNA_read1 [cDNA_read2 if paired-end] CellBarcode_read . Requires –outSAMtype BAM Unsorted [and/or SortedByCoordinate] - SmartSeq … Smart-seq: each cell in a separate FASTQ (paired- or single-end), barcodes are corresponding read-groups, no UMI sequences, alignments deduplicated according to alignment start and end (after extending soft-clipped bases)</td>
-<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">List of <code>string</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--soloCBwhitelist</code></td>
 <td style="text-align: left;">file(s) with whitelist(s) of cell barcodes. Only –soloType CB_UMI_Complex allows more than one whitelist file. - None … no whitelist: all cell barcodes are allowed</td>
-<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">List of <code>string</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--soloCBstart</code></td>
@@ -2549,7 +2549,7 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><code>--soloCBposition</code></td>
 <td style="text-align: left;">position of Cell Barcode(s) on the barcode read. Presently only works with –soloType CB_UMI_Complex, and barcodes are assumed to be on Read2. Format for each barcode: startAnchor_startPosition_endAnchor_endPosition start(end)Anchor defines the Anchor Base for the CB: 0: read start; 1: read end; 2: adapter start; 3: adapter end start(end)Position is the 0-based position with of the CB start(end) with respect to the Anchor Base String for different barcodes are separated by space. Example: inDrop (Zilionis et al, Nat. Protocols, 2017): –soloCBposition 0_0_2_-1 3_1_3_8</td>
-<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">List of <code>string</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--soloUMIposition</code></td>
@@ -2574,12 +2574,12 @@ Note
 <tr class="even">
 <td style="text-align: left;"><code>--soloInputSAMattrBarcodeSeq</code></td>
 <td style="text-align: left;">when inputting reads from a SAM file (–readsFileType SAM SE/PE), these SAM attributes mark the barcode sequence (in proper order). For instance, for 10X CellRanger or STARsolo BAMs, use –soloInputSAMattrBarcodeSeq CR UR . This parameter is required when running STARsolo with input from SAM.</td>
-<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">List of <code>string</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--soloInputSAMattrBarcodeQual</code></td>
 <td style="text-align: left;">when inputting reads from a SAM file (–readsFileType SAM SE/PE), these SAM attributes mark the barcode qualities (in proper order). For instance, for 10X CellRanger or STARsolo BAMs, use –soloInputSAMattrBarcodeQual CY UY . If this parameter is ‘-’ (default), the quality ‘H’ will be assigned to all bases.</td>
-<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">List of <code>string</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--soloStrand</code></td>
@@ -2589,37 +2589,37 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><code>--soloFeatures</code></td>
 <td style="text-align: left;">genomic features for which the UMI counts per Cell Barcode are collected - Gene … genes: reads match the gene transcript - SJ … splice junctions: reported in SJ.out.tab - GeneFull … full gene (pre-mRNA): count all reads overlapping genes’ exons and introns - GeneFull_ExonOverIntron … full gene (pre-mRNA): count all reads overlapping genes’ exons and introns: prioritize 100% overlap with exons - GeneFull_Ex50pAS … full gene (pre-RNA): count all reads overlapping genes’ exons and introns: prioritize &gt;50% overlap with exons. Do not count reads with 100% exonic overlap in the antisense direction.</td>
-<td style="text-align: left;"><code>string</code>, example: <code>"Gene"</code></td>
+<td style="text-align: left;">List of <code>string</code>, example: <code>"Gene"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--soloMultiMappers</code></td>
 <td style="text-align: left;">counting method for reads mapping to multiple genes - Unique … count only reads that map to unique genes - Uniform … uniformly distribute multi-genic UMIs to all genes - Rescue … distribute UMIs proportionally to unique+uniform counts (~ first iteration of EM) - PropUnique … distribute UMIs proportionally to unique mappers, if present, and uniformly if not. - EM … multi-gene UMIs are distributed using Expectation Maximization algorithm</td>
-<td style="text-align: left;"><code>string</code>, example: <code>"Unique"</code></td>
+<td style="text-align: left;">List of <code>string</code>, example: <code>"Unique"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--soloUMIdedup</code></td>
 <td style="text-align: left;">type of UMI deduplication (collapsing) algorithm - 1MM_All … all UMIs with 1 mismatch distance to each other are collapsed (i.e.&nbsp;counted once). - 1MM_Directional_UMItools … follows the “directional” method from the UMI-tools by Smith, Heger and Sudbery (Genome Research 2017). - 1MM_Directional … same as 1MM_Directional_UMItools, but with more stringent criteria for duplicate UMIs - Exact … only exactly matching UMIs are collapsed. - NoDedup … no deduplication of UMIs, count all reads. - 1MM_CR … CellRanger2-4 algorithm for 1MM UMI collapsing.</td>
-<td style="text-align: left;"><code>string</code>, example: <code>"1MM_All"</code></td>
+<td style="text-align: left;">List of <code>string</code>, example: <code>"1MM_All"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--soloUMIfiltering</code></td>
 <td style="text-align: left;">type of UMI filtering (for reads uniquely mapping to genes) - - … basic filtering: remove UMIs with N and homopolymers (similar to CellRanger 2.2.0). - MultiGeneUMI … basic + remove lower-count UMIs that map to more than one gene. - MultiGeneUMI_All … basic + remove all UMIs that map to more than one gene. - MultiGeneUMI_CR … basic + remove lower-count UMIs that map to more than one gene, matching CellRanger &gt; 3.0.0 . Only works with –soloUMIdedup 1MM_CR</td>
-<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">List of <code>string</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--soloOutFileNames</code></td>
 <td style="text-align: left;">file names for STARsolo output: file_name_prefix gene_names barcode_sequences cell_feature_count_matrix</td>
-<td style="text-align: left;"><code>string</code>, example: <code>"Solo.out/"</code>, example: <code>"features.tsv"</code>, example: <code>"barcodes.tsv"</code>, example: <code>"matrix.mtx"</code></td>
+<td style="text-align: left;">List of <code>string</code>, example: <code>"Solo.out/", "features.tsv", "barcodes.tsv", "matrix.mtx"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--soloCellFilter</code></td>
 <td style="text-align: left;">cell filtering type and parameters - None … do not output filtered cells - TopCells … only report top cells by UMI count, followed by the exact number of cells - CellRanger2.2 … simple filtering of CellRanger 2.2. Can be followed by numbers: number of expected cells, robust maximum percentile for UMI count, maximum to minimum ratio for UMI count The harcoded values are from CellRanger: nExpectedCells=3000; maxPercentile=0.99; maxMinRatio=10 - EmptyDrops_CR … EmptyDrops filtering in CellRanger flavor. Please cite the original EmptyDrops paper: A.T.L Lun et al, Genome Biology, 20, 63 (2019): https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1662-y Can be followed by 10 numeric parameters: nExpectedCells maxPercentile maxMinRatio indMin indMax umiMin umiMinFracMedian candMaxN FDR simN The harcoded values are from CellRanger: 3000 0.99 10 45000 90000 500 0.01 20000 0.01 10000</td>
-<td style="text-align: left;"><code>string</code>, example: <code>"CellRanger2.2"</code>, example: <code>"3000"</code>, example: <code>"0.99"</code>, example: <code>"10"</code></td>
+<td style="text-align: left;">List of <code>string</code>, example: <code>"CellRanger2.2", "3000", "0.99", "10"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--soloOutFormatFeaturesGeneField3</code></td>
 <td style="text-align: left;">field 3 in the Gene features.tsv file. If “-”, then no 3rd field is output.</td>
-<td style="text-align: left;"><code>string</code>, example: <code>"Gene Expression"</code></td>
+<td style="text-align: left;">List of <code>string</code>, example: <code>"Gene Expression"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--soloCellReadStats</code></td>

@@ -1275,9 +1275,9 @@ Note
 <h3 class="anchored" data-anchor-id="inputs">Inputs</h3>
 <table class="table">
 <colgroup>
-<col style="width: 10%">
-<col style="width: 71%">
-<col style="width: 18%">
+<col style="width: 9%">
+<col style="width: 65%">
+<col style="width: 25%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1305,7 +1305,7 @@ Note
 <tr class="even">
 <td style="text-align: left;"><code>--var_qc_metrics</code></td>
 <td style="text-align: left;">Keys to select a boolean (containing only True or False) column from .var. For each cell, calculate the proportion of total values for genes which are labeled ‘True’, compared to the total sum of the values for all genes.</td>
-<td style="text-align: left;"><code>string</code>, example: <code>"ercc,highly_variable,mitochondrial"</code></td>
+<td style="text-align: left;">List of <code>string</code>, example: <code>"ercc,highly_variable,mitochondrial"</code>, multiple_sep: <code>","</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--var_qc_metrics_fill_na_value</code></td>
@@ -1315,7 +1315,7 @@ Note
 <tr class="even">
 <td style="text-align: left;"><code>--top_n_vars</code></td>
 <td style="text-align: left;">Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. <code>--top_n_vars 20,50</code> finds cumulative proportion to the 20th and 50th most expressed vars.</td>
-<td style="text-align: left;"><code>integer</code></td>
+<td style="text-align: left;">List of <code>integer</code>, multiple_sep: <code>","</code></td>
 </tr>
 </tbody>
 </table>
