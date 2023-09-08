@@ -14,7 +14,7 @@ ID: `cellranger_multi`
 Namespace: `ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/workflows/ingestion/cellranger_multi){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.1/./workflows/ingestion/cellranger_multi){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.0 -latest \
+  -r 0.10.1 -latest \
   -main-script ./workflows/ingestion/cellranger_multi/main.nf \
   --help
 ```
@@ -79,7 +79,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.0 -latest \
+  -r 0.10.1 -latest \
   -profile docker \
   -main-script ./workflows/ingestion/cellranger_multi/main.nf \
   -params-file params.yaml
@@ -93,14 +93,14 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Inputs
 
-|Name                             |Description                                                                                                                                                                                                                                                                                                                          |Attributes                                                                                                 |
-|:--------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------|
-|`--id`                           |ID of the sample.                                                                                                                                                                                                                                                                                                                    |`string`, required, example: `"foo"`                                                                       |
-|`--input`                        |The fastq.gz files to align. Can also be a single directory containing fastq.gz files.                                                                                                                                                                                                                                               |`file`, required, example: `"sample_S1_L001_R1_001.fastq.gz"`, example: `"sample_S1_L001_R2_001.fastq.gz"` |
-|`--gex_reference`                |Genome refence index built by Cell Ranger mkref.                                                                                                                                                                                                                                                                                     |`file`, required, example: `"reference_genome.tar.gz"`                                                     |
-|`--vdj_reference`                |VDJ refence index built by Cell Ranger mkref.                                                                                                                                                                                                                                                                                        |`file`, example: `"reference_vdj.tar.gz"`                                                                  |
-|`--feature_reference`            |Path to the Feature reference CSV file, declaring Feature Barcode constructs and associated barcodes. Required only for Antibody Capture  or CRISPR Guide Capture libraries. See  https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/using/feature-bc-analysis#feature-ref  for more information. |`file`, example: `"feature_reference.csv"`                                                                 |
-|`--vdj_inner_enrichment_primers` |V(D)J Immune Profiling libraries: if inner enrichment primers other than those provided  in the 10x Genomics kits are used, they need to be specified here as a text file with one primer per line.                                                                                                                                  |`file`, example: `"enrichment_primers.txt"`                                                                |
+|Name                             |Description                                                                                                                                                                                                                                                                                                                          |Attributes                                                                                                                   |
+|:--------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------|
+|`--id`                           |ID of the sample.                                                                                                                                                                                                                                                                                                                    |`string`, required, example: `"foo"`                                                                                         |
+|`--input`                        |The fastq.gz files to align. Can also be a single directory containing fastq.gz files.                                                                                                                                                                                                                                               |List of `file`, required, example: `"sample_S1_L001_R1_001.fastq.gz", "sample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
+|`--gex_reference`                |Genome refence index built by Cell Ranger mkref.                                                                                                                                                                                                                                                                                     |`file`, required, example: `"reference_genome.tar.gz"`                                                                       |
+|`--vdj_reference`                |VDJ refence index built by Cell Ranger mkref.                                                                                                                                                                                                                                                                                        |`file`, example: `"reference_vdj.tar.gz"`                                                                                    |
+|`--feature_reference`            |Path to the Feature reference CSV file, declaring Feature Barcode constructs and associated barcodes. Required only for Antibody Capture  or CRISPR Guide Capture libraries. See  https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/using/feature-bc-analysis#feature-ref  for more information. |`file`, example: `"feature_reference.csv"`                                                                                   |
+|`--vdj_inner_enrichment_primers` |V(D)J Immune Profiling libraries: if inner enrichment primers other than those provided  in the 10x Genomics kits are used, they need to be specified here as a text file with one primer per line.                                                                                                                                  |`file`, example: `"enrichment_primers.txt"`                                                                                  |
 
 
 ### Outputs
@@ -140,12 +140,12 @@ Arguments relevant to the analysis of gene expression data.
 
 ### Library arguments
 
-|Name                  |Description                                                                                                                                                                 |Attributes                                       |
-|:---------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------|
-|`--library_id`        |The Illumina sample name to analyze. This must exactly match the 'Sample Name' part of the FASTQ files specified in the `--input` argument.                                 |`string`, required, example: `"mysample1"`       |
-|`--library_type`      |The underlying feature type of the library. Possible values: "Gene Expression", "VDJ", "VDJ-T", "VDJ-B", "Antibody Capture", "CRISPR Guide Capture", "Multiplexing Capture" |`string`, required, example: `"Gene Expression"` |
-|`--library_subsample` |Optional. The rate at which reads from the provided FASTQ files are sampled. Must be strictly greater than 0 and less than or equal to 1.                                   |`string`, example: `"0.5"`                       |
-|`--library_lanes`     |Lanes associated with this sample. Defaults to using all lanes.                                                                                                             |`string`, example: `"1-4"`                       |
+|Name                  |Description                                                                                                                                                                 |Attributes                                                                    |
+|:---------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------|
+|`--library_id`        |The Illumina sample name to analyze. This must exactly match the 'Sample Name' part of the FASTQ files specified in the `--input` argument.                                 |List of `string`, required, example: `"mysample1"`, multiple_sep: `";"`       |
+|`--library_type`      |The underlying feature type of the library. Possible values: "Gene Expression", "VDJ", "VDJ-T", "VDJ-B", "Antibody Capture", "CRISPR Guide Capture", "Multiplexing Capture" |List of `string`, required, example: `"Gene Expression"`, multiple_sep: `";"` |
+|`--library_subsample` |Optional. The rate at which reads from the provided FASTQ files are sampled. Must be strictly greater than 0 and less than or equal to 1.                                   |List of `string`, example: `"0.5"`, multiple_sep: `";"`                       |
+|`--library_lanes`     |Lanes associated with this sample. Defaults to using all lanes.                                                                                                             |List of `string`, example: `"1-4"`, multiple_sep: `";"`                       |
 
 ## Authors
 
