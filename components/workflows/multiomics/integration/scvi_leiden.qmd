@@ -1,0 +1,199 @@
+---
+title: "Scvi leiden"
+namespace: "Multiomics/integration"
+description: "Run scvi integration followed by neighbour calculations, leiden clustering and run umap on the result."
+type: "workflow"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `scvi_leiden`  
+Namespace: `multiomics/integration`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.1/./workflows/multiomics/integration/scvi_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 0.10.1 -latest \
+  -main-script ./workflows/multiomics/integration/scvi_leiden/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Inputs
+id: # please fill in - example: "foo"
+input: # please fill in - example: "dataset.h5mu"
+layer: "log_normalized"
+modality: "rna"
+
+# Outputs
+# output: "$id.$key.output.h5mu"
+# output_model: "$id.$key.output_model.output_model"
+
+# Neighbour calculation
+uns_neighbors: "scvi_integration_neighbors"
+obsp_neighbor_distances: "scvi_integration_distances"
+obsp_neighbor_connectivities: "scvi_integration_connectivities"
+
+# Scvi integration options
+obs_batch: # please fill in - example: "foo"
+obsm_output: "X_scvi_integrated"
+# var_input: "foo"
+# early_stopping: true
+early_stopping_monitor: "elbo_validation"
+early_stopping_patience: 45
+early_stopping_min_delta: 0.0
+# max_epochs: 123
+reduce_lr_on_plateau: true
+lr_factor: 0.6
+lr_patience: 30
+
+# Clustering options
+obs_cluster: "scvi_integration_leiden"
+leiden_resolution: [1]
+
+# Umap options
+obsm_umap: "X_scvi_umap"
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 0.10.1 -latest \
+  -profile docker \
+  -main-script ./workflows/multiomics/integration/scvi_leiden/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Inputs
+
+|Name         |Description                                                                           |Attributes                                  |
+|:------------|:-------------------------------------------------------------------------------------|:-------------------------------------------|
+|`--id`       |ID of the sample.                                                                     |`string`, required, example: `"foo"`        |
+|`--input`    |Path to the sample.                                                                   |`file`, required, example: `"dataset.h5mu"` |
+|`--layer`    |use specified layer for expression values instead of the .X object from the modality. |`string`, default: `"log_normalized"`       |
+|`--modality` |Which modality to process.                                                            |`string`, default: `"rna"`                  |
+
+
+### Outputs
+
+|Name             |Description                                                   |Attributes                                 |
+|:----------------|:-------------------------------------------------------------|:------------------------------------------|
+|`--output`       |Destination path to the output.                               |`file`, required, example: `"output.h5mu"` |
+|`--output_model` |Folder where the state of the trained model will be saved to. |`file`, required, example: `"output_dir"`  |
+
+
+### Neighbour calculation
+
+|Name                             |Description                                                                             |Attributes                                             |
+|:--------------------------------|:---------------------------------------------------------------------------------------|:------------------------------------------------------|
+|`--uns_neighbors`                |In which .uns slot to store various neighbor output objects.                            |`string`, default: `"scvi_integration_neighbors"`      |
+|`--obsp_neighbor_distances`      |In which .obsp slot to store the distance matrix between the resulting neighbors.       |`string`, default: `"scvi_integration_distances"`      |
+|`--obsp_neighbor_connectivities` |In which .obsp slot to store the connectivities matrix between the resulting neighbors. |`string`, default: `"scvi_integration_connectivities"` |
+
+
+### Scvi integration options
+
+|Name                         |Description                                                                                                                                          |Attributes                               |
+|:----------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------|
+|`--obs_batch`                |Column name discriminating between your batches.                                                                                                     |`string`, required                       |
+|`--obsm_output`              |In which .obsm slot to store the resulting integrated embedding.                                                                                     |`string`, default: `"X_scvi_integrated"` |
+|`--var_input`                |.var column containing highly variable genes. By default, do not subset genes.                                                                       |`string`                                 |
+|`--early_stopping`           |Whether to perform early stopping with respect to the validation set.                                                                                |`boolean`                                |
+|`--early_stopping_monitor`   |Metric logged during validation set epoch.                                                                                                           |`string`, default: `"elbo_validation"`   |
+|`--early_stopping_patience`  |Number of validation epochs with no improvement after which training will be stopped.                                                                |`integer`, default: `45`                 |
+|`--early_stopping_min_delta` |Minimum change in the monitored quantity to qualify as an improvement, i.e. an absolute change of less than min_delta, will count as no improvement. |`double`, default: `0`                   |
+|`--max_epochs`               |Number of passes through the dataset, defaults to (20000 / number of cells) * 400 or 400; whichever is smallest.                                     |`integer`                                |
+|`--reduce_lr_on_plateau`     |Whether to monitor validation loss and reduce learning rate when validation set `lr_scheduler_metric` plateaus.                                      |`boolean`, default: `TRUE`               |
+|`--lr_factor`                |Factor to reduce learning rate.                                                                                                                      |`double`, default: `0.6`                 |
+|`--lr_patience`              |Number of epochs with no improvement after which learning rate will be reduced.                                                                      |`double`, default: `30`                  |
+
+
+### Clustering options
+
+|Name                  |Description                                                                                                                                                                                                                                                        |Attributes                                          |
+|:---------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------|
+|`--obs_cluster`       |Prefix for the .obs keys under which to add the cluster labels. Newly created columns in .obs will  be created from the specified value for '--obs_cluster' suffixed with an underscore and one of the resolutions resolutions specified in '--leiden_resolution'. |`string`, default: `"scvi_integration_leiden"`      |
+|`--leiden_resolution` |Control the coarseness of the clustering. Higher values lead to more clusters.                                                                                                                                                                                     |List of `double`, default: `1`, multiple_sep: `":"` |
+
+
+### Umap options
+
+|Name          |Description                                                |Attributes                         |
+|:-------------|:----------------------------------------------------------|:----------------------------------|
+|`--obsm_umap` |In which .obsm slot to store the resulting UMAP embedding. |`string`, default: `"X_scvi_umap"` |
+
+## Authors
+
+
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (author)
+
+## Visualisation
+
+```{mermaid}
+%%| column: screen-inset-shaded
+flowchart LR
+    p0(Input)
+    p3(toSortedList)
+    p5(flatMap)
+    p12(scvi)
+    p14(join)
+    p23(find_neighbors)
+    p25(join)
+    p33(leiden)
+    p35(join)
+    p43(umap)
+    p45(join)
+    p53(move_obsm_to_obs)
+    p55(join)
+    p62(Output)
+    p0-->p3
+    p3-->p5
+    p5-->p14
+    p5-->p12
+    p12-->p14
+    p14-->p25
+    p14-->p23
+    p23-->p25
+    p25-->p35
+    p25-->p33
+    p33-->p35
+    p35-->p45
+    p35-->p43
+    p43-->p45
+    p45-->p55
+    p45-->p53
+    p53-->p55
+    p55-->p62
+
+```
