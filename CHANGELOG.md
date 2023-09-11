@@ -1,3 +1,15 @@
+# OpenPipelines.bio v0.10.0
+
+## MAJOR CHANGES
+
+* Update component documentation to v0.10.0 release.
+
+* Add documentation for OpenPipelines architecture.
+
+## MINOR CHANGES
+
+* Also generate documentation for the `multiple_sep` values of component arguments.
+
 # OpenPipelines.bio v0.9.0
 
 ## MAJOR CHANGES
@@ -13,11 +25,11 @@
 ## MAJOR CHANGES
 * Update component documentation to v0.8.0 release.
 
-* Use git submodule to access openpipeline repo
+* Use git submodule to access openpipeline repo.
 
-* Propose new website structure
+* Propose new website structure.
 
-* Update author page
+* Update author page.
 
 # OpenPipelines.bio v0.7.2
 
