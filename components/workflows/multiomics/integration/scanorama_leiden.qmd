@@ -136,7 +136,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |Name                  |Description                                                                                                                                                                                                                                            |Attributes                                          |
 |:---------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------|
 |`--obs_cluster`       |Prefix for the .obs keys under which to add the cluster labels. Newly created columns in .obs will  be created from the specified value for '--obs_cluster' suffixed with an underscore and one of the resolutions specified in '--leiden_resolution'. |`string`, default: `"scanorama_integration_leiden"` |
-|`--leiden_resolution` |Control the coarseness of the clustering. Higher values lead to more clusters.                                                                                                                                                                         |`double`, default: `1`                              |
+|`--leiden_resolution` |Control the coarseness of the clustering. Higher values lead to more clusters.                                                                                                                                                                         |List of `double`, default: `1`, multiple_sep: `":"` |
 
 
 ### Umap options
