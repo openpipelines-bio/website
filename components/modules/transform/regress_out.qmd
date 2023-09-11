@@ -14,7 +14,7 @@ ID: `regress_out`
 Namespace: `transform`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/./src/transform/regress_out){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/src/transform/regress_out){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
