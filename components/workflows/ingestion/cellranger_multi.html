@@ -1294,9 +1294,9 @@ Note
 <h3 class="anchored" data-anchor-id="inputs">Inputs</h3>
 <table class="table">
 <colgroup>
-<col style="width: 7%">
-<col style="width: 69%">
-<col style="width: 23%">
+<col style="width: 6%">
+<col style="width: 67%">
+<col style="width: 25%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1314,7 +1314,7 @@ Note
 <tr class="even">
 <td style="text-align: left;"><code>--input</code></td>
 <td style="text-align: left;">The fastq.gz files to align. Can also be a single directory containing fastq.gz files.</td>
-<td style="text-align: left;"><code>file</code>, required, example: <code>"sample_S1_L001_R1_001.fastq.gz"</code>, example: <code>"sample_S1_L001_R2_001.fastq.gz"</code></td>
+<td style="text-align: left;">List of <code>file</code>, required, example: <code>"sample_S1_L001_R1_001.fastq.gz", "sample_S1_L001_R2_001.fastq.gz"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--gex_reference</code></td>
@@ -1457,9 +1457,9 @@ Note
 <h3 class="anchored" data-anchor-id="library-arguments">Library arguments</h3>
 <table class="table">
 <colgroup>
-<col style="width: 9%">
-<col style="width: 70%">
-<col style="width: 20%">
+<col style="width: 8%">
+<col style="width: 63%">
+<col style="width: 28%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1472,22 +1472,22 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><code>--library_id</code></td>
 <td style="text-align: left;">The Illumina sample name to analyze. This must exactly match the ‘Sample Name’ part of the FASTQ files specified in the <code>--input</code> argument.</td>
-<td style="text-align: left;"><code>string</code>, required, example: <code>"mysample1"</code></td>
+<td style="text-align: left;">List of <code>string</code>, required, example: <code>"mysample1"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--library_type</code></td>
 <td style="text-align: left;">The underlying feature type of the library. Possible values: “Gene Expression”, “VDJ”, “VDJ-T”, “VDJ-B”, “Antibody Capture”, “CRISPR Guide Capture”, “Multiplexing Capture”</td>
-<td style="text-align: left;"><code>string</code>, required, example: <code>"Gene Expression"</code></td>
+<td style="text-align: left;">List of <code>string</code>, required, example: <code>"Gene Expression"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>--library_subsample</code></td>
 <td style="text-align: left;">Optional. The rate at which reads from the provided FASTQ files are sampled. Must be strictly greater than 0 and less than or equal to 1.</td>
-<td style="text-align: left;"><code>string</code>, example: <code>"0.5"</code></td>
+<td style="text-align: left;">List of <code>string</code>, example: <code>"0.5"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--library_lanes</code></td>
 <td style="text-align: left;">Lanes associated with this sample. Defaults to using all lanes.</td>
-<td style="text-align: left;"><code>string</code>, example: <code>"1-4"</code></td>
+<td style="text-align: left;">List of <code>string</code>, example: <code>"1-4"</code>, multiple_sep: <code>";"</code></td>
 </tr>
 </tbody>
 </table>

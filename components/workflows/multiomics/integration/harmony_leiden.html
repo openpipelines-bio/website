@@ -1388,8 +1388,8 @@ Note
 <table class="table">
 <colgroup>
 <col style="width: 7%">
-<col style="width: 69%">
-<col style="width: 22%">
+<col style="width: 65%">
+<col style="width: 27%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1412,12 +1412,12 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><code>--obs_covariates</code></td>
 <td style="text-align: left;">The .obs field(s) that define the covariate(s) to regress out.</td>
-<td style="text-align: left;"><code>string</code>, required, example: <code>"batch"</code>, example: <code>"sample"</code></td>
+<td style="text-align: left;">List of <code>string</code>, required, example: <code>"batch", "sample"</code>, multiple_sep: <code>":"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--theta</code></td>
 <td style="text-align: left;">Diversity clustering penalty parameter. Specify for each variable in group.by.vars. theta=0 does not encourage any diversity. Larger values of theta result in more diverse clusters.”</td>
-<td style="text-align: left;"><code>double</code>, default: <code>2</code></td>
+<td style="text-align: left;">List of <code>double</code>, default: <code>2</code>, multiple_sep: <code>":"</code></td>
 </tr>
 </tbody>
 </table>
@@ -1427,7 +1427,7 @@ Note
 <table class="table">
 <colgroup>
 <col style="width: 6%">
-<col style="width: 78%">
+<col style="width: 77%">
 <col style="width: 15%">
 </colgroup>
 <thead>
@@ -1446,7 +1446,7 @@ Note
 <tr class="even">
 <td style="text-align: left;"><code>--leiden_resolution</code></td>
 <td style="text-align: left;">Control the coarseness of the clustering. Higher values lead to more clusters.</td>
-<td style="text-align: left;"><code>double</code>, default: <code>1</code></td>
+<td style="text-align: left;">List of <code>double</code>, default: <code>1</code>, multiple_sep: <code>":"</code></td>
 </tr>
 </tbody>
 </table>
