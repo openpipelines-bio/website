@@ -14,7 +14,7 @@ ID: `bd_rhapsody`
 Namespace: `ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/workflows/ingestion/bd_rhapsody){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.0/./workflows/ingestion/bd_rhapsody){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -42,7 +42,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.0 -latest \
+  -r 0.11.0 -latest \
   -main-script ./workflows/ingestion/bd_rhapsody/main.nf \
   --help
 ```
@@ -95,7 +95,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.0 -latest \
+  -r 0.11.0 -latest \
   -profile docker \
   -main-script ./workflows/ingestion/bd_rhapsody/main.nf \
   -params-file params.yaml
@@ -184,17 +184,17 @@ flowchart LR
     p4(flatMap)
     p10(bd_rhapsody)
     p12(join)
-    p20(from_bdrhap_to_h5mu)
-    p22(join)
-    p28(Output)
+    p21(from_bdrhap_to_h5mu)
+    p23(join)
+    p29(Output)
     p0-->p2
     p2-->p4
     p4-->p12
     p4-->p10
     p10-->p12
-    p12-->p22
-    p12-->p20
-    p20-->p22
-    p22-->p28
+    p12-->p23
+    p12-->p21
+    p21-->p23
+    p23-->p29
 
 ```

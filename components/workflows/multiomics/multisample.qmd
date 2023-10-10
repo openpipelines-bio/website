@@ -14,7 +14,7 @@ ID: `multisample`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/workflows/multiomics/multisample){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.0/./workflows/multiomics/multisample){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -34,7 +34,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.0 -latest \
+  -r 0.11.0 -latest \
   -main-script ./workflows/multiomics/multisample/main.nf \
   --help
 ```
@@ -70,7 +70,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.0 -latest \
+  -r 0.11.0 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/multisample/main.nf \
   -params-file params.yaml
@@ -139,70 +139,67 @@ flowchart LR
     p17(filter)
     p19(test_wf:run_wf:split_modalities_workflow:splitStub)
     p22(flatMap)
-    p23(filter)
-    p26(toSortedList)
-    p28(flatMap)
-    p30(toSortedList)
-    p32(Output)
-    p38(normalize_total)
-    p40(join)
-    p48(log1p)
-    p50(join)
-    p58(delete_layer)
-    p60(join)
-    p68(filter_with_hvg)
-    p70(join)
-    p78(rna_calculate_qc_metrics)
-    p80(join)
-    p121(concat)
-    p86(filter)
-    p89(toSortedList)
-    p91(flatMap)
+    p24(filter)
+    p27(toSortedList)
+    p29(flatMap)
+    p31(toSortedList)
+    p33(Output)
+    p39(normalize_total)
+    p41(join)
+    p50(log1p)
+    p52(join)
+    p61(delete_layer)
+    p63(join)
+    p72(filter_with_hvg)
+    p74(join)
+    p83(rna_calculate_qc_metrics)
+    p85(join)
+    p126(concat)
+    p90(filter)
     p93(toSortedList)
-    p95(Output)
-    p101(clr)
-    p103(join)
-    p111(prot_calculate_qc_metrics)
-    p113(join)
-    p119(filter)
-    p122(groupTuple)
-    p128(merge)
-    p130(join)
-    p133(filter)
-    p137(toSortedList)
-    p139(flatMap)
-    p146(pca)
-    p148(join)
-    p156(find_neighbors)
-    p158(join)
-    p166(umap)
-    p168(join)
-    p173(concat)
-    p172(filter)
-    p174(filter)
-    p178(toSortedList)
-    p180(flatMap)
-    p187(pca)
-    p189(join)
-    p197(find_neighbors)
-    p199(join)
-    p207(test_wf:run_wf:integration_setup_workflow:initialize_integration_prot:umap:umap_process1)
+    p95(flatMap)
+    p97(toSortedList)
+    p99(Output)
+    p105(clr)
+    p107(join)
+    p116(prot_calculate_qc_metrics)
+    p118(join)
+    p123(filter)
+    p127(groupTuple)
+    p133(merge)
+    p135(join)
+    p139(filter)
+    p143(toSortedList)
+    p145(flatMap)
+    p152(pca)
+    p154(join)
+    p163(find_neighbors)
+    p165(join)
+    p174(umap)
+    p176(join)
+    p182(concat)
+    p181(filter)
+    p183(filter)
+    p187(toSortedList)
+    p189(flatMap)
+    p196(pca)
+    p198(join)
+    p207(find_neighbors)
     p209(join)
-    p214(concat)
-    p213(filter)
-    p220(publish)
-    p222(join)
-    p227(toSortedList)
-    p229(Output)
+    p218(test_wf:run_wf:integration_setup_workflow:initialize_integration_prot:umap:umap_process1)
+    p220(join)
+    p226(concat)
+    p225(filter)
+    p234(publish)
+    p236(join)
+    p241(toSortedList)
+    p243(Output)
     p21-->p22
-    p22-->p23
-    p22-->p86
-    p22-->p119
-    p121-->p122
-    p172-->p173
-    p173-->p174
-    p173-->p213
-    p213-->p214
+    p126-->p127
+    p181-->p182
+    p182-->p183
+    p182-->p225
+    p225-->p226
     p0-->p2
     p2-->p4
     p4-->p7
@@ -213,71 +210,74 @@ flowchart LR
     p14-->p21
     p17-->p19
     p19-->p21
-    p23-->p26
-    p26-->p28
-    p28-->p30
-    p30-->p32
-    p28-->p40
-    p28-->p38
-    p38-->p40
-    p40-->p50
-    p40-->p48
-    p48-->p50
-    p50-->p60
-    p50-->p58
-    p58-->p60
-    p60-->p70
-    p60-->p68
-    p68-->p70
-    p70-->p80
-    p70-->p78
-    p78-->p80
-    p80-->p121
-    p86-->p89
-    p89-->p91
-    p91-->p93
+    p22-->p24
+    p22-->p90
+    p22-->p123
+    p24-->p27
+    p27-->p29
+    p29-->p31
+    p31-->p33
+    p29-->p41
+    p29-->p39
+    p39-->p41
+    p41-->p52
+    p41-->p50
+    p50-->p52
+    p52-->p63
+    p52-->p61
+    p61-->p63
+    p63-->p74
+    p63-->p72
+    p72-->p74
+    p74-->p85
+    p74-->p83
+    p83-->p85
+    p85-->p126
+    p90-->p93
     p93-->p95
-    p91-->p103
-    p91-->p101
-    p101-->p103
-    p103-->p113
-    p103-->p111
-    p111-->p113
-    p113-->p121
-    p119-->p121
-    p122-->p130
-    p122-->p128
-    p128-->p130
-    p130-->p133
-    p130-->p172
-    p133-->p137
-    p137-->p139
-    p139-->p148
-    p139-->p146
-    p146-->p148
-    p148-->p158
-    p148-->p156
-    p156-->p158
-    p158-->p168
-    p158-->p166
-    p166-->p168
-    p168-->p173
-    p174-->p178
-    p178-->p180
-    p180-->p189
-    p180-->p187
+    p95-->p97
+    p97-->p99
+    p95-->p107
+    p95-->p105
+    p105-->p107
+    p107-->p118
+    p107-->p116
+    p116-->p118
+    p118-->p126
+    p123-->p126
+    p127-->p135
+    p127-->p133
+    p133-->p135
+    p135-->p139
+    p135-->p181
+    p139-->p143
+    p143-->p145
+    p145-->p154
+    p145-->p152
+    p152-->p154
+    p154-->p165
+    p154-->p163
+    p163-->p165
+    p165-->p176
+    p165-->p174
+    p174-->p176
+    p176-->p182
+    p183-->p187
     p187-->p189
-    p189-->p199
-    p189-->p197
-    p197-->p199
-    p199-->p209
-    p199-->p207
+    p189-->p198
+    p189-->p196
+    p196-->p198
+    p198-->p209
+    p198-->p207
     p207-->p209
-    p209-->p214
-    p214-->p222
-    p214-->p220
-    p220-->p222
-    p222-->p227
-    p227-->p229
+    p209-->p220
+    p209-->p218
+    p218-->p220
+    p220-->p226
+    p226-->p236
+    p226-->p234
+    p234-->p236
+    p236-->p241
+    p241-->p243
 
 ```

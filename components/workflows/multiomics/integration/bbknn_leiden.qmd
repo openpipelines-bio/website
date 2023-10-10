@@ -14,7 +14,7 @@ ID: `bbknn_leiden`
 Namespace: `multiomics/integration`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/workflows/multiomics/integration/bbknn_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.0/./workflows/multiomics/integration/bbknn_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.0 -latest \
+  -r 0.11.0 -latest \
   -main-script ./workflows/multiomics/integration/bbknn_leiden/main.nf \
   --help
 ```
@@ -61,7 +61,7 @@ n_pcs: 50
 
 # Clustering options
 obs_cluster: "bbknn_integration_leiden"
-leiden_resolution: 1
+leiden_resolution: [1]
 
 # UMAP options
 obsm_umap: "X_leiden_bbknn_umap"
@@ -74,7 +74,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.0 -latest \
+  -r 0.11.0 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/integration/bbknn_leiden/main.nf \
   -params-file params.yaml
@@ -119,10 +119,10 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Clustering options
 
-|Name                  |Description                                                                                                                                                                                                                                                        |Attributes                                      |
-|:---------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------|
-|`--obs_cluster`       |Prefix for the .obs keys under which to add the cluster labels. Newly created columns in .obs will  be created from the specified value for '--obs_cluster' suffixed with an underscore and one of the resolutions resolutions specified in '--leiden_resolution'. |`string`, default: `"bbknn_integration_leiden"` |
-|`--leiden_resolution` |Control the coarseness of the clustering. Higher values lead to more clusters.                                                                                                                                                                                     |`double`, default: `1`                          |
+|Name                  |Description                                                                                                                                                                                                                                                        |Attributes                                          |
+|:---------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------|
+|`--obs_cluster`       |Prefix for the .obs keys under which to add the cluster labels. Newly created columns in .obs will  be created from the specified value for '--obs_cluster' suffixed with an underscore and one of the resolutions resolutions specified in '--leiden_resolution'. |`string`, default: `"bbknn_integration_leiden"`     |
+|`--leiden_resolution` |Control the coarseness of the clustering. Higher values lead to more clusters.                                                                                                                                                                                     |List of `double`, default: `1`, multiple_sep: `":"` |
 
 
 ### UMAP options
@@ -148,27 +148,34 @@ flowchart LR
     p4(flatMap)
     p10(bbknn)
     p12(join)
-    p20(leiden)
-    p22(join)
-    p30(umap)
-    p32(join)
-    p40(move_obsm_to_obs)
-    p42(join)
-    p48(Output)
+    p15(filter)
+    p21(leiden)
+    p23(join)
+    p31(move_obsm_to_obs)
+    p33(join)
+    p37(mix)
+    p36(filter)
+    p43(umap)
+    p45(join)
+    p51(Output)
+    p36-->p37
     p0-->p2
     p2-->p4
     p4-->p12
     p4-->p10
     p10-->p12
-    p12-->p22
-    p12-->p20
-    p20-->p22
-    p22-->p32
-    p22-->p30
-    p30-->p32
-    p32-->p42
-    p32-->p40
-    p40-->p42
-    p42-->p48
+    p12-->p15
+    p12-->p36
+    p15-->p23
+    p15-->p21
+    p21-->p23
+    p23-->p33
+    p23-->p31
+    p31-->p33
+    p33-->p37
+    p37-->p45
+    p37-->p43
+    p43-->p45
+    p45-->p51
 
 ```

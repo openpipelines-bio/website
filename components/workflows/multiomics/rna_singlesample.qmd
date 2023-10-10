@@ -14,7 +14,7 @@ ID: `rna_singlesample`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/workflows/multiomics/rna_singlesample){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.0/./workflows/multiomics/rna_singlesample){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.0 -latest \
+  -r 0.11.0 -latest \
   -main-script ./workflows/multiomics/rna_singlesample/main.nf \
   --help
 ```
@@ -69,7 +69,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.0 -latest \
+  -r 0.11.0 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/rna_singlesample/main.nf \
   -params-file params.yaml
@@ -136,22 +136,22 @@ flowchart LR
     p5(flatMap)
     p12(filter_with_counts)
     p14(join)
-    p22(do_filter)
-    p24(join)
-    p32(filter_with_scrublet)
-    p34(join)
-    p42(Output)
+    p23(do_filter)
+    p25(join)
+    p34(filter_with_scrublet)
+    p36(join)
+    p44(Output)
     p0-->p3
     p3-->p5
     p5-->p14
     p5-->p12
     p12-->p14
-    p14-->p24
-    p14-->p22
-    p22-->p24
-    p24-->p34
-    p24-->p32
-    p32-->p34
-    p34-->p42
+    p14-->p25
+    p14-->p23
+    p23-->p25
+    p25-->p36
+    p25-->p34
+    p34-->p36
+    p36-->p44
 
 ```

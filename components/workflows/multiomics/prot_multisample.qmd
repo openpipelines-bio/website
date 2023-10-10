@@ -14,7 +14,7 @@ ID: `prot_multisample`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/workflows/multiomics/prot_multisample){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.0/./workflows/multiomics/prot_multisample){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.0 -latest \
+  -r 0.11.0 -latest \
   -main-script ./workflows/multiomics/prot_multisample/main.nf \
   --help
 ```
@@ -58,7 +58,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.0 -latest \
+  -r 0.11.0 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/prot_multisample/main.nf \
   -params-file params.yaml
@@ -108,9 +108,9 @@ flowchart LR
     p9(Output)
     p15(clr)
     p17(join)
-    p25(prot_calculate_qc_metrics)
-    p27(join)
-    p34(Output)
+    p26(prot_calculate_qc_metrics)
+    p28(join)
+    p35(Output)
     p0-->p3
     p3-->p5
     p5-->p7
@@ -118,9 +118,9 @@ flowchart LR
     p5-->p17
     p5-->p15
     p15-->p17
-    p17-->p27
-    p17-->p25
-    p25-->p27
-    p27-->p34
+    p17-->p28
+    p17-->p26
+    p26-->p28
+    p28-->p35
 
 ```

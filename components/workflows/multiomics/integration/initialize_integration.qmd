@@ -14,7 +14,7 @@ ID: `initialize_integration`
 Namespace: `multiomics/integration`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/workflows/multiomics/integration/initialize_integration){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.0/./workflows/multiomics/integration/initialize_integration){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.0 -latest \
+  -r 0.11.0 -latest \
   -main-script ./workflows/multiomics/integration/initialize_integration/main.nf \
   --help
 ```
@@ -70,7 +70,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.0 -latest \
+  -r 0.11.0 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/integration/initialize_integration/main.nf \
   -params-file params.yaml
@@ -138,24 +138,24 @@ flowchart LR
     p4(flatMap)
     p11(pca)
     p13(join)
-    p21(find_neighbors)
-    p23(join)
-    p31(umap)
-    p33(join)
-    p38(toSortedList)
-    p40(Output)
+    p22(find_neighbors)
+    p24(join)
+    p33(umap)
+    p35(join)
+    p40(toSortedList)
+    p42(Output)
     p0-->p2
     p2-->p4
     p4-->p13
     p4-->p11
     p11-->p13
-    p13-->p23
-    p13-->p21
-    p21-->p23
-    p23-->p33
-    p23-->p31
-    p31-->p33
-    p33-->p38
-    p38-->p40
+    p13-->p24
+    p13-->p22
+    p22-->p24
+    p24-->p35
+    p24-->p33
+    p33-->p35
+    p35-->p40
+    p40-->p42
 
 ```
