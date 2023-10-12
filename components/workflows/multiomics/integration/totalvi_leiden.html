@@ -431,6 +431,12 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../../../components/workflows/multiomics/integration/scvi_leiden.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scvi leiden</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../../../components/workflows/multiomics/integration/totalvi_leiden.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Totalvi leiden</span></a>
   </div>
@@ -1214,7 +1220,7 @@ Namespace: <code>multiomics/integration</code></p>
 </section>
 <section id="links" class="level3">
 <h3 class="anchored" data-anchor-id="links">Links</h3>
-<p><a href="https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/workflows/multiomics/integration/totalvi_leiden" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
+<p><a href="https://github.com/openpipelines-bio/openpipeline/blob/0.11.0/./workflows/multiomics/integration/totalvi_leiden" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
 </section>
 </div></div><section id="example-commands" class="level2">
 <h2 class="anchored" data-anchor-id="example-commands">Example commands</h2>
@@ -1223,7 +1229,7 @@ Namespace: <code>multiomics/integration</code></p>
 <h3 class="anchored" data-anchor-id="view-help">View help</h3>
 <p>You can use <code>--help</code> as a parameter to get an overview of the possible parameters.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> 0.10.0 <span class="at">-latest</span> <span class="dt">\</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> 0.11.0 <span class="at">-latest</span> <span class="dt">\</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> ./workflows/multiomics/integration/totalvi_leiden/main.nf <span class="dt">\</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
@@ -1288,7 +1294,7 @@ Example of <code>params.yaml</code>
 <span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="co"># param_list: "my_params.yaml"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> 0.10.0 <span class="at">-latest</span> <span class="dt">\</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> 0.11.0 <span class="at">-latest</span> <span class="dt">\</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-profile</span> docker <span class="dt">\</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> ./workflows/multiomics/integration/totalvi_leiden/main.nf <span class="dt">\</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">-params-file</span> params.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1670,23 +1676,31 @@ Note
     p14(join)
     p23(find_neighbors)
     p25(join)
-    p33(leiden)
-    p35(join)
-    p43(umap)
-    p45(join)
-    p53(move_obsm_to_obs)
-    p55(join)
-    p64(test_wf:run_wf:test_wf:run_wf:neighbors_leiden_umap:find_neighbors:find_neighbors_process1)
-    p66(join)
-    p74(test_wf:run_wf:test_wf:run_wf:neighbors_leiden_umap:leiden:leiden_process1)
-    p76(join)
-    p84(test_wf:run_wf:test_wf:run_wf:neighbors_leiden_umap:umap:umap_process1)
-    p86(join)
-    p94(test_wf:run_wf:test_wf:run_wf:neighbors_leiden_umap:move_obsm_to_obs:move_obsm_to_obs_process1)
-    p96(join)
-    p104(publish)
-    p106(join)
-    p112(Output)
+    p28(filter)
+    p34(leiden)
+    p36(join)
+    p44(move_obsm_to_obs)
+    p46(join)
+    p50(mix)
+    p49(filter)
+    p56(umap)
+    p58(join)
+    p67(test_wf:run_wf:test_wf:run_wf:neighbors_leiden_umap:find_neighbors:find_neighbors_process1)
+    p69(join)
+    p72(filter)
+    p78(test_wf:run_wf:test_wf:run_wf:neighbors_leiden_umap:leiden:leiden_process1)
+    p80(join)
+    p88(test_wf:run_wf:test_wf:run_wf:neighbors_leiden_umap:move_obsm_to_obs:move_obsm_to_obs_process1)
+    p90(join)
+    p94(mix)
+    p93(filter)
+    p100(test_wf:run_wf:test_wf:run_wf:neighbors_leiden_umap:umap:umap_process1)
+    p102(join)
+    p110(publish)
+    p112(join)
+    p118(Output)
+    p49--&gt;p50
+    p93--&gt;p94
     p0--&gt;p3
     p3--&gt;p5
     p5--&gt;p14
@@ -1695,31 +1709,37 @@ Note
     p14--&gt;p25
     p14--&gt;p23
     p23--&gt;p25
-    p25--&gt;p35
-    p25--&gt;p33
-    p33--&gt;p35
-    p35--&gt;p45
-    p35--&gt;p43
-    p43--&gt;p45
-    p45--&gt;p55
-    p45--&gt;p53
-    p53--&gt;p55
-    p55--&gt;p66
-    p55--&gt;p64
-    p64--&gt;p66
-    p66--&gt;p76
-    p66--&gt;p74
-    p74--&gt;p76
-    p76--&gt;p86
-    p76--&gt;p84
-    p84--&gt;p86
-    p86--&gt;p96
-    p86--&gt;p94
-    p94--&gt;p96
-    p96--&gt;p106
-    p96--&gt;p104
-    p104--&gt;p106
-    p106--&gt;p112
+    p25--&gt;p28
+    p25--&gt;p49
+    p28--&gt;p36
+    p28--&gt;p34
+    p34--&gt;p36
+    p36--&gt;p46
+    p36--&gt;p44
+    p44--&gt;p46
+    p46--&gt;p50
+    p50--&gt;p58
+    p50--&gt;p56
+    p56--&gt;p58
+    p58--&gt;p69
+    p58--&gt;p67
+    p67--&gt;p69
+    p69--&gt;p72
+    p69--&gt;p93
+    p72--&gt;p80
+    p72--&gt;p78
+    p78--&gt;p80
+    p80--&gt;p90
+    p80--&gt;p88
+    p88--&gt;p90
+    p90--&gt;p94
+    p94--&gt;p102
+    p94--&gt;p100
+    p100--&gt;p102
+    p102--&gt;p112
+    p102--&gt;p110
+    p110--&gt;p112
+    p112--&gt;p118
 
 </pre>
 </div>

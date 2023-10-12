@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="A generic pipeline for running bcl2fastq, bcl-convert or Cell Ranger mkfastq.">
+<meta name="description" content="Run scvi integration followed by neighbour calculations, leiden clustering and run umap on the result.">
 
-<title>OpenPipelines - Demux</title>
+<title>OpenPipelines - Scvi leiden</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -58,24 +58,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../">
-<script src="../../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -110,12 +110,12 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 </script>
-<script src="../../../site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="../../../site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+<script src="../../../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
-<link rel="stylesheet" href="../../../styles.css">
+<link rel="stylesheet" href="../../../../styles.css">
 </head>
 
 <body class="nav-sidebar floating nav-fixed slimcontent">
@@ -125,8 +125,8 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../../images/logo.svg" alt="" class="navbar-logo">
+    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../../images/logo.svg" alt="" class="navbar-logo">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -136,27 +136,27 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../index.html" rel="" target="">
+    <a class="nav-link" href="../../../../index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../fundamentals/index.html" rel="" target="">
+    <a class="nav-link" href="../../../../fundamentals/index.html" rel="" target="">
  <span class="menu-text">Fundamentals</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../user_guide/index.html" rel="" target="">
+    <a class="nav-link" href="../../../../user_guide/index.html" rel="" target="">
  <span class="menu-text">User Guide</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../contributing/index.html" rel="" target="">
+    <a class="nav-link" href="../../../../contributing/index.html" rel="" target="">
  <span class="menu-text">Contributing</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../../../components/index.html" rel="" target="" aria-current="page">
+    <a class="nav-link active" href="../../../../components/index.html" rel="" target="" aria-current="page">
  <span class="menu-text">Reference</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../team/index.html" rel="" target="">
+    <a class="nav-link" href="../../../../team/index.html" rel="" target="">
  <span class="menu-text">Team</span></a>
   </li>  
 </ul>
@@ -177,7 +177,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../components/index.html">Components</a></li><li class="breadcrumb-item"><a href="../../../components/workflows/index.html">Workflows</a></li><li class="breadcrumb-item"><a href="../../../components/workflows/ingestion/bd_rhapsody.html">Ingestion</a></li><li class="breadcrumb-item"><a href="../../../components/workflows/ingestion/demux.html">Demux</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../components/index.html">Components</a></li><li class="breadcrumb-item"><a href="../../../../components/workflows/index.html">Workflows</a></li><li class="breadcrumb-item"><a href="../../../../components/workflows/multiomics/full_pipeline.html">Multiomics</a></li><li class="breadcrumb-item"><a href="../../../../components/workflows/multiomics/integration/bbknn_leiden.html">Integration</a></li><li class="breadcrumb-item"><a href="../../../../components/workflows/multiomics/integration/scvi_leiden.html">Scvi leiden</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -191,7 +191,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../components/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../../components/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Components</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -200,7 +200,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../components/workflows/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../../components/workflows/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Workflows</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -218,43 +218,43 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/ingestion/bd_rhapsody.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/workflows/ingestion/bd_rhapsody.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">BD Rhapsody</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/ingestion/cellranger_mapping.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/workflows/ingestion/cellranger_mapping.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Cell Ranger mapping</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/ingestion/cellranger_multi.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/workflows/ingestion/cellranger_multi.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Cell Ranger multi</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/ingestion/cellranger_postprocessing.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/workflows/ingestion/cellranger_postprocessing.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Cell Ranger post-processing</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/ingestion/conversion.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/workflows/ingestion/conversion.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Conversion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/ingestion/demux.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../../components/workflows/ingestion/demux.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Demux</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/ingestion/make_reference.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/workflows/ingestion/make_reference.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Make reference</span></a>
   </div>
 </li>
@@ -280,7 +280,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth4 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/integration/common/harmony_leiden.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/workflows/integration/common/harmony_leiden.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Harmony leiden</span></a>
   </div>
 </li>
@@ -297,7 +297,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth4 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/integration/initialize_integration/initialize_integration.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/workflows/integration/initialize_integration/initialize_integration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Initialize integration</span></a>
   </div>
 </li>
@@ -314,7 +314,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth4 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/integration/scanorama_leiden/scanorama_leiden.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/workflows/integration/scanorama_leiden/scanorama_leiden.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scanorama leiden</span></a>
   </div>
 </li>
@@ -331,7 +331,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth4 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/integration/scvi/scvi.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/workflows/integration/scvi/scvi.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scvi</span></a>
   </div>
 </li>
@@ -350,94 +350,94 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/multiomics/full_pipeline.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/workflows/multiomics/full_pipeline.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Full pipeline</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/multiomics/integration.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/workflows/multiomics/integration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Integration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/multiomics/multisample.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/workflows/multiomics/multisample.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Multisample</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/multiomics/prot_multisample.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/workflows/multiomics/prot_multisample.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Prot multisample</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/multiomics/prot_singlesample.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/workflows/multiomics/prot_singlesample.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Prot singlesample</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/multiomics/rna_multisample.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/workflows/multiomics/rna_multisample.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Rna multisample</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/multiomics/rna_singlesample.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/workflows/multiomics/rna_singlesample.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Rna singlesample</span></a>
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
  <span class="menu-text">Integration</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth4 ">  
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth4 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/multiomics/integration/bbknn_leiden.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/workflows/multiomics/integration/bbknn_leiden.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bbknn leiden</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/multiomics/integration/harmony_leiden.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/workflows/multiomics/integration/harmony_leiden.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Harmony leiden</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/multiomics/integration/initialize_integration.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/workflows/multiomics/integration/initialize_integration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Initialize integration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/multiomics/integration/leiden_scvi.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/workflows/multiomics/integration/leiden_scvi.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Leiden scvi</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/multiomics/integration/scanorama_leiden.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/workflows/multiomics/integration/scanorama_leiden.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scanorama leiden</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/multiomics/integration/scvi_leiden.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/workflows/multiomics/integration/scvi_leiden.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Scvi leiden</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/multiomics/integration/totalvi_leiden.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/workflows/multiomics/integration/totalvi_leiden.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Totalvi leiden</span></a>
   </div>
 </li>
@@ -449,7 +449,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../components/modules/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../../components/modules/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Modules</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -467,7 +467,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/annotate/popv.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/annotate/popv.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Popv</span></a>
   </div>
 </li>
@@ -484,7 +484,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/cluster/leiden.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/cluster/leiden.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Leiden</span></a>
   </div>
 </li>
@@ -501,7 +501,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/compression/compress_h5mu.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/compression/compress_h5mu.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Compress h5mu</span></a>
   </div>
 </li>
@@ -518,49 +518,49 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/convert/from_10xh5_to_h5mu.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/convert/from_10xh5_to_h5mu.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">From 10xh5 to h5mu</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/convert/from_10xmtx_to_h5mu.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/convert/from_10xmtx_to_h5mu.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">From 10xmtx to h5mu</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/convert/from_bd_to_10x_molecular_barcode_tags.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/convert/from_bd_to_10x_molecular_barcode_tags.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">From bd to 10x molecular barcode tags</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/convert/from_bdrhap_to_h5mu.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/convert/from_bdrhap_to_h5mu.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">From bdrhap to h5mu</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/convert/from_cellranger_multi_to_h5mu.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/convert/from_cellranger_multi_to_h5mu.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">From cellranger multi to h5mu</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/convert/from_h5ad_to_h5mu.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/convert/from_h5ad_to_h5mu.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">From h5ad to h5mu</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/convert/from_h5mu_to_h5ad.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/convert/from_h5mu_to_h5ad.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">From h5mu to h5ad</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/convert/velocyto_to_h5mu.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/convert/velocyto_to_h5mu.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Velocyto to h5mu</span></a>
   </div>
 </li>
@@ -577,13 +577,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/correction/cellbender_remove_background.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/correction/cellbender_remove_background.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Cellbender remove background</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/correction/cellbender_remove_background_v0_2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/correction/cellbender_remove_background_v0_2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Cellbender remove background v0 2</span></a>
   </div>
 </li>
@@ -600,19 +600,19 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/dataflow/concat.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/dataflow/concat.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Concat</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/dataflow/merge.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/dataflow/merge.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Merge</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/dataflow/split_modalities.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/dataflow/split_modalities.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Split modalities</span></a>
   </div>
 </li>
@@ -629,19 +629,19 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/demux/bcl_convert.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/demux/bcl_convert.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bcl convert</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/demux/bcl2fastq.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/demux/bcl2fastq.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bcl2fastq</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/demux/cellranger_mkfastq.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/demux/cellranger_mkfastq.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Cellranger mkfastq</span></a>
   </div>
 </li>
@@ -658,13 +658,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/dimred/pca.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/dimred/pca.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Pca</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/dimred/umap.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/dimred/umap.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Umap</span></a>
   </div>
 </li>
@@ -681,13 +681,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-20" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/download/download_file.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/download/download_file.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Download file</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/download/sync_test_resources.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/download/sync_test_resources.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sync test resources</span></a>
   </div>
 </li>
@@ -704,7 +704,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-21" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/files/make_params.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/files/make_params.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Make params</span></a>
   </div>
 </li>
@@ -721,37 +721,37 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-22" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/filter/do_filter.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/filter/do_filter.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Do filter</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/filter/filter_with_counts.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/filter/filter_with_counts.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Filter with counts</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/filter/filter_with_hvg.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/filter/filter_with_hvg.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Filter with hvg</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/filter/filter_with_scrublet.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/filter/filter_with_scrublet.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Filter with scrublet</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/filter/remove_modality.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/filter/remove_modality.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Remove modality</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/filter/subset_h5mu.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/filter/subset_h5mu.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Subset h5mu</span></a>
   </div>
 </li>
@@ -768,31 +768,31 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-23" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/integrate/harmonypy.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/integrate/harmonypy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Harmonypy</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/integrate/scanorama.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/integrate/scanorama.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scanorama</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/integrate/scarches.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/integrate/scarches.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scarches</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/integrate/scvi.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/integrate/scvi.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scvi</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/integrate/totalvi.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/integrate/totalvi.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Totalvi</span></a>
   </div>
 </li>
@@ -809,7 +809,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-24" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/interpret/lianapy.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/interpret/lianapy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lianapy</span></a>
   </div>
 </li>
@@ -826,13 +826,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-25" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/labels_transfer/knn.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/labels_transfer/knn.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Knn</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/labels_transfer/xgboost.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/labels_transfer/xgboost.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Xgboost</span></a>
   </div>
 </li>
@@ -849,73 +849,73 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-26" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/mapping/bd_rhapsody.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/mapping/bd_rhapsody.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">BD Rhapsody</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/mapping/cellranger_count.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/mapping/cellranger_count.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Cellranger count</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/mapping/cellranger_count_split.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/mapping/cellranger_count_split.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Cellranger count split</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/mapping/cellranger_multi.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/mapping/cellranger_multi.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Cellranger multi</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/mapping/htseq_count.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/mapping/htseq_count.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Htseq count</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/mapping/htseq_count_to_h5mu.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/mapping/htseq_count_to_h5mu.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Htseq count to h5mu</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/mapping/multi_star.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/mapping/multi_star.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Multi star</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/mapping/multi_star_to_h5mu.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/mapping/multi_star_to_h5mu.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Multi star to h5mu</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/mapping/samtools_sort.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/mapping/samtools_sort.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Samtools sort</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/mapping/star_align.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/mapping/star_align.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Star align</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/mapping/star_align_v273a.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/mapping/star_align_v273a.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Star align v273a</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/mapping/star_build_reference.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/mapping/star_build_reference.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Star build reference</span></a>
   </div>
 </li>
@@ -932,25 +932,25 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-27" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/metadata/add_id.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/metadata/add_id.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Add id</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/metadata/join_csv.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/metadata/join_csv.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Join csv</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/metadata/join_uns_to_obs.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/metadata/join_uns_to_obs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Join uns to obs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/metadata/move_obsm_to_obs.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/metadata/move_obsm_to_obs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Move obsm to obs</span></a>
   </div>
 </li>
@@ -967,13 +967,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-28" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/neighbors/bbknn.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/neighbors/bbknn.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bbknn</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/neighbors/find_neighbors.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/neighbors/find_neighbors.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Find neighbors</span></a>
   </div>
 </li>
@@ -990,7 +990,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-29" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/process_10xh5/filter_10xh5.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/process_10xh5/filter_10xh5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Filter 10xh5</span></a>
   </div>
 </li>
@@ -1007,19 +1007,19 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-30" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/qc/calculate_qc_metrics.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/qc/calculate_qc_metrics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calculate qc metrics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/qc/fastqc.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/qc/fastqc.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Fastqc</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/qc/multiqc.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/qc/multiqc.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Multiqc</span></a>
   </div>
 </li>
@@ -1036,7 +1036,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-31" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/query/cellxgene_census.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/query/cellxgene_census.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Cellxgene census</span></a>
   </div>
 </li>
@@ -1053,19 +1053,19 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-32" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/reference/build_bdrhap_reference.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/reference/build_bdrhap_reference.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Build bdrhap reference</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/reference/build_cellranger_reference.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/reference/build_cellranger_reference.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Build cellranger reference</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/reference/make_reference.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/reference/make_reference.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Make reference</span></a>
   </div>
 </li>
@@ -1082,7 +1082,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-33" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/report/mermaid.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/report/mermaid.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Mermaid</span></a>
   </div>
 </li>
@@ -1099,7 +1099,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-34" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/transfer/publish.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/transfer/publish.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Publish</span></a>
   </div>
 </li>
@@ -1116,37 +1116,37 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-35" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/transform/clr.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/transform/clr.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Clr</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/transform/delete_layer.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/transform/delete_layer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Delete layer</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/transform/log1p.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/transform/log1p.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Log1p</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/transform/normalize_total.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/transform/normalize_total.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Normalize total</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/transform/regress_out.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/transform/regress_out.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Regress out</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/transform/scale.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/transform/scale.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scale</span></a>
   </div>
 </li>
@@ -1163,13 +1163,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-36" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/velocity/scvelo.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/velocity/scvelo.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scvelo</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/velocity/velocyto.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../components/modules/velocity/velocyto.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Velocyto</span></a>
   </div>
 </li>
@@ -1191,12 +1191,12 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Demux</h1>
+<h1 class="title">Scvi leiden</h1>
 </div>
 
 <div>
   <div class="description">
-    A generic pipeline for running bcl2fastq, bcl-convert or Cell Ranger mkfastq.
+    Run scvi integration followed by neighbour calculations, leiden clustering and run umap on the result.
   </div>
 </div>
 
@@ -1215,15 +1215,14 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <div class="no-row-height column-margin column-container"><div class="">
 <section id="info" class="level3">
 <h3 class="anchored" data-anchor-id="info">Info</h3>
-<p>ID: <code>demux</code><br>
-Namespace: <code>ingestion</code></p>
+<p>ID: <code>scvi_leiden</code><br>
+Namespace: <code>multiomics/integration</code></p>
 </section>
 <section id="links" class="level3">
 <h3 class="anchored" data-anchor-id="links">Links</h3>
-<p><a href="https://github.com/openpipelines-bio/openpipeline/blob/0.11.0/./workflows/ingestion/demux" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
+<p><a href="https://github.com/openpipelines-bio/openpipeline/blob/0.11.0/./workflows/multiomics/integration/scvi_leiden" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
 </section>
-</div></div><p>Convert <code>.bcl</code> files to <code>.fastq</code> files using bcl2fastq, bcl-convert or Cell Ranger mkfastq.</p>
-<section id="example-commands" class="level2">
+</div></div><section id="example-commands" class="level2">
 <h2 class="anchored" data-anchor-id="example-commands">Example commands</h2>
 <p>You can run the pipeline using <code>nextflow run</code>.</p>
 <section id="view-help" class="level3">
@@ -1231,7 +1230,7 @@ Namespace: <code>ingestion</code></p>
 <p>You can use <code>--help</code> as a parameter to get an overview of the possible parameters.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> 0.11.0 <span class="at">-latest</span> <span class="dt">\</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> ./workflows/ingestion/demux/main.nf <span class="dt">\</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> ./workflows/multiomics/integration/scvi_leiden/main.nf <span class="dt">\</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="run-command" class="level3">
@@ -1240,21 +1239,49 @@ Namespace: <code>ingestion</code></p>
 <summary>
 Example of <code>params.yaml</code>
 </summary>
-<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Arguments</span></span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inputs</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="co"> # please fill in - example: "foo"</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">input</span><span class="kw">:</span><span class="co"> # please fill in - example: "bcl_dir"</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_sheet</span><span class="kw">:</span><span class="co"> # please fill in - example: "bcl_dir"</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">demultiplexer</span><span class="kw">:</span><span class="at"> </span><span class="st">"bcl2fastq"</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ignore_missing: true</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Nextflow input-output arguments</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">publish_dir</span><span class="kw">:</span><span class="co"> # please fill in - example: "output/"</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># param_list: "my_params.yaml"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">input</span><span class="kw">:</span><span class="co"> # please fill in - example: "dataset.h5mu"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">layer</span><span class="kw">:</span><span class="at"> </span><span class="st">"log_normalized"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">modality</span><span class="kw">:</span><span class="at"> </span><span class="st">"rna"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Outputs</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># output: "$id.$key.output.h5mu"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># output_model: "$id.$key.output_model.output_model"</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Neighbour calculation</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">uns_neighbors</span><span class="kw">:</span><span class="at"> </span><span class="st">"scvi_integration_neighbors"</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">obsp_neighbor_distances</span><span class="kw">:</span><span class="at"> </span><span class="st">"scvi_integration_distances"</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">obsp_neighbor_connectivities</span><span class="kw">:</span><span class="at"> </span><span class="st">"scvi_integration_connectivities"</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Scvi integration options</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">obs_batch</span><span class="kw">:</span><span class="co"> # please fill in - example: "foo"</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">obsm_output</span><span class="kw">:</span><span class="at"> </span><span class="st">"X_scvi_integrated"</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># var_input: "foo"</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># early_stopping: true</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="fu">early_stopping_monitor</span><span class="kw">:</span><span class="at"> </span><span class="st">"elbo_validation"</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">early_stopping_patience</span><span class="kw">:</span><span class="at"> </span><span class="dv">45</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="fu">early_stopping_min_delta</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.0</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># max_epochs: 123</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">reduce_lr_on_plateau</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="fu">lr_factor</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.6</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="fu">lr_patience</span><span class="kw">:</span><span class="at"> </span><span class="dv">30</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Clustering options</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="fu">obs_cluster</span><span class="kw">:</span><span class="at"> </span><span class="st">"scvi_integration_leiden"</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="fu">leiden_resolution</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="dv">1</span><span class="kw">]</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Umap options</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="fu">obsm_umap</span><span class="kw">:</span><span class="at"> </span><span class="st">"X_scvi_umap"</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Nextflow input-output arguments</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="fu">publish_dir</span><span class="kw">:</span><span class="co"> # please fill in - example: "output/"</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="co"># param_list: "my_params.yaml"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> 0.11.0 <span class="at">-latest</span> <span class="dt">\</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-profile</span> docker <span class="dt">\</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> ./workflows/ingestion/demux/main.nf <span class="dt">\</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> ./workflows/multiomics/integration/scvi_leiden/main.nf <span class="dt">\</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">-params-file</span> params.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1271,15 +1298,15 @@ Note
 </div>
 </section>
 </section>
-<section id="argument-group" class="level2">
-<h2 class="anchored" data-anchor-id="argument-group">Argument group</h2>
-<section id="arguments" class="level3">
-<h3 class="anchored" data-anchor-id="arguments">Arguments</h3>
+<section id="argument-groups" class="level2">
+<h2 class="anchored" data-anchor-id="argument-groups">Argument groups</h2>
+<section id="inputs" class="level3">
+<h3 class="anchored" data-anchor-id="inputs">Inputs</h3>
 <table class="table">
 <colgroup>
-<col style="width: 15%">
-<col style="width: 52%">
-<col style="width: 32%">
+<col style="width: 9%">
+<col style="width: 60%">
+<col style="width: 30%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1296,23 +1323,208 @@ Note
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--input</code></td>
-<td style="text-align: left;">Input run directory</td>
-<td style="text-align: left;"><code>file</code>, required, example: <code>"bcl_dir"</code></td>
+<td style="text-align: left;">Path to the sample.</td>
+<td style="text-align: left;"><code>file</code>, required, example: <code>"dataset.h5mu"</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>--sample_sheet</code></td>
-<td style="text-align: left;">Pointer to the sample sheet</td>
-<td style="text-align: left;"><code>file</code>, required, example: <code>"bcl_dir"</code></td>
+<td style="text-align: left;"><code>--layer</code></td>
+<td style="text-align: left;">use specified layer for expression values instead of the .X object from the modality.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"log_normalized"</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>--demultiplexer</code></td>
-<td style="text-align: left;">The multiplexer to use, one of bclconvert or mkfastq</td>
-<td style="text-align: left;"><code>string</code>, default: <code>"bcl2fastq"</code></td>
+<td style="text-align: left;"><code>--modality</code></td>
+<td style="text-align: left;">Which modality to process.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"rna"</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="outputs" class="level3">
+<h3 class="anchored" data-anchor-id="outputs">Outputs</h3>
+<table class="table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 50%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--output</code></td>
+<td style="text-align: left;">Destination path to the output.</td>
+<td style="text-align: left;"><code>file</code>, required, example: <code>"output.h5mu"</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--output_model</code></td>
+<td style="text-align: left;">Folder where the state of the trained model will be saved to.</td>
+<td style="text-align: left;"><code>file</code>, required, example: <code>"output_dir"</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="neighbour-calculation" class="level3">
+<h3 class="anchored" data-anchor-id="neighbour-calculation">Neighbour calculation</h3>
+<table class="table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 50%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--uns_neighbors</code></td>
+<td style="text-align: left;">In which .uns slot to store various neighbor output objects.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"scvi_integration_neighbors"</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--obsp_neighbor_distances</code></td>
+<td style="text-align: left;">In which .obsp slot to store the distance matrix between the resulting neighbors.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"scvi_integration_distances"</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>--ignore_missing</code></td>
-<td style="text-align: left;">Should the demultiplexer ignore missing entities (filter, …)</td>
+<td style="text-align: left;"><code>--obsp_neighbor_connectivities</code></td>
+<td style="text-align: left;">In which .obsp slot to store the connectivities matrix between the resulting neighbors.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"scvi_integration_connectivities"</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="scvi-integration-options" class="level3">
+<h3 class="anchored" data-anchor-id="scvi-integration-options">Scvi integration options</h3>
+<table class="table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 68%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--obs_batch</code></td>
+<td style="text-align: left;">Column name discriminating between your batches.</td>
+<td style="text-align: left;"><code>string</code>, required</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--obsm_output</code></td>
+<td style="text-align: left;">In which .obsm slot to store the resulting integrated embedding.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"X_scvi_integrated"</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--var_input</code></td>
+<td style="text-align: left;">.var column containing highly variable genes. By default, do not subset genes.</td>
+<td style="text-align: left;"><code>string</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--early_stopping</code></td>
+<td style="text-align: left;">Whether to perform early stopping with respect to the validation set.</td>
 <td style="text-align: left;"><code>boolean</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--early_stopping_monitor</code></td>
+<td style="text-align: left;">Metric logged during validation set epoch.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"elbo_validation"</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--early_stopping_patience</code></td>
+<td style="text-align: left;">Number of validation epochs with no improvement after which training will be stopped.</td>
+<td style="text-align: left;"><code>integer</code>, default: <code>45</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--early_stopping_min_delta</code></td>
+<td style="text-align: left;">Minimum change in the monitored quantity to qualify as an improvement, i.e.&nbsp;an absolute change of less than min_delta, will count as no improvement.</td>
+<td style="text-align: left;"><code>double</code>, default: <code>0</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--max_epochs</code></td>
+<td style="text-align: left;">Number of passes through the dataset, defaults to (20000 / number of cells) * 400 or 400; whichever is smallest.</td>
+<td style="text-align: left;"><code>integer</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--reduce_lr_on_plateau</code></td>
+<td style="text-align: left;">Whether to monitor validation loss and reduce learning rate when validation set <code>lr_scheduler_metric</code> plateaus.</td>
+<td style="text-align: left;"><code>boolean</code>, default: <code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--lr_factor</code></td>
+<td style="text-align: left;">Factor to reduce learning rate.</td>
+<td style="text-align: left;"><code>double</code>, default: <code>0.6</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--lr_patience</code></td>
+<td style="text-align: left;">Number of epochs with no improvement after which learning rate will be reduced.</td>
+<td style="text-align: left;"><code>double</code>, default: <code>30</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="clustering-options" class="level3">
+<h3 class="anchored" data-anchor-id="clustering-options">Clustering options</h3>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 77%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--obs_cluster</code></td>
+<td style="text-align: left;">Prefix for the .obs keys under which to add the cluster labels. Newly created columns in .obs will be created from the specified value for ‘–obs_cluster’ suffixed with an underscore and one of the resolutions resolutions specified in ‘–leiden_resolution’.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"scvi_integration_leiden"</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--leiden_resolution</code></td>
+<td style="text-align: left;">Control the coarseness of the clustering. Higher values lead to more clusters.</td>
+<td style="text-align: left;">List of <code>double</code>, default: <code>1</code>, multiple_sep: <code>":"</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="umap-options" class="level3">
+<h3 class="anchored" data-anchor-id="umap-options">Umap options</h3>
+<table class="table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 54%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--obsm_umap</code></td>
+<td style="text-align: left;">In which .obsm slot to store the resulting UMAP embedding.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"X_scvi_umap"</code></td>
 </tr>
 </tbody>
 </table>
@@ -1321,11 +1533,7 @@ Note
 <section id="authors" class="level2">
 <h2 class="anchored" data-anchor-id="authors">Authors</h2>
 <ul>
-<li><p>Toni Verbeiren <a href="https://github.com/tverbeiren"><i class="fa-brands fa-github" aria-label="github"></i></a> <a href="https://linkedin.com/in/verbeiren"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a> (author, maintainer)</p></li>
-<li><p>Marijke Van Moerbeke <a href="https://github.com/mvanmoerbeke"><i class="fa-brands fa-github" aria-label="github"></i></a> <a href="https://orcid.org/0000-0002-3097-5621"><i class="fa-brands fa-orcid" aria-label="orcid"></i></a> <a href="https://linkedin.com/in/marijke-van-moerbeke-84303a34"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a> (author)</p></li>
-<li><p>Angela Oliveira Pisco <a href="https://github.com/aopisco"><i class="fa-brands fa-github" aria-label="github"></i></a> <a href="https://orcid.org/0000-0003-0142-2355"><i class="fa-brands fa-orcid" aria-label="orcid"></i></a> <a href="https://linkedin.com/in/aopisco"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a> (author)</p></li>
-<li><p>Samuel D’Souza <a href="https://github.com/srdsam"><i class="fa-brands fa-github" aria-label="github"></i></a> <a href="https://linkedin.com/in/samuel-d-souza-887023150/"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a> (author)</p></li>
-<li><p>Robrecht Cannoodt <a href="https://github.com/rcannood"><i class="fa-brands fa-github" aria-label="github"></i></a> <a href="https://orcid.org/0000-0003-3641-729X"><i class="fa-brands fa-orcid" aria-label="orcid"></i></a> <a href="https://linkedin.com/in/robrechtcannoodt"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a> (author)</p></li>
+<li>Dries Schaumont <a href="https://github.com/DriesSchaumont"><i class="fa-brands fa-github" aria-label="github"></i></a> <a href="https://orcid.org/0000-0002-4389-0440"><i class="fa-brands fa-orcid" aria-label="orcid"></i></a> <a href="https://linkedin.com/in/dries-schaumont"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a> (author)</li>
 </ul>
 </section>
 <section id="visualisation" class="level2 page-columns page-full">
@@ -1338,51 +1546,42 @@ Note
     p0(Input)
     p2(toSortedList)
     p4(flatMap)
-    p5(filter)
-    p10(cellranger_mkfastq)
+    p10(scvi)
     p12(join)
-    p35(mix)
-    p15(filter)
-    p20(bcl_convert)
+    p20(find_neighbors)
     p22(join)
     p25(filter)
-    p30(bcl2fastq)
-    p32(join)
-    p41(fastqc)
+    p31(leiden)
+    p33(join)
+    p41(move_obsm_to_obs)
     p43(join)
-    p46(Output)
-    p48(toSortedList)
-    p54(multiqc)
-    p56(join)
-    p59(Output)
-    p64(Output)
-    p4--&gt;p5
-    p4--&gt;p15
-    p4--&gt;p25
+    p47(mix)
+    p46(filter)
+    p53(umap)
+    p55(join)
+    p61(Output)
+    p46--&gt;p47
     p0--&gt;p2
     p2--&gt;p4
-    p5--&gt;p12
-    p5--&gt;p10
+    p4--&gt;p12
+    p4--&gt;p10
     p10--&gt;p12
-    p12--&gt;p35
-    p15--&gt;p22
-    p15--&gt;p20
+    p12--&gt;p22
+    p12--&gt;p20
     p20--&gt;p22
-    p22--&gt;p35
-    p25--&gt;p32
-    p25--&gt;p30
-    p30--&gt;p32
-    p32--&gt;p35
-    p35--&gt;p43
-    p35--&gt;p41
+    p22--&gt;p25
+    p22--&gt;p46
+    p25--&gt;p33
+    p25--&gt;p31
+    p31--&gt;p33
+    p33--&gt;p43
+    p33--&gt;p41
     p41--&gt;p43
-    p43--&gt;p46
-    p35--&gt;p48
-    p48--&gt;p56
-    p48--&gt;p54
-    p54--&gt;p56
-    p56--&gt;p59
-    p35--&gt;p64
+    p43--&gt;p47
+    p47--&gt;p55
+    p47--&gt;p53
+    p53--&gt;p55
+    p55--&gt;p61
 
 </pre>
 </div>
@@ -1699,7 +1898,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/components/workflows/ingestion/demux.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/components/workflows/multiomics/integration/scvi_leiden.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

@@ -431,6 +431,12 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/multiomics/integration/scvi_leiden.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scvi leiden</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../../components/workflows/multiomics/integration/totalvi_leiden.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Totalvi leiden</span></a>
   </div>
@@ -1214,7 +1220,7 @@ Namespace: <code>multiomics</code></p>
 </section>
 <section id="links" class="level3">
 <h3 class="anchored" data-anchor-id="links">Links</h3>
-<p><a href="https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/workflows/multiomics/rna_multisample" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
+<p><a href="https://github.com/openpipelines-bio/openpipeline/blob/0.11.0/./workflows/multiomics/rna_multisample" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
 </section>
 </div></div><section id="example-commands" class="level2">
 <h2 class="anchored" data-anchor-id="example-commands">Example commands</h2>
@@ -1223,7 +1229,7 @@ Namespace: <code>multiomics</code></p>
 <h3 class="anchored" data-anchor-id="view-help">View help</h3>
 <p>You can use <code>--help</code> as a parameter to get an overview of the possible parameters.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> 0.10.0 <span class="at">-latest</span> <span class="dt">\</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> 0.11.0 <span class="at">-latest</span> <span class="dt">\</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> ./workflows/multiomics/rna_multisample/main.nf <span class="dt">\</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
@@ -1255,7 +1261,7 @@ Example of <code>params.yaml</code>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># param_list: "my_params.yaml"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> 0.10.0 <span class="at">-latest</span> <span class="dt">\</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> 0.11.0 <span class="at">-latest</span> <span class="dt">\</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-profile</span> docker <span class="dt">\</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> ./workflows/multiomics/rna_multisample/main.nf <span class="dt">\</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">-params-file</span> params.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1420,15 +1426,15 @@ Note
     p9(Output)
     p15(normalize_total)
     p17(join)
-    p25(log1p)
-    p27(join)
-    p35(delete_layer)
-    p37(join)
-    p45(filter_with_hvg)
-    p47(join)
-    p55(rna_calculate_qc_metrics)
-    p57(join)
-    p64(Output)
+    p26(log1p)
+    p28(join)
+    p37(delete_layer)
+    p39(join)
+    p48(filter_with_hvg)
+    p50(join)
+    p59(rna_calculate_qc_metrics)
+    p61(join)
+    p68(Output)
     p0--&gt;p3
     p3--&gt;p5
     p5--&gt;p7
@@ -1436,19 +1442,19 @@ Note
     p5--&gt;p17
     p5--&gt;p15
     p15--&gt;p17
-    p17--&gt;p27
-    p17--&gt;p25
-    p25--&gt;p27
-    p27--&gt;p37
-    p27--&gt;p35
-    p35--&gt;p37
-    p37--&gt;p47
-    p37--&gt;p45
-    p45--&gt;p47
-    p47--&gt;p57
-    p47--&gt;p55
-    p55--&gt;p57
-    p57--&gt;p64
+    p17--&gt;p28
+    p17--&gt;p26
+    p26--&gt;p28
+    p28--&gt;p39
+    p28--&gt;p37
+    p37--&gt;p39
+    p39--&gt;p50
+    p39--&gt;p48
+    p48--&gt;p50
+    p50--&gt;p61
+    p50--&gt;p59
+    p59--&gt;p61
+    p61--&gt;p68
 
 </pre>
 </div>
