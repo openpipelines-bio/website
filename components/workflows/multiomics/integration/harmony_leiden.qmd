@@ -14,7 +14,7 @@ ID: `harmony_leiden`
 Namespace: `multiomics/integration`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.0/workflows/multiomics/integration/harmony_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.0/./workflows/multiomics/integration/harmony_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.0 -latest \
+  -r 0.11.0 -latest \
   -main-script ./workflows/multiomics/integration/harmony_leiden/main.nf \
   --help
 ```
@@ -75,7 +75,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.0 -latest \
+  -r 0.11.0 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/integration/harmony_leiden/main.nf \
   -params-file params.yaml
@@ -154,13 +154,17 @@ flowchart LR
     p12(join)
     p20(find_neighbors)
     p22(join)
-    p30(leiden)
-    p32(join)
-    p40(umap)
-    p42(join)
-    p50(move_obsm_to_obs)
-    p52(join)
-    p58(Output)
+    p25(filter)
+    p31(leiden)
+    p33(join)
+    p41(move_obsm_to_obs)
+    p43(join)
+    p47(mix)
+    p46(filter)
+    p53(umap)
+    p55(join)
+    p61(Output)
+    p46-->p47
     p0-->p2
     p2-->p4
     p4-->p12
@@ -169,15 +173,18 @@ flowchart LR
     p12-->p22
     p12-->p20
     p20-->p22
-    p22-->p32
-    p22-->p30
-    p30-->p32
-    p32-->p42
-    p32-->p40
-    p40-->p42
-    p42-->p52
-    p42-->p50
-    p50-->p52
-    p52-->p58
+    p22-->p25
+    p22-->p46
+    p25-->p33
+    p25-->p31
+    p31-->p33
+    p33-->p43
+    p33-->p41
+    p41-->p43
+    p43-->p47
+    p47-->p55
+    p47-->p53
+    p53-->p55
+    p55-->p61
 
 ```
