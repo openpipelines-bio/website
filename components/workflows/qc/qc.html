@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="A wrapper for the BD Rhapsody Analysis CWL v1.10.1 pipeline">
+<meta name="description" content="A pipeline to add basic qc statistics to a MuData">
 
-<title>OpenPipelines - BD Rhapsody</title>
+<title>OpenPipelines - Qc</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -110,6 +110,9 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 </script>
+<script src="../../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../../../styles.css">
@@ -174,7 +177,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../components/index.html">Components</a></li><li class="breadcrumb-item"><a href="../../../components/modules/index.html">Modules</a></li><li class="breadcrumb-item"><a href="../../../components/modules/mapping/bd_rhapsody.html">Mapping</a></li><li class="breadcrumb-item"><a href="../../../components/modules/mapping/bd_rhapsody.html">BD Rhapsody</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../components/index.html">Components</a></li><li class="breadcrumb-item"><a href="../../../components/workflows/index.html">Workflows</a></li><li class="breadcrumb-item"><a href="../../../components/workflows/qc/qc.html">Qc</a></li><li class="breadcrumb-item"><a href="../../../components/workflows/qc/qc.html">Qc</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -453,7 +456,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/workflows/qc/qc.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../components/workflows/qc/qc.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Qc</span></a>
   </div>
 </li>
@@ -869,7 +872,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-27" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../components/modules/mapping/bd_rhapsody.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../components/modules/mapping/bd_rhapsody.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">BD Rhapsody</span></a>
   </div>
 </li>
@@ -1217,12 +1220,12 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">BD Rhapsody</h1>
+<h1 class="title">Qc</h1>
 </div>
 
 <div>
   <div class="description">
-    A wrapper for the BD Rhapsody Analysis CWL v1.10.1 pipeline
+    A pipeline to add basic qc statistics to a MuData
   </div>
 </div>
 
@@ -1241,26 +1244,14 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <div class="no-row-height column-margin column-container"><div class="">
 <section id="info" class="level3">
 <h3 class="anchored" data-anchor-id="info">Info</h3>
-<p>ID: <code>bd_rhapsody</code><br>
-Namespace: <code>mapping</code></p>
+<p>ID: <code>qc</code><br>
+Namespace: <code>qc</code></p>
 </section>
 <section id="links" class="level3">
 <h3 class="anchored" data-anchor-id="links">Links</h3>
-<p><a href="https://github.com/openpipelines-bio/openpipeline/blob/0.12.0/./src/mapping/bd_rhapsody" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
+<p><a href="https://github.com/openpipelines-bio/openpipeline/blob/0.12.0/./workflows/qc/qc" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
 </section>
-</div></div><p>A wrapper for the BD Rhapsody Analysis CWL v1.10.1 pipeline.</p>
-<p>The CWL pipeline file is obtained by cloning ‘https://bitbucket.org/CRSwDev/cwl/src/master/’ and removing all objects with class ‘DockerRequirement’ from the YML.</p>
-<p>This pipeline can be used for a targeted analysis (with <code>--mode targeted</code>) or for a whole transcriptome analysis (with <code>--mode wta</code>).</p>
-<ul>
-<li>If mode is <code>"targeted"</code>, then either the <code>--reference</code> or <code>--abseq_reference</code> parameters must be defined.</li>
-<li>If mode is <code>"wta"</code>, then <code>--reference</code> and <code>--transcriptome_annotation</code> must be defined, <code>--abseq_reference</code> and <code>--supplemental_reference</code> is optional.</li>
-</ul>
-<p>The reference_genome and transcriptome_annotation files can be generated with the make_reference pipeline. Alternatively, BD also provides standard references which can be downloaded from these locations:</p>
-<ul>
-<li>Human: http://bd-rhapsody-public.s3-website-us-east-1.amazonaws.com/Rhapsody-WTA/GRCh38-PhiX-gencodev29/</li>
-<li>Mouse: http://bd-rhapsody-public.s3-website-us-east-1.amazonaws.com/Rhapsody-WTA/GRCm38-PhiX-gencodevM19/</li>
-</ul>
-<section id="example-commands" class="level2">
+</div></div><section id="example-commands" class="level2">
 <h2 class="anchored" data-anchor-id="example-commands">Example commands</h2>
 <p>You can run the pipeline using <code>nextflow run</code>.</p>
 <section id="view-help" class="level3">
@@ -1268,7 +1259,7 @@ Namespace: <code>mapping</code></p>
 <p>You can use <code>--help</code> as a parameter to get an overview of the possible parameters.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> 0.12.0 <span class="at">-latest</span> <span class="dt">\</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> target/nextflow/mapping/bd_rhapsody/main.nf <span class="dt">\</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> ./workflows/qc/qc/main.nf <span class="dt">\</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="run-command" class="level3">
@@ -1278,46 +1269,32 @@ Namespace: <code>mapping</code></p>
 Example of <code>params.yaml</code>
 </summary>
 <div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inputs</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mode</span><span class="kw">:</span><span class="co"> # please fill in - example: "wta"</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">input</span><span class="kw">:</span><span class="co"> # please fill in - example: ["input.fastq.gz"]</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">reference</span><span class="kw">:</span><span class="co"> # please fill in - example: ["reference_genome.tar.gz|reference.fasta"]</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># transcriptome_annotation: "transcriptome.gtf"</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># abseq_reference: ["abseq_reference.fasta"]</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># supplemental_reference: ["supplemental_reference.fasta"]</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_prefix</span><span class="kw">:</span><span class="at"> </span><span class="st">"sample"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="co"> # please fill in - example: "foo"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">input</span><span class="kw">:</span><span class="co"> # please fill in - example: "input.h5mu"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">modality</span><span class="kw">:</span><span class="at"> </span><span class="st">"rna"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># layer: "raw_counts"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Outputs</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># output: "$id.$key.output.h5mu"</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Outputs</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># output: "$id.$key.output.output"</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Putative cell calling settings</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># putative_cell_call: "mRNA"</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># exact_cell_count: 10000</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="fu">disable_putative_calling</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Subsample arguments</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># subsample: 0.01</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># subsample_seed: 3445</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiplex arguments</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co"># sample_tags_version: "human"</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># tag_names: ["4-mySample", "9-myOtherSample", "6-alsoThisSample"]</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co"># VDJ arguments</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># vdj_version: "human"</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co"># CWL-runner arguments</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="fu">parallel</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="fu">timestamps</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="fu">dryrun</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Nextflow input-output arguments</span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="fu">publish_dir</span><span class="kw">:</span><span class="co"> # please fill in - example: "output/"</span></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co"># param_list: "my_params.yaml"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Mitochondrial Gene Detection</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># var_name_mitochondrial_genes: "foo"</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># obs_name_mitochondrial_fraction: "foo"</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># var_gene_names: "gene_symbol"</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mitochondrial_gene_regex</span><span class="kw">:</span><span class="at"> </span><span class="st">"^[mM][tT]-"</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># QC metrics calculation options</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># var_qc_metrics: ["ercc", "highly_variable"]</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">top_n_vars</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="dv">50</span><span class="kw">,</span><span class="at"> </span><span class="dv">100</span><span class="kw">,</span><span class="at"> </span><span class="dv">200</span><span class="kw">,</span><span class="at"> </span><span class="dv">500</span><span class="kw">]</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Nextflow input-output arguments</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="fu">publish_dir</span><span class="kw">:</span><span class="co"> # please fill in - example: "output/"</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># param_list: "my_params.yaml"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> 0.12.0 <span class="at">-latest</span> <span class="dt">\</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-profile</span> docker <span class="dt">\</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> target/nextflow/mapping/bd_rhapsody/main.nf <span class="dt">\</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> ./workflows/qc/qc/main.nf <span class="dt">\</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">-params-file</span> params.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1340,9 +1317,9 @@ Note
 <h3 class="anchored" data-anchor-id="inputs">Inputs</h3>
 <table class="table">
 <colgroup>
-<col style="width: 8%">
-<col style="width: 61%">
-<col style="width: 30%">
+<col style="width: 14%">
+<col style="width: 38%">
+<col style="width: 46%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1353,50 +1330,35 @@ Note
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><code>--mode</code></td>
-<td style="text-align: left;">Whether to run a whole transcriptome analysis (WTA) or a targeted analysis.</td>
-<td style="text-align: left;"><code>string</code>, required, example: <code>"wta"</code></td>
+<td style="text-align: left;"><code>--id</code></td>
+<td style="text-align: left;">ID of the sample.</td>
+<td style="text-align: left;"><code>string</code>, required, example: <code>"foo"</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>--input</code></td>
-<td style="text-align: left;">Path to your read files in the FASTQ.GZ format. You may specify as many R1/R2 read pairs as you want.</td>
-<td style="text-align: left;">List of <code>file</code>, required, example: <code>"input.fastq.gz"</code>, multiple_sep: <code>";"</code></td>
+<td style="text-align: left;">Path to the sample.</td>
+<td style="text-align: left;"><code>file</code>, required, example: <code>"input.h5mu"</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>--reference</code></td>
-<td style="text-align: left;">Refence to map to. For <code>--mode wta</code>, this is the path to STAR index as a tar.gz file. For <code>--mode targeted</code>, this is the path to mRNA reference file for pre-designed, supplemental, or custom panel, in FASTA format</td>
-<td style="text-align: left;">List of <code>file</code>, required, example: <code>"reference_genome.tar.gz&amp;#124;reference.fasta"</code>, multiple_sep: <code>";"</code></td>
+<td style="text-align: left;"><code>--modality</code></td>
+<td style="text-align: left;">Which modality to process.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"rna"</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>--transcriptome_annotation</code></td>
-<td style="text-align: left;">Path to GTF annotation file (only for <code>--mode wta</code>).</td>
-<td style="text-align: left;"><code>file</code>, example: <code>"transcriptome.gtf"</code></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>--abseq_reference</code></td>
-<td style="text-align: left;">Path to the AbSeq reference file in FASTA format. Only needed if BD AbSeq Ab-Oligos are used.</td>
-<td style="text-align: left;">List of <code>file</code>, example: <code>"abseq_reference.fasta"</code>, multiple_sep: <code>";"</code></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>--supplemental_reference</code></td>
-<td style="text-align: left;">Path to the supplemental reference file in FASTA format. Only needed if there are additional transgene sequences used in the experiment (only for <code>--mode wta</code>).</td>
-<td style="text-align: left;">List of <code>file</code>, example: <code>"supplemental_reference.fasta"</code>, multiple_sep: <code>";"</code></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>--sample_prefix</code></td>
-<td style="text-align: left;">Specify a run name to use as the output file base name. Use only letters, numbers, or hyphens. Do not use special characters or spaces.</td>
-<td style="text-align: left;"><code>string</code>, default: <code>"sample"</code></td>
+<td style="text-align: left;"><code>--layer</code></td>
+<td style="text-align: left;">Layer to calculate qc metrics for.</td>
+<td style="text-align: left;"><code>string</code>, example: <code>"raw_counts"</code></td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="outputs" class="level3">
-<h3 class="anchored" data-anchor-id="outputs">Outputs</h3>
+<section id="mitochondrial-gene-detection" class="level3">
+<h3 class="anchored" data-anchor-id="mitochondrial-gene-detection">Mitochondrial Gene Detection</h3>
 <table class="table">
 <colgroup>
-<col style="width: 9%">
-<col style="width: 52%">
-<col style="width: 37%">
+<col style="width: 12%">
+<col style="width: 75%">
+<col style="width: 12%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1407,53 +1369,34 @@ Note
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><code>--output</code></td>
-<td style="text-align: left;">Output folder. Output still needs to be processed further.</td>
-<td style="text-align: left;"><code>file</code>, required, example: <code>"output_dir"</code></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="putative-cell-calling-settings" class="level3">
-<h3 class="anchored" data-anchor-id="putative-cell-calling-settings">Putative cell calling settings</h3>
-<table class="table">
-<colgroup>
-<col style="width: 7%">
-<col style="width: 86%">
-<col style="width: 6%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Description</th>
-<th style="text-align: left;">Attributes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><code>--putative_cell_call</code></td>
-<td style="text-align: left;">Specify the dataset to be used for putative cell calling. For putative cell calling using an AbSeq dataset, please provide an AbSeq_Reference fasta file above.</td>
-<td style="text-align: left;"><code>string</code>, example: <code>"mRNA"</code></td>
+<td style="text-align: left;"><code>--var_name_mitochondrial_genes</code></td>
+<td style="text-align: left;">In which .var slot to store a boolean array corresponding the mitochondrial genes.</td>
+<td style="text-align: left;"><code>string</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>--exact_cell_count</code></td>
-<td style="text-align: left;">Exact cell count - Set a specific number (&gt;=1) of cells as putative, based on those with the highest error-corrected read count</td>
-<td style="text-align: left;"><code>integer</code>, example: <code>10000</code></td>
+<td style="text-align: left;"><code>--obs_name_mitochondrial_fraction</code></td>
+<td style="text-align: left;">.Obs slot to store the fraction of reads found to be mitochondrial. Defaults to ‘fraction_’ suffixed by the value of –var_name_mitochondrial_genes</td>
+<td style="text-align: left;"><code>string</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>--disable_putative_calling</code></td>
-<td style="text-align: left;">Disable Refined Putative Cell Calling - Determine putative cells using only the basic algorithm (minimum second derivative along the cumulative reads curve). The refined algorithm attempts to remove false positives and recover false negatives, but may not be ideal for certain complex mixtures of cell types. Does not apply if Exact Cell Count is set.</td>
-<td style="text-align: left;"><code>boolean_true</code></td>
+<td style="text-align: left;"><code>--var_gene_names</code></td>
+<td style="text-align: left;">.var column name to be used to detect mitochondrial genes instead of .var_names (default if not set). Gene names matching with the regex value from –mitochondrial_gene_regex will be identified as a mitochondrial gene.</td>
+<td style="text-align: left;"><code>string</code>, example: <code>"gene_symbol"</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--mitochondrial_gene_regex</code></td>
+<td style="text-align: left;">Regex string that identifies mitochondrial genes from –var_gene_names. By default will detect human and mouse mitochondrial genes from a gene symbol.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"^[mM][tT]-"</code></td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="subsample-arguments" class="level3">
-<h3 class="anchored" data-anchor-id="subsample-arguments">Subsample arguments</h3>
+<section id="qc-metrics-calculation-options" class="level3">
+<h3 class="anchored" data-anchor-id="qc-metrics-calculation-options">QC metrics calculation options</h3>
 <table class="table">
 <colgroup>
-<col style="width: 13%">
-<col style="width: 67%">
+<col style="width: 5%">
+<col style="width: 75%">
 <col style="width: 19%">
 </colgroup>
 <thead>
@@ -1465,25 +1408,25 @@ Note
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><code>--subsample</code></td>
-<td style="text-align: left;">A number &gt;1 or fraction (0 &lt; n &lt; 1) to indicate the number or percentage of reads to subsample.</td>
-<td style="text-align: left;"><code>double</code>, example: <code>0.01</code></td>
+<td style="text-align: left;"><code>--var_qc_metrics</code></td>
+<td style="text-align: left;">Keys to select a boolean (containing only True or False) column from .var. For each cell, calculate the proportion of total values for genes which are labeled ‘True’, compared to the total sum of the values for all genes. Defaults to the value from –var_name_mitochondrial_genes.</td>
+<td style="text-align: left;">List of <code>string</code>, example: <code>"ercc,highly_variable"</code>, multiple_sep: <code>","</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>--subsample_seed</code></td>
-<td style="text-align: left;">A seed for replicating a previous subsampled run.</td>
-<td style="text-align: left;"><code>integer</code>, example: <code>3445</code></td>
+<td style="text-align: left;"><code>--top_n_vars</code></td>
+<td style="text-align: left;">Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. <code>--top_n_vars 20,50</code> finds cumulative proportion to the 20th and 50th most expressed vars.</td>
+<td style="text-align: left;">List of <code>integer</code>, default: <code>50, 100, 200, 500</code>, multiple_sep: <code>","</code></td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="multiplex-arguments" class="level3">
-<h3 class="anchored" data-anchor-id="multiplex-arguments">Multiplex arguments</h3>
+<section id="outputs" class="level3">
+<h3 class="anchored" data-anchor-id="outputs">Outputs</h3>
 <table class="table">
 <colgroup>
-<col style="width: 7%">
-<col style="width: 60%">
-<col style="width: 32%">
+<col style="width: 12%">
+<col style="width: 37%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1494,67 +1437,9 @@ Note
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><code>--sample_tags_version</code></td>
-<td style="text-align: left;">Specify if multiplexed run.</td>
-<td style="text-align: left;"><code>string</code>, example: <code>"human"</code></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>--tag_names</code></td>
-<td style="text-align: left;">Tag_Names (optional) - Specify the tag number followed by ‘-’ and the desired sample name to appear in Sample_Tag_Metrics.csv. Do not use the special characters: &amp;, (), [], {}, &lt;&gt;, ?, |</td>
-<td style="text-align: left;">List of <code>string</code>, example: <code>"4-mySample", "9-myOtherSample", "6-alsoThisSample"</code>, multiple_sep: <code>":"</code></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="vdj-arguments" class="level3">
-<h3 class="anchored" data-anchor-id="vdj-arguments">VDJ arguments</h3>
-<table class="table">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Description</th>
-<th style="text-align: left;">Attributes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><code>--vdj_version</code></td>
-<td style="text-align: left;">Specify if VDJ run.</td>
-<td style="text-align: left;"><code>string</code>, example: <code>"human"</code></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="cwl-runner-arguments" class="level3">
-<h3 class="anchored" data-anchor-id="cwl-runner-arguments">CWL-runner arguments</h3>
-<table class="table">
-<colgroup>
-<col style="width: 9%">
-<col style="width: 73%">
-<col style="width: 17%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Description</th>
-<th style="text-align: left;">Attributes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><code>--parallel</code></td>
-<td style="text-align: left;">Run jobs in parallel.</td>
-<td style="text-align: left;"><code>boolean</code>, default: <code>TRUE</code></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>--timestamps</code></td>
-<td style="text-align: left;">Add timestamps to the errors, warnings, and notifications.</td>
-<td style="text-align: left;"><code>boolean_true</code></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>--dryrun</code></td>
-<td style="text-align: left;">If true, the output directory will only contain the CWL input files, but the pipeline itself will not be executed.</td>
-<td style="text-align: left;"><code>boolean_true</code></td>
+<td style="text-align: left;"><code>--output</code></td>
+<td style="text-align: left;">Destination path to the output.</td>
+<td style="text-align: left;"><code>file</code>, required, example: <code>"output.h5mu"</code></td>
 </tr>
 </tbody>
 </table>
@@ -1563,8 +1448,53 @@ Note
 <section id="authors" class="level2">
 <h2 class="anchored" data-anchor-id="authors">Authors</h2>
 <ul>
-<li>Robrecht Cannoodt <a href="https://github.com/rcannood"><i class="fa-brands fa-github" aria-label="github"></i></a> <a href="https://orcid.org/0000-0003-3641-729X"><i class="fa-brands fa-orcid" aria-label="orcid"></i></a> <a href="https://linkedin.com/in/robrechtcannoodt"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a> (maintainer)</li>
+<li>Dries Schaumont <a href="https://github.com/DriesSchaumont"><i class="fa-brands fa-github" aria-label="github"></i></a> <a href="https://orcid.org/0000-0002-4389-0440"><i class="fa-brands fa-orcid" aria-label="orcid"></i></a> <a href="https://linkedin.com/in/dries-schaumont"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a> (author, maintainer)</li>
 </ul>
+</section>
+<section id="visualisation" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="visualisation">Visualisation</h2>
+<div class="cell page-columns page-full">
+<div class="cell-output-display column-screen-inset-shaded">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    v0(Input)
+    v2(toSortedList)
+    v4(flatMap)
+    v7(filter)
+    v13(grep_annotation_column)
+    v15(join)
+    v19(mix)
+    v18(filter)
+    v25(calculate_qc_metrics)
+    v27(join)
+    v35(publish)
+    v37(join)
+    v41(toSortedList)
+    v43(Output)
+    v18--&gt;v19
+    v0--&gt;v2
+    v2--&gt;v4
+    v4--&gt;v7
+    v4--&gt;v18
+    v7--&gt;v15
+    v7--&gt;v13
+    v13--&gt;v15
+    v15--&gt;v19
+    v19--&gt;v27
+    v19--&gt;v25
+    v25--&gt;v27
+    v27--&gt;v37
+    v27--&gt;v35
+    v35--&gt;v37
+    v37--&gt;v41
+    v41--&gt;v43
+
+</pre>
+</div>
+</div>
+</div>
+</div>
 
 
 </section>
@@ -1875,7 +1805,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/components/modules/mapping/bd_rhapsody.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/components/workflows/qc/qc.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
