@@ -14,7 +14,7 @@ ID: `scvi_leiden`
 Namespace: `multiomics/integration`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.0/./workflows/multiomics/integration/scvi_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.0/./workflows/multiomics/integration/scvi_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.11.0 -latest \
+  -r 0.12.0 -latest \
   -main-script ./workflows/multiomics/integration/scvi_leiden/main.nf \
   --help
 ```
@@ -83,7 +83,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.11.0 -latest \
+  -r 0.12.0 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/integration/scvi_leiden/main.nf \
   -params-file params.yaml
@@ -163,44 +163,44 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ```{mermaid}
 %%| column: screen-inset-shaded
 flowchart LR
-    p0(Input)
-    p2(toSortedList)
-    p4(flatMap)
-    p10(scvi)
-    p12(join)
-    p20(find_neighbors)
-    p22(join)
-    p25(filter)
-    p31(leiden)
-    p33(join)
-    p41(move_obsm_to_obs)
-    p43(join)
-    p47(mix)
-    p46(filter)
-    p53(umap)
-    p55(join)
-    p61(Output)
-    p46-->p47
-    p0-->p2
-    p2-->p4
-    p4-->p12
-    p4-->p10
-    p10-->p12
-    p12-->p22
-    p12-->p20
-    p20-->p22
-    p22-->p25
-    p22-->p46
-    p25-->p33
-    p25-->p31
-    p31-->p33
-    p33-->p43
-    p33-->p41
-    p41-->p43
-    p43-->p47
-    p47-->p55
-    p47-->p53
-    p53-->p55
-    p55-->p61
+    v0(Input)
+    v2(toSortedList)
+    v4(flatMap)
+    v10(scvi)
+    v12(join)
+    v20(find_neighbors)
+    v22(join)
+    v25(filter)
+    v31(leiden)
+    v33(join)
+    v41(move_obsm_to_obs)
+    v43(join)
+    v47(mix)
+    v46(filter)
+    v53(umap)
+    v55(join)
+    v61(Output)
+    v46-->v47
+    v0-->v2
+    v2-->v4
+    v4-->v12
+    v4-->v10
+    v10-->v12
+    v12-->v22
+    v12-->v20
+    v20-->v22
+    v22-->v25
+    v22-->v46
+    v25-->v33
+    v25-->v31
+    v31-->v33
+    v33-->v43
+    v33-->v41
+    v41-->v43
+    v43-->v47
+    v47-->v55
+    v47-->v53
+    v53-->v55
+    v55-->v61
 
 ```

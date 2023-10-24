@@ -14,7 +14,7 @@ ID: `bbknn_leiden`
 Namespace: `multiomics/integration`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.0/./workflows/multiomics/integration/bbknn_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.0/./workflows/multiomics/integration/bbknn_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.11.0 -latest \
+  -r 0.12.0 -latest \
   -main-script ./workflows/multiomics/integration/bbknn_leiden/main.nf \
   --help
 ```
@@ -74,7 +74,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.11.0 -latest \
+  -r 0.12.0 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/integration/bbknn_leiden/main.nf \
   -params-file params.yaml
@@ -143,39 +143,39 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ```{mermaid}
 %%| column: screen-inset-shaded
 flowchart LR
-    p0(Input)
-    p2(toSortedList)
-    p4(flatMap)
-    p10(bbknn)
-    p12(join)
-    p15(filter)
-    p21(leiden)
-    p23(join)
-    p31(move_obsm_to_obs)
-    p33(join)
-    p37(mix)
-    p36(filter)
-    p43(umap)
-    p45(join)
-    p51(Output)
-    p36-->p37
-    p0-->p2
-    p2-->p4
-    p4-->p12
-    p4-->p10
-    p10-->p12
-    p12-->p15
-    p12-->p36
-    p15-->p23
-    p15-->p21
-    p21-->p23
-    p23-->p33
-    p23-->p31
-    p31-->p33
-    p33-->p37
-    p37-->p45
-    p37-->p43
-    p43-->p45
-    p45-->p51
+    v0(Input)
+    v2(toSortedList)
+    v4(flatMap)
+    v10(bbknn)
+    v12(join)
+    v15(filter)
+    v21(leiden)
+    v23(join)
+    v31(move_obsm_to_obs)
+    v33(join)
+    v37(mix)
+    v36(filter)
+    v43(umap)
+    v45(join)
+    v51(Output)
+    v36-->v37
+    v0-->v2
+    v2-->v4
+    v4-->v12
+    v4-->v10
+    v10-->v12
+    v12-->v15
+    v12-->v36
+    v15-->v23
+    v15-->v21
+    v21-->v23
+    v23-->v33
+    v23-->v31
+    v31-->v33
+    v33-->v37
+    v37-->v45
+    v37-->v43
+    v43-->v45
+    v45-->v51
 
 ```
