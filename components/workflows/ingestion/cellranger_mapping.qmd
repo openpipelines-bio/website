@@ -14,7 +14,7 @@ ID: `cellranger_mapping`
 Namespace: `ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.0/./workflows/ingestion/cellranger_mapping){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.0/./workflows/ingestion/cellranger_mapping){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.11.0 -latest \
+  -r 0.12.0 -latest \
   -main-script ./workflows/ingestion/cellranger_mapping/main.nf \
   --help
 ```
@@ -66,7 +66,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.11.0 -latest \
+  -r 0.12.0 -latest \
   -profile docker \
   -main-script ./workflows/ingestion/cellranger_mapping/main.nf \
   -params-file params.yaml
@@ -121,27 +121,27 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ```{mermaid}
 %%| column: screen-inset-shaded
 flowchart LR
-    p0(Input)
-    p2(toSortedList)
-    p4(flatMap)
-    p11(cellranger_count)
-    p13(join)
-    p21(cellranger_count_split)
-    p23(join)
-    p31(from_10xh5_to_h5mu)
-    p33(join)
-    p40(Output)
-    p0-->p2
-    p2-->p4
-    p4-->p13
-    p4-->p11
-    p11-->p13
-    p13-->p23
-    p13-->p21
-    p21-->p23
-    p23-->p33
-    p23-->p31
-    p31-->p33
-    p33-->p40
+    v0(Input)
+    v2(toSortedList)
+    v4(flatMap)
+    v11(cellranger_count)
+    v13(join)
+    v21(cellranger_count_split)
+    v23(join)
+    v31(from_10xh5_to_h5mu)
+    v33(join)
+    v40(Output)
+    v0-->v2
+    v2-->v4
+    v4-->v13
+    v4-->v11
+    v11-->v13
+    v13-->v23
+    v13-->v21
+    v21-->v23
+    v23-->v33
+    v23-->v31
+    v31-->v33
+    v33-->v40
 
 ```

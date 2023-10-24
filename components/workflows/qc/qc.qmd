@@ -1,0 +1,158 @@
+---
+title: "Qc"
+namespace: "Qc"
+description: "A pipeline to add basic qc statistics to a MuData"
+type: "workflow"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `qc`  
+Namespace: `qc`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.0/./workflows/qc/qc){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 0.12.0 -latest \
+  -main-script ./workflows/qc/qc/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Inputs
+id: # please fill in - example: "foo"
+input: # please fill in - example: "input.h5mu"
+modality: "rna"
+# layer: "raw_counts"
+
+# Outputs
+# output: "$id.$key.output.h5mu"
+
+# Mitochondrial Gene Detection
+# var_name_mitochondrial_genes: "foo"
+# obs_name_mitochondrial_fraction: "foo"
+# var_gene_names: "gene_symbol"
+mitochondrial_gene_regex: "^[mM][tT]-"
+
+# QC metrics calculation options
+# var_qc_metrics: ["ercc", "highly_variable"]
+top_n_vars: [50, 100, 200, 500]
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 0.12.0 -latest \
+  -profile docker \
+  -main-script ./workflows/qc/qc/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Inputs
+
+|Name         |Description                        |Attributes                                |
+|:------------|:----------------------------------|:-----------------------------------------|
+|`--id`       |ID of the sample.                  |`string`, required, example: `"foo"`      |
+|`--input`    |Path to the sample.                |`file`, required, example: `"input.h5mu"` |
+|`--modality` |Which modality to process.         |`string`, default: `"rna"`                |
+|`--layer`    |Layer to calculate qc metrics for. |`string`, example: `"raw_counts"`         |
+
+
+### Mitochondrial Gene Detection
+
+|Name                                |Description                                                                                                                                                                                                                |Attributes                         |
+|:-----------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------|
+|`--var_name_mitochondrial_genes`    |In which .var slot to store a boolean array corresponding the mitochondrial genes.                                                                                                                                         |`string`                           |
+|`--obs_name_mitochondrial_fraction` |.Obs slot to store the fraction of reads found to be mitochondrial. Defaults to 'fraction_' suffixed by the value of --var_name_mitochondrial_genes                                                                        |`string`                           |
+|`--var_gene_names`                  |.var column name to be used to detect mitochondrial genes instead of .var_names (default if not set). Gene names matching with the regex value from --mitochondrial_gene_regex will be identified as a mitochondrial gene. |`string`, example: `"gene_symbol"` |
+|`--mitochondrial_gene_regex`        |Regex string that identifies mitochondrial genes from --var_gene_names. By default will detect human and mouse mitochondrial genes from a gene symbol.                                                                     |`string`, default: `"^[mM][tT]-"`  |
+
+
+### QC metrics calculation options
+
+|Name               |Description                                                                                                                                                                                                                                                                               |Attributes                                                               |
+|:------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------|
+|`--var_qc_metrics` |Keys to select a boolean (containing only True or False) column from .var. For each cell, calculate the proportion of total values for genes which are labeled 'True',  compared to the total sum of the values for all genes. Defaults to the value from --var_name_mitochondrial_genes. |List of `string`, example: `"ercc,highly_variable"`, multiple_sep: `","` |
+|`--top_n_vars`     |Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. `--top_n_vars 20,50` finds cumulative proportion to the 20th and 50th most expressed vars.                                                                           |List of `integer`, default: `50, 100, 200, 500`, multiple_sep: `","`     |
+
+
+### Outputs
+
+|Name       |Description                     |Attributes                                 |
+|:----------|:-------------------------------|:------------------------------------------|
+|`--output` |Destination path to the output. |`file`, required, example: `"output.h5mu"` |
+
+## Authors
+
+
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (author, maintainer)
+
+## Visualisation
+
+```{mermaid}
+%%| column: screen-inset-shaded
+flowchart LR
+    v0(Input)
+    v2(toSortedList)
+    v4(flatMap)
+    v7(filter)
+    v13(grep_annotation_column)
+    v15(join)
+    v19(mix)
+    v18(filter)
+    v25(calculate_qc_metrics)
+    v27(join)
+    v35(publish)
+    v37(join)
+    v41(toSortedList)
+    v43(Output)
+    v18-->v19
+    v0-->v2
+    v2-->v4
+    v4-->v7
+    v4-->v18
+    v7-->v15
+    v7-->v13
+    v13-->v15
+    v15-->v19
+    v19-->v27
+    v19-->v25
+    v25-->v27
+    v27-->v37
+    v27-->v35
+    v35-->v37
+    v37-->v41
+    v41-->v43
+
+```

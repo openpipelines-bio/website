@@ -14,7 +14,7 @@ ID: `bd_rhapsody`
 Namespace: `ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.0/./workflows/ingestion/bd_rhapsody){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.0/./workflows/ingestion/bd_rhapsody){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -42,7 +42,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.11.0 -latest \
+  -r 0.12.0 -latest \
   -main-script ./workflows/ingestion/bd_rhapsody/main.nf \
   --help
 ```
@@ -95,7 +95,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.11.0 -latest \
+  -r 0.12.0 -latest \
   -profile docker \
   -main-script ./workflows/ingestion/bd_rhapsody/main.nf \
   -params-file params.yaml
@@ -179,22 +179,22 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ```{mermaid}
 %%| column: screen-inset-shaded
 flowchart LR
-    p0(Input)
-    p2(toSortedList)
-    p4(flatMap)
-    p10(bd_rhapsody)
-    p12(join)
-    p21(from_bdrhap_to_h5mu)
-    p23(join)
-    p29(Output)
-    p0-->p2
-    p2-->p4
-    p4-->p12
-    p4-->p10
-    p10-->p12
-    p12-->p23
-    p12-->p21
-    p21-->p23
-    p23-->p29
+    v0(Input)
+    v2(toSortedList)
+    v4(flatMap)
+    v10(bd_rhapsody)
+    v12(join)
+    v21(from_bdrhap_to_h5mu)
+    v23(join)
+    v29(Output)
+    v0-->v2
+    v2-->v4
+    v4-->v12
+    v4-->v10
+    v10-->v12
+    v12-->v23
+    v12-->v21
+    v21-->v23
+    v23-->v29
 
 ```

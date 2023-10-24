@@ -14,7 +14,7 @@ ID: `cellranger_postprocessing`
 Namespace: `ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.0/./workflows/ingestion/cellranger_postprocessing){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.0/./workflows/ingestion/cellranger_postprocessing){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.11.0 -latest \
+  -r 0.12.0 -latest \
   -main-script ./workflows/ingestion/cellranger_postprocessing/main.nf \
   --help
 ```
@@ -63,7 +63,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.11.0 -latest \
+  -r 0.12.0 -latest \
   -profile docker \
   -main-script ./workflows/ingestion/cellranger_postprocessing/main.nf \
   -params-file params.yaml
@@ -117,46 +117,46 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ```{mermaid}
 %%| column: screen-inset-shaded
 flowchart LR
-    p0(Input)
-    p6(from_10xh5_to_h5mu)
-    p8(join)
-    p12(toSortedList)
-    p14(flatMap)
-    p15(filter)
-    p21(cellbender_remove_background)
-    p23(join)
-    p27(mix)
-    p26(filter)
-    p28(filter)
-    p34(filter_with_counts)
-    p36(join)
-    p40(mix)
-    p39(filter)
-    p46(publish)
-    p48(join)
-    p54(Output)
-    p14-->p15
-    p14-->p26
-    p26-->p27
-    p27-->p28
-    p27-->p39
-    p39-->p40
-    p0-->p8
-    p0-->p6
-    p6-->p8
-    p8-->p12
-    p12-->p14
-    p15-->p23
-    p15-->p21
-    p21-->p23
-    p23-->p27
-    p28-->p36
-    p28-->p34
-    p34-->p36
-    p36-->p40
-    p40-->p48
-    p40-->p46
-    p46-->p48
-    p48-->p54
+    v0(Input)
+    v6(from_10xh5_to_h5mu)
+    v8(join)
+    v12(toSortedList)
+    v14(flatMap)
+    v15(filter)
+    v21(cellbender_remove_background)
+    v23(join)
+    v27(mix)
+    v26(filter)
+    v28(filter)
+    v34(filter_with_counts)
+    v36(join)
+    v40(mix)
+    v39(filter)
+    v46(publish)
+    v48(join)
+    v54(Output)
+    v14-->v15
+    v14-->v26
+    v26-->v27
+    v27-->v28
+    v27-->v39
+    v39-->v40
+    v0-->v8
+    v0-->v6
+    v6-->v8
+    v8-->v12
+    v12-->v14
+    v15-->v23
+    v15-->v21
+    v21-->v23
+    v23-->v27
+    v28-->v36
+    v28-->v34
+    v34-->v36
+    v36-->v40
+    v40-->v48
+    v40-->v46
+    v46-->v48
+    v48-->v54
 
 ```

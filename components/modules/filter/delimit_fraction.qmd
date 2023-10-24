@@ -1,0 +1,107 @@
+---
+title: "Delimit fraction"
+namespace: "Filter"
+description: "Turns a column containing values between 0 and 1 into a boolean column based on thresholds"
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `delimit_fraction`  
+Namespace: `filter`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.0/./src/filter/delimit_fraction){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 0.12.0 -latest \
+  -main-script target/nextflow/filter/delimit_fraction/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Inputs
+input: # please fill in - example: "input.h5mu"
+modality: "rna"
+# layer: "raw_counts"
+obs_fraction_column: # please fill in - example: "fraction_mitochondrial"
+
+# Outputs
+# output: "$id.$key.output.h5mu"
+# output_compression: "gzip"
+obs_name_filter: # please fill in - example: "foo"
+
+# Arguments
+min_fraction: 0
+max_fraction: 1
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 0.12.0 -latest \
+  -profile docker \
+  -main-script target/nextflow/filter/delimit_fraction/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Inputs
+
+|Name                    |Description                                                                                                |Attributes                                              |
+|:-----------------------|:----------------------------------------------------------------------------------------------------------|:-------------------------------------------------------|
+|`--input`               |Input h5mu file                                                                                            |`file`, required, example: `"input.h5mu"`               |
+|`--modality`            |                                                                                                           |`string`, default: `"rna"`                              |
+|`--layer`               |                                                                                                           |`string`, example: `"raw_counts"`                       |
+|`--obs_fraction_column` |Name of column from .var dataframe selecting a column that contains floating point values between 0 and 1. |`string`, required, example: `"fraction_mitochondrial"` |
+
+
+### Outputs
+
+|Name                   |Description                                                                                        |Attributes                       |
+|:----------------------|:--------------------------------------------------------------------------------------------------|:--------------------------------|
+|`--output`             |Output h5mu file.                                                                                  |`file`, example: `"output.h5mu"` |
+|`--output_compression` |The compression format to be used on the output h5mu object.                                       |`string`, example: `"gzip"`      |
+|`--obs_name_filter`    |In which .obs slot to store a boolean array corresponding to which observations should be removed. |`string`, required               |
+
+
+### Arguments
+
+|Name             |Description                                                      |Attributes             |
+|:----------------|:----------------------------------------------------------------|:----------------------|
+|`--min_fraction` |Min fraction for an observation to be retained (True in output). |`double`, default: `0` |
+|`--max_fraction` |Max fraction for an observation to be retained (True in output). |`double`, default: `1` |
+
+## Authors
+
+
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (author, maintainer)
