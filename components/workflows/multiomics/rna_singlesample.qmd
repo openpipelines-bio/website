@@ -14,7 +14,7 @@ ID: `rna_singlesample`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.0/./workflows/multiomics/rna_singlesample){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.1/./workflows/multiomics/rna_singlesample){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.0 -latest \
+  -r 0.12.1 -latest \
   -main-script ./workflows/multiomics/rna_singlesample/main.nf \
   --help
 ```
@@ -70,7 +70,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.0 -latest \
+  -r 0.12.1 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/rna_singlesample/main.nf \
   -params-file params.yaml
@@ -152,11 +152,11 @@ flowchart LR
     v56(filter)
     v63(filter_with_counts)
     v65(join)
-    v74(do_filter)
-    v76(join)
-    v84(filter_with_scrublet)
-    v86(join)
-    v93(Output)
+    v73(do_filter)
+    v75(join)
+    v83(filter_with_scrublet)
+    v85(join)
+    v92(Output)
     v21-->v22
     v56-->v57
     v0-->v2
@@ -182,12 +182,12 @@ flowchart LR
     v57-->v65
     v57-->v63
     v63-->v65
-    v65-->v76
-    v65-->v74
-    v74-->v76
-    v76-->v86
-    v76-->v84
-    v84-->v86
-    v86-->v93
+    v65-->v75
+    v65-->v73
+    v73-->v75
+    v75-->v85
+    v75-->v83
+    v83-->v85
+    v85-->v92
 
 ```

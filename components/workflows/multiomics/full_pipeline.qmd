@@ -14,7 +14,7 @@ ID: `full_pipeline`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.0/./workflows/multiomics/full_pipeline){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.1/./workflows/multiomics/full_pipeline){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.0 -latest \
+  -r 0.12.1 -latest \
   -main-script ./workflows/multiomics/full_pipeline/main.nf \
   --help
 ```
@@ -93,7 +93,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.0 -latest \
+  -r 0.12.1 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/full_pipeline/main.nf \
   -params-file params.yaml
@@ -236,103 +236,103 @@ flowchart LR
     v101(filter)
     v108(filter_with_counts)
     v110(join)
-    v119(do_filter)
-    v121(join)
-    v129(filter_with_scrublet)
-    v131(join)
-    v200(concat)
-    v134(filter)
-    v137(toSortedList)
-    v139(flatMap)
-    v144(filter)
-    v150(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:unfiltered_counts_qc_metrics_prot:grep_annotation_column:grep_annotation_column_process1)
-    v152(join)
-    v156(mix)
-    v155(filter)
-    v162(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:unfiltered_counts_qc_metrics_prot:calculate_qc_metrics:calculate_qc_metrics_process1)
-    v164(join)
-    v172(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:unfiltered_counts_qc_metrics_prot:publish:publish_process1)
-    v174(join)
-    v183(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:filter_with_counts:filter_with_counts_process1)
-    v185(join)
-    v193(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:do_filter:do_filter_process1)
-    v195(join)
-    v198(filter)
-    v204(groupTuple)
-    v210(concat)
-    v212(join)
-    v216(filter)
-    v219(toSortedList)
-    v221(flatMap)
-    v223(toSortedList)
-    v225(Output)
-    v231(normalize_total)
-    v233(join)
-    v242(log1p)
-    v244(join)
-    v253(delete_layer)
-    v255(join)
-    v264(filter_with_hvg)
-    v266(join)
-    v275(rna_calculate_qc_metrics)
-    v277(join)
-    v341(concat)
-    v282(filter)
-    v285(toSortedList)
-    v287(flatMap)
-    v288(toSortedList)
-    v290(Output)
-    v296(clr)
-    v298(join)
-    v304(filter)
-    v310(test_wf:run_wf:multisample_processing_workflow:prot_multisample:prot_qc:grep_annotation_column:grep_annotation_column_process2)
-    v312(join)
-    v316(mix)
-    v315(filter)
-    v322(test_wf:run_wf:multisample_processing_workflow:prot_multisample:prot_qc:calculate_qc_metrics:calculate_qc_metrics_process2)
-    v324(join)
-    v332(test_wf:run_wf:multisample_processing_workflow:prot_multisample:prot_qc:publish:publish_process2)
-    v334(join)
-    v338(filter)
-    v343(toSortedList)
-    v349(merge)
-    v351(join)
-    v355(filter)
-    v359(toSortedList)
-    v361(flatMap)
-    v368(pca)
-    v370(join)
-    v379(find_neighbors)
-    v381(join)
-    v390(umap)
-    v392(join)
-    v398(concat)
-    v397(filter)
-    v399(filter)
-    v403(toSortedList)
-    v405(flatMap)
-    v412(pca)
-    v414(join)
-    v423(find_neighbors)
-    v425(join)
-    v434(test_wf:run_wf:integration_setup_workflow:initialize_integration_prot:umap:umap_process1)
-    v436(join)
-    v442(concat)
-    v441(filter)
-    v450(test_wf:run_wf:publish:publish_process3)
-    v452(join)
-    v457(toSortedList)
-    v459(Output)
+    v118(do_filter)
+    v120(join)
+    v128(filter_with_scrublet)
+    v130(join)
+    v199(concat)
+    v133(filter)
+    v136(toSortedList)
+    v138(flatMap)
+    v143(filter)
+    v149(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:unfiltered_counts_qc_metrics_prot:grep_annotation_column:grep_annotation_column_process1)
+    v151(join)
+    v155(mix)
+    v154(filter)
+    v161(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:unfiltered_counts_qc_metrics_prot:calculate_qc_metrics:calculate_qc_metrics_process1)
+    v163(join)
+    v171(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:unfiltered_counts_qc_metrics_prot:publish:publish_process1)
+    v173(join)
+    v182(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:filter_with_counts:filter_with_counts_process1)
+    v184(join)
+    v192(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:do_filter:do_filter_process1)
+    v194(join)
+    v197(filter)
+    v203(groupTuple)
+    v209(concat)
+    v211(join)
+    v215(filter)
+    v218(toSortedList)
+    v220(flatMap)
+    v222(toSortedList)
+    v224(Output)
+    v230(normalize_total)
+    v232(join)
+    v241(log1p)
+    v243(join)
+    v252(delete_layer)
+    v254(join)
+    v263(filter_with_hvg)
+    v265(join)
+    v274(rna_calculate_qc_metrics)
+    v276(join)
+    v340(concat)
+    v281(filter)
+    v284(toSortedList)
+    v286(flatMap)
+    v287(toSortedList)
+    v289(Output)
+    v295(clr)
+    v297(join)
+    v303(filter)
+    v309(test_wf:run_wf:multisample_processing_workflow:prot_multisample:prot_qc:grep_annotation_column:grep_annotation_column_process2)
+    v311(join)
+    v315(mix)
+    v314(filter)
+    v321(test_wf:run_wf:multisample_processing_workflow:prot_multisample:prot_qc:calculate_qc_metrics:calculate_qc_metrics_process2)
+    v323(join)
+    v331(test_wf:run_wf:multisample_processing_workflow:prot_multisample:prot_qc:publish:publish_process2)
+    v333(join)
+    v337(filter)
+    v342(toSortedList)
+    v348(merge)
+    v350(join)
+    v354(filter)
+    v358(toSortedList)
+    v360(flatMap)
+    v367(pca)
+    v369(join)
+    v378(find_neighbors)
+    v380(join)
+    v389(umap)
+    v391(join)
+    v397(concat)
+    v396(filter)
+    v398(filter)
+    v402(toSortedList)
+    v404(flatMap)
+    v411(pca)
+    v413(join)
+    v422(find_neighbors)
+    v424(join)
+    v433(test_wf:run_wf:integration_setup_workflow:initialize_integration_prot:umap:umap_process1)
+    v435(join)
+    v441(concat)
+    v440(filter)
+    v449(test_wf:run_wf:publish:publish_process3)
+    v451(join)
+    v456(toSortedList)
+    v458(Output)
     v41-->v42
     v66-->v67
     v101-->v102
-    v155-->v156
-    v287-->v288
-    v315-->v316
+    v154-->v155
+    v286-->v287
+    v314-->v315
+    v396-->v397
     v397-->v398
-    v398-->v399
-    v398-->v441
-    v441-->v442
+    v397-->v440
+    v440-->v441
     v0-->v2
     v2-->v4
     v4-->v7
@@ -353,8 +353,8 @@ flowchart LR
     v37-->v39
     v39-->v41
     v42-->v44
-    v42-->v134
-    v42-->v198
+    v42-->v133
+    v42-->v197
     v44-->v47
     v47-->v49
     v49-->v55
@@ -378,116 +378,116 @@ flowchart LR
     v102-->v110
     v102-->v108
     v108-->v110
-    v110-->v121
-    v110-->v119
-    v119-->v121
-    v121-->v131
-    v121-->v129
-    v129-->v131
-    v131-->v200
-    v134-->v137
-    v137-->v139
-    v139-->v144
-    v139-->v155
-    v144-->v152
-    v144-->v150
-    v150-->v152
-    v152-->v156
-    v156-->v164
-    v156-->v162
-    v162-->v164
-    v164-->v174
-    v164-->v172
-    v172-->v174
-    v174-->v185
-    v174-->v183
-    v183-->v185
-    v185-->v195
-    v185-->v193
-    v193-->v195
-    v195-->v200
-    v198-->v200
-    v200-->v204
-    v204-->v212
-    v204-->v210
-    v210-->v212
-    v212-->v216
-    v212-->v282
-    v212-->v338
-    v216-->v219
-    v219-->v221
-    v221-->v223
-    v223-->v225
-    v221-->v233
-    v221-->v231
-    v231-->v233
-    v233-->v244
-    v233-->v242
-    v242-->v244
-    v244-->v255
-    v244-->v253
-    v253-->v255
-    v255-->v266
-    v255-->v264
-    v264-->v266
-    v266-->v277
-    v266-->v275
-    v275-->v277
-    v277-->v341
-    v282-->v285
-    v285-->v287
-    v288-->v290
-    v287-->v298
-    v287-->v296
-    v296-->v298
-    v298-->v304
-    v298-->v315
-    v304-->v312
-    v304-->v310
-    v310-->v312
-    v312-->v316
-    v316-->v324
-    v316-->v322
-    v322-->v324
-    v324-->v334
-    v324-->v332
-    v332-->v334
-    v334-->v341
-    v338-->v341
-    v341-->v343
-    v343-->v351
-    v343-->v349
-    v349-->v351
-    v351-->v355
-    v351-->v397
-    v355-->v359
-    v359-->v361
-    v361-->v370
-    v361-->v368
-    v368-->v370
-    v370-->v381
-    v370-->v379
-    v379-->v381
-    v381-->v392
-    v381-->v390
-    v390-->v392
-    v392-->v398
-    v399-->v403
-    v403-->v405
-    v405-->v414
-    v405-->v412
-    v412-->v414
-    v414-->v425
-    v414-->v423
-    v423-->v425
-    v425-->v436
-    v425-->v434
-    v434-->v436
-    v436-->v442
-    v442-->v452
-    v442-->v450
-    v450-->v452
-    v452-->v457
-    v457-->v459
+    v110-->v120
+    v110-->v118
+    v118-->v120
+    v120-->v130
+    v120-->v128
+    v128-->v130
+    v130-->v199
+    v133-->v136
+    v136-->v138
+    v138-->v143
+    v138-->v154
+    v143-->v151
+    v143-->v149
+    v149-->v151
+    v151-->v155
+    v155-->v163
+    v155-->v161
+    v161-->v163
+    v163-->v173
+    v163-->v171
+    v171-->v173
+    v173-->v184
+    v173-->v182
+    v182-->v184
+    v184-->v194
+    v184-->v192
+    v192-->v194
+    v194-->v199
+    v197-->v199
+    v199-->v203
+    v203-->v211
+    v203-->v209
+    v209-->v211
+    v211-->v215
+    v211-->v281
+    v211-->v337
+    v215-->v218
+    v218-->v220
+    v220-->v222
+    v222-->v224
+    v220-->v232
+    v220-->v230
+    v230-->v232
+    v232-->v243
+    v232-->v241
+    v241-->v243
+    v243-->v254
+    v243-->v252
+    v252-->v254
+    v254-->v265
+    v254-->v263
+    v263-->v265
+    v265-->v276
+    v265-->v274
+    v274-->v276
+    v276-->v340
+    v281-->v284
+    v284-->v286
+    v287-->v289
+    v286-->v297
+    v286-->v295
+    v295-->v297
+    v297-->v303
+    v297-->v314
+    v303-->v311
+    v303-->v309
+    v309-->v311
+    v311-->v315
+    v315-->v323
+    v315-->v321
+    v321-->v323
+    v323-->v333
+    v323-->v331
+    v331-->v333
+    v333-->v340
+    v337-->v340
+    v340-->v342
+    v342-->v350
+    v342-->v348
+    v348-->v350
+    v350-->v354
+    v350-->v396
+    v354-->v358
+    v358-->v360
+    v360-->v369
+    v360-->v367
+    v367-->v369
+    v369-->v380
+    v369-->v378
+    v378-->v380
+    v380-->v391
+    v380-->v389
+    v389-->v391
+    v391-->v397
+    v398-->v402
+    v402-->v404
+    v404-->v413
+    v404-->v411
+    v411-->v413
+    v413-->v424
+    v413-->v422
+    v422-->v424
+    v424-->v435
+    v424-->v433
+    v433-->v435
+    v435-->v441
+    v441-->v451
+    v441-->v449
+    v449-->v451
+    v451-->v456
+    v456-->v458
 
 ```
