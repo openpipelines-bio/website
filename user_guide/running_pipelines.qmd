@@ -4,21 +4,78 @@ description: Run a pipeline from CLI or Nextflow Tower
 order: 10
 ---
 
+Dependening on whether you want to run a workflow locally or on cloud infrastructure, using Nextflow Tower or not, you will need to use different commands.
+
+## Run locally from the CLI
+
+You can run a workflow from the command line using the following command:
+
 ```bash
-bin/nextflow run . \
-  -main-script workflows/integration/multimodal_integration/main.nf \
+nextflow run openpipelines-bio/openpipeline \
+  -main-script target/nextflow/workflows/integration/multimodal_integration/main.nf \
+  -revision 0.12.1 \
+  -latest \
   -profile docker \
-  -resume 
-  --publish_dir foo/
-  --input "bar"
+  --publish_dir foo/ \
+  --input "bar" \
   --output "test.txt"
 ```
 
-### Running pipelines from Nextflow Tower
+Doing so will run the workflow **locally** using a Docker container.
 
-### Using param_list to pass large parameter sets
+## On cloud infrastructure
 
-Using Viash's VDSL3 nextflow platform, an optional `-param_list` argument can be used to pass a large number of inputs to a workflow. Additionally, the pipeline parameter values can be set for each input to the workflow independently. A `param_list` can either be a list of maps, a csv file, a json file, a yaml file, or simply a yaml blob:
+You can use a similar command to run the workflow on cloud infrastructure, such as AWS Batch or Google Cloud Platform. However, this requires you to create a separate Nextflow config file for each cloud provider. See the [Nextflow documentation](https://www.nextflow.io/docs/latest/executor.html) for more information.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -main-script target/nextflow/workflows/integration/multimodal_integration/main.nf \
+  -revision 0.12.1 \
+  -latest \
+  --publish_dir foo/ \
+  --input "bar" \
+  --output "test.txt" \
+  -c configs/my_hpc.config
+```
+
+## Using the Nextflow Tower CLI
+
+If you have access to a Nextflow Tower instance in which a Compute Environment has already been set up, you can run a workflow from the Tower CLI. The command is very similar to the command to run a workflow from the CLI, but you need to:
+  * Use `tw launch` instead of `nextflow run`
+  * Specify the workspace ID and compute environment ID
+  * Rename arguments: `-revision` to `--revision`, `-latest` to `--pull-latest`, `-main-script` to `--main-script`, `-c` to `--config`
+  * Store workflow arguments in a separate yaml file (if this was not already the case).
+
+Example:
+
+```bash
+tw launch openpipelines-bio/openpipeline \
+  --revision 0.12.1 \
+  --pull-latest \
+  --main-script target/nextflow/workflows/integration/multimodal_integration/main.nf \
+  --workspace <your workspace id> \
+  --compute-env <your compute environment id> \
+  --params-file params.yaml \
+  --config configs/my_hpc.config
+```
+
+## Using the Nextflow Tower Web UI
+
+If you have access to a Nextflow Tower instance in which a Compute Environment has already been set up, you can run a workflow from the Tower UI. To do so, go to the "Launchpad" and click on the button "launch a run without configuration".
+
+![](./images/launchpad.png)
+
+Next, fill in the required fields and click on "Launch run".
+
+* **Compute environment**: Select the compute environment you want to run the workflow on.
+* **Pipeline to launch**: Fill in `openpipelines-bio/openpipeline`.
+* **Revision number**: The release number of the pipeline you want to run, e.g. `0.12.1`. You can find the release number on the [GitHub releases page](https://github.com/openpipelines-bio/openpipeline/releases).
+* **Work directory**: The bucket path where the scratch data is stored.
+* **Pipeline parameters**: The YAML or JSON of the parameters that are passed to the pipeline. See the [Components](../components/) page for more information about the parameters of each pipeline.
+
+## Using param_list to pass large parameter sets
+
+Using Viash's VDSL3 nextflow platform, an optional `--param_list` argument can be used to pass a large number of inputs to a workflow. Additionally, the pipeline parameter values can be set for each input to the workflow independently. A `param_list` can either be a list of maps, a csv file, a json file, a yaml file, or simply a yaml blob:
 
 * A csv file should have column names which correspond to the different arguments of this pipeline. Example: `--param_list data.csv` with columns `id,input`.
 * A json or a yaml file should be a list of maps, each of which has keys corresponding to the arguments of the pipeline. Example: `--param_list data.json` with contents `[ {'id': 'foo', 'input': 'foo.txt'}, {'id': 'bar', 'input': 'bar.txt'} ]`.
