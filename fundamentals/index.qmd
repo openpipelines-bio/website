@@ -2,7 +2,7 @@
 title: Fundamentals
 sidebar: true
 listing:
-  template: ../style/listing.ejs
+  template: ../templates/listing.ejs
   type: default
   contents: "./*.qmd"
 ---
