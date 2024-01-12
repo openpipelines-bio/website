@@ -251,7 +251,6 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   <li><a href="#on-cloud-infrastructure" id="toc-on-cloud-infrastructure" class="nav-link" data-scroll-target="#on-cloud-infrastructure">On cloud infrastructure</a></li>
   <li><a href="#using-the-nextflow-tower-cli" id="toc-using-the-nextflow-tower-cli" class="nav-link" data-scroll-target="#using-the-nextflow-tower-cli">Using the Nextflow Tower CLI</a></li>
   <li><a href="#using-the-nextflow-tower-web-ui" id="toc-using-the-nextflow-tower-web-ui" class="nav-link" data-scroll-target="#using-the-nextflow-tower-web-ui">Using the Nextflow Tower Web UI</a></li>
-  <li><a href="#using-param_list-to-pass-large-parameter-sets" id="toc-using-param_list-to-pass-large-parameter-sets" class="nav-link" data-scroll-target="#using-param_list-to-pass-large-parameter-sets">Using param_list to pass large parameter sets</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/user_guide/running_pipelines.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -330,22 +329,6 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <li><strong>Revision number</strong>: The release number of the pipeline you want to run, e.g.&nbsp;<code>0.12.1</code>. You can find the release number on the <a href="https://github.com/openpipelines-bio/openpipeline/releases">GitHub releases page</a>.</li>
 <li><strong>Work directory</strong>: The bucket path where the scratch data is stored.</li>
 <li><strong>Pipeline parameters</strong>: The YAML or JSON of the parameters that are passed to the pipeline. See the <a href="../components/">Components</a> page for more information about the parameters of each pipeline.</li>
-</ul>
-</section>
-<section id="using-param_list-to-pass-large-parameter-sets" class="level2">
-<h2 class="anchored" data-anchor-id="using-param_list-to-pass-large-parameter-sets">Using param_list to pass large parameter sets</h2>
-<p>Using Viash’s VDSL3 nextflow platform, an optional <code>--param_list</code> argument can be used to pass a large number of inputs to a workflow. Additionally, the pipeline parameter values can be set for each input to the workflow independently. A <code>param_list</code> can either be a list of maps, a csv file, a json file, a yaml file, or simply a yaml blob:</p>
-<ul>
-<li>A csv file should have column names which correspond to the different arguments of this pipeline. Example: <code>--param_list data.csv</code> with columns <code>id,input</code>.</li>
-<li>A json or a yaml file should be a list of maps, each of which has keys corresponding to the arguments of the pipeline. Example: <code>--param_list data.json</code> with contents <code>[ {'id': 'foo', 'input': 'foo.txt'}, {'id': 'bar', 'input': 'bar.txt'} ]</code>.</li>
-<li>A yaml blob can also be passed directly as a string. Example: <code>--param_list "[ {'id': 'foo', 'input': 'foo.txt'}, {'id': 'bar', 'input': 'bar.txt'} ]"</code>.</li>
-<li>A list of maps can be in a <code>nextflow.config</code> file, where the keys of each map corresponds to the arguments of the pipeline. Example in a <code>nextflow.config</code> file: <code>param_list: [ ['id': 'foo', 'input': 'foo.txt'], ['id': 'bar', 'input': 'bar.txt'] ]</code>.</li>
-</ul>
-<p>When passing a csv, json or yaml file, relative path names are relativized to the location of the parameter file. No relativation is performed when <code>param_list</code> is a list of maps (as-is) or a yaml blob.</p>
-<p>Using a <code>param_list</code> can be combined with setting parameters that are set for all parameter sets. These ‘gobal’ parameters will always be overwritten with their counterpart that was specified in a more specific manner for a single parameter set. For example, using <code>--param_list "[ {'id': 'foo', 'input': 'foo.txt'}, {'id': 'bar'} ]" --input 'global.txt'</code> will result in the following parameter sets being processed:</p>
-<ul>
-<li><code>id</code>: <code>foo</code>, <code>input</code>: <code>foo.txt</code></li>
-<li><code>id</code>: <code>bar</code>, <code>input</code>: <code>global.txt</code></li>
 </ul>
 
 
