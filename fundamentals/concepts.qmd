@@ -1,5 +1,6 @@
 ---
 title: Concepts
+description: The core concepts behind this project
 order: 20
 ---
 

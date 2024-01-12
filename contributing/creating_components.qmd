@@ -1,13 +1,14 @@
 ---
 title: Creating components
+description: A guide on how to create new components
 order: 20
 ---
 
-# A common file format
+## A common file format
 
-One of the core principals of OpenPipelines is to use [MuData](https://mudata.readthedocs.io/) as a common data format troughout the whole pipeline. See [the concepts page](../fundamentals/concepts.qmd#sec-common-file-format) for more information on openpipelines uses MuData to store single-cell data.
+One of the core principals of OpenPipelines is to use [MuData](https://mudata.readthedocs.io/) as a common data format troughout the whole pipeline. See [the concepts page](/fundamentals/concepts.qmd#sec-common-file-format) for more information on openpipelines uses MuData to store single-cell data.
 
-# Component location
+## Component location
 As discussed in [the project structure](project_structure.qmd#sec-project-structure), components in the repository are stored within `src`. Additionally, components are grouped into namespaces, according to a common functionality. An example of such a namespace is the dimensionality reduction namespace (`dimred`), of which the components `pca` and `umap` are members. This means that within `src`, the namespace folders can be found that stores the components that belong to these namespaces. 
 
 In order to create a new component in OpenPipelines, you will need to create a new folder that will contain the different elements of the component:
@@ -20,7 +21,7 @@ mkdir src/my_namespace/my_component
 Take a look at the components that are already in `src/`! There might be a component that already does something similar to what you need.
 :::
 
-# The elements of a component
+## The elements of a component
 A component consists of one or more scripts that provide the functionality of the component together with metadata of the component in a configuration file. The [Viash config](https://viash.io/reference/config/) contains metadata of your dataset, which script is used to run it, and the required dependencies. An in-depth guide on how to create components is available on the [viash website](https://viash.io/guide/component/create-component.html), but a few specifics and guidelines will be discussed here.
 
 ## The config
@@ -90,37 +91,33 @@ Resources checklist:
   - Script resources are located next to the config and added to the config with the correct type (`python_script`, `r_script`, ...)
   - Small resources (<50MB) that are not scripts can also be checked in into the repo, next to the 
 
-### Build information
+### The script file
 
 TODO
 
-## The script file
+### Author information
 
 TODO
 
-## Author information
+## Adding dependencies
 
 TODO
 
-# Adding dependencies
-
-TODO
-
-# Building components from their source
+## Building components from their source
 When running or [testing individual components](#running-component-unittests), it is not necessary to execute an extra command to run the build step, `viash test` and `viash run` will build the component on the fly. However, before integrating components into a pipeline, you will need to build the components. More specifically, openpipelines uses Nextflow to combine components into pipelines, so we need to have at least the components build for `nextflow` platform as target. The easiest method to build the components is to use:
 
 ```bash
 viash ns build --parallel --setup cachedbuild
 ```
-After using `.viash ns build`, the target folder will be populated with three subfolders, corresponding to the build platforms that viash supports: `native`, `docker` and `nextflow`. In contrast to `./bin/viash build`, `viash_build` will use all of the platforms defined in each of the components configuration instead of the first one. Keep in mind that running `./bin/viash_build` will not always cause a component to be re-build completely. Caching mechanisms in the docker platform for example will make sure only components for which alterations have been made will be build, significantly reducing build times. In summary, using `./bin/viash_build` makes sure that the latest build of components are available before starting to integrate them in pipelines.
+After using `viash ns build`, the target folder will be populated with three subfolders, corresponding to the build platforms that viash supports: `native`, `docker` and `nextflow`. 
 
-Building an individual component can still be useful, for example when debugging a component for which the build fails or if you want to create a standalone executable for a component to execute it without the need to use `viash`. To build an individual component, `./bin/viash build` can be used. Note that the default build directory of this viash base command is `output`, which is not the location where build components will be imported from when integrating them in pipelines. Using the `--output` argument, you can set it to any directory you want, for example:
+Building an individual component can still be useful, for example when debugging a component for which the build fails or if you want to create a standalone executable for a component to execute it without the need to use `viash`. To build an individual component, `viash build` can be used. Note that the default build directory of this viash base command is `output`, which is not the location where build components will be imported from when integrating them in pipelines. Using the `--output` argument, you can set it to any directory you want, for example:
 
 ```bash
-./bin/viash build ./src/filter/do_filter/config.vsh.yaml -o ./target/native/filter/do_filter/ -p native
+viash build src/filter/do_filter/config.vsh.yaml -o target/native/filter/do_filter/ -p native
 ```
 
-# Containerization
+## Containerization
 One of the key benefits of using Viash is that containers can be created that gather dependencies per component,
 which avoids building one container that has to encorporate all dependencies for a pipeline together. The containers for a single component can be reduced in size, defining the minimal requirements to run the component. That being said, building containers from scratch can be labour intensive and error prone, with base containers from reputable publishers often benefiting from improved reliability and security. Hence, a balance has to be made between reducing the container's size and adding many dependencies to a small base container.
 

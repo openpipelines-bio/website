@@ -1,5 +1,6 @@
 ---
 title: Bug reports
+description: How to report bugs
 order: 80
 ---
 

@@ -48,7 +48,11 @@ website:
     - id: contributing
       collapse-level: 3
       title: Contributing
-      contents:  contributing
+      contents: contributing
+    - id: more_information
+      collapse-level: 3
+      title: More information
+      contents: more_information
 
 format:
   html:

@@ -1,0 +1,105 @@
+---
+title: Passing parameter lists
+description: Pass a large number of inputs to a workflow
+order: 15
+---
+
+Using Viash's VDSL3 nextflow platform, an optional `--param_list` argument can be used to pass a large number of inputs to a workflow. A `param_list` can either be a csv file, a json file, a yaml file, a yaml blob, or be passed as a nextflow config file.
+
+
+## CSV file
+
+The following example shows how to use a csv file as a parameter list. The csv file has two columns, `id` and `input`. The `id` column is used to name the output file, and the `input` column is used as the input file. The `input` column is relativized to the location of the csv file.
+
+```bash
+$ cat param_list.csv
+id,input
+foo,foo.txt
+bar,bar.txt
+```
+
+```bash
+nextflow run ... --param_list param_list.csv
+```
+
+## YAML file
+
+The following example shows how to use a yaml file as a parameter list.
+
+```bash
+$ cat param_list.yaml
+- id: foo
+  input: foo.txt
+- id: bar
+  input: bar.txt
+```
+
+```bash
+nextflow run ... --param_list param_list.yaml
+```
+
+## YAML blob
+
+The following example shows how to use a yaml blob as a parameter list.
+
+```bash
+nextflow run ... --param_list "[ {'id': 'foo', 'input': 'foo.txt'}, {'id': 'bar', 'input': 'bar.txt'} ]"
+```
+
+## As a Nextflow config
+
+The following example shows how to use a `nextflow.config` file as a parameter list.
+
+```
+$ cat params.config
+params {
+  param_list: [
+    ['id': 'foo', 'input': 'foo.txt'],
+    ['id': 'bar', 'input': 'bar.txt']
+  ]
+}
+```
+
+```bash
+nextflow run ... -params-file params.config
+```
+
+## Global parameters
+
+Note that a `param_list` can be combined with setting parameters that are set for all parameter sets. These 'global' parameters will always be overwritten with their counterpart that was specified in a more specific manner for a single parameter set. 
+
+For example, using `--param_list param_list.yaml --ref global.txt` with the following `param_list.yaml`:
+
+```yaml
+- id: foo
+  input: foo.txt
+- id: bar
+  input: bar.txt
+  ref: custom_bar_ref.txt
+```
+
+Will result in the following parameter sets being processed:
+
+* `id`: `foo`, `input`: `foo.txt`, `ref`: `global.txt`
+* `id`: `bar`, `input`: `bar.txt`, `ref`: `custom_bar_ref.txt`
+
+## Resolving paths
+
+If the `--param_list` is a file (CSV, YAML, or JSON), all files in the `param_list` are relativized to the location of the `param_list` file. If the `--param_list` is a YAML blob or a Nextflow config, all files in the `param_list` are relativized to the current working directory.
+
+For example, with a `param_list.yaml` file located in the `data` directory:
+
+```bash
+$ cat /data/param_list.yaml
+- id: foo
+  input: foo.txt
+- id: bar
+  input: /path/to/bar.txt
+```
+
+This will result in the following parameter sets being processed:
+
+* `id`: `foo`, `input`: `/data/foo.txt`
+* `id`: `bar`, `input`: `/path/to/bar.txt`
+
+Note that this also works when the param list is located on a remote location, such as an S3 bucket. In that case, the files in the param list are relativized to the location of the param list on the remote location.
