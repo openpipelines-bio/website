@@ -5,15 +5,14 @@ order: 10
 ---
 
 ## Project structure {#sec-project-structure}
-The root of the repository contains three main folders:
+The root of the repository contains two main folders:
 
-1. `src`, which contains the source code for individual components.
-2. The `workflows` folder containing the implementations of the pipelines (combining one or more components).
+1. `src`, which contains the source code for components and workflows.
 3. (optionally) the `target` folder 
 
 Each subfolder from `src` contains a Viash [namespace](https://viash.io/guides/projects/namespaces/), a logical grouping of pipeline components that perform a similar function. Within each namespace, subfolders designate individual pipeline components. For example `./src/convert/from_bdrhap_to_h5ad` contains the implementation for a component `from_bdrhap_to_h5ad` which is grouped together with other components such as `from_10xmtx_to_h5mu` into a namespace `convert`. In a similar manner as grouping components into `namespaces`, pipelines are grouped together into folders. However, these are not component namespaces and as such do not interact with `viash ns` commands.
 
-As will become apparent later on, Viash not only provides commands to perform operations on individual components, but also on groups of components in a namespace and all components in a project. As a rule of thumb, the basic Viash commands (like `./bin/viash test`) are designated for running commands on individual components, while `ns` commands are (`./bin/viash ns test`) are for namespaces.
+As will become apparent later on, Viash not only provides commands to perform operations on individual components, but also on groups of components in a namespace and all components in a project. As a rule of thumb, the basic Viash commands (like `viash test`) are designated for running commands on individual components, while `ns` commands are (`viash ns test`) are for namespaces.
 When cloning a fresh repository, there will be no `target` folder present. This is because the target folder will only be created after components have been build. 
 
 ## Versioning and branching strategy {#sec-versioning}
