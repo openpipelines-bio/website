@@ -1249,7 +1249,7 @@ Namespace: <code>multiomics</code></p>
 </section>
 <section id="links" class="level3">
 <h3 class="anchored" data-anchor-id="links">Links</h3>
-<p><a href="https://github.com/openpipelines-bio/openpipeline/blob/0.12.0/./workflows/multiomics/full_pipeline" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
+<p><a href="https://github.com/openpipelines-bio/openpipeline/blob/0.12.1/./workflows/multiomics/full_pipeline" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
 </section>
 </div></div><section id="example-commands" class="level2">
 <h2 class="anchored" data-anchor-id="example-commands">Example commands</h2>
@@ -1258,7 +1258,7 @@ Namespace: <code>multiomics</code></p>
 <h3 class="anchored" data-anchor-id="view-help">View help</h3>
 <p>You can use <code>--help</code> as a parameter to get an overview of the possible parameters.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> 0.12.0 <span class="at">-latest</span> <span class="dt">\</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> 0.12.1 <span class="at">-latest</span> <span class="dt">\</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> ./workflows/multiomics/full_pipeline/main.nf <span class="dt">\</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
@@ -1318,7 +1318,7 @@ Example of <code>params.yaml</code>
 <span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="co"># param_list: "my_params.yaml"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> 0.12.0 <span class="at">-latest</span> <span class="dt">\</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> 0.12.1 <span class="at">-latest</span> <span class="dt">\</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-profile</span> docker <span class="dt">\</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> ./workflows/multiomics/full_pipeline/main.nf <span class="dt">\</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">-params-file</span> params.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1696,103 +1696,103 @@ Note
     v101(filter)
     v108(filter_with_counts)
     v110(join)
-    v119(do_filter)
-    v121(join)
-    v129(filter_with_scrublet)
-    v131(join)
-    v200(concat)
-    v134(filter)
-    v137(toSortedList)
-    v139(flatMap)
-    v144(filter)
-    v150(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:unfiltered_counts_qc_metrics_prot:grep_annotation_column:grep_annotation_column_process1)
-    v152(join)
-    v156(mix)
-    v155(filter)
-    v162(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:unfiltered_counts_qc_metrics_prot:calculate_qc_metrics:calculate_qc_metrics_process1)
-    v164(join)
-    v172(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:unfiltered_counts_qc_metrics_prot:publish:publish_process1)
-    v174(join)
-    v183(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:filter_with_counts:filter_with_counts_process1)
-    v185(join)
-    v193(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:do_filter:do_filter_process1)
-    v195(join)
-    v198(filter)
-    v204(groupTuple)
-    v210(concat)
-    v212(join)
-    v216(filter)
-    v219(toSortedList)
-    v221(flatMap)
-    v223(toSortedList)
-    v225(Output)
-    v231(normalize_total)
-    v233(join)
-    v242(log1p)
-    v244(join)
-    v253(delete_layer)
-    v255(join)
-    v264(filter_with_hvg)
-    v266(join)
-    v275(rna_calculate_qc_metrics)
-    v277(join)
-    v341(concat)
-    v282(filter)
-    v285(toSortedList)
-    v287(flatMap)
-    v288(toSortedList)
-    v290(Output)
-    v296(clr)
-    v298(join)
-    v304(filter)
-    v310(test_wf:run_wf:multisample_processing_workflow:prot_multisample:prot_qc:grep_annotation_column:grep_annotation_column_process2)
-    v312(join)
-    v316(mix)
-    v315(filter)
-    v322(test_wf:run_wf:multisample_processing_workflow:prot_multisample:prot_qc:calculate_qc_metrics:calculate_qc_metrics_process2)
-    v324(join)
-    v332(test_wf:run_wf:multisample_processing_workflow:prot_multisample:prot_qc:publish:publish_process2)
-    v334(join)
-    v338(filter)
-    v343(toSortedList)
-    v349(merge)
-    v351(join)
-    v355(filter)
-    v359(toSortedList)
-    v361(flatMap)
-    v368(pca)
-    v370(join)
-    v379(find_neighbors)
-    v381(join)
-    v390(umap)
-    v392(join)
-    v398(concat)
-    v397(filter)
-    v399(filter)
-    v403(toSortedList)
-    v405(flatMap)
-    v412(pca)
-    v414(join)
-    v423(find_neighbors)
-    v425(join)
-    v434(test_wf:run_wf:integration_setup_workflow:initialize_integration_prot:umap:umap_process1)
-    v436(join)
-    v442(concat)
-    v441(filter)
-    v450(test_wf:run_wf:publish:publish_process3)
-    v452(join)
-    v457(toSortedList)
-    v459(Output)
+    v118(do_filter)
+    v120(join)
+    v128(filter_with_scrublet)
+    v130(join)
+    v199(concat)
+    v133(filter)
+    v136(toSortedList)
+    v138(flatMap)
+    v143(filter)
+    v149(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:unfiltered_counts_qc_metrics_prot:grep_annotation_column:grep_annotation_column_process1)
+    v151(join)
+    v155(mix)
+    v154(filter)
+    v161(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:unfiltered_counts_qc_metrics_prot:calculate_qc_metrics:calculate_qc_metrics_process1)
+    v163(join)
+    v171(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:unfiltered_counts_qc_metrics_prot:publish:publish_process1)
+    v173(join)
+    v182(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:filter_with_counts:filter_with_counts_process1)
+    v184(join)
+    v192(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:do_filter:do_filter_process1)
+    v194(join)
+    v197(filter)
+    v203(groupTuple)
+    v209(concat)
+    v211(join)
+    v215(filter)
+    v218(toSortedList)
+    v220(flatMap)
+    v222(toSortedList)
+    v224(Output)
+    v230(normalize_total)
+    v232(join)
+    v241(log1p)
+    v243(join)
+    v252(delete_layer)
+    v254(join)
+    v263(filter_with_hvg)
+    v265(join)
+    v274(rna_calculate_qc_metrics)
+    v276(join)
+    v340(concat)
+    v281(filter)
+    v284(toSortedList)
+    v286(flatMap)
+    v287(toSortedList)
+    v289(Output)
+    v295(clr)
+    v297(join)
+    v303(filter)
+    v309(test_wf:run_wf:multisample_processing_workflow:prot_multisample:prot_qc:grep_annotation_column:grep_annotation_column_process2)
+    v311(join)
+    v315(mix)
+    v314(filter)
+    v321(test_wf:run_wf:multisample_processing_workflow:prot_multisample:prot_qc:calculate_qc_metrics:calculate_qc_metrics_process2)
+    v323(join)
+    v331(test_wf:run_wf:multisample_processing_workflow:prot_multisample:prot_qc:publish:publish_process2)
+    v333(join)
+    v337(filter)
+    v342(toSortedList)
+    v348(merge)
+    v350(join)
+    v354(filter)
+    v358(toSortedList)
+    v360(flatMap)
+    v367(pca)
+    v369(join)
+    v378(find_neighbors)
+    v380(join)
+    v389(umap)
+    v391(join)
+    v397(concat)
+    v396(filter)
+    v398(filter)
+    v402(toSortedList)
+    v404(flatMap)
+    v411(pca)
+    v413(join)
+    v422(find_neighbors)
+    v424(join)
+    v433(test_wf:run_wf:integration_setup_workflow:initialize_integration_prot:umap:umap_process1)
+    v435(join)
+    v441(concat)
+    v440(filter)
+    v449(test_wf:run_wf:publish:publish_process3)
+    v451(join)
+    v456(toSortedList)
+    v458(Output)
     v41--&gt;v42
     v66--&gt;v67
     v101--&gt;v102
-    v155--&gt;v156
-    v287--&gt;v288
-    v315--&gt;v316
+    v154--&gt;v155
+    v286--&gt;v287
+    v314--&gt;v315
+    v396--&gt;v397
     v397--&gt;v398
-    v398--&gt;v399
-    v398--&gt;v441
-    v441--&gt;v442
+    v397--&gt;v440
+    v440--&gt;v441
     v0--&gt;v2
     v2--&gt;v4
     v4--&gt;v7
@@ -1813,8 +1813,8 @@ Note
     v37--&gt;v39
     v39--&gt;v41
     v42--&gt;v44
-    v42--&gt;v134
-    v42--&gt;v198
+    v42--&gt;v133
+    v42--&gt;v197
     v44--&gt;v47
     v47--&gt;v49
     v49--&gt;v55
@@ -1838,117 +1838,117 @@ Note
     v102--&gt;v110
     v102--&gt;v108
     v108--&gt;v110
-    v110--&gt;v121
-    v110--&gt;v119
-    v119--&gt;v121
-    v121--&gt;v131
-    v121--&gt;v129
-    v129--&gt;v131
-    v131--&gt;v200
-    v134--&gt;v137
-    v137--&gt;v139
-    v139--&gt;v144
-    v139--&gt;v155
-    v144--&gt;v152
-    v144--&gt;v150
-    v150--&gt;v152
-    v152--&gt;v156
-    v156--&gt;v164
-    v156--&gt;v162
-    v162--&gt;v164
-    v164--&gt;v174
-    v164--&gt;v172
-    v172--&gt;v174
-    v174--&gt;v185
-    v174--&gt;v183
-    v183--&gt;v185
-    v185--&gt;v195
-    v185--&gt;v193
-    v193--&gt;v195
-    v195--&gt;v200
-    v198--&gt;v200
-    v200--&gt;v204
-    v204--&gt;v212
-    v204--&gt;v210
-    v210--&gt;v212
-    v212--&gt;v216
-    v212--&gt;v282
-    v212--&gt;v338
-    v216--&gt;v219
-    v219--&gt;v221
-    v221--&gt;v223
-    v223--&gt;v225
-    v221--&gt;v233
-    v221--&gt;v231
-    v231--&gt;v233
-    v233--&gt;v244
-    v233--&gt;v242
-    v242--&gt;v244
-    v244--&gt;v255
-    v244--&gt;v253
-    v253--&gt;v255
-    v255--&gt;v266
-    v255--&gt;v264
-    v264--&gt;v266
-    v266--&gt;v277
-    v266--&gt;v275
-    v275--&gt;v277
-    v277--&gt;v341
-    v282--&gt;v285
-    v285--&gt;v287
-    v288--&gt;v290
-    v287--&gt;v298
-    v287--&gt;v296
-    v296--&gt;v298
-    v298--&gt;v304
-    v298--&gt;v315
-    v304--&gt;v312
-    v304--&gt;v310
-    v310--&gt;v312
-    v312--&gt;v316
-    v316--&gt;v324
-    v316--&gt;v322
-    v322--&gt;v324
-    v324--&gt;v334
-    v324--&gt;v332
-    v332--&gt;v334
-    v334--&gt;v341
-    v338--&gt;v341
-    v341--&gt;v343
-    v343--&gt;v351
-    v343--&gt;v349
-    v349--&gt;v351
-    v351--&gt;v355
-    v351--&gt;v397
-    v355--&gt;v359
-    v359--&gt;v361
-    v361--&gt;v370
-    v361--&gt;v368
-    v368--&gt;v370
-    v370--&gt;v381
-    v370--&gt;v379
-    v379--&gt;v381
-    v381--&gt;v392
-    v381--&gt;v390
-    v390--&gt;v392
-    v392--&gt;v398
-    v399--&gt;v403
-    v403--&gt;v405
-    v405--&gt;v414
-    v405--&gt;v412
-    v412--&gt;v414
-    v414--&gt;v425
-    v414--&gt;v423
-    v423--&gt;v425
-    v425--&gt;v436
-    v425--&gt;v434
-    v434--&gt;v436
-    v436--&gt;v442
-    v442--&gt;v452
-    v442--&gt;v450
-    v450--&gt;v452
-    v452--&gt;v457
-    v457--&gt;v459
+    v110--&gt;v120
+    v110--&gt;v118
+    v118--&gt;v120
+    v120--&gt;v130
+    v120--&gt;v128
+    v128--&gt;v130
+    v130--&gt;v199
+    v133--&gt;v136
+    v136--&gt;v138
+    v138--&gt;v143
+    v138--&gt;v154
+    v143--&gt;v151
+    v143--&gt;v149
+    v149--&gt;v151
+    v151--&gt;v155
+    v155--&gt;v163
+    v155--&gt;v161
+    v161--&gt;v163
+    v163--&gt;v173
+    v163--&gt;v171
+    v171--&gt;v173
+    v173--&gt;v184
+    v173--&gt;v182
+    v182--&gt;v184
+    v184--&gt;v194
+    v184--&gt;v192
+    v192--&gt;v194
+    v194--&gt;v199
+    v197--&gt;v199
+    v199--&gt;v203
+    v203--&gt;v211
+    v203--&gt;v209
+    v209--&gt;v211
+    v211--&gt;v215
+    v211--&gt;v281
+    v211--&gt;v337
+    v215--&gt;v218
+    v218--&gt;v220
+    v220--&gt;v222
+    v222--&gt;v224
+    v220--&gt;v232
+    v220--&gt;v230
+    v230--&gt;v232
+    v232--&gt;v243
+    v232--&gt;v241
+    v241--&gt;v243
+    v243--&gt;v254
+    v243--&gt;v252
+    v252--&gt;v254
+    v254--&gt;v265
+    v254--&gt;v263
+    v263--&gt;v265
+    v265--&gt;v276
+    v265--&gt;v274
+    v274--&gt;v276
+    v276--&gt;v340
+    v281--&gt;v284
+    v284--&gt;v286
+    v287--&gt;v289
+    v286--&gt;v297
+    v286--&gt;v295
+    v295--&gt;v297
+    v297--&gt;v303
+    v297--&gt;v314
+    v303--&gt;v311
+    v303--&gt;v309
+    v309--&gt;v311
+    v311--&gt;v315
+    v315--&gt;v323
+    v315--&gt;v321
+    v321--&gt;v323
+    v323--&gt;v333
+    v323--&gt;v331
+    v331--&gt;v333
+    v333--&gt;v340
+    v337--&gt;v340
+    v340--&gt;v342
+    v342--&gt;v350
+    v342--&gt;v348
+    v348--&gt;v350
+    v350--&gt;v354
+    v350--&gt;v396
+    v354--&gt;v358
+    v358--&gt;v360
+    v360--&gt;v369
+    v360--&gt;v367
+    v367--&gt;v369
+    v369--&gt;v380
+    v369--&gt;v378
+    v378--&gt;v380
+    v380--&gt;v391
+    v380--&gt;v389
+    v389--&gt;v391
+    v391--&gt;v397
+    v398--&gt;v402
+    v402--&gt;v404
+    v404--&gt;v413
+    v404--&gt;v411
+    v411--&gt;v413
+    v413--&gt;v424
+    v413--&gt;v422
+    v422--&gt;v424
+    v424--&gt;v435
+    v424--&gt;v433
+    v433--&gt;v435
+    v435--&gt;v441
+    v441--&gt;v451
+    v441--&gt;v449
+    v449--&gt;v451
+    v451--&gt;v456
+    v456--&gt;v458
 
 </pre>
 </div>
