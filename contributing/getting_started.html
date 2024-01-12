@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Install dependencies and fetch test resources">
 
 <title>OpenPipelines - Getting started</title>
 <style>
@@ -241,7 +242,8 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
    
   <ul>
   <li><a href="#forking-the-code-and-cloning-the-repository" id="toc-forking-the-code-and-cloning-the-repository" class="nav-link active" data-scroll-target="#forking-the-code-and-cloning-the-repository">Forking the code and cloning the repository</a></li>
-  <li><a href="#sec-install-viash-nextflow" id="toc-sec-install-viash-nextflow" class="nav-link" data-scroll-target="#sec-install-viash-nextflow">Installing <code>viash</code> and <code>nextflow</code></a></li>
+  <li><a href="#sec-install-viash-nextflow" id="toc-sec-install-viash-nextflow" class="nav-link" data-scroll-target="#sec-install-viash-nextflow">Install <code>viash</code> and <code>nextflow</code></a></li>
+  <li><a href="#fetch-test-resources" id="toc-fetch-test-resources" class="nav-link" data-scroll-target="#fetch-test-resources">Fetch test resources</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/contributing/getting_started.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -253,6 +255,11 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <h1 class="title">Getting started</h1>
 </div>
 
+<div>
+  <div class="description">
+    Install dependencies and fetch test resources
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -265,9 +272,9 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 
 </header>
 
-<section id="forking-the-code-and-cloning-the-repository" class="level1">
-<h1>Forking the code and cloning the repository</h1>
-<p>The openpipelines code is hosted on GitHub. To start working on openpipeline, you should create your own copy of the repository by forking it. Visit the openpipeline repository <a href="https://github.com/openpipelines-bio/openpipeline">here</a> and use the ‘Fork’ button on the top right hand side of the page. After you are done forking, you can clone the repository to a local directory on your computer using <code>git clone</code>. You can choose between using an SSH key to log in to GitHub or username and password (HTTPS) to connect to github.</p>
+<section id="forking-the-code-and-cloning-the-repository" class="level2">
+<h2 class="anchored" data-anchor-id="forking-the-code-and-cloning-the-repository">Forking the code and cloning the repository</h2>
+<p>The OpenPipelines code is hosted on GitHub. To start working on OpenPipelines, you should create your own copy of the repository by forking it. Visit the OpenPipelines repository <a href="https://github.com/openpipelines-bio/openpipeline">here</a> and use the ‘Fork’ button on the top right hand side of the page. After you are done forking, you can clone the repository to a local directory on your computer using <code>git clone</code>. You can choose between using an SSH key to log in to GitHub or username and password (HTTPS) to connect to github.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">HTTPS</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">SSH</a></li></ul>
 <div class="tab-content">
@@ -284,12 +291,18 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 </div>
 </div>
 </section>
-<section id="sec-install-viash-nextflow" class="level1">
-<h1>Installing <code>viash</code> and <code>nextflow</code></h1>
-<p>Openpipelines is being developed in Viash and Nextflow. If you are unfamiliar with either one of these platforms, you can check out their respective documentations <a href="https://viash.io/guides/getting_started/introduction/">here</a> and <a href="https://www.nextflow.io/docs/latest/index.html">here</a>. To start contributing to openpipelines, you will need at least a working version of Java 11, OpenJDK 11, or a later version (up to Java 18). Additionally, by using <a href="https://www.docker.com/">Docker</a>,you can build and test pipeline components and pipelines without needing to manually install dependencies for these components on your machine.</p>
-<p>Viash and Nextflow can be installed by following the guides in the documentation for both of these tools. Make sure the <code>viash</code> and <code>nextflow</code> binaries are located in an existing directory that is listed in your <code>$PATH</code>. You can check if everything worked by running the following two commands and see if they output the correct location of the executables.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> viash</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> nextflow</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="sec-install-viash-nextflow" class="level2">
+<h2 class="anchored" data-anchor-id="sec-install-viash-nextflow">Install <code>viash</code> and <code>nextflow</code></h2>
+<p>To start contributing to OpenPipelines, you will need at <a href="https://www.oracle.com/java/technologies/downloads/">Java 11</a> (or higher) and <a href="https://docs.docker.com/get-docker/">Docker</a> installed on your system.</p>
+<p>OpenPipelines is being developed in <a href="https://viash.io/quickstart/">Viash</a> and <a href="https://www.nextflow.io/docs/latest/index.html">Nextflow</a>. If you are unfamiliar with either one of these platforms, you can check out their respective documentation pages.</p>
+<p>You can check if is installed correctly by running the following commands.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run hello <span class="at">-with-docker</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="fetch-test-resources" class="level2">
+<h2 class="anchored" data-anchor-id="fetch-test-resources">Fetch test resources</h2>
+<p>OpenPipelines uses a number of test resources to test the pipelines. If everything is installed correctly, you should be able to fetch these resources by running the following command.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run src/download/sync_test_resources/config.vsh.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>

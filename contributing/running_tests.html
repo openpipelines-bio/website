@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="How to run component and integration tests.">
 
 <title>OpenPipelines - Running tests</title>
 <style>
@@ -240,9 +241,9 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#fetching-the-test-data." id="toc-fetching-the-test-data." class="nav-link active" data-scroll-target="#fetching-the-test-data.">Fetching the test data.</a></li>
-  <li><a href="#running-component-unittests" id="toc-running-component-unittests" class="nav-link" data-scroll-target="#running-component-unittests">Running component unittests</a></li>
-  <li><a href="#integration-tests" id="toc-integration-tests" class="nav-link" data-scroll-target="#integration-tests">Integration tests</a></li>
+  <li><a href="#fetch-the-test-data" id="toc-fetch-the-test-data" class="nav-link active" data-scroll-target="#fetch-the-test-data">Fetch the test data</a></li>
+  <li><a href="#run-component-tests" id="toc-run-component-tests" class="nav-link" data-scroll-target="#run-component-tests">Run component tests</a></li>
+  <li><a href="#run-integration-tests" id="toc-run-integration-tests" class="nav-link" data-scroll-target="#run-integration-tests">Run integration tests</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/contributing/running_tests.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -254,6 +255,11 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <h1 class="title">Running tests</h1>
 </div>
 
+<div>
+  <div class="description">
+    How to run component and integration tests.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -266,27 +272,23 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 
 </header>
 
-<section id="fetching-the-test-data." class="level3">
-<h3 class="anchored" data-anchor-id="fetching-the-test-data.">Fetching the test data.</h3>
+<section id="fetch-the-test-data" class="level2">
+<h2 class="anchored" data-anchor-id="fetch-the-test-data">Fetch the test data</h2>
 <p>The input data that is needed to run the tests will need to be downloaded from the openpipelines Amazon AWS s3 bucket first. To do so, the <code>download/sync_test_resource</code> component can be used, which will download the data to the correct location (<code>resources_test</code>) by default.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./bin/viash</span> run ./src/download/sync_test_resources/config.vsh.yaml <span class="at">-p</span> docker <span class="at">--</span> <span class="at">--input</span> s3://openpipelines-data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Or, if you do not want to use Docker and have <code>aws-cli</code> tools installed natively:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./bin/viash</span> run ./src/download/sync_test_resources/config.vsh.yaml <span class="at">-p</span> native <span class="at">--</span> <span class="at">--input</span> s3://openpipelines-data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run src/download/sync_test_resources/config.vsh.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="running-component-unittests" class="level3">
-<h3 class="anchored" data-anchor-id="running-component-unittests">Running component unittests</h3>
+<section id="run-component-tests" class="level2">
+<h2 class="anchored" data-anchor-id="run-component-tests">Run component tests</h2>
 <p>To build and run tests for individual component that you are working on, use <a href="https://viash.io/api/commands/test/">viash test</a> with the <code>config.vsh.yaml</code> of the component you would like to test. For example:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./bin/viash</span> test ./src/convert/from_10xh5_to_h5mu/config.vsh.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> test src/convert/from_10xh5_to_h5mu/config.vsh.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Keep in mind that when no platform is passed to <code>viash test</code>, it will use the first platform that is specified in the config, which is <code>docker</code> for most of the components in openpipelines. Use <code>-p native</code> for example if you do not want to use docker.</p>
-<p>It is also possible to execute the tests for all components in each namespace using <code>./bin/viash_test</code> (note the underscore instead of a space).</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./bin/viash_test</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It is also possible to execute the tests for all components in each namespace using:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> ns test <span class="at">--parallel</span> <span class="at">-q</span> convert</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="integration-tests" class="level3">
-<h3 class="anchored" data-anchor-id="integration-tests">Integration tests</h3>
-<p>Individual integration tests can be run by using the <code>integration_test.sh</code> scripts for a pipeline, located next to the <code>main.nf</code> in the <code>workflows</code> folder.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./workflows/ingestion/cellranger_demux/integration_test.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Running all integration tests is also possible using a helper script that can be found at <code>workflows/test/integration_test.sh</code>. Using this script requires a working <code>R</code> installation with <a href="https://www.tidyverse.org/packages/">tidyverse</a> installed. However, as pipelines are implemented by combining individual components</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./workflows/test/integration_test.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="run-integration-tests" class="level2">
+<h2 class="anchored" data-anchor-id="run-integration-tests">Run integration tests</h2>
+<p>Individual integration tests can be run by using the <code>integration_test.sh</code> scripts for a pipeline, located next to the <code>main.nf</code> in the <code>src/workflows</code> folder.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">src/workflows/ingestion/cellranger_demux/integration_test.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>

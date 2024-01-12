@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="A guide on how to create new components">
 
 <title>OpenPipelines - Creating components</title>
 <style>
@@ -242,15 +243,12 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   <ul>
   <li><a href="#a-common-file-format" id="toc-a-common-file-format" class="nav-link active" data-scroll-target="#a-common-file-format">A common file format</a></li>
   <li><a href="#component-location" id="toc-component-location" class="nav-link" data-scroll-target="#component-location">Component location</a></li>
-  <li><a href="#the-elements-of-a-component" id="toc-the-elements-of-a-component" class="nav-link" data-scroll-target="#the-elements-of-a-component">The elements of a component</a>
-  <ul class="collapse">
+  <li><a href="#the-elements-of-a-component" id="toc-the-elements-of-a-component" class="nav-link" data-scroll-target="#the-elements-of-a-component">The elements of a component</a></li>
   <li><a href="#the-config" id="toc-the-config" class="nav-link" data-scroll-target="#the-config">The config</a>
   <ul class="collapse">
   <li><a href="#basic-information" id="toc-basic-information" class="nav-link" data-scroll-target="#basic-information">Basic information</a></li>
   <li><a href="#arguments-and-argument-groups" id="toc-arguments-and-argument-groups" class="nav-link" data-scroll-target="#arguments-and-argument-groups">Arguments and argument groups</a></li>
   <li><a href="#testresources" id="toc-testresources" class="nav-link" data-scroll-target="#testresources">(Test)resources</a></li>
-  <li><a href="#build-information" id="toc-build-information" class="nav-link" data-scroll-target="#build-information">Build information</a></li>
-  </ul></li>
   <li><a href="#the-script-file" id="toc-the-script-file" class="nav-link" data-scroll-target="#the-script-file">The script file</a></li>
   <li><a href="#author-information" id="toc-author-information" class="nav-link" data-scroll-target="#author-information">Author information</a></li>
   </ul></li>
@@ -268,6 +266,11 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <h1 class="title">Creating components</h1>
 </div>
 
+<div>
+  <div class="description">
+    A guide on how to create new components
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -280,12 +283,12 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 
 </header>
 
-<section id="a-common-file-format" class="level1">
-<h1>A common file format</h1>
+<section id="a-common-file-format" class="level2">
+<h2 class="anchored" data-anchor-id="a-common-file-format">A common file format</h2>
 <p>One of the core principals of OpenPipelines is to use <a href="https://mudata.readthedocs.io/">MuData</a> as a common data format troughout the whole pipeline. See <a href="../fundamentals/concepts.html#sec-common-file-format">the concepts page</a> for more information on openpipelines uses MuData to store single-cell data.</p>
 </section>
-<section id="component-location" class="level1">
-<h1>Component location</h1>
+<section id="component-location" class="level2">
+<h2 class="anchored" data-anchor-id="component-location">Component location</h2>
 <p>As discussed in <a href="../contributing/project_structure.html#sec-project-structure">the project structure</a>, components in the repository are stored within <code>src</code>. Additionally, components are grouped into namespaces, according to a common functionality. An example of such a namespace is the dimensionality reduction namespace (<code>dimred</code>), of which the components <code>pca</code> and <code>umap</code> are members. This means that within <code>src</code>, the namespace folders can be found that stores the components that belong to these namespaces.</p>
 <p>In order to create a new component in OpenPipelines, you will need to create a new folder that will contain the different elements of the component:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> src/my_namespace/my_component</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -303,9 +306,10 @@ Tip
 </div>
 </div>
 </section>
-<section id="the-elements-of-a-component" class="level1">
-<h1>The elements of a component</h1>
+<section id="the-elements-of-a-component" class="level2">
+<h2 class="anchored" data-anchor-id="the-elements-of-a-component">The elements of a component</h2>
 <p>A component consists of one or more scripts that provide the functionality of the component together with metadata of the component in a configuration file. The <a href="https://viash.io/reference/config/">Viash config</a> contains metadata of your dataset, which script is used to run it, and the required dependencies. An in-depth guide on how to create components is available on the <a href="https://viash.io/guide/component/create-component.html">viash website</a>, but a few specifics and guidelines will be discussed here.</p>
+</section>
 <section id="the-config" class="level2">
 <h2 class="anchored" data-anchor-id="the-config">The config</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">functionality</span><span class="kw">:</span></span>
@@ -364,34 +368,29 @@ Tip
 <p>In openpipelines, it was decided to not use a service like <code>git lfs</code> to include large resources into the repository. Instead, if large resources are required, there are two possibilities: * Large resources required for <em>testing</em> are to uploaded into an <code>s3</code> bucket that is synced automatically before running tests (both locally and on github). Please ping a maintainer when you open a PR and ask them to upload the files for you. * Other large resources that are not needed for testing can be considered as input. This means that an argument of <code>type: file</code> needs to be created. The downside of this method is that viash is not able to natively support remote files f</p>
 <p>Resources checklist: - Script resources are located next to the config and added to the config with the correct type (<code>python_script</code>, <code>r_script</code>, …) - Small resources (&lt;50MB) that are not scripts can also be checked in into the repo, next to the</p>
 </section>
-<section id="build-information" class="level3">
-<h3 class="anchored" data-anchor-id="build-information">Build information</h3>
+<section id="the-script-file" class="level3">
+<h3 class="anchored" data-anchor-id="the-script-file">The script file</h3>
+<p>TODO</p>
+</section>
+<section id="author-information" class="level3">
+<h3 class="anchored" data-anchor-id="author-information">Author information</h3>
 <p>TODO</p>
 </section>
 </section>
-<section id="the-script-file" class="level2">
-<h2 class="anchored" data-anchor-id="the-script-file">The script file</h2>
+<section id="adding-dependencies" class="level2">
+<h2 class="anchored" data-anchor-id="adding-dependencies">Adding dependencies</h2>
 <p>TODO</p>
 </section>
-<section id="author-information" class="level2">
-<h2 class="anchored" data-anchor-id="author-information">Author information</h2>
-<p>TODO</p>
-</section>
-</section>
-<section id="adding-dependencies" class="level1">
-<h1>Adding dependencies</h1>
-<p>TODO</p>
-</section>
-<section id="building-components-from-their-source" class="level1">
-<h1>Building components from their source</h1>
+<section id="building-components-from-their-source" class="level2">
+<h2 class="anchored" data-anchor-id="building-components-from-their-source">Building components from their source</h2>
 <p>When running or <a href="#running-component-unittests">testing individual components</a>, it is not necessary to execute an extra command to run the build step, <code>viash test</code> and <code>viash run</code> will build the component on the fly. However, before integrating components into a pipeline, you will need to build the components. More specifically, openpipelines uses Nextflow to combine components into pipelines, so we need to have at least the components build for <code>nextflow</code> platform as target. The easiest method to build the components is to use:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> ns build <span class="at">--parallel</span> <span class="at">--setup</span> cachedbuild</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>After using <code>.viash ns build</code>, the target folder will be populated with three subfolders, corresponding to the build platforms that viash supports: <code>native</code>, <code>docker</code> and <code>nextflow</code>. In contrast to <code>./bin/viash build</code>, <code>viash_build</code> will use all of the platforms defined in each of the components configuration instead of the first one. Keep in mind that running <code>./bin/viash_build</code> will not always cause a component to be re-build completely. Caching mechanisms in the docker platform for example will make sure only components for which alterations have been made will be build, significantly reducing build times. In summary, using <code>./bin/viash_build</code> makes sure that the latest build of components are available before starting to integrate them in pipelines.</p>
-<p>Building an individual component can still be useful, for example when debugging a component for which the build fails or if you want to create a standalone executable for a component to execute it without the need to use <code>viash</code>. To build an individual component, <code>./bin/viash build</code> can be used. Note that the default build directory of this viash base command is <code>output</code>, which is not the location where build components will be imported from when integrating them in pipelines. Using the <code>--output</code> argument, you can set it to any directory you want, for example:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./bin/viash</span> build ./src/filter/do_filter/config.vsh.yaml <span class="at">-o</span> ./target/native/filter/do_filter/ <span class="at">-p</span> native</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>After using <code>viash ns build</code>, the target folder will be populated with three subfolders, corresponding to the build platforms that viash supports: <code>native</code>, <code>docker</code> and <code>nextflow</code>.</p>
+<p>Building an individual component can still be useful, for example when debugging a component for which the build fails or if you want to create a standalone executable for a component to execute it without the need to use <code>viash</code>. To build an individual component, <code>viash build</code> can be used. Note that the default build directory of this viash base command is <code>output</code>, which is not the location where build components will be imported from when integrating them in pipelines. Using the <code>--output</code> argument, you can set it to any directory you want, for example:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> build src/filter/do_filter/config.vsh.yaml <span class="at">-o</span> target/native/filter/do_filter/ <span class="at">-p</span> native</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="containerization" class="level1">
-<h1>Containerization</h1>
+<section id="containerization" class="level2">
+<h2 class="anchored" data-anchor-id="containerization">Containerization</h2>
 <p>One of the key benefits of using Viash is that containers can be created that gather dependencies per component, which avoids building one container that has to encorporate all dependencies for a pipeline together. The containers for a single component can be reduced in size, defining the minimal requirements to run the component. That being said, building containers from scratch can be labour intensive and error prone, with base containers from reputable publishers often benefiting from improved reliability and security. Hence, a balance has to be made between reducing the container’s size and adding many dependencies to a small base container.</p>
 <p>The preferred containerization setup in OpenPipelines uses the following guidelines:</p>
 <ul>

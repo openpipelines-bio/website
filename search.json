@@ -1,94 +1,52 @@
 [
   {
-    "objectID": "more_information/data_api.html",
-    "href": "more_information/data_api.html",
-    "title": "Data API",
+    "objectID": "more_information/code_of_conduct.html",
+    "href": "more_information/code_of_conduct.html",
+    "title": "Code of conduct",
     "section": "",
-    "text": "Note\n\n\n\nFile formats are being discussed in openpipelines-bio/openpipeline#102"
+    "text": "We as members, contributors, and leaders pledge to make participation in our community a harassment-free experience for everyone, regardless of age, body size, visible or invisible disability, ethnicity, sex characteristics, gender identity and expression, level of experience, education, socio-economic status, nationality, personal appearance, race, caste, color, religion, or sexual identity and orientation.\nWe pledge to act and interact in ways that contribute to an open, welcoming, diverse, inclusive, and healthy community.\nOur full Code of Conduct is adapted from the Contributor Covenant, version 2.1."
   },
   {
-    "objectID": "more_information/data_api.html#dataset",
-    "href": "more_information/data_api.html#dataset",
-    "title": "Data API",
-    "section": "Dataset",
-    "text": "Dataset\nobs:\n index # cell id\n sample\n cell_type\n organism\n tissue\n\nmod:\n rna:\n rnav:\n prot:\n atac:\n vdj:"
-  },
-  {
-    "objectID": "more_information/data_api.html#rna-modality",
-    "href": "more_information/data_api.html#rna-modality",
-    "title": "Data API",
-    "section": "RNA modality",
-    "text": "RNA modality\nmod:\n rna:\n   layers:\n     counts\n     normalized\n   obs:\n     &lt;qc metrics&gt;\n     doublet_score\n     doublet_bool\n     cluster\n   var:\n     index # feature_id, preferably an ensembl id\n     feature_name\n     &lt;qc metrics&gt;\n     highly_variable\n     highly_variable_score\n   obsm:\n     X_pca\n     X_integrated\n     X_umap\n     annotation # scvi, bbknn, ...\n   obsp:\n     connectivities\n     distances"
-  },
-  {
-    "objectID": "more_information/data_api.html#adt-modality",
-    "href": "more_information/data_api.html#adt-modality",
-    "title": "Data API",
-    "section": "ADT modality",
-    "text": "ADT modality\nmod:\n prot:\n   layers:\n     counts\n   var:\n      index # feature_id\n      feature_name # Associated protein names"
-  },
-  {
-    "objectID": "more_information/data_api.html#vdj-modality",
-    "href": "more_information/data_api.html#vdj-modality",
-    "title": "Data API",
-    "section": "VDJ modality",
-    "text": "VDJ modality\nmod:\n vdj:\n   obsm:\n     vdj_t\n     vdj_b"
-  },
-  {
-    "objectID": "more_information/data_api.html#atac-modality",
-    "href": "more_information/data_api.html#atac-modality",
-    "title": "Data API",
-    "section": "ATAC modality",
-    "text": "ATAC modality\nmod:\n atac:\n   layers:\n     counts\n   var:\n     interval"
-  },
-  {
-    "objectID": "more_information/data_api.html#rna-velocity-modality",
-    "href": "more_information/data_api.html#rna-velocity-modality",
-    "title": "Data API",
-    "section": "RNA velocity modality",
-    "text": "RNA velocity modality\nmod:\n rnav:\n   layers:\n     spliced\n     unspliced"
-  },
-  {
-    "objectID": "user_guide/bug_reports.html",
-    "href": "user_guide/bug_reports.html",
-    "title": "Bug reports",
+    "objectID": "more_information/cheat_sheets.html",
+    "href": "more_information/cheat_sheets.html",
+    "title": "Cheat sheets",
     "section": "",
-    "text": "Issues with Openpipelines are being tracked on Github. In order for an issue to be fixed in a timely manner, creating a complete and reproducable is essential."
+    "text": "Figure 1: Cheat sheet for developing modular pipeline components with Viash, including a sample Viash component (left) and common commands used throughout the various stages of a development cycle (right)."
   },
   {
-    "objectID": "user_guide/index.html#using-the-nf-tower-user-interface",
-    "href": "user_guide/index.html#using-the-nf-tower-user-interface",
-    "title": "User Guide",
-    "section": "Using the nf-tower user-interface",
-    "text": "Using the nf-tower user-interface"
+    "objectID": "more_information/cheat_sheets.html#viash",
+    "href": "more_information/cheat_sheets.html#viash",
+    "title": "Cheat sheets",
+    "section": "",
+    "text": "Figure 1: Cheat sheet for developing modular pipeline components with Viash, including a sample Viash component (left) and common commands used throughout the various stages of a development cycle (right)."
   },
   {
-    "objectID": "user_guide/index.html#using-the-nf-tower-cli-tw",
-    "href": "user_guide/index.html#using-the-nf-tower-cli-tw",
-    "title": "User Guide",
-    "section": "Using the nf-tower CLI (tw)",
-    "text": "Using the nf-tower CLI (tw)"
+    "objectID": "team/index.html",
+    "href": "team/index.html",
+    "title": "Team",
+    "section": "",
+    "text": "Angela Oliveira Pisco\n      Contributor\n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n          Director of Computational Biology \n           at \n              \n              Insitro\n              \n        \n      \n      \n        \n          Core Member \n           at \n              \n              Open Problems\n              \n        \n      \n    \n  \n  \n    \n    \n      Dries De Maeyer\n      Core Team Member\n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n          Principal Scientist \n           at \n              \n              Janssen Pharmaceuticals\n              \n        \n      \n    \n  \n  \n    \n    \n      Dries Schaumont\n      Core Team Member\n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n          Data Scientist \n           at \n              \n              Data Intuitive\n              \n        \n      \n    \n  \n  \n    \n    \n      Malte D. Luecken\n      Core Team Member\n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n          Group Leader \n           at \n              \n              Helmholtz Munich\n              \n        \n      \n      \n        \n          Core Member \n           at \n              \n              Open Problems\n              \n        \n      \n    \n  \n  \n    \n    \n      Marijke Van Moerbeke\n      Contributor\n      \n        \n      \n      \n        \n      \n      \n        \n          Statistical Consultant \n           at \n              \n              OpenAnalytics\n              \n        \n      \n    \n  \n  \n    \n    \n      Matthias Beyens\n      Contributor\n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n          Principal Scientist \n           at \n              \n              Janssen Pharmaceuticals\n              \n        \n      \n    \n  \n  \n    \n    \n      Mauro Saporita\n      Contributor\n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n          Lead Nextflow Developer \n           at \n              \n              Ardigen\n              \n        \n      \n    \n  \n  \n    \n    \n      Povilas Gibas\n      Contributor\n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n          Bioinformatician \n           at \n              \n              Ardigen\n              \n        \n      \n    \n  \n  \n    \n    \n      Robrecht Cannoodt\n      Core Team Member\n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n          Data Science Engineer \n           at \n              \n              Data Intuitive\n              \n        \n      \n      \n        \n          Core Member \n           at \n              \n              Open Problems\n              \n        \n      \n    \n  \n  \n    \n    \n      Samuel D'Souza\n      Contributor\n      \n        \n      \n      \n        \n      \n      \n        \n          Data Engineer \n           at \n              \n              Chan Zuckerberg Biohub\n              \n        \n      \n    \n  \n  \n    \n    \n      Toni Verbeiren\n      Core Team Member\n      \n        \n      \n      \n        \n      \n      \n        \n          Data Scientist and CEO \n           at \n              \n              Data Intuitive\n              \n        \n      \n    \n  \n  \n    \n    \n      Vladimir Shitov\n      Contributor\n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n          PhD Candidate \n           at \n              \n              Helmholtz Munich\n              \n        \n      \n    \n  \n\n\nNo matching items"
   },
   {
-    "objectID": "user_guide/index.html#using-the-nextflow-cli",
-    "href": "user_guide/index.html#using-the-nextflow-cli",
+    "objectID": "user_guide/index.html",
+    "href": "user_guide/index.html",
     "title": "User Guide",
-    "section": "Using the nextflow CLI",
-    "text": "Using the nextflow CLI"
+    "section": "",
+    "text": "Getting started: Setting up infrastructure\n  \n  \n    Running pipelines: Run a pipeline from CLI or Nextflow Tower\n  \n  \n    Passing parameter lists: Pass a large number of inputs to a workflow\n  \n  \n    Ingestion: From sequencing to count tables\n  \n  \n    Processing: From count tables to integrated data\n  \n  \n    Downstream: Celltyping and cell-cell communication\n  \n  \n    Bug reports: How to report bugs\n  \n\n\nNo matching items"
   },
   {
     "objectID": "contributing/project_structure.html",
     "href": "contributing/project_structure.html",
     "title": "Project structure",
     "section": "",
-    "text": "The root of the repository contains three main folders:\n\nsrc, which contains the source code for individual components.\nThe workflows folder containing the implementations of the pipelines (combining one or more components).\n(optionally) the target folder\n\nEach subfolder from src contains a Viash namespace, a logical grouping of pipeline components that perform a similar function. Within each namespace, subfolders designate individual pipeline components. For example ./src/convert/from_bdrhap_to_h5ad contains the implementation for a component from_bdrhap_to_h5ad which is grouped together with other components such as from_10xmtx_to_h5mu into a namespace convert. In a similar manner as grouping components into namespaces, pipelines are grouped together into folders. However, these are not component namespaces and as such do not interact with viash ns commands.\nAs will become apparent later on, Viash not only provides commands to perform operations on individual components, but also on groups of components in a namespace and all components in a project. As a rule of thumb, the basic Viash commands (like ./bin/viash test) are designated for running commands on individual components, while ns commands are (./bin/viash ns test) are for namespaces. When cloning a fresh repository, there will be no target folder present. This is because the target folder will only be created after components have been build."
+    "text": "The root of the repository contains two main folders:\n\nsrc, which contains the source code for components and workflows.\n(optionally) the target folder\n\nEach subfolder from src contains a Viash namespace, a logical grouping of pipeline components that perform a similar function. Within each namespace, subfolders designate individual pipeline components. For example ./src/convert/from_bdrhap_to_h5ad contains the implementation for a component from_bdrhap_to_h5ad which is grouped together with other components such as from_10xmtx_to_h5mu into a namespace convert. In a similar manner as grouping components into namespaces, pipelines are grouped together into folders. However, these are not component namespaces and as such do not interact with viash ns commands.\nAs will become apparent later on, Viash not only provides commands to perform operations on individual components, but also on groups of components in a namespace and all components in a project. As a rule of thumb, the basic Viash commands (like viash test) are designated for running commands on individual components, while ns commands are (viash ns test) are for namespaces. When cloning a fresh repository, there will be no target folder present. This is because the target folder will only be created after components have been build."
   },
   {
     "objectID": "contributing/project_structure.html#sec-project-structure",
     "href": "contributing/project_structure.html#sec-project-structure",
     "title": "Project structure",
     "section": "",
-    "text": "The root of the repository contains three main folders:\n\nsrc, which contains the source code for individual components.\nThe workflows folder containing the implementations of the pipelines (combining one or more components).\n(optionally) the target folder\n\nEach subfolder from src contains a Viash namespace, a logical grouping of pipeline components that perform a similar function. Within each namespace, subfolders designate individual pipeline components. For example ./src/convert/from_bdrhap_to_h5ad contains the implementation for a component from_bdrhap_to_h5ad which is grouped together with other components such as from_10xmtx_to_h5mu into a namespace convert. In a similar manner as grouping components into namespaces, pipelines are grouped together into folders. However, these are not component namespaces and as such do not interact with viash ns commands.\nAs will become apparent later on, Viash not only provides commands to perform operations on individual components, but also on groups of components in a namespace and all components in a project. As a rule of thumb, the basic Viash commands (like ./bin/viash test) are designated for running commands on individual components, while ns commands are (./bin/viash ns test) are for namespaces. When cloning a fresh repository, there will be no target folder present. This is because the target folder will only be created after components have been build."
+    "text": "The root of the repository contains two main folders:\n\nsrc, which contains the source code for components and workflows.\n(optionally) the target folder\n\nEach subfolder from src contains a Viash namespace, a logical grouping of pipeline components that perform a similar function. Within each namespace, subfolders designate individual pipeline components. For example ./src/convert/from_bdrhap_to_h5ad contains the implementation for a component from_bdrhap_to_h5ad which is grouped together with other components such as from_10xmtx_to_h5mu into a namespace convert. In a similar manner as grouping components into namespaces, pipelines are grouped together into folders. However, these are not component namespaces and as such do not interact with viash ns commands.\nAs will become apparent later on, Viash not only provides commands to perform operations on individual components, but also on groups of components in a namespace and all components in a project. As a rule of thumb, the basic Viash commands (like viash test) are designated for running commands on individual components, while ns commands are (viash ns test) are for namespaces. When cloning a fresh repository, there will be no target folder present. This is because the target folder will only be created after components have been build."
   },
   {
     "objectID": "contributing/project_structure.html#sec-versioning",
@@ -96,6 +54,13 @@
     "title": "Project structure",
     "section": "Versioning and branching strategy",
     "text": "Versioning and branching strategy\nOpenPipeline tries to use of semantic versioning to govern changes between versions. An release of openpipelines uses a version number in the format MAJOR.MINOR.PATCH. Currenly, openpipelines is still at major version 0.x.y, meaning that public-facing breaking changes are possible on MINOR releases. These breaking changes will be documented in a dedicated section of the CHANGELOG that is published with each release. A PATCH release (i.e. a release where the MAJOR and MINOR version number stay the same), is used to resolve bugs with the pipeline but should not introduce breaking changes. Keep in mind that patches might introduce behavioral changes that may look breaking but are actually rectifying changes that were inadvertently introduced previously (and were in fact also ‘breaking changes’). In this case, a bug can also be released without changing the MINOR version, in a PATH release.\nBetween releases, development progress is tracked on Git branches. A git branch represents a snapshot of a codebase in time, to which changes can be added (i.e. committed). Eventually, all new feature or bugfixes must be reconsiled into a single branch so that a new release can be created. This process is called merging and the process of requesting the merging of two branches is called a pull request. Openpipelines follows the convention that the target branch for all pull requests is the main branch. Thus, the main branch contains the latest changes for the code and it can be considered the development branch.\nOnce a pull request has been approved and merged, Github Actions CI will automatically build all components (creating the target directory) and push the result to the main_build branch. In essence, the main_build branch is a copy of the main branch, but also containing the build components. Once it is time to create a openpipelines release, the Github CI release workflow is manually triggered, the components on the main branch will be build and tested. Then, the result will be pushed to the release branch and the integration tests will be run. If all tests succeeded, a new github tag and release can be created manually from the release branch.\n\n\n\n\n%%{init: { 'logLevel': 'debug', 'theme': 'default'} } }%%\ngitGraph\n  commit id: \"initial commit\"\n  branch main_build\n  commit id: \"CI build\"\n  checkout main\n  commit\n  checkout main_build\n  merge main\n  checkout main\n  branch feature_a\n  branch feature_b\n  checkout feature_a\n  commit\n  commit\n  checkout main\n  commit id: \"#release 0.1\" type: HIGHLIGHT\n  checkout main_build\n  merge main\n  checkout main\n  branch release\n  commit tag: \"0.1\"\n  checkout main\n  commit\n  checkout feature_b\n  commit\n  commit\n  checkout feature_a\n  commit\n  checkout main\n  merge feature_a\n  checkout main_build\n  merge main\n  checkout main\n  checkout feature_b\n  commit\n  checkout main\n  merge feature_b\n  checkout main_build\n  merge main\n  checkout release\n  merge main tag: \"0.2\""
+  },
+  {
+    "objectID": "contributing/index.html",
+    "href": "contributing/index.html",
+    "title": "Contributing",
+    "section": "",
+    "text": "Getting started: Install dependencies and fetch test resources\n  \n  \n    Project structure: The structure of OpenPipelines\n  \n  \n    Creating components: A guide on how to create new components\n  \n  \n    Creating pipelines: A guide on how to create new workflows\n  \n  \n    Running tests: How to run component and integration tests.\n  \n  \n    Publishing your changes: How to create a pull request\n  \n\n\nNo matching items"
   },
   {
     "objectID": "fundamentals/roadmap.html",
@@ -1759,42 +1724,70 @@
   {
     "objectID": "CHANGELOG.html",
     "href": "CHANGELOG.html",
-    "title": "OpenPipelines.bio v0.10.0",
+    "title": "OpenPipelines.bio next release",
     "section": "",
-    "text": "Update component documentation to v0.10.0 release.\nAdd documentation for OpenPipelines architecture.\n\n\n\n\n\nAlso generate documentation for the multiple_sep values of component arguments."
+    "text": "Add descriptions to all pages and add listings to index pages.\nUpdate documentation on creating components for developers.\nUpdate getting started page for developers\nUpdate project structure.\nUpdate information on running tests.\nUpdate “More information” pages\nWrite getting started page for user guide\nDocument how to run workflows\nDocument parameter lists"
   },
   {
     "objectID": "CHANGELOG.html#major-changes",
     "href": "CHANGELOG.html#major-changes",
-    "title": "OpenPipelines.bio v0.10.0",
+    "title": "OpenPipelines.bio next release",
     "section": "",
-    "text": "Update component documentation to v0.10.0 release.\nAdd documentation for OpenPipelines architecture."
-  },
-  {
-    "objectID": "CHANGELOG.html#minor-changes",
-    "href": "CHANGELOG.html#minor-changes",
-    "title": "OpenPipelines.bio v0.10.0",
-    "section": "",
-    "text": "Also generate documentation for the multiple_sep values of component arguments."
+    "text": "Add descriptions to all pages and add listings to index pages.\nUpdate documentation on creating components for developers.\nUpdate getting started page for developers\nUpdate project structure.\nUpdate information on running tests.\nUpdate “More information” pages\nWrite getting started page for user guide\nDocument how to run workflows\nDocument parameter lists"
   },
   {
     "objectID": "CHANGELOG.html#major-changes-1",
     "href": "CHANGELOG.html#major-changes-1",
-    "title": "OpenPipelines.bio v0.10.0",
+    "title": "OpenPipelines.bio next release",
+    "section": "MAJOR CHANGES",
+    "text": "MAJOR CHANGES\n\nUpdate component documentation to v0.12.1 release."
+  },
+  {
+    "objectID": "CHANGELOG.html#major-changes-2",
+    "href": "CHANGELOG.html#major-changes-2",
+    "title": "OpenPipelines.bio next release",
+    "section": "MAJOR CHANGES",
+    "text": "MAJOR CHANGES\n\nUpdate component documentation to v0.12.0 release."
+  },
+  {
+    "objectID": "CHANGELOG.html#major-changes-3",
+    "href": "CHANGELOG.html#major-changes-3",
+    "title": "OpenPipelines.bio next release",
+    "section": "MAJOR CHANGES",
+    "text": "MAJOR CHANGES\n\nUpdate component documentation to v0.11.0 release."
+  },
+  {
+    "objectID": "CHANGELOG.html#major-changes-4",
+    "href": "CHANGELOG.html#major-changes-4",
+    "title": "OpenPipelines.bio next release",
+    "section": "MAJOR CHANGES",
+    "text": "MAJOR CHANGES\n\nUpdate component documentation to v0.10.0 release.\nAdd documentation for OpenPipelines architecture."
+  },
+  {
+    "objectID": "CHANGELOG.html#minor-changes",
+    "href": "CHANGELOG.html#minor-changes",
+    "title": "OpenPipelines.bio next release",
+    "section": "MINOR CHANGES",
+    "text": "MINOR CHANGES\n\nAlso generate documentation for the multiple_sep values of component arguments."
+  },
+  {
+    "objectID": "CHANGELOG.html#major-changes-5",
+    "href": "CHANGELOG.html#major-changes-5",
+    "title": "OpenPipelines.bio next release",
     "section": "MAJOR CHANGES",
     "text": "MAJOR CHANGES\n\nUpdate component documentation to v0.9.0 release."
   },
   {
     "objectID": "CHANGELOG.html#minor-changes-1",
     "href": "CHANGELOG.html#minor-changes-1",
-    "title": "OpenPipelines.bio v0.10.0",
+    "title": "OpenPipelines.bio next release",
     "section": "MINOR CHANGES",
     "text": "MINOR CHANGES\n\nUpdate to Viash actions 0.4.0."
   },
   {
-    "objectID": "CHANGELOG.html#major-changes-2",
-    "href": "CHANGELOG.html#major-changes-2",
-    "title": "OpenPipelines.bio v0.10.0",
+    "objectID": "CHANGELOG.html#major-changes-6",
+    "href": "CHANGELOG.html#major-changes-6",
+    "title": "OpenPipelines.bio next release",
     "section": "MAJOR CHANGES",
     "text": "MAJOR CHANGES\n\nUpdate component documentation to v0.8.0 release.\nUse git submodule to access openpipeline repo.\nPropose new website structure.\nUpdate author page."
   },
@@ -3294,7 +3287,14 @@
     "href": "index.html",
     "title": "OpenPipelines",
     "section": "",
-    "text": "Fundamentals\n  \n  \n        \n  \n  Philosophy\n  \n    \n        \n  \n  Concepts\n  \n    \n        \n  \n  Architecture\n  \n    \n        \n  \n  Roadmap\n  \n    \n  \n\nNo matching items\n\n\n\n\n\n  \n  User Guide\n  \n  \n        \n  \n  Getting started\n  \n    \n        \n  \n  Ingestion\n  \n    \n        \n  \n  Processing\n  \n    \n        \n  \n  Running pipelines\n  \n    \n        \n  \n  Downstream\n  \n    \n        \n  \n  Bug reports\n  \n    \n  \n\nNo matching items\n\n\n\n\n\n  \n  Contributing\n  \n  \n        \n  \n  Getting started\n  \n    \n        \n  \n  Project structure\n  \n    \n        \n  \n  Creating components\n  \n    \n        \n  \n  Creating pipelines\n  \n    \n        \n  \n  Running tests\n  \n    \n        \n  \n  Publishing your changes\n  \n    \n  \n\nNo matching items\n\n\n\n\n\n  \n  More information\n  \n  \n        \n  \n  Cheat sheets\n  \n    \n        \n  \n  Code of conduct\n  \n    \n        \n  \n  Data API\n  \n    \n        \n  \n  FAQ\n  \n    \n  \n\nNo matching items"
+    "text": "Fundamentals\n  \n  \n        \n  \n  Philosophy\n  \n    \n        \n  \n  Concepts\n  \n    \n        \n  \n  Architecture\n  \n    \n        \n  \n  Roadmap\n  \n    \n  \n\nNo matching items\n\n\n\n\n\n  \n  User Guide\n  \n  \n        \n  \n  Getting started\n  \n    \n        \n  \n  Running pipelines\n  \n    \n        \n  \n  Passing parameter lists\n  \n    \n        \n  \n  Ingestion\n  \n    \n        \n  \n  Processing\n  \n    \n        \n  \n  Downstream\n  \n    \n        \n  \n  Bug reports\n  \n    \n  \n\nNo matching items\n\n\n\n\n\n  \n  Contributing\n  \n  \n        \n  \n  Getting started\n  \n    \n        \n  \n  Project structure\n  \n    \n        \n  \n  Creating components\n  \n    \n        \n  \n  Creating pipelines\n  \n    \n        \n  \n  Running tests\n  \n    \n        \n  \n  Publishing your changes\n  \n    \n  \n\nNo matching items\n\n\n\n\n\n  \n  More information\n  \n  \n        \n  \n  Cheat sheets\n  \n    \n        \n  \n  Code of conduct\n  \n    \n        \n  \n  FAQ\n  \n    \n  \n\nNo matching items"
+  },
+  {
+    "objectID": "fundamentals/index.html",
+    "href": "fundamentals/index.html",
+    "title": "Fundamentals",
+    "section": "",
+    "text": "Philosophy: Our approach and mission\n  \n  \n    Concepts: The core concepts behind this project\n  \n  \n    Architecture: Structure of the project\n  \n  \n    Roadmap: Development roadmap\n  \n\n\nNo matching items"
   },
   {
     "objectID": "fundamentals/philosophy.html",
@@ -3308,28 +3308,91 @@
     "href": "contributing/getting_started.html",
     "title": "Getting started",
     "section": "",
-    "text": "Forking the code and cloning the repository\nThe openpipelines code is hosted on GitHub. To start working on openpipeline, you should create your own copy of the repository by forking it. Visit the openpipeline repository here and use the ‘Fork’ button on the top right hand side of the page. After you are done forking, you can clone the repository to a local directory on your computer using git clone. You can choose between using an SSH key to log in to GitHub or username and password (HTTPS) to connect to github.\n\nHTTPSSSH\n\n\ngit clone https://github.com/&lt;YOUR USERNAME&gt;/openpipeline.git\ncd openpipeline\ngit remote add upstream https://github.com/openpipeline-bio/openpipeline.git\n\n\ngit clone git@github.com:&lt;YOUR USERNAME&gt;/openpipeline.git\ncd openpipeline\ngit remote add upstream https://github.com/openpipeline-bio/openpipeline.git\n\n\n\n\n\nInstalling viash and nextflow\nOpenpipelines is being developed in Viash and Nextflow. If you are unfamiliar with either one of these platforms, you can check out their respective documentations here and here. To start contributing to openpipelines, you will need at least a working version of Java 11, OpenJDK 11, or a later version (up to Java 18). Additionally, by using Docker,you can build and test pipeline components and pipelines without needing to manually install dependencies for these components on your machine.\nViash and Nextflow can be installed by following the guides in the documentation for both of these tools. Make sure the viash and nextflow binaries are located in an existing directory that is listed in your $PATH. You can check if everything worked by running the following two commands and see if they output the correct location of the executables.\nwhich viash\nwhich nextflow"
+    "text": "The OpenPipelines code is hosted on GitHub. To start working on OpenPipelines, you should create your own copy of the repository by forking it. Visit the OpenPipelines repository here and use the ‘Fork’ button on the top right hand side of the page. After you are done forking, you can clone the repository to a local directory on your computer using git clone. You can choose between using an SSH key to log in to GitHub or username and password (HTTPS) to connect to github.\n\nHTTPSSSH\n\n\ngit clone https://github.com/&lt;YOUR USERNAME&gt;/openpipeline.git\ncd openpipeline\ngit remote add upstream https://github.com/openpipeline-bio/openpipeline.git\n\n\ngit clone git@github.com:&lt;YOUR USERNAME&gt;/openpipeline.git\ncd openpipeline\ngit remote add upstream https://github.com/openpipeline-bio/openpipeline.git"
+  },
+  {
+    "objectID": "contributing/getting_started.html#forking-the-code-and-cloning-the-repository",
+    "href": "contributing/getting_started.html#forking-the-code-and-cloning-the-repository",
+    "title": "Getting started",
+    "section": "",
+    "text": "The OpenPipelines code is hosted on GitHub. To start working on OpenPipelines, you should create your own copy of the repository by forking it. Visit the OpenPipelines repository here and use the ‘Fork’ button on the top right hand side of the page. After you are done forking, you can clone the repository to a local directory on your computer using git clone. You can choose between using an SSH key to log in to GitHub or username and password (HTTPS) to connect to github.\n\nHTTPSSSH\n\n\ngit clone https://github.com/&lt;YOUR USERNAME&gt;/openpipeline.git\ncd openpipeline\ngit remote add upstream https://github.com/openpipeline-bio/openpipeline.git\n\n\ngit clone git@github.com:&lt;YOUR USERNAME&gt;/openpipeline.git\ncd openpipeline\ngit remote add upstream https://github.com/openpipeline-bio/openpipeline.git"
+  },
+  {
+    "objectID": "contributing/getting_started.html#sec-install-viash-nextflow",
+    "href": "contributing/getting_started.html#sec-install-viash-nextflow",
+    "title": "Getting started",
+    "section": "Install viash and nextflow",
+    "text": "Install viash and nextflow\nTo start contributing to OpenPipelines, you will need at Java 11 (or higher) and Docker installed on your system.\nOpenPipelines is being developed in Viash and Nextflow. If you are unfamiliar with either one of these platforms, you can check out their respective documentation pages.\nYou can check if is installed correctly by running the following commands.\nnextflow run hello -with-docker\nviash --version"
+  },
+  {
+    "objectID": "contributing/getting_started.html#fetch-test-resources",
+    "href": "contributing/getting_started.html#fetch-test-resources",
+    "title": "Getting started",
+    "section": "Fetch test resources",
+    "text": "Fetch test resources\nOpenPipelines uses a number of test resources to test the pipelines. If everything is installed correctly, you should be able to fetch these resources by running the following command.\nviash run src/download/sync_test_resources/config.vsh.yaml"
   },
   {
     "objectID": "contributing/pull_requests.html",
     "href": "contributing/pull_requests.html",
     "title": "Publishing your changes",
     "section": "",
-    "text": "While creating changes on your local branch, another developper could have added new changes the openpipeline repository. These changes will need to be included into your local branch before a pull request can be merged. Updating your branch involves merging the upstream branch (usually main) into your branch:\n# download the changes from the openpipelines repo\ngit fetch upstream\n# change your current branch to the branch of the pull request\ngit checkout &lt;feature_branch&gt;\n# merge the changes from upstream into your branch\ngit merge upstream/main\n# push the updates, your pull request will also be updated\ngit push"
+    "text": "After ensuring that the implemented changes pass all relevant tests and meets the contribution guidelines, you can create a pull request following the steps below."
   },
   {
-    "objectID": "contributing/pull_requests.html#updating-your-pull-request-or-branch",
-    "href": "contributing/pull_requests.html#updating-your-pull-request-or-branch",
+    "objectID": "contributing/pull_requests.html#step-1-merge-upstream-repository",
+    "href": "contributing/pull_requests.html#step-1-merge-upstream-repository",
     "title": "Publishing your changes",
-    "section": "",
-    "text": "While creating changes on your local branch, another developper could have added new changes the openpipeline repository. These changes will need to be included into your local branch before a pull request can be merged. Updating your branch involves merging the upstream branch (usually main) into your branch:\n# download the changes from the openpipelines repo\ngit fetch upstream\n# change your current branch to the branch of the pull request\ngit checkout &lt;feature_branch&gt;\n# merge the changes from upstream into your branch\ngit merge upstream/main\n# push the updates, your pull request will also be updated\ngit push"
+    "section": "Step 1: Merge upstream repository",
+    "text": "Step 1: Merge upstream repository\nBefore you contribute your changes need to merge the upstream main branch into your fork. This ensures that your changes are based on the latest version of the code.\nTo do this, enter the following commands adapted from Syncing a Fork in your terminal or command prompt:\n# add the upstream repository to your local repository\ngit remote add upstream https://github.com/openpipelines-bio/openpipeline.git\n# download the changes from the openpipelines repo\ngit fetch upstream\n# change your current branch to the branch of the pull request\ngit checkout &lt;feature_branch&gt;\n# merge the changes from upstream into your branch\ngit merge upstream/main\n# push the updates, your pull request will also be updated\ngit push"
+  },
+  {
+    "objectID": "contributing/pull_requests.html#step-2-edit-changelog",
+    "href": "contributing/pull_requests.html#step-2-edit-changelog",
+    "title": "Publishing your changes",
+    "section": "Step 2: Edit changelog",
+    "text": "Step 2: Edit changelog\nAdd an entry to the CHANGELOG.md file describing the proposed changes."
+  },
+  {
+    "objectID": "contributing/pull_requests.html#step-3-create-pull-request",
+    "href": "contributing/pull_requests.html#step-3-create-pull-request",
+    "title": "Publishing your changes",
+    "section": "Step 3: Create pull request",
+    "text": "Step 3: Create pull request\nThe following steps were adapted from Creating a pull request from a fork\n\nGo to https://github.com/openpipelines-bio/openpipeline/pulls.\nClick on the New pull request button.\nOn the compare page click on the link compare across forks below the title. \nOn the right side in the head section select your fork repo and the correct branch you want to merge.\nClick on Create pull request.\nConstruct your PR by giving it a title and description.\nMake sure you select the box below the description Allow edits from maintainers.\nIf the PR is ready for review click the button Create Pull Request. Otherwise you can click the arrow next to the button and select Create Draft Pull Request and click the button when it changes."
+  },
+  {
+    "objectID": "contributing/pull_requests.html#next-steps",
+    "href": "contributing/pull_requests.html#next-steps",
+    "title": "Publishing your changes",
+    "section": "Next steps",
+    "text": "Next steps\n\nGithub Actions\nWhenever a Pull Request (including draft) is created a github workflow will perform checks. These checks need to be succesful as a minimum requirement before a merge can be done. When there are errors in the checks, try to fix them while waiting on a review. If it is not possible to fix the error, add a comment to the PR to let the reviewers know.\n\n\nReview\nYour PR will be reviewed by maintainers of OpenPipelines. During the review, you can be asked for changes to the code."
   },
   {
     "objectID": "contributing/running_tests.html",
     "href": "contributing/running_tests.html",
     "title": "Running tests",
     "section": "",
-    "text": "Fetching the test data.\nThe input data that is needed to run the tests will need to be downloaded from the openpipelines Amazon AWS s3 bucket first. To do so, the download/sync_test_resource component can be used, which will download the data to the correct location (resources_test) by default.\n./bin/viash run ./src/download/sync_test_resources/config.vsh.yaml -p docker -- --input s3://openpipelines-data\nOr, if you do not want to use Docker and have aws-cli tools installed natively:\n./bin/viash run ./src/download/sync_test_resources/config.vsh.yaml -p native -- --input s3://openpipelines-data\n\n\nRunning component unittests\nTo build and run tests for individual component that you are working on, use viash test with the config.vsh.yaml of the component you would like to test. For example:\n./bin/viash test ./src/convert/from_10xh5_to_h5mu/config.vsh.yaml\nKeep in mind that when no platform is passed to viash test, it will use the first platform that is specified in the config, which is docker for most of the components in openpipelines. Use -p native for example if you do not want to use docker.\nIt is also possible to execute the tests for all components in each namespace using ./bin/viash_test (note the underscore instead of a space).\n./bin/viash_test\n\n\nIntegration tests\nIndividual integration tests can be run by using the integration_test.sh scripts for a pipeline, located next to the main.nf in the workflows folder.\n./workflows/ingestion/cellranger_demux/integration_test.sh\nRunning all integration tests is also possible using a helper script that can be found at workflows/test/integration_test.sh. Using this script requires a working R installation with tidyverse installed. However, as pipelines are implemented by combining individual components\n./workflows/test/integration_test.sh"
+    "text": "The input data that is needed to run the tests will need to be downloaded from the openpipelines Amazon AWS s3 bucket first. To do so, the download/sync_test_resource component can be used, which will download the data to the correct location (resources_test) by default.\nviash run src/download/sync_test_resources/config.vsh.yaml"
+  },
+  {
+    "objectID": "contributing/running_tests.html#fetch-the-test-data",
+    "href": "contributing/running_tests.html#fetch-the-test-data",
+    "title": "Running tests",
+    "section": "",
+    "text": "The input data that is needed to run the tests will need to be downloaded from the openpipelines Amazon AWS s3 bucket first. To do so, the download/sync_test_resource component can be used, which will download the data to the correct location (resources_test) by default.\nviash run src/download/sync_test_resources/config.vsh.yaml"
+  },
+  {
+    "objectID": "contributing/running_tests.html#run-component-tests",
+    "href": "contributing/running_tests.html#run-component-tests",
+    "title": "Running tests",
+    "section": "Run component tests",
+    "text": "Run component tests\nTo build and run tests for individual component that you are working on, use viash test with the config.vsh.yaml of the component you would like to test. For example:\nviash test src/convert/from_10xh5_to_h5mu/config.vsh.yaml\nKeep in mind that when no platform is passed to viash test, it will use the first platform that is specified in the config, which is docker for most of the components in openpipelines. Use -p native for example if you do not want to use docker.\nIt is also possible to execute the tests for all components in each namespace using:\nviash ns test --parallel -q convert"
+  },
+  {
+    "objectID": "contributing/running_tests.html#run-integration-tests",
+    "href": "contributing/running_tests.html#run-integration-tests",
+    "title": "Running tests",
+    "section": "Run integration tests",
+    "text": "Run integration tests\nIndividual integration tests can be run by using the integration_test.sh scripts for a pipeline, located next to the main.nf in the src/workflows folder.\nsrc/workflows/ingestion/cellranger_demux/integration_test.sh"
   },
   {
     "objectID": "contributing/creating_components.html",
@@ -3339,38 +3402,192 @@
     "text": "One of the core principals of OpenPipelines is to use MuData as a common data format troughout the whole pipeline. See the concepts page for more information on openpipelines uses MuData to store single-cell data."
   },
   {
+    "objectID": "contributing/creating_components.html#a-common-file-format",
+    "href": "contributing/creating_components.html#a-common-file-format",
+    "title": "Creating components",
+    "section": "",
+    "text": "One of the core principals of OpenPipelines is to use MuData as a common data format troughout the whole pipeline. See the concepts page for more information on openpipelines uses MuData to store single-cell data."
+  },
+  {
+    "objectID": "contributing/creating_components.html#component-location",
+    "href": "contributing/creating_components.html#component-location",
+    "title": "Creating components",
+    "section": "Component location",
+    "text": "Component location\nAs discussed in the project structure, components in the repository are stored within src. Additionally, components are grouped into namespaces, according to a common functionality. An example of such a namespace is the dimensionality reduction namespace (dimred), of which the components pca and umap are members. This means that within src, the namespace folders can be found that stores the components that belong to these namespaces.\nIn order to create a new component in OpenPipelines, you will need to create a new folder that will contain the different elements of the component:\nmkdir src/my_namespace/my_component\n\n\n\n\n\n\nTip\n\n\n\nTake a look at the components that are already in src/! There might be a component that already does something similar to what you need."
+  },
+  {
+    "objectID": "contributing/creating_components.html#the-elements-of-a-component",
+    "href": "contributing/creating_components.html#the-elements-of-a-component",
+    "title": "Creating components",
+    "section": "The elements of a component",
+    "text": "The elements of a component\nA component consists of one or more scripts that provide the functionality of the component together with metadata of the component in a configuration file. The Viash config contains metadata of your dataset, which script is used to run it, and the required dependencies. An in-depth guide on how to create components is available on the viash website, but a few specifics and guidelines will be discussed here."
+  },
+  {
     "objectID": "contributing/creating_components.html#the-config",
     "href": "contributing/creating_components.html#the-config",
     "title": "Creating components",
     "section": "The config",
-    "text": "The config\nfunctionality:\n  name: \"my_component\"\n  namespace: \"my_namespace\"\n  description: \"My new custom component\"\n  authors:\n    - __merge__: ../../authors/my_name.yaml\n      roles: [ author ]\n  arguments:\n    - name: \"--output\"\n      type: file\n      example: \"output_file.h5mu\"\n      description: \"Location were the output file should be written to.\"\n      direction: \"output\"\n  resources:\n    - type: python_script\n      path: script.py\nplatforms:\n  - type: docker\n    image: python:3.11\n    setup:\n      - type: python\n        packages: mudata~=0.2.3\n  - type: nextflow\n    directives:\n      label: [highcpu, midmem]\n\nBasic information\nEach component should have the name, a namespace, a description and author information defined in the config. Because a single author can contribute to multiple components, the author information is often duplicated across components, which was causing issues with the author information being out of date and not easy to maintain. Therefore, it was decided to move author information to ./src/authors. Each author has a yaml file containing the author information, and the viash __merge__ property is used to merge this information into the viash configs.\nBasic information checklist:\n\nGive the component a name\nAdd the component to an appropriate namespace\nAdd a description\nAdd author information\n\n\n\nArguments and argument groups\nIf you component requires arguments, they should be defined in arguments or argument_groups. Try tro group individual arguments into argument_groups when the number of arguments become too larg (10 or more as a rule of thumb).\nArgument checklist:\n\nAdd a description and name\nEach argument should have the appropriate type.\nInput and output files should be of type file instead of string and use the appropriate direction:\nIf possible: add an example\nIf the argument can accept multiple values, add multiple: true\nIf the possible input for an argument is limited to certain set of values, use choices:\n\n\n\n(Test)resources\nResources define files that are required for a component to perform its function. These can be scripts, but also additional files like settings for tools you might require. Defining resources is both a necessity because viash needs to know what code to execute, but defining resources also has the added benefit that these resources are automatically made available, regardless of the build environment. For example: resources are automatically mounted within a running docker container.\nThere is a difference between defining resources and test_resources. While resources are required for a component to function, test_resources only need to be included when testing the component (with for example viash test) in addition to the regular resources. Having a look at the example above, resources are defined using the resources: property. It takes a list of multiple files or folders.\nIn openpipelines, it was decided to not use a service like git lfs to include large resources into the repository. Instead, if large resources are required, there are two possibilities: * Large resources required for testing are to uploaded into an s3 bucket that is synced automatically before running tests (both locally and on github). Please ping a maintainer when you open a PR and ask them to upload the files for you. * Other large resources that are not needed for testing can be considered as input. This means that an argument of type: file needs to be created. The downside of this method is that viash is not able to natively support remote files f\nResources checklist: - Script resources are located next to the config and added to the config with the correct type (python_script, r_script, …) - Small resources (&lt;50MB) that are not scripts can also be checked in into the repo, next to the\n\n\nBuild information\nTODO"
+    "text": "The config\nfunctionality:\n  name: \"my_component\"\n  namespace: \"my_namespace\"\n  description: \"My new custom component\"\n  authors:\n    - __merge__: ../../authors/my_name.yaml\n      roles: [ author ]\n  arguments:\n    - name: \"--output\"\n      type: file\n      example: \"output_file.h5mu\"\n      description: \"Location were the output file should be written to.\"\n      direction: \"output\"\n  resources:\n    - type: python_script\n      path: script.py\nplatforms:\n  - type: docker\n    image: python:3.11\n    setup:\n      - type: python\n        packages: mudata~=0.2.3\n  - type: nextflow\n    directives:\n      label: [highcpu, midmem]\n\nBasic information\nEach component should have the name, a namespace, a description and author information defined in the config. Because a single author can contribute to multiple components, the author information is often duplicated across components, which was causing issues with the author information being out of date and not easy to maintain. Therefore, it was decided to move author information to ./src/authors. Each author has a yaml file containing the author information, and the viash __merge__ property is used to merge this information into the viash configs.\nBasic information checklist:\n\nGive the component a name\nAdd the component to an appropriate namespace\nAdd a description\nAdd author information\n\n\n\nArguments and argument groups\nIf you component requires arguments, they should be defined in arguments or argument_groups. Try tro group individual arguments into argument_groups when the number of arguments become too larg (10 or more as a rule of thumb).\nArgument checklist:\n\nAdd a description and name\nEach argument should have the appropriate type.\nInput and output files should be of type file instead of string and use the appropriate direction:\nIf possible: add an example\nIf the argument can accept multiple values, add multiple: true\nIf the possible input for an argument is limited to certain set of values, use choices:\n\n\n\n(Test)resources\nResources define files that are required for a component to perform its function. These can be scripts, but also additional files like settings for tools you might require. Defining resources is both a necessity because viash needs to know what code to execute, but defining resources also has the added benefit that these resources are automatically made available, regardless of the build environment. For example: resources are automatically mounted within a running docker container.\nThere is a difference between defining resources and test_resources. While resources are required for a component to function, test_resources only need to be included when testing the component (with for example viash test) in addition to the regular resources. Having a look at the example above, resources are defined using the resources: property. It takes a list of multiple files or folders.\nIn openpipelines, it was decided to not use a service like git lfs to include large resources into the repository. Instead, if large resources are required, there are two possibilities: * Large resources required for testing are to uploaded into an s3 bucket that is synced automatically before running tests (both locally and on github). Please ping a maintainer when you open a PR and ask them to upload the files for you. * Other large resources that are not needed for testing can be considered as input. This means that an argument of type: file needs to be created. The downside of this method is that viash is not able to natively support remote files f\nResources checklist: - Script resources are located next to the config and added to the config with the correct type (python_script, r_script, …) - Small resources (&lt;50MB) that are not scripts can also be checked in into the repo, next to the\n\n\nThe script file\nTODO\n\n\nAuthor information\nTODO"
   },
   {
-    "objectID": "contributing/creating_components.html#the-script-file",
-    "href": "contributing/creating_components.html#the-script-file",
+    "objectID": "contributing/creating_components.html#adding-dependencies",
+    "href": "contributing/creating_components.html#adding-dependencies",
     "title": "Creating components",
-    "section": "The script file",
-    "text": "The script file\nTODO"
+    "section": "Adding dependencies",
+    "text": "Adding dependencies\nTODO"
   },
   {
-    "objectID": "contributing/creating_components.html#author-information",
-    "href": "contributing/creating_components.html#author-information",
+    "objectID": "contributing/creating_components.html#building-components-from-their-source",
+    "href": "contributing/creating_components.html#building-components-from-their-source",
     "title": "Creating components",
-    "section": "Author information",
-    "text": "Author information\nTODO"
+    "section": "Building components from their source",
+    "text": "Building components from their source\nWhen running or testing individual components, it is not necessary to execute an extra command to run the build step, viash test and viash run will build the component on the fly. However, before integrating components into a pipeline, you will need to build the components. More specifically, openpipelines uses Nextflow to combine components into pipelines, so we need to have at least the components build for nextflow platform as target. The easiest method to build the components is to use:\nviash ns build --parallel --setup cachedbuild\nAfter using viash ns build, the target folder will be populated with three subfolders, corresponding to the build platforms that viash supports: native, docker and nextflow.\nBuilding an individual component can still be useful, for example when debugging a component for which the build fails or if you want to create a standalone executable for a component to execute it without the need to use viash. To build an individual component, viash build can be used. Note that the default build directory of this viash base command is output, which is not the location where build components will be imported from when integrating them in pipelines. Using the --output argument, you can set it to any directory you want, for example:\nviash build src/filter/do_filter/config.vsh.yaml -o target/native/filter/do_filter/ -p native"
+  },
+  {
+    "objectID": "contributing/creating_components.html#containerization",
+    "href": "contributing/creating_components.html#containerization",
+    "title": "Creating components",
+    "section": "Containerization",
+    "text": "Containerization\nOne of the key benefits of using Viash is that containers can be created that gather dependencies per component, which avoids building one container that has to encorporate all dependencies for a pipeline together. The containers for a single component can be reduced in size, defining the minimal requirements to run the component. That being said, building containers from scratch can be labour intensive and error prone, with base containers from reputable publishers often benefiting from improved reliability and security. Hence, a balance has to be made between reducing the container’s size and adding many dependencies to a small base container.\nThe preferred containerization setup in OpenPipelines uses the following guidelines:\n\nChoose a base container from a reputable source and use its latest version\nDo not use base containers that have not been updated in a while\nUse package managers to install dependencies as much as possible\nAvoid building depdencies from source.\n\nExamples of base containers that are currently being used are:\n\npython:3.11 for python environments\nubuntu:focal for general linux environments and bash scripts\neddelbuettel/r2u:22.04 for R\nnvcr.io/nvidia/pytorch:22.09-py3 for using GPU accelerated calculations using pytorch in python"
+  },
+  {
+    "objectID": "user_guide/getting_started.html",
+    "href": "user_guide/getting_started.html",
+    "title": "Getting started",
+    "section": "",
+    "text": "Depending on whether you plan to run the OpenPipelines workflows locally or in the cloud"
+  },
+  {
+    "objectID": "user_guide/getting_started.html#starting-workflows-locally",
+    "href": "user_guide/getting_started.html#starting-workflows-locally",
+    "title": "Getting started",
+    "section": "Starting workflows locally",
+    "text": "Starting workflows locally\nIf you want to start workflows locally, you will need to install Nextflow.\n\nInstall Docker (optional)\nDocker is a containerization platform that allows you to package your application and all its dependencies into a single image. It is used to run the analysis pipelines.\nIf you are planning on running the workflows locally, you will need to install Docker. You do not need to install Docker if the workflows will be run in the cloud using AWS Batch, Azure Batch, Google Cloud Batch, or other cloud-based compute environments.\nTo install Docker, follow the instructions here.\n\n\nInstall Java\nNextflow requires Java 11 or later. To check if Java is installed on your system, run:\njava -version\nIf Java is not installed, you can download it from here.\n\n\nInstall Nextflow\nNextflow is distributed as a single executable file. To install it, run:\ncurl -s https://get.nextflow.io | bash\nThis command will download the latest version of Nextflow and store it in the current directory.\nTo install Nextflow system-wide, move the downloaded file to a directory in your $PATH, e.g.:\nmv nextflow /usr/local/bin\n\n\nTest the installation\nTo test the installation, run:\nnextflow run hello -with-docker"
+  },
+  {
+    "objectID": "user_guide/getting_started.html#using-nextflow-tower",
+    "href": "user_guide/getting_started.html#using-nextflow-tower",
+    "title": "Getting started",
+    "section": "Using Nextflow Tower",
+    "text": "Using Nextflow Tower\nNextflow Tower is a web-based user interface for running and monitoring Nextflow pipelines. If you are planning on using Nextflow Tower, a compute environment will need to be set up."
   },
   {
     "objectID": "user_guide/running_pipelines.html",
     "href": "user_guide/running_pipelines.html",
     "title": "Running pipelines",
     "section": "",
-    "text": "Note\n\n\n\nTODO: Fill in these sections.\n\nExamples should be using an OpenPipelines release or the main_build branch.\nPoint to the “Components” tab\n\n\n\n\nInstalling Viash and Nextflow\nBefore you try running OpenPipelines, please install Viash and Nextflow first.\n\nRunning pipelines from the CLI\nbin/nextflow run . \\\n  -main-script workflows/integration/multimodal_integration/main.nf \\\n  -profile docker \\\n  -resume \n  --publish_dir foo/\n  --input \"bar\"\n  --output \"test.txt\"\n\n\nRunning pipelines from Nextflow Tower\n\n\nUsing param_list to pass large parameter sets\nUsing Viash’s VDSL3 nextflow platform, an optional -param_list argument can be used to pass a large number of inputs to a workflow. Additionally, the pipeline parameter values can be set for each input to the workflow independently. A param_list can either be a list of maps, a csv file, a json file, a yaml file, or simply a yaml blob:\n\nA csv file should have column names which correspond to the different arguments of this pipeline. Example: --param_list data.csv with columns id,input.\nA json or a yaml file should be a list of maps, each of which has keys corresponding to the arguments of the pipeline. Example: --param_list data.json with contents [ {'id': 'foo', 'input': 'foo.txt'}, {'id': 'bar', 'input': 'bar.txt'} ].\nA yaml blob can also be passed directly as a string. Example: --param_list \"[ {'id': 'foo', 'input': 'foo.txt'}, {'id': 'bar', 'input': 'bar.txt'} ]\".\nA list of maps can be in a nextflow.config file, where the keys of each map corresponds to the arguments of the pipeline. Example in a nextflow.config file: param_list: [ ['id': 'foo', 'input': 'foo.txt'], ['id': 'bar', 'input': 'bar.txt'] ].\n\nWhen passing a csv, json or yaml file, relative path names are relativized to the location of the parameter file. No relativation is performed when param_list is a list of maps (as-is) or a yaml blob.\nUsing a param_list can be combined with setting parameters that are set for all parameter sets. These ‘gobal’ parameters will always be overwritten with their counterpart that was specified in a more specific manner for a single parameter set. For example, using --param_list \"[ {'id': 'foo', 'input': 'foo.txt'}, {'id': 'bar'} ]\" --input 'global.txt' will result in the following parameter sets being processed:\n\nid: foo, input: foo.txt\nid: bar, input: global.txt"
+    "text": "Dependening on whether you want to run a workflow locally or on cloud infrastructure, using Nextflow Tower or not, you will need to use different commands."
   },
   {
-    "objectID": "team/index.html",
-    "href": "team/index.html",
-    "title": "Team",
+    "objectID": "user_guide/running_pipelines.html#run-locally-from-the-cli",
+    "href": "user_guide/running_pipelines.html#run-locally-from-the-cli",
+    "title": "Running pipelines",
+    "section": "Run locally from the CLI",
+    "text": "Run locally from the CLI\nYou can run a workflow from the command line using the following command:\nnextflow run openpipelines-bio/openpipeline \\\n  -main-script target/nextflow/workflows/integration/multimodal_integration/main.nf \\\n  -revision 0.12.1 \\\n  -latest \\\n  -profile docker \\\n  --publish_dir foo/ \\\n  --input \"bar\" \\\n  --output \"test.txt\"\nDoing so will run the workflow locally using a Docker container."
+  },
+  {
+    "objectID": "user_guide/running_pipelines.html#on-cloud-infrastructure",
+    "href": "user_guide/running_pipelines.html#on-cloud-infrastructure",
+    "title": "Running pipelines",
+    "section": "On cloud infrastructure",
+    "text": "On cloud infrastructure\nYou can use a similar command to run the workflow on cloud infrastructure, such as AWS Batch or Google Cloud Platform. However, this requires you to create a separate Nextflow config file for each cloud provider. See the Nextflow documentation for more information.\nnextflow run openpipelines-bio/openpipeline \\\n  -main-script target/nextflow/workflows/integration/multimodal_integration/main.nf \\\n  -revision 0.12.1 \\\n  -latest \\\n  --publish_dir foo/ \\\n  --input \"bar\" \\\n  --output \"test.txt\" \\\n  -c configs/my_hpc.config"
+  },
+  {
+    "objectID": "user_guide/running_pipelines.html#using-the-nextflow-tower-cli",
+    "href": "user_guide/running_pipelines.html#using-the-nextflow-tower-cli",
+    "title": "Running pipelines",
+    "section": "Using the Nextflow Tower CLI",
+    "text": "Using the Nextflow Tower CLI\nIf you have access to a Nextflow Tower instance in which a Compute Environment has already been set up, you can run a workflow from the Tower CLI. The command is very similar to the command to run a workflow from the CLI, but you need to: * Use tw launch instead of nextflow run * Specify the workspace ID and compute environment ID * Rename arguments: -revision to --revision, -latest to --pull-latest, -main-script to --main-script, -c to --config * Store workflow arguments in a separate yaml file (if this was not already the case).\nExample:\ntw launch openpipelines-bio/openpipeline \\\n  --revision 0.12.1 \\\n  --pull-latest \\\n  --main-script target/nextflow/workflows/integration/multimodal_integration/main.nf \\\n  --workspace &lt;your workspace id&gt; \\\n  --compute-env &lt;your compute environment id&gt; \\\n  --params-file params.yaml \\\n  --config configs/my_hpc.config"
+  },
+  {
+    "objectID": "user_guide/running_pipelines.html#using-the-nextflow-tower-web-ui",
+    "href": "user_guide/running_pipelines.html#using-the-nextflow-tower-web-ui",
+    "title": "Running pipelines",
+    "section": "Using the Nextflow Tower Web UI",
+    "text": "Using the Nextflow Tower Web UI\nIf you have access to a Nextflow Tower instance in which a Compute Environment has already been set up, you can run a workflow from the Tower UI. To do so, go to the “Launchpad” and click on the button “launch a run without configuration”.\n\nNext, fill in the required fields and click on “Launch run”.\n\nCompute environment: Select the compute environment you want to run the workflow on.\nPipeline to launch: Fill in openpipelines-bio/openpipeline.\nRevision number: The release number of the pipeline you want to run, e.g. 0.12.1. You can find the release number on the GitHub releases page.\nWork directory: The bucket path where the scratch data is stored.\nPipeline parameters: The YAML or JSON of the parameters that are passed to the pipeline. See the Components page for more information about the parameters of each pipeline."
+  },
+  {
+    "objectID": "user_guide/parameter_lists.html",
+    "href": "user_guide/parameter_lists.html",
+    "title": "Passing parameter lists",
     "section": "",
-    "text": "Angela Oliveira Pisco\n      Contributor\n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n          Director of Computational Biology \n           at \n              \n              Insitro\n              \n        \n      \n      \n        \n          Core Member \n           at \n              \n              Open Problems\n              \n        \n      \n    \n  \n  \n    \n    \n      Dries De Maeyer\n      Core Team Member\n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n          Principal Scientist \n           at \n              \n              Janssen Pharmaceuticals\n              \n        \n      \n    \n  \n  \n    \n    \n      Dries Schaumont\n      Core Team Member\n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n          Data Scientist \n           at \n              \n              Data Intuitive\n              \n        \n      \n    \n  \n  \n    \n    \n      Malte D. Luecken\n      Core Team Member\n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n          Group Leader \n           at \n              \n              Helmholtz Munich\n              \n        \n      \n      \n        \n          Core Member \n           at \n              \n              Open Problems\n              \n        \n      \n    \n  \n  \n    \n    \n      Marijke Van Moerbeke\n      Contributor\n      \n        \n      \n      \n        \n      \n      \n        \n          Statistical Consultant \n           at \n              \n              OpenAnalytics\n              \n        \n      \n    \n  \n  \n    \n    \n      Matthias Beyens\n      Contributor\n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n          Principal Scientist \n           at \n              \n              Janssen Pharmaceuticals\n              \n        \n      \n    \n  \n  \n    \n    \n      Mauro Saporita\n      Contributor\n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n          Lead Nextflow Developer \n           at \n              \n              Ardigen\n              \n        \n      \n    \n  \n  \n    \n    \n      Povilas Gibas\n      Contributor\n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n          Bioinformatician \n           at \n              \n              Ardigen\n              \n        \n      \n    \n  \n  \n    \n    \n      Robrecht Cannoodt\n      Core Team Member\n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n          Data Science Engineer \n           at \n              \n              Data Intuitive\n              \n        \n      \n      \n        \n          Core Member \n           at \n              \n              Open Problems\n              \n        \n      \n    \n  \n  \n    \n    \n      Samuel D'Souza\n      Contributor\n      \n        \n      \n      \n        \n      \n      \n        \n          Data Engineer \n           at \n              \n              Chan Zuckerberg Biohub\n              \n        \n      \n    \n  \n  \n    \n    \n      Toni Verbeiren\n      Core Team Member\n      \n        \n      \n      \n        \n      \n      \n        \n          Data Scientist and CEO \n           at \n              \n              Data Intuitive\n              \n        \n      \n    \n  \n  \n    \n    \n      Vladimir Shitov\n      Contributor\n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n      \n      \n        \n          PhD Candidate \n           at \n              \n              Helmholtz Munich\n              \n        \n      \n    \n  \n\n\nNo matching items"
+    "text": "Using Viash’s VDSL3 nextflow platform, an optional --param_list argument can be used to pass a large number of inputs to a workflow. A param_list can either be a csv file, a json file, a yaml file, a yaml blob, or be passed as a nextflow config file."
+  },
+  {
+    "objectID": "user_guide/parameter_lists.html#csv-file",
+    "href": "user_guide/parameter_lists.html#csv-file",
+    "title": "Passing parameter lists",
+    "section": "CSV file",
+    "text": "CSV file\nThe following example shows how to use a csv file as a parameter list. The csv file has two columns, id and input. The id column is used to name the output file, and the input column is used as the input file. The input column is relativized to the location of the csv file.\n$ cat param_list.csv\nid,input\nfoo,foo.txt\nbar,bar.txt\nnextflow run ... --param_list param_list.csv"
+  },
+  {
+    "objectID": "user_guide/parameter_lists.html#yaml-file",
+    "href": "user_guide/parameter_lists.html#yaml-file",
+    "title": "Passing parameter lists",
+    "section": "YAML file",
+    "text": "YAML file\nThe following example shows how to use a yaml file as a parameter list.\n$ cat param_list.yaml\n- id: foo\n  input: foo.txt\n- id: bar\n  input: bar.txt\nnextflow run ... --param_list param_list.yaml"
+  },
+  {
+    "objectID": "user_guide/parameter_lists.html#yaml-blob",
+    "href": "user_guide/parameter_lists.html#yaml-blob",
+    "title": "Passing parameter lists",
+    "section": "YAML blob",
+    "text": "YAML blob\nThe following example shows how to use a yaml blob as a parameter list.\nnextflow run ... --param_list \"[ {'id': 'foo', 'input': 'foo.txt'}, {'id': 'bar', 'input': 'bar.txt'} ]\""
+  },
+  {
+    "objectID": "user_guide/parameter_lists.html#as-a-nextflow-config",
+    "href": "user_guide/parameter_lists.html#as-a-nextflow-config",
+    "title": "Passing parameter lists",
+    "section": "As a Nextflow config",
+    "text": "As a Nextflow config\nThe following example shows how to use a nextflow.config file as a parameter list.\n$ cat params.config\nparams {\n  param_list: [\n    ['id': 'foo', 'input': 'foo.txt'],\n    ['id': 'bar', 'input': 'bar.txt']\n  ]\n}\nnextflow run ... -params-file params.config"
+  },
+  {
+    "objectID": "user_guide/parameter_lists.html#global-parameters",
+    "href": "user_guide/parameter_lists.html#global-parameters",
+    "title": "Passing parameter lists",
+    "section": "Global parameters",
+    "text": "Global parameters\nNote that a param_list can be combined with setting parameters that are set for all parameter sets. These ‘global’ parameters will always be overwritten with their counterpart that was specified in a more specific manner for a single parameter set.\nFor example, using --param_list param_list.yaml --ref global.txt with the following param_list.yaml:\n- id: foo\n  input: foo.txt\n- id: bar\n  input: bar.txt\n  ref: custom_bar_ref.txt\nWill result in the following parameter sets being processed:\n\nid: foo, input: foo.txt, ref: global.txt\nid: bar, input: bar.txt, ref: custom_bar_ref.txt"
+  },
+  {
+    "objectID": "user_guide/parameter_lists.html#resolving-paths",
+    "href": "user_guide/parameter_lists.html#resolving-paths",
+    "title": "Passing parameter lists",
+    "section": "Resolving paths",
+    "text": "Resolving paths\nIf the --param_list is a file (CSV, YAML, or JSON), all files in the param_list are relativized to the location of the param_list file. If the --param_list is a YAML blob or a Nextflow config, all files in the param_list are relativized to the current working directory.\nFor example, with a param_list.yaml file located in the data directory:\n$ cat /data/param_list.yaml\n- id: foo\n  input: foo.txt\n- id: bar\n  input: /path/to/bar.txt\nThis will result in the following parameter sets being processed:\n\nid: foo, input: /data/foo.txt\nid: bar, input: /path/to/bar.txt\n\nNote that this also works when the param list is located on a remote location, such as an S3 bucket. In that case, the files in the param list are relativized to the location of the param list on the remote location."
+  },
+  {
+    "objectID": "user_guide/bug_reports.html",
+    "href": "user_guide/bug_reports.html",
+    "title": "Bug reports",
+    "section": "",
+    "text": "Issues with Openpipelines are being tracked on Github. In order for an issue to be fixed in a timely manner, creating a complete and reproducable is essential."
+  },
+  {
+    "objectID": "more_information/index.html",
+    "href": "more_information/index.html",
+    "title": "More information",
+    "section": "",
+    "text": "Cheat sheets: Cheat sheets for various tools\n  \n  \n    Code of conduct: Our DEI values\n  \n  \n    FAQ: Frequently Asked Questions\n  \n\n\nNo matching items"
+  },
+  {
+    "objectID": "more_information/faq.html",
+    "href": "more_information/faq.html",
+    "title": "FAQ",
+    "section": "",
+    "text": "It is possible to add additional resources such as a file containing helper functions or other resources. All you need to do is list those files under the functionality.resources section of your component and refer to them in your script using meta[\"resources_dir\"] + \"/myresource.txt\". Please visit the Viash documentation for concrete examples on how to add helper functions and other resources to your component."
+  },
+  {
+    "objectID": "more_information/faq.html#how-can-i-add-an-external-resource-to-my-viash-component",
+    "href": "more_information/faq.html#how-can-i-add-an-external-resource-to-my-viash-component",
+    "title": "FAQ",
+    "section": "",
+    "text": "It is possible to add additional resources such as a file containing helper functions or other resources. All you need to do is list those files under the functionality.resources section of your component and refer to them in your script using meta[\"resources_dir\"] + \"/myresource.txt\". Please visit the Viash documentation for concrete examples on how to add helper functions and other resources to your component."
+  },
+  {
+    "objectID": "more_information/faq.html#what-does-__merge__-do",
+    "href": "more_information/faq.html#what-does-__merge__-do",
+    "title": "FAQ",
+    "section": "What does __merge__ do?",
+    "text": "What does __merge__ do?\nThe __merge__ field is used to merge another YAML into a Viash config. One of its uses is in making sure that all of the components in a task has the same API.\nEach task in OpenProblems contains strict definitions of the input/output file interface of its components and the file formats of those files. These interfaces are stored as YAML files in the api subdirectory of each task."
   }
 ]

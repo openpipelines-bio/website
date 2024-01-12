@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="How to create a pull request">
 
 <title>OpenPipelines - Publishing your changes</title>
 <style>
@@ -240,7 +241,14 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#updating-your-pull-request-or-branch" id="toc-updating-your-pull-request-or-branch" class="nav-link active" data-scroll-target="#updating-your-pull-request-or-branch">Updating your pull request or branch</a></li>
+  <li><a href="#step-1-merge-upstream-repository" id="toc-step-1-merge-upstream-repository" class="nav-link active" data-scroll-target="#step-1-merge-upstream-repository">Step 1: Merge upstream repository</a></li>
+  <li><a href="#step-2-edit-changelog" id="toc-step-2-edit-changelog" class="nav-link" data-scroll-target="#step-2-edit-changelog">Step 2: Edit changelog</a></li>
+  <li><a href="#step-3-create-pull-request" id="toc-step-3-create-pull-request" class="nav-link" data-scroll-target="#step-3-create-pull-request">Step 3: Create pull request</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next steps</a>
+  <ul class="collapse">
+  <li><a href="#github-actions" id="toc-github-actions" class="nav-link" data-scroll-target="#github-actions">Github Actions</a></li>
+  <li><a href="#review" id="toc-review" class="nav-link" data-scroll-target="#review">Review</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/contributing/pull_requests.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -252,6 +260,11 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <h1 class="title">Publishing your changes</h1>
 </div>
 
+<div>
+  <div class="description">
+    How to create a pull request
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -264,19 +277,52 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 
 </header>
 
-<section id="updating-your-pull-request-or-branch" class="level2">
-<h2 class="anchored" data-anchor-id="updating-your-pull-request-or-branch">Updating your pull request or branch</h2>
-<p>While creating changes on your local branch, another developper could have added new changes the openpipeline repository. These changes will need to be included into your local branch before a pull request can be merged. Updating your branch involves merging the upstream branch (usually <code>main</code>) into your branch:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># download the changes from the openpipelines repo</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch upstream</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># change your current branch to the branch of the pull request</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="op">&lt;</span>feature_branch<span class="op">&gt;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># merge the changes from upstream into your branch</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge upstream/main</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># push the updates, your pull request will also be updated</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>After ensuring that the implemented changes pass all relevant tests and meets the contribution guidelines, you can create a pull request following the steps below.</p>
+<section id="step-1-merge-upstream-repository" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-merge-upstream-repository">Step 1: Merge upstream repository</h2>
+<p>Before you contribute your changes need to merge the upstream main branch into your fork. This ensures that your changes are based on the latest version of the code.</p>
+<p>To do this, enter the following commands adapted from <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-command-line">Syncing a Fork</a> in your terminal or command prompt:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add the upstream repository to your local repository</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add upstream https://github.com/openpipelines-bio/openpipeline.git</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># download the changes from the openpipelines repo</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch upstream</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># change your current branch to the branch of the pull request</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="op">&lt;</span>feature_branch<span class="op">&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># merge the changes from upstream into your branch</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge upstream/main</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># push the updates, your pull request will also be updated</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="step-2-edit-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-edit-changelog">Step 2: Edit changelog</h2>
+<p>Add an entry to the CHANGELOG.md file describing the proposed changes.</p>
+</section>
+<section id="step-3-create-pull-request" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-create-pull-request">Step 3: Create pull request</h2>
+<p>The following steps were adapted from <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork">Creating a pull request from a fork</a></p>
+<ol type="1">
+<li>Go to <a href="https://github.com/openpipelines-bio/openpipeline/pulls" class="uri">https://github.com/openpipelines-bio/openpipeline/pulls</a>.</li>
+<li>Click on the <code>New pull request</code> button.</li>
+<li>On the compare page click on the link <code>compare across forks</code> below the title. <img src="images/compare_across_forks.png" class="img-fluid"></li>
+<li>On the right side in the <code>head</code> section select your fork repo and the correct branch you want to merge.</li>
+<li>Click on <code>Create pull request</code>.</li>
+<li>Construct your PR by giving it a title and description.</li>
+<li>Make sure you select the box below the description <code>Allow edits from maintainers</code>.</li>
+<li>If the PR is ready for review click the button <code>Create Pull Request</code>. Otherwise you can click the arrow next to the button and select <code>Create Draft Pull Request</code> and click the button when it changes.</li>
+</ol>
+</section>
+<section id="next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="next-steps">Next steps</h2>
+<section id="github-actions" class="level3">
+<h3 class="anchored" data-anchor-id="github-actions">Github Actions</h3>
+<p>Whenever a Pull Request (including draft) is created a github workflow will perform checks. These checks need to be succesful as a minimum requirement before a merge can be done. When there are errors in the checks, try to fix them while waiting on a review. If it is not possible to fix the error, add a comment to the PR to let the reviewers know.</p>
+</section>
+<section id="review" class="level3">
+<h3 class="anchored" data-anchor-id="review">Review</h3>
+<p>Your PR will be reviewed by maintainers of OpenPipelines. During the review, you can be asked for changes to the code.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

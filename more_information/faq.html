@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Frequently Asked Questions">
 
 <title>OpenPipelines - FAQ</title>
 <style>
@@ -78,7 +79,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -132,13 +133,66 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../more_information/index.html">More information</a></li><li class="breadcrumb-item"><a href="../more_information/faq.html">FAQ</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../more_information/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">More information</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../more_information/cheat_sheets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cheat sheets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../more_information/code_of_conduct.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Code of conduct</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../more_information/faq.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">FAQ</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#how-can-i-add-an-external-resource-to-my-viash-component" id="toc-how-can-i-add-an-external-resource-to-my-viash-component" class="nav-link active" data-scroll-target="#how-can-i-add-an-external-resource-to-my-viash-component">How can I add an external resource to my Viash component?</a></li>
+  <li><a href="#what-does-__merge__-do" id="toc-what-does-__merge__-do" class="nav-link" data-scroll-target="#what-does-__merge__-do">What does <code>__merge__</code> do?</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/more_information/faq.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -148,6 +202,11 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <h1 class="title">FAQ</h1>
 </div>
 
+<div>
+  <div class="description">
+    Frequently Asked Questions
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -160,8 +219,17 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 
 </header>
 
+<section id="how-can-i-add-an-external-resource-to-my-viash-component" class="level2">
+<h2 class="anchored" data-anchor-id="how-can-i-add-an-external-resource-to-my-viash-component">How can I add an external resource to my Viash component?</h2>
+<p>It is possible to add additional resources such as a file containing helper functions or other resources. All you need to do is list those files under the <code>functionality.resources</code> section of your component and refer to them in your script using <code>meta["resources_dir"] + "/myresource.txt"</code>. Please visit the Viash documentation for concrete examples on how to add <a href="https://viash.io/guide/component/use-helper-functions.html">helper functions</a> and <a href="https://viash.io/guide/component/add-resources.html">other resources</a> to your component.</p>
+</section>
+<section id="what-does-__merge__-do" class="level2">
+<h2 class="anchored" data-anchor-id="what-does-__merge__-do">What does <code>__merge__</code> do?</h2>
+<p>The <code>__merge__</code> field is used to merge another YAML into a Viash config. One of its uses is in making sure that all of the components in a task has the same API.</p>
+<p>Each task in OpenProblems contains strict definitions of the input/output file interface of its components and the file formats of those files. These interfaces are stored as YAML files in the <code>api</code> subdirectory of each task.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -469,7 +537,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/more_information/faq.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    </div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

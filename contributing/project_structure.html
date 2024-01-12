@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="The structure of OpenPipelines">
 
 <title>OpenPipelines - Project structure</title>
 <style>
@@ -222,6 +223,11 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <h1 class="title">Project structure</h1>
 </div>
 
+<div>
+  <div class="description">
+    The structure of OpenPipelines
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -236,14 +242,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 
 <section id="sec-project-structure" class="level2">
 <h2 class="anchored" data-anchor-id="sec-project-structure">Project structure</h2>
-<p>The root of the repository contains three main folders:</p>
+<p>The root of the repository contains two main folders:</p>
 <ol type="1">
-<li><code>src</code>, which contains the source code for individual components.</li>
-<li>The <code>workflows</code> folder containing the implementations of the pipelines (combining one or more components).</li>
+<li><code>src</code>, which contains the source code for components and workflows.</li>
 <li>(optionally) the <code>target</code> folder</li>
 </ol>
 <p>Each subfolder from <code>src</code> contains a Viash <a href="https://viash.io/guides/projects/namespaces/">namespace</a>, a logical grouping of pipeline components that perform a similar function. Within each namespace, subfolders designate individual pipeline components. For example <code>./src/convert/from_bdrhap_to_h5ad</code> contains the implementation for a component <code>from_bdrhap_to_h5ad</code> which is grouped together with other components such as <code>from_10xmtx_to_h5mu</code> into a namespace <code>convert</code>. In a similar manner as grouping components into <code>namespaces</code>, pipelines are grouped together into folders. However, these are not component namespaces and as such do not interact with <code>viash ns</code> commands.</p>
-<p>As will become apparent later on, Viash not only provides commands to perform operations on individual components, but also on groups of components in a namespace and all components in a project. As a rule of thumb, the basic Viash commands (like <code>./bin/viash test</code>) are designated for running commands on individual components, while <code>ns</code> commands are (<code>./bin/viash ns test</code>) are for namespaces. When cloning a fresh repository, there will be no <code>target</code> folder present. This is because the target folder will only be created after components have been build.</p>
+<p>As will become apparent later on, Viash not only provides commands to perform operations on individual components, but also on groups of components in a namespace and all components in a project. As a rule of thumb, the basic Viash commands (like <code>viash test</code>) are designated for running commands on individual components, while <code>ns</code> commands are (<code>viash ns test</code>) are for namespaces. When cloning a fresh repository, there will be no <code>target</code> folder present. This is because the target folder will only be created after components have been build.</p>
 </section>
 <section id="sec-versioning" class="level2">
 <h2 class="anchored" data-anchor-id="sec-versioning">Versioning and branching strategy</h2>

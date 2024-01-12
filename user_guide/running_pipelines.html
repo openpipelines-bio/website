@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Run a pipeline from CLI or Nextflow Tower">
 
 <title>OpenPipelines - Running pipelines</title>
 <style>
@@ -200,6 +201,18 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../user_guide/running_pipelines.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Running pipelines</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../user_guide/parameter_lists.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Passing parameter lists</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../user_guide/ingestion.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Ingestion</span></a>
   </div>
@@ -208,12 +221,6 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   <div class="sidebar-item-container"> 
   <a href="../user_guide/processing.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Processing</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../user_guide/running_pipelines.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Running pipelines</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -240,12 +247,10 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#installing-viash-and-nextflow" id="toc-installing-viash-and-nextflow" class="nav-link active" data-scroll-target="#installing-viash-and-nextflow">Installing Viash and Nextflow</a>
-  <ul class="collapse">
-  <li><a href="#running-pipelines-from-the-cli" id="toc-running-pipelines-from-the-cli" class="nav-link" data-scroll-target="#running-pipelines-from-the-cli">Running pipelines from the CLI</a></li>
-  <li><a href="#running-pipelines-from-nextflow-tower" id="toc-running-pipelines-from-nextflow-tower" class="nav-link" data-scroll-target="#running-pipelines-from-nextflow-tower">Running pipelines from Nextflow Tower</a></li>
-  <li><a href="#using-param_list-to-pass-large-parameter-sets" id="toc-using-param_list-to-pass-large-parameter-sets" class="nav-link" data-scroll-target="#using-param_list-to-pass-large-parameter-sets">Using param_list to pass large parameter sets</a></li>
-  </ul></li>
+  <li><a href="#run-locally-from-the-cli" id="toc-run-locally-from-the-cli" class="nav-link active" data-scroll-target="#run-locally-from-the-cli">Run locally from the CLI</a></li>
+  <li><a href="#on-cloud-infrastructure" id="toc-on-cloud-infrastructure" class="nav-link" data-scroll-target="#on-cloud-infrastructure">On cloud infrastructure</a></li>
+  <li><a href="#using-the-nextflow-tower-cli" id="toc-using-the-nextflow-tower-cli" class="nav-link" data-scroll-target="#using-the-nextflow-tower-cli">Using the Nextflow Tower CLI</a></li>
+  <li><a href="#using-the-nextflow-tower-web-ui" id="toc-using-the-nextflow-tower-web-ui" class="nav-link" data-scroll-target="#using-the-nextflow-tower-web-ui">Using the Nextflow Tower Web UI</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/user_guide/running_pipelines.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -257,6 +262,11 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <h1 class="title">Running pipelines</h1>
 </div>
 
+<div>
+  <div class="description">
+    Run a pipeline from CLI or Nextflow Tower
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -269,57 +279,59 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 
 </header>
 
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>TODO: Fill in these sections.</p>
-<ul>
-<li>Examples should be using an OpenPipelines release or the <code>main_build</code> branch.</li>
-<li>Point to the “Components” tab</li>
-</ul>
-</div>
-</div>
-<section id="installing-viash-and-nextflow" class="level1">
-<h1>Installing Viash and Nextflow</h1>
-<p>Before you try running OpenPipelines, please install Viash and Nextflow first.</p>
-<section id="running-pipelines-from-the-cli" class="level3">
-<h3 class="anchored" data-anchor-id="running-pipelines-from-the-cli">Running pipelines from the CLI</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bin/nextflow</span> run . <span class="dt">\</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> workflows/integration/multimodal_integration/main.nf <span class="dt">\</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-profile</span> docker <span class="dt">\</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-resume</span> </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--publish_dir</span> foo/</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--input</span> <span class="st">"bar"</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--output</span> <span class="st">"test.txt"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Dependening on whether you want to run a workflow locally or on cloud infrastructure, using Nextflow Tower or not, you will need to use different commands.</p>
+<section id="run-locally-from-the-cli" class="level2">
+<h2 class="anchored" data-anchor-id="run-locally-from-the-cli">Run locally from the CLI</h2>
+<p>You can run a workflow from the command line using the following command:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> target/nextflow/workflows/integration/multimodal_integration/main.nf <span class="dt">\</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-revision</span> 0.12.1 <span class="dt">\</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-latest</span> <span class="dt">\</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">-profile</span> docker <span class="dt">\</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--publish_dir</span> foo/ <span class="dt">\</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">--input</span> <span class="st">"bar"</span> <span class="dt">\</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output</span> <span class="st">"test.txt"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Doing so will run the workflow <strong>locally</strong> using a Docker container.</p>
 </section>
-<section id="running-pipelines-from-nextflow-tower" class="level3">
-<h3 class="anchored" data-anchor-id="running-pipelines-from-nextflow-tower">Running pipelines from Nextflow Tower</h3>
+<section id="on-cloud-infrastructure" class="level2">
+<h2 class="anchored" data-anchor-id="on-cloud-infrastructure">On cloud infrastructure</h2>
+<p>You can use a similar command to run the workflow on cloud infrastructure, such as AWS Batch or Google Cloud Platform. However, this requires you to create a separate Nextflow config file for each cloud provider. See the <a href="https://www.nextflow.io/docs/latest/executor.html">Nextflow documentation</a> for more information.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> target/nextflow/workflows/integration/multimodal_integration/main.nf <span class="dt">\</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-revision</span> 0.12.1 <span class="dt">\</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-latest</span> <span class="dt">\</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--publish_dir</span> foo/ <span class="dt">\</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--input</span> <span class="st">"bar"</span> <span class="dt">\</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output</span> <span class="st">"test.txt"</span> <span class="dt">\</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">-c</span> configs/my_hpc.config</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="using-param_list-to-pass-large-parameter-sets" class="level3">
-<h3 class="anchored" data-anchor-id="using-param_list-to-pass-large-parameter-sets">Using param_list to pass large parameter sets</h3>
-<p>Using Viash’s VDSL3 nextflow platform, an optional <code>-param_list</code> argument can be used to pass a large number of inputs to a workflow. Additionally, the pipeline parameter values can be set for each input to the workflow independently. A <code>param_list</code> can either be a list of maps, a csv file, a json file, a yaml file, or simply a yaml blob:</p>
+<section id="using-the-nextflow-tower-cli" class="level2">
+<h2 class="anchored" data-anchor-id="using-the-nextflow-tower-cli">Using the Nextflow Tower CLI</h2>
+<p>If you have access to a Nextflow Tower instance in which a Compute Environment has already been set up, you can run a workflow from the Tower CLI. The command is very similar to the command to run a workflow from the CLI, but you need to: * Use <code>tw launch</code> instead of <code>nextflow run</code> * Specify the workspace ID and compute environment ID * Rename arguments: <code>-revision</code> to <code>--revision</code>, <code>-latest</code> to <code>--pull-latest</code>, <code>-main-script</code> to <code>--main-script</code>, <code>-c</code> to <code>--config</code> * Store workflow arguments in a separate yaml file (if this was not already the case).</p>
+<p>Example:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tw</span> launch openpipelines-bio/openpipeline <span class="dt">\</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--revision</span> 0.12.1 <span class="dt">\</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pull-latest</span> <span class="dt">\</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--main-script</span> target/nextflow/workflows/integration/multimodal_integration/main.nf <span class="dt">\</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--workspace</span> <span class="op">&lt;</span>your workspace id<span class="op">&gt;</span> <span class="dt">\</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--compute-env</span> <span class="op">&lt;</span>your compute environment id<span class="op">&gt;</span> <span class="dt">\</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">--params-file</span> params.yaml <span class="dt">\</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">--config</span> configs/my_hpc.config</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="using-the-nextflow-tower-web-ui" class="level2">
+<h2 class="anchored" data-anchor-id="using-the-nextflow-tower-web-ui">Using the Nextflow Tower Web UI</h2>
+<p>If you have access to a Nextflow Tower instance in which a Compute Environment has already been set up, you can run a workflow from the Tower UI. To do so, go to the “Launchpad” and click on the button “launch a run without configuration”.</p>
+<p><img src="./images/launchpad.png" class="img-fluid"></p>
+<p>Next, fill in the required fields and click on “Launch run”.</p>
 <ul>
-<li>A csv file should have column names which correspond to the different arguments of this pipeline. Example: <code>--param_list data.csv</code> with columns <code>id,input</code>.</li>
-<li>A json or a yaml file should be a list of maps, each of which has keys corresponding to the arguments of the pipeline. Example: <code>--param_list data.json</code> with contents <code>[ {'id': 'foo', 'input': 'foo.txt'}, {'id': 'bar', 'input': 'bar.txt'} ]</code>.</li>
-<li>A yaml blob can also be passed directly as a string. Example: <code>--param_list "[ {'id': 'foo', 'input': 'foo.txt'}, {'id': 'bar', 'input': 'bar.txt'} ]"</code>.</li>
-<li>A list of maps can be in a <code>nextflow.config</code> file, where the keys of each map corresponds to the arguments of the pipeline. Example in a <code>nextflow.config</code> file: <code>param_list: [ ['id': 'foo', 'input': 'foo.txt'], ['id': 'bar', 'input': 'bar.txt'] ]</code>.</li>
-</ul>
-<p>When passing a csv, json or yaml file, relative path names are relativized to the location of the parameter file. No relativation is performed when <code>param_list</code> is a list of maps (as-is) or a yaml blob.</p>
-<p>Using a <code>param_list</code> can be combined with setting parameters that are set for all parameter sets. These ‘gobal’ parameters will always be overwritten with their counterpart that was specified in a more specific manner for a single parameter set. For example, using <code>--param_list "[ {'id': 'foo', 'input': 'foo.txt'}, {'id': 'bar'} ]" --input 'global.txt'</code> will result in the following parameter sets being processed:</p>
-<ul>
-<li><code>id</code>: <code>foo</code>, <code>input</code>: <code>foo.txt</code></li>
-<li><code>id</code>: <code>bar</code>, <code>input</code>: <code>global.txt</code></li>
+<li><strong>Compute environment</strong>: Select the compute environment you want to run the workflow on.</li>
+<li><strong>Pipeline to launch</strong>: Fill in <code>openpipelines-bio/openpipeline</code>.</li>
+<li><strong>Revision number</strong>: The release number of the pipeline you want to run, e.g.&nbsp;<code>0.12.1</code>. You can find the release number on the <a href="https://github.com/openpipelines-bio/openpipeline/releases">GitHub releases page</a>.</li>
+<li><strong>Work directory</strong>: The bucket path where the scratch data is stored.</li>
+<li><strong>Pipeline parameters</strong>: The YAML or JSON of the parameters that are passed to the pipeline. See the <a href="../components/">Components</a> page for more information about the parameters of each pipeline.</li>
 </ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
