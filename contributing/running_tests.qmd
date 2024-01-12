@@ -1,5 +1,6 @@
 ---
 title: Running tests
+description: How to run component and integration tests.
 order: 30
 ---
 

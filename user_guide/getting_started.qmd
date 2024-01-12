@@ -1,4 +1,5 @@
 ---
 title: Getting started
-order: 10
+description: Setting up infrastructure
+order: 0
 ---

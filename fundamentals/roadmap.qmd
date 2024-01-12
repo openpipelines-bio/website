@@ -1,5 +1,6 @@
 ---
 title: Roadmap
+description: Development roadmap
 order: 40
 ---
 

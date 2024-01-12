@@ -1,5 +1,6 @@
 ---
 title: Project structure
+description: The structure of OpenPipelines
 order: 10
 ---
 

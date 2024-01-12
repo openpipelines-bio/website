@@ -1,5 +1,6 @@
 ---
 title: Getting started
+description: Install dependencies and fetch test resources
 order: 0
 ---
 

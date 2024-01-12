@@ -1,4 +1,8 @@
 ---
 title: Contributing
 sidebar: true
+listing:
+  template: ../style/listing.ejs
+  type: default
+  contents: "./*.qmd"
 ---

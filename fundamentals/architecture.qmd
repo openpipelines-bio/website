@@ -1,5 +1,6 @@
 ---
 title: Architecture
+description: Structure of the project
 order: 30
 d2:
   layout: elk

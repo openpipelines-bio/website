@@ -1,4 +1,5 @@
 ---
 title: Creating pipelines
+description: A guide on how to create new workflows
 order: 30
 ---

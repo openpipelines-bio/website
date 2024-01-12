@@ -1,5 +1,6 @@
 ---
 title: Philosophy
+description: Our approach and mission
 order: 10
 ---
 

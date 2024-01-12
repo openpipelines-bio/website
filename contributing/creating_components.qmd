@@ -1,5 +1,6 @@
 ---
 title: Creating components
+description: A guide on how to create new components
 order: 20
 ---
 

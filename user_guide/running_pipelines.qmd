@@ -1,21 +1,8 @@
 ---
 title: Running pipelines
-order: 30
+description: Run a pipeline from CLI or Nextflow Tower
+order: 10
 ---
-
-:::{.callout-note}
-TODO: Fill in these sections.
-
-* Examples should be using an OpenPipelines release or the `main_build` branch.
-* Point to the "Components" tab
-:::
-
-
-# Installing Viash and Nextflow
-
-Before you try running OpenPipelines, please install Viash and Nextflow first.
-
-### Running pipelines from the CLI
 
 ```bash
 bin/nextflow run . \

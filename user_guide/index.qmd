@@ -1,13 +1,8 @@
 ---
 title: User Guide
 sidebar: true
+listing:
+  template: ../style/listing.ejs
+  type: default
+  contents: "./*.qmd"
 ---
-
-# Which workflow is right for me
-
-# Executing pipelines or build components
-## Using the nf-tower user-interface
-
-## Using the nf-tower CLI (`tw`)
-
-## Using the `nextflow` CLI
