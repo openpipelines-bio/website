@@ -14,7 +14,7 @@ ID: `prot_singlesample`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.1/./workflows/multiomics/prot_singlesample){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.1/./workflows/multiomics/prot_singlesample){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.1 -latest \
+  -r 0.11.1 -latest \
   -main-script ./workflows/multiomics/prot_singlesample/main.nf \
   --help
 ```
@@ -53,6 +53,8 @@ input: # please fill in - example: "dataset.h5mu"
 # min_proteins_per_cell: 200
 # max_proteins_per_cell: 1500000
 # min_cells_per_protein: 3
+# min_fraction_mito: 0
+# max_fraction_mito: 0.2
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
@@ -62,7 +64,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.1 -latest \
+  -r 0.11.1 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/prot_singlesample/main.nf \
   -params-file params.yaml
@@ -91,13 +93,15 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Filtering options
 
-|Name                      |Description                                 |Attributes                    |
-|:-------------------------|:-------------------------------------------|:-----------------------------|
-|`--min_counts`            |Minimum number of counts captured per cell. |`integer`, example: `200`     |
-|`--max_counts`            |Maximum number of counts captured per cell. |`integer`, example: `5000000` |
-|`--min_proteins_per_cell` |Minimum of non-zero values per cell.        |`integer`, example: `200`     |
-|`--max_proteins_per_cell` |Maximum of non-zero values per cell.        |`integer`, example: `1500000` |
-|`--min_cells_per_protein` |Minimum of non-zero values per gene.        |`integer`, example: `3`       |
+|Name                      |Description                                          |Attributes                    |
+|:-------------------------|:----------------------------------------------------|:-----------------------------|
+|`--min_counts`            |Minimum number of counts captured per cell.          |`integer`, example: `200`     |
+|`--max_counts`            |Maximum number of counts captured per cell.          |`integer`, example: `5000000` |
+|`--min_proteins_per_cell` |Minimum of non-zero values per cell.                 |`integer`, example: `200`     |
+|`--max_proteins_per_cell` |Maximum of non-zero values per cell.                 |`integer`, example: `1500000` |
+|`--min_cells_per_protein` |Minimum of non-zero values per gene.                 |`integer`, example: `3`       |
+|`--min_fraction_mito`     |Minimum fraction of proteins that are mitochondrial. |`double`, example: `0`        |
+|`--max_fraction_mito`     |Maximum fraction of proteins that are mitochondrial. |`double`, example: `0.2`      |
 
 ## Authors
 
@@ -116,43 +120,21 @@ flowchart LR
     v0(Input)
     v3(toSortedList)
     v5(flatMap)
-    v10(filter)
-    v16(grep_annotation_column)
-    v18(join)
-    v22(mix)
-    v21(filter)
-    v28(calculate_qc_metrics)
-    v30(join)
-    v38(publish)
-    v40(join)
-    v49(filter_with_counts)
-    v51(join)
-    v59(do_filter)
-    v61(join)
-    v65(toSortedList)
-    v67(Output)
-    v21-->v22
+    v12(filter_with_counts)
+    v14(join)
+    v23(do_filter)
+    v25(join)
+    v31(toSortedList)
+    v33(Output)
     v0-->v3
     v3-->v5
-    v5-->v10
-    v5-->v21
-    v10-->v18
-    v10-->v16
-    v16-->v18
-    v18-->v22
-    v22-->v30
-    v22-->v28
-    v28-->v30
-    v30-->v40
-    v30-->v38
-    v38-->v40
-    v40-->v51
-    v40-->v49
-    v49-->v51
-    v51-->v61
-    v51-->v59
-    v59-->v61
-    v61-->v65
-    v65-->v67
+    v5-->v14
+    v5-->v12
+    v12-->v14
+    v14-->v25
+    v14-->v23
+    v23-->v25
+    v25-->v31
+    v31-->v33
 
 ```

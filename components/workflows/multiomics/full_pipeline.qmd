@@ -14,7 +14,7 @@ ID: `full_pipeline`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.1/./workflows/multiomics/full_pipeline){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.1/./workflows/multiomics/full_pipeline){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.1 -latest \
+  -r 0.11.1 -latest \
   -main-script ./workflows/multiomics/full_pipeline/main.nf \
   --help
 ```
@@ -74,7 +74,6 @@ filter_with_hvg_obs_batch_key: "sample_id"
 
 # Mitochondrial Gene Detection
 # var_name_mitochondrial_genes: "foo"
-# obs_name_mitochondrial_fraction: "foo"
 # var_gene_names: "gene_symbol"
 mitochondrial_gene_regex: "^[mM][tT]-"
 
@@ -93,7 +92,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.1 -latest \
+  -r 0.11.1 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/full_pipeline/main.nf \
   -params-file params.yaml
@@ -168,12 +167,11 @@ id present in a requirement of several components for this pipeline.
 
 ### Mitochondrial Gene Detection
 
-|Name                                |Description                                                                                                                                                                                                                |Attributes                         |
-|:-----------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------|
-|`--var_name_mitochondrial_genes`    |In which .var slot to store a boolean array corresponding the mitochondrial genes.                                                                                                                                         |`string`                           |
-|`--obs_name_mitochondrial_fraction` |When specified, write the fraction of counts originating from mitochondrial genes  (based on --mitochondrial_gene_regex) to an .obs column with the specified name. Requires --var_name_mitochondrial_genes.               |`string`                           |
-|`--var_gene_names`                  |.var column name to be used to detect mitochondrial genes instead of .var_names (default if not set). Gene names matching with the regex value from --mitochondrial_gene_regex will be identified as a mitochondrial gene. |`string`, example: `"gene_symbol"` |
-|`--mitochondrial_gene_regex`        |Regex string that identifies mitochondrial genes from --var_gene_names. By default will detect human and mouse mitochondrial genes from a gene symbol.                                                                     |`string`, default: `"^[mM][tT]-"`  |
+|Name                             |Description                                                                                                                                                                                                                |Attributes                         |
+|:--------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------|
+|`--var_name_mitochondrial_genes` |In which .var slot to store a boolean array corresponding the mitochondrial genes.                                                                                                                                         |`string`                           |
+|`--var_gene_names`               |.var column name to be used to detect mitochondrial genes instead of .var_names (default if not set). Gene names matching with the regex value from --mitochondrial_gene_regex will be identified as a mitochondrial gene. |`string`, example: `"gene_symbol"` |
+|`--mitochondrial_gene_regex`     |Regex string that identifies mitochondrial genes from --var_gene_names. By default will detect human and mouse mitochondrial genes from a gene symbol.                                                                     |`string`, default: `"^[mM][tT]-"`  |
 
 
 ### QC metrics calculation options
@@ -220,119 +218,84 @@ flowchart LR
     v44(filter)
     v47(toSortedList)
     v49(flatMap)
-    v55(filter)
-    v61(grep_annotation_column)
-    v63(join)
-    v67(mix)
-    v66(filter)
-    v73(calculate_qc_metrics)
-    v75(join)
-    v83(publish)
-    v85(join)
-    v89(filter)
-    v96(delimit_fraction)
+    v56(filter_with_counts)
+    v58(join)
+    v67(do_filter)
+    v69(join)
+    v78(filter_with_scrublet)
+    v80(join)
+    v116(concat)
+    v84(filter)
+    v87(toSortedList)
+    v89(flatMap)
+    v96(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:filter_with_counts:filter_with_counts_process1)
     v98(join)
-    v102(mix)
-    v101(filter)
-    v108(filter_with_counts)
-    v110(join)
-    v118(do_filter)
-    v120(join)
-    v128(filter_with_scrublet)
-    v130(join)
-    v199(concat)
-    v133(filter)
-    v136(toSortedList)
-    v138(flatMap)
-    v143(filter)
-    v149(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:unfiltered_counts_qc_metrics_prot:grep_annotation_column:grep_annotation_column_process1)
-    v151(join)
-    v155(mix)
-    v154(filter)
-    v161(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:unfiltered_counts_qc_metrics_prot:calculate_qc_metrics:calculate_qc_metrics_process1)
-    v163(join)
-    v171(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:unfiltered_counts_qc_metrics_prot:publish:publish_process1)
-    v173(join)
-    v182(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:filter_with_counts:filter_with_counts_process1)
-    v184(join)
-    v192(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:do_filter:do_filter_process1)
-    v194(join)
-    v197(filter)
-    v203(groupTuple)
-    v209(concat)
-    v211(join)
-    v215(filter)
-    v218(toSortedList)
-    v220(flatMap)
-    v222(toSortedList)
-    v224(Output)
-    v230(normalize_total)
-    v232(join)
-    v241(log1p)
-    v243(join)
-    v252(delete_layer)
-    v254(join)
-    v263(filter_with_hvg)
-    v265(join)
-    v274(rna_calculate_qc_metrics)
-    v276(join)
-    v340(concat)
-    v281(filter)
-    v284(toSortedList)
-    v286(flatMap)
-    v287(toSortedList)
-    v289(Output)
-    v295(clr)
-    v297(join)
-    v303(filter)
-    v309(test_wf:run_wf:multisample_processing_workflow:prot_multisample:prot_qc:grep_annotation_column:grep_annotation_column_process2)
-    v311(join)
-    v315(mix)
-    v314(filter)
-    v321(test_wf:run_wf:multisample_processing_workflow:prot_multisample:prot_qc:calculate_qc_metrics:calculate_qc_metrics_process2)
-    v323(join)
-    v331(test_wf:run_wf:multisample_processing_workflow:prot_multisample:prot_qc:publish:publish_process2)
-    v333(join)
-    v337(filter)
-    v342(toSortedList)
-    v348(merge)
-    v350(join)
-    v354(filter)
-    v358(toSortedList)
-    v360(flatMap)
-    v367(pca)
-    v369(join)
-    v378(find_neighbors)
-    v380(join)
-    v389(umap)
-    v391(join)
-    v397(concat)
-    v396(filter)
-    v398(filter)
-    v402(toSortedList)
-    v404(flatMap)
-    v411(pca)
-    v413(join)
-    v422(find_neighbors)
-    v424(join)
-    v433(test_wf:run_wf:integration_setup_workflow:initialize_integration_prot:umap:umap_process1)
-    v435(join)
-    v441(concat)
-    v440(filter)
-    v449(test_wf:run_wf:publish:publish_process3)
-    v451(join)
-    v456(toSortedList)
-    v458(Output)
+    v107(test_wf:run_wf:singlesample_processing_workflow:prot_singlesample:do_filter:do_filter_process1)
+    v109(join)
+    v114(filter)
+    v120(groupTuple)
+    v126(concat)
+    v128(join)
+    v132(filter)
+    v135(toSortedList)
+    v137(flatMap)
+    v139(toSortedList)
+    v141(Output)
+    v147(normalize_total)
+    v149(join)
+    v158(log1p)
+    v160(join)
+    v169(delete_layer)
+    v171(join)
+    v180(filter_with_hvg)
+    v182(join)
+    v191(rna_calculate_qc_metrics)
+    v193(join)
+    v234(concat)
+    v198(filter)
+    v201(toSortedList)
+    v203(flatMap)
+    v205(toSortedList)
+    v207(Output)
+    v213(clr)
+    v215(join)
+    v224(prot_calculate_qc_metrics)
+    v226(join)
+    v231(filter)
+    v236(toSortedList)
+    v242(merge)
+    v244(join)
+    v248(filter)
+    v252(toSortedList)
+    v254(flatMap)
+    v261(pca)
+    v263(join)
+    v272(find_neighbors)
+    v274(join)
+    v283(umap)
+    v285(join)
+    v291(concat)
+    v290(filter)
+    v292(filter)
+    v296(toSortedList)
+    v298(flatMap)
+    v305(pca)
+    v307(join)
+    v316(find_neighbors)
+    v318(join)
+    v327(test_wf:run_wf:integration_setup_workflow:initialize_integration_prot:umap:umap_process1)
+    v329(join)
+    v335(concat)
+    v334(filter)
+    v343(publish)
+    v345(join)
+    v350(toSortedList)
+    v352(Output)
     v41-->v42
-    v66-->v67
-    v101-->v102
-    v154-->v155
-    v286-->v287
-    v314-->v315
-    v396-->v397
-    v397-->v398
-    v397-->v440
-    v440-->v441
+    v290-->v291
+    v291-->v292
+    v291-->v334
+    v334-->v335
     v0-->v2
     v2-->v4
     v4-->v7
@@ -353,141 +316,103 @@ flowchart LR
     v37-->v39
     v39-->v41
     v42-->v44
-    v42-->v133
-    v42-->v197
+    v42-->v84
+    v42-->v114
     v44-->v47
     v47-->v49
-    v49-->v55
-    v49-->v66
-    v55-->v63
-    v55-->v61
-    v61-->v63
-    v63-->v67
-    v67-->v75
-    v67-->v73
-    v73-->v75
-    v75-->v85
-    v75-->v83
-    v83-->v85
-    v85-->v89
-    v85-->v101
+    v49-->v58
+    v49-->v56
+    v56-->v58
+    v58-->v69
+    v58-->v67
+    v67-->v69
+    v69-->v80
+    v69-->v78
+    v78-->v80
+    v80-->v116
+    v84-->v87
+    v87-->v89
     v89-->v98
     v89-->v96
     v96-->v98
-    v98-->v102
-    v102-->v110
-    v102-->v108
-    v108-->v110
-    v110-->v120
-    v110-->v118
-    v118-->v120
-    v120-->v130
+    v98-->v109
+    v98-->v107
+    v107-->v109
+    v109-->v116
+    v114-->v116
+    v116-->v120
     v120-->v128
-    v128-->v130
-    v130-->v199
-    v133-->v136
-    v136-->v138
-    v138-->v143
-    v138-->v154
-    v143-->v151
-    v143-->v149
-    v149-->v151
-    v151-->v155
-    v155-->v163
-    v155-->v161
-    v161-->v163
-    v163-->v173
-    v163-->v171
-    v171-->v173
-    v173-->v184
-    v173-->v182
-    v182-->v184
-    v184-->v194
-    v184-->v192
-    v192-->v194
-    v194-->v199
-    v197-->v199
-    v199-->v203
-    v203-->v211
-    v203-->v209
-    v209-->v211
-    v211-->v215
-    v211-->v281
-    v211-->v337
-    v215-->v218
-    v218-->v220
-    v220-->v222
-    v222-->v224
-    v220-->v232
-    v220-->v230
-    v230-->v232
-    v232-->v243
-    v232-->v241
-    v241-->v243
-    v243-->v254
-    v243-->v252
+    v120-->v126
+    v126-->v128
+    v128-->v132
+    v128-->v198
+    v128-->v231
+    v132-->v135
+    v135-->v137
+    v137-->v139
+    v139-->v141
+    v137-->v149
+    v137-->v147
+    v147-->v149
+    v149-->v160
+    v149-->v158
+    v158-->v160
+    v160-->v171
+    v160-->v169
+    v169-->v171
+    v171-->v182
+    v171-->v180
+    v180-->v182
+    v182-->v193
+    v182-->v191
+    v191-->v193
+    v193-->v234
+    v198-->v201
+    v201-->v203
+    v203-->v205
+    v205-->v207
+    v203-->v215
+    v203-->v213
+    v213-->v215
+    v215-->v226
+    v215-->v224
+    v224-->v226
+    v226-->v234
+    v231-->v234
+    v234-->v236
+    v236-->v244
+    v236-->v242
+    v242-->v244
+    v244-->v248
+    v244-->v290
+    v248-->v252
     v252-->v254
-    v254-->v265
     v254-->v263
-    v263-->v265
-    v265-->v276
-    v265-->v274
-    v274-->v276
-    v276-->v340
-    v281-->v284
-    v284-->v286
-    v287-->v289
-    v286-->v297
-    v286-->v295
-    v295-->v297
-    v297-->v303
-    v297-->v314
-    v303-->v311
-    v303-->v309
-    v309-->v311
-    v311-->v315
-    v315-->v323
-    v315-->v321
-    v321-->v323
-    v323-->v333
-    v323-->v331
-    v331-->v333
-    v333-->v340
-    v337-->v340
-    v340-->v342
-    v342-->v350
-    v342-->v348
-    v348-->v350
-    v350-->v354
-    v350-->v396
-    v354-->v358
-    v358-->v360
-    v360-->v369
-    v360-->v367
-    v367-->v369
-    v369-->v380
-    v369-->v378
-    v378-->v380
-    v380-->v391
-    v380-->v389
-    v389-->v391
-    v391-->v397
-    v398-->v402
-    v402-->v404
-    v404-->v413
-    v404-->v411
-    v411-->v413
-    v413-->v424
-    v413-->v422
-    v422-->v424
-    v424-->v435
-    v424-->v433
-    v433-->v435
-    v435-->v441
-    v441-->v451
-    v441-->v449
-    v449-->v451
-    v451-->v456
-    v456-->v458
+    v254-->v261
+    v261-->v263
+    v263-->v274
+    v263-->v272
+    v272-->v274
+    v274-->v285
+    v274-->v283
+    v283-->v285
+    v285-->v291
+    v292-->v296
+    v296-->v298
+    v298-->v307
+    v298-->v305
+    v305-->v307
+    v307-->v318
+    v307-->v316
+    v316-->v318
+    v318-->v329
+    v318-->v327
+    v327-->v329
+    v329-->v335
+    v335-->v345
+    v335-->v343
+    v343-->v345
+    v345-->v350
+    v350-->v352
 
 ```
