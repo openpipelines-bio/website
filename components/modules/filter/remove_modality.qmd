@@ -14,7 +14,7 @@ ID: `remove_modality`
 Namespace: `filter`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.1/./src/filter/remove_modality){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.2/./src/filter/remove_modality){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.1 -latest \
+  -r 0.12.2 -latest \
   -main-script target/nextflow/filter/remove_modality/main.nf \
   --help
 ```
@@ -54,7 +54,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.1 -latest \
+  -r 0.12.2 -latest \
   -profile docker \
   -main-script target/nextflow/filter/remove_modality/main.nf \
   -params-file params.yaml
