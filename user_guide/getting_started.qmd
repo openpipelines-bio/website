@@ -1,4 +1,59 @@
 ---
 title: Getting started
-order: 10
+description: Setting up infrastructure
+order: 0
 ---
+
+Depending on whether you plan to run the OpenPipelines workflows locally or in the cloud
+
+## Starting workflows locally
+
+If you want to start workflows locally, you will need to install Nextflow.
+
+### Install Docker (optional)
+
+Docker is a containerization platform that allows you to package your application and all its dependencies into a single image. It is used to run the analysis pipelines.
+
+If you are planning on **running** the workflows locally, you will need to install Docker. You do not need to install Docker if the workflows will be run in the cloud using [AWS Batch](https://www.nextflow.io/docs/latest/aws.html#aws-batch), [Azure Batch](https://www.nextflow.io/docs/latest/azure.html#azure-batch), [Google Cloud Batch](https://www.nextflow.io/docs/latest/google.html#cloud-batch), or other cloud-based compute environments.
+
+To install Docker, follow the instructions [here](https://docs.docker.com/install/).
+
+### Install Java
+
+Nextflow requires Java 11 or later. To check if Java is installed on your system, run:
+
+```bash
+java -version
+```
+
+If Java is not installed, you can download it from [here](https://www.java.com/en/download/).
+
+### Install Nextflow
+
+Nextflow is distributed as a single executable file. To install it, run:
+
+```bash
+curl -s https://get.nextflow.io | bash
+```
+
+This command will download the latest version of Nextflow and store it in the current directory.
+
+To install Nextflow system-wide, move the downloaded file to a directory in your `$PATH`, e.g.:
+
+```bash
+mv nextflow /usr/local/bin
+```
+
+### Test the installation
+
+To test the installation, run:
+
+```bash
+nextflow run hello -with-docker
+```
+
+
+
+## Using Nextflow Tower
+
+Nextflow Tower is a web-based user interface for running and monitoring Nextflow pipelines. If you are planning on using Nextflow Tower, a [compute environment](https://docs.seqera.io/platform/23.3.0/compute-envs/overview) will need to be set up.

@@ -14,7 +14,7 @@ ID: `initialize_integration`
 Namespace: `multiomics/integration`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.0/./workflows/multiomics/integration/initialize_integration){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.1/./workflows/multiomics/integration/initialize_integration){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.11.0 -latest \
+  -r 0.11.1 -latest \
   -main-script ./workflows/multiomics/integration/initialize_integration/main.nf \
   --help
 ```
@@ -70,7 +70,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.11.0 -latest \
+  -r 0.11.1 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/integration/initialize_integration/main.nf \
   -params-file params.yaml
@@ -133,29 +133,29 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ```{mermaid}
 %%| column: screen-inset-shaded
 flowchart LR
-    p0(Input)
-    p2(toSortedList)
-    p4(flatMap)
-    p11(pca)
-    p13(join)
-    p22(find_neighbors)
-    p24(join)
-    p33(umap)
-    p35(join)
-    p40(toSortedList)
-    p42(Output)
-    p0-->p2
-    p2-->p4
-    p4-->p13
-    p4-->p11
-    p11-->p13
-    p13-->p24
-    p13-->p22
-    p22-->p24
-    p24-->p35
-    p24-->p33
-    p33-->p35
-    p35-->p40
-    p40-->p42
+    v0(Input)
+    v2(toSortedList)
+    v4(flatMap)
+    v11(pca)
+    v13(join)
+    v22(find_neighbors)
+    v24(join)
+    v33(umap)
+    v35(join)
+    v40(toSortedList)
+    v42(Output)
+    v0-->v2
+    v2-->v4
+    v4-->v13
+    v4-->v11
+    v11-->v13
+    v13-->v24
+    v13-->v22
+    v22-->v24
+    v24-->v35
+    v24-->v33
+    v33-->v35
+    v35-->v40
+    v40-->v42
 
 ```

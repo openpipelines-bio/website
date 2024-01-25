@@ -14,7 +14,7 @@ ID: `make_reference`
 Namespace: `ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.0/./workflows/ingestion/make_reference){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.1/./workflows/ingestion/make_reference){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.11.0 -latest \
+  -r 0.11.1 -latest \
   -main-script ./workflows/ingestion/make_reference/main.nf \
   --help
 ```
@@ -65,7 +65,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.11.0 -latest \
+  -r 0.11.1 -latest \
   -profile docker \
   -main-script ./workflows/ingestion/make_reference/main.nf \
   -params-file params.yaml
@@ -117,50 +117,50 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ```{mermaid}
 %%| column: screen-inset-shaded
 flowchart LR
-    p0(Input)
-    p2(toSortedList)
-    p4(flatMap)
-    p11(make_reference)
-    p13(join)
-    p17(filter)
-    p22(build_cellranger_reference)
-    p24(join)
-    p54(join)
-    p29(filter)
-    p34(build_bdrhap_reference)
-    p36(join)
-    p55(join)
-    p41(filter)
-    p46(star_build_reference)
-    p48(join)
-    p56(join)
-    p57(join)
-    p62(Output)
-    p54-->p55
-    p55-->p56
-    p56-->p57
-    p0-->p2
-    p2-->p4
-    p4-->p13
-    p4-->p11
-    p11-->p13
-    p13-->p17
-    p17-->p24
-    p17-->p22
-    p22-->p24
-    p24-->p54
-    p13-->p29
-    p29-->p36
-    p29-->p34
-    p34-->p36
-    p36-->p55
-    p13-->p41
-    p41-->p48
-    p41-->p46
-    p46-->p48
-    p48-->p56
-    p0-->p57
-    p13-->p54
-    p57-->p62
+    v0(Input)
+    v2(toSortedList)
+    v4(flatMap)
+    v11(make_reference)
+    v13(join)
+    v17(filter)
+    v22(build_cellranger_reference)
+    v24(join)
+    v54(join)
+    v29(filter)
+    v34(build_bdrhap_reference)
+    v36(join)
+    v55(join)
+    v41(filter)
+    v46(star_build_reference)
+    v48(join)
+    v56(join)
+    v57(join)
+    v62(Output)
+    v54-->v55
+    v55-->v56
+    v56-->v57
+    v0-->v2
+    v2-->v4
+    v4-->v13
+    v4-->v11
+    v11-->v13
+    v13-->v17
+    v17-->v24
+    v17-->v22
+    v22-->v24
+    v24-->v54
+    v13-->v29
+    v29-->v36
+    v29-->v34
+    v34-->v36
+    v36-->v55
+    v13-->v41
+    v41-->v48
+    v41-->v46
+    v46-->v48
+    v48-->v56
+    v0-->v57
+    v13-->v54
+    v57-->v62
 
 ```

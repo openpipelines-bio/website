@@ -1,3 +1,9 @@
 ---
 title: Cheat sheets
+description: Cheat sheets for various tools
 ---
+
+
+## Viash
+
+[![Cheat sheet for developing modular pipeline components with Viash, including a sample Viash component (left) and common commands used throughout the various stages of a development cycle (right).](https://viash.io/cheatsheet/viash_cheatsheet_v1_1.png){#fig-viash-cheat-sheet}](https://viash.io/cheatsheet/viash_cheatsheet_latest.html)
