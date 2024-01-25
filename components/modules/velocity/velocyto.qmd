@@ -14,7 +14,7 @@ ID: `velocyto`
 Namespace: `velocity`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.1/./src/velocity/velocyto){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/./src/velocity/velocyto){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.1 -latest \
+  -r main_build -latest \
   -main-script target/nextflow/velocity/velocyto/main.nf \
   --help
 ```
@@ -56,7 +56,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.1 -latest \
+  -r main_build -latest \
   -profile docker \
   -main-script target/nextflow/velocity/velocyto/main.nf \
   -params-file params.yaml

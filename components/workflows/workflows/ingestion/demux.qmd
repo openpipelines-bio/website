@@ -1,0 +1,98 @@
+---
+title: "Demux"
+namespace: "Workflows/ingestion"
+description: "A generic pipeline for running bcl2fastq, bcl-convert or Cell Ranger mkfastq."
+type: "workflow"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `demux`  
+Namespace: `workflows/ingestion`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/main_build/./src/workflows/ingestion/demux){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+Convert `.bcl` files to `.fastq` files using bcl2fastq, bcl-convert or Cell Ranger mkfastq.
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main_build -latest \
+  -main-script ./src/workflows/ingestion/demux/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Arguments
+id: # please fill in - example: "foo"
+input: # please fill in - example: "bcl_dir"
+sample_sheet: # please fill in - example: "bcl_dir"
+demultiplexer: "bcl2fastq"
+# ignore_missing: true
+# output_fastq: "$id.$key.output_fastq.output_fastq"
+# output_fastqc: "$id.$key.output_fastqc.output_fastqc"
+# output_multiqc: "$id.$key.output_multiqc.output_multiqc"
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r main_build -latest \
+  -profile docker \
+  -main-script ./src/workflows/ingestion/demux/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument group
+
+### Arguments
+
+|Name               |Description                                                    |Attributes                               |
+|:------------------|:--------------------------------------------------------------|:----------------------------------------|
+|`--id`             |ID of the sample.                                              |`string`, required, example: `"foo"`     |
+|`--input`          |Input run directory                                            |`file`, required, example: `"bcl_dir"`   |
+|`--sample_sheet`   |Pointer to the sample sheet                                    |`file`, required, example: `"bcl_dir"`   |
+|`--demultiplexer`  |The multiplexer to use, one of bclconvert or mkfastq           |`string`, default: `"bcl2fastq"`         |
+|`--ignore_missing` |Should the demultiplexer ignore missing entities (filter, ...) |`boolean`                                |
+|`--output_fastq`   |Output directory containig fastq files                         |`file`, required, example: `"fastq_dir"` |
+|`--output_fastqc`  |Reports directory produced by FastQC                           |`file`, example: `"reports_dir"`         |
+|`--output_multiqc` |Reports directory produced by MultiQC                          |`file`, example: `"reports_dir"`         |
+
+## Authors
+
+
+  * Toni Verbeiren [{{< fa brands github >}}](https://github.com/tverbeiren) [{{< fa brands linkedin >}}](https://linkedin.com/in/verbeiren) (author, maintainer)
+
+  * Marijke Van Moerbeke [{{< fa brands github >}}](https://github.com/mvanmoerbeke) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-3097-5621) [{{< fa brands linkedin >}}](https://linkedin.com/in/marijke-van-moerbeke-84303a34) (author)
+
+  * Angela Oliveira Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) [{{< fa brands linkedin >}}](https://linkedin.com/in/aopisco) (author)
+
+  * Samuel D'Souza [{{< fa brands github >}}](https://github.com/srdsam) [{{< fa brands linkedin >}}](https://linkedin.com/in/samuel-d-souza-887023150/) (author)
+
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (author)
