@@ -14,7 +14,7 @@ ID: `cellranger_postprocessing`
 Namespace: `ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.2/./workflows/ingestion/cellranger_postprocessing){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.2/./workflows/ingestion/cellranger_postprocessing){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.2 -latest \
+  -r 0.11.2 -latest \
   -main-script ./workflows/ingestion/cellranger_postprocessing/main.nf \
   --help
 ```
@@ -63,7 +63,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.2 -latest \
+  -r 0.11.2 -latest \
   -profile docker \
   -main-script ./workflows/ingestion/cellranger_postprocessing/main.nf \
   -params-file params.yaml

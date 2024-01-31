@@ -14,7 +14,7 @@ ID: `rna_singlesample`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.2/./workflows/multiomics/rna_singlesample){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.2/./workflows/multiomics/rna_singlesample){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.2 -latest \
+  -r 0.11.2 -latest \
   -main-script ./workflows/multiomics/rna_singlesample/main.nf \
   --help
 ```
@@ -58,7 +58,6 @@ input: # please fill in - example: "dataset.h5mu"
 
 # Mitochondrial gene detection
 # var_name_mitochondrial_genes: "foo"
-# obs_name_mitochondrial_fraction: "foo"
 # var_gene_names: "gene_symbol"
 mitochondrial_gene_regex: "^[mM][tT]-"
 
@@ -70,7 +69,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.2 -latest \
+  -r 0.11.2 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/rna_singlesample/main.nf \
   -params-file params.yaml
@@ -99,25 +98,24 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Filtering options
 
-|Name                   |Description                                                                                  |Attributes                    |
-|:----------------------|:--------------------------------------------------------------------------------------------|:-----------------------------|
-|`--min_counts`         |Minimum number of counts captured per cell.                                                  |`integer`, example: `200`     |
-|`--max_counts`         |Maximum number of counts captured per cell.                                                  |`integer`, example: `5000000` |
-|`--min_genes_per_cell` |Minimum of non-zero values per cell.                                                         |`integer`, example: `200`     |
-|`--max_genes_per_cell` |Maximum of non-zero values per cell.                                                         |`integer`, example: `1500000` |
-|`--min_cells_per_gene` |Minimum of non-zero values per gene.                                                         |`integer`, example: `3`       |
-|`--min_fraction_mito`  |Minimum fraction of UMIs that are mitochondrial. Requires --obs_name_mitochondrial_fraction. |`double`, example: `0`        |
-|`--max_fraction_mito`  |Maximum fraction of UMIs that are mitochondrial. Requires --obs_name_mitochondrial_fraction. |`double`, example: `0.2`      |
+|Name                   |Description                                      |Attributes                    |
+|:----------------------|:------------------------------------------------|:-----------------------------|
+|`--min_counts`         |Minimum number of counts captured per cell.      |`integer`, example: `200`     |
+|`--max_counts`         |Maximum number of counts captured per cell.      |`integer`, example: `5000000` |
+|`--min_genes_per_cell` |Minimum of non-zero values per cell.             |`integer`, example: `200`     |
+|`--max_genes_per_cell` |Maximum of non-zero values per cell.             |`integer`, example: `1500000` |
+|`--min_cells_per_gene` |Minimum of non-zero values per gene.             |`integer`, example: `3`       |
+|`--min_fraction_mito`  |Minimum fraction of UMIs that are mitochondrial. |`double`, example: `0`        |
+|`--max_fraction_mito`  |Maximum fraction of UMIs that are mitochondrial. |`double`, example: `0.2`      |
 
 
 ### Mitochondrial gene detection
 
-|Name                                |Description                                                                                                                                                                                                                |Attributes                         |
-|:-----------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------|
-|`--var_name_mitochondrial_genes`    |In which .var slot to store a boolean array corresponding the mitochondrial genes.                                                                                                                                         |`string`                           |
-|`--obs_name_mitochondrial_fraction` |When specified, write the fraction of counts originating from mitochondrial genes  (based on --mitochondrial_gene_regex) to an .obs column with the specified name. Requires --var_name_mitochondrial_genes.               |`string`                           |
-|`--var_gene_names`                  |.var column name to be used to detect mitochondrial genes instead of .var_names (default if not set). Gene names matching with the regex value from --mitochondrial_gene_regex will be identified as a mitochondrial gene. |`string`, example: `"gene_symbol"` |
-|`--mitochondrial_gene_regex`        |Regex string that identifies mitochondrial genes from --var_gene_names. By default will detect human and mouse mitochondrial genes from a gene symbol.                                                                     |`string`, default: `"^[mM][tT]-"`  |
+|Name                             |Description                                                                                                                                                                                                                |Attributes                         |
+|:--------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------|
+|`--var_name_mitochondrial_genes` |In which .var slot to store a boolean array corresponding the mitochondrial genes.                                                                                                                                         |`string`                           |
+|`--var_gene_names`               |.var column name to be used to detect mitochondrial genes instead of .var_names (default if not set). Gene names matching with the regex value from --mitochondrial_gene_regex will be identified as a mitochondrial gene. |`string`, example: `"gene_symbol"` |
+|`--mitochondrial_gene_regex`     |Regex string that identifies mitochondrial genes from --var_gene_names. By default will detect human and mouse mitochondrial genes from a gene symbol.                                                                     |`string`, default: `"^[mM][tT]-"`  |
 
 ## Authors
 
@@ -134,60 +132,26 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 %%| column: screen-inset-shaded
 flowchart LR
     v0(Input)
-    v2(toSortedList)
-    v4(flatMap)
-    v10(filter)
-    v16(grep_annotation_column)
-    v18(join)
-    v22(mix)
-    v21(filter)
-    v28(calculate_qc_metrics)
-    v30(join)
-    v38(publish)
-    v40(join)
-    v44(filter)
-    v51(delimit_fraction)
-    v53(join)
-    v57(mix)
-    v56(filter)
-    v63(filter_with_counts)
-    v65(join)
-    v73(do_filter)
-    v75(join)
-    v83(filter_with_scrublet)
-    v85(join)
-    v92(Output)
-    v21-->v22
-    v56-->v57
-    v0-->v2
-    v2-->v4
-    v4-->v10
-    v4-->v21
-    v10-->v18
-    v10-->v16
-    v16-->v18
-    v18-->v22
-    v22-->v30
-    v22-->v28
-    v28-->v30
-    v30-->v40
-    v30-->v38
-    v38-->v40
-    v40-->v44
-    v40-->v56
-    v44-->v53
-    v44-->v51
-    v51-->v53
-    v53-->v57
-    v57-->v65
-    v57-->v63
-    v63-->v65
-    v65-->v75
-    v65-->v73
-    v73-->v75
-    v75-->v85
-    v75-->v83
-    v83-->v85
-    v85-->v92
+    v3(toSortedList)
+    v5(flatMap)
+    v12(filter_with_counts)
+    v14(join)
+    v23(do_filter)
+    v25(join)
+    v34(filter_with_scrublet)
+    v36(join)
+    v44(Output)
+    v0-->v3
+    v3-->v5
+    v5-->v14
+    v5-->v12
+    v12-->v14
+    v14-->v25
+    v14-->v23
+    v23-->v25
+    v25-->v36
+    v25-->v34
+    v34-->v36
+    v36-->v44
 
 ```
