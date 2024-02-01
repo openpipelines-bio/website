@@ -14,7 +14,7 @@ ID: `totalvi_leiden`
 Namespace: `multiomics/integration`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.1/./workflows/multiomics/integration/totalvi_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.2/./workflows/multiomics/integration/totalvi_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.1 -latest \
+  -r 0.10.2 -latest \
   -main-script ./workflows/multiomics/integration/totalvi_leiden/main.nf \
   --help
 ```
@@ -98,7 +98,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.1 -latest \
+  -r 0.10.2 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/integration/totalvi_leiden/main.nf \
   -params-file params.yaml
@@ -209,62 +209,62 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ```{mermaid}
 %%| column: screen-inset-shaded
 flowchart LR
-    p0(Input)
-    p3(toSortedList)
-    p5(flatMap)
-    p12(totalvi)
-    p14(join)
-    p23(find_neighbors)
-    p25(join)
-    p33(leiden)
-    p35(join)
-    p43(umap)
-    p45(join)
-    p53(move_obsm_to_obs)
-    p55(join)
-    p64(test_wf:run_wf:test_wf:run_wf:neighbors_leiden_umap:find_neighbors:find_neighbors_process1)
-    p66(join)
-    p74(test_wf:run_wf:test_wf:run_wf:neighbors_leiden_umap:leiden:leiden_process1)
-    p76(join)
-    p84(test_wf:run_wf:test_wf:run_wf:neighbors_leiden_umap:umap:umap_process1)
-    p86(join)
-    p94(test_wf:run_wf:test_wf:run_wf:neighbors_leiden_umap:move_obsm_to_obs:move_obsm_to_obs_process1)
-    p96(join)
-    p104(publish)
-    p106(join)
-    p112(Output)
-    p0-->p3
-    p3-->p5
-    p5-->p14
-    p5-->p12
-    p12-->p14
-    p14-->p25
-    p14-->p23
-    p23-->p25
-    p25-->p35
-    p25-->p33
-    p33-->p35
-    p35-->p45
-    p35-->p43
-    p43-->p45
-    p45-->p55
-    p45-->p53
-    p53-->p55
-    p55-->p66
-    p55-->p64
-    p64-->p66
-    p66-->p76
-    p66-->p74
-    p74-->p76
-    p76-->p86
-    p76-->p84
-    p84-->p86
-    p86-->p96
-    p86-->p94
-    p94-->p96
-    p96-->p106
-    p96-->p104
-    p104-->p106
-    p106-->p112
+    v0(Input)
+    v3(toSortedList)
+    v5(flatMap)
+    v12(totalvi)
+    v14(join)
+    v23(find_neighbors)
+    v25(join)
+    v33(leiden)
+    v35(join)
+    v43(umap)
+    v45(join)
+    v53(move_obsm_to_obs)
+    v55(join)
+    v64(test_wf:run_wf:test_wf:run_wf:neighbors_leiden_umap:find_neighbors:find_neighbors_process1)
+    v66(join)
+    v74(test_wf:run_wf:test_wf:run_wf:neighbors_leiden_umap:leiden:leiden_process1)
+    v76(join)
+    v84(test_wf:run_wf:test_wf:run_wf:neighbors_leiden_umap:umap:umap_process1)
+    v86(join)
+    v94(test_wf:run_wf:test_wf:run_wf:neighbors_leiden_umap:move_obsm_to_obs:move_obsm_to_obs_process1)
+    v96(join)
+    v104(publish)
+    v106(join)
+    v112(Output)
+    v0-->v3
+    v3-->v5
+    v5-->v14
+    v5-->v12
+    v12-->v14
+    v14-->v25
+    v14-->v23
+    v23-->v25
+    v25-->v35
+    v25-->v33
+    v33-->v35
+    v35-->v45
+    v35-->v43
+    v43-->v45
+    v45-->v55
+    v45-->v53
+    v53-->v55
+    v55-->v66
+    v55-->v64
+    v64-->v66
+    v66-->v76
+    v66-->v74
+    v74-->v76
+    v76-->v86
+    v76-->v84
+    v84-->v86
+    v86-->v96
+    v86-->v94
+    v94-->v96
+    v96-->v106
+    v96-->v104
+    v104-->v106
+    v106-->v112
 
 ```

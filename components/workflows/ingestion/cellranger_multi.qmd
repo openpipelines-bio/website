@@ -14,7 +14,7 @@ ID: `cellranger_multi`
 Namespace: `ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.1/./workflows/ingestion/cellranger_multi){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.2/./workflows/ingestion/cellranger_multi){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.1 -latest \
+  -r 0.10.2 -latest \
   -main-script ./workflows/ingestion/cellranger_multi/main.nf \
   --help
 ```
@@ -79,7 +79,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.1 -latest \
+  -r 0.10.2 -latest \
   -profile docker \
   -main-script ./workflows/ingestion/cellranger_multi/main.nf \
   -params-file params.yaml
@@ -157,22 +157,22 @@ Arguments relevant to the analysis of gene expression data.
 ```{mermaid}
 %%| column: screen-inset-shaded
 flowchart LR
-    p0(Input)
-    p2(toSortedList)
-    p4(flatMap)
-    p11(cellranger_multi)
-    p13(join)
-    p20(from_cellranger_multi_to_h5mu)
-    p22(join)
-    p29(Output)
-    p0-->p2
-    p2-->p4
-    p4-->p13
-    p4-->p11
-    p11-->p13
-    p13-->p22
-    p13-->p20
-    p20-->p22
-    p22-->p29
+    v0(Input)
+    v2(toSortedList)
+    v4(flatMap)
+    v11(cellranger_multi)
+    v13(join)
+    v20(from_cellranger_multi_to_h5mu)
+    v22(join)
+    v29(Output)
+    v0-->v2
+    v2-->v4
+    v4-->v13
+    v4-->v11
+    v11-->v13
+    v13-->v22
+    v13-->v20
+    v20-->v22
+    v22-->v29
 
 ```
