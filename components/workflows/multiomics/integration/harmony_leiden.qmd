@@ -14,7 +14,7 @@ ID: `harmony_leiden`
 Namespace: `multiomics/integration`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.2/./workflows/multiomics/integration/harmony_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.2/./workflows/multiomics/integration/harmony_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.2 -latest \
+  -r 0.10.2 -latest \
   -main-script ./workflows/multiomics/integration/harmony_leiden/main.nf \
   --help
 ```
@@ -75,7 +75,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.2 -latest \
+  -r 0.10.2 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/integration/harmony_leiden/main.nf \
   -params-file params.yaml
@@ -154,17 +154,13 @@ flowchart LR
     v12(join)
     v20(find_neighbors)
     v22(join)
-    v25(filter)
-    v31(leiden)
-    v33(join)
-    v41(move_obsm_to_obs)
-    v43(join)
-    v47(mix)
-    v46(filter)
-    v53(umap)
-    v55(join)
-    v61(Output)
-    v46-->v47
+    v30(leiden)
+    v32(join)
+    v40(umap)
+    v42(join)
+    v50(move_obsm_to_obs)
+    v52(join)
+    v58(Output)
     v0-->v2
     v2-->v4
     v4-->v12
@@ -173,18 +169,15 @@ flowchart LR
     v12-->v22
     v12-->v20
     v20-->v22
-    v22-->v25
-    v22-->v46
-    v25-->v33
-    v25-->v31
-    v31-->v33
-    v33-->v43
-    v33-->v41
-    v41-->v43
-    v43-->v47
-    v47-->v55
-    v47-->v53
-    v53-->v55
-    v55-->v61
+    v22-->v32
+    v22-->v30
+    v30-->v32
+    v32-->v42
+    v32-->v40
+    v40-->v42
+    v42-->v52
+    v42-->v50
+    v50-->v52
+    v52-->v58
 
 ```

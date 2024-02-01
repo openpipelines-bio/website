@@ -14,7 +14,7 @@ ID: `scanorama_leiden`
 Namespace: `multiomics/integration`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.2/./workflows/multiomics/integration/scanorama_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.2/./workflows/multiomics/integration/scanorama_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.2 -latest \
+  -r 0.10.2 -latest \
   -main-script ./workflows/multiomics/integration/scanorama_leiden/main.nf \
   --help
 ```
@@ -79,7 +79,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.2 -latest \
+  -r 0.10.2 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/integration/scanorama_leiden/main.nf \
   -params-file params.yaml
@@ -160,41 +160,34 @@ flowchart LR
     v0(Input)
     v2(toSortedList)
     v4(flatMap)
-    v10(scanorama)
-    v12(join)
-    v20(find_neighbors)
-    v22(join)
-    v25(filter)
+    v11(scanorama)
+    v13(join)
+    v21(find_neighbors)
+    v23(join)
     v31(leiden)
     v33(join)
-    v41(move_obsm_to_obs)
+    v41(umap)
     v43(join)
-    v47(mix)
-    v46(filter)
-    v53(umap)
-    v55(join)
-    v61(Output)
-    v46-->v47
+    v51(move_obsm_to_obs)
+    v53(join)
+    v60(Output)
     v0-->v2
     v2-->v4
-    v4-->v12
-    v4-->v10
-    v10-->v12
-    v12-->v22
-    v12-->v20
-    v20-->v22
-    v22-->v25
-    v22-->v46
-    v25-->v33
-    v25-->v31
+    v4-->v13
+    v4-->v11
+    v11-->v13
+    v13-->v23
+    v13-->v21
+    v21-->v23
+    v23-->v33
+    v23-->v31
     v31-->v33
     v33-->v43
     v33-->v41
     v41-->v43
-    v43-->v47
-    v47-->v55
-    v47-->v53
-    v53-->v55
-    v55-->v61
+    v43-->v53
+    v43-->v51
+    v51-->v53
+    v53-->v60
 
 ```

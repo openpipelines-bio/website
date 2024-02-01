@@ -14,7 +14,7 @@ ID: `cellranger_multi`
 Namespace: `ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.2/./workflows/ingestion/cellranger_multi){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.2/./workflows/ingestion/cellranger_multi){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.2 -latest \
+  -r 0.10.2 -latest \
   -main-script ./workflows/ingestion/cellranger_multi/main.nf \
   --help
 ```
@@ -79,7 +79,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.2 -latest \
+  -r 0.10.2 -latest \
   -profile docker \
   -main-script ./workflows/ingestion/cellranger_multi/main.nf \
   -params-file params.yaml
@@ -162,17 +162,17 @@ flowchart LR
     v4(flatMap)
     v11(cellranger_multi)
     v13(join)
-    v21(from_cellranger_multi_to_h5mu)
-    v23(join)
-    v30(Output)
+    v20(from_cellranger_multi_to_h5mu)
+    v22(join)
+    v29(Output)
     v0-->v2
     v2-->v4
     v4-->v13
     v4-->v11
     v11-->v13
-    v13-->v23
-    v13-->v21
-    v21-->v23
-    v23-->v30
+    v13-->v22
+    v13-->v20
+    v20-->v22
+    v22-->v29
 
 ```

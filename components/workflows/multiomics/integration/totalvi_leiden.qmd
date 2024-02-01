@@ -14,7 +14,7 @@ ID: `totalvi_leiden`
 Namespace: `multiomics/integration`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.2/./workflows/multiomics/integration/totalvi_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.2/./workflows/multiomics/integration/totalvi_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.2 -latest \
+  -r 0.10.2 -latest \
   -main-script ./workflows/multiomics/integration/totalvi_leiden/main.nf \
   --help
 ```
@@ -98,7 +98,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.2 -latest \
+  -r 0.10.2 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/integration/totalvi_leiden/main.nf \
   -params-file params.yaml
@@ -216,31 +216,23 @@ flowchart LR
     v14(join)
     v23(find_neighbors)
     v25(join)
-    v28(filter)
-    v34(leiden)
-    v36(join)
-    v44(move_obsm_to_obs)
-    v46(join)
-    v50(mix)
-    v49(filter)
-    v56(umap)
-    v58(join)
-    v67(test_wf:run_wf:test_wf:run_wf:neighbors_leiden_umap:find_neighbors:find_neighbors_process1)
-    v69(join)
-    v72(filter)
-    v78(test_wf:run_wf:test_wf:run_wf:neighbors_leiden_umap:leiden:leiden_process1)
-    v80(join)
-    v88(test_wf:run_wf:test_wf:run_wf:neighbors_leiden_umap:move_obsm_to_obs:move_obsm_to_obs_process1)
-    v90(join)
-    v94(mix)
-    v93(filter)
-    v100(test_wf:run_wf:test_wf:run_wf:neighbors_leiden_umap:umap:umap_process1)
-    v102(join)
-    v110(publish)
-    v112(join)
-    v118(Output)
-    v49-->v50
-    v93-->v94
+    v33(leiden)
+    v35(join)
+    v43(umap)
+    v45(join)
+    v53(move_obsm_to_obs)
+    v55(join)
+    v64(test_wf:run_wf:test_wf:run_wf:neighbors_leiden_umap:find_neighbors:find_neighbors_process1)
+    v66(join)
+    v74(test_wf:run_wf:test_wf:run_wf:neighbors_leiden_umap:leiden:leiden_process1)
+    v76(join)
+    v84(test_wf:run_wf:test_wf:run_wf:neighbors_leiden_umap:umap:umap_process1)
+    v86(join)
+    v94(test_wf:run_wf:test_wf:run_wf:neighbors_leiden_umap:move_obsm_to_obs:move_obsm_to_obs_process1)
+    v96(join)
+    v104(publish)
+    v106(join)
+    v112(Output)
     v0-->v3
     v3-->v5
     v5-->v14
@@ -249,36 +241,30 @@ flowchart LR
     v14-->v25
     v14-->v23
     v23-->v25
-    v25-->v28
-    v25-->v49
-    v28-->v36
-    v28-->v34
-    v34-->v36
-    v36-->v46
-    v36-->v44
-    v44-->v46
-    v46-->v50
-    v50-->v58
-    v50-->v56
-    v56-->v58
-    v58-->v69
-    v58-->v67
-    v67-->v69
-    v69-->v72
-    v69-->v93
-    v72-->v80
-    v72-->v78
-    v78-->v80
-    v80-->v90
-    v80-->v88
-    v88-->v90
-    v90-->v94
-    v94-->v102
-    v94-->v100
-    v100-->v102
-    v102-->v112
-    v102-->v110
-    v110-->v112
-    v112-->v118
+    v25-->v35
+    v25-->v33
+    v33-->v35
+    v35-->v45
+    v35-->v43
+    v43-->v45
+    v45-->v55
+    v45-->v53
+    v53-->v55
+    v55-->v66
+    v55-->v64
+    v64-->v66
+    v66-->v76
+    v66-->v74
+    v74-->v76
+    v76-->v86
+    v76-->v84
+    v84-->v86
+    v86-->v96
+    v86-->v94
+    v94-->v96
+    v96-->v106
+    v96-->v104
+    v104-->v106
+    v106-->v112
 
 ```
