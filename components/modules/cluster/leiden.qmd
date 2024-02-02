@@ -14,7 +14,7 @@ ID: `leiden`
 Namespace: `cluster`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.2/./src/cluster/leiden){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.3/./src/cluster/leiden){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -39,7 +39,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.2 -latest \
+  -r 0.11.3 -latest \
   -main-script target/nextflow/cluster/leiden/main.nf \
   --help
 ```
@@ -56,7 +56,7 @@ obsp_connectivities: "connectivities"
 # output: "$id.$key.output.h5mu"
 # output_compression: "gzip"
 obsm_name: "leiden"
-resolution: # please fill in - example: [1]
+resolution: [1]
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
@@ -66,7 +66,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.2 -latest \
+  -r 0.11.3 -latest \
   -profile docker \
   -main-script target/nextflow/cluster/leiden/main.nf \
   -params-file params.yaml
@@ -80,15 +80,15 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name                    |Description                                                                                                                                                                    |Attributes                                                    |
-|:-----------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------|
-|`--input`               |Input file.                                                                                                                                                                    |`file`, required, example: `"input.h5mu"`                     |
-|`--modality`            |                                                                                                                                                                               |`string`, default: `"rna"`                                    |
-|`--obsp_connectivities` |In which .obsp slot the neighbor connectivities can be found.                                                                                                                  |`string`, default: `"connectivities"`                         |
-|`--output`              |Output file.                                                                                                                                                                   |`file`, required, example: `"output.h5mu"`                    |
-|`--output_compression`  |                                                                                                                                                                               |`string`, example: `"gzip"`                                   |
-|`--obsm_name`           |Name of the .obsm key under which to add the cluster labels. The name of the columns in the matrix will correspond to the resolutions.                                         |`string`, default: `"leiden"`                                 |
-|`--resolution`          |A parameter value controlling the coarseness of the clustering. Higher values lead to more clusters. Multiple values will result in clustering being performed multiple times. |List of `double`, required, default: `1`, multiple_sep: `":"` |
+|Name                    |Description                                                                                                                                                                    |Attributes                                          |
+|:-----------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------|
+|`--input`               |Input file.                                                                                                                                                                    |`file`, required, example: `"input.h5mu"`           |
+|`--modality`            |                                                                                                                                                                               |`string`, default: `"rna"`                          |
+|`--obsp_connectivities` |In which .obsp slot the neighbor connectivities can be found.                                                                                                                  |`string`, default: `"connectivities"`               |
+|`--output`              |Output file.                                                                                                                                                                   |`file`, required, example: `"output.h5mu"`          |
+|`--output_compression`  |                                                                                                                                                                               |`string`, example: `"gzip"`                         |
+|`--obsm_name`           |Name of the .obsm key under which to add the cluster labels. The name of the columns in the matrix will correspond to the resolutions.                                         |`string`, default: `"leiden"`                       |
+|`--resolution`          |A parameter value controlling the coarseness of the clustering. Higher values lead to more clusters. Multiple values will result in clustering being performed multiple times. |List of `double`, default: `1`, multiple_sep: `":"` |
 
 ## Authors
 

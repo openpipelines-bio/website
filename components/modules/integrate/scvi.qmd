@@ -14,7 +14,7 @@ ID: `scvi`
 Namespace: `integrate`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.2/./src/integrate/scvi){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.3/./src/integrate/scvi){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.2 -latest \
+  -r 0.11.3 -latest \
   -main-script target/nextflow/integrate/scvi/main.nf \
   --help
 ```
@@ -53,7 +53,7 @@ obs_batch: "sample_id"
 
 # Outputs
 # output: "$id.$key.output.output"
-# output_model: "$id.$key.output_model.output_model"
+# model_output: "$id.$key.model_output.model_output"
 # output_compression: "gzip"
 obsm_output: "X_scvi_integrated"
 
@@ -96,7 +96,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.2 -latest \
+  -r 0.11.3 -latest \
   -profile docker \
   -main-script target/nextflow/integrate/scvi/main.nf \
   -params-file params.yaml
@@ -128,7 +128,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |Name                   |Description                                                      |Attributes                               |
 |:----------------------|:----------------------------------------------------------------|:----------------------------------------|
 |`--output`             |Output h5mu file.                                                |`file`, required                         |
-|`--output_model`       |Folder where the state of the trained model will be saved to.    |`file`                                   |
+|`--model_output`       |Folder where the state of the trained model will be saved to.    |`file`                                   |
 |`--output_compression` |The compression format to be used on the output h5mu object.     |`string`, example: `"gzip"`              |
 |`--obsm_output`        |In which .obsm slot to store the resulting integrated embedding. |`string`, default: `"X_scvi_integrated"` |
 

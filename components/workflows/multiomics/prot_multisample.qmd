@@ -14,7 +14,7 @@ ID: `prot_multisample`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.2/./workflows/multiomics/prot_multisample){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.3/./workflows/multiomics/prot_multisample){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.2 -latest \
+  -r 0.11.3 -latest \
   -main-script ./workflows/multiomics/prot_multisample/main.nf \
   --help
 ```
@@ -48,7 +48,6 @@ input: # please fill in - example: "dataset.h5mu"
 # output: "$id.$key.output.h5mu"
 
 # QC metrics calculation options
-# var_qc_metrics: ["ercc", "highly_variable"]
 top_n_vars: [50, 100, 200, 500]
 
 # Nextflow input-output arguments
@@ -59,7 +58,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.2 -latest \
+  -r 0.11.3 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/prot_multisample/main.nf \
   -params-file params.yaml
@@ -88,10 +87,9 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### QC metrics calculation options
 
-|Name               |Description                                                                                                                                                                                                                                                                               |Attributes                                                               |
-|:------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------|
-|`--var_qc_metrics` |Keys to select a boolean (containing only True or False) column from .var. For each cell, calculate the proportion of total values for genes which are labeled 'True',  compared to the total sum of the values for all genes. Defaults to the value from --var_name_mitochondrial_genes. |List of `string`, example: `"ercc,highly_variable"`, multiple_sep: `","` |
-|`--top_n_vars`     |Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. `--top_n_vars 20,50` finds cumulative proportion to the 20th and 50th most expressed vars.                                                                           |List of `integer`, default: `50, 100, 200, 500`, multiple_sep: `","`     |
+|Name           |Description                                                                                                                                                                                                     |Attributes                                                           |
+|:--------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------|
+|`--top_n_vars` |Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. `--top_n_vars 20,50` finds cumulative proportion to the 20th and 50th most expressed vars. |List of `integer`, default: `50, 100, 200, 500`, multiple_sep: `","` |
 
 ## Authors
 
@@ -106,40 +104,23 @@ flowchart LR
     v0(Input)
     v3(toSortedList)
     v5(flatMap)
-    v6(toSortedList)
-    v8(Output)
-    v14(clr)
-    v16(join)
-    v22(filter)
-    v28(grep_annotation_column)
-    v30(join)
-    v34(mix)
-    v33(filter)
-    v40(calculate_qc_metrics)
-    v42(join)
-    v50(publish)
-    v52(join)
-    v58(Output)
-    v5-->v6
-    v33-->v34
+    v7(toSortedList)
+    v9(Output)
+    v15(clr)
+    v17(join)
+    v25(prot_calculate_qc_metrics)
+    v27(join)
+    v34(Output)
     v0-->v3
     v3-->v5
-    v6-->v8
-    v5-->v16
-    v5-->v14
-    v14-->v16
-    v16-->v22
-    v16-->v33
-    v22-->v30
-    v22-->v28
-    v28-->v30
-    v30-->v34
-    v34-->v42
-    v34-->v40
-    v40-->v42
-    v42-->v52
-    v42-->v50
-    v50-->v52
-    v52-->v58
+    v5-->v7
+    v7-->v9
+    v5-->v17
+    v5-->v15
+    v15-->v17
+    v17-->v27
+    v17-->v25
+    v25-->v27
+    v27-->v34
 
 ```
