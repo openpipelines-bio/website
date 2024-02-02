@@ -14,7 +14,7 @@ ID: `xgboost`
 Namespace: `labels_transfer`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.2/./src/labels_transfer/xgboost){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.5/./src/labels_transfer/xgboost){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.2 -latest \
+  -r 0.12.5 -latest \
   -main-script target/nextflow/labels_transfer/xgboost/main.nf \
   --help
 ```
@@ -69,7 +69,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.2 -latest \
+  -r 0.12.5 -latest \
   -profile docker \
   -main-script target/nextflow/labels_transfer/xgboost/main.nf \
   -params-file params.yaml
