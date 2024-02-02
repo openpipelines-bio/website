@@ -14,7 +14,7 @@ ID: `multisample`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.2/./workflows/multiomics/multisample){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.3/./workflows/multiomics/multisample){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -34,7 +34,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.11.2 -latest \
+  -r 0.11.3 -latest \
   -main-script ./workflows/multiomics/multisample/main.nf \
   --help
 ```
@@ -70,7 +70,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.11.2 -latest \
+  -r 0.11.3 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/multisample/main.nf \
   -params-file params.yaml
@@ -139,67 +139,70 @@ flowchart LR
     v17(filter)
     v19(test_wf:run_wf:split_modalities_workflow:splitStub)
     v22(flatMap)
-    v24(filter)
-    v27(toSortedList)
-    v29(flatMap)
-    v31(toSortedList)
-    v33(Output)
-    v39(normalize_total)
-    v41(join)
-    v50(log1p)
-    v52(join)
-    v61(delete_layer)
-    v63(join)
-    v72(filter_with_hvg)
-    v74(join)
-    v83(rna_calculate_qc_metrics)
-    v85(join)
-    v126(concat)
-    v90(filter)
+    v23(filter)
+    v26(toSortedList)
+    v28(flatMap)
+    v30(toSortedList)
+    v32(Output)
+    v38(normalize_total)
+    v40(join)
+    v48(log1p)
+    v50(join)
+    v58(delete_layer)
+    v60(join)
+    v68(filter_with_hvg)
+    v70(join)
+    v78(rna_calculate_qc_metrics)
+    v80(join)
+    v121(concat)
+    v86(filter)
+    v89(toSortedList)
+    v91(flatMap)
     v93(toSortedList)
-    v95(flatMap)
-    v97(toSortedList)
-    v99(Output)
-    v105(clr)
-    v107(join)
-    v116(prot_calculate_qc_metrics)
-    v118(join)
-    v123(filter)
-    v127(groupTuple)
-    v133(merge)
-    v135(join)
-    v139(filter)
-    v143(toSortedList)
-    v145(flatMap)
-    v152(pca)
-    v154(join)
-    v163(find_neighbors)
-    v165(join)
-    v174(umap)
-    v176(join)
-    v182(concat)
-    v181(filter)
-    v183(filter)
-    v187(toSortedList)
-    v189(flatMap)
-    v196(pca)
-    v198(join)
-    v207(find_neighbors)
+    v95(Output)
+    v101(clr)
+    v103(join)
+    v111(prot_calculate_qc_metrics)
+    v113(join)
+    v119(filter)
+    v122(groupTuple)
+    v128(merge)
+    v130(join)
+    v133(filter)
+    v137(toSortedList)
+    v139(flatMap)
+    v146(pca)
+    v148(join)
+    v156(find_neighbors)
+    v158(join)
+    v166(umap)
+    v168(join)
+    v173(concat)
+    v172(filter)
+    v174(filter)
+    v178(toSortedList)
+    v180(flatMap)
+    v187(pca)
+    v189(join)
+    v197(find_neighbors)
+    v199(join)
+    v207(test_wf:run_wf:integration_setup_workflow:initialize_integration_prot:umap:umap_process1)
     v209(join)
-    v218(test_wf:run_wf:integration_setup_workflow:initialize_integration_prot:umap:umap_process1)
-    v220(join)
-    v226(concat)
-    v225(filter)
-    v234(publish)
-    v236(join)
-    v241(toSortedList)
-    v243(Output)
+    v214(concat)
+    v213(filter)
+    v220(publish)
+    v222(join)
+    v227(toSortedList)
+    v229(Output)
     v21-->v22
-    v126-->v127
-    v181-->v182
-    v182-->v183
-    v182-->v225
-    v225-->v226
+    v22-->v23
+    v22-->v86
+    v22-->v119
+    v121-->v122
+    v172-->v173
+    v173-->v174
+    v173-->v213
+    v213-->v214
     v0-->v2
     v2-->v4
     v4-->v7
@@ -210,74 +213,71 @@ flowchart LR
     v14-->v21
     v17-->v19
     v19-->v21
-    v22-->v24
-    v22-->v90
-    v22-->v123
-    v24-->v27
-    v27-->v29
-    v29-->v31
-    v31-->v33
-    v29-->v41
-    v29-->v39
-    v39-->v41
-    v41-->v52
-    v41-->v50
-    v50-->v52
-    v52-->v63
-    v52-->v61
-    v61-->v63
-    v63-->v74
-    v63-->v72
-    v72-->v74
-    v74-->v85
-    v74-->v83
-    v83-->v85
-    v85-->v126
-    v90-->v93
+    v23-->v26
+    v26-->v28
+    v28-->v30
+    v30-->v32
+    v28-->v40
+    v28-->v38
+    v38-->v40
+    v40-->v50
+    v40-->v48
+    v48-->v50
+    v50-->v60
+    v50-->v58
+    v58-->v60
+    v60-->v70
+    v60-->v68
+    v68-->v70
+    v70-->v80
+    v70-->v78
+    v78-->v80
+    v80-->v121
+    v86-->v89
+    v89-->v91
+    v91-->v93
     v93-->v95
-    v95-->v97
-    v97-->v99
-    v95-->v107
-    v95-->v105
-    v105-->v107
-    v107-->v118
-    v107-->v116
-    v116-->v118
-    v118-->v126
-    v123-->v126
-    v127-->v135
-    v127-->v133
-    v133-->v135
-    v135-->v139
-    v135-->v181
-    v139-->v143
-    v143-->v145
-    v145-->v154
-    v145-->v152
-    v152-->v154
-    v154-->v165
-    v154-->v163
-    v163-->v165
-    v165-->v176
-    v165-->v174
-    v174-->v176
-    v176-->v182
-    v183-->v187
+    v91-->v103
+    v91-->v101
+    v101-->v103
+    v103-->v113
+    v103-->v111
+    v111-->v113
+    v113-->v121
+    v119-->v121
+    v122-->v130
+    v122-->v128
+    v128-->v130
+    v130-->v133
+    v130-->v172
+    v133-->v137
+    v137-->v139
+    v139-->v148
+    v139-->v146
+    v146-->v148
+    v148-->v158
+    v148-->v156
+    v156-->v158
+    v158-->v168
+    v158-->v166
+    v166-->v168
+    v168-->v173
+    v174-->v178
+    v178-->v180
+    v180-->v189
+    v180-->v187
     v187-->v189
-    v189-->v198
-    v189-->v196
-    v196-->v198
-    v198-->v209
-    v198-->v207
+    v189-->v199
+    v189-->v197
+    v197-->v199
+    v199-->v209
+    v199-->v207
     v207-->v209
-    v209-->v220
-    v209-->v218
-    v218-->v220
-    v220-->v226
-    v226-->v236
-    v226-->v234
-    v234-->v236
-    v236-->v241
-    v241-->v243
+    v209-->v214
+    v214-->v222
+    v214-->v220
+    v220-->v222
+    v222-->v227
+    v227-->v229
 
 ```
