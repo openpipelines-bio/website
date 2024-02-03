@@ -14,7 +14,7 @@ ID: `subset_h5mu`
 Namespace: `filter`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.5/./src/filter/subset_h5mu){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/filter/subset_h5mu){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.5 -latest \
+  -r 0.12.6 -latest \
   -main-script target/nextflow/filter/subset_h5mu/main.nf \
   --help
 ```
@@ -55,7 +55,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.5 -latest \
+  -r 0.12.6 -latest \
   -profile docker \
   -main-script target/nextflow/filter/subset_h5mu/main.nf \
   -params-file params.yaml
