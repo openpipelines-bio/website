@@ -14,7 +14,7 @@ ID: `filter_with_counts`
 Namespace: `filter`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.2/./src/filter/filter_with_counts){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.4/./src/filter/filter_with_counts){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -32,7 +32,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.2 -latest \
+  -r 0.11.4 -latest \
   -main-script target/nextflow/filter/filter_with_counts/main.nf \
   --help
 ```
@@ -46,6 +46,8 @@ nextflow run openpipelines-bio/openpipeline \
 input: # please fill in - example: "input.h5mu"
 modality: "rna"
 # layer: "raw_counts"
+# var_gene_names: "gene_symbol"
+mitochondrial_gene_regex: "^[mM][tT]-"
 
 # Outputs
 # output: "$id.$key.output.h5mu"
@@ -53,6 +55,7 @@ modality: "rna"
 do_subset: false
 obs_name_filter: "filter_with_counts"
 var_name_filter: "filter_with_counts"
+# var_name_mitochondrial_genes: "foo"
 
 # Arguments
 # min_counts: 200
@@ -60,6 +63,8 @@ var_name_filter: "filter_with_counts"
 # min_genes_per_cell: 200
 # max_genes_per_cell: 1500000
 # min_cells_per_gene: 3
+# min_fraction_mito: 0
+# max_fraction_mito: 0.2
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
@@ -69,7 +74,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.2 -latest \
+  -r 0.11.4 -latest \
   -profile docker \
   -main-script target/nextflow/filter/filter_with_counts/main.nf \
   -params-file params.yaml
@@ -83,33 +88,38 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Inputs
 
-|Name         |Description     |Attributes                                |
-|:------------|:---------------|:-----------------------------------------|
-|`--input`    |Input h5mu file |`file`, required, example: `"input.h5mu"` |
-|`--modality` |                |`string`, default: `"rna"`                |
-|`--layer`    |                |`string`, example: `"raw_counts"`         |
+|Name                         |Description                                                                                                                                                                                                                 |Attributes                                |
+|:----------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------|
+|`--input`                    |Input h5mu file                                                                                                                                                                                                             |`file`, required, example: `"input.h5mu"` |
+|`--modality`                 |                                                                                                                                                                                                                            |`string`, default: `"rna"`                |
+|`--layer`                    |                                                                                                                                                                                                                            |`string`, example: `"raw_counts"`         |
+|`--var_gene_names`           |.var column name to be used to detect mitochondrial genes instead of .var_names (default if not set).  Gene names matching with the regex value from --mitochondrial_gene_regex will be identified as a mitochondrial gene. |`string`, example: `"gene_symbol"`        |
+|`--mitochondrial_gene_regex` |Regex string that identifies mitochondrial genes from --var_gene_names. By default will detect human and mouse mitochondrial genes from a gene symbol.                                                                      |`string`, default: `"^[mM][tT]-"`         |
 
 
 ### Outputs
 
-|Name                   |Description                                                                                        |Attributes                                |
-|:----------------------|:--------------------------------------------------------------------------------------------------|:-----------------------------------------|
-|`--output`             |Output h5mu file.                                                                                  |`file`, example: `"output.h5mu"`          |
-|`--output_compression` |The compression format to be used on the output h5mu object.                                       |`string`, example: `"gzip"`               |
-|`--do_subset`          |Whether to subset before storing the output.                                                       |`boolean_true`                            |
-|`--obs_name_filter`    |In which .obs slot to store a boolean array corresponding to which observations should be removed. |`string`, default: `"filter_with_counts"` |
-|`--var_name_filter`    |In which .var slot to store a boolean array corresponding to which variables should be removed.    |`string`, default: `"filter_with_counts"` |
+|Name                             |Description                                                                                                                                                       |Attributes                                |
+|:--------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------|
+|`--output`                       |Output h5mu file.                                                                                                                                                 |`file`, example: `"output.h5mu"`          |
+|`--output_compression`           |The compression format to be used on the output h5mu object.                                                                                                      |`string`, example: `"gzip"`               |
+|`--do_subset`                    |Whether to subset before storing the output.                                                                                                                      |`boolean_true`                            |
+|`--obs_name_filter`              |In which .obs slot to store a boolean array corresponding to which observations should be removed.                                                                |`string`, default: `"filter_with_counts"` |
+|`--var_name_filter`              |In which .var slot to store a boolean array corresponding to which variables should be removed.                                                                   |`string`, default: `"filter_with_counts"` |
+|`--var_name_mitochondrial_genes` |In which .var slot to store a boolean array corresponding the mitochondrial genes. Will only be used if --min_fraction_mito or --max_fraction_mito are specified. |`string`                                  |
 
 
 ### Arguments
 
-|Name                   |Description                                 |Attributes                    |
-|:----------------------|:-------------------------------------------|:-----------------------------|
-|`--min_counts`         |Minimum number of counts captured per cell. |`integer`, example: `200`     |
-|`--max_counts`         |Maximum number of counts captured per cell. |`integer`, example: `5000000` |
-|`--min_genes_per_cell` |Minimum of non-zero values per cell.        |`integer`, example: `200`     |
-|`--max_genes_per_cell` |Maximum of non-zero values per cell.        |`integer`, example: `1500000` |
-|`--min_cells_per_gene` |Minimum of non-zero values per gene.        |`integer`, example: `3`       |
+|Name                   |Description                                      |Attributes                    |
+|:----------------------|:------------------------------------------------|:-----------------------------|
+|`--min_counts`         |Minimum number of counts captured per cell.      |`integer`, example: `200`     |
+|`--max_counts`         |Maximum number of counts captured per cell.      |`integer`, example: `5000000` |
+|`--min_genes_per_cell` |Minimum of non-zero values per cell.             |`integer`, example: `200`     |
+|`--max_genes_per_cell` |Maximum of non-zero values per cell.             |`integer`, example: `1500000` |
+|`--min_cells_per_gene` |Minimum of non-zero values per gene.             |`integer`, example: `3`       |
+|`--min_fraction_mito`  |Minimum fraction of UMIs that are mitochondrial. |`double`, example: `0`        |
+|`--max_fraction_mito`  |Maximum fraction of UMIs that are mitochondrial. |`double`, example: `0.2`      |
 
 ## Authors
 
