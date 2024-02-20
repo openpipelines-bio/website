@@ -14,7 +14,7 @@ ID: `harmony_leiden`
 Namespace: `multiomics/integration`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.1/./workflows/multiomics/integration/harmony_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.2/./workflows/multiomics/integration/harmony_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.1 -latest \
+  -r 0.10.2 -latest \
   -main-script ./workflows/multiomics/integration/harmony_leiden/main.nf \
   --help
 ```
@@ -75,7 +75,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.1 -latest \
+  -r 0.10.2 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/integration/harmony_leiden/main.nf \
   -params-file params.yaml
@@ -147,37 +147,37 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ```{mermaid}
 %%| column: screen-inset-shaded
 flowchart LR
-    p0(Input)
-    p2(toSortedList)
-    p4(flatMap)
-    p10(harmonypy)
-    p12(join)
-    p20(find_neighbors)
-    p22(join)
-    p30(leiden)
-    p32(join)
-    p40(umap)
-    p42(join)
-    p50(move_obsm_to_obs)
-    p52(join)
-    p58(Output)
-    p0-->p2
-    p2-->p4
-    p4-->p12
-    p4-->p10
-    p10-->p12
-    p12-->p22
-    p12-->p20
-    p20-->p22
-    p22-->p32
-    p22-->p30
-    p30-->p32
-    p32-->p42
-    p32-->p40
-    p40-->p42
-    p42-->p52
-    p42-->p50
-    p50-->p52
-    p52-->p58
+    v0(Input)
+    v2(toSortedList)
+    v4(flatMap)
+    v10(harmonypy)
+    v12(join)
+    v20(find_neighbors)
+    v22(join)
+    v30(leiden)
+    v32(join)
+    v40(umap)
+    v42(join)
+    v50(move_obsm_to_obs)
+    v52(join)
+    v58(Output)
+    v0-->v2
+    v2-->v4
+    v4-->v12
+    v4-->v10
+    v10-->v12
+    v12-->v22
+    v12-->v20
+    v20-->v22
+    v22-->v32
+    v22-->v30
+    v30-->v32
+    v32-->v42
+    v32-->v40
+    v40-->v42
+    v42-->v52
+    v42-->v50
+    v50-->v52
+    v52-->v58
 
 ```

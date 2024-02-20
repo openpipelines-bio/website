@@ -14,7 +14,7 @@ ID: `rna_multisample`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.1/./workflows/multiomics/rna_multisample){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.2/./workflows/multiomics/rna_multisample){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.1 -latest \
+  -r 0.10.2 -latest \
   -main-script ./workflows/multiomics/rna_multisample/main.nf \
   --help
 ```
@@ -65,7 +65,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.1 -latest \
+  -r 0.10.2 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/rna_multisample/main.nf \
   -params-file params.yaml
@@ -123,41 +123,41 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ```{mermaid}
 %%| column: screen-inset-shaded
 flowchart LR
-    p0(Input)
-    p3(toSortedList)
-    p5(flatMap)
-    p7(toSortedList)
-    p9(Output)
-    p15(normalize_total)
-    p17(join)
-    p25(log1p)
-    p27(join)
-    p35(delete_layer)
-    p37(join)
-    p45(filter_with_hvg)
-    p47(join)
-    p55(rna_calculate_qc_metrics)
-    p57(join)
-    p64(Output)
-    p0-->p3
-    p3-->p5
-    p5-->p7
-    p7-->p9
-    p5-->p17
-    p5-->p15
-    p15-->p17
-    p17-->p27
-    p17-->p25
-    p25-->p27
-    p27-->p37
-    p27-->p35
-    p35-->p37
-    p37-->p47
-    p37-->p45
-    p45-->p47
-    p47-->p57
-    p47-->p55
-    p55-->p57
-    p57-->p64
+    v0(Input)
+    v3(toSortedList)
+    v5(flatMap)
+    v7(toSortedList)
+    v9(Output)
+    v15(normalize_total)
+    v17(join)
+    v25(log1p)
+    v27(join)
+    v35(delete_layer)
+    v37(join)
+    v45(filter_with_hvg)
+    v47(join)
+    v55(rna_calculate_qc_metrics)
+    v57(join)
+    v64(Output)
+    v0-->v3
+    v3-->v5
+    v5-->v7
+    v7-->v9
+    v5-->v17
+    v5-->v15
+    v15-->v17
+    v17-->v27
+    v17-->v25
+    v25-->v27
+    v27-->v37
+    v27-->v35
+    v35-->v37
+    v37-->v47
+    v37-->v45
+    v45-->v47
+    v47-->v57
+    v47-->v55
+    v55-->v57
+    v57-->v64
 
 ```

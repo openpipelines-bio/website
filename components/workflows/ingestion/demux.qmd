@@ -14,7 +14,7 @@ ID: `demux`
 Namespace: `ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.1/./workflows/ingestion/demux){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.2/./workflows/ingestion/demux){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -31,7 +31,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.1 -latest \
+  -r 0.10.2 -latest \
   -main-script ./workflows/ingestion/demux/main.nf \
   --help
 ```
@@ -56,7 +56,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.1 -latest \
+  -r 0.10.2 -latest \
   -profile docker \
   -main-script ./workflows/ingestion/demux/main.nf \
   -params-file params.yaml
@@ -96,53 +96,53 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ```{mermaid}
 %%| column: screen-inset-shaded
 flowchart LR
-    p0(Input)
-    p2(toSortedList)
-    p4(flatMap)
-    p5(filter)
-    p10(cellranger_mkfastq)
-    p12(join)
-    p35(mix)
-    p15(filter)
-    p20(bcl_convert)
-    p22(join)
-    p25(filter)
-    p30(bcl2fastq)
-    p32(join)
-    p41(fastqc)
-    p43(join)
-    p46(Output)
-    p48(toSortedList)
-    p54(multiqc)
-    p56(join)
-    p59(Output)
-    p63(Output)
-    p4-->p5
-    p4-->p15
-    p4-->p25
-    p0-->p2
-    p2-->p4
-    p5-->p12
-    p5-->p10
-    p10-->p12
-    p12-->p35
-    p15-->p22
-    p15-->p20
-    p20-->p22
-    p22-->p35
-    p25-->p32
-    p25-->p30
-    p30-->p32
-    p32-->p35
-    p35-->p43
-    p35-->p41
-    p41-->p43
-    p43-->p46
-    p35-->p48
-    p48-->p56
-    p48-->p54
-    p54-->p56
-    p56-->p59
-    p35-->p63
+    v0(Input)
+    v2(toSortedList)
+    v4(flatMap)
+    v5(filter)
+    v10(cellranger_mkfastq)
+    v12(join)
+    v35(mix)
+    v15(filter)
+    v20(bcl_convert)
+    v22(join)
+    v25(filter)
+    v30(bcl2fastq)
+    v32(join)
+    v41(fastqc)
+    v43(join)
+    v46(Output)
+    v48(toSortedList)
+    v54(multiqc)
+    v56(join)
+    v59(Output)
+    v63(Output)
+    v4-->v5
+    v4-->v15
+    v4-->v25
+    v0-->v2
+    v2-->v4
+    v5-->v12
+    v5-->v10
+    v10-->v12
+    v12-->v35
+    v15-->v22
+    v15-->v20
+    v20-->v22
+    v22-->v35
+    v25-->v32
+    v25-->v30
+    v30-->v32
+    v32-->v35
+    v35-->v43
+    v35-->v41
+    v41-->v43
+    v43-->v46
+    v35-->v48
+    v48-->v56
+    v48-->v54
+    v54-->v56
+    v56-->v59
+    v35-->v63
 
 ```

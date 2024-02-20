@@ -14,7 +14,7 @@ ID: `bbknn_leiden`
 Namespace: `multiomics/integration`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.1/./workflows/multiomics/integration/bbknn_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.2/./workflows/multiomics/integration/bbknn_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.1 -latest \
+  -r 0.10.2 -latest \
   -main-script ./workflows/multiomics/integration/bbknn_leiden/main.nf \
   --help
 ```
@@ -74,7 +74,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.1 -latest \
+  -r 0.10.2 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/integration/bbknn_leiden/main.nf \
   -params-file params.yaml
@@ -143,32 +143,32 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ```{mermaid}
 %%| column: screen-inset-shaded
 flowchart LR
-    p0(Input)
-    p2(toSortedList)
-    p4(flatMap)
-    p10(bbknn)
-    p12(join)
-    p20(leiden)
-    p22(join)
-    p30(umap)
-    p32(join)
-    p40(move_obsm_to_obs)
-    p42(join)
-    p48(Output)
-    p0-->p2
-    p2-->p4
-    p4-->p12
-    p4-->p10
-    p10-->p12
-    p12-->p22
-    p12-->p20
-    p20-->p22
-    p22-->p32
-    p22-->p30
-    p30-->p32
-    p32-->p42
-    p32-->p40
-    p40-->p42
-    p42-->p48
+    v0(Input)
+    v2(toSortedList)
+    v4(flatMap)
+    v10(bbknn)
+    v12(join)
+    v20(leiden)
+    v22(join)
+    v30(umap)
+    v32(join)
+    v40(move_obsm_to_obs)
+    v42(join)
+    v48(Output)
+    v0-->v2
+    v2-->v4
+    v4-->v12
+    v4-->v10
+    v10-->v12
+    v12-->v22
+    v12-->v20
+    v20-->v22
+    v22-->v32
+    v22-->v30
+    v30-->v32
+    v32-->v42
+    v32-->v40
+    v40-->v42
+    v42-->v48
 
 ```

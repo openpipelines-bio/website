@@ -14,7 +14,7 @@ ID: `prot_singlesample`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.1/./workflows/multiomics/prot_singlesample){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.2/./workflows/multiomics/prot_singlesample){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.1 -latest \
+  -r 0.10.2 -latest \
   -main-script ./workflows/multiomics/prot_singlesample/main.nf \
   --help
 ```
@@ -64,7 +64,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.1 -latest \
+  -r 0.10.2 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/prot_singlesample/main.nf \
   -params-file params.yaml
@@ -117,24 +117,24 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ```{mermaid}
 %%| column: screen-inset-shaded
 flowchart LR
-    p0(Input)
-    p3(toSortedList)
-    p5(flatMap)
-    p12(filter_with_counts)
-    p14(join)
-    p22(do_filter)
-    p24(join)
-    p30(toSortedList)
-    p32(Output)
-    p0-->p3
-    p3-->p5
-    p5-->p14
-    p5-->p12
-    p12-->p14
-    p14-->p24
-    p14-->p22
-    p22-->p24
-    p24-->p30
-    p30-->p32
+    v0(Input)
+    v3(toSortedList)
+    v5(flatMap)
+    v12(filter_with_counts)
+    v14(join)
+    v22(do_filter)
+    v24(join)
+    v30(toSortedList)
+    v32(Output)
+    v0-->v3
+    v3-->v5
+    v5-->v14
+    v5-->v12
+    v12-->v14
+    v14-->v24
+    v14-->v22
+    v22-->v24
+    v24-->v30
+    v30-->v32
 
 ```

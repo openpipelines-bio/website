@@ -14,7 +14,7 @@ ID: `scvi_leiden`
 Namespace: `multiomics/integration`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.1/./workflows/multiomics/integration/scvi_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.10.2/./workflows/multiomics/integration/scvi_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.1 -latest \
+  -r 0.10.2 -latest \
   -main-script ./workflows/multiomics/integration/scvi_leiden/main.nf \
   --help
 ```
@@ -83,7 +83,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.10.1 -latest \
+  -r 0.10.2 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/integration/scvi_leiden/main.nf \
   -params-file params.yaml
@@ -163,37 +163,37 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ```{mermaid}
 %%| column: screen-inset-shaded
 flowchart LR
-    p0(Input)
-    p3(toSortedList)
-    p5(flatMap)
-    p12(scvi)
-    p14(join)
-    p23(find_neighbors)
-    p25(join)
-    p33(leiden)
-    p35(join)
-    p43(umap)
-    p45(join)
-    p53(move_obsm_to_obs)
-    p55(join)
-    p62(Output)
-    p0-->p3
-    p3-->p5
-    p5-->p14
-    p5-->p12
-    p12-->p14
-    p14-->p25
-    p14-->p23
-    p23-->p25
-    p25-->p35
-    p25-->p33
-    p33-->p35
-    p35-->p45
-    p35-->p43
-    p43-->p45
-    p45-->p55
-    p45-->p53
-    p53-->p55
-    p55-->p62
+    v0(Input)
+    v3(toSortedList)
+    v5(flatMap)
+    v12(scvi)
+    v14(join)
+    v23(find_neighbors)
+    v25(join)
+    v33(leiden)
+    v35(join)
+    v43(umap)
+    v45(join)
+    v53(move_obsm_to_obs)
+    v55(join)
+    v62(Output)
+    v0-->v3
+    v3-->v5
+    v5-->v14
+    v5-->v12
+    v12-->v14
+    v14-->v25
+    v14-->v23
+    v23-->v25
+    v25-->v35
+    v25-->v33
+    v33-->v35
+    v35-->v45
+    v35-->v43
+    v43-->v45
+    v45-->v55
+    v45-->v53
+    v53-->v55
+    v55-->v62
 
 ```
