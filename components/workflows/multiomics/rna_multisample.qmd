@@ -14,7 +14,7 @@ ID: `rna_multisample`
 Namespace: `multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.2/./workflows/multiomics/rna_multisample){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.11.3/./workflows/multiomics/rna_multisample){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.11.2 -latest \
+  -r 0.11.3 -latest \
   -main-script ./workflows/multiomics/rna_multisample/main.nf \
   --help
 ```
@@ -65,7 +65,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.11.2 -latest \
+  -r 0.11.3 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/rna_multisample/main.nf \
   -params-file params.yaml
@@ -130,15 +130,15 @@ flowchart LR
     v9(Output)
     v15(normalize_total)
     v17(join)
-    v26(log1p)
-    v28(join)
-    v37(delete_layer)
-    v39(join)
-    v48(filter_with_hvg)
-    v50(join)
-    v59(rna_calculate_qc_metrics)
-    v61(join)
-    v68(Output)
+    v25(log1p)
+    v27(join)
+    v35(delete_layer)
+    v37(join)
+    v45(filter_with_hvg)
+    v47(join)
+    v55(rna_calculate_qc_metrics)
+    v57(join)
+    v64(Output)
     v0-->v3
     v3-->v5
     v5-->v7
@@ -146,18 +146,18 @@ flowchart LR
     v5-->v17
     v5-->v15
     v15-->v17
-    v17-->v28
-    v17-->v26
-    v26-->v28
-    v28-->v39
-    v28-->v37
-    v37-->v39
-    v39-->v50
-    v39-->v48
-    v48-->v50
-    v50-->v61
-    v50-->v59
-    v59-->v61
-    v61-->v68
+    v17-->v27
+    v17-->v25
+    v25-->v27
+    v27-->v37
+    v27-->v35
+    v35-->v37
+    v37-->v47
+    v37-->v45
+    v45-->v47
+    v47-->v57
+    v47-->v55
+    v55-->v57
+    v57-->v64
 
 ```
