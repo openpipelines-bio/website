@@ -14,7 +14,7 @@ ID: `pca`
 Namespace: `dimred`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.4/./src/dimred/pca){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.5/./src/dimred/pca){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.4 -latest \
+  -r 0.12.5 -latest \
   -main-script target/nextflow/dimred/pca/main.nf \
   --help
 ```
@@ -61,7 +61,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.4 -latest \
+  -r 0.12.5 -latest \
   -profile docker \
   -main-script target/nextflow/dimred/pca/main.nf \
   -params-file params.yaml

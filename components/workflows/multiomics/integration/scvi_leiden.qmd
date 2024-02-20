@@ -14,7 +14,7 @@ ID: `scvi_leiden`
 Namespace: `multiomics/integration`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.4/./workflows/multiomics/integration/scvi_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.5/./workflows/multiomics/integration/scvi_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.4 -latest \
+  -r 0.12.5 -latest \
   -main-script ./workflows/multiomics/integration/scvi_leiden/main.nf \
   --help
 ```
@@ -83,7 +83,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.4 -latest \
+  -r 0.12.5 -latest \
   -profile docker \
   -main-script ./workflows/multiomics/integration/scvi_leiden/main.nf \
   -params-file params.yaml
