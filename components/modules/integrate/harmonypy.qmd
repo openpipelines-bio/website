@@ -14,7 +14,7 @@ ID: `harmonypy`
 Namespace: `integrate`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.2/./src/integrate/harmonypy){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0rc1/./src/integrate/harmonypy){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.2 -latest \
+  -r 1.0.0rc1 -latest \
   -main-script target/nextflow/integrate/harmonypy/main.nf \
   --help
 ```
@@ -58,7 +58,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.2 -latest \
+  -r 1.0.0rc1 -latest \
   -profile docker \
   -main-script target/nextflow/integrate/harmonypy/main.nf \
   -params-file params.yaml
@@ -80,8 +80,8 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--modality`           |                                                                                                                                                                                      |`string`, default: `"rna"`                                                    |
 |`--obsm_input`         |Which .obsm slot to use as a starting PCA embedding.                                                                                                                                  |`string`, default: `"X_pca"`                                                  |
 |`--obsm_output`        |In which .obsm slot to store the resulting integrated embedding.                                                                                                                      |`string`, default: `"X_pca_integrated"`                                       |
-|`--theta`              |Diversity clustering penalty parameter. Specify for each variable in group.by.vars. theta=0 does not encourage any diversity. Larger values of theta result in more diverse clusters. |List of `double`, default: `2`, multiple_sep: `":"`                           |
-|`--obs_covariates`     |The .obs field(s) that define the covariate(s) to regress out.                                                                                                                        |List of `string`, required, example: `"batch", "sample"`, multiple_sep: `":"` |
+|`--theta`              |Diversity clustering penalty parameter. Specify for each variable in group.by.vars. theta=0 does not encourage any diversity. Larger values of theta result in more diverse clusters. |List of `double`, default: `2`, multiple_sep: `";"`                           |
+|`--obs_covariates`     |The .obs field(s) that define the covariate(s) to regress out.                                                                                                                        |List of `string`, required, example: `"batch", "sample"`, multiple_sep: `";"` |
 
 ## Authors
 

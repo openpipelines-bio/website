@@ -1,0 +1,123 @@
+---
+title: "Dsc pileup"
+namespace: "Genetic demux"
+description: ""dsc-pileup is a software tool to pileup reads and corresponding base quality for each overlapping SNPs and each barcode."
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `dsc_pileup`  
+Namespace: `genetic_demux`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0rc1/./src/genetic_demux/dsc_pileup){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+By using pileup files, it would allow us to run demuxlet/freemuxlet pretty fast multiple times without going over the BAM file again
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 1.0.0rc1 -latest \
+  -main-script target/nextflow/genetic_demux/dsc_pileup/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Input
+# sam: "path/to/file"
+tag_group: "CB"
+tag_umi: "UB"
+exclude_flag: 1796
+# vcf: "path/to/file"
+# sm: "foo"
+# sm_list: "foo"
+sam_verbose: 1000000
+vcf_verbose: 1000
+skip_umi: false
+cap_bq: 40
+min_bq: 13
+min_mq: 20
+min_td: 0
+excl_flag: 3844
+# group_list: "foo"
+min_total: 0
+min_uniq: 0
+min_snp: 0
+
+# Output
+# output: "$id.$key.output.output"
+# out: "demuxlet_dsc"
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 1.0.0rc1 -latest \
+  -profile docker \
+  -main-script target/nextflow/genetic_demux/dsc_pileup/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Input
+
+|Name             |Description                                                                                                                          |Attributes                    |
+|:----------------|:------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------|
+|`--sam`          |Input SAM/BAM/CRAM file. Must be sorted by coordinates and indexed.                                                                  |`file`                        |
+|`--tag_group`    |Tag representing readgroup or cell barcodes, in the case to partition the BAM file into multiple groups. For 10x genomics, use CB.   |`string`, default: `"CB"`     |
+|`--tag_umi`      |Tag representing UMIs. For 10x genomiucs, use UB.                                                                                    |`string`, default: `"UB"`     |
+|`--exclude_flag` |SAM/BAM FLAGs to be excluded.                                                                                                        |`integer`, default: `1796`    |
+|`--vcf`          |Input VCF/BCF file for dsc-pileup, containing the AC and AN field.                                                                   |`file`                        |
+|`--sm`           |List of sample IDs to compare to (default: use all).                                                                                 |`string`                      |
+|`--sm_list`      |File containing the list of sample IDs to compare.                                                                                   |`string`                      |
+|`--sam_verbose`  |Verbose message frequency for SAM/BAM/CRAM.                                                                                          |`integer`, default: `1000000` |
+|`--vcf_verbose`  |Verbose message frequency for VCF/BCF.                                                                                               |`integer`, default: `1000`    |
+|`--skip_umi`     |Do not generate [prefix].umi.gz file, which stores the regions covered by each barcode/UMI pair.                                     |`boolean_true`                |
+|`--cap_bq`       |Maximum base quality (higher BQ will be capped).                                                                                     |`integer`, default: `40`      |
+|`--min_bq`       |Minimum base quality to consider (lower BQ will be skipped).                                                                         |`integer`, default: `13`      |
+|`--min_mq`       |Minimum mapping quality to consider (lower MQ will be ignored).                                                                      |`integer`, default: `20`      |
+|`--min_td`       |Minimum distance to the tail (lower will be ignored).                                                                                |`integer`, default: `0`       |
+|`--excl_flag`    |SAM/BAM FLAGs to be excluded for SNP overlapping Read filtering Options.                                                             |`integer`, default: `3844`    |
+|`--group_list`   |List of tag readgroup/cell barcode to consider in this run. All other barcodes will be ignored. This is useful for parallelized run. |`string`                      |
+|`--min_total`    |Minimum number of total reads for a droplet/cell to be considered.                                                                   |`integer`, default: `0`       |
+|`--min_uniq`     |Minimum number of unique reads (determined by UMI/SNP pair) for a droplet/cell to be considered.                                     |`integer`, default: `0`       |
+|`--min_snp`      |Minimum number of SNPs with coverage for a droplet/cell to be considered.                                                            |`integer`, default: `0`       |
+
+
+### Output
+
+|Name       |Description                   |Attributes                          |
+|:----------|:-----------------------------|:-----------------------------------|
+|`--output` |Output directory              |`file`, example: `"demux"`          |
+|`--out`    |dsc-pileup output file prefix |`string`, example: `"demuxlet_dsc"` |
+
+## Authors
+
+
+  * Xichen Wu [{{< fa brands github >}}](https://github.com/wxicu) [{{< fa brands orcid >}}](https://orcid.org/0009-0008-2168-4508) [{{< fa brands linkedin >}}](https://linkedin.com/in/xichen-wu) (author)
