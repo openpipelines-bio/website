@@ -14,7 +14,7 @@ ID: `scvelo`
 Namespace: `velocity`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.4/./src/velocity/scvelo){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.2/./src/velocity/scvelo){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.4 -latest \
+  -r 0.12.2 -latest \
   -main-script target/nextflow/velocity/scvelo/main.nf \
   --help
 ```
@@ -69,7 +69,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.4 -latest \
+  -r 0.12.2 -latest \
   -profile docker \
   -main-script target/nextflow/velocity/scvelo/main.nf \
   -params-file params.yaml
