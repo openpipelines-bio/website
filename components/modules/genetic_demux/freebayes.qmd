@@ -1,0 +1,231 @@
+---
+title: "Freebayes"
+namespace: "Genetic demux"
+description: "freebayes is a Bayesian genetic variant detector designed to find small polymorphisms, specifically SNPs."
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `freebayes`  
+Namespace: `genetic_demux`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0rc1/./src/genetic_demux/freebayes){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 1.0.0rc1 -latest \
+  -main-script target/nextflow/genetic_demux/freebayes/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Input
+# bam: "path/to/file"
+# bam_list: "path/to/file"
+stdin: false
+# fasta_reference: "path/to/file"
+# fasta_reference_index: "path/to/file"
+# targets: "path/to/file"
+# region: "foo"
+# samples: "path/to/file"
+# populations: "path/to/file"
+# cnv_map: "path/to/file"
+gvcf: false
+# gvcf_chunk: 123
+# variant_input: "path/to/file"
+only_use_input_alleles: false
+# haplotype_basis_alleles: "path/to/file"
+report_all_haplotype_alleles: false
+report_monomorphic: false
+pvar: 0.0
+strict_vcf: false
+theta: 0.001
+ploidy: 2
+pooled_discrete: false
+pooled_continuous: false
+use_reference_allele: false
+reference_quality: "100,60"
+throw_away_snp_obs: false
+throw_away_mnps_obs: true
+throw_away_indel_obs: true
+throw_away_complex_obs: true
+use_best_n_alleles: 0
+max_complex_gap: 3
+min_repeat_size: 5
+min_repeat_entropy: 1
+no_partial_observations: false
+dont_left_align_indels: false
+use_duplicate_reads: false
+min_mapping_quality: 1
+min_base_quality: 1
+min_supporting_allele_qsum: 0
+min_supporting_mapping_qsum: 0
+mismatch_base_quality_threshold: 10
+read_max_mismatch_fraction: 1.0
+# read_mismatch_limit: 123
+# read_snp_limit: 123
+# read_indel_limit: 123
+standard_filters: false
+min_alternate_fraction: 0.05
+min_alternate_count: 2
+min_alternate_qsum: 0
+min_alternate_total: 1
+min_coverage: 0
+# max_coverage: 123
+no_population_priors: false
+hwe_priors_off: false
+binomial_obs_priors_off: false
+allele_balance_priors_off: false
+# observation_bias: "path/to/file"
+# base_quality_cap: 123
+prob_contamination: 1.0E-8
+legacy_gls: false
+# contamination_estimates: "path/to/file"
+report_genotype_likelihood_max: false
+genotyping_max_iterations: 1000
+genotyping_max_banddepth: 6
+posterior_integration_limits: "1,3"
+exclude_unobserved_genotypes: false
+# genotype_variant_threshold: 123
+use_mapping_quality: false
+harmonic_indel_quality: false
+read_dependence_factor: 0.9
+genotype_qualities: false
+debug: false
+dd: false
+
+# Output
+# output: "$id.$key.output.output"
+# vcf: "snp.vcf"
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 1.0.0rc1 -latest \
+  -profile docker \
+  -main-script target/nextflow/genetic_demux/freebayes/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Input
+
+|Name                                |Description                                                                                                                                                                                                         |Attributes                    |
+|:-----------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------|
+|`--bam`                             |Add FILE to the set of BAM files to be analyzed.                                                                                                                                                                    |`file`                        |
+|`--bam_list`                        |A file containing a list of BAM files to be analyzed.                                                                                                                                                               |`file`                        |
+|`--stdin`                           |Read BAM input on stdin.                                                                                                                                                                                            |`boolean_true`                |
+|`--fasta_reference`                 |Use FILE as the reference sequence for analysis. An index file (FILE.fai) will be created if none exists. If neither --targets nor --region are specified, FreeBayes will analyze every position in this reference. |`file`                        |
+|`--fasta_reference_index`           |Use FILE.fai as the index of reference sequence for analysis.                                                                                                                                                       |`file`                        |
+|`--targets`                         |Limit analysis to targets listed in the BED-format FILE.                                                                                                                                                            |`file`                        |
+|`--region`                          |Limit analysis to the specified region, 0-base coordinates, end_position not included (same as BED format).                                                                                                         |`string`                      |
+|`--samples`                         |Limit analysis to samples listed (one per line) in the FILE. By default FreeBayes will analyze all samples in its input BAM files.                                                                                  |`file`                        |
+|`--populations`                     |Each line of FILE should list a sample and a population which it is part of. The population-based bayesian inference model will then be partitioned on the basis of the populations.                                |`file`                        |
+|`--cnv_map`                         |Read a copy number map from the BED file FILE, which has either a sample-level ploidy or a region-specific format.                                                                                                  |`file`                        |
+|`--gvcf`                            |Write gVCF output, which indicates coverage in uncalled regions.                                                                                                                                                    |`boolean_true`                |
+|`--gvcf_chunk`                      |When writing gVCF output emit a record for every NUM bases.                                                                                                                                                         |`integer`                     |
+|`--variant_input`                   |Use variants reported in VCF file as input to the algorithm. Variants in this file will included in the output even if there is not enough support in the data to pass input filters.                               |`file`                        |
+|`--only_use_input_alleles`          |Only provide variant calls and genotype likelihoods for sites and alleles which are provided in the VCF input, and provide output in the VCF for all input alleles, not just those which have support in the data.  |`boolean_true`                |
+|`--haplotype_basis_alleles`         |When specified, only variant alleles provided in this input VCF will be used for the construction of complex or haplotype alleles.                                                                                  |`file`                        |
+|`--report_all_haplotype_alleles`    |At sites where genotypes are made over haplotype alleles, provide information about all alleles in output, not only those which are called.                                                                         |`boolean_true`                |
+|`--report_monomorphic`              |Report even loci which appear to be monomorphic, and report all considered alleles, even those which are not in called genotypes.                                                                                   |`boolean_true`                |
+|`--pvar`                            |Report sites if the probability that there is a polymorphism at the site is greater than N. Note that post-filtering is generally recommended over the use of this parameter.                                       |`double`, default: `0`        |
+|`--strict_vcf`                      |Generate strict VCF format (FORMAT/GQ will be an int).                                                                                                                                                              |`boolean_true`                |
+|`--theta`                           |The expected mutation rate or pairwise nucleotide diversity among the population under analysis. This serves as the single parameter to the Ewens Sampling Formula prior model.                                     |`double`, default: `0.001`    |
+|`--ploidy`                          |Sets the default ploidy for the analysis to N.                                                                                                                                                                      |`integer`, default: `2`       |
+|`--pooled_discrete`                 |Assume that samples result from pooled sequencing. Model pooled samples using discrete genotypes across pools.                                                                                                      |`boolean_true`                |
+|`--pooled_continuous`               |Output all alleles which pass input filters, regardles of genotyping outcome or model.                                                                                                                              |`boolean_true`                |
+|`--use_reference_allele`            |This flag includes the reference allele in the analysis as if it is another sample from the same population.                                                                                                        |`boolean_true`                |
+|`--reference_quality`               |Assign mapping quality of MQ to the reference allele at each site and base quality of BQ.                                                                                                                           |`string`, default: `"100,60"` |
+|`--throw_away_snp_obs`              |Ignore SNP alleles.                                                                                                                                                                                                 |`boolean_true`                |
+|`--throw_away_mnps_obs`             |Ignore multi-nuceotide polymorphisms, MNPs. MNPs are excluded as default.                                                                                                                                           |`boolean_false`               |
+|`--throw_away_indel_obs`            |Ignore insertion and deletion alleles. Indels are excluded as default.                                                                                                                                              |`boolean_false`               |
+|`--throw_away_complex_obs`          |Ignore complex events (composites of other classes). Complex are excluded as default                                                                                                                                |`boolean_false`               |
+|`--use_best_n_alleles`              |Evaluate only the best N SNP alleles, ranked by sum of supporting quality scores.                                                                                                                                   |`integer`, default: `0`       |
+|`--max_complex_gap`                 |Allow haplotype calls with contiguous embedded matches of up to this length.                                                                                                                                        |`integer`, default: `3`       |
+|`--min_repeat_size`                 |When assembling observations across repeats, require the total repeat length at least this many bp.                                                                                                                 |`integer`, default: `5`       |
+|`--min_repeat_entropy`              |To detect interrupted repeats, build across sequence until it has entropy > N bits per bp. Set to 0 to turn off.                                                                                                    |`integer`, default: `1`       |
+|`--no_partial_observations`         |Exclude observations which do not fully span the dynamically-determined detection window.  (default, use all observations, dividing partial support across matching haplotypes when generating haplotypes.)         |`boolean_true`                |
+|`--dont_left_align_indels`          |Turn off left-alignment of indels, which is enabled by default.                                                                                                                                                     |`boolean_true`                |
+|`--use_duplicate_reads`             |Include duplicate-marked alignments in the analysis. default: exclude duplicates marked as such in alignments                                                                                                       |`boolean_true`                |
+|`--min_mapping_quality`             |Exclude alignments from analysis if they have a mapping quality less than Q.                                                                                                                                        |`integer`, default: `1`       |
+|`--min_base_quality`                |Exclude alleles from analysis if their supporting base quality is less than Q. Default value is changed according to the instruction of scSplit.                                                                    |`integer`, default: `1`       |
+|`--min_supporting_allele_qsum`      |Consider any allele in which the sum of qualities of supporting observations is at least Q.                                                                                                                         |`integer`, default: `0`       |
+|`--min_supporting_mapping_qsum`     |Consider any allele in which and the sum of mapping qualities of supporting reads is at least.                                                                                                                      |`integer`, default: `0`       |
+|`--mismatch_base_quality_threshold` |Count mismatches toward --read-mismatch-limit if the base quality of the mismatch is >= Q.                                                                                                                          |`integer`, default: `10`      |
+|`--read_max_mismatch_fraction`      |Exclude reads with more than N mismatches where each mismatch has base quality >= mismatch-base-quality-threshold.                                                                                                  |`double`, default: `1`        |
+|`--read_mismatch_limit`             |Exclude reads with more than N [0,1] fraction of mismatches where each mismatch has base quality >= mismatch-base-quality-threshold.                                                                                |`integer`                     |
+|`--read_snp_limit`                  |Exclude reads with more than N base mismatches, ignoring gaps with quality >= mismatch-base-quality-threshold.                                                                                                      |`integer`                     |
+|`--read_indel_limit`                |Exclude reads with more than N separate gaps.                                                                                                                                                                       |`integer`                     |
+|`--standard_filters`                |Use stringent input base and mapping quality filters, equivalent to -m 30 -q 20 -R 0 -S 0                                                                                                                           |`boolean_true`                |
+|`--min_alternate_fraction`          |Require at least this fraction of observations supporting an alternate allele within a single individual in order to evaluate the position.                                                                         |`double`, default: `0.05`     |
+|`--min_alternate_count`             |Require at least this count of observations supporting an alternate allele within a single individual in order to evaluate the position.                                                                            |`integer`, default: `2`       |
+|`--min_alternate_qsum`              |Require at least this sum of quality of observations supporting an alternate allele within a single individual in order to evaluate the position.                                                                   |`integer`, default: `0`       |
+|`--min_alternate_total`             |Require at least this count of observations supporting an alternate allele within the total population in order to use the allele in analysis.                                                                      |`integer`, default: `1`       |
+|`--min_coverage`                    |Require at least this coverage to process a site.                                                                                                                                                                   |`integer`, default: `0`       |
+|`--max_coverage`                    |Do not process sites with greater than this coverage.                                                                                                                                                               |`integer`                     |
+|`--no_population_priors`            |Equivalent to --pooled-discrete --hwe-priors-off and removal of Ewens Sampling Formula component of priors.                                                                                                         |`boolean_true`                |
+|`--hwe_priors_off`                  |Disable estimation of the probability of the combination arising under HWE given the allele frequency as estimated by observation frequency.                                                                        |`boolean_true`                |
+|`--binomial_obs_priors_off`         |Disable incorporation of prior expectations about observations. Uses read placement probability, strand balance probability, and read position probability.                                                         |`boolean_true`                |
+|`--allele_balance_priors_off`       |Disable use of aggregate probability of observation balance between alleles as a component of the priors.                                                                                                           |`boolean_true`                |
+|`--observation_bias`                |Read length-dependent allele observation biases from FILE. The format is [length] [alignment efficiency relative to reference] where the efficiency is 1 if there is no relative observation bias.                  |`file`                        |
+|`--base_quality_cap`                |Limit estimated observation quality by capping base quality at Q.                                                                                                                                                   |`integer`                     |
+|`--prob_contamination`              |An estimate of contamination to use for all samples.                                                                                                                                                                |`double`, default: `1e-08`    |
+|`--legacy_gls`                      |Use legacy (polybayes equivalent) genotype likelihood calculations                                                                                                                                                  |`boolean_true`                |
+|`--contamination_estimates`         |A file containing per-sample estimates of contamination, such as those generated by VerifyBamID.                                                                                                                    |`file`                        |
+|`--report_genotype_likelihood_max`  |Report genotypes using the maximum-likelihood estimate provided from genotype likelihoods.                                                                                                                          |`boolean_true`                |
+|`--genotyping_max_iterations`       |Iterate no more than N times during genotyping step.                                                                                                                                                                |`integer`, default: `1000`    |
+|`--genotyping_max_banddepth`        |Integrate no deeper than the Nth best genotype by likelihood when genotyping.                                                                                                                                       |`integer`, default: `6`       |
+|`--posterior_integration_limits`    |Integrate all genotype combinations in our posterior space which include no more than N samples with their Mth best data likelihood.                                                                                |`string`, default: `"1,3"`    |
+|`--exclude_unobserved_genotypes`    |Skip sample genotypings for which the sample has no supporting reads.                                                                                                                                               |`boolean_true`                |
+|`--genotype_variant_threshold`      |Limit posterior integration to samples where the second-best genotype likelihood is no more than log(N) from the highest genotype likelihood for the sample.                                                        |`integer`                     |
+|`--use_mapping_quality`             |Use mapping quality of alleles when calculating data likelihoods.                                                                                                                                                   |`boolean_true`                |
+|`--harmonic_indel_quality`          |Use a weighted sum of base qualities around an indel, scaled by the distance from the indel. By default use a minimum BQ in flanking sequence.                                                                      |`boolean_true`                |
+|`--read_dependence_factor`          |Incorporate non-independence of reads by scaling successive observations by this factor during data likelihood calculations.                                                                                        |`double`, default: `0.9`      |
+|`--genotype_qualities`              |Calculate the marginal probability of genotypes and report as GQ in each sample field in the VCF output.                                                                                                            |`boolean_true`                |
+|`--debug`                           |Print debugging output.                                                                                                                                                                                             |`boolean_true`                |
+|`--dd`                              |Print more verbose debugging output                                                                                                                                                                                 |`boolean_true`                |
+
+
+### Output
+
+|Name       |Description                        |Attributes                         |
+|:----------|:----------------------------------|:----------------------------------|
+|`--output` |Output directory                   |`file`, example: `"freebayes_out"` |
+|`--vcf`    |Output VCF-format results to FILE. |`string`, example: `"snp.vcf"`     |
+
+## Authors
+
+
+  * Xichen Wu [{{< fa brands github >}}](https://github.com/wxicu) [{{< fa brands orcid >}}](https://orcid.org/0009-0008-2168-4508) [{{< fa brands linkedin >}}](https://linkedin.com/in/xichen-wu) (author)
