@@ -1,7 +1,7 @@
 ---
 title: "Dsc pileup"
 namespace: "Genetic demux"
-description: ""dsc-pileup is a software tool to pileup reads and corresponding base quality for each overlapping SNPs and each barcode."
+description: "dsc-pileup is a software tool to pileup reads and corresponding base quality for each overlapping SNPs and each barcode."
 type: "module"
 toc: false
 ---

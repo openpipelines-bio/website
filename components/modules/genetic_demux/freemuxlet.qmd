@@ -1,7 +1,7 @@
 ---
 title: "Freemuxlet"
 namespace: "Genetic demux"
-description: ""freemuxlet is a software tool to deconvolute sample identity and identify multiplets when multiple samples are pooled by barcoded single cell sequencing."
+description: "freemuxlet is a software tool to deconvolute sample identity and identify multiplets when multiple samples are pooled by barcoded single cell sequencing."
 type: "module"
 toc: false
 ---
