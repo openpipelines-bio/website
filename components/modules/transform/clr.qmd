@@ -14,7 +14,7 @@ ID: `clr`
 Namespace: `transform`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/transform/clr){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0rc1/./src/transform/clr){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0rc1 -latest \
   -main-script target/nextflow/transform/clr/main.nf \
   --help
 ```
@@ -45,6 +45,7 @@ input: # please fill in - example: "input.h5mu"
 modality: "prot"
 # output: "$id.$key.output.h5mu"
 # output_compression: "gzip"
+# input_layer: "foo"
 # output_layer: "foo"
 
 # Nextflow input-output arguments
@@ -55,7 +56,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0rc1 -latest \
   -profile docker \
   -main-script target/nextflow/transform/clr/main.nf \
   -params-file params.yaml
@@ -75,6 +76,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--modality`           |                                                             |`string`, default: `"prot"`                |
 |`--output`             |Output h5mu file.                                            |`file`, required, default: `"output.h5mu"` |
 |`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`                |
+|`--input_layer`        |Input layer to use. By default, .X is used.                  |`string`                                   |
 |`--output_layer`       |Output layer to use. By default, use X.                      |`string`                                   |
 
 ## Authors

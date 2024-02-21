@@ -14,7 +14,7 @@ ID: `remove_modality`
 Namespace: `filter`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/filter/remove_modality){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0rc1/./src/filter/remove_modality){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0rc1 -latest \
   -main-script target/nextflow/filter/remove_modality/main.nf \
   --help
 ```
@@ -54,7 +54,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0rc1 -latest \
   -profile docker \
   -main-script target/nextflow/filter/remove_modality/main.nf \
   -params-file params.yaml
@@ -71,7 +71,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |Name                   |Description                                                  |Attributes                                      |
 |:----------------------|:------------------------------------------------------------|:-----------------------------------------------|
 |`--input`              |Input h5mu file                                              |`file`, required, example: `"input.h5mu"`       |
-|`--modality`           |                                                             |List of `string`, required, multiple_sep: `":"` |
+|`--modality`           |                                                             |List of `string`, required, multiple_sep: `";"` |
 |`--output`             |Output h5mu file.                                            |`file`, example: `"output.h5mu"`                |
 |`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`                     |
 
