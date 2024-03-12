@@ -14,7 +14,7 @@ ID: `cellranger_multi`
 Namespace: `mapping`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/mapping/cellranger_multi){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0-rc2/./src/mapping/cellranger_multi){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0-rc2 -latest \
   -main-script target/nextflow/mapping/cellranger_multi/main.nf \
   --help
 ```
@@ -44,15 +44,26 @@ nextflow run openpipelines-bio/openpipeline \
 # output: "$id.$key.output.output"
 
 # Input files
-input: # please fill in - example: ["mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"]
+# input: ["mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"]
 gex_reference: # please fill in - example: "reference_genome.tar.gz"
 # vdj_reference: "reference_vdj.tar.gz"
 # vdj_inner_enrichment_primers: "enrichment_primers.txt"
 # feature_reference: "feature_reference.csv"
 
+# Feature type-specific input files
+# gex_input: ["mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"]
+# abc_input: ["mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"]
+# cgc_input: ["mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"]
+# mux_input: ["mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"]
+# vdj_input: ["mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"]
+# vdj_t_input: ["mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"]
+# vdj_t_gd_input: ["mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"]
+# vdj_b_input: ["mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"]
+# agc_input: ["mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"]
+
 # Library arguments
-library_id: # please fill in - example: ["mysample1"]
-library_type: # please fill in - example: ["Gene Expression"]
+# library_id: ["mysample1"]
+# library_type: ["Gene Expression"]
 # library_subsample: ["0.5"]
 # library_lanes: ["1-4"]
 
@@ -79,7 +90,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0-rc2 -latest \
   -profile docker \
   -main-script target/nextflow/mapping/cellranger_multi/main.nf \
   -params-file params.yaml
@@ -93,23 +104,41 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Input files
 
-|Name                             |Description                                                                                                                                                                                                                                                                                                                       |Attributes                                                                                                                       |
-|:--------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------|
-|`--input`                        |The FASTQ files to be analyzed. FASTQ files should conform to the naming conventions of bcl2fastq and mkfastq: `[Sample Name]_S[Sample Index]_L00[Lane Number]_[Read Type]_001.fastq.gz`                                                                                                                                          |List of `file`, required, example: `"mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
-|`--gex_reference`                |Genome refence index built by Cell Ranger mkref.                                                                                                                                                                                                                                                                                  |`file`, required, example: `"reference_genome.tar.gz"`                                                                           |
-|`--vdj_reference`                |VDJ refence index built by Cell Ranger mkref.                                                                                                                                                                                                                                                                                     |`file`, example: `"reference_vdj.tar.gz"`                                                                                        |
-|`--vdj_inner_enrichment_primers` |V(D)J Immune Profiling libraries: if inner enrichment primers other than those provided  in the 10x Genomics kits are used, they need to be specified here as a text file with one primer per line.                                                                                                                               |`file`, example: `"enrichment_primers.txt"`                                                                                      |
-|`--feature_reference`            |Path to the Feature reference CSV file, declaring Feature Barcode constructs and associated barcodes. Required only for Antibody Capture or CRISPR Guide Capture libraries. See https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/using/feature-bc-analysis#feature-ref for more information. |`file`, example: `"feature_reference.csv"`                                                                                       |
+|Name                             |Description                                                                                                                                                                                                                                                                                                                       |Attributes                                                                                                             |
+|:--------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------|
+|`--input`                        |The FASTQ files to be analyzed. FASTQ files should conform to the naming conventions of bcl2fastq and mkfastq: `[Sample Name]_S[Sample Index]_L00[Lane Number]_[Read Type]_001.fastq.gz`                                                                                                                                          |List of `file`, example: `"mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
+|`--gex_reference`                |Genome refence index built by Cell Ranger mkref.                                                                                                                                                                                                                                                                                  |`file`, required, example: `"reference_genome.tar.gz"`                                                                 |
+|`--vdj_reference`                |VDJ refence index built by Cell Ranger mkref.                                                                                                                                                                                                                                                                                     |`file`, example: `"reference_vdj.tar.gz"`                                                                              |
+|`--vdj_inner_enrichment_primers` |V(D)J Immune Profiling libraries: if inner enrichment primers other than those provided  in the 10x Genomics kits are used, they need to be specified here as a text file with one primer per line.                                                                                                                               |`file`, example: `"enrichment_primers.txt"`                                                                            |
+|`--feature_reference`            |Path to the Feature reference CSV file, declaring Feature Barcode constructs and associated barcodes. Required only for Antibody Capture or CRISPR Guide Capture libraries. See https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/using/feature-bc-analysis#feature-ref for more information. |`file`, example: `"feature_reference.csv"`                                                                             |
+
+
+### Feature type-specific input files
+
+Helper functionality to allow feature type-specific input files, without the need to specify library_type or library_id. The library_id will be inferred from the input paths.
+
+
+|Name               |Description                                                                                                                                                                                                       |Attributes                                                                                                             |
+|:------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------|
+|`--gex_input`      |The FASTQ files to be analyzed for Gene Expression. FASTQ files should conform to the naming conventions of bcl2fastq and mkfastq: `[Sample Name]_S[Sample Index]_L00[Lane Number]_[Read Type]_001.fastq.gz`      |List of `file`, example: `"mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
+|`--abc_input`      |The FASTQ files to be analyzed for Antibody Capture. FASTQ files should conform to the naming conventions of bcl2fastq and mkfastq: `[Sample Name]_S[Sample Index]_L00[Lane Number]_[Read Type]_001.fastq.gz`     |List of `file`, example: `"mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
+|`--cgc_input`      |The FASTQ files to be analyzed for CRISPR Guide Capture. FASTQ files should conform to the naming conventions of bcl2fastq and mkfastq: `[Sample Name]_S[Sample Index]_L00[Lane Number]_[Read Type]_001.fastq.gz` |List of `file`, example: `"mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
+|`--mux_input`      |The FASTQ files to be analyzed for Multiplexing Capture. FASTQ files should conform to the naming conventions of bcl2fastq and mkfastq: `[Sample Name]_S[Sample Index]_L00[Lane Number]_[Read Type]_001.fastq.gz` |List of `file`, example: `"mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
+|`--vdj_input`      |The FASTQ files to be analyzed for VDJ. FASTQ files should conform to the naming conventions of bcl2fastq and mkfastq: `[Sample Name]_S[Sample Index]_L00[Lane Number]_[Read Type]_001.fastq.gz`                  |List of `file`, example: `"mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
+|`--vdj_t_input`    |The FASTQ files to be analyzed for VDJ-T. FASTQ files should conform to the naming conventions of bcl2fastq and mkfastq: `[Sample Name]_S[Sample Index]_L00[Lane Number]_[Read Type]_001.fastq.gz`                |List of `file`, example: `"mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
+|`--vdj_t_gd_input` |The FASTQ files to be analyzed for VDJ-T-GD. FASTQ files should conform to the naming conventions of bcl2fastq and mkfastq: `[Sample Name]_S[Sample Index]_L00[Lane Number]_[Read Type]_001.fastq.gz`             |List of `file`, example: `"mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
+|`--vdj_b_input`    |The FASTQ files to be analyzed for VDJ-B. FASTQ files should conform to the naming conventions of bcl2fastq and mkfastq: `[Sample Name]_S[Sample Index]_L00[Lane Number]_[Read Type]_001.fastq.gz`                |List of `file`, example: `"mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
+|`--agc_input`      |The FASTQ files to be analyzed for Antigen Capture. FASTQ files should conform to the naming conventions of bcl2fastq and mkfastq: `[Sample Name]_S[Sample Index]_L00[Lane Number]_[Read Type]_001.fastq.gz`      |List of `file`, example: `"mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
 
 
 ### Library arguments
 
-|Name                  |Description                                                                                                                                                                 |Attributes                                                                    |
-|:---------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------|
-|`--library_id`        |The Illumina sample name to analyze. This must exactly match the 'Sample Name' part of the FASTQ files specified in the `--input` argument.                                 |List of `string`, required, example: `"mysample1"`, multiple_sep: `";"`       |
-|`--library_type`      |The underlying feature type of the library. Possible values: "Gene Expression", "VDJ", "VDJ-T", "VDJ-B", "Antibody Capture", "CRISPR Guide Capture", "Multiplexing Capture" |List of `string`, required, example: `"Gene Expression"`, multiple_sep: `";"` |
-|`--library_subsample` |Optional. The rate at which reads from the provided FASTQ files are sampled. Must be strictly greater than 0 and less than or equal to 1.                                   |List of `string`, example: `"0.5"`, multiple_sep: `";"`                       |
-|`--library_lanes`     |Lanes associated with this sample. Defaults to using all lanes.                                                                                                             |List of `string`, example: `"1-4"`, multiple_sep: `";"`                       |
+|Name                  |Description                                                                                                                                                                 |Attributes                                                          |
+|:---------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------|
+|`--library_id`        |The Illumina sample name to analyze. This must exactly match the 'Sample Name' part of the FASTQ files specified in the `--input` argument.                                 |List of `string`, example: `"mysample1"`, multiple_sep: `";"`       |
+|`--library_type`      |The underlying feature type of the library. Possible values: "Gene Expression", "VDJ", "VDJ-T", "VDJ-B", "Antibody Capture", "CRISPR Guide Capture", "Multiplexing Capture" |List of `string`, example: `"Gene Expression"`, multiple_sep: `";"` |
+|`--library_subsample` |Optional. The rate at which reads from the provided FASTQ files are sampled. Must be strictly greater than 0 and less than or equal to 1.                                   |List of `string`, example: `"0.5"`, multiple_sep: `";"`             |
+|`--library_lanes`     |Lanes associated with this sample. Defaults to using all lanes.                                                                                                             |List of `string`, example: `"1-4"`, multiple_sep: `";"`             |
 
 
 ### Gene expression arguments
