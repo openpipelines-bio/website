@@ -14,7 +14,7 @@ ID: `popv`
 Namespace: `annotate`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/annotate/popv){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0-rc2/./src/annotate/popv){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0-rc2 -latest \
   -main-script target/nextflow/annotate/popv/main.nf \
   --help
 ```
@@ -70,7 +70,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0-rc2 -latest \
   -profile docker \
   -main-script target/nextflow/annotate/popv/main.nf \
   -params-file params.yaml
@@ -129,7 +129,7 @@ Other arguments.
 
 |Name        |Description                                                             |Attributes                                                                          |
 |:-----------|:-----------------------------------------------------------------------|:-----------------------------------------------------------------------------------|
-|`--methods` |Methods to call cell types. By default, runs to knn_on_scvi and scanvi. |List of `string`, required, example: `"knn_on_scvi", "scanvi"`, multiple_sep: `":"` |
+|`--methods` |Methods to call cell types. By default, runs to knn_on_scvi and scanvi. |List of `string`, required, example: `"knn_on_scvi", "scanvi"`, multiple_sep: `";"` |
 
 ## Authors
 

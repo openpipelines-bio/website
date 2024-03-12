@@ -1,0 +1,83 @@
+---
+title: "From h5mu to seurat"
+namespace: "Convert"
+description: "Converts an h5mu file into a Seurat file."
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `from_h5mu_to_seurat`  
+Namespace: `convert`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0-rc2/./src/convert/from_h5mu_to_seurat){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+Restrictions:
+  - Only the intersection of cells is currently loaded into the Seurat object due to the object structure limitation.
+  - Multimodal embeddings (global .obsm slot) are loaded with the assay.used field set to the default assay.
+  - Embeddings names are changed in order to comply with R & Seurat requirements and conventions.
+  - Feature names with underscores ('_') are automatically replaced with dashes ('-')
+  - Seurat does not support global variables metadata /var.
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 1.0.0-rc2 -latest \
+  -main-script target/nextflow/convert/from_h5mu_to_seurat/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Arguments
+input: # please fill in - example: "input.h5mu"
+# output: "$id.$key.output.rds"
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 1.0.0-rc2 -latest \
+  -profile docker \
+  -main-script target/nextflow/convert/from_h5mu_to_seurat/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument group
+
+### Arguments
+
+|Name       |Description        |Attributes                                |
+|:----------|:------------------|:-----------------------------------------|
+|`--input`  |Input h5mu file    |`file`, required, example: `"input.h5mu"` |
+|`--output` |Output Seurat file |`file`, required, example: `"output.rds"` |
+
+## Authors
+
+
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (author, maintainer)

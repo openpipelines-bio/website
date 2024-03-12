@@ -14,7 +14,7 @@ ID: `cellxgene_census`
 Namespace: `query`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/query/cellxgene_census){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0-rc2/./src/query/cellxgene_census){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0-rc2 -latest \
   -main-script target/nextflow/query/cellxgene_census/main.nf \
   --help
 ```
@@ -63,7 +63,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0-rc2 -latest \
   -profile docker \
   -main-script target/nextflow/query/cellxgene_census/main.nf \
   -params-file params.yaml
@@ -96,7 +96,7 @@ Arguments related to the query.
 |:----------------------------|:----------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 |`--species`                  |Specie(s) of interest. If not specified, Homo Sapiens will be queried.       |`string`, default: `"homo_sapiens"`, example: `"homo_sapiens"`                                                                                            |
 |`--cell_query`               |The query for selecting the cells as defined by the cellxgene census schema. |`string`, example: `"is_primary_data == True and cell_type_ontology_term_id in ['CL:0000136', 'CL:1000311', 'CL:0002616'] and suspension_type == 'cell'"` |
-|`--cells_filter_columns`     |The query for selecting the cells as defined by the cellxgene census schema. |List of `string`, example: `"dataset_id", "tissue", "assay", "disease", "cell_type"`, multiple_sep: `":"`                                                 |
+|`--cells_filter_columns`     |The query for selecting the cells as defined by the cellxgene census schema. |List of `string`, example: `"dataset_id", "tissue", "assay", "disease", "cell_type"`, multiple_sep: `";"`                                                 |
 |`--min_cells_filter_columns` |Minimum of amount of summed cells_filter_columns cells                       |`double`, example: `100`                                                                                                                                  |
 
 

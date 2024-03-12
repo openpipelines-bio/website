@@ -1,0 +1,83 @@
+---
+title: "Bcftools"
+namespace: "Genetic demux"
+description: "Filter the variants called by freebayes or cellSNP"
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `bcftools`  
+Namespace: `genetic_demux`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0-rc2/./src/genetic_demux/bcftools){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 1.0.0-rc2 -latest \
+  -main-script target/nextflow/genetic_demux/bcftools/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Arguments
+vcf: # please fill in - example: ["path/to/file"]
+concat: false
+filter: false
+filter_qual: 30
+# output: "$id.$key.output.output"
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 1.0.0-rc2 -latest \
+  -profile docker \
+  -main-script target/nextflow/genetic_demux/bcftools/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument group
+
+### Arguments
+
+|Name            |Description                                                               |Attributes                                    |
+|:---------------|:-------------------------------------------------------------------------|:---------------------------------------------|
+|`--vcf`         |VCF files, must have the same sample columns appearing in the same order. |List of `file`, required, multiple_sep: `";"` |
+|`--concat`      |Concatenate or combine VCFs and sort them.                                |`boolean_true`                                |
+|`--filter`      |Filter VCFs.                                                              |`boolean_true`                                |
+|`--filter_qual` |Filter VCFs with specified QUAL threshold.                                |`integer`, default: `30`                      |
+|`--output`      |bcftools output directory                                                 |`file`, example: `"bcftools_out"`             |
+
+## Authors
+
+
+  * Xichen Wu [{{< fa brands github >}}](https://github.com/wxicu) [{{< fa brands orcid >}}](https://orcid.org/0009-0008-2168-4508) [{{< fa brands linkedin >}}](https://linkedin.com/in/xichen-wu) (author)
