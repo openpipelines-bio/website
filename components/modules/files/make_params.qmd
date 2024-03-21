@@ -14,7 +14,7 @@ ID: `make_params`
 Namespace: `files`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/files/make_params){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0-rc3/./src/files/make_params){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0-rc3 -latest \
   -main-script target/nextflow/files/make_params/main.nf \
   --help
 ```
@@ -58,7 +58,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0-rc3 -latest \
   -profile docker \
   -main-script target/nextflow/files/make_params/main.nf \
   -params-file params.yaml

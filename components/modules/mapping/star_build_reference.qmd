@@ -14,7 +14,7 @@ ID: `star_build_reference`
 Namespace: `mapping`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/mapping/star_build_reference){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0-rc3/./src/mapping/star_build_reference){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0-rc3 -latest \
   -main-script target/nextflow/mapping/star_build_reference/main.nf \
   --help
 ```
@@ -56,7 +56,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0-rc3 -latest \
   -profile docker \
   -main-script target/nextflow/mapping/star_build_reference/main.nf \
   -params-file params.yaml
@@ -72,7 +72,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 |Name                  |Description                                                                                                                                                                                                                                                     |Attributes                                                                           |
 |:---------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------|
-|`--genome_fasta`      |The fasta files to be included in the reference. Corresponds to the --genomeFastaFiles argument in the STAR command.                                                                                                                                            |List of `file`, required, example: `"chr1.fasta", "chr2.fasta"`, multiple_sep: `" "` |
+|`--genome_fasta`      |The fasta files to be included in the reference. Corresponds to the --genomeFastaFiles argument in the STAR command.                                                                                                                                            |List of `file`, required, example: `"chr1.fasta", "chr2.fasta"`, multiple_sep: `";"` |
 |`--transcriptome_gtf` |Specifies the path to the file with annotated transcripts in the standard GTF format. STAR will extract splice junctions from this file and use them to greatly improve accuracy of the mapping. Corresponds to the --sjdbGTFfile argument in the STAR command. |`file`                                                                               |
 |`--output`            |Path to output directory. Corresponds to the --genomeDir argument in the STAR command.                                                                                                                                                                          |`file`, required, example: `"/path/to/foo"`                                          |
 
