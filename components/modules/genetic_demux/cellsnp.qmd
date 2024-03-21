@@ -1,0 +1,127 @@
+---
+title: "Cellsnp"
+namespace: "Genetic demux"
+description: "cellSNP aims to pileup the expressed alleles in single-cell or bulk RNA-seq data."
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `cellsnp`  
+Namespace: `genetic_demux`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0-rc3/./src/genetic_demux/cellsnp){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+It can be directly used for donor deconvolution in multiplexed single-cell RNA-seq data, particularly with vireo.
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 1.0.0-rc3 -latest \
+  -main-script target/nextflow/genetic_demux/cellsnp/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Input
+# sam_file: "path/to/file"
+# sam_index_file: "path/to/file"
+# sam_fileList: "path/to/file"
+# regions_vcf: "path/to/file"
+# targets_vcf: "path/to/file"
+# barcode_file: "path/to/file"
+# sample_list: "path/to/file"
+# sample_ids: "foo"
+genotype: false
+gzip: false
+print_skip_snps: false
+# chrom: "foo"
+cell_tag: "CB"
+umi_tag: "Auto"
+min_count: 20
+min_maf: 0.0
+doublet_gl: false
+# incl_flag: "foo"
+# excl_flag: "foo"
+count_orphan: false
+min_mapq: 20
+min_len: 30
+
+# Output
+# output: "$id.$key.output.output"
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 1.0.0-rc3 -latest \
+  -profile docker \
+  -main-script target/nextflow/genetic_demux/cellsnp/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Input
+
+|Name                |Description                                                                                                                                                                                                      |Attributes                  |
+|:-------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------|
+|`--sam_file`        |Indexed sam/bam file(s), comma separated multiple samples. Mode 1a & 2a: one sam/bam file with single cell. Mode 1b & 2b: one or multiple bulk sam/bam files, no barcodes needed, but sample ids and regionsVCF. |`file`                      |
+|`--sam_index_file`  |Input SAM/BAM Index file, problem with samFileList.                                                                                                                                                              |`file`                      |
+|`--sam_fileList`    |A list file containing bam files, each per line, for Mode 1b & 2b.                                                                                                                                               |`file`                      |
+|`--regions_vcf`     |A vcf file listing all candidate SNPs, for fetch each variants. If None, pileup the genome. Needed for bulk samples.                                                                                             |`file`                      |
+|`--targets_vcf`     |Similar as --regions_vcf, but the next position is accessed by streaming rather than indexing/jumping (like -T in samtools/bcftools mpileup).                                                                    |`file`                      |
+|`--barcode_file`    |A plain file listing all effective cell barcode.                                                                                                                                                                 |`file`                      |
+|`--sample_list`     |A list file containing sample IDs, each per line.                                                                                                                                                                |`file`                      |
+|`--sample_ids`      |Comma separated sample ids.                                                                                                                                                                                      |`string`                    |
+|`--genotype`        |If use, do genotyping in addition to counting.                                                                                                                                                                   |`boolean_true`              |
+|`--gzip`            |If use, the output files will be zipped into BGZF format.                                                                                                                                                        |`boolean_true`              |
+|`--print_skip_snps` |If use, the SNPs skipped when loading VCF will be printed.                                                                                                                                                       |`boolean_true`              |
+|`--chrom`           |The chromosomes to use in integer format 1-22, comma separated                                                                                                                                                   |`string`                    |
+|`--cell_tag`        |Tag for cell barcodes, turn off with None.                                                                                                                                                                       |`string`, default: `"CB"`   |
+|`--umi_tag`         |Tag for UMI: UR, Auto, None. For Auto mode, use UR if barcodes is inputted, otherwise use None. None mode means no UMI but read counts.                                                                          |`string`, default: `"Auto"` |
+|`--min_count`       |Minimum aggragated count.                                                                                                                                                                                        |`integer`, default: `20`    |
+|`--min_maf`         |Minimum minor allele frequency.                                                                                                                                                                                  |`double`, default: `0`      |
+|`--doublet_gl`      |If use, keep doublet GT likelihood, i.e., GT=0.5 and GT=1.5.                                                                                                                                                     |`boolean_true`              |
+|`--incl_flag`       |Required flags: skip reads with all mask bits unset.                                                                                                                                                             |`string`                    |
+|`--excl_flag`       |Filter flags: skip reads with any mask bits set [UNMAP,SECONDARY,QCFAIL (when use UMI) or UNMAP,SECONDARY,QCFAIL,DUP (otherwise)]                                                                                |`string`                    |
+|`--count_orphan`    |If use, do not skip anomalous read pairs.                                                                                                                                                                        |`boolean_true`              |
+|`--min_mapq`        |Minimum MAPQ for read filtering.                                                                                                                                                                                 |`integer`, default: `20`    |
+|`--min_len`         |Minimum mapped length for read filtering.                                                                                                                                                                        |`integer`, default: `30`    |
+
+
+### Output
+
+|Name       |Description                                   |Attributes                       |
+|:----------|:---------------------------------------------|:--------------------------------|
+|`--output` |Output directory for VCF and sparse matrices. |`file`, example: `"cellsnp_out"` |
+
+## Authors
+
+
+  * Xichen Wu [{{< fa brands github >}}](https://github.com/wxicu) [{{< fa brands orcid >}}](https://orcid.org/0009-0008-2168-4508) [{{< fa brands linkedin >}}](https://linkedin.com/in/xichen-wu) (author)
