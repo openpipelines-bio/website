@@ -14,7 +14,7 @@ ID: `sync_test_resources`
 Namespace: `download`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/download/sync_test_resources){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0-rc4/./src/download/sync_test_resources){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0-rc4 -latest \
   -main-script target/nextflow/download/sync_test_resources/main.nf \
   --help
 ```
@@ -56,7 +56,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0-rc4 -latest \
   -profile docker \
   -main-script target/nextflow/download/sync_test_resources/main.nf \
   -params-file params.yaml
@@ -77,7 +77,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--quiet`   |Displays the operations that would be performed using the specified command without actually running them. |`boolean_true`                                 |
 |`--dryrun`  |Does not display the operations performed from the specified command.                                      |`boolean_true`                                 |
 |`--delete`  |Files that exist in the destination but not in the source are deleted during sync.                         |`boolean_true`                                 |
-|`--exclude` |Exclude all files or objects from the command that matches the specified pattern.                          |List of `string`, multiple_sep: `":"`          |
+|`--exclude` |Exclude all files or objects from the command that matches the specified pattern.                          |List of `string`, multiple_sep: `";"`          |
 
 ## Authors
 
