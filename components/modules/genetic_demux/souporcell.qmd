@@ -1,0 +1,113 @@
+---
+title: "Souporcell"
+namespace: "Genetic demux"
+description: "souporcell is a method for clustering mixed-genotype scRNAseq experiments by individual."
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `souporcell`  
+Namespace: `genetic_demux`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0-rc5/./src/genetic_demux/souporcell){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 1.0.0-rc5 -latest \
+  -main-script target/nextflow/genetic_demux/souporcell/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Input
+# fasta: "path/to/file"
+# bam: "path/to/file"
+# bam_index: "path/to/file"
+# barcodes: "path/to/file"
+# clusters: 123
+ploidy: 2
+min_alt: 10
+min_ref: 10
+max_loci: 2048
+# restarts: 123
+# common_variants: "path/to/file"
+# known_genotypes: "path/to/file"
+# known_genotypes_sample_names: "foo"
+skip_remap: false
+ignore: false
+
+# Output
+# output: "$id.$key.output.output"
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 1.0.0-rc5 -latest \
+  -profile docker \
+  -main-script target/nextflow/genetic_demux/souporcell/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Input
+
+|Name                             |Description                                                                                                       |Attributes                 |
+|:--------------------------------|:-----------------------------------------------------------------------------------------------------------------|:--------------------------|
+|`--fasta`                        |reference fasta file                                                                                              |`file`                     |
+|`--bam`                          |cellranger bam                                                                                                    |`file`                     |
+|`--bam_index`                    |cellranger bam index                                                                                              |`file`                     |
+|`--barcodes`                     |barcodes.tsv from cellranger                                                                                      |`file`                     |
+|`--clusters`                     |number cluster, tbd add easy way to run on a range of k                                                           |`integer`                  |
+|`--ploidy`                       |ploidy, must be 1 or 2                                                                                            |`integer`, default: `2`    |
+|`--min_alt`                      |min alt to use locus                                                                                              |`integer`, default: `10`   |
+|`--min_ref`                      |min ref to use locus                                                                                              |`integer`, default: `10`   |
+|`--max_loci`                     |max loci per cell, affects speed                                                                                  |`integer`, default: `2048` |
+|`--restarts`                     |number of restarts in clustering, when there are > 12 clusters we recommend increasing this to avoid local minima |`integer`                  |
+|`--common_variants`              |common variant loci or known variant loci vcf, must be vs same reference fasta                                    |`file`                     |
+|`--known_genotypes`              |known variants per clone in population vcf mode, must be .vcf right now we dont accept gzip or bcf sorry          |`file`                     |
+|`--known_genotypes_sample_names` |which samples in population vcf from known genotypes option represent the donors in your sample                   |`string`                   |
+|`--skip_remap`                   |dont remap with minimap2 (not recommended unless in conjunction with --common_variants                            |`boolean_true`             |
+|`--ignore`                       |set to True to ignore data error assertions                                                                       |`boolean_true`             |
+
+
+### Output
+
+|Name       |Description                                 |Attributes                          |
+|:----------|:-------------------------------------------|:-----------------------------------|
+|`--output` |name of directory to place souporcell files |`file`, example: `"souporcell_out"` |
+
+## Authors
+
+
+  * Xichen Wu [{{< fa brands github >}}](https://github.com/wxicu) [{{< fa brands orcid >}}](https://orcid.org/0009-0008-2168-4508) [{{< fa brands linkedin >}}](https://linkedin.com/in/xichen-wu) (author)

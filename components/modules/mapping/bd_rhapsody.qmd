@@ -14,7 +14,7 @@ ID: `bd_rhapsody`
 Namespace: `mapping`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/mapping/bd_rhapsody){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0-rc5/./src/mapping/bd_rhapsody){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -44,7 +44,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0-rc5 -latest \
   -main-script target/nextflow/mapping/bd_rhapsody/main.nf \
   --help
 ```
@@ -95,7 +95,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0-rc5 -latest \
   -profile docker \
   -main-script target/nextflow/mapping/bd_rhapsody/main.nf \
   -params-file params.yaml
@@ -149,7 +149,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |Name                    |Description                                                                                                                                                                                     |Attributes                                                                                            |
 |:-----------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------|
 |`--sample_tags_version` |Specify if multiplexed run.                                                                                                                                                                     |`string`, example: `"human"`                                                                          |
-|`--tag_names`           |Tag_Names (optional) - Specify the tag number followed by '-' and the desired sample name to appear in Sample_Tag_Metrics.csv. Do not use the special characters: &, (), [], {},  <>, ?, &#124; |List of `string`, example: `"4-mySample", "9-myOtherSample", "6-alsoThisSample"`, multiple_sep: `":"` |
+|`--tag_names`           |Tag_Names (optional) - Specify the tag number followed by '-' and the desired sample name to appear in Sample_Tag_Metrics.csv. Do not use the special characters: &, (), [], {},  <>, ?, &#124; |List of `string`, example: `"4-mySample", "9-myOtherSample", "6-alsoThisSample"`, multiple_sep: `";"` |
 
 
 ### VDJ arguments
