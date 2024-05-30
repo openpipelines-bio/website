@@ -1,0 +1,80 @@
+---
+title: "Move layer"
+namespace: "Transform"
+description: "Move a data matrix stored at the .layers or .X attributes in a MuData object to another layer."
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `move_layer`  
+Namespace: `transform`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v1.0.0-rc5/./src/transform/move_layer){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r v1.0.0-rc5 -latest \
+  -main-script target/nextflow/transform/move_layer/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Arguments
+input: # please fill in - example: "input.h5mu"
+modality: "rna"
+# input_layer: "foo"
+# output: "$id.$key.output.h5mu"
+# output_layer: "foo"
+# output_compression: "gzip"
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r v1.0.0-rc5 -latest \
+  -profile docker \
+  -main-script target/nextflow/transform/move_layer/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument group
+
+### Arguments
+
+|Name                   |Description                                                  |Attributes                                 |
+|:----------------------|:------------------------------------------------------------|:------------------------------------------|
+|`--input`              |Input h5mu file                                              |`file`, required, example: `"input.h5mu"`  |
+|`--modality`           |                                                             |`string`, default: `"rna"`                 |
+|`--input_layer`        |                                                             |`string`                                   |
+|`--output`             |Output h5mu file.                                            |`file`, required, example: `"output.h5mu"` |
+|`--output_layer`       |                                                             |`string`                                   |
+|`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`                |

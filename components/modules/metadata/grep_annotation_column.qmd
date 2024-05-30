@@ -14,7 +14,7 @@ ID: `grep_annotation_column`
 Namespace: `metadata`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/metadata/grep_annotation_column){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v1.0.0-rc5/./src/metadata/grep_annotation_column){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r v1.0.0-rc5 -latest \
   -main-script target/nextflow/metadata/grep_annotation_column/main.nf \
   --help
 ```
@@ -43,6 +43,7 @@ nextflow run openpipelines-bio/openpipeline \
 # Inputs
 input: # please fill in - example: "sample_path"
 # input_column: "foo"
+# input_layer: "foo"
 modality: # please fill in - example: "rna"
 # matrix: "var"
 
@@ -63,7 +64,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r v1.0.0-rc5 -latest \
   -profile docker \
   -main-script target/nextflow/metadata/grep_annotation_column/main.nf \
   -params-file params.yaml
@@ -80,12 +81,13 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 Arguments related to the input dataset.
 
 
-|Name             |Description                                                                                         |Attributes                                 |
-|:----------------|:---------------------------------------------------------------------------------------------------|:------------------------------------------|
-|`--input`        |Path to the input .h5mu.                                                                            |`file`, required, example: `"sample_path"` |
-|`--input_column` |Column to query. If not specified, use .var_names or .obs_names, depending on the value of --matrix |`string`                                   |
-|`--modality`     |Which modality to get the annotation matrix from.                                                   |`string`, required, example: `"rna"`       |
-|`--matrix`       |Matrix to fetch the column from that will be searched.                                              |`string`, example: `"var"`                 |
+|Name             |Description                                                                                                                                                                |Attributes                                 |
+|:----------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------|
+|`--input`        |Path to the input .h5mu.                                                                                                                                                   |`file`, required, example: `"sample_path"` |
+|`--input_column` |Column to query. If not specified, use .var_names or .obs_names, depending on the value of --matrix                                                                        |`string`                                   |
+|`--input_layer`  |Input data to use when calculating fraction of observations that match with the query.  Only used when --output_fraction_column is provided. If not specified, .X is used. |`string`                                   |
+|`--modality`     |Which modality to get the annotation matrix from.                                                                                                                          |`string`, required, example: `"rna"`       |
+|`--matrix`       |Matrix to fetch the column from that will be searched.                                                                                                                     |`string`, example: `"var"`                 |
 
 
 ### Outputs
