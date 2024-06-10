@@ -1,0 +1,113 @@
+---
+title: "Cell Ranger post-processing"
+namespace: "Workflows/ingestion"
+description: "Post-processing Cell Ranger datasets."
+type: "workflow"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `cellranger_postprocessing`  
+Namespace: `workflows/ingestion`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0-rc6/./src/workflows/ingestion/cellranger_postprocessing){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 1.0.0-rc6 -latest \
+  -main-script ./src/workflows/ingestion/cellranger_postprocessing/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Inputs
+id: # please fill in - example: "foo"
+input: # please fill in - example: "input.h5mu"
+
+# Outputs
+# output: "$id.$key.output.output"
+
+# Correction arguments
+perform_correction: false
+cellbender_epochs: 150
+
+# Filtering arguments
+# min_genes: 100
+# min_counts: 1000
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 1.0.0-rc6 -latest \
+  -profile docker \
+  -main-script ./src/workflows/ingestion/cellranger_postprocessing/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Inputs
+
+|Name      |Description                                                                       |Attributes                                |
+|:---------|:---------------------------------------------------------------------------------|:-----------------------------------------|
+|`--id`    |ID of the sample.                                                                 |`string`, required, example: `"foo"`      |
+|`--input` |Input h5mu file created by running Cell Ranger and converting its output to h5mu. |`file`, required, example: `"input.h5mu"` |
+
+
+### Outputs
+
+|Name       |Description              |Attributes |
+|:----------|:------------------------|:----------|
+|`--output` |The converted h5mu file. |`file`     |
+
+
+### Correction arguments
+
+|Name                   |Description                                                   |Attributes                |
+|:----------------------|:-------------------------------------------------------------|:-------------------------|
+|`--perform_correction` |Whether or not to run CellBender to perform count correction. |`boolean_true`            |
+|`--cellbender_epochs`  |Number of epochs to run CellBender for.                       |`integer`, default: `150` |
+
+
+### Filtering arguments
+
+|Name           |Description                                                              |Attributes                 |
+|:--------------|:------------------------------------------------------------------------|:--------------------------|
+|`--min_genes`  |Minimum number of counts required for a cell to pass filtering.          |`integer`, example: `100`  |
+|`--min_counts` |Minimum number of genes expressed required for a cell to pass filtering. |`integer`, example: `1000` |
+
+## Authors
+
+
+  * Angela Oliveira Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) [{{< fa brands linkedin >}}](https://linkedin.com/in/aopisco) (author)
+
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (author, maintainer)

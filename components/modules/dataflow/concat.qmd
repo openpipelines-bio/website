@@ -14,7 +14,7 @@ ID: `concat`
 Namespace: `dataflow`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/dataflow/concat){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0-rc6/./src/dataflow/concat){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0-rc6 -latest \
   -main-script target/nextflow/dataflow/concat/main.nf \
   --help
 ```
@@ -56,7 +56,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0-rc6 -latest \
   -profile docker \
   -main-script target/nextflow/dataflow/concat/main.nf \
   -params-file params.yaml
@@ -72,8 +72,8 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 |Name                   |Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |Attributes                                                               |
 |:----------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------|
-|`--input`              |Paths to the different samples to be concatenated.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |List of `file`, required, example: `"sample_paths"`, multiple_sep: `","` |
-|`--input_id`           |Names of the different samples that have to be concatenated.  Must be specified when using '--mode move'. In this case, the ids will be used for the columns names of the dataframes registring the conflicts. If specified, must be of same length as `--input`.                                                                                                                                                                                                                                                                  |List of `string`, multiple_sep: `","`                                    |
+|`--input`              |Paths to the different samples to be concatenated.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |List of `file`, required, example: `"sample_paths"`, multiple_sep: `";"` |
+|`--input_id`           |Names of the different samples that have to be concatenated.  Must be specified when using '--mode move'. In this case, the ids will be used for the columns names of the dataframes registring the conflicts. If specified, must be of same length as `--input`.                                                                                                                                                                                                                                                                  |List of `string`, multiple_sep: `";"`                                    |
 |`--output`             |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |`file`, example: `"output.h5mu"`                                         |
 |`--output_compression` |The compression format to be used on the output h5mu object.                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |`string`, example: `"gzip"`                                              |
 |`--obs_sample_name`    |Name of the .obs key under which to add the sample names.                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |`string`, default: `"sample_id"`                                         |

@@ -1,0 +1,101 @@
+---
+title: "Conversion"
+namespace: "Workflows/ingestion"
+description: "A pipeline to convert different file formats to .h5mu."
+type: "workflow"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `conversion`  
+Namespace: `workflows/ingestion`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0-rc6/./src/workflows/ingestion/conversion){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 1.0.0-rc6 -latest \
+  -main-script ./src/workflows/ingestion/conversion/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Inputs
+id: # please fill in - example: "foo"
+input: # please fill in - example: "input.h5mu"
+input_type: # please fill in - example: "foo"
+
+# Outputs
+# output: "$id.$key.output.h5mu"
+
+# Conversion from h5ad
+# modality: ["foo"]
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 1.0.0-rc6 -latest \
+  -profile docker \
+  -main-script ./src/workflows/ingestion/conversion/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Inputs
+
+|Name           |Description            |Attributes                                |
+|:--------------|:----------------------|:-----------------------------------------|
+|`--id`         |ID of the sample.      |`string`, required, example: `"foo"`      |
+|`--input`      |Path to the sample.    |`file`, required, example: `"input.h5mu"` |
+|`--input_type` |Type of the input file |`string`, required                        |
+
+
+### Outputs
+
+|Name       |Description                            |Attributes                       |
+|:----------|:--------------------------------------|:--------------------------------|
+|`--output` |Name or template for the output files. |`file`, example: `"output.h5mu"` |
+
+
+### Conversion from h5ad
+
+|Name         |Description                                                       |Attributes                            |
+|:------------|:-----------------------------------------------------------------|:-------------------------------------|
+|`--modality` |Name of the modality where the h5ad is stored in the h5mu object. |List of `string`, multiple_sep: `";"` |
+
+## Authors
+
+
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (author, maintainer)
+
+  * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-de-maeyer-b46a814) (author)

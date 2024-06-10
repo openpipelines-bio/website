@@ -14,7 +14,7 @@ ID: `filter_10xh5`
 Namespace: `process_10xh5`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/process_10xh5/filter_10xh5){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0-rc6/./src/process_10xh5/filter_10xh5){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0-rc6 -latest \
   -main-script target/nextflow/process_10xh5/filter_10xh5/main.nf \
   --help
 ```
@@ -56,7 +56,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0-rc6 -latest \
   -profile docker \
   -main-script target/nextflow/process_10xh5/filter_10xh5/main.nf \
   -params-file params.yaml
@@ -76,7 +76,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--output`             |Output h5 file.                                        |`file`, required, example: `"pbmc_1k_protein_v3_raw_feature_bc_matrix_filtered.h5"` |
 |`--min_library_size`   |Minimum library size.                                  |`integer`, default: `0`                                                             |
 |`--min_cells_per_gene` |Minimum number of cells per gene.                      |`integer`, default: `0`                                                             |
-|`--keep_feature_types` |Specify which feature types will never be filtered out |List of `string`, example: `"Antibody Capture"`, multiple_sep: `":"`                |
+|`--keep_feature_types` |Specify which feature types will never be filtered out |List of `string`, example: `"Antibody Capture"`, multiple_sep: `";"`                |
 |`--verbose`            |Increase verbosity                                     |`boolean_true`                                                                      |
 
 ## Authors
