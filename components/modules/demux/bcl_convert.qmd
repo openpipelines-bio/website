@@ -14,7 +14,7 @@ ID: `bcl_convert`
 Namespace: `demux`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/demux/bcl_convert){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/./src/demux/bcl_convert){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -33,7 +33,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0 -latest \
   -main-script target/nextflow/demux/bcl_convert/main.nf \
   --help
 ```
@@ -58,7 +58,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0 -latest \
   -profile docker \
   -main-script target/nextflow/demux/bcl_convert/main.nf \
   -params-file params.yaml

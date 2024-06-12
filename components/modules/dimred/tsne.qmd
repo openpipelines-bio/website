@@ -1,0 +1,115 @@
+---
+title: "Tsne"
+namespace: "Dimred"
+description: "t-SNE (t-Distributed Stochastic Neighbor Embedding) is a dimensionality reduction technique used to visualize high-dimensional data in a low-dimensional space, revealing patterns and clusters by preserving local data similarities"
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `tsne`  
+Namespace: `dimred`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/./src/dimred/tsne){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 1.0.0 -latest \
+  -main-script target/nextflow/dimred/tsne/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Inputs
+input: # please fill in - example: "input.h5mu"
+modality: # please fill in - example: "rna"
+use_rep: # please fill in - example: "X_pca"
+
+# Outputs
+# output: "$id.$key.output.h5mu"
+# output_compression: "gzip"
+obsm_output: "X_tsne"
+
+# Arguments
+n_pcs: 50
+perplexity: 30.0
+min_dist: 0.5
+metric: "euclidean"
+early_exaggeration: 12.0
+learning_rate: 1000.0
+random_state: 0
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 1.0.0 -latest \
+  -profile docker \
+  -main-script target/nextflow/dimred/tsne/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Inputs
+
+|Name         |Description                                                |Attributes                                |
+|:------------|:----------------------------------------------------------|:-----------------------------------------|
+|`--input`    |Input h5mu file                                            |`file`, required, example: `"input.h5mu"` |
+|`--modality` |                                                           |`string`, required, default: `"rna"`      |
+|`--use_rep`  |The `.obsm` slot to use as input for the tSNE computation. |`string`, required, example: `"X_pca"`    |
+
+
+### Outputs
+
+|Name                   |Description                                                  |Attributes                                 |
+|:----------------------|:------------------------------------------------------------|:------------------------------------------|
+|`--output`             |Output h5mu file.                                            |`file`, required, example: `"output.h5mu"` |
+|`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`                |
+|`--obsm_output`        |The .obsm key to use for storing the tSNE results.           |`string`, default: `"X_tsne"`              |
+
+
+### Arguments
+
+|Name                   |Description                                                                                                                                                                                                                                                                                                                                                                                                          |Attributes                       |
+|:----------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------|
+|`--n_pcs`              |The number of principal components to use for the tSNE computation.                                                                                                                                                                                                                                                                                                                                                  |`integer`, default: `50`         |
+|`--perplexity`         |The perplexity is related to the number of nearest neighbors that is used in other manifold learning algorithms. Larger datasets usually require a larger perplexity. Consider selecting a value between 5 and 50. Different values can result in significantly different results.                                                                                                                                   |`double`, default: `30`          |
+|`--min_dist`           |The effective minimum distance between embedded points. Smaller values will result in a more clustered/clumped embedding where nearby points on the manifold are drawn closer together, while larger values will result on a more even dispersal of points. The value should be set relative to the spread value, which determines the scale at which embedded points will be spread out.                            |`double`, default: `0.5`         |
+|`--metric`             |Distance metric to calculate neighbors on.                                                                                                                                                                                                                                                                                                                                                                           |`string`, default: `"euclidean"` |
+|`--early_exaggeration` |Controls how tight natural clusters in the original space are in the embedded space and how much space will be between them. For larger values, the space between natural clusters will be larger in the embedded space. Again, the choice of this parameter is not very critical. If the cost function increases during initial optimization, the early exaggeration factor or the learning rate might be too high. |`double`, default: `12`          |
+|`--learning_rate`      |The learning rate for t-SNE optimization. Typical values range between 10.0 and 1000.0.                                                                                                                                                                                                                                                                                                                              |`double`, default: `1000`        |
+|`--random_state`       |The random seed to use for the tSNE computation.                                                                                                                                                                                                                                                                                                                                                                     |`integer`, default: `0`          |
+
+## Authors
+
+
+  * Jakub Majercik [{{< fa brands github >}}](https://github.com/jakubmajercik) [{{< fa brands linkedin >}}](https://linkedin.com/in/jakubmajercik) (maintainer)

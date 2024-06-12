@@ -1,0 +1,139 @@
+---
+title: "Demuxlet"
+namespace: "Genetic demux"
+description: "Demuxlet is a software tool to deconvolute sample identity and identify multiplets when multiple samples are pooled by barcoded single cell sequencing."
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `demuxlet`  
+Namespace: `genetic_demux`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/./src/genetic_demux/demuxlet){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+If external genotyping data
+for each sample is available (e.g. from SNP arrays), demuxlet would be recommended. Be careful
+that the parameters on the github is not in line with the newest help version
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 1.0.0 -latest \
+  -main-script target/nextflow/genetic_demux/demuxlet/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Input
+# sam: "path/to/file"
+tag_group: "CB"
+tag_umi: "UB"
+# plp: "foo"
+# vcf: "path/to/file"
+field: "GT"
+geno_error_offset: 0.1
+geno_error_coeff: 0.0
+r2_info: "R2"
+min_mac: 1
+min_call_rate: 0.5
+alpha: "0.5"
+doublet_prior: 0.5
+# sm: "foo"
+# sm_list: "foo"
+sam_verbose: 1000000
+vcf_verbose: 1000
+cap_bq: 20
+min_bq: 13
+min_mq: 20
+min_td: 0
+excl_flag: 3844
+# group_list: "foo"
+min_total: 0
+min_snp: 0
+min_umi: 0
+
+# Output
+# output: "$id.$key.output.output"
+# out: "demuxlet"
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 1.0.0 -latest \
+  -profile docker \
+  -main-script target/nextflow/genetic_demux/demuxlet/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Input
+
+|Name                  |Description                                                                                                                                                |Attributes                    |
+|:---------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------|
+|`--sam`               |Input SAM/BAM/CRAM file. Must be sorted by coordinates and indexed.                                                                                        |`file`                        |
+|`--tag_group`         |Tag representing readgroup or cell barcodes, in the case to partition the BAM file into multiple groups. For 10x genomics, use CB.                         |`string`, default: `"CB"`     |
+|`--tag_umi`           |Tag representing UMIs. For 10x genomiucs, use UB.                                                                                                          |`string`, default: `"UB"`     |
+|`--plp`               |Input pileup format. If the value is a string, it will be considered as the path of the plp file. If the value is boolean true, it will perform dscpileup. |`string`                      |
+|`--vcf`               |Input VCF/BCF file, containing the individual genotypes (GT), posterior probability (GP), or genotype likelihood (PL).                                     |`file`                        |
+|`--field`             |FORMAT field to extract the genotype, likelihood, or posterior from                                                                                        |`string`, default: `"GT"`     |
+|`--geno_error_offset` |Offset of genotype error rate. [error] = [offset] + [1-offset]*[coeff]*[1-r2]                                                                              |`double`, default: `0.1`      |
+|`--geno_error_coeff`  |Slope of genotype error rate. [error] = [offset] + [1-offset]*[coeff]*[1-r2]                                                                               |`double`, default: `0`        |
+|`--r2_info`           |INFO field name representing R2 value. Used for representing imputation quality.                                                                           |`string`, default: `"R2"`     |
+|`--min_mac`           |Minimum minor allele frequency.                                                                                                                            |`integer`, default: `1`       |
+|`--min_call_rate`     |Minimum call rate.                                                                                                                                         |`double`, default: `0.5`      |
+|`--alpha`             |Grid of alpha to search for (default is 0.1, 0.2, 0.3, 0.4, 0.5)                                                                                           |`string`, default: `"0.5"`    |
+|`--doublet_prior`     |Prior of doublet                                                                                                                                           |`double`, default: `0.5`      |
+|`--sm`                |List of sample IDs to compare to (default: use all).                                                                                                       |`string`                      |
+|`--sm_list`           |File containing the list of sample IDs to compare.                                                                                                         |`string`                      |
+|`--sam_verbose`       |Verbose message frequency for SAM/BAM/CRAM.                                                                                                                |`integer`, default: `1000000` |
+|`--vcf_verbose`       |Verbose message frequency for VCF/BCF.                                                                                                                     |`integer`, default: `1000`    |
+|`--cap_bq`            |Maximum base quality (higher BQ will be capped).                                                                                                           |`integer`, default: `20`      |
+|`--min_bq`            |Minimum base quality to consider (lower BQ will be skipped).                                                                                               |`integer`, default: `13`      |
+|`--min_mq`            |Minimum mapping quality to consider (lower MQ will be ignored).                                                                                            |`integer`, default: `20`      |
+|`--min_td`            |Minimum distance to the tail (lower will be ignored).                                                                                                      |`integer`, default: `0`       |
+|`--excl_flag`         |SAM/BAM FLAGs to be excluded.                                                                                                                              |`integer`, default: `3844`    |
+|`--group_list`        |List of tag readgroup/cell barcode to consider in this run. All other barcodes will be ignored. This is useful for parallelized run.                       |`string`                      |
+|`--min_total`         |Minimum number of total reads for a droplet/cell to be considered.                                                                                         |`integer`, default: `0`       |
+|`--min_snp`           |Minimum number of SNPs with coverage for a droplet/cell to be considered.                                                                                  |`integer`, default: `0`       |
+|`--min_umi`           |Minimum number of UMIs for a droplet/cell to be considered.                                                                                                |`integer`, default: `0`       |
+
+
+### Output
+
+|Name       |Description                 |Attributes                      |
+|:----------|:---------------------------|:-------------------------------|
+|`--output` |Output directory            |`file`, example: `"demux"`      |
+|`--out`    |demuxlet output file prefix |`string`, example: `"demuxlet"` |
+
+## Authors
+
+
+  * Xichen Wu [{{< fa brands github >}}](https://github.com/wxicu) [{{< fa brands orcid >}}](https://orcid.org/0009-0008-2168-4508) [{{< fa brands linkedin >}}](https://linkedin.com/in/xichen-wu) (author)

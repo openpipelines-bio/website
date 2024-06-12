@@ -14,7 +14,7 @@ ID: `cellbender_remove_background_v0_2`
 Namespace: `correction`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/correction/cellbender_remove_background_v0_2){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/./src/correction/cellbender_remove_background_v0_2){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -35,7 +35,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0 -latest \
   -main-script target/nextflow/correction/cellbender_remove_background_v0_2/main.nf \
   --help
 ```
@@ -83,7 +83,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0 -latest \
   -profile docker \
   -main-script target/nextflow/correction/cellbender_remove_background_v0_2/main.nf \
   -params-file params.yaml
@@ -128,10 +128,10 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--epochs`                       |Number of epochs to train.                                                                                                                                                                                                                                                                                                                            |`integer`, default: `150`                              |
 |`--low_count_threshold`          |Droplets with UMI counts below this number are completely  excluded from the analysis. This can help identify the correct  prior for empty droplet counts in the rare case where empty  counts are extremely high (over 200).                                                                                                                         |`integer`, default: `15`                               |
 |`--z_dim`                        |Dimension of latent variable z.                                                                                                                                                                                                                                                                                                                       |`integer`, default: `100`                              |
-|`--z_layers`                     |Dimension of hidden layers in the encoder for z.                                                                                                                                                                                                                                                                                                      |List of `integer`, default: `500`, multiple_sep: `":"` |
+|`--z_layers`                     |Dimension of hidden layers in the encoder for z.                                                                                                                                                                                                                                                                                                      |List of `integer`, default: `500`, multiple_sep: `";"` |
 |`--training_fraction`            |Training detail: the fraction of the data used for training. The rest is never seen by the inference algorithm. Speeds up learning.                                                                                                                                                                                                                   |`double`, default: `0.9`                               |
 |`--empty_drop_training_fraction` |Training detail: the fraction of the training data each epoch that  is drawn (randomly sampled) from surely empty droplets.                                                                                                                                                                                                                           |`double`, default: `0.5`                               |
-|`--fpr`                          |Target false positive rate in (0, 1). A false positive is a true signal count that is erroneously removed. More background removal is accompanied by more signal removal at high values of FPR. You can specify multiple values, which will create multiple output files.                                                                             |List of `double`, default: `0.01`, multiple_sep: `":"` |
+|`--fpr`                          |Target false positive rate in (0, 1). A false positive is a true signal count that is erroneously removed. More background removal is accompanied by more signal removal at high values of FPR. You can specify multiple values, which will create multiple output files.                                                                             |List of `double`, default: `0.01`, multiple_sep: `";"` |
 |`--exclude_antibody_capture`     |Including the flag --exclude-antibody-capture will cause remove-background to operate on gene counts only, ignoring other features.                                                                                                                                                                                                                   |`boolean_true`                                         |
 |`--learning_rate`                |Training detail: lower learning rate for inference. A OneCycle learning rate schedule is used, where the upper learning rate is ten times this value. (For this value, probably do not exceed 1e-3).                                                                                                                                                  |`double`, example: `1e-04`                             |
 |`--cuda`                         |Including the flag --cuda will run the inference on a GPU.                                                                                                                                                                                                                                                                                            |`boolean_true`                                         |
