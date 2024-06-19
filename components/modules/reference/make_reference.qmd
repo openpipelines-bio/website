@@ -14,7 +14,7 @@ ID: `make_reference`
 Namespace: `reference`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/reference/make_reference){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/./src/reference/make_reference){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -34,7 +34,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/reference/make_reference/main.nf \
   --help
 ```
@@ -60,7 +60,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/reference/make_reference/main.nf \
   -params-file params.yaml
