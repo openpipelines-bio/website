@@ -81,4 +81,3 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 
   * Xichen Wu [{{< fa brands github >}}](https://github.com/wxicu) [{{< fa brands orcid >}}](https://orcid.org/0009-0008-2168-4508) [{{< fa brands linkedin >}}](https://linkedin.com/in/xichen-wu) (author)
-

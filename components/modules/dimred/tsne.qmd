@@ -113,4 +113,3 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 
   * Jakub Majercik [{{< fa brands github >}}](https://github.com/jakubmajercik) [{{< fa brands linkedin >}}](https://linkedin.com/in/jakubmajercik) (maintainer)
-
