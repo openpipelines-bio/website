@@ -1,6 +1,6 @@
 ---
 title: "Cell Ranger post-processing"
-namespace: "Ingestion"
+namespace: "Workflows/ingestion"
 description: "Post-processing Cell Ranger datasets."
 type: "workflow"
 toc: false
@@ -11,10 +11,10 @@ toc: false
 ### Info
 
 ID: `cellranger_postprocessing`  
-Namespace: `ingestion`
+Namespace: `workflows/ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./workflows/ingestion/cellranger_postprocessing){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/workflows/ingestion/cellranger_postprocessing){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,8 +30,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
-  -main-script ./workflows/ingestion/cellranger_postprocessing/main.nf \
+  -r 1.0.0 -latest \
+  -main-script src/workflows/ingestion/cellranger_postprocessing/main.nf \
   --help
 ```
 
@@ -63,9 +63,9 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0 -latest \
   -profile docker \
-  -main-script ./workflows/ingestion/cellranger_postprocessing/main.nf \
+  -main-script src/workflows/ingestion/cellranger_postprocessing/main.nf \
   -params-file params.yaml
 ```
 
@@ -111,52 +111,3 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
   * Angela Oliveira Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) [{{< fa brands linkedin >}}](https://linkedin.com/in/aopisco) (author)
 
   * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (author, maintainer)
-
-## Visualisation
-
-```{mermaid}
-%%| column: screen-inset-shaded
-flowchart LR
-    v0(Input)
-    v6(from_10xh5_to_h5mu)
-    v8(join)
-    v12(toSortedList)
-    v14(flatMap)
-    v15(filter)
-    v21(cellbender_remove_background)
-    v23(join)
-    v27(mix)
-    v26(filter)
-    v28(filter)
-    v34(filter_with_counts)
-    v36(join)
-    v40(mix)
-    v39(filter)
-    v46(publish)
-    v48(join)
-    v54(Output)
-    v14-->v15
-    v14-->v26
-    v26-->v27
-    v27-->v28
-    v27-->v39
-    v39-->v40
-    v0-->v8
-    v0-->v6
-    v6-->v8
-    v8-->v12
-    v12-->v14
-    v15-->v23
-    v15-->v21
-    v21-->v23
-    v23-->v27
-    v28-->v36
-    v28-->v34
-    v34-->v36
-    v36-->v40
-    v40-->v48
-    v40-->v46
-    v46-->v48
-    v48-->v54
-
-```

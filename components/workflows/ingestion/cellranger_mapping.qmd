@@ -1,6 +1,6 @@
 ---
 title: "Cell Ranger mapping"
-namespace: "Ingestion"
+namespace: "Workflows/ingestion"
 description: "A pipeline for running Cell Ranger mapping."
 type: "workflow"
 toc: false
@@ -11,10 +11,10 @@ toc: false
 ### Info
 
 ID: `cellranger_mapping`  
-Namespace: `ingestion`
+Namespace: `workflows/ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./workflows/ingestion/cellranger_mapping){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/workflows/ingestion/cellranger_mapping){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,8 +30,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
-  -main-script ./workflows/ingestion/cellranger_mapping/main.nf \
+  -r 1.0.0 -latest \
+  -main-script src/workflows/ingestion/cellranger_mapping/main.nf \
   --help
 ```
 
@@ -48,7 +48,7 @@ reference: # please fill in - example: "reference.tar.gz"
 # Outputs
 # output_raw: "$id.$key.output_raw.output_raw"
 # output_h5mu: "$id.$key.output_h5mu.h5mu"
-obsm_metrics: "metrics_summary"
+uns_metrics: "metrics_summary"
 output_type: "raw"
 
 # Cell Ranger arguments
@@ -66,9 +66,9 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0 -latest \
   -profile docker \
-  -main-script ./workflows/ingestion/cellranger_mapping/main.nf \
+  -main-script src/workflows/ingestion/cellranger_mapping/main.nf \
   -params-file params.yaml
 ```
 
@@ -89,12 +89,12 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Outputs
 
-|Name             |Description                                                       |Attributes                                 |
-|:----------------|:-----------------------------------------------------------------|:------------------------------------------|
-|`--output_raw`   |Location where the output folder from Cell Ranger will be stored. |`file`, required, example: `"output_dir"`  |
-|`--output_h5mu`  |The output from Cell Ranger, converted to h5mu.                   |`file`, required, example: `"output.h5mu"` |
-|`--obsm_metrics` |Name of the .obsm slot under which to QC metrics (if any).        |`string`, default: `"metrics_summary"`     |
-|`--output_type`  |Which Cell Ranger output to use for converting to h5mu.           |`string`, default: `"raw"`                 |
+|Name            |Description                                                       |Attributes                                 |
+|:---------------|:-----------------------------------------------------------------|:------------------------------------------|
+|`--output_raw`  |Location where the output folder from Cell Ranger will be stored. |`file`, required, example: `"output_dir"`  |
+|`--output_h5mu` |The output from Cell Ranger, converted to h5mu.                   |`file`, required, example: `"output.h5mu"` |
+|`--uns_metrics` |Name of the .uns slot under which to QC metrics (if any).         |`string`, default: `"metrics_summary"`     |
+|`--output_type` |Which Cell Ranger output to use for converting to h5mu.           |`string`, default: `"raw"`                 |
 
 
 ### Cell Ranger arguments
@@ -115,33 +115,3 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
   * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (author, maintainer)
 
   * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-de-maeyer-b46a814) (author)
-
-## Visualisation
-
-```{mermaid}
-%%| column: screen-inset-shaded
-flowchart LR
-    v0(Input)
-    v2(toSortedList)
-    v4(flatMap)
-    v11(cellranger_count)
-    v13(join)
-    v21(cellranger_count_split)
-    v23(join)
-    v31(from_10xh5_to_h5mu)
-    v33(join)
-    v40(Output)
-    v0-->v2
-    v2-->v4
-    v4-->v13
-    v4-->v11
-    v11-->v13
-    v13-->v23
-    v13-->v21
-    v21-->v23
-    v23-->v33
-    v23-->v31
-    v31-->v33
-    v33-->v40
-
-```
