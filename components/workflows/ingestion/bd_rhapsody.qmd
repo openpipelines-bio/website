@@ -1,6 +1,6 @@
 ---
 title: "BD Rhapsody"
-namespace: "Ingestion"
+namespace: "Workflows/ingestion"
 description: "A generic pipeline for running BD Rhapsody WTA or Targeted mapping, with support for AbSeq, VDJ and/or SMK."
 type: "workflow"
 toc: false
@@ -11,10 +11,10 @@ toc: false
 ### Info
 
 ID: `bd_rhapsody`  
-Namespace: `ingestion`
+Namespace: `workflows/ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./workflows/ingestion/bd_rhapsody){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/workflows/ingestion/bd_rhapsody){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -42,8 +42,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
-  -main-script ./workflows/ingestion/bd_rhapsody/main.nf \
+  -r 1.0.0 -latest \
+  -main-script src/workflows/ingestion/bd_rhapsody/main.nf \
   --help
 ```
 
@@ -95,9 +95,9 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0 -latest \
   -profile docker \
-  -main-script ./workflows/ingestion/bd_rhapsody/main.nf \
+  -main-script src/workflows/ingestion/bd_rhapsody/main.nf \
   -params-file params.yaml
 ```
 
@@ -151,7 +151,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |Name                    |Description                                                                                                                                                                                     |Attributes                                                                                            |
 |:-----------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------|
 |`--sample_tags_version` |Specify if multiplexed run.                                                                                                                                                                     |`string`, example: `"human"`                                                                          |
-|`--tag_names`           |Tag_Names (optional) - Specify the tag number followed by '-' and the desired sample name to appear in Sample_Tag_Metrics.csv. Do not use the special characters: &, (), [], {},  <>, ?, &#124; |List of `string`, example: `"4-mySample", "9-myOtherSample", "6-alsoThisSample"`, multiple_sep: `":"` |
+|`--tag_names`           |Tag_Names (optional) - Specify the tag number followed by '-' and the desired sample name to appear in Sample_Tag_Metrics.csv. Do not use the special characters: &, (), [], {},  <>, ?, &#124; |List of `string`, example: `"4-mySample", "9-myOtherSample", "6-alsoThisSample"`, multiple_sep: `";"` |
 
 
 ### VDJ arguments
@@ -173,28 +173,3 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 
   * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (maintainer)
-
-## Visualisation
-
-```{mermaid}
-%%| column: screen-inset-shaded
-flowchart LR
-    v0(Input)
-    v2(toSortedList)
-    v4(flatMap)
-    v10(bd_rhapsody)
-    v12(join)
-    v21(from_bdrhap_to_h5mu)
-    v23(join)
-    v29(Output)
-    v0-->v2
-    v2-->v4
-    v4-->v12
-    v4-->v10
-    v10-->v12
-    v12-->v23
-    v12-->v21
-    v21-->v23
-    v23-->v29
-
-```

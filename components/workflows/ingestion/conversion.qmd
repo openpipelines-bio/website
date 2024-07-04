@@ -1,6 +1,6 @@
 ---
 title: "Conversion"
-namespace: "Ingestion"
+namespace: "Workflows/ingestion"
 description: "A pipeline to convert different file formats to .h5mu."
 type: "workflow"
 toc: false
@@ -11,10 +11,10 @@ toc: false
 ### Info
 
 ID: `conversion`  
-Namespace: `ingestion`
+Namespace: `workflows/ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./workflows/ingestion/conversion){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/workflows/ingestion/conversion){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,8 +30,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
-  -main-script ./workflows/ingestion/conversion/main.nf \
+  -r 1.0.0 -latest \
+  -main-script src/workflows/ingestion/conversion/main.nf \
   --help
 ```
 
@@ -42,7 +42,7 @@ nextflow run openpipelines-bio/openpipeline \
 ```yaml
 # Inputs
 id: # please fill in - example: "foo"
-input: # please fill in - example: ["input.h5mu"]
+input: # please fill in - example: "input.h5mu"
 input_type: # please fill in - example: "foo"
 
 # Outputs
@@ -59,9 +59,9 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0 -latest \
   -profile docker \
-  -main-script ./workflows/ingestion/conversion/main.nf \
+  -main-script src/workflows/ingestion/conversion/main.nf \
   -params-file params.yaml
 ```
 
@@ -73,11 +73,11 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Inputs
 
-|Name           |Description            |Attributes                                                             |
-|:--------------|:----------------------|:----------------------------------------------------------------------|
-|`--id`         |ID of the sample.      |`string`, required, example: `"foo"`                                   |
-|`--input`      |Path to the sample.    |List of `file`, required, example: `"input.h5mu"`, multiple_sep: `";"` |
-|`--input_type` |Type of the input file |`string`, required                                                     |
+|Name           |Description            |Attributes                                |
+|:--------------|:----------------------|:-----------------------------------------|
+|`--id`         |ID of the sample.      |`string`, required, example: `"foo"`      |
+|`--input`      |Path to the sample.    |`file`, required, example: `"input.h5mu"` |
+|`--input_type` |Type of the input file |`string`, required                        |
 
 
 ### Outputs
@@ -91,7 +91,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 |Name         |Description                                                       |Attributes                            |
 |:------------|:-----------------------------------------------------------------|:-------------------------------------|
-|`--modality` |Name of the modality where the h5ad is stored in the h5mu object. |List of `string`, multiple_sep: `":"` |
+|`--modality` |Name of the modality where the h5ad is stored in the h5mu object. |List of `string`, multiple_sep: `";"` |
 
 ## Authors
 
@@ -99,45 +99,3 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
   * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (author, maintainer)
 
   * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-de-maeyer-b46a814) (author)
-
-## Visualisation
-
-```{mermaid}
-%%| column: screen-inset-shaded
-flowchart LR
-    v0(Input)
-    v2(toSortedList)
-    v4(flatMap)
-    v5(filter)
-    v10(from_10xh5_to_h5mu)
-    v12(join)
-    v35(mix)
-    v15(filter)
-    v20(from_10xmtx_to_h5mu)
-    v22(join)
-    v25(filter)
-    v30(from_h5ad_to_h5mu)
-    v32(join)
-    v37(toSortedList)
-    v39(Output)
-    v4-->v5
-    v4-->v15
-    v4-->v25
-    v0-->v2
-    v2-->v4
-    v5-->v12
-    v5-->v10
-    v10-->v12
-    v12-->v35
-    v15-->v22
-    v15-->v20
-    v20-->v22
-    v22-->v35
-    v25-->v32
-    v25-->v30
-    v30-->v32
-    v32-->v35
-    v35-->v37
-    v37-->v39
-
-```

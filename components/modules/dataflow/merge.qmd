@@ -14,7 +14,7 @@ ID: `merge`
 Namespace: `dataflow`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/dataflow/merge){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/dataflow/merge){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0 -latest \
   -main-script target/nextflow/dataflow/merge/main.nf \
   --help
 ```
@@ -53,7 +53,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0 -latest \
   -profile docker \
   -main-script target/nextflow/dataflow/merge/main.nf \
   -params-file params.yaml
@@ -69,7 +69,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 |Name                   |Description                                                       |Attributes                                                               |
 |:----------------------|:-----------------------------------------------------------------|:------------------------------------------------------------------------|
-|`--input`              |Paths to the single-modality .h5mu files that need to be combined |List of `file`, required, default: `"sample_paths"`, multiple_sep: `","` |
+|`--input`              |Paths to the single-modality .h5mu files that need to be combined |List of `file`, required, default: `"sample_paths"`, multiple_sep: `";"` |
 |`--output`             |Path to the output file.                                          |`file`, default: `"output.h5mu"`                                         |
 |`--output_compression` |The compression format to be used on the output h5mu object.      |`string`, example: `"gzip"`                                              |
 

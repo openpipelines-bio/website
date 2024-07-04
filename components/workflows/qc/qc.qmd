@@ -1,6 +1,6 @@
 ---
 title: "Qc"
-namespace: "Qc"
+namespace: "Workflows/qc"
 description: "A pipeline to add basic qc statistics to a MuData"
 type: "workflow"
 toc: false
@@ -11,10 +11,10 @@ toc: false
 ### Info
 
 ID: `qc`  
-Namespace: `qc`
+Namespace: `workflows/qc`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./workflows/qc/qc){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/workflows/qc/qc){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,8 +30,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
-  -main-script ./workflows/qc/qc/main.nf \
+  -r 1.0.0 -latest \
+  -main-script src/workflows/qc/qc/main.nf \
   --help
 ```
 
@@ -58,6 +58,12 @@ mitochondrial_gene_regex: "^[mM][tT]-"
 # QC metrics calculation options
 # var_qc_metrics: ["ercc", "highly_variable"]
 top_n_vars: [50, 100, 200, 500]
+output_obs_num_nonzero_vars: "num_nonzero_vars"
+output_obs_total_counts_vars: "total_counts"
+output_var_num_nonzero_obs: "num_nonzero_obs"
+output_var_total_counts_obs: "total_counts"
+output_var_obs_mean: "obs_mean"
+output_var_pct_dropout: "pct_dropout"
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
@@ -67,9 +73,9 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.0 -latest \
   -profile docker \
-  -main-script ./workflows/qc/qc/main.nf \
+  -main-script src/workflows/qc/qc/main.nf \
   -params-file params.yaml
 ```
 
@@ -101,10 +107,16 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### QC metrics calculation options
 
-|Name               |Description                                                                                                                                                                                                                                                                               |Attributes                                                               |
-|:------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------|
-|`--var_qc_metrics` |Keys to select a boolean (containing only True or False) column from .var. For each cell, calculate the proportion of total values for genes which are labeled 'True',  compared to the total sum of the values for all genes. Defaults to the value from --var_name_mitochondrial_genes. |List of `string`, example: `"ercc,highly_variable"`, multiple_sep: `","` |
-|`--top_n_vars`     |Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. `--top_n_vars 20,50` finds cumulative proportion to the 20th and 50th most expressed vars.                                                                           |List of `integer`, default: `50, 100, 200, 500`, multiple_sep: `","`     |
+|Name                             |Description                                                                                                                                                                                                                                                                               |Attributes                                                               |
+|:--------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------|
+|`--var_qc_metrics`               |Keys to select a boolean (containing only True or False) column from .var. For each cell, calculate the proportion of total values for genes which are labeled 'True',  compared to the total sum of the values for all genes. Defaults to the value from --var_name_mitochondrial_genes. |List of `string`, example: `"ercc,highly_variable"`, multiple_sep: `";"` |
+|`--top_n_vars`                   |Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. `--top_n_vars 20,50` finds cumulative proportion to the 20th and 50th most expressed vars.                                                                           |List of `integer`, default: `50, 100, 200, 500`, multiple_sep: `";"`     |
+|`--output_obs_num_nonzero_vars`  |Name of column in .obs describing, for each observation, the number of stored values (including explicit zeroes). In other words, the name of the column that counts for each row the number of columns that contain data.                                                                |`string`, default: `"num_nonzero_vars"`                                  |
+|`--output_obs_total_counts_vars` |Name of the column for .obs describing, for each observation (row), the sum of the stored values in the columns.                                                                                                                                                                          |`string`, default: `"total_counts"`                                      |
+|`--output_var_num_nonzero_obs`   |Name of column describing, for each feature, the number of stored values (including explicit zeroes). In other words, the name of the column that counts for each column the number of rows that contain data.                                                                            |`string`, default: `"num_nonzero_obs"`                                   |
+|`--output_var_total_counts_obs`  |Name of the column in .var describing, for each feature (column), the sum of the stored values in the rows.                                                                                                                                                                               |`string`, default: `"total_counts"`                                      |
+|`--output_var_obs_mean`          |Name of the column in .obs providing the mean of the values in each row.                                                                                                                                                                                                                  |`string`, default: `"obs_mean"`                                          |
+|`--output_var_pct_dropout`       |Name of the column in .obs providing for each feature the percentage of observations the feature does not appear on (i.e. is missing). Same as `--output_var_num_nonzero_obs` but percentage based.                                                                                       |`string`, default: `"pct_dropout"`                                       |
 
 
 ### Outputs
@@ -117,42 +129,3 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 
   * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (author, maintainer)
-
-## Visualisation
-
-```{mermaid}
-%%| column: screen-inset-shaded
-flowchart LR
-    v0(Input)
-    v2(toSortedList)
-    v4(flatMap)
-    v7(filter)
-    v13(grep_annotation_column)
-    v15(join)
-    v19(mix)
-    v18(filter)
-    v25(calculate_qc_metrics)
-    v27(join)
-    v35(publish)
-    v37(join)
-    v41(toSortedList)
-    v43(Output)
-    v18-->v19
-    v0-->v2
-    v2-->v4
-    v4-->v7
-    v4-->v18
-    v7-->v15
-    v7-->v13
-    v13-->v15
-    v15-->v19
-    v19-->v27
-    v19-->v25
-    v25-->v27
-    v27-->v37
-    v27-->v35
-    v35-->v37
-    v37-->v41
-    v41-->v43
-
-```

@@ -1,0 +1,143 @@
+---
+title: "Harmony leiden"
+namespace: "Workflows/integration"
+description: "Run harmony integration followed by neighbour calculations, leiden clustering and run umap on the result."
+type: "workflow"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `harmony_leiden`  
+Namespace: `workflows/integration`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/workflows/integration/harmony_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 1.0.0 -latest \
+  -main-script src/workflows/integration/harmony_leiden/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Inputs
+id: # please fill in - example: "foo"
+input: # please fill in - example: "dataset.h5mu"
+layer: "log_normalized"
+modality: "rna"
+
+# Outputs
+# output: "$id.$key.output.h5mu"
+
+# Neighbour calculation
+uns_neighbors: "harmonypy_integration_neighbors"
+obsp_neighbor_distances: "harmonypy_integration_distances"
+obsp_neighbor_connectivities: "harmonypy_integration_connectivities"
+
+# Harmony integration options
+embedding: "X_pca"
+obsm_integrated: "X_pca_integrated"
+obs_covariates: # please fill in - example: ["batch", "sample"]
+theta: [2]
+
+# Clustering options
+obs_cluster: "harmony_integration_leiden"
+leiden_resolution: [1]
+
+# Umap options
+obsm_umap: "X_leiden_harmony_umap"
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 1.0.0 -latest \
+  -profile docker \
+  -main-script src/workflows/integration/harmony_leiden/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Inputs
+
+|Name         |Description                                                                           |Attributes                                  |
+|:------------|:-------------------------------------------------------------------------------------|:-------------------------------------------|
+|`--id`       |ID of the sample.                                                                     |`string`, required, example: `"foo"`        |
+|`--input`    |Path to the sample.                                                                   |`file`, required, example: `"dataset.h5mu"` |
+|`--layer`    |use specified layer for expression values instead of the .X object from the modality. |`string`, default: `"log_normalized"`       |
+|`--modality` |Which modality to process.                                                            |`string`, default: `"rna"`                  |
+
+
+### Outputs
+
+|Name       |Description                     |Attributes                                 |
+|:----------|:-------------------------------|:------------------------------------------|
+|`--output` |Destination path to the output. |`file`, required, example: `"output.h5mu"` |
+
+
+### Neighbour calculation
+
+|Name                             |Description                                                                             |Attributes                                                  |
+|:--------------------------------|:---------------------------------------------------------------------------------------|:-----------------------------------------------------------|
+|`--uns_neighbors`                |In which .uns slot to store various neighbor output objects.                            |`string`, default: `"harmonypy_integration_neighbors"`      |
+|`--obsp_neighbor_distances`      |In which .obsp slot to store the distance matrix between the resulting neighbors.       |`string`, default: `"harmonypy_integration_distances"`      |
+|`--obsp_neighbor_connectivities` |In which .obsp slot to store the connectivities matrix between the resulting neighbors. |`string`, default: `"harmonypy_integration_connectivities"` |
+
+
+### Harmony integration options
+
+|Name                |Description                                                                                                                                                                             |Attributes                                                                    |
+|:-------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------|
+|`--embedding`       |Embedding to use as input                                                                                                                                                               |`string`, default: `"X_pca"`                                                  |
+|`--obsm_integrated` |In which .obsm slot to store the resulting integrated embedding.                                                                                                                        |`string`, default: `"X_pca_integrated"`                                       |
+|`--obs_covariates`  |The .obs field(s) that define the covariate(s) to regress out.                                                                                                                          |List of `string`, required, example: `"batch", "sample"`, multiple_sep: `";"` |
+|`--theta`           |Diversity clustering penalty parameter. Specify for each variable in group.by.vars.  theta=0 does not encourage any diversity. Larger values of theta result in more diverse clusters." |List of `double`, default: `2`, multiple_sep: `";"`                           |
+
+
+### Clustering options
+
+|Name                  |Description                                                                                                                                                                                                                                                        |Attributes                                          |
+|:---------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------|
+|`--obs_cluster`       |Prefix for the .obs keys under which to add the cluster labels. Newly created columns in .obs will  be created from the specified value for '--obs_cluster' suffixed with an underscore and one of the resolutions resolutions specified in '--leiden_resolution'. |`string`, default: `"harmony_integration_leiden"`   |
+|`--leiden_resolution` |Control the coarseness of the clustering. Higher values lead to more clusters.                                                                                                                                                                                     |List of `double`, default: `1`, multiple_sep: `";"` |
+
+
+### Umap options
+
+|Name          |Description                                                |Attributes                                   |
+|:-------------|:----------------------------------------------------------|:--------------------------------------------|
+|`--obsm_umap` |In which .obsm slot to store the resulting UMAP embedding. |`string`, default: `"X_leiden_harmony_umap"` |
+
+## Authors
+
+
+  * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (author)
