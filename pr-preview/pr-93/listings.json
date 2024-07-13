@@ -55,8 +55,12 @@
     "listing": "/team/index.html",
     "items": [
       "/team/angela_oliveira_pisco/index.html",
+      "/team/dorien_roosen/index.html",
       "/team/dries_de_maeyer/index.html",
       "/team/dries_schaumont/index.html",
+      "/team/isabelle_bergiers/index.html",
+      "/team/jakub_majercik/index.html",
+      "/team/kai_waldrant/index.html",
       "/team/malte_d_luecken/index.html",
       "/team/marijke_van_moerbeke/index.html",
       "/team/matthias_beyens/index.html",
@@ -65,7 +69,25 @@
       "/team/robrecht_cannoodt/index.html",
       "/team/samuel_dsouza/index.html",
       "/team/toni_verbeiren/index.html",
-      "/team/vladimir_shitov/index.html"
+      "/team/vladimir_shitov/index.html",
+      "/team/xichen_wu/index.html"
+    ]
+  },
+  {
+    "listing": "/more_information/index.html",
+    "items": [
+      "/more_information/cheat_sheets.html",
+      "/more_information/code_of_conduct.html",
+      "/more_information/faq.html"
+    ]
+  },
+  {
+    "listing": "/fundamentals/index.html",
+    "items": [
+      "/fundamentals/philosophy.html",
+      "/fundamentals/concepts.html",
+      "/fundamentals/architecture.html",
+      "/fundamentals/roadmap.html"
     ]
   },
   {
@@ -185,23 +207,6 @@
       "/components/modules/convert/velocyto_to_h5mu.html",
       "/components/modules/genetic_demux/vireo.html",
       "/components/modules/labels_transfer/xgboost.html"
-    ]
-  },
-  {
-    "listing": "/fundamentals/index.html",
-    "items": [
-      "/fundamentals/philosophy.html",
-      "/fundamentals/concepts.html",
-      "/fundamentals/architecture.html",
-      "/fundamentals/roadmap.html"
-    ]
-  },
-  {
-    "listing": "/more_information/index.html",
-    "items": [
-      "/more_information/cheat_sheets.html",
-      "/more_information/code_of_conduct.html",
-      "/more_information/faq.html"
     ]
   }
 ]

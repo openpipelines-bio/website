@@ -26,6 +26,8 @@ header > .quarto-title h1 {
 #quarto-header nav.navbar {
   height: 4rem;
   padding: 0; 
+  background-color: #ffffff;
+  border-color: #ffffff;
 }
 
 a.navbar-brand-logo > img {
