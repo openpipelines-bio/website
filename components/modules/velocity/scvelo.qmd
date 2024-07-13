@@ -14,7 +14,7 @@ ID: `scvelo`
 Namespace: `velocity`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/velocity/scvelo){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/velocity/scvelo/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/velocity/scvelo/main.nf \
   --help
 ```
@@ -69,7 +69,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/velocity/scvelo/main.nf \
   -params-file params.yaml
@@ -84,14 +84,14 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Inputs
 
 |Name      |Description         |Attributes       |
-|:---------|:-------------------|:----------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--input` |Velocyto loom file. |`file`, required |
 
 
 ### Outputs
 
 |Name                   |Description                                                  |Attributes                  |
-|:----------------------|:------------------------------------------------------------|:---------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output`             |Output directory. If it does not exist, will be created.     |`file`, required            |
 |`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"` |
 
@@ -102,7 +102,7 @@ Arguments for filtering, normalization an log transform (see scvelo.pp.filter_an
 
 
 |Name                  |Description                                                                    |Attributes                 |
-|:---------------------|:------------------------------------------------------------------------------|:--------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--min_counts`        |Minimum number of counts required for a gene to pass filtering (spliced).      |`integer`                  |
 |`--min_counts_u`      |Minimum number of counts required for a gene to pass filtering (unspliced).    |`integer`                  |
 |`--min_cells`         |Minimum number of cells expressed required to pass filtering (spliced).        |`integer`                  |
@@ -119,7 +119,7 @@ Arguments for fitting the data
 
 
 |Name                       |Description                                                                                                                                                                                 |Attributes               |
-|:--------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--n_principal_components` |Number of principal components to use for calculating moments.                                                                                                                              |`integer`                |
 |`--n_neighbors`            |Number of neighbors to use. First/second-order moments are computed for each cell across its nearest neighbors, where the neighbor graph is obtained from euclidean distances in PCA space. |`integer`, default: `30` |
 
@@ -127,3 +127,4 @@ Arguments for fitting the data
 
 
   * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (maintainer)
+

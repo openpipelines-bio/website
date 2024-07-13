@@ -14,7 +14,7 @@ ID: `add_id`
 Namespace: `metadata`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/metadata/add_id){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/metadata/add_id/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -31,7 +31,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/metadata/add_id/main.nf \
   --help
 ```
@@ -57,7 +57,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/metadata/add_id/main.nf \
   -params-file params.yaml
@@ -72,7 +72,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Arguments
 
 |Name                             |Description                                                  |Attributes                                 |
-|:--------------------------------|:------------------------------------------------------------|:------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--input`                        |Path to the input .h5mu.                                     |`file`, required, example: `"sample_path"` |
 |`--input_id`                     |The input id.                                                |`string`, required                         |
 |`--obs_output`                   |Name of the .obs column where to store the id.               |`string`, default: `"sample_id"`           |
@@ -84,3 +84,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 
   * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (maintainer)
+

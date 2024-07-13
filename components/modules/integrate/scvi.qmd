@@ -14,7 +14,7 @@ ID: `scvi`
 Namespace: `integrate`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/integrate/scvi){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/integrate/scvi/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/integrate/scvi/main.nf \
   --help
 ```
@@ -96,7 +96,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/integrate/scvi/main.nf \
   -params-file params.yaml
@@ -111,7 +111,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Inputs
 
 |Name                          |Description                                                                                                                                                                                                                                                                                                                                     |Attributes                            |
-|:-----------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--input`                     |Input h5mu file                                                                                                                                                                                                                                                                                                                                 |`file`, required                      |
 |`--modality`                  |                                                                                                                                                                                                                                                                                                                                                |`string`, default: `"rna"`            |
 |`--input_layer`               |Input layer to use. If None, X is used                                                                                                                                                                                                                                                                                                          |`string`                              |
@@ -119,14 +119,14 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--var_input`                 |.var column containing highly variable genes. By default, do not subset genes.                                                                                                                                                                                                                                                                  |`string`                              |
 |`--obs_labels`                |Key in adata.obs for label information. Categories will automatically be  converted into integer categories and saved to adata.obs['_scvi_labels']. If None, assigns the same label to all the data.                                                                                                                                            |`string`                              |
 |`--obs_size_factor`           |Key in adata.obs for size factor information. Instead of using library size as a size factor, the provided size factor column will be used as offset in the mean of the likelihood. Assumed to be on linear scale.                                                                                                                              |`string`                              |
-|`--obs_categorical_covariate` |Keys in adata.obs that correspond to categorical data. These covariates can be added in addition to the batch covariate and are also treated as nuisance factors (i.e., the model tries to minimize their effects on the latent space). Thus, these should not be used for biologically-relevant factors that you do _not_ want to correct for. |List of `string`, multiple_sep: `":"` |
-|`--obs_continuous_covariate`  |Keys in adata.obs that correspond to continuous data. These covariates can be added in addition to the batch covariate and are also treated as nuisance factors (i.e., the model tries to minimize their effects on the latent space). Thus, these should not be used for biologically-relevant factors that you do _not_ want to correct for.  |List of `string`, multiple_sep: `":"` |
+|`--obs_categorical_covariate` |Keys in adata.obs that correspond to categorical data. These covariates can be added in addition to the batch covariate and are also treated as nuisance factors (i.e., the model tries to minimize their effects on the latent space). Thus, these should not be used for biologically-relevant factors that you do _not_ want to correct for. |List of `string`, multiple_sep: `";"` |
+|`--obs_continuous_covariate`  |Keys in adata.obs that correspond to continuous data. These covariates can be added in addition to the batch covariate and are also treated as nuisance factors (i.e., the model tries to minimize their effects on the latent space). Thus, these should not be used for biologically-relevant factors that you do _not_ want to correct for.  |List of `string`, multiple_sep: `";"` |
 
 
 ### Outputs
 
 |Name                   |Description                                                      |Attributes                               |
-|:----------------------|:----------------------------------------------------------------|:----------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output`             |Output h5mu file.                                                |`file`, required                         |
 |`--output_model`       |Folder where the state of the trained model will be saved to.    |`file`                                   |
 |`--output_compression` |The compression format to be used on the output h5mu object.     |`string`, example: `"gzip"`              |
@@ -136,7 +136,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### SCVI options
 
 |Name                          |Description                                                                                                                                                                                                                                                                                                                                              |Attributes                  |
-|:-----------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--n_hidden_nodes`            |Number of nodes per hidden layer.                                                                                                                                                                                                                                                                                                                        |`integer`, default: `128`   |
 |`--n_dimensions_latent_space` |Dimensionality of the latent space.                                                                                                                                                                                                                                                                                                                      |`integer`, default: `30`    |
 |`--n_hidden_layers`           |Number of hidden layers used for encoder and decoder neural-networks.                                                                                                                                                                                                                                                                                    |`integer`, default: `2`     |
@@ -148,7 +148,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Variational auto-encoder model options
 
 |Name                         |Description                                                                                                                                                                                               |Attributes                  |
-|:----------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--use_layer_normalization`  |Neural networks for which to enable layer normalization.                                                                                                                                                  |`string`, default: `"both"` |
 |`--use_batch_normalization`  |Neural networks for which to enable batch normalization.                                                                                                                                                  |`string`, default: `"none"` |
 |`--encode_covariates`        |Whether to concatenate covariates to expression in encoder                                                                                                                                                |`boolean_false`             |
@@ -159,7 +159,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Early stopping arguments
 
 |Name                         |Description                                                                                                                                          |Attributes                             |
-|:----------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--early_stopping`           |Whether to perform early stopping with respect to the validation set.                                                                                |`boolean`                              |
 |`--early_stopping_monitor`   |Metric logged during validation set epoch.                                                                                                           |`string`, default: `"elbo_validation"` |
 |`--early_stopping_patience`  |Number of validation epochs with no improvement after which training will be stopped.                                                                |`integer`, default: `45`               |
@@ -169,7 +169,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Learning parameters
 
 |Name                     |Description                                                                                                      |Attributes                 |
-|:------------------------|:----------------------------------------------------------------------------------------------------------------|:--------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--max_epochs`           |Number of passes through the dataset, defaults to (20000 / number of cells) * 400 or 400; whichever is smallest. |`integer`                  |
 |`--reduce_lr_on_plateau` |Whether to monitor validation loss and reduce learning rate when validation set `lr_scheduler_metric` plateaus.  |`boolean`, default: `TRUE` |
 |`--lr_factor`            |Factor to reduce learning rate.                                                                                  |`double`, default: `0.6`   |
@@ -179,7 +179,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Data validition
 
 |Name                |Description                                                                                                                      |Attributes              |
-|:-------------------|:--------------------------------------------------------------------------------------------------------------------------------|:-----------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--n_obs_min_count` |Minimum number of cells threshold ensuring that every obs_batch category has sufficient observations (cells) for model training. |`integer`, default: `0` |
 |`--n_var_min_count` |Minimum number of genes threshold ensuring that every var_input filter has sufficient observations (genes) for model training.   |`integer`, default: `0` |
 
@@ -191,3 +191,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
   * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (maintainer)
 
   * Matthias Beyens [{{< fa brands github >}}](https://github.com/MatthiasBeyens) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3304-0706) [{{< fa brands linkedin >}}](https://linkedin.com/in/mbeyens) (contributor)
+

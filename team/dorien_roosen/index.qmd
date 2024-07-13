@@ -1,0 +1,22 @@
+---
+title: Dorien Roosen
+image: https://www.github.com/dorien-er.png
+role: Contributor
+organizations:
+- name: Data Intuitive
+  href: https://www.data-intuitive.com
+  role: Data Scientist
+links:
+- icon: bi-envelope
+  text: E-mail
+  href: mailto:dorien@data-intuitive.com
+- icon: bi-github
+  text: GitHub
+  href: https://github.com/dorien-er
+- icon: bi-linkedin
+  text: LinkedIn
+  href: https://www.linkedin.com/in/dorien-roosen
+about:
+  template: jolla
+---
+

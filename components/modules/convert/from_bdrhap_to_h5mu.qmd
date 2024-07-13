@@ -14,7 +14,7 @@ ID: `from_bdrhap_to_h5mu`
 Namespace: `convert`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/convert/from_bdrhap_to_h5mu){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/convert/from_bdrhap_to_h5mu/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/convert/from_bdrhap_to_h5mu/main.nf \
   --help
 ```
@@ -56,7 +56,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/convert/from_bdrhap_to_h5mu/main.nf \
   -params-file params.yaml
@@ -71,7 +71,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Inputs
 
 |Name      |Description                           |Attributes                               |
-|:---------|:-------------------------------------|:----------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--id`    |A sample ID.                          |`string`, required, example: `"my_id"`   |
 |`--input` |The output of a BD Rhapsody workflow. |`file`, required, example: `"input_dir"` |
 
@@ -79,7 +79,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Outputs
 
 |Name                   |Description       |Attributes                                 |
-|:----------------------|:-----------------|:------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output`             |Output h5mu file. |`file`, required, example: `"output.h5mu"` |
 |`--output_compression` |                  |`string`, example: `"gzip"`                |
 
@@ -87,3 +87,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 
   * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (maintainer)
+

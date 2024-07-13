@@ -1,12 +1,15 @@
 ---
 title: Marijke Van Moerbeke
-image: /images/avatar.svg
+image: https://www.github.com/mvanmoerbeke.png
 role: Contributor
 organizations:
 - name: OpenAnalytics
   href: https://www.openanalytics.eu
   role: Statistical Consultant
 links:
+- icon: bi-github
+  text: GitHub
+  href: https://github.com/mvanmoerbeke
 - icon: fa-brands fa-orcid
   text: ORCID
   href: https://orcid.org/0000-0002-3097-5621

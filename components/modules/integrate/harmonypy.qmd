@@ -14,7 +14,7 @@ ID: `harmonypy`
 Namespace: `integrate`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/integrate/harmonypy){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/integrate/harmonypy/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/integrate/harmonypy/main.nf \
   --help
 ```
@@ -58,7 +58,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/integrate/harmonypy/main.nf \
   -params-file params.yaml
@@ -73,15 +73,15 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Arguments
 
 |Name                   |Description                                                                                                                                                                           |Attributes                                                                    |
-|:----------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--input`              |Input h5mu file                                                                                                                                                                       |`file`, required                                                              |
 |`--output`             |Output h5mu file.                                                                                                                                                                     |`file`, required                                                              |
 |`--output_compression` |The compression format to be used on the output h5mu object.                                                                                                                          |`string`, example: `"gzip"`                                                   |
 |`--modality`           |                                                                                                                                                                                      |`string`, default: `"rna"`                                                    |
 |`--obsm_input`         |Which .obsm slot to use as a starting PCA embedding.                                                                                                                                  |`string`, default: `"X_pca"`                                                  |
 |`--obsm_output`        |In which .obsm slot to store the resulting integrated embedding.                                                                                                                      |`string`, default: `"X_pca_integrated"`                                       |
-|`--theta`              |Diversity clustering penalty parameter. Specify for each variable in group.by.vars. theta=0 does not encourage any diversity. Larger values of theta result in more diverse clusters. |List of `double`, default: `2`, multiple_sep: `":"`                           |
-|`--obs_covariates`     |The .obs field(s) that define the covariate(s) to regress out.                                                                                                                        |List of `string`, required, example: `"batch", "sample"`, multiple_sep: `":"` |
+|`--theta`              |Diversity clustering penalty parameter. Specify for each variable in group.by.vars. theta=0 does not encourage any diversity. Larger values of theta result in more diverse clusters. |List of `double`, default: `2`, multiple_sep: `";"`                           |
+|`--obs_covariates`     |The .obs field(s) that define the covariate(s) to regress out.                                                                                                                        |List of `string`, required, example: `"batch", "sample"`, multiple_sep: `";"` |
 
 ## Authors
 
@@ -89,3 +89,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
   * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (maintainer)
 
   * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (contributor)
+

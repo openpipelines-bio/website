@@ -14,7 +14,7 @@ ID: `mermaid`
 Namespace: `report`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/report/mermaid){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/report/mermaid/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/report/mermaid/main.nf \
   --help
 ```
@@ -56,7 +56,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/report/mermaid/main.nf \
   -params-file params.yaml
@@ -71,7 +71,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Arguments
 
 |Name                 |Description                                                                                                                 |Attributes                                         |
-|:--------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--input`            |Input directory                                                                                                             |`file`, required                                   |
 |`--output`           |Generated network as output.                                                                                                |`file`, required                                   |
 |`--output_format`    |Output format for the generated image. By default will be inferred from the extension  of the file specified with --output. |`string`                                           |
@@ -83,3 +83,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 
   * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-de-maeyer-b46a814) (maintainer)
+

@@ -14,7 +14,7 @@ ID: `cellranger_count`
 Namespace: `mapping`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/mapping/cellranger_count){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/mapping/cellranger_count/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/mapping/cellranger_count/main.nf \
   --help
 ```
@@ -62,7 +62,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/mapping/cellranger_count/main.nf \
   -params-file params.yaml
@@ -77,7 +77,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Inputs
 
 |Name          |Description                                                                            |Attributes                                                                                                                   |
-|:-------------|:--------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--input`     |The fastq.gz files to align. Can also be a single directory containing fastq.gz files. |List of `file`, required, example: `"sample_S1_L001_R1_001.fastq.gz", "sample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
 |`--reference` |The path to Cell Ranger reference tar.gz file. Can also be a directory.                |`file`, required, example: `"reference.tar.gz"`                                                                              |
 
@@ -85,14 +85,14 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Outputs
 
 |Name       |Description                                |Attributes                                     |
-|:----------|:------------------------------------------|:----------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output` |The folder to store the alignment results. |`file`, required, example: `"/path/to/output"` |
 
 
 ### Arguments
 
 |Name                   |Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |Attributes                  |
-|:----------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--expect_cells`       |Expected number of recovered cells, used as input to cell calling algorithm.                                                                                                                                                                                                                                                                                                                                                                                                                                      |`integer`, example: `3000`  |
 |`--chemistry`          |Assay configuration. - auto: autodetect mode - threeprime: Single Cell 3' - fiveprime: Single Cell 5' - SC3Pv1: Single Cell 3' v1 - SC3Pv2: Single Cell 3' v2 - SC3Pv3: Single Cell 3' v3 - SC3Pv3LT: Single Cell 3' v3 LT - SC3Pv3HT: Single Cell 3' v3 HT - SC5P-PE: Single Cell 5' paired-end - SC5P-R2: Single Cell 5' R2-only - SC-FB: Single Cell Antibody-only 3' v2 or 5' See https://kb.10xgenomics.com/hc/en-us/articles/115003764132-How-does-Cell-Ranger-auto-detect-chemistry- for more information. |`string`, default: `"auto"` |
 |`--secondary_analysis` |Whether or not to run the secondary analysis e.g. clustering.                                                                                                                                                                                                                                                                                                                                                                                                                                                     |`boolean`, default: `FALSE` |
@@ -107,3 +107,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
   * Samuel D'Souza [{{< fa brands github >}}](https://github.com/srdsam) [{{< fa brands linkedin >}}](https://linkedin.com/in/samuel-d-souza-887023150/) (author)
 
   * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (author, maintainer)
+

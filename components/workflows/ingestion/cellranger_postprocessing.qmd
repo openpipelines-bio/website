@@ -1,6 +1,6 @@
 ---
 title: "Cell Ranger post-processing"
-namespace: "Ingestion"
+namespace: "Workflows/ingestion"
 description: "Post-processing Cell Ranger datasets."
 type: "workflow"
 toc: false
@@ -11,10 +11,10 @@ toc: false
 ### Info
 
 ID: `cellranger_postprocessing`  
-Namespace: `ingestion`
+Namespace: `workflows/ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./workflows/ingestion/cellranger_postprocessing){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/workflows/ingestion/cellranger_postprocessing/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,8 +30,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
-  -main-script ./workflows/ingestion/cellranger_postprocessing/main.nf \
+  -r 1.0.1 -latest \
+  -main-script target/nextflow/workflows/ingestion/cellranger_postprocessing/main.nf \
   --help
 ```
 
@@ -63,9 +63,9 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
-  -main-script ./workflows/ingestion/cellranger_postprocessing/main.nf \
+  -main-script target/nextflow/workflows/ingestion/cellranger_postprocessing/main.nf \
   -params-file params.yaml
 ```
 
@@ -78,7 +78,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Inputs
 
 |Name      |Description                                                                       |Attributes                                |
-|:---------|:---------------------------------------------------------------------------------|:-----------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--id`    |ID of the sample.                                                                 |`string`, required, example: `"foo"`      |
 |`--input` |Input h5mu file created by running Cell Ranger and converting its output to h5mu. |`file`, required, example: `"input.h5mu"` |
 
@@ -86,14 +86,14 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Outputs
 
 |Name       |Description              |Attributes |
-|:----------|:------------------------|:----------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output` |The converted h5mu file. |`file`     |
 
 
 ### Correction arguments
 
 |Name                   |Description                                                   |Attributes                |
-|:----------------------|:-------------------------------------------------------------|:-------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--perform_correction` |Whether or not to run CellBender to perform count correction. |`boolean_true`            |
 |`--cellbender_epochs`  |Number of epochs to run CellBender for.                       |`integer`, default: `150` |
 
@@ -101,7 +101,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Filtering arguments
 
 |Name           |Description                                                              |Attributes                 |
-|:--------------|:------------------------------------------------------------------------|:--------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--min_genes`  |Minimum number of counts required for a cell to pass filtering.          |`integer`, example: `100`  |
 |`--min_counts` |Minimum number of genes expressed required for a cell to pass filtering. |`integer`, example: `1000` |
 
@@ -117,46 +117,23 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ```{mermaid}
 %%| column: screen-inset-shaded
 flowchart LR
-    v0(Input)
-    v6(from_10xh5_to_h5mu)
-    v8(join)
-    v12(toSortedList)
-    v14(flatMap)
-    v15(filter)
-    v21(cellbender_remove_background)
-    v23(join)
-    v27(mix)
-    v26(filter)
-    v28(filter)
-    v34(filter_with_counts)
-    v36(join)
-    v40(mix)
-    v39(filter)
-    v46(publish)
-    v48(join)
-    v54(Output)
-    v14-->v15
-    v14-->v26
-    v26-->v27
-    v27-->v28
-    v27-->v39
-    v39-->v40
-    v0-->v8
-    v0-->v6
-    v6-->v8
-    v8-->v12
-    v12-->v14
-    v15-->v23
-    v15-->v21
-    v21-->v23
-    v23-->v27
-    v28-->v36
-    v28-->v34
-    v34-->v36
-    v36-->v40
-    v40-->v48
-    v40-->v46
-    v46-->v48
-    v48-->v54
+    v0(Channel.fromList)
+    v2(filter)
+    v18(cellbender_remove_background)
+    v31(mix)
+    v41(filter_with_counts)
+    v54(mix)
+    v63(publish)
+    v90(Output)
+    v0-->v2
+    v2-->v18
+    v18-->v31
+    v2-->v31
+    v31-->v41
+    v41-->v54
+    v31-->v54
+    v54-->v63
+    v63-->v90
 
 ```
+

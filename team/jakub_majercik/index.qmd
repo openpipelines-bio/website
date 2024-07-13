@@ -1,0 +1,22 @@
+---
+title: Jakub Majercik
+image: https://www.github.com/jakubmajercik.png
+role: Contributor
+organizations:
+- name: Data Intuitive
+  href: https://www.data-intuitive.com
+  role: Bioinformatics Engineer
+links:
+- icon: bi-envelope
+  text: E-mail
+  href: mailto:jakub@data-intuitive.com
+- icon: bi-github
+  text: GitHub
+  href: https://github.com/jakubmajercik
+- icon: bi-linkedin
+  text: LinkedIn
+  href: https://www.linkedin.com/in/jakubmajercik
+about:
+  template: jolla
+---
+

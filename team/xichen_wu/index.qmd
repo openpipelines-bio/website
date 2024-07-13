@@ -1,0 +1,22 @@
+---
+title: Xichen Wu
+image: https://www.github.com/wxicu.png
+role: Contributor
+organizations:
+- name: Helmholtz Munich
+  href: https://www.helmholtz-munich.de
+  role: Student Assistant
+links:
+- icon: bi-github
+  text: GitHub
+  href: https://github.com/wxicu
+- icon: bi-linkedin
+  text: LinkedIn
+  href: https://www.linkedin.com/in/xichen-wu
+- icon: fa-brands fa-orcid
+  text: ORCID
+  href: https://orcid.org/0009-0008-2168-4508
+about:
+  template: jolla
+---
+

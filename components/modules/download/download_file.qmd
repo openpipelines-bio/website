@@ -14,7 +14,7 @@ ID: `download_file`
 Namespace: `download`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/download/download_file){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/download/download_file/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/download/download_file/main.nf \
   --help
 ```
@@ -53,7 +53,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/download/download_file/main.nf \
   -params-file params.yaml
@@ -68,7 +68,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Arguments
 
 |Name        |Description                 |Attributes                                                                                                                                        |
-|:-----------|:---------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--input`   |URL to a file to download.  |`string`, required, example: `"https://cf.10xgenomics.com/samples/cell-exp/3.0.0/pbmc_1k_protein_v3/pbmc_1k_protein_v3_raw_feature_bc_matrix.h5"` |
 |`--output`  |Path where to store output. |`file`, required, example: `"pbmc_1k_protein_v3_raw_feature_bc_matrix.h5"`                                                                        |
 |`--verbose` |Increase verbosity          |`boolean_true`                                                                                                                                    |
@@ -77,3 +77,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 
   * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (maintainer)
+

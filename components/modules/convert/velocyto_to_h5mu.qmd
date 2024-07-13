@@ -14,7 +14,7 @@ ID: `velocyto_to_h5mu`
 Namespace: `convert`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/velocity/velocyto_to_h5mu){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/velocity/velocyto_to_h5mu/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -32,7 +32,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/convert/velocyto_to_h5mu/main.nf \
   --help
 ```
@@ -62,7 +62,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/convert/velocyto_to_h5mu/main.nf \
   -params-file params.yaml
@@ -77,7 +77,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Inputs
 
 |Name           |Description                             |Attributes                                |
-|:--------------|:---------------------------------------|:-----------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--input_loom` |Path to the input loom file.            |`file`, required, example: `"input.loom"` |
 |`--input_h5mu` |If a MuData file is provided,           |`file`, example: `"input.h5mu"`           |
 |`--modality`   |The name of the modality to operate on. |`string`, default: `"rna_velocity"`       |
@@ -86,7 +86,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Outputs
 
 |Name                   |Description                                                  |Attributes                            |
-|:----------------------|:------------------------------------------------------------|:-------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output`             |Path to the output MuData file.                              |`file`, example: `"output.h5mu"`      |
 |`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`           |
 |`--layer_spliced`      |Output layer for the spliced reads.                          |`string`, default: `"velo_spliced"`   |
@@ -101,3 +101,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
   * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (author)
 
   * Angela Oliveira Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) [{{< fa brands linkedin >}}](https://linkedin.com/in/aopisco) (contributor)
+

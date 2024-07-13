@@ -14,7 +14,7 @@ ID: `htseq_count`
 Namespace: `mapping`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.6/./src/mapping/htseq_count){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/mapping/htseq_count/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -33,7 +33,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/mapping/htseq_count/main.nf \
   --help
 ```
@@ -75,7 +75,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 0.12.6 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/mapping/htseq_count/main.nf \
   -params-file params.yaml
@@ -90,7 +90,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Input
 
 |Name          |Description                                            |Attributes                                                                                 |
-|:-------------|:------------------------------------------------------|:------------------------------------------------------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--input`     |Path to the SAM/BAM files containing the mapped reads. |List of `file`, required, example: `"mysample1.BAM", "mysample2.BAM"`, multiple_sep: `";"` |
 |`--reference` |Path to the GTF file containing the features.          |`file`, required, example: `"reference.gtf"`                                               |
 
@@ -98,7 +98,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Output
 
 |Name                  |Description                                                                                                                                                                                                               |Attributes                                                                               |
-|:---------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output`            |Filename to output the counts to.                                                                                                                                                                                         |`file`, required, example: `"htseq-count.tsv"`                                           |
 |`--output_delimiter`  |Column delimiter in output.                                                                                                                                                                                               |`string`, example: `"	"`                                                                  |
 |`--output_sam`        |Write out all SAM alignment records into SAM/BAM files (one per input file needed),  annotating each line with its feature assignment (as an optional field with tag 'XF').  See the -p option to use BAM instead of SAM. |List of `file`, example: `"mysample1_out.BAM", "mysample2_out.BAM"`, multiple_sep: `";"` |
@@ -108,13 +108,13 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Arguments
 
 |Name                          |Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |Attributes                                                    |
-|:-----------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--order`                     |Sorting order of <alignment_file>. Paired-end sequencing data must be sorted either by position or by read name, and the sorting order must be specified. Ignored for single-end data.                                                                                                                                                                                                                                                                                                                                                               |`string`, default: `"name"`                                   |
 |`--stranded`                  |Whether the data is from a strand-specific assay. 'reverse' means 'yes' with reversed strand interpretation.                                                                                                                                                                                                                                                                                                                                                                                                                                         |`string`, default: `"yes"`                                    |
 |`--minimum_alignment_quality` |Skip all reads with MAPQ alignment quality lower than the given minimum value.  MAPQ is the 5th column of a SAM/BAM file and its usage depends on the software  used to map the reads.                                                                                                                                                                                                                                                                                                                                                               |`integer`, default: `10`                                      |
 |`--type`                      |Feature type (3rd column in GTF file) to be used, all features of other type are ignored (default, suitable for Ensembl GTF files: exon)                                                                                                                                                                                                                                                                                                                                                                                                             |`string`, example: `"exon"`                                   |
-|`--id_attribute`              |GTF attribute to be used as feature ID (default, suitable for Ensembl GTF files: gene_id). All feature of the right type (see -t option) within the same GTF attribute will be added together. The typical way of using this option is to count all exonic reads from each gene and add the exons but other uses are possible as well. You can call this option multiple times: in that case, the combination of all attributes separated by colons (:) will be used as a unique identifier, e.g. for exons you might use -i gene_id -i exon_number. |List of `string`, example: `"gene_id"`, multiple_sep: `":"`   |
-|`--additional_attributes`     |Additional feature attributes (suitable for Ensembl GTF files: gene_name). Use multiple times for more than one additional attribute. These attributes are only used as annotations in the output, while the determination of how the counts are added together is done based on option -i.                                                                                                                                                                                                                                                          |List of `string`, example: `"gene_name"`, multiple_sep: `":"` |
+|`--id_attribute`              |GTF attribute to be used as feature ID (default, suitable for Ensembl GTF files: gene_id). All feature of the right type (see -t option) within the same GTF attribute will be added together. The typical way of using this option is to count all exonic reads from each gene and add the exons but other uses are possible as well. You can call this option multiple times: in that case, the combination of all attributes separated by colons (:) will be used as a unique identifier, e.g. for exons you might use -i gene_id -i exon_number. |List of `string`, example: `"gene_id"`, multiple_sep: `";"`   |
+|`--additional_attributes`     |Additional feature attributes (suitable for Ensembl GTF files: gene_name). Use multiple times for more than one additional attribute. These attributes are only used as annotations in the output, while the determination of how the counts are added together is done based on option -i.                                                                                                                                                                                                                                                          |List of `string`, example: `"gene_name"`, multiple_sep: `";"` |
 |`--add_chromosome_info`       |Store information about the chromosome of each feature as an additional attribute (e.g. colunm in the TSV output file).                                                                                                                                                                                                                                                                                                                                                                                                                              |`boolean_true`                                                |
 |`--mode`                      |Mode to handle reads overlapping more than one feature.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |`string`, default: `"union"`                                  |
 |`--non_unique`                |Whether and how to score reads that are not uniquely aligned or ambiguously assigned to features.                                                                                                                                                                                                                                                                                                                                                                                                                                                    |`string`, default: `"none"`                                   |
@@ -128,3 +128,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
   * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (author, maintainer)
 
   * Angela Oliveira Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) [{{< fa brands linkedin >}}](https://linkedin.com/in/aopisco) (author)
+
