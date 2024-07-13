@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.130">
+<meta name="generator" content="quarto-1.5.54">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>OpenPipelines - Team</title>
+<title>Team – OpenPipelines</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -48,12 +48,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -62,6 +63,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -77,9 +79,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-project','listing-website','listing-format','listing-filters','listing-language','listing-title','listing-image','listing-role','listing-organizations','listing-links','listing-about','listing-path','listing-outputHref','listing-author','listing-description','listing-filename','listing-file-modified','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
+      valueNames: ['listing-project','listing-website','listing-format','listing-filters','listing-language','listing-title','listing-image','listing-role','listing-organizations','listing-links','listing-about','listing-path','listing-outputHref','listing-author','listing-description','listing-filename','listing-file-modified','listing-reading-time','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
       
-      searchColumns: ["listing-project","listing-website","listing-format","listing-filters","listing-language","listing-title","listing-image","listing-role","listing-organizations","listing-links","listing-about","listing-path","listing-outputHref","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time"],
+      searchColumns: ["listing-project","listing-website","listing-format","listing-filters","listing-language","listing-title","listing-image","listing-role","listing-organizations","listing-links","listing-about","listing-path","listing-outputHref","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -106,8 +108,35 @@ gtag('js', new Date());
 gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 </script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 <link rel="stylesheet" href="team.css">
@@ -117,7 +146,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
@@ -125,45 +154,45 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html" rel="" target="">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../fundamentals/index.html" rel="" target="">
- <span class="menu-text">Fundamentals</span></a>
+    <a class="nav-link" href="../fundamentals/index.html"> 
+<span class="menu-text">Fundamentals</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../user_guide/index.html" rel="" target="">
- <span class="menu-text">User Guide</span></a>
+    <a class="nav-link" href="../user_guide/index.html"> 
+<span class="menu-text">User Guide</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../contributing/index.html" rel="" target="">
- <span class="menu-text">Contributing</span></a>
+    <a class="nav-link" href="../contributing/index.html"> 
+<span class="menu-text">Contributing</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../components/index.html" rel="" target="">
- <span class="menu-text">Reference</span></a>
+    <a class="nav-link" href="../components/index.html"> 
+<span class="menu-text">Reference</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../team/index.html" rel="" target="" aria-current="page">
- <span class="menu-text">Team</span></a>
+    <a class="nav-link active" href="../team/index.html" aria-current="page"> 
+<span class="menu-text">Team</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/openpipelines-bio/openpipeline" rel="" target=""><i class="bi bi-github" role="img" aria-label="GitHub">
+    <a class="nav-link" href="https://github.com/openpipelines-bio/openpipeline"> <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -191,26 +220,38 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </div>
   
 
+
 </header>
+
 
 <!-- this is here to make sure fontawesome is loaded in-->
 <p><i class="fa-solid fa-letter" aria-label="letter"></i></p>
 <div id="listing-authors" class="quarto-listing quarto-listing-container-custom">
 <div class="people-widget justify-content-evenly">
+  
   <div class="people-person">
+    
     <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/aopisco.png">
+    
     <div class="portrait-title">
       <h4>Angela Oliveira Pisco</h4>
+      
       <h5>Contributor</h5>
+      
+      
       <a class="network-icon" href="https://github.com/aopisco">
         <i class="bi-github"></i>
       </a>
+      
       <a class="network-icon" href="https://orcid.org/0000-0003-0142-2355">
         <i class="fa-brands fa-orcid"></i>
       </a>
+      
       <a class="network-icon" href="https://www.linkedin.com/in/aopisco">
         <i class="bi-linkedin"></i>
       </a>
+      
+      
       <h6>
         <i>
           Director of Computational Biology 
@@ -218,8 +259,10 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
              <a href="https://insitro.com"> 
               Insitro
              </a> 
+          
         </i>
       </h6>
+      
       <h6>
         <i>
           Core Member 
@@ -227,52 +270,36 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
              <a href="https://openproblems.bio"> 
               Open Problems
              </a> 
+          
         </i>
       </h6>
+       
     </div>
   </div>
+  
   <div class="people-person">
-    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/ddemaeyer.png">
+    
+    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/dorien-er.png">
+    
     <div class="portrait-title">
-      <h4>Dries De Maeyer</h4>
-      <h5>Core Team Member</h5>
-      <a class="network-icon" href="mailto:ddemaeyer@gmail.com">
+      <h4>Dorien Roosen</h4>
+      
+      <h5>Contributor</h5>
+      
+      
+      <a class="network-icon" href="mailto:dorien@data-intuitive.com">
         <i class="bi-envelope"></i>
       </a>
-      <a class="network-icon" href="https://github.com/ddemaeyer">
+      
+      <a class="network-icon" href="https://github.com/dorien-er">
         <i class="bi-github"></i>
       </a>
-      <a class="network-icon" href="https://www.linkedin.com/in/dries-de-maeyer-b46a814">
+      
+      <a class="network-icon" href="https://www.linkedin.com/in/dorien-roosen">
         <i class="bi-linkedin"></i>
       </a>
-      <h6>
-        <i>
-          Principal Scientist 
-           at 
-             <a href="https://www.janssen.com"> 
-              Janssen Pharmaceuticals
-             </a> 
-        </i>
-      </h6>
-    </div>
-  </div>
-  <div class="people-person">
-    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/DriesSchaumont.png">
-    <div class="portrait-title">
-      <h4>Dries Schaumont</h4>
-      <h5>Core Team Member</h5>
-      <a class="network-icon" href="mailto:dries@data-intuitive.com">
-        <i class="bi-envelope"></i>
-      </a>
-      <a class="network-icon" href="https://github.com/DriesSchaumont">
-        <i class="bi-github"></i>
-      </a>
-      <a class="network-icon" href="https://orcid.org/0000-0002-4389-0440">
-        <i class="fa-brands fa-orcid"></i>
-      </a>
-      <a class="network-icon" href="https://www.linkedin.com/in/dries-schaumont">
-        <i class="bi-linkedin"></i>
-      </a>
+      
+      
       <h6>
         <i>
           Data Scientist 
@@ -280,86 +307,36 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
              <a href="https://www.data-intuitive.com"> 
               Data Intuitive
              </a> 
+          
         </i>
       </h6>
+       
     </div>
   </div>
+  
   <div class="people-person">
-    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/LuckyMD.png">
+    
+    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/ddemaeyer.png">
+    
     <div class="portrait-title">
-      <h4>Malte D. Luecken</h4>
+      <h4>Dries De Maeyer</h4>
+      
       <h5>Core Team Member</h5>
-      <a class="network-icon" href="mailto:malte.luecken@helmholtz-muenchen.de">
+      
+      
+      <a class="network-icon" href="mailto:ddemaeyer@gmail.com">
         <i class="bi-envelope"></i>
       </a>
-      <a class="network-icon" href="https://github.com/LuckyMD">
+      
+      <a class="network-icon" href="https://github.com/ddemaeyer">
         <i class="bi-github"></i>
       </a>
-      <a class="network-icon" href="https://orcid.org/0000-0001-7464-7921">
-        <i class="fa-brands fa-orcid"></i>
-      </a>
-      <a class="network-icon" href="https://www.linkedin.com/in/malte-l%C3%BCcken-b8b21049">
+      
+      <a class="network-icon" href="https://www.linkedin.com/in/dries-de-maeyer-b46a814">
         <i class="bi-linkedin"></i>
       </a>
-      <h6>
-        <i>
-          Group Leader 
-           at 
-             <a href="https://www.helmholtz-munich.de"> 
-              Helmholtz Munich
-             </a> 
-        </i>
-      </h6>
-      <h6>
-        <i>
-          Core Member 
-           at 
-             <a href="https://openproblems.bio"> 
-              Open Problems
-             </a> 
-        </i>
-      </h6>
-    </div>
-  </div>
-  <div class="people-person">
-    <img loading="lazy" class="avatar avatar-circle" src="../images/avatar.svg">
-    <div class="portrait-title">
-      <h4>Marijke Van Moerbeke</h4>
-      <h5>Contributor</h5>
-      <a class="network-icon" href="https://orcid.org/0000-0002-3097-5621">
-        <i class="fa-brands fa-orcid"></i>
-      </a>
-      <a class="network-icon" href="https://www.linkedin.com/in/marijke-van-moerbeke-84303a34">
-        <i class="bi-linkedin"></i>
-      </a>
-      <h6>
-        <i>
-          Statistical Consultant 
-           at 
-             <a href="https://www.openanalytics.eu"> 
-              OpenAnalytics
-             </a> 
-        </i>
-      </h6>
-    </div>
-  </div>
-  <div class="people-person">
-    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/MatthiasBeyens.png">
-    <div class="portrait-title">
-      <h4>Matthias Beyens</h4>
-      <h5>Contributor</h5>
-      <a class="network-icon" href="https://github.com/MatthiasBeyens">
-        <i class="bi-github"></i>
-      </a>
-      <a class="network-icon" href="https://orcid.org/0000-0003-3304-0706">
-        <i class="fa-brands fa-orcid"></i>
-      </a>
-      <a class="network-icon" href="mailto:matthias.beyens@gmail.com">
-        <i class="bi-envelope"></i>
-      </a>
-      <a class="network-icon" href="https://www.linkedin.com/in/mbeyens">
-        <i class="bi-linkedin"></i>
-      </a>
+      
+      
       <h6>
         <i>
           Principal Scientist 
@@ -367,86 +344,195 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
              <a href="https://www.janssen.com"> 
               Janssen Pharmaceuticals
              </a> 
+          
         </i>
       </h6>
+       
     </div>
   </div>
+  
   <div class="people-person">
-    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/mauro-saporita.png">
+    
+    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/DriesSchaumont.png">
+    
     <div class="portrait-title">
-      <h4>Mauro Saporita</h4>
-      <h5>Contributor</h5>
-      <a class="network-icon" href="mailto:maurosaporita@gmail.com">
-        <i class="bi-envelope"></i>
-      </a>
-      <a class="network-icon" href="https://github.com/mauro-saporita">
-        <i class="bi-github"></i>
-      </a>
-      <a class="network-icon" href="https://www.linkedin.com/in/mauro-saporita-930b06a5">
-        <i class="bi-linkedin"></i>
-      </a>
-      <h6>
-        <i>
-          Lead Nextflow Developer 
-           at 
-             <a href="https://ardigen.com"> 
-              Ardigen
-             </a> 
-        </i>
-      </h6>
-    </div>
-  </div>
-  <div class="people-person">
-    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/PoGibas.png">
-    <div class="portrait-title">
-      <h4>Povilas Gibas</h4>
-      <h5>Contributor</h5>
-      <a class="network-icon" href="mailto:povilasgibas@gmail.com">
-        <i class="bi-envelope"></i>
-      </a>
-      <a class="network-icon" href="https://github.com/PoGibas">
-        <i class="bi-github"></i>
-      </a>
-      <a class="network-icon" href="https://www.linkedin.com/in/povilas-gibas">
-        <i class="bi-linkedin"></i>
-      </a>
-      <h6>
-        <i>
-          Bioinformatician 
-           at 
-             <a href="https://ardigen.com"> 
-              Ardigen
-             </a> 
-        </i>
-      </h6>
-    </div>
-  </div>
-  <div class="people-person">
-    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/rcannood.png">
-    <div class="portrait-title">
-      <h4>Robrecht Cannoodt</h4>
+      <h4>Dries Schaumont</h4>
+      
       <h5>Core Team Member</h5>
-      <a class="network-icon" href="mailto:robrecht@data-intuitive.com">
+      
+      
+      <a class="network-icon" href="mailto:dries@data-intuitive.com">
         <i class="bi-envelope"></i>
       </a>
-      <a class="network-icon" href="https://github.com/rcannood">
+      
+      <a class="network-icon" href="https://github.com/DriesSchaumont">
         <i class="bi-github"></i>
       </a>
-      <a class="network-icon" href="https://orcid.org/0000-0003-3641-729X">
+      
+      <a class="network-icon" href="https://orcid.org/0000-0002-4389-0440">
         <i class="fa-brands fa-orcid"></i>
       </a>
-      <a class="network-icon" href="https://www.linkedin.com/in/robrechtcannoodt">
+      
+      <a class="network-icon" href="https://www.linkedin.com/in/dries-schaumont">
         <i class="bi-linkedin"></i>
       </a>
+      
+      
       <h6>
         <i>
-          Data Science Engineer 
+          Data Scientist 
            at 
              <a href="https://www.data-intuitive.com"> 
               Data Intuitive
              </a> 
+          
         </i>
       </h6>
+       
+    </div>
+  </div>
+  
+  <div class="people-person">
+    
+    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/Isabelle-b.png">
+    
+    <div class="portrait-title">
+      <h4>Isabelle Bergiers</h4>
+      
+      <h5>Contributor</h5>
+      
+      
+      <a class="network-icon" href="https://github.com/Isabelle-b">
+        <i class="bi-github"></i>
+      </a>
+      
+      <a class="network-icon" href="https://orcid.org/0000-0001-9622-7960">
+        <i class="fa-brands fa-orcid"></i>
+      </a>
+      
+      
+      <h6>
+        <i>
+          Scientist OMICS Technology 
+           at 
+             <a href="https://www.janssen.com"> 
+              Janssen Pharmaceuticals
+             </a> 
+          
+        </i>
+      </h6>
+       
+    </div>
+  </div>
+  
+  <div class="people-person">
+    
+    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/jakubmajercik.png">
+    
+    <div class="portrait-title">
+      <h4>Jakub Majercik</h4>
+      
+      <h5>Contributor</h5>
+      
+      
+      <a class="network-icon" href="mailto:jakub@data-intuitive.com">
+        <i class="bi-envelope"></i>
+      </a>
+      
+      <a class="network-icon" href="https://github.com/jakubmajercik">
+        <i class="bi-github"></i>
+      </a>
+      
+      <a class="network-icon" href="https://www.linkedin.com/in/jakubmajercik">
+        <i class="bi-linkedin"></i>
+      </a>
+      
+      
+      <h6>
+        <i>
+          Bioinformatics Engineer 
+           at 
+             <a href="https://www.data-intuitive.com"> 
+              Data Intuitive
+             </a> 
+          
+        </i>
+      </h6>
+       
+    </div>
+  </div>
+  
+  <div class="people-person">
+    
+    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/KaiWaldrant.png">
+    
+    <div class="portrait-title">
+      <h4>Kai Waldrant</h4>
+      
+      <h5>Contributor</h5>
+      
+      
+      <a class="network-icon" href="https://github.com/KaiWaldrant">
+        <i class="bi-github"></i>
+      </a>
+      
+      <a class="network-icon" href="https://www.linkedin.com/in/kai-waldrant-b8b86160">
+        <i class="bi-linkedin"></i>
+      </a>
+      
+      
+      <h6>
+        <i>
+          Bioinformatics Workflow Developer 
+           at 
+             <a href="https://www.data-intuitive.com"> 
+              Data Intuitive
+             </a> 
+          
+        </i>
+      </h6>
+       
+    </div>
+  </div>
+  
+  <div class="people-person">
+    
+    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/LuckyMD.png">
+    
+    <div class="portrait-title">
+      <h4>Malte D. Luecken</h4>
+      
+      <h5>Core Team Member</h5>
+      
+      
+      <a class="network-icon" href="mailto:malte.luecken@helmholtz-muenchen.de">
+        <i class="bi-envelope"></i>
+      </a>
+      
+      <a class="network-icon" href="https://github.com/LuckyMD">
+        <i class="bi-github"></i>
+      </a>
+      
+      <a class="network-icon" href="https://orcid.org/0000-0001-7464-7921">
+        <i class="fa-brands fa-orcid"></i>
+      </a>
+      
+      <a class="network-icon" href="https://www.linkedin.com/in/malte-l%C3%BCcken-b8b21049">
+        <i class="bi-linkedin"></i>
+      </a>
+      
+      
+      <h6>
+        <i>
+          Group Leader 
+           at 
+             <a href="https://www.helmholtz-munich.de"> 
+              Helmholtz Munich
+             </a> 
+          
+        </i>
+      </h6>
+      
       <h6>
         <i>
           Core Member 
@@ -454,21 +540,236 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
              <a href="https://openproblems.bio"> 
               Open Problems
              </a> 
+          
         </i>
       </h6>
+       
     </div>
   </div>
+  
   <div class="people-person">
+    
+    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/mvanmoerbeke.png">
+    
+    <div class="portrait-title">
+      <h4>Marijke Van Moerbeke</h4>
+      
+      <h5>Contributor</h5>
+      
+      
+      <a class="network-icon" href="https://github.com/mvanmoerbeke">
+        <i class="bi-github"></i>
+      </a>
+      
+      <a class="network-icon" href="https://orcid.org/0000-0002-3097-5621">
+        <i class="fa-brands fa-orcid"></i>
+      </a>
+      
+      <a class="network-icon" href="https://www.linkedin.com/in/marijke-van-moerbeke-84303a34">
+        <i class="bi-linkedin"></i>
+      </a>
+      
+      
+      <h6>
+        <i>
+          Statistical Consultant 
+           at 
+             <a href="https://www.openanalytics.eu"> 
+              OpenAnalytics
+             </a> 
+          
+        </i>
+      </h6>
+       
+    </div>
+  </div>
+  
+  <div class="people-person">
+    
+    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/MatthiasBeyens.png">
+    
+    <div class="portrait-title">
+      <h4>Matthias Beyens</h4>
+      
+      <h5>Contributor</h5>
+      
+      
+      <a class="network-icon" href="https://github.com/MatthiasBeyens">
+        <i class="bi-github"></i>
+      </a>
+      
+      <a class="network-icon" href="https://orcid.org/0000-0003-3304-0706">
+        <i class="fa-brands fa-orcid"></i>
+      </a>
+      
+      <a class="network-icon" href="mailto:matthias.beyens@gmail.com">
+        <i class="bi-envelope"></i>
+      </a>
+      
+      <a class="network-icon" href="https://www.linkedin.com/in/mbeyens">
+        <i class="bi-linkedin"></i>
+      </a>
+      
+      
+      <h6>
+        <i>
+          Principal Scientist 
+           at 
+             <a href="https://www.janssen.com"> 
+              Janssen Pharmaceuticals
+             </a> 
+          
+        </i>
+      </h6>
+       
+    </div>
+  </div>
+  
+  <div class="people-person">
+    
+    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/mauro-saporita.png">
+    
+    <div class="portrait-title">
+      <h4>Mauro Saporita</h4>
+      
+      <h5>Contributor</h5>
+      
+      
+      <a class="network-icon" href="mailto:maurosaporita@gmail.com">
+        <i class="bi-envelope"></i>
+      </a>
+      
+      <a class="network-icon" href="https://github.com/mauro-saporita">
+        <i class="bi-github"></i>
+      </a>
+      
+      <a class="network-icon" href="https://www.linkedin.com/in/mauro-saporita-930b06a5">
+        <i class="bi-linkedin"></i>
+      </a>
+      
+      
+      <h6>
+        <i>
+          Lead Nextflow Developer 
+           at 
+             <a href="https://ardigen.com"> 
+              Ardigen
+             </a> 
+          
+        </i>
+      </h6>
+       
+    </div>
+  </div>
+  
+  <div class="people-person">
+    
+    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/PoGibas.png">
+    
+    <div class="portrait-title">
+      <h4>Povilas Gibas</h4>
+      
+      <h5>Contributor</h5>
+      
+      
+      <a class="network-icon" href="mailto:povilasgibas@gmail.com">
+        <i class="bi-envelope"></i>
+      </a>
+      
+      <a class="network-icon" href="https://github.com/PoGibas">
+        <i class="bi-github"></i>
+      </a>
+      
+      <a class="network-icon" href="https://www.linkedin.com/in/povilas-gibas">
+        <i class="bi-linkedin"></i>
+      </a>
+      
+      
+      <h6>
+        <i>
+          Bioinformatician 
+           at 
+             <a href="https://ardigen.com"> 
+              Ardigen
+             </a> 
+          
+        </i>
+      </h6>
+       
+    </div>
+  </div>
+  
+  <div class="people-person">
+    
+    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/rcannood.png">
+    
+    <div class="portrait-title">
+      <h4>Robrecht Cannoodt</h4>
+      
+      <h5>Core Team Member</h5>
+      
+      
+      <a class="network-icon" href="mailto:robrecht@data-intuitive.com">
+        <i class="bi-envelope"></i>
+      </a>
+      
+      <a class="network-icon" href="https://github.com/rcannood">
+        <i class="bi-github"></i>
+      </a>
+      
+      <a class="network-icon" href="https://orcid.org/0000-0003-3641-729X">
+        <i class="fa-brands fa-orcid"></i>
+      </a>
+      
+      <a class="network-icon" href="https://www.linkedin.com/in/robrechtcannoodt">
+        <i class="bi-linkedin"></i>
+      </a>
+      
+      
+      <h6>
+        <i>
+          Data Science Engineer 
+           at 
+             <a href="https://www.data-intuitive.com"> 
+              Data Intuitive
+             </a> 
+          
+        </i>
+      </h6>
+      
+      <h6>
+        <i>
+          Core Member 
+           at 
+             <a href="https://openproblems.bio"> 
+              Open Problems
+             </a> 
+          
+        </i>
+      </h6>
+       
+    </div>
+  </div>
+  
+  <div class="people-person">
+    
     <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/srdsam.png">
+    
     <div class="portrait-title">
       <h4>Samuel D'Souza</h4>
+      
       <h5>Contributor</h5>
+      
+      
       <a class="network-icon" href="https://github.com/srdsam">
         <i class="bi-github"></i>
       </a>
+      
       <a class="network-icon" href="https://www.linkedin.com/in/samuel-d-souza-887023150/">
         <i class="bi-linkedin"></i>
       </a>
+      
+      
       <h6>
         <i>
           Data Engineer 
@@ -476,21 +777,32 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
              <a href="https://www.czbiohub.org"> 
               Chan Zuckerberg Biohub
              </a> 
+          
         </i>
       </h6>
+       
     </div>
   </div>
+  
   <div class="people-person">
+    
     <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/tverbeiren.png">
+    
     <div class="portrait-title">
       <h4>Toni Verbeiren</h4>
+      
       <h5>Core Team Member</h5>
+      
+      
       <a class="network-icon" href="https://github.com/tverbeiren">
         <i class="bi-github"></i>
       </a>
+      
       <a class="network-icon" href="https://www.linkedin.com/in/verbeiren">
         <i class="bi-linkedin"></i>
       </a>
+      
+      
       <h6>
         <i>
           Data Scientist and CEO 
@@ -498,27 +810,40 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
              <a href="https://www.data-intuitive.com"> 
               Data Intuitive
              </a> 
+          
         </i>
       </h6>
+       
     </div>
   </div>
+  
   <div class="people-person">
+    
     <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/vladimirshitov.png">
+    
     <div class="portrait-title">
       <h4>Vladimir Shitov</h4>
+      
       <h5>Contributor</h5>
+      
+      
       <a class="network-icon" href="mailto:vladimir.shitov@helmholtz-muenchen.de">
         <i class="bi-envelope"></i>
       </a>
+      
       <a class="network-icon" href="https://github.com/vladimirshitov">
         <i class="bi-github"></i>
       </a>
+      
       <a class="network-icon" href="https://orcid.org/0000-0002-1960-8812">
         <i class="fa-brands fa-orcid"></i>
       </a>
+      
       <a class="network-icon" href="https://www.linkedin.com/in/vladimir-shitov-9a659513b">
         <i class="bi-linkedin"></i>
       </a>
+      
+      
       <h6>
         <i>
           PhD Candidate 
@@ -526,10 +851,50 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
              <a href="https://www.helmholtz-munich.de"> 
               Helmholtz Munich
              </a> 
+          
         </i>
       </h6>
+       
     </div>
   </div>
+  
+  <div class="people-person">
+    
+    <img loading="lazy" class="avatar avatar-circle" src="https://www.github.com/wxicu.png">
+    
+    <div class="portrait-title">
+      <h4>Xichen Wu</h4>
+      
+      <h5>Contributor</h5>
+      
+      
+      <a class="network-icon" href="https://github.com/wxicu">
+        <i class="bi-github"></i>
+      </a>
+      
+      <a class="network-icon" href="https://www.linkedin.com/in/xichen-wu">
+        <i class="bi-linkedin"></i>
+      </a>
+      
+      <a class="network-icon" href="https://orcid.org/0009-0008-2168-4508">
+        <i class="fa-brands fa-orcid"></i>
+      </a>
+      
+      
+      <h6>
+        <i>
+          Student Assistant 
+           at 
+             <a href="https://www.helmholtz-munich.de"> 
+              Helmholtz Munich
+             </a> 
+          
+        </i>
+      </h6>
+       
+    </div>
+  </div>
+  
 </div>
 <div class="listing-no-matching d-none">
 No matching items
@@ -568,18 +933,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -611,7 +965,47 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/openpipelines\.bio");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -646,24 +1040,64 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
   const processXRef = (id, note) => {
-    if (id.startsWith('sec-')) {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
         }
         return container.innerHTML
       } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
-      return note.innerHTML;
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -672,28 +1106,56 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       instance.disable();
       let url = xref.getAttribute('href');
       let hash = undefined; 
-      try { hash = new URL(url).hash; } catch {}
-      const id = hash.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note !== null) {
-        try {
-          const html = processXRef(id, note);
-          instance.setContent(html);
-        } finally {
-          instance.enable();
-          instance.show();
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
         }
       } else {
-        // See if we can fetch this
-        fetch(url.split('#')[0])
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
         .then(res => res.text())
         .then(html => {
           const parser = new DOMParser();
           const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.getElementById(id);
-          console.log(htmlDoc.body.innerHTML);
+          const note = htmlDoc.querySelector('main.content');
           if (note !== null) {
-            const html = processXRef(id, note);
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
             instance.setContent(html);
           } 
         }).finally(() => {
@@ -771,6 +1233,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -838,12 +1326,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/openpipelines-bio/website/edit/main/team/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    <div class="toc-actions"><ul><li><a href="https://github.com/openpipelines-bio/website/edit/main/team/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+
 
 
 
