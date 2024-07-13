@@ -1,0 +1,19 @@
+---
+title: Kai Waldrant
+image: https://www.github.com/KaiWaldrant.png
+role: Contributor
+organizations:
+- name: Data Intuitive
+  href: https://www.data-intuitive.com
+  role: Bioinformatics Workflow Developer
+links:
+- icon: bi-github
+  text: GitHub
+  href: https://github.com/KaiWaldrant
+- icon: bi-linkedin
+  text: LinkedIn
+  href: https://www.linkedin.com/in/kai-waldrant-b8b86160
+about:
+  template: jolla
+---
+

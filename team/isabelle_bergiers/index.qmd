@@ -1,0 +1,19 @@
+---
+title: Isabelle Bergiers
+image: https://www.github.com/Isabelle-b.png
+role: Contributor
+organizations:
+- name: Janssen Pharmaceuticals
+  href: https://www.janssen.com
+  role: Scientist OMICS Technology
+links:
+- icon: bi-github
+  text: GitHub
+  href: https://github.com/Isabelle-b
+- icon: fa-brands fa-orcid
+  text: ORCID
+  href: https://orcid.org/0000-0001-9622-7960
+about:
+  template: jolla
+---
+
