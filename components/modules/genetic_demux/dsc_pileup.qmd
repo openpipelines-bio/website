@@ -14,7 +14,7 @@ ID: `dsc_pileup`
 Namespace: `genetic_demux`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/genetic_demux/dsc_pileup){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/genetic_demux/dsc_pileup/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -32,7 +32,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/genetic_demux/dsc_pileup/main.nf \
   --help
 ```
@@ -75,7 +75,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/genetic_demux/dsc_pileup/main.nf \
   -params-file params.yaml
@@ -90,7 +90,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Input
 
 |Name             |Description                                                                                                                          |Attributes                    |
-|:----------------|:------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--sam`          |Input SAM/BAM/CRAM file. Must be sorted by coordinates and indexed.                                                                  |`file`                        |
 |`--tag_group`    |Tag representing readgroup or cell barcodes, in the case to partition the BAM file into multiple groups. For 10x genomics, use CB.   |`string`, default: `"CB"`     |
 |`--tag_umi`      |Tag representing UMIs. For 10x genomiucs, use UB.                                                                                    |`string`, default: `"UB"`     |
@@ -115,7 +115,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Output
 
 |Name       |Description                   |Attributes                          |
-|:----------|:-----------------------------|:-----------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output` |Output directory              |`file`, example: `"demux"`          |
 |`--out`    |dsc-pileup output file prefix |`string`, example: `"demuxlet_dsc"` |
 
@@ -123,3 +123,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 
   * Xichen Wu [{{< fa brands github >}}](https://github.com/wxicu) [{{< fa brands orcid >}}](https://orcid.org/0009-0008-2168-4508) [{{< fa brands linkedin >}}](https://linkedin.com/in/xichen-wu) (author)
+

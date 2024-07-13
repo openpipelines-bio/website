@@ -14,7 +14,7 @@ ID: `tsne`
 Namespace: `dimred`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/dimred/tsne){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/dimred/tsne/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/dimred/tsne/main.nf \
   --help
 ```
@@ -67,7 +67,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/dimred/tsne/main.nf \
   -params-file params.yaml
@@ -82,7 +82,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Inputs
 
 |Name         |Description                                                |Attributes                                |
-|:------------|:----------------------------------------------------------|:-----------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--input`    |Input h5mu file                                            |`file`, required, example: `"input.h5mu"` |
 |`--modality` |                                                           |`string`, required, default: `"rna"`      |
 |`--use_rep`  |The `.obsm` slot to use as input for the tSNE computation. |`string`, required, example: `"X_pca"`    |
@@ -91,7 +91,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Outputs
 
 |Name                   |Description                                                  |Attributes                                 |
-|:----------------------|:------------------------------------------------------------|:------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output`             |Output h5mu file.                                            |`file`, required, example: `"output.h5mu"` |
 |`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`                |
 |`--obsm_output`        |The .obsm key to use for storing the tSNE results.           |`string`, default: `"X_tsne"`              |
@@ -100,7 +100,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Arguments
 
 |Name                   |Description                                                                                                                                                                                                                                                                                                                                                                                                          |Attributes                       |
-|:----------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--n_pcs`              |The number of principal components to use for the tSNE computation.                                                                                                                                                                                                                                                                                                                                                  |`integer`, default: `50`         |
 |`--perplexity`         |The perplexity is related to the number of nearest neighbors that is used in other manifold learning algorithms. Larger datasets usually require a larger perplexity. Consider selecting a value between 5 and 50. Different values can result in significantly different results.                                                                                                                                   |`double`, default: `30`          |
 |`--min_dist`           |The effective minimum distance between embedded points. Smaller values will result in a more clustered/clumped embedding where nearby points on the manifold are drawn closer together, while larger values will result on a more even dispersal of points. The value should be set relative to the spread value, which determines the scale at which embedded points will be spread out.                            |`double`, default: `0.5`         |
@@ -113,3 +113,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 
   * Jakub Majercik [{{< fa brands github >}}](https://github.com/jakubmajercik) [{{< fa brands linkedin >}}](https://linkedin.com/in/jakubmajercik) (maintainer)
+

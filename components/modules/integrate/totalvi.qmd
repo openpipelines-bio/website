@@ -14,7 +14,7 @@ ID: `totalvi`
 Namespace: `integrate`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/integrate/totalvi){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/integrate/totalvi/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/integrate/totalvi/main.nf \
   --help
 ```
@@ -73,7 +73,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/integrate/totalvi/main.nf \
   -params-file params.yaml
@@ -88,7 +88,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Inputs
 
 |Name                            |Description                                                                    |Attributes                       |
-|:-------------------------------|:------------------------------------------------------------------------------|:--------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--input`                       |Input h5mu file with query data to integrate with reference.                   |`file`, required                 |
 |`--reference`                   |Input h5mu file with reference data to train the TOTALVI model.                |`file`, required                 |
 |`--force_retrain`               |If true, retrain the model and save it to reference_model_path                 |`boolean_true`                   |
@@ -104,7 +104,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Outputs
 
 |Name                               |Description                                                                          |Attributes                                          |
-|:----------------------------------|:------------------------------------------------------------------------------------|:---------------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output`                         |Output h5mu file.                                                                    |`file`, required                                    |
 |`--obsm_output`                    |In which .obsm slot to store the resulting integrated embedding.                     |`string`, default: `"X_integrated_totalvi"`         |
 |`--obsm_normalized_rna_output`     |In which .obsm slot to store the normalized RNA from TOTALVI.                        |`string`, default: `"X_totalvi_normalized_rna"`     |
@@ -116,7 +116,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Learning parameters
 
 |Name                 |Description                                                            |Attributes                |
-|:--------------------|:----------------------------------------------------------------------|:-------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--max_epochs`       |Number of passes through the dataset                                   |`integer`, default: `400` |
 |`--max_query_epochs` |Number of passes through the dataset, when fine-tuning model for query |`integer`, default: `200` |
 |`--weight_decay`     |Weight decay, when fine-tuning model for query                         |`double`, default: `0`    |
@@ -125,3 +125,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 
   * Vladimir Shitov [{{< fa brands github >}}](https://github.com/vladimirshitov) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-1960-8812) [{{< fa brands linkedin >}}](https://linkedin.com/in/vladimir-shitov-9a659513b)
+

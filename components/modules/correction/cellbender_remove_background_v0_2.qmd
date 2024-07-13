@@ -14,7 +14,7 @@ ID: `cellbender_remove_background_v0_2`
 Namespace: `correction`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/correction/cellbender_remove_background_v0_2){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/correction/cellbender_remove_background_v0_2/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -35,7 +35,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/correction/cellbender_remove_background_v0_2/main.nf \
   --help
 ```
@@ -83,7 +83,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/correction/cellbender_remove_background_v0_2/main.nf \
   -params-file params.yaml
@@ -98,7 +98,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Inputs
 
 |Name         |Description                    |Attributes                                |
-|:------------|:------------------------------|:-----------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--input`    |Input h5mu file.               |`file`, required, example: `"input.h5mu"` |
 |`--modality` |List of modalities to process. |`string`, default: `"rna"`                |
 
@@ -106,7 +106,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Outputs
 
 |Name                            |Description                                                                                                           |Attributes                                             |
-|:-------------------------------|:---------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output`                      |Full count matrix as an h5mu file, with background RNA removed. This file contains all the original droplet barcodes. |`file`, required, example: `"output.h5mu"`             |
 |`--output_compression`          |                                                                                                                      |`string`, example: `"gzip"`                            |
 |`--layer_output`                |Output layer                                                                                                          |`string`, default: `"corrected"`                       |
@@ -120,7 +120,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Arguments
 
 |Name                             |Description                                                                                                                                                                                                                                                                                                                                           |Attributes                                             |
-|:--------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--expected_cells`               |Number of cells expected in the dataset (a rough estimate within a factor of 2 is sufficient).                                                                                                                                                                                                                                                        |`integer`, example: `1000`                             |
 |`--total_droplets_included`      |The number of droplets from the rank-ordered UMI plot that will be analyzed. The largest 'total_droplets' droplets will have their cell probabilities inferred as an output.                                                                                                                                                                          |`integer`, example: `25000`                            |
 |`--expected_cells_from_qc`       |Will use the Cell Ranger QC to determine the estimated number of cells                                                                                                                                                                                                                                                                                |`boolean`, default: `TRUE`                             |
@@ -135,3 +135,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--exclude_antibody_capture`     |Including the flag --exclude-antibody-capture will cause remove-background to operate on gene counts only, ignoring other features.                                                                                                                                                                                                                   |`boolean_true`                                         |
 |`--learning_rate`                |Training detail: lower learning rate for inference. A OneCycle learning rate schedule is used, where the upper learning rate is ten times this value. (For this value, probably do not exceed 1e-3).                                                                                                                                                  |`double`, example: `1e-04`                             |
 |`--cuda`                         |Including the flag --cuda will run the inference on a GPU.                                                                                                                                                                                                                                                                                            |`boolean_true`                                         |
+

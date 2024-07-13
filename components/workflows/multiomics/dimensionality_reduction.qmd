@@ -14,7 +14,7 @@ ID: `dimensionality_reduction`
 Namespace: `workflows/multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/workflows/multiomics/dimensionality_reduction){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/workflows/multiomics/dimensionality_reduction/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,8 +30,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
-  -main-script src/workflows/multiomics/dimensionality_reduction/main.nf \
+  -r 1.0.1 -latest \
+  -main-script target/nextflow/workflows/multiomics/dimensionality_reduction/main.nf \
   --help
 ```
 
@@ -70,9 +70,9 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
-  -main-script src/workflows/multiomics/dimensionality_reduction/main.nf \
+  -main-script target/nextflow/workflows/multiomics/dimensionality_reduction/main.nf \
   -params-file params.yaml
 ```
 
@@ -85,7 +85,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Inputs
 
 |Name         |Description                                                                           |Attributes                                  |
-|:------------|:-------------------------------------------------------------------------------------|:-------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--id`       |ID of the sample.                                                                     |`string`, required, example: `"foo"`        |
 |`--input`    |Path to the sample.                                                                   |`file`, required, example: `"dataset.h5mu"` |
 |`--layer`    |use specified layer for expression values instead of the .X object from the modality. |`string`, default: `"log_normalized"`       |
@@ -95,14 +95,14 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Outputs
 
 |Name       |Description                     |Attributes                                 |
-|:----------|:-------------------------------|:------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output` |Destination path to the output. |`file`, required, example: `"output.h5mu"` |
 
 
 ### PCA options
 
 |Name                          |Description                                                                           |Attributes                   |
-|:-----------------------------|:-------------------------------------------------------------------------------------|:----------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--obsm_pca`                  |In which .obsm slot to store the resulting PCA embedding.                             |`string`, default: `"X_pca"` |
 |`--var_pca_feature_selection` |Column name in .var matrix that will be used to select which genes to run the PCA on. |`string`                     |
 |`--pca_overwrite`             |Allow overwriting slots for PCA output.                                               |`boolean_true`               |
@@ -111,7 +111,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Neighbour calculation
 
 |Name                             |Description                                                                             |Attributes                            |
-|:--------------------------------|:---------------------------------------------------------------------------------------|:-------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--uns_neighbors`                |In which .uns slot to store various neighbor output objects.                            |`string`, default: `"neighbors"`      |
 |`--obsp_neighbor_distances`      |In which .obsp slot to store the distance matrix between the resulting neighbors.       |`string`, default: `"distances"`      |
 |`--obsp_neighbor_connectivities` |In which .obsp slot to store the connectivities matrix between the resulting neighbors. |`string`, default: `"connectivities"` |
@@ -120,10 +120,28 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Umap options
 
 |Name          |Description                                                |Attributes                    |
-|:-------------|:----------------------------------------------------------|:-----------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--obsm_umap` |In which .obsm slot to store the resulting UMAP embedding. |`string`, default: `"X_umap"` |
 
 ## Authors
 
 
   * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (author)
+
+## Visualisation
+
+```{mermaid}
+%%| column: screen-inset-shaded
+flowchart LR
+    v0(Channel.fromList)
+    v18(pca)
+    v38(find_neighbors)
+    v58(umap)
+    v85(Output)
+    v0-->v18
+    v18-->v38
+    v38-->v58
+    v58-->v85
+
+```
+

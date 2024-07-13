@@ -14,7 +14,7 @@ ID: `umap`
 Namespace: `dimred`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/dimred/umap){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/dimred/umap/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/dimred/umap/main.nf \
   --help
 ```
@@ -68,7 +68,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/dimred/umap/main.nf \
   -params-file params.yaml
@@ -83,7 +83,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Inputs
 
 |Name              |Description                                                            |Attributes                                |
-|:-----------------|:----------------------------------------------------------------------|:-----------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--input`         |Input h5mu file                                                        |`file`, required, example: `"input.h5mu"` |
 |`--modality`      |                                                                       |`string`, default: `"rna"`                |
 |`--uns_neighbors` |The `.uns` neighbors slot as output by the `find_neighbors` component. |`string`, default: `"neighbors"`          |
@@ -92,7 +92,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Outputs
 
 |Name                   |Description                                                  |Attributes                                 |
-|:----------------------|:------------------------------------------------------------|:------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output`             |Output h5mu file.                                            |`file`, required, example: `"output.h5mu"` |
 |`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`                |
 |`--obsm_output`        |The pre/postfix under which to store the UMAP results.       |`string`, default: `"umap"`                |
@@ -101,7 +101,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Arguments
 
 |Name                     |Description                                                                                                                                                                                                                                                                                                                                                                               |Attributes                      |
-|:------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--min_dist`             |The effective minimum distance between embedded points. Smaller values will result in a more clustered/clumped embedding where nearby points on the manifold are drawn closer together, while larger values will result on a more even dispersal of points. The value should be set relative to the spread value, which determines the scale at which embedded points will be spread out. |`double`, default: `0.5`        |
 |`--spread`               |The effective scale of embedded points. In combination with `min_dist` this determines how clustered/clumped the embedded points are.                                                                                                                                                                                                                                                     |`double`, default: `1`          |
 |`--num_components`       |The number of dimensions of the embedding.                                                                                                                                                                                                                                                                                                                                                |`integer`, default: `2`         |
@@ -115,3 +115,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 
   * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-de-maeyer-b46a814) (maintainer)
+

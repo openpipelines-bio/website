@@ -14,7 +14,7 @@ ID: `cellranger_multi`
 Namespace: `workflows/ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/workflows/ingestion/cellranger_multi){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/workflows/ingestion/cellranger_multi/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,8 +30,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
-  -main-script src/workflows/ingestion/cellranger_multi/main.nf \
+  -r 1.0.1 -latest \
+  -main-script target/nextflow/workflows/ingestion/cellranger_multi/main.nf \
   --help
 ```
 
@@ -90,9 +90,9 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
-  -main-script src/workflows/ingestion/cellranger_multi/main.nf \
+  -main-script target/nextflow/workflows/ingestion/cellranger_multi/main.nf \
   -params-file params.yaml
 ```
 
@@ -105,7 +105,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Inputs
 
 |Name                             |Description                                                                                                                                                                                                                                                                                                                          |Attributes                                                                                                         |
-|:--------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--id`                           |ID of the sample.                                                                                                                                                                                                                                                                                                                    |`string`, required, example: `"foo"`                                                                               |
 |`--input`                        |The fastq.gz files to align. Can also be a single directory containing fastq.gz files.                                                                                                                                                                                                                                               |List of `file`, example: `"sample_S1_L001_R1_001.fastq.gz", "sample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
 |`--gex_reference`                |Genome refence index built by Cell Ranger mkref.                                                                                                                                                                                                                                                                                     |`file`, required, example: `"reference_genome.tar.gz"`                                                             |
@@ -120,7 +120,7 @@ Helper functionality to allow feature type-specific input files, without the nee
 
 
 |Name               |Description                                                                                                                                                                                                       |Attributes                                                                                                             |
-|:------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--gex_input`      |The FASTQ files to be analyzed for Gene Expression. FASTQ files should conform to the naming conventions of bcl2fastq and mkfastq: `[Sample Name]_S[Sample Index]_L00[Lane Number]_[Read Type]_001.fastq.gz`      |List of `file`, example: `"mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
 |`--abc_input`      |The FASTQ files to be analyzed for Antibody Capture. FASTQ files should conform to the naming conventions of bcl2fastq and mkfastq: `[Sample Name]_S[Sample Index]_L00[Lane Number]_[Read Type]_001.fastq.gz`     |List of `file`, example: `"mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
 |`--cgc_input`      |The FASTQ files to be analyzed for CRISPR Guide Capture. FASTQ files should conform to the naming conventions of bcl2fastq and mkfastq: `[Sample Name]_S[Sample Index]_L00[Lane Number]_[Read Type]_001.fastq.gz` |List of `file`, example: `"mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
@@ -135,7 +135,7 @@ Helper functionality to allow feature type-specific input files, without the nee
 ### Outputs
 
 |Name            |Description                                               |Attributes                                 |
-|:---------------|:---------------------------------------------------------|:------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output_raw`  |The raw output folder.                                    |`file`, required, example: `"output_dir"`  |
 |`--output_h5mu` |The converted h5mu file.                                  |`file`, required, example: `"output.h5mu"` |
 |`--uns_metrics` |Name of the .uns slot under which to QC metrics (if any). |`string`, default: `"metrics_cellranger"`  |
@@ -147,7 +147,7 @@ Arguments related to cell multiplexing.
 
 
 |Name                           |Description                                                                                                                                                                                            |Attributes |
-|:------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--cell_multiplex_sample_id`   |A name to identify a multiplexed sample. Must be alphanumeric with hyphens and/or underscores,  and less than 64 characters. Required for Cell Multiplexing libraries.                                 |`string`   |
 |`--cell_multiplex_oligo_ids`   |The Cell Multiplexing oligo IDs used to multiplex this sample. If multiple CMOs were used for a sample, separate IDs with a pipe (e.g., CMO301&#124;CMO302). Required for Cell Multiplexing libraries. |`string`   |
 |`--cell_multiplex_description` |A description for the sample.                                                                                                                                                                          |`string`   |
@@ -159,7 +159,7 @@ Arguments relevant to the analysis of gene expression data.
 
 
 |Name                       |Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |Attributes                  |
-|:--------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--gex_expect_cells`       |Expected number of recovered cells, used as input to cell calling algorithm.                                                                                                                                                                                                                                                                                                                                                                                                                                      |`integer`, example: `3000`  |
 |`--gex_chemistry`          |Assay configuration. - auto: autodetect mode - threeprime: Single Cell 3' - fiveprime: Single Cell 5' - SC3Pv1: Single Cell 3' v1 - SC3Pv2: Single Cell 3' v2 - SC3Pv3: Single Cell 3' v3 - SC3Pv3LT: Single Cell 3' v3 LT - SC3Pv3HT: Single Cell 3' v3 HT - SC5P-PE: Single Cell 5' paired-end - SC5P-R2: Single Cell 5' R2-only - SC-FB: Single Cell Antibody-only 3' v2 or 5' See https://kb.10xgenomics.com/hc/en-us/articles/115003764132-How-does-Cell-Ranger-auto-detect-chemistry- for more information. |`string`, default: `"auto"` |
 |`--gex_secondary_analysis` |Whether or not to run the secondary analysis e.g. clustering.                                                                                                                                                                                                                                                                                                                                                                                                                                                     |`boolean`, default: `FALSE` |
@@ -170,7 +170,7 @@ Arguments relevant to the analysis of gene expression data.
 ### Library arguments
 
 |Name                  |Description                                                                                                                                                                 |Attributes                                                          |
-|:---------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--library_id`        |The Illumina sample name to analyze. This must exactly match the 'Sample Name' part of the FASTQ files specified in the `--input` argument.                                 |List of `string`, example: `"mysample1"`, multiple_sep: `";"`       |
 |`--library_type`      |The underlying feature type of the library. Possible values: "Gene Expression", "VDJ", "VDJ-T", "VDJ-B", "Antibody Capture", "CRISPR Guide Capture", "Multiplexing Capture" |List of `string`, example: `"Gene Expression"`, multiple_sep: `";"` |
 |`--library_subsample` |Optional. The rate at which reads from the provided FASTQ files are sampled. Must be strictly greater than 0 and less than or equal to 1.                                   |List of `string`, example: `"0.5"`, multiple_sep: `";"`             |
@@ -180,3 +180,19 @@ Arguments relevant to the analysis of gene expression data.
 
 
   * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (author)
+
+## Visualisation
+
+```{mermaid}
+%%| column: screen-inset-shaded
+flowchart LR
+    v0(Channel.fromList)
+    v17(cellranger_multi_component)
+    v37(from_cellranger_multi_to_h5mu)
+    v64(Output)
+    v0-->v17
+    v17-->v37
+    v37-->v64
+
+```
+

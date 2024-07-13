@@ -14,7 +14,7 @@ ID: `process_batches`
 Namespace: `workflows/multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/workflows/multiomics/process_batches){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/workflows/multiomics/process_batches/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -34,8 +34,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
-  -main-script src/workflows/multiomics/process_batches/main.nf \
+  -r 1.0.1 -latest \
+  -main-script target/nextflow/workflows/multiomics/process_batches/main.nf \
   --help
 ```
 
@@ -72,9 +72,9 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
-  -main-script src/workflows/multiomics/process_batches/main.nf \
+  -main-script target/nextflow/workflows/multiomics/process_batches/main.nf \
   -params-file params.yaml
 ```
 
@@ -87,7 +87,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Inputs
 
 |Name           |Description                                                                  |Attributes                                                             |
-|:--------------|:----------------------------------------------------------------------------|:----------------------------------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--id`         |ID of the sample.                                                            |`string`, required, example: `"foo"`                                   |
 |`--input`      |Path to the sample.                                                          |List of `file`, required, example: `"input.h5mu"`, multiple_sep: `";"` |
 |`--rna_layer`  |Input layer for the gene expression modality. If not specified, .X is used.  |`string`                                                               |
@@ -97,14 +97,14 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Outputs
 
 |Name       |Description                     |Attributes                                 |
-|:----------|:-------------------------------|:------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output` |Destination path to the output. |`file`, required, example: `"output.h5mu"` |
 
 
 ### Highly variable features detection
 
 |Name                                       |Description                                                                                                                                                                                                    |Attributes                             |
-|:------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--highly_variable_features_var_output`    |In which .var slot to store a boolean array corresponding to the highly variable genes.                                                                                                                        |`string`, default: `"filter_with_hvg"` |
 |`--highly_variable_features_obs_batch_key` |If specified, highly-variable genes are selected within each batch separately and merged. This simple  process avoids the selection of batch-specific genes and acts as a lightweight batch correction method. |`string`, default: `"sample_id"`       |
 
@@ -112,7 +112,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### QC metrics calculation options
 
 |Name               |Description                                                                                                                                                                                                                    |Attributes                                                                                             |
-|:------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--var_qc_metrics` |Keys to select a boolean (containing only True or False) column from .var. For each cell, calculate the proportion of total values for genes which are labeled 'True',  compared to the total sum of the values for all genes. |List of `string`, default: `"filter_with_hvg"`, example: `"ercc,highly_variable"`, multiple_sep: `";"` |
 |`--top_n_vars`     |Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. `--top_n_vars 20,50` finds cumulative proportion to the 20th and 50th most expressed vars.                |List of `integer`, default: `50, 100, 200, 500`, multiple_sep: `";"`                                   |
 
@@ -120,10 +120,102 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### PCA options
 
 |Name              |Description                             |Attributes     |
-|:-----------------|:---------------------------------------|:--------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--pca_overwrite` |Allow overwriting slots for PCA output. |`boolean_true` |
 
 ## Authors
 
 
   * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (author, maintainer)
+
+## Visualisation
+
+```{mermaid}
+%%| column: screen-inset-shaded
+flowchart LR
+    v0(Channel.fromList)
+    v11(filter)
+    v55(flatMap)
+    v370(mix)
+    v372(mix)
+    v388(merge)
+    v404(branch)
+    v478(concat)
+    v482(branch)
+    v556(concat)
+    v565(publish)
+    v593(Output)
+    subgraph split_modalities_workflow
+        v27(split_modalities_component)
+    end
+    subgraph rna_multisample
+        v78(normalize_total)
+        v98(log1p)
+        v118(delete_layer)
+        v138(highly_variable_features_scanpy)
+        v150(filter)
+        v168(grep_annotation_column)
+        v181(mix)
+        v190(calculate_qc_metrics)
+        v210(publish)
+    end
+    subgraph prot_multisample
+        v263(clr)
+        v275(filter)
+        v293(grep_annotation_column)
+        v306(mix)
+        v315(calculate_qc_metrics)
+        v335(publish)
+    end
+    subgraph dimensionality_reduction_rna
+        v417(pca)
+        v437(find_neighbors)
+        v457(umap)
+    end
+    subgraph dimensionality_reduction_prot
+        v495(pca)
+        v515(find_neighbors)
+        v535(umap)
+    end
+    v370-->v372
+    v404-->v478
+    v482-->v556
+    v0-->v11
+    v11-->v27
+    v27-->v55
+    v55-->v78
+    v78-->v98
+    v98-->v118
+    v118-->v138
+    v138-->v150
+    v150-->v168
+    v168-->v181
+    v150-->v181
+    v181-->v190
+    v190-->v210
+    v210-->v370
+    v55-->v263
+    v263-->v275
+    v275-->v293
+    v293-->v306
+    v275-->v306
+    v306-->v315
+    v315-->v335
+    v335-->v370
+    v55-->v372
+    v372-->v388
+    v388-->v404
+    v404-->v417
+    v417-->v437
+    v437-->v457
+    v457-->v478
+    v478-->v482
+    v482-->v495
+    v495-->v515
+    v515-->v535
+    v535-->v556
+    v556-->v565
+    v565-->v593
+
+```
+

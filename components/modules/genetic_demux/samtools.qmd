@@ -14,7 +14,7 @@ ID: `samtools`
 Namespace: `genetic_demux`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/genetic_demux/samtools){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/genetic_demux/samtools/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/genetic_demux/samtools/main.nf \
   --help
 ```
@@ -52,7 +52,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/genetic_demux/samtools/main.nf \
   -params-file params.yaml
@@ -67,7 +67,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Arguments
 
 |Name       |Description                   |Attributes                        |
-|:----------|:-----------------------------|:---------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--bam`    |Input bam file for filtering. |`file`, required                  |
 |`--output` |Samtools output directory.    |`file`, example: `"samtools_out"` |
 
@@ -75,3 +75,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 
   * Xichen Wu [{{< fa brands github >}}](https://github.com/wxicu) [{{< fa brands orcid >}}](https://orcid.org/0009-0008-2168-4508) [{{< fa brands linkedin >}}](https://linkedin.com/in/xichen-wu) (author)
+

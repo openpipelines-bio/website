@@ -14,7 +14,7 @@ ID: `leiden`
 Namespace: `cluster`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/cluster/leiden){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/cluster/leiden/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -39,7 +39,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/cluster/leiden/main.nf \
   --help
 ```
@@ -66,7 +66,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/cluster/leiden/main.nf \
   -params-file params.yaml
@@ -81,7 +81,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Arguments
 
 |Name                    |Description                                                                                                                                                                    |Attributes                                                    |
-|:-----------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--input`               |Input file.                                                                                                                                                                    |`file`, required, example: `"input.h5mu"`                     |
 |`--modality`            |                                                                                                                                                                               |`string`, default: `"rna"`                                    |
 |`--obsp_connectivities` |In which .obsp slot the neighbor connectivities can be found.                                                                                                                  |`string`, default: `"connectivities"`                         |
@@ -94,3 +94,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 
   * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-de-maeyer-b46a814) (maintainer)
+

@@ -14,7 +14,7 @@ ID: `multi_star_to_h5mu`
 Namespace: `mapping`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/mapping/multi_star_to_h5mu){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/mapping/multi_star_to_h5mu/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/mapping/multi_star_to_h5mu/main.nf \
   --help
 ```
@@ -53,7 +53,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/mapping/multi_star_to_h5mu/main.nf \
   -params-file params.yaml
@@ -68,7 +68,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Arguments
 
 |Name                   |Description                                                  |Attributes                                  |
-|:----------------------|:------------------------------------------------------------|:-------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--input`              |The directory created by `multi_star`                        |`file`, required, example: `"/path/to/foo"` |
 |`--output`             |Output h5mu file.                                            |`file`, required, example: `"output.h5mu"`  |
 |`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`                 |
@@ -79,3 +79,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
   * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (author, maintainer)
 
   * Angela Oliveira Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) [{{< fa brands linkedin >}}](https://linkedin.com/in/aopisco) (author)
+

@@ -14,7 +14,7 @@ ID: `filter_with_counts`
 Namespace: `filter`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/filter/filter_with_counts){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/filter/filter_with_counts/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -32,7 +32,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/filter/filter_with_counts/main.nf \
   --help
 ```
@@ -69,7 +69,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/filter/filter_with_counts/main.nf \
   -params-file params.yaml
@@ -84,7 +84,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Inputs
 
 |Name         |Description     |Attributes                                |
-|:------------|:---------------|:-----------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--input`    |Input h5mu file |`file`, required, example: `"input.h5mu"` |
 |`--modality` |                |`string`, default: `"rna"`                |
 |`--layer`    |                |`string`, example: `"raw_counts"`         |
@@ -93,7 +93,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Outputs
 
 |Name                   |Description                                                                                        |Attributes                                |
-|:----------------------|:--------------------------------------------------------------------------------------------------|:-----------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output`             |Output h5mu file.                                                                                  |`file`, example: `"output.h5mu"`          |
 |`--output_compression` |The compression format to be used on the output h5mu object.                                       |`string`, example: `"gzip"`               |
 |`--do_subset`          |Whether to subset before storing the output.                                                       |`boolean_true`                            |
@@ -104,7 +104,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Arguments
 
 |Name                   |Description                                 |Attributes                    |
-|:----------------------|:-------------------------------------------|:-----------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--min_counts`         |Minimum number of counts captured per cell. |`integer`, example: `200`     |
 |`--max_counts`         |Maximum number of counts captured per cell. |`integer`, example: `5000000` |
 |`--min_genes_per_cell` |Minimum of non-zero values per cell.        |`integer`, example: `200`     |
@@ -117,3 +117,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
   * Dries De Maeyer [{{< fa brands github >}}](https://github.com/ddemaeyer) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-de-maeyer-b46a814) (author)
 
   * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (maintainer, author)
+

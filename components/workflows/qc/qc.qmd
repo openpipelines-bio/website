@@ -14,7 +14,7 @@ ID: `qc`
 Namespace: `workflows/qc`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/workflows/qc/qc){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/workflows/qc/qc/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,8 +30,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
-  -main-script src/workflows/qc/qc/main.nf \
+  -r 1.0.1 -latest \
+  -main-script target/nextflow/workflows/qc/qc/main.nf \
   --help
 ```
 
@@ -73,9 +73,9 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
-  -main-script src/workflows/qc/qc/main.nf \
+  -main-script target/nextflow/workflows/qc/qc/main.nf \
   -params-file params.yaml
 ```
 
@@ -88,7 +88,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Inputs
 
 |Name         |Description                        |Attributes                                |
-|:------------|:----------------------------------|:-----------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--id`       |ID of the sample.                  |`string`, required, example: `"foo"`      |
 |`--input`    |Path to the sample.                |`file`, required, example: `"input.h5mu"` |
 |`--modality` |Which modality to process.         |`string`, default: `"rna"`                |
@@ -98,7 +98,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Mitochondrial Gene Detection
 
 |Name                                |Description                                                                                                                                                                                                                |Attributes                         |
-|:-----------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--var_name_mitochondrial_genes`    |In which .var slot to store a boolean array corresponding the mitochondrial genes.                                                                                                                                         |`string`                           |
 |`--obs_name_mitochondrial_fraction` |.Obs slot to store the fraction of reads found to be mitochondrial. Defaults to 'fraction_' suffixed by the value of --var_name_mitochondrial_genes                                                                        |`string`                           |
 |`--var_gene_names`                  |.var column name to be used to detect mitochondrial genes instead of .var_names (default if not set). Gene names matching with the regex value from --mitochondrial_gene_regex will be identified as a mitochondrial gene. |`string`, example: `"gene_symbol"` |
@@ -108,7 +108,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### QC metrics calculation options
 
 |Name                             |Description                                                                                                                                                                                                                                                                               |Attributes                                                               |
-|:--------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--var_qc_metrics`               |Keys to select a boolean (containing only True or False) column from .var. For each cell, calculate the proportion of total values for genes which are labeled 'True',  compared to the total sum of the values for all genes. Defaults to the value from --var_name_mitochondrial_genes. |List of `string`, example: `"ercc,highly_variable"`, multiple_sep: `";"` |
 |`--top_n_vars`                   |Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. `--top_n_vars 20,50` finds cumulative proportion to the 20th and 50th most expressed vars.                                                                           |List of `integer`, default: `50, 100, 200, 500`, multiple_sep: `";"`     |
 |`--output_obs_num_nonzero_vars`  |Name of column in .obs describing, for each observation, the number of stored values (including explicit zeroes). In other words, the name of the column that counts for each row the number of columns that contain data.                                                                |`string`, default: `"num_nonzero_vars"`                                  |
@@ -122,10 +122,33 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Outputs
 
 |Name       |Description                     |Attributes                                 |
-|:----------|:-------------------------------|:------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output` |Destination path to the output. |`file`, required, example: `"output.h5mu"` |
 
 ## Authors
 
 
   * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (author, maintainer)
+
+## Visualisation
+
+```{mermaid}
+%%| column: screen-inset-shaded
+flowchart LR
+    v0(Channel.fromList)
+    v2(filter)
+    v20(grep_annotation_column)
+    v33(mix)
+    v42(calculate_qc_metrics)
+    v62(publish)
+    v90(Output)
+    v0-->v2
+    v2-->v20
+    v20-->v33
+    v2-->v33
+    v33-->v42
+    v42-->v62
+    v62-->v90
+
+```
+

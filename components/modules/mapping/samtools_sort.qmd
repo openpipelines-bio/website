@@ -14,7 +14,7 @@ ID: `samtools_sort`
 Namespace: `mapping`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/mapping/samtools_sort){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/mapping/samtools_sort/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -36,7 +36,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/mapping/samtools_sort/main.nf \
   --help
 ```
@@ -70,7 +70,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/mapping/samtools_sort/main.nf \
   -params-file params.yaml
@@ -85,14 +85,14 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Input
 
 |Name      |Description                                                 |Attributes                               |
-|:---------|:-----------------------------------------------------------|:----------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--input` |Path to the SAM/BAM/CRAM files containing the mapped reads. |`file`, required, example: `"input.bam"` |
 
 
 ### Output
 
 |Name              |Description                                                                                                                                                                        |Attributes                                |
-|:-----------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output_bam`    |Filename to output the counts to.                                                                                                                                                  |`file`, required, example: `"output.bam"` |
 |`--output_bai`    |BAI-format index for BAM file.                                                                                                                                                     |`file`, example: `"output.bam.bai"`       |
 |`--output_format` |The output format. By default, samtools tries to select a format based on the -o filename extension; if output is to standard output or no format can be deduced, bam is selected. |`string`, example: `"bam"`                |
@@ -102,7 +102,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Arguments
 
 |Name                   |Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |Attributes               |
-|:----------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--minimizer_cluster`  |Sort unmapped reads (those in chromosome "*") by their sequence minimiser (Schleimer et al., 2003; Roberts et al., 2004),  also reverse complementing as appropriate. This has the effect of collating some similar data together, improving the  compressibility of the unmapped sequence. The minimiser kmer size is adjusted using the -K option. Note data compressed  in this manner may need to be name collated prior to conversion back to fastq.  Mapped sequences are sorted by chromosome and position. |`boolean_true`           |
 |`--minimizer_kmer`     |Sets the kmer size to be used in the -M option.                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |`integer`, example: `20` |
 |`--sort_by_read_names` |Sort by read names (i.e., the QNAME field) rather than by chromosomal coordinates.                                                                                                                                                                                                                                                                                                                                                                                                                                 |`boolean_true`           |
@@ -115,3 +115,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
   * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (author, maintainer)
 
   * Angela Oliveira Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) [{{< fa brands linkedin >}}](https://linkedin.com/in/aopisco) (author)
+

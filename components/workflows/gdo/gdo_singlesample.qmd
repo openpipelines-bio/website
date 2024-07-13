@@ -14,7 +14,7 @@ ID: `gdo_singlesample`
 Namespace: `workflows/gdo`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/workflows/gdo/gdo_singlesample){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/workflows/gdo/gdo_singlesample/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,8 +30,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
-  -main-script src/workflows/gdo/gdo_singlesample/main.nf \
+  -r 1.0.1 -latest \
+  -main-script target/nextflow/workflows/gdo/gdo_singlesample/main.nf \
   --help
 ```
 
@@ -63,9 +63,9 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
-  -main-script src/workflows/gdo/gdo_singlesample/main.nf \
+  -main-script target/nextflow/workflows/gdo/gdo_singlesample/main.nf \
   -params-file params.yaml
 ```
 
@@ -78,7 +78,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Input
 
 |Name      |Description                                             |Attributes                                  |
-|:---------|:-------------------------------------------------------|:-------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--id`    |ID of the sample.                                       |`string`, required, example: `"foo"`        |
 |`--input` |Path to the sample.                                     |`file`, required, example: `"dataset.h5mu"` |
 |`--layer` |Input layer to start from. By default, .X will be used. |`string`                                    |
@@ -87,14 +87,14 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Output
 
 |Name       |Description                     |Attributes                                 |
-|:----------|:-------------------------------|:------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output` |Destination path to the output. |`file`, required, example: `"output.h5mu"` |
 
 
 ### Filtering options
 
 |Name                    |Description                                 |Attributes                    |
-|:-----------------------|:-------------------------------------------|:-----------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--min_counts`          |Minimum number of counts captured per cell. |`integer`, example: `200`     |
 |`--max_counts`          |Maximum number of counts captured per cell. |`integer`, example: `5000000` |
 |`--min_guides_per_cell` |Minimum of non-zero values per cell.        |`integer`, example: `200`     |
@@ -105,3 +105,19 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 
   * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (author)
+
+## Visualisation
+
+```{mermaid}
+%%| column: screen-inset-shaded
+flowchart LR
+    v0(Channel.fromList)
+    v18(gdo_filter_with_counts)
+    v38(gdo_do_filter)
+    v66(Output)
+    v0-->v18
+    v18-->v38
+    v38-->v66
+
+```
+

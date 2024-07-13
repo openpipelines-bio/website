@@ -14,7 +14,7 @@ ID: `rna_multisample`
 Namespace: `workflows/rna`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/workflows/rna/rna_multisample){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/workflows/rna/rna_multisample/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,8 +30,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
-  -main-script src/workflows/rna/rna_multisample/main.nf \
+  -r 1.0.1 -latest \
+  -main-script target/nextflow/workflows/rna/rna_multisample/main.nf \
   --help
 ```
 
@@ -73,9 +73,9 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
-  -main-script src/workflows/rna/rna_multisample/main.nf \
+  -main-script target/nextflow/workflows/rna/rna_multisample/main.nf \
   -params-file params.yaml
 ```
 
@@ -88,7 +88,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Inputs
 
 |Name         |Description                                       |Attributes                                    |
-|:------------|:-------------------------------------------------|:---------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--id`       |ID of the concatenated file                       |`string`, required, example: `"concatenated"` |
 |`--input`    |Path to the samples.                              |`file`, required, example: `"dataset.h5mu"`   |
 |`--modality` |Modality to process.                              |`string`, default: `"rna"`                    |
@@ -98,14 +98,14 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Output
 
 |Name       |Description                     |Attributes                                 |
-|:----------|:-------------------------------|:------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output` |Destination path to the output. |`file`, required, example: `"output.h5mu"` |
 
 
 ### Filtering highly variable features
 
 |Name                                        |Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |Attributes                             |
-|:-------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--highly_variable_features_var_output`     |In which .var slot to store a boolean array corresponding to the highly variable features.                                                                                                                                                                                                                                                                                                                                                                                                                    |`string`, default: `"filter_with_hvg"` |
 |`--highly_variable_features_obs_batch_key`  |If specified, highly-variable features are selected within each batch separately and merged. This simple  process avoids the selection of batch-specific features and acts as a lightweight batch correction method.  For all flavors, featues are first sorted by how many batches they are highly variable. For dispersion-based flavors  ties are broken by normalized dispersion. If flavor = 'seurat_v3', ties are broken by the median (across batches) rank based on within-batch normalized variance. |`string`, default: `"sample_id"`       |
 |`--highly_variable_features_flavor`         |Choose the flavor for identifying highly variable features. For the dispersion based methods in their default workflows, Seurat passes the cutoffs whereas Cell Ranger passes n_top_features.                                                                                                                                                                                                                                                                                                                 |`string`, default: `"seurat"`          |
@@ -115,7 +115,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### QC metrics calculation options
 
 |Name                             |Description                                                                                                                                                                                                                    |Attributes                                                                                             |
-|:--------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--var_qc_metrics`               |Keys to select a boolean (containing only True or False) column from .var. For each cell, calculate the proportion of total values for genes which are labeled 'True',  compared to the total sum of the values for all genes. |List of `string`, default: `"filter_with_hvg"`, example: `"ercc,highly_variable"`, multiple_sep: `";"` |
 |`--top_n_vars`                   |Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. `--top_n_vars 20,50` finds cumulative proportion to the 20th and 50th most expressed vars.                |List of `integer`, default: `50, 100, 200, 500`, multiple_sep: `";"`                                   |
 |`--output_obs_num_nonzero_vars`  |Name of column in .obs describing, for each observation, the number of stored values (including explicit zeroes). In other words, the name of the column that counts for each row the number of columns that contain data.     |`string`, default: `"num_nonzero_vars"`                                                                |
@@ -133,3 +133,36 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
   * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (author, maintainer)
 
   * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (author)
+
+## Visualisation
+
+```{mermaid}
+%%| column: screen-inset-shaded
+flowchart LR
+    v0(Channel.fromList)
+    v18(normalize_total)
+    v38(log1p)
+    v58(delete_layer)
+    v78(highly_variable_features_scanpy)
+    v189(Output)
+    subgraph rna_qc
+        v90(filter)
+        v108(grep_annotation_column)
+        v121(mix)
+        v130(calculate_qc_metrics)
+        v150(publish)
+    end
+    v0-->v18
+    v18-->v38
+    v38-->v58
+    v58-->v78
+    v78-->v90
+    v90-->v108
+    v108-->v121
+    v90-->v121
+    v121-->v130
+    v130-->v150
+    v150-->v189
+
+```
+

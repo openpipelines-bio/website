@@ -14,7 +14,7 @@ ID: `fastqc`
 Namespace: `qc`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/qc/fastqc){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/qc/fastqc/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/qc/fastqc/main.nf \
   --help
 ```
@@ -54,7 +54,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/qc/fastqc/main.nf \
   -params-file params.yaml
@@ -69,8 +69,9 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Arguments
 
 |Name        |Description                                                                                                         |Attributes                               |
-|:-----------|:-------------------------------------------------------------------------------------------------------------------|:----------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--mode`    |The mode in which the component works. Can be either files or dir.                                                  |`string`, default: `"files"`             |
 |`--input`   |Directory containing input fastq files.                                                                             |`file`, required, example: `"fastq_dir"` |
 |`--output`  |Output directory to write reports to.                                                                               |`file`, required, example: `"qc"`        |
 |`--threads` |Specifies the number of files which can be processed simultaneously. Each thread will be allocated 250MB of memory. |`integer`                                |
+

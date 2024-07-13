@@ -14,7 +14,7 @@ ID: `scarches`
 Namespace: `integrate`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/integrate/scarches){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/integrate/scarches/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/integrate/scarches/main.nf \
   --help
 ```
@@ -72,7 +72,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/integrate/scarches/main.nf \
   -params-file params.yaml
@@ -87,7 +87,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Inputs
 
 |Name             |Description                                                                                                                             |Attributes                          |
-|:----------------|:---------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--input`        |Input h5mu file to use as a query                                                                                                       |`file`, required                    |
 |`--modality`     |                                                                                                                                        |`string`, default: `"rna"`          |
 |`--reference`    |Path to the directory with reference model or a web link. For HLCA use https://zenodo.org/record/6337966/files/HLCA_reference_model.zip |`file`, required                    |
@@ -97,7 +97,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Outputs
 
 |Name                   |Description                                                      |Attributes                                 |
-|:----------------------|:----------------------------------------------------------------|:------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output`             |Output h5mu file.                                                |`file`, required                           |
 |`--output_compression` |The compression format to be used on the output h5mu object.     |`string`, example: `"gzip"`                |
 |`--model_output`       |Output directory for model                                       |`file`, default: `"model"`                 |
@@ -107,7 +107,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Early stopping arguments
 
 |Name                         |Description                                                                                                                                          |Attributes                             |
-|:----------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--early_stopping`           |Whether to perform early stopping with respect to the validation set.                                                                                |`boolean`                              |
 |`--early_stopping_monitor`   |Metric logged during validation set epoch.                                                                                                           |`string`, default: `"elbo_validation"` |
 |`--early_stopping_patience`  |Number of validation epochs with no improvement after which training will be stopped.                                                                |`integer`, default: `45`               |
@@ -117,7 +117,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Learning parameters
 
 |Name                     |Description                                                                                                      |Attributes                 |
-|:------------------------|:----------------------------------------------------------------------------------------------------------------|:--------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--max_epochs`           |Number of passes through the dataset, defaults to (20000 / number of cells) * 400 or 400; whichever is smallest. |`integer`, required        |
 |`--reduce_lr_on_plateau` |Whether to monitor validation loss and reduce learning rate when validation set `lr_scheduler_metric` plateaus.  |`boolean`, default: `TRUE` |
 |`--lr_factor`            |Factor to reduce learning rate.                                                                                  |`double`, default: `0.6`   |
@@ -127,3 +127,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 
   * Vladimir Shitov [{{< fa brands github >}}](https://github.com/vladimirshitov) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-1960-8812) [{{< fa brands linkedin >}}](https://linkedin.com/in/vladimir-shitov-9a659513b)
+

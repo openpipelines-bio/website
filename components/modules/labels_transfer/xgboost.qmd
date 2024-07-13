@@ -14,7 +14,7 @@ ID: `xgboost`
 Namespace: `labels_transfer`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/labels_transfer/xgboost){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/labels_transfer/xgboost/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/labels_transfer/xgboost/main.nf \
   --help
 ```
@@ -69,7 +69,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/labels_transfer/xgboost/main.nf \
   -params-file params.yaml
@@ -84,7 +84,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Input dataset (query) arguments
 
 |Name                    |Description                                                                                                                                                                                                                                              |Attributes                                 |
-|:-----------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--input`               |The query data to transfer the labels to. Should be a .h5mu file.                                                                                                                                                                                        |`file`, required                           |
 |`--modality`            |Which modality to use.                                                                                                                                                                                                                                   |`string`, default: `"rna"`                 |
 |`--input_obsm_features` |The `.obsm` key of the embedding to use for the classifier's inference. If not provided, the `.X` slot will be used instead. Make sure that embedding was obtained in the same way as the reference embedding (e.g. by the same model or preprocessing). |`string`, example: `"X_integrated_scanvi"` |
@@ -93,7 +93,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Reference dataset arguments
 
 |Name                        |Description                                                                                                                                                                                    |Attributes                                                                                                                                      |
-|:---------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--reference`               |The reference data to train classifiers on.                                                                                                                                                    |`file`, example: `"https:/zenodo.org/record/6337966/files/HLCA_emb_and_metadata.h5ad"`                                                          |
 |`--reference_obsm_features` |The `.obsm` key of the embedding to use for the classifier's training. Make sure that embedding was obtained in the same way as the query embedding (e.g. by the same model or preprocessing). |`string`, required, default: `"X_integrated_scanvi"`                                                                                            |
 |`--reference_obs_targets`   |The `.obs` key of the target labels to tranfer.                                                                                                                                                |List of `string`, default: `"ann_level_1", "ann_level_2", "ann_level_3", "ann_level_4", "ann_level_5", "ann_finest_level"`, multiple_sep: `";"` |
@@ -102,7 +102,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Outputs
 
 |Name                       |Description                                                                                                                                                                                                                              |Attributes                             |
-|:--------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output`                 |The query data in .h5mu format with predicted labels transfered from the reference.                                                                                                                                                      |`file`, required                       |
 |`--output_obs_predictions` |In which `.obs` slots to store the predicted information. If provided, must have the same length as `--reference_obs_targets`. If empty, will default to the `reference_obs_targets` combined with the `"_pred"` suffix.                 |List of `string`, multiple_sep: `";"`  |
 |`--output_obs_uncertainty` |In which `.obs` slots to store the uncertainty of the predictions. If provided, must have the same length as `--reference_obs_targets`. If empty, will default to the `reference_obs_targets` combined with the `"_uncertainty"` suffix. |List of `string`, multiple_sep: `";"`  |
@@ -112,7 +112,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Execution arguments
 
 |Name              |Description                                                                                                                                                                              |Attributes                  |
-|:-----------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--force_retrain` |Retrain models on the reference even if model_output directory already has trained classifiers. WARNING! It will rewrite existing classifiers for targets in the model_output directory! |`boolean_true`              |
 |`--use_gpu`       |Use GPU during models training and inference (recommended).                                                                                                                              |`boolean`, default: `FALSE` |
 |`--verbosity`     |The verbosity level for evaluation of the classifier from the range [0,2]                                                                                                                |`integer`, default: `1`     |
@@ -122,7 +122,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Learning parameters
 
 |Name                  |Description                                                                                                                                                                                       |Attributes                     |
-|:---------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--learning_rate`     |Step size shrinkage used in update to prevents overfitting. Range: [0,1]. See https://xgboost.readthedocs.io/en/stable/parameter.html#parameters-for-tree-booster for the reference               |`double`, default: `0.3`       |
 |`--min_split_loss`    |Minimum loss reduction required to make a further partition on a leaf node of the tree. See https://xgboost.readthedocs.io/en/stable/parameter.html#parameters-for-tree-booster for the reference |`double`, default: `0`         |
 |`--max_depth`         |Maximum depth of a tree. See https://xgboost.readthedocs.io/en/stable/parameter.html#parameters-for-tree-booster for the reference                                                                |`integer`, default: `6`        |
@@ -141,3 +141,4 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 
   * Vladimir Shitov [{{< fa brands github >}}](https://github.com/vladimirshitov) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-1960-8812) [{{< fa brands linkedin >}}](https://linkedin.com/in/vladimir-shitov-9a659513b) (author)
+

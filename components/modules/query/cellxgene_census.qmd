@@ -14,7 +14,7 @@ ID: `cellxgene_census`
 Namespace: `query`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/query/cellxgene_census){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/query/cellxgene_census/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -32,7 +32,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/query/cellxgene_census/main.nf \
   --help
 ```
@@ -74,7 +74,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/query/cellxgene_census/main.nf \
   -params-file params.yaml
@@ -91,11 +91,11 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 Open CellxGene Census by version or URI.
 
 
-|Name                     |Description                                                                                                                                                                                                                                                                                                           |Attributes                              |
-|:------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------|
-|`--input_uri`            |If specified, a URI containing the Census SOMA objects. If specified, will take precedence over the `--census_version` argument.                                                                                                                                                                                      |`string`, example: `"s3://bucket/path"` |
-|`--census_version`       |Which release of CellxGene census to use. Possible values are "latest", "stable", or the date of one of the releases (e.g. "2023-07-25"). For more information, check the documentation on [Census data releases](https://chanzuckerberg.github.io/cellxgene-census/cellxgene_census_docsite_data_release_info.html). |`string`, example: `"stable"`           |
-|`--add_dataset_metadata` |If true, the experiment metadata will be added to the cell metadata. More specifically: `collection_id`, `collection_name`, `collection_doi`, `dataset_title`.                                                                                                                                                        |`boolean_true`                          |
+|Name                     |Description                                                                                                                                                                                                      |Attributes                              |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--input_uri`            |If specified, a URI containing the Census SOMA objects. If specified, will take precedence over the `--census_version` argument.                                                                                 |`string`, example: `"s3://bucket/path"` |
+|`--census_version`       |Which release of CellxGene census to use. Possible values are "latest", "stable", or the date of one of the releases (e.g. "2023-07-25"). For more information, check the documentation on [Census data releases](https://chanzuckerberg.github.io/cellxgene-census/cellxgene_census_docsite_data_release_info.html).|`string`, example: `"stable"`           |
+|`--add_dataset_metadata` |If true, the experiment metadata will be added to the cell metadata. More specifically: `collection_id`, `collection_name`, `collection_doi`, `dataset_title`.                                                   |`boolean_true`                          |
 
 
 ### Cell query
@@ -104,7 +104,7 @@ Arguments related to the query.
 
 
 |Name                 |Description                                                                                                              |Attributes                                                                                                                                                          |
-|:--------------------|:------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--species`          |The organism to query, usually one of `Homo sapiens` or `Mus musculus`.                                                  |`string`, required, example: `"homo_sapiens"`                                                                                                                       |
 |`--obs_value_filter` |Filter for selecting the `obs` metadata (i.e. cells). Value is a filter query written in the SOMA `value_filter` syntax. |`string`, required, example: `"is_primary_data == True and cell_type_ontology_term_id in ['CL:0000136', 'CL:1000311', 'CL:0002616'] and suspension_type == 'cell'"` |
 
@@ -115,7 +115,7 @@ Filter groups with fewer than X number of cells.
 
 
 |Name                          |Description                                                                                                                                                                                                                                                                  |Attributes                                                                                                |
-|:-----------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--cell_filter_grouping`      |A subset of 'obs' columns by which to group the cells for filtering. Only groups surpassing or equal to the `--cell_filter_minimum_count` threshold will be retained. Take care not to introduce a selection bias against cells with more fine-grained ontology annotations. |List of `string`, example: `"dataset_id", "tissue", "assay", "disease", "cell_type"`, multiple_sep: `";"` |
 |`--cell_filter_minimum_count` |A minimum number of cells per group to retain. If `--cell_filter_grouping` is defined, this parameter should also be provided and vice versa.                                                                                                                                |`integer`, example: `100`                                                                                 |
 
@@ -126,7 +126,7 @@ Arguments related to filtering cells and genes by counts.
 
 
 |Name                       |Description                                               |Attributes               |
-|:--------------------------|:---------------------------------------------------------|:------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--cell_filter_min_genes`  |Remove cells with less than this number of genes.         |`integer`, default: `50` |
 |`--cell_filter_min_counts` |Remove cells with less than this number of counts.        |`integer`, default: `0`  |
 |`--gene_filter_min_cells`  |Remove genes expressed in less than this number of cells. |`integer`, default: `5`  |
@@ -139,7 +139,7 @@ Output arguments.
 
 
 |Name                   |Description                            |Attributes                                 |
-|:----------------------|:--------------------------------------|:------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output`             |Output h5mu file.                      |`file`, required, example: `"output.h5mu"` |
 |`--output_compression` |                                       |`string`, example: `"gzip"`                |
 |`--output_modality`    |Which modality to store the output in. |`string`, default: `"rna"`                 |
@@ -154,3 +154,4 @@ Output arguments.
   * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (author)
 
   * Kai Waldrant [{{< fa brands github >}}](https://github.com/KaiWaldrant) [{{< fa brands linkedin >}}](https://linkedin.com/in/kai-waldrant-b8b86160) (contributor)
+

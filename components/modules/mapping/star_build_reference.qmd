@@ -14,7 +14,7 @@ ID: `star_build_reference`
 Namespace: `mapping`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/mapping/star_build_reference){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/mapping/star_build_reference/config.vsh.yml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/mapping/star_build_reference/main.nf \
   --help
 ```
@@ -56,7 +56,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/mapping/star_build_reference/main.nf \
   -params-file params.yaml
@@ -71,7 +71,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Input/Output
 
 |Name                  |Description                                                                                                                                                                                                                                                     |Attributes                                                                           |
-|:---------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--genome_fasta`      |The fasta files to be included in the reference. Corresponds to the --genomeFastaFiles argument in the STAR command.                                                                                                                                            |List of `file`, required, example: `"chr1.fasta", "chr2.fasta"`, multiple_sep: `";"` |
 |`--transcriptome_gtf` |Specifies the path to the file with annotated transcripts in the standard GTF format. STAR will extract splice junctions from this file and use them to greatly improve accuracy of the mapping. Corresponds to the --sjdbGTFfile argument in the STAR command. |`file`                                                                               |
 |`--output`            |Path to output directory. Corresponds to the --genomeDir argument in the STAR command.                                                                                                                                                                          |`file`, required, example: `"/path/to/foo"`                                          |
@@ -80,10 +80,11 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Genome indexing arguments
 
 |Name                    |Description                                                                                                                                                                                                                                                     |Attributes               |
-|:-----------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--genomeSAindexNbases` |Length (bases) of the SA pre-indexing string. Typically between 10 and 15. Longer strings will use much more memory, but allow faster searches. For small genomes, the parameter {genomeSAindexNbases must be scaled down to min(14, log2(GenomeLength)/2 - 1). |`integer`, default: `14` |
 
 ## Authors
 
 
   * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (author)
+

@@ -14,7 +14,7 @@ ID: `process_samples`
 Namespace: `workflows/multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/workflows/multiomics/process_samples){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/workflows/multiomics/process_samples/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,8 +30,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
-  -main-script src/workflows/multiomics/process_samples/main.nf \
+  -r 1.0.1 -latest \
+  -main-script target/nextflow/workflows/multiomics/process_samples/main.nf \
   --help
 ```
 
@@ -103,9 +103,9 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
-  -main-script src/workflows/multiomics/process_samples/main.nf \
+  -main-script target/nextflow/workflows/multiomics/process_samples/main.nf \
   -params-file params.yaml
 ```
 
@@ -118,7 +118,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Inputs
 
 |Name           |Description                                                                                 |Attributes                                |
-|:--------------|:-------------------------------------------------------------------------------------------|:-----------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--id`         |ID of the sample.                                                                           |`string`, required, example: `"foo"`      |
 |`--input`      |Path to the sample.                                                                         |`file`, required, example: `"input.h5mu"` |
 |`--rna_layer`  |Input layer for the gene expression modality. If not specified, .X is used.                 |`string`                                  |
@@ -129,7 +129,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Outputs
 
 |Name       |Description                     |Attributes                                 |
-|:----------|:-------------------------------|:------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output` |Destination path to the output. |`file`, required, example: `"output.h5mu"` |
 
 
@@ -141,7 +141,7 @@ id present in a requirement of several components for this pipeline.
 
 
 |Name                                    |Description                                                                                         |Attributes                       |
-|:---------------------------------------|:---------------------------------------------------------------------------------------------------|:--------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--add_id_to_obs`                       |Add the value passed with --id to .obs.                                                             |`boolean`, default: `TRUE`       |
 |`--add_id_obs_output`                   |.Obs column to add the sample IDs to. Required and only used when  --add_id_to_obs is set to 'true' |`string`, default: `"sample_id"` |
 |`--add_id_make_observation_keys_unique` |Join the id to the .obs index (.obs_names).  Only used when --add_id_to_obs is set to 'true'.       |`boolean`, default: `TRUE`       |
@@ -150,7 +150,7 @@ id present in a requirement of several components for this pipeline.
 ### RNA filtering options
 
 |Name                       |Description                                      |Attributes                    |
-|:--------------------------|:------------------------------------------------|:-----------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--rna_min_counts`         |Minimum number of counts captured per cell.      |`integer`, example: `200`     |
 |`--rna_max_counts`         |Maximum number of counts captured per cell.      |`integer`, example: `5000000` |
 |`--rna_min_genes_per_cell` |Minimum of non-zero values per cell.             |`integer`, example: `200`     |
@@ -163,7 +163,7 @@ id present in a requirement of several components for this pipeline.
 ### CITE-seq filtering options
 
 |Name                           |Description                             |Attributes                      |
-|:------------------------------|:---------------------------------------|:-------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--prot_min_counts`            |Minimum number of counts per cell.      |`integer`, example: `3`         |
 |`--prot_max_counts`            |Minimum number of counts per cell.      |`integer`, example: `5000000`   |
 |`--prot_min_proteins_per_cell` |Minimum of non-zero values per cell.    |`integer`, example: `200`       |
@@ -174,7 +174,7 @@ id present in a requirement of several components for this pipeline.
 ### GDO filtering options
 
 |Name                        |Description                           |Attributes                      |
-|:---------------------------|:-------------------------------------|:-------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--gdo_min_counts`          |Minimum number of counts per cell.    |`integer`, example: `3`         |
 |`--gdo_max_counts`          |Minimum number of counts per cell.    |`integer`, example: `5000000`   |
 |`--gdo_min_guides_per_cell` |Minimum of non-zero values per cell.  |`integer`, example: `200`       |
@@ -185,7 +185,7 @@ id present in a requirement of several components for this pipeline.
 ### Highly variable features detection
 
 |Name                                       |Description                                                                                                                                                                                                    |Attributes                             |
-|:------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--highly_variable_features_var_output`    |In which .var slot to store a boolean array corresponding to the highly variable genes.                                                                                                                        |`string`, default: `"filter_with_hvg"` |
 |`--highly_variable_features_obs_batch_key` |If specified, highly-variable genes are selected within each batch separately and merged. This simple  process avoids the selection of batch-specific genes and acts as a lightweight batch correction method. |`string`, default: `"sample_id"`       |
 
@@ -193,7 +193,7 @@ id present in a requirement of several components for this pipeline.
 ### Mitochondrial Gene Detection
 
 |Name                                |Description                                                                                                                                                                                                                |Attributes                         |
-|:-----------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--var_name_mitochondrial_genes`    |In which .var slot to store a boolean array corresponding the mitochondrial genes.                                                                                                                                         |`string`                           |
 |`--obs_name_mitochondrial_fraction` |When specified, write the fraction of counts originating from mitochondrial genes  (based on --mitochondrial_gene_regex) to an .obs column with the specified name. Requires --var_name_mitochondrial_genes.               |`string`                           |
 |`--var_gene_names`                  |.var column name to be used to detect mitochondrial genes instead of .var_names (default if not set). Gene names matching with the regex value from --mitochondrial_gene_regex will be identified as a mitochondrial gene. |`string`, example: `"gene_symbol"` |
@@ -203,7 +203,7 @@ id present in a requirement of several components for this pipeline.
 ### QC metrics calculation options
 
 |Name               |Description                                                                                                                                                                                                                                                                                                                                            |Attributes                                                               |
-|:------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--var_qc_metrics` |Keys to select a boolean (containing only True or False) column from .var. For each cell, calculate the proportion of total values for genes which are labeled 'True',  compared to the total sum of the values for all genes. Defaults to the combined values specified for --var_name_mitochondrial_genes and --highly_variable_features_var_output. |List of `string`, example: `"ercc,highly_variable"`, multiple_sep: `";"` |
 |`--top_n_vars`     |Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. `--top_n_vars 20,50` finds cumulative proportion to the 20th and 50th most expressed vars.                                                                                                                                        |List of `integer`, default: `50, 100, 200, 500`, multiple_sep: `";"`     |
 
@@ -211,10 +211,151 @@ id present in a requirement of several components for this pipeline.
 ### PCA options
 
 |Name              |Description                             |Attributes     |
-|:-----------------|:---------------------------------------|:--------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--pca_overwrite` |Allow overwriting slots for PCA output. |`boolean_true` |
 
 ## Authors
 
 
   * Dries Schaumont [{{< fa brands github >}}](https://github.com/DriesSchaumont) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-4389-0440) [{{< fa brands linkedin >}}](https://linkedin.com/in/dries-schaumont) (author, maintainer)
+
+## Visualisation
+
+```{mermaid}
+%%| column: screen-inset-shaded
+flowchart LR
+    v0(Channel.fromList)
+    v20(add_id)
+    v32(filter)
+    v76(flatMap)
+    v388(mix)
+    v390(mix)
+    v405(concatenate_h5mu)
+    v429(filter)
+    v1022(Output)
+    subgraph split_modalities_workflow
+        v48(split_modalities_component)
+    end
+    subgraph rna_singlesample
+        v90(filter)
+        v108(grep_annotation_column)
+        v121(mix)
+        v130(calculate_qc_metrics)
+        v150(publish)
+        v176(branch)
+        v192(concat)
+        v181(delimit_fraction)
+        v201(rna_filter_with_counts)
+        v221(rna_do_filter)
+        v241(filter_with_scrublet)
+    end
+    subgraph prot_singlesample
+        v282(prot_filter_with_counts)
+        v302(prot_do_filter)
+    end
+    subgraph gdo_singlesample
+        v344(gdo_filter_with_counts)
+        v364(gdo_do_filter)
+    end
+    subgraph process_batches
+        v445(split_modalities_component)
+        v473(flatMap)
+        v496(normalize_total)
+        v516(log1p)
+        v536(delete_layer)
+        v556(highly_variable_features_scanpy)
+        v568(filter)
+        v586(grep_annotation_column)
+        v599(mix)
+        v608(calculate_qc_metrics)
+        v628(publish)
+        v788(mix)
+        v681(clr)
+        v693(filter)
+        v711(grep_annotation_column)
+        v724(mix)
+        v733(calculate_qc_metrics)
+        v753(publish)
+        v790(mix)
+        v806(merge)
+        v822(branch)
+        v896(concat)
+        v835(pca)
+        v855(find_neighbors)
+        v875(umap)
+        v900(branch)
+        v974(concat)
+        v913(pca)
+        v933(find_neighbors)
+        v953(umap)
+        v983(publish)
+    end
+    v176-->v192
+    v388-->v390
+    v788-->v790
+    v822-->v896
+    v900-->v974
+    v176-->v181
+    v0-->v20
+    v20-->v32
+    v32-->v48
+    v48-->v76
+    v76-->v90
+    v90-->v108
+    v108-->v121
+    v90-->v121
+    v121-->v130
+    v130-->v150
+    v150-->v176
+    v181-->v192
+    v192-->v201
+    v201-->v221
+    v221-->v241
+    v241-->v388
+    v76-->v282
+    v282-->v302
+    v302-->v388
+    v76-->v344
+    v344-->v364
+    v364-->v388
+    v76-->v390
+    v390-->v405
+    v405-->v429
+    v429-->v445
+    v445-->v473
+    v473-->v496
+    v496-->v516
+    v516-->v536
+    v536-->v556
+    v556-->v568
+    v568-->v586
+    v586-->v599
+    v568-->v599
+    v599-->v608
+    v608-->v628
+    v628-->v788
+    v473-->v681
+    v681-->v693
+    v693-->v711
+    v711-->v724
+    v693-->v724
+    v724-->v733
+    v733-->v753
+    v753-->v788
+    v473-->v790
+    v790-->v806
+    v806-->v822
+    v822-->v835
+    v835-->v855
+    v855-->v875
+    v875-->v896
+    v896-->v900
+    v900-->v913
+    v913-->v933
+    v933-->v953
+    v953-->v974
+    v974-->v983
+    v983-->v1022
+
+```
+

@@ -14,7 +14,7 @@ ID: `scanorama_leiden`
 Namespace: `workflows/integration`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/workflows/integration/scanorama_leiden){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/workflows/integration/scanorama_leiden/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,8 +30,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
-  -main-script src/workflows/integration/scanorama_leiden/main.nf \
+  -r 1.0.1 -latest \
+  -main-script target/nextflow/workflows/integration/scanorama_leiden/main.nf \
   --help
 ```
 
@@ -79,9 +79,9 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
-  -main-script src/workflows/integration/scanorama_leiden/main.nf \
+  -main-script target/nextflow/workflows/integration/scanorama_leiden/main.nf \
   -params-file params.yaml
 ```
 
@@ -94,7 +94,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Inputs
 
 |Name         |Description                                                                           |Attributes                                  |
-|:------------|:-------------------------------------------------------------------------------------|:-------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--id`       |ID of the sample.                                                                     |`string`, required, example: `"foo"`        |
 |`--input`    |Path to the sample.                                                                   |`file`, required, example: `"dataset.h5mu"` |
 |`--layer`    |use specified layer for expression values instead of the .X object from the modality. |`string`, default: `"log_normalized"`       |
@@ -104,14 +104,14 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Outputs
 
 |Name       |Description                     |Attributes                                 |
-|:----------|:-------------------------------|:------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output` |Destination path to the output. |`file`, required, example: `"output.h5mu"` |
 
 
 ### Neighbour calculation
 
 |Name                             |Description                                                                             |Attributes                                                  |
-|:--------------------------------|:---------------------------------------------------------------------------------------|:-----------------------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--uns_neighbors`                |In which .uns slot to store various neighbor output objects.                            |`string`, default: `"scanorama_integration_neighbors"`      |
 |`--obsp_neighbor_distances`      |In which .obsp slot to store the distance matrix between the resulting neighbors.       |`string`, default: `"scanorama_integration_distances"`      |
 |`--obsp_neighbor_connectivities` |In which .obsp slot to store the connectivities matrix between the resulting neighbors. |`string`, default: `"scanorama_integration_connectivities"` |
@@ -120,7 +120,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Scanorama integration options
 
 |Name            |Description                                                                                                                                                                 |Attributes                         |
-|:---------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--obs_batch`   |Column name discriminating between your batches.                                                                                                                            |`string`, default: `"sample_id"`   |
 |`--obsm_input`  |.obsm slot that points to embedding to run scanorama on.                                                                                                                    |`string`, default: `"X_pca"`       |
 |`--obsm_output` |The name of the field in adata.obsm where the integrated embeddings will be stored after running this function. Defaults to X_scanorama.                                    |`string`, default: `"X_scanorama"` |
@@ -134,7 +134,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Clustering options
 
 |Name                  |Description                                                                                                                                                                                                                                            |Attributes                                          |
-|:---------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--obs_cluster`       |Prefix for the .obs keys under which to add the cluster labels. Newly created columns in .obs will  be created from the specified value for '--obs_cluster' suffixed with an underscore and one of the resolutions specified in '--leiden_resolution'. |`string`, default: `"scanorama_integration_leiden"` |
 |`--leiden_resolution` |Control the coarseness of the clustering. Higher values lead to more clusters.                                                                                                                                                                         |List of `double`, default: `1`, multiple_sep: `";"` |
 
@@ -142,7 +142,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Umap options
 
 |Name          |Description                                                |Attributes                                     |
-|:-------------|:----------------------------------------------------------|:----------------------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--obsm_umap` |In which .obsm slot to store the resulting UMAP embedding. |`string`, default: `"X_leiden_scanorama_umap"` |
 
 ## Authors
@@ -151,3 +151,30 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
   * Mauro Saporita [{{< fa brands github >}}](https://github.com/mauro-saporita) [{{< fa brands linkedin >}}](https://linkedin.com/in/mauro-saporita-930b06a5) (author)
 
   * Povilas Gibas [{{< fa brands github >}}](https://github.com/PoGibas) [{{< fa brands linkedin >}}](https://linkedin.com/in/povilas-gibas) (author)
+
+## Visualisation
+
+```{mermaid}
+%%| column: screen-inset-shaded
+flowchart LR
+    v0(Channel.fromList)
+    v18(scanorama)
+    v49(concat)
+    v38(find_neighbors)
+    v59(leiden)
+    v79(move_obsm_to_obs)
+    v92(mix)
+    v101(umap)
+    v128(Output)
+    v0-->v18
+    v18-->v38
+    v38-->v49
+    v49-->v59
+    v59-->v79
+    v79-->v92
+    v49-->v92
+    v92-->v101
+    v101-->v128
+
+```
+

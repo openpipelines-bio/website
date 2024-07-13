@@ -14,7 +14,7 @@ ID: `vireo`
 Namespace: `genetic_demux`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/genetic_demux/vireo){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/genetic_demux/vireo/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/genetic_demux/vireo/main.nf \
   --help
 ```
@@ -68,7 +68,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/genetic_demux/vireo/main.nf \
   -params-file params.yaml
@@ -83,7 +83,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Input
 
 |Name                  |Description                                                                                          |Attributes                  |
-|:---------------------|:----------------------------------------------------------------------------------------------------|:---------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--cell_data`         |The cell genotype file in VCF format or cellSNP folder with sparse matrices.                         |`file`                      |
 |`--n_donor`           |Number of donors to demultiplex; can be larger than provided in donor_file.                          |`integer`, default: `2`     |
 |`--vartrix_data`      |The cell genotype files in vartrix outputs.                                                          |`file`                      |
@@ -104,10 +104,11 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Output
 
 |Name       |Description      |Attributes                 |
-|:----------|:----------------|:--------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output` |Output directory |`file`, example: `"vireo"` |
 
 ## Authors
 
 
   * Xichen Wu [{{< fa brands github >}}](https://github.com/wxicu) [{{< fa brands orcid >}}](https://orcid.org/0009-0008-2168-4508) [{{< fa brands linkedin >}}](https://linkedin.com/in/xichen-wu) (author)
+

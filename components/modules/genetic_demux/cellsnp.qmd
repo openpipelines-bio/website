@@ -14,7 +14,7 @@ ID: `cellsnp`
 Namespace: `genetic_demux`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.0/src/genetic_demux/cellsnp){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/genetic_demux/cellsnp/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -main-script target/nextflow/genetic_demux/cellsnp/main.nf \
   --help
 ```
@@ -75,7 +75,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.0 -latest \
+  -r 1.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/genetic_demux/cellsnp/main.nf \
   -params-file params.yaml
@@ -90,7 +90,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Input
 
 |Name                |Description                                                                                                                                                                                                      |Attributes                  |
-|:-------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--sam_file`        |Indexed sam/bam file(s), comma separated multiple samples. Mode 1a & 2a: one sam/bam file with single cell. Mode 1b & 2b: one or multiple bulk sam/bam files, no barcodes needed, but sample ids and regionsVCF. |`file`                      |
 |`--sam_index_file`  |Input SAM/BAM Index file, problem with samFileList.                                                                                                                                                              |`file`                      |
 |`--sam_fileList`    |A list file containing bam files, each per line, for Mode 1b & 2b.                                                                                                                                               |`file`                      |
@@ -118,10 +118,11 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ### Output
 
 |Name       |Description                                   |Attributes                       |
-|:----------|:---------------------------------------------|:--------------------------------|
+|:----------|:--------------------------------------------------|:--------------------|
 |`--output` |Output directory for VCF and sparse matrices. |`file`, example: `"cellsnp_out"` |
 
 ## Authors
 
 
   * Xichen Wu [{{< fa brands github >}}](https://github.com/wxicu) [{{< fa brands orcid >}}](https://orcid.org/0009-0008-2168-4508) [{{< fa brands linkedin >}}](https://linkedin.com/in/xichen-wu) (author)
+
