@@ -34,9 +34,16 @@ website:
         aria-label: GitHub
   sidebar:
     - id: components
-      collapse-level: 4
       title: Components
-      contents: components
+      contents:
+        - components
+        - text: Workflows
+          collapse-level: 3
+          contents: components/workflows/**
+        - text: Modules
+          collapse-level: 3
+          contents:
+            - auto: components/modules/**
     - id: user_guide
       collapse-level: 3
       title: User guide
