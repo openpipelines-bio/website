@@ -78,8 +78,7 @@ ul.task-list li input[type="checkbox"] {
 
     const options = {
       valueNames: ['listing-title','listing-namespace','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
-      page: 30,
-    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
+      
       searchColumns: ["listing-title","listing-author"],
     };
 
@@ -224,8 +223,8 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../components/workflows/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Workflows</span></a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Modules</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -234,395 +233,12 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Gdo</span></a>
+ <span class="menu-text">Annotate</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth3 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/gdo/gdo_singlesample.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Gdo singlesample</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">Ingestion</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/ingestion/bd_rhapsody.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">BD Rhapsody</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/ingestion/cellranger_mapping.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Cell Ranger mapping</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/ingestion/cellranger_multi.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Cell Ranger multi</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/ingestion/cellranger_postprocessing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Cell Ranger post-processing</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/ingestion/conversion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Conversion</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/ingestion/demux.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Demux</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/ingestion/make_reference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Make reference</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
- <span class="menu-text">Integration</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth3 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/integration/bbknn_leiden.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Bbknn leiden</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/integration/harmony_leiden.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Harmony leiden</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/integration/scanorama_leiden.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Scanorama leiden</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/integration/scvi_leiden.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Scvi leiden</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/integration/totalvi_leiden.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Totalvi leiden</span></a>
-  </div>
-</li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
- <span class="menu-text">Common</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth4 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/integration/common/harmony_leiden.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Harmony leiden</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
- <span class="menu-text">Initialize Integration</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth4 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/integration/initialize_integration/initialize_integration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Initialize integration</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
- <span class="menu-text">Scanorama Leiden</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth4 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/integration/scanorama_leiden/scanorama_leiden.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Scanorama leiden</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">
- <span class="menu-text">Scvi</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth4 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/integration/scvi/scvi.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Scvi</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
- <span class="menu-text">Multiomics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth3 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/multiomics/dimensionality_reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Dimensionality reduction</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/multiomics/full_pipeline.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Full pipeline</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/multiomics/integration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Integration</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/multiomics/multisample.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Multisample</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/multiomics/process_batches.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Process batches</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/multiomics/process_samples.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Process samples</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/multiomics/prot_multisample.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Prot multisample</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/multiomics/prot_singlesample.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Prot singlesample</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/multiomics/rna_multisample.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Rna multisample</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/multiomics/rna_singlesample.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Rna singlesample</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/multiomics/split_modalities.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Split modalities</span></a>
-  </div>
-</li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false">
- <span class="menu-text">Integration</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth4 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/multiomics/integration/bbknn_leiden.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Bbknn leiden</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/multiomics/integration/harmony_leiden.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Harmony leiden</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/multiomics/integration/initialize_integration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Initialize integration</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/multiomics/integration/leiden_scvi.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Leiden scvi</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/multiomics/integration/scanorama_leiden.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Scanorama leiden</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/multiomics/integration/scvi_leiden.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Scvi leiden</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/multiomics/integration/totalvi_leiden.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Totalvi leiden</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">
- <span class="menu-text">Prot</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth3 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/prot/prot_multisample.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Prot multisample</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/prot/prot_singlesample.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Prot singlesample</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">
- <span class="menu-text">Qc</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/qc/qc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Qc</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="true">
- <span class="menu-text">Rna</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth3 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/rna/rna_multisample.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Rna multisample</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../components/workflows/rna/rna_singlesample.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Rna singlesample</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../components/modules/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Reference</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth2 show">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" aria-expanded="true">
- <span class="menu-text">Annotate</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/annotate/popv.html" class="sidebar-item-text sidebar-link">
@@ -633,13 +249,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
  <span class="menu-text">Cluster</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/cluster/leiden.html" class="sidebar-item-text sidebar-link">
@@ -650,13 +266,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
  <span class="menu-text">Compression</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/compression/compress_h5mu.html" class="sidebar-item-text sidebar-link">
@@ -667,13 +283,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
  <span class="menu-text">Convert</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/convert/from_10xh5_to_h5mu.html" class="sidebar-item-text sidebar-link">
@@ -732,13 +348,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
  <span class="menu-text">Correction</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-20" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/correction/cellbender_remove_background.html" class="sidebar-item-text sidebar-link">
@@ -755,13 +371,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-21" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
  <span class="menu-text">Dataflow</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-21" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-21" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/dataflow/concat.html" class="sidebar-item-text sidebar-link">
@@ -790,13 +406,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-22" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
  <span class="menu-text">Demux</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-22" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-22" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/demux/bcl_convert.html" class="sidebar-item-text sidebar-link">
@@ -819,13 +435,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-23" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
  <span class="menu-text">Dimred</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-23" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-23" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/dimred/pca.html" class="sidebar-item-text sidebar-link">
@@ -848,13 +464,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-24" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">
  <span class="menu-text">Download</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-24" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-24" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/download/download_file.html" class="sidebar-item-text sidebar-link">
@@ -871,13 +487,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-25" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">
  <span class="menu-text">Feature Annotation</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-25" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-25" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/feature_annotation/highly_variable_features_scanpy.html" class="sidebar-item-text sidebar-link">
@@ -888,13 +504,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-26" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">
  <span class="menu-text">Files</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-26" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-26" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/files/make_params.html" class="sidebar-item-text sidebar-link">
@@ -905,13 +521,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-27" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="true">
  <span class="menu-text">Filter</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-27" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-27" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/filter/delimit_fraction.html" class="sidebar-item-text sidebar-link">
@@ -964,13 +580,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-28" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-expanded="true">
  <span class="menu-text">Genetic Demux</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-28" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-28" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/genetic_demux/bcftools.html" class="sidebar-item-text sidebar-link">
@@ -1035,13 +651,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-29" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" aria-expanded="true">
  <span class="menu-text">Integrate</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-29" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-29" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/integrate/harmonypy.html" class="sidebar-item-text sidebar-link">
@@ -1076,13 +692,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-30" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" aria-expanded="true">
  <span class="menu-text">Interpret</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-30" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-30" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/interpret/lianapy.html" class="sidebar-item-text sidebar-link">
@@ -1093,13 +709,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-31" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" aria-expanded="true">
  <span class="menu-text">Labels Transfer</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-31" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-31" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/labels_transfer/knn.html" class="sidebar-item-text sidebar-link">
@@ -1116,13 +732,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-32" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" aria-expanded="true">
  <span class="menu-text">Mapping</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-32" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-32" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/mapping/bd_rhapsody.html" class="sidebar-item-text sidebar-link">
@@ -1199,13 +815,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-33" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" aria-expanded="true">
  <span class="menu-text">Metadata</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-33" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-33" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-20" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/metadata/add_id.html" class="sidebar-item-text sidebar-link">
@@ -1240,13 +856,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-34" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-21" aria-expanded="true">
  <span class="menu-text">Neighbors</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-34" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-21" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-34" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-21" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/neighbors/bbknn.html" class="sidebar-item-text sidebar-link">
@@ -1263,13 +879,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-35" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-22" aria-expanded="true">
  <span class="menu-text">Process 10xh5</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-35" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-22" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-35" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-22" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/process_10xh5/filter_10xh5.html" class="sidebar-item-text sidebar-link">
@@ -1280,13 +896,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-36" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-23" aria-expanded="true">
  <span class="menu-text">Qc</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-36" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-23" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-36" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-23" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/qc/calculate_qc_metrics.html" class="sidebar-item-text sidebar-link">
@@ -1309,13 +925,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-37" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-24" aria-expanded="true">
  <span class="menu-text">Query</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-37" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-24" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-37" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-24" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/query/cellxgene_census.html" class="sidebar-item-text sidebar-link">
@@ -1326,13 +942,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-38" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-25" aria-expanded="true">
  <span class="menu-text">Reference</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-38" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-25" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-38" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-25" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/reference/build_bdrhap_reference.html" class="sidebar-item-text sidebar-link">
@@ -1355,13 +971,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-39" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-26" aria-expanded="true">
  <span class="menu-text">Report</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-39" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-26" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-39" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-26" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/report/mermaid.html" class="sidebar-item-text sidebar-link">
@@ -1372,13 +988,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-40" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-27" aria-expanded="true">
  <span class="menu-text">Transfer</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-40" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-27" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-40" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-27" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/transfer/publish.html" class="sidebar-item-text sidebar-link">
@@ -1389,13 +1005,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-41" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-28" aria-expanded="true">
  <span class="menu-text">Transform</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-41" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-28" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-41" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-28" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/transform/clr.html" class="sidebar-item-text sidebar-link">
@@ -1442,13 +1058,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-42" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-29" aria-expanded="true">
  <span class="menu-text">Velocity</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-42" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-29" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-42" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-29" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../components/modules/velocity/scvelo.html" class="sidebar-item-text sidebar-link">
@@ -1459,6 +1075,226 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
   <div class="sidebar-item-container"> 
   <a href="../components/modules/velocity/velocyto.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Velocyto</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-30" aria-expanded="true">
+ <span class="menu-text">Workflows</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-30" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-30" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-31" aria-expanded="true">
+ <span class="menu-text">Gdo</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-31" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-31" class="collapse list-unstyled sidebar-section depth3 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../components/workflows/gdo/gdo_singlesample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Gdo singlesample</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-32" aria-expanded="true">
+ <span class="menu-text">Ingestion</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-32" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-32" class="collapse list-unstyled sidebar-section depth3 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../components/workflows/ingestion/bd_rhapsody.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">BD Rhapsody</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../components/workflows/ingestion/cellranger_mapping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cell Ranger mapping</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../components/workflows/ingestion/cellranger_multi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cell Ranger multi</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../components/workflows/ingestion/cellranger_postprocessing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cell Ranger post-processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../components/workflows/ingestion/conversion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Conversion</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../components/workflows/ingestion/demux.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Demux</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../components/workflows/ingestion/make_reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Make reference</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-33" aria-expanded="true">
+ <span class="menu-text">Integration</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-33" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-33" class="collapse list-unstyled sidebar-section depth3 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../components/workflows/integration/bbknn_leiden.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bbknn leiden</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../components/workflows/integration/harmony_leiden.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Harmony leiden</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../components/workflows/integration/scanorama_leiden.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scanorama leiden</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../components/workflows/integration/scvi_leiden.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scvi leiden</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../components/workflows/integration/totalvi_leiden.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Totalvi leiden</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-34" aria-expanded="true">
+ <span class="menu-text">Multiomics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-34" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-34" class="collapse list-unstyled sidebar-section depth3 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../components/workflows/multiomics/dimensionality_reduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dimensionality reduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../components/workflows/multiomics/process_batches.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Process batches</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../components/workflows/multiomics/process_samples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Process samples</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../components/workflows/multiomics/split_modalities.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Split modalities</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-35" aria-expanded="true">
+ <span class="menu-text">Prot</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-35" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-35" class="collapse list-unstyled sidebar-section depth3 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../components/workflows/prot/prot_multisample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prot multisample</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../components/workflows/prot/prot_singlesample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prot singlesample</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-36" aria-expanded="true">
+ <span class="menu-text">Qc</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-36" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-36" class="collapse list-unstyled sidebar-section depth3 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../components/workflows/qc/qc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Qc</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-37" aria-expanded="true">
+ <span class="menu-text">Rna</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-37" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-37" class="collapse list-unstyled sidebar-section depth3 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../components/workflows/rna/rna_multisample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rna multisample</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../components/workflows/rna/rna_singlesample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rna singlesample</span></a>
   </div>
 </li>
       </ul>
@@ -1541,18 +1377,7 @@ Description
 </tr>
 </thead>
 <tbody class="list">
-<tr data-index="0" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="1" data-listing-title-sort="Workflows" data-listing-filename-sort="index.qmd">
-<td>
-<a href="../components/workflows/index.html" class="title listing-title">Workflows</a>
-</td>
-<td>
-<span class="listing-namespace">&nbsp;</span>
-</td>
-<td>
-<span class="listing-description"></span>
-</td>
-</tr>
-<tr data-index="1" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="23" data-listing-title-sort="BD Rhapsody" data-listing-filename-sort="bd_rhapsody.qmd">
+<tr data-index="0" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="23" data-listing-title-sort="BD Rhapsody" data-listing-filename-sort="bd_rhapsody.qmd">
 <td>
 <a href="../components/workflows/ingestion/bd_rhapsody.html" class="title listing-title">BD Rhapsody</a>
 </td>
@@ -1563,7 +1388,7 @@ Description
 <span class="listing-description">A generic pipeline for running BD Rhapsody WTA or Targeted mapping, with support for AbSeq, VDJ and/or SMK.</span>
 </td>
 </tr>
-<tr data-index="2" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="23" data-listing-title-sort="Bbknn leiden" data-listing-filename-sort="bbknn_leiden.qmd">
+<tr data-index="1" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="23" data-listing-title-sort="Bbknn leiden" data-listing-filename-sort="bbknn_leiden.qmd">
 <td>
 <a href="../components/workflows/integration/bbknn_leiden.html" class="title listing-title">Bbknn leiden</a>
 </td>
@@ -1574,18 +1399,7 @@ Description
 <span class="listing-description">Run bbknn followed by leiden clustering and run umap on the result.</span>
 </td>
 </tr>
-<tr data-index="3" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="23" data-listing-title-sort="Bbknn leiden" data-listing-filename-sort="bbknn_leiden.qmd">
-<td>
-<a href="../components/workflows/multiomics/integration/bbknn_leiden.html" class="title listing-title">Bbknn leiden</a>
-</td>
-<td>
-<span class="listing-namespace">Multiomics/integration</span>
-</td>
-<td>
-<span class="listing-description">Run bbknn followed by leiden clustering and run umap on the result.</span>
-</td>
-</tr>
-<tr data-index="4" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="17" data-listing-title-sort="Cell Ranger mapping" data-listing-filename-sort="cellranger_mapping.qmd">
+<tr data-index="2" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="17" data-listing-title-sort="Cell Ranger mapping" data-listing-filename-sort="cellranger_mapping.qmd">
 <td>
 <a href="../components/workflows/ingestion/cellranger_mapping.html" class="title listing-title">Cell Ranger mapping</a>
 </td>
@@ -1596,7 +1410,7 @@ Description
 <span class="listing-description">A pipeline for running Cell Ranger mapping.</span>
 </td>
 </tr>
-<tr data-index="5" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="35" data-listing-title-sort="Cell Ranger multi" data-listing-filename-sort="cellranger_multi.qmd">
+<tr data-index="3" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="35" data-listing-title-sort="Cell Ranger multi" data-listing-filename-sort="cellranger_multi.qmd">
 <td>
 <a href="../components/workflows/ingestion/cellranger_multi.html" class="title listing-title">Cell Ranger multi</a>
 </td>
@@ -1607,7 +1421,7 @@ Description
 <span class="listing-description">A pipeline for running Cell Ranger multi.</span>
 </td>
 </tr>
-<tr data-index="6" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="4" data-listing-title-sort="Cell Ranger post-processing" data-listing-filename-sort="cellranger_postprocessing.qmd">
+<tr data-index="4" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="4" data-listing-title-sort="Cell Ranger post-processing" data-listing-filename-sort="cellranger_postprocessing.qmd">
 <td>
 <a href="../components/workflows/ingestion/cellranger_postprocessing.html" class="title listing-title">Cell Ranger post-processing</a>
 </td>
@@ -1618,7 +1432,7 @@ Description
 <span class="listing-description">Post-processing Cell Ranger datasets.</span>
 </td>
 </tr>
-<tr data-index="7" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="3" data-listing-title-sort="Conversion" data-listing-filename-sort="conversion.qmd">
+<tr data-index="5" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="3" data-listing-title-sort="Conversion" data-listing-filename-sort="conversion.qmd">
 <td>
 <a href="../components/workflows/ingestion/conversion.html" class="title listing-title">Conversion</a>
 </td>
@@ -1629,7 +1443,7 @@ Description
 <span class="listing-description">A pipeline to convert different file formats to .h5mu.</span>
 </td>
 </tr>
-<tr data-index="8" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="4" data-listing-title-sort="Demux" data-listing-filename-sort="demux.qmd">
+<tr data-index="6" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="4" data-listing-title-sort="Demux" data-listing-filename-sort="demux.qmd">
 <td>
 <a href="../components/workflows/ingestion/demux.html" class="title listing-title">Demux</a>
 </td>
@@ -1640,7 +1454,7 @@ Description
 <span class="listing-description">A generic pipeline for running bcl2fastq, bcl-convert or Cell Ranger mkfastq.</span>
 </td>
 </tr>
-<tr data-index="9" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="7" data-listing-title-sort="Dimensionality reduction" data-listing-filename-sort="dimensionality_reduction.qmd">
+<tr data-index="7" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="7" data-listing-title-sort="Dimensionality reduction" data-listing-filename-sort="dimensionality_reduction.qmd">
 <td>
 <a href="../components/workflows/multiomics/dimensionality_reduction.html" class="title listing-title">Dimensionality reduction</a>
 </td>
@@ -1651,18 +1465,7 @@ Description
 <span class="listing-description">Run calculations that output information required for most integration methods: PCA, nearest neighbour and UMAP.</span>
 </td>
 </tr>
-<tr data-index="10" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="21" data-listing-title-sort="Full pipeline" data-listing-filename-sort="full_pipeline.qmd">
-<td>
-<a href="../components/workflows/multiomics/full_pipeline.html" class="title listing-title">Full pipeline</a>
-</td>
-<td>
-<span class="listing-namespace">Multiomics</span>
-</td>
-<td>
-<span class="listing-description">A pipeline to analyse multiple multiomics samples.</span>
-</td>
-</tr>
-<tr data-index="11" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="4" data-listing-title-sort="Gdo singlesample" data-listing-filename-sort="gdo_singlesample.qmd">
+<tr data-index="8" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="4" data-listing-title-sort="Gdo singlesample" data-listing-filename-sort="gdo_singlesample.qmd">
 <td>
 <a href="../components/workflows/gdo/gdo_singlesample.html" class="title listing-title">Gdo singlesample</a>
 </td>
@@ -1673,18 +1476,7 @@ Description
 <span class="listing-description">Processing unimodal single-sample guide-derived oligonucleotide (GDO) data.</span>
 </td>
 </tr>
-<tr data-index="12" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="11" data-listing-title-sort="Harmony leiden" data-listing-filename-sort="harmony_leiden.qmd">
-<td>
-<a href="../components/workflows/integration/common/harmony_leiden.html" class="title listing-title">Harmony leiden</a>
-</td>
-<td>
-<span class="listing-namespace">Integration/common</span>
-</td>
-<td>
-<span class="listing-description">Run harmony integration followed by neighbour calculations, leiden clustering and run umap on the result.</span>
-</td>
-</tr>
-<tr data-index="13" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="13" data-listing-title-sort="Harmony leiden" data-listing-filename-sort="harmony_leiden.qmd">
+<tr data-index="9" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="13" data-listing-title-sort="Harmony leiden" data-listing-filename-sort="harmony_leiden.qmd">
 <td>
 <a href="../components/workflows/integration/harmony_leiden.html" class="title listing-title">Harmony leiden</a>
 </td>
@@ -1695,62 +1487,7 @@ Description
 <span class="listing-description">Run harmony integration followed by neighbour calculations, leiden clustering and run umap on the result.</span>
 </td>
 </tr>
-<tr data-index="14" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="14" data-listing-title-sort="Harmony leiden" data-listing-filename-sort="harmony_leiden.qmd">
-<td>
-<a href="../components/workflows/multiomics/integration/harmony_leiden.html" class="title listing-title">Harmony leiden</a>
-</td>
-<td>
-<span class="listing-namespace">Multiomics/integration</span>
-</td>
-<td>
-<span class="listing-description">Run harmony integration followed by neighbour calculations, leiden clustering and run umap on the result.</span>
-</td>
-</tr>
-<tr data-index="15" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="7" data-listing-title-sort="Initialize integration" data-listing-filename-sort="initialize_integration.qmd">
-<td>
-<a href="../components/workflows/integration/initialize_integration/initialize_integration.html" class="title listing-title">Initialize integration</a>
-</td>
-<td>
-<span class="listing-namespace">Integration/initialize integration</span>
-</td>
-<td>
-<span class="listing-description">Run calculations that output information required for most integration methods: PCA, nearest neighbour and UMAP.</span>
-</td>
-</tr>
-<tr data-index="16" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="7" data-listing-title-sort="Initialize integration" data-listing-filename-sort="initialize_integration.qmd">
-<td>
-<a href="../components/workflows/multiomics/integration/initialize_integration.html" class="title listing-title">Initialize integration</a>
-</td>
-<td>
-<span class="listing-namespace">Multiomics/integration</span>
-</td>
-<td>
-<span class="listing-description">Run calculations that output information required for most integration methods: PCA, nearest neighbour and UMAP.</span>
-</td>
-</tr>
-<tr data-index="17" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="11" data-listing-title-sort="Integration" data-listing-filename-sort="integration.qmd">
-<td>
-<a href="../components/workflows/multiomics/integration.html" class="title listing-title">Integration</a>
-</td>
-<td>
-<span class="listing-namespace">Multiomics</span>
-</td>
-<td>
-<span class="listing-description">A pipeline for demultiplexing multimodal multi-sample RNA transcriptomics data.</span>
-</td>
-</tr>
-<tr data-index="18" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="16" data-listing-title-sort="Leiden scvi" data-listing-filename-sort="leiden_scvi.qmd">
-<td>
-<a href="../components/workflows/multiomics/integration/leiden_scvi.html" class="title listing-title">Leiden scvi</a>
-</td>
-<td>
-<span class="listing-namespace">Multiomics/integration</span>
-</td>
-<td>
-<span class="listing-description">Run scvi integration followed by neighbour calculations, leiden clustering and run umap on the result.</span>
-</td>
-</tr>
-<tr data-index="19" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="6" data-listing-title-sort="Make reference" data-listing-filename-sort="make_reference.qmd">
+<tr data-index="10" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="6" data-listing-title-sort="Make reference" data-listing-filename-sort="make_reference.qmd">
 <td>
 <a href="../components/workflows/ingestion/make_reference.html" class="title listing-title">Make reference</a>
 </td>
@@ -1761,18 +1498,7 @@ Description
 <span class="listing-description">Build a transcriptomics reference into one of many formats</span>
 </td>
 </tr>
-<tr data-index="20" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="10" data-listing-title-sort="Multisample" data-listing-filename-sort="multisample.qmd">
-<td>
-<a href="../components/workflows/multiomics/multisample.html" class="title listing-title">Multisample</a>
-</td>
-<td>
-<span class="listing-namespace">Multiomics</span>
-</td>
-<td>
-<span class="listing-description">This workflow serves as an entrypoint into the ‘full_pipeline’ in order to re-run the multisample processing and the integration setup.</span>
-</td>
-</tr>
-<tr data-index="21" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="9" data-listing-title-sort="Process batches" data-listing-filename-sort="process_batches.qmd">
+<tr data-index="11" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="11" data-listing-title-sort="Process batches" data-listing-filename-sort="process_batches.qmd">
 <td>
 <a href="../components/workflows/multiomics/process_batches.html" class="title listing-title">Process batches</a>
 </td>
@@ -1783,7 +1509,7 @@ Description
 <span class="listing-description">This workflow serves as an entrypoint into the ‘full_pipeline’ in order to re-run the multisample processing and the integration setup.</span>
 </td>
 </tr>
-<tr data-index="22" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="18" data-listing-title-sort="Process samples" data-listing-filename-sort="process_samples.qmd">
+<tr data-index="12" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="22" data-listing-title-sort="Process samples" data-listing-filename-sort="process_samples.qmd">
 <td>
 <a href="../components/workflows/multiomics/process_samples.html" class="title listing-title">Process samples</a>
 </td>
@@ -1794,18 +1520,7 @@ Description
 <span class="listing-description">A pipeline to analyse multiple multiomics samples.</span>
 </td>
 </tr>
-<tr data-index="23" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="5" data-listing-title-sort="Prot multisample" data-listing-filename-sort="prot_multisample.qmd">
-<td>
-<a href="../components/workflows/multiomics/prot_multisample.html" class="title listing-title">Prot multisample</a>
-</td>
-<td>
-<span class="listing-namespace">Multiomics</span>
-</td>
-<td>
-<span class="listing-description">Processing unimodal multi-sample ADT data.</span>
-</td>
-</tr>
-<tr data-index="24" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="12" data-listing-title-sort="Prot multisample" data-listing-filename-sort="prot_multisample.qmd">
+<tr data-index="13" data-listing-file-modified-sort="1720907305050" data-listing-reading-time-sort="12" data-listing-title-sort="Prot multisample" data-listing-filename-sort="prot_multisample.qmd">
 <td>
 <a href="../components/workflows/prot/prot_multisample.html" class="title listing-title">Prot multisample</a>
 </td>
@@ -1816,18 +1531,7 @@ Description
 <span class="listing-description">Processing unimodal multi-sample ADT data.</span>
 </td>
 </tr>
-<tr data-index="25" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="4" data-listing-title-sort="Prot singlesample" data-listing-filename-sort="prot_singlesample.qmd">
-<td>
-<a href="../components/workflows/multiomics/prot_singlesample.html" class="title listing-title">Prot singlesample</a>
-</td>
-<td>
-<span class="listing-namespace">Multiomics</span>
-</td>
-<td>
-<span class="listing-description">Processing unimodal single-sample CITE-seq data.</span>
-</td>
-</tr>
-<tr data-index="26" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="4" data-listing-title-sort="Prot singlesample" data-listing-filename-sort="prot_singlesample.qmd">
+<tr data-index="14" data-listing-file-modified-sort="1720907305050" data-listing-reading-time-sort="4" data-listing-title-sort="Prot singlesample" data-listing-filename-sort="prot_singlesample.qmd">
 <td>
 <a href="../components/workflows/prot/prot_singlesample.html" class="title listing-title">Prot singlesample</a>
 </td>
@@ -1838,7 +1542,7 @@ Description
 <span class="listing-description">Processing unimodal single-sample CITE-seq data.</span>
 </td>
 </tr>
-<tr data-index="27" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="15" data-listing-title-sort="Qc" data-listing-filename-sort="qc.qmd">
+<tr data-index="15" data-listing-file-modified-sort="1720907305050" data-listing-reading-time-sort="15" data-listing-title-sort="Qc" data-listing-filename-sort="qc.qmd">
 <td>
 <a href="../components/workflows/qc/qc.html" class="title listing-title">Qc</a>
 </td>
@@ -1849,18 +1553,7 @@ Description
 <span class="listing-description">A pipeline to add basic qc statistics to a MuData</span>
 </td>
 </tr>
-<tr data-index="28" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="14" data-listing-title-sort="Rna multisample" data-listing-filename-sort="rna_multisample.qmd">
-<td>
-<a href="../components/workflows/multiomics/rna_multisample.html" class="title listing-title">Rna multisample</a>
-</td>
-<td>
-<span class="listing-namespace">Multiomics</span>
-</td>
-<td>
-<span class="listing-description">Processing unimodal multi-sample RNA transcriptomics data.</span>
-</td>
-</tr>
-<tr data-index="29" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="20" data-listing-title-sort="Rna multisample" data-listing-filename-sort="rna_multisample.qmd">
+<tr data-index="16" data-listing-file-modified-sort="1720907305050" data-listing-reading-time-sort="21" data-listing-title-sort="Rna multisample" data-listing-filename-sort="rna_multisample.qmd">
 <td>
 <a href="../components/workflows/rna/rna_multisample.html" class="title listing-title">Rna multisample</a>
 </td>
@@ -1871,18 +1564,7 @@ Description
 <span class="listing-description">Processing unimodal multi-sample RNA transcriptomics data.</span>
 </td>
 </tr>
-<tr data-index="30" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="9" data-listing-title-sort="Rna singlesample" data-listing-filename-sort="rna_singlesample.qmd">
-<td>
-<a href="../components/workflows/multiomics/rna_singlesample.html" class="title listing-title">Rna singlesample</a>
-</td>
-<td>
-<span class="listing-namespace">Multiomics</span>
-</td>
-<td>
-<span class="listing-description">Processing unimodal single-sample RNA transcriptomics data.</span>
-</td>
-</tr>
-<tr data-index="31" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="9" data-listing-title-sort="Rna singlesample" data-listing-filename-sort="rna_singlesample.qmd">
+<tr data-index="17" data-listing-file-modified-sort="1720907305050" data-listing-reading-time-sort="10" data-listing-title-sort="Rna singlesample" data-listing-filename-sort="rna_singlesample.qmd">
 <td>
 <a href="../components/workflows/rna/rna_singlesample.html" class="title listing-title">Rna singlesample</a>
 </td>
@@ -1893,7 +1575,7 @@ Description
 <span class="listing-description">Processing unimodal single-sample RNA transcriptomics data.</span>
 </td>
 </tr>
-<tr data-index="32" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="14" data-listing-title-sort="Scanorama leiden" data-listing-filename-sort="scanorama_leiden.qmd">
+<tr data-index="18" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="14" data-listing-title-sort="Scanorama leiden" data-listing-filename-sort="scanorama_leiden.qmd">
 <td>
 <a href="../components/workflows/integration/scanorama_leiden.html" class="title listing-title">Scanorama leiden</a>
 </td>
@@ -1904,40 +1586,7 @@ Description
 <span class="listing-description">Run scanorama integration followed by neighbour calculations, leiden clustering and run umap on the result.</span>
 </td>
 </tr>
-<tr data-index="33" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="13" data-listing-title-sort="Scanorama leiden" data-listing-filename-sort="scanorama_leiden.qmd">
-<td>
-<a href="../components/workflows/integration/scanorama_leiden/scanorama_leiden.html" class="title listing-title">Scanorama leiden</a>
-</td>
-<td>
-<span class="listing-namespace">Integration/scanorama leiden</span>
-</td>
-<td>
-<span class="listing-description">Run scanorama integration followed by neighbour calculations, leiden clustering and run umap on the result.</span>
-</td>
-</tr>
-<tr data-index="34" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="15" data-listing-title-sort="Scanorama leiden" data-listing-filename-sort="scanorama_leiden.qmd">
-<td>
-<a href="../components/workflows/multiomics/integration/scanorama_leiden.html" class="title listing-title">Scanorama leiden</a>
-</td>
-<td>
-<span class="listing-namespace">Multiomics/integration</span>
-</td>
-<td>
-<span class="listing-description">Run scanorama integration followed by neighbour calculations, leiden clustering and run umap on the result.</span>
-</td>
-</tr>
-<tr data-index="35" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="13" data-listing-title-sort="Scvi" data-listing-filename-sort="scvi.qmd">
-<td>
-<a href="../components/workflows/integration/scvi/scvi.html" class="title listing-title">Scvi</a>
-</td>
-<td>
-<span class="listing-namespace">Integration/scvi</span>
-</td>
-<td>
-<span class="listing-description">Run scvi integration followed by neighbour calculations and run umap on the result.</span>
-</td>
-</tr>
-<tr data-index="36" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="16" data-listing-title-sort="Scvi leiden" data-listing-filename-sort="scvi_leiden.qmd">
+<tr data-index="19" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="16" data-listing-title-sort="Scvi leiden" data-listing-filename-sort="scvi_leiden.qmd">
 <td>
 <a href="../components/workflows/integration/scvi_leiden.html" class="title listing-title">Scvi leiden</a>
 </td>
@@ -1948,18 +1597,7 @@ Description
 <span class="listing-description">Run scvi integration followed by neighbour calculations, leiden clustering and run umap on the result.</span>
 </td>
 </tr>
-<tr data-index="37" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="17" data-listing-title-sort="Scvi leiden" data-listing-filename-sort="scvi_leiden.qmd">
-<td>
-<a href="../components/workflows/multiomics/integration/scvi_leiden.html" class="title listing-title">Scvi leiden</a>
-</td>
-<td>
-<span class="listing-namespace">Multiomics/integration</span>
-</td>
-<td>
-<span class="listing-description">Run scvi integration followed by neighbour calculations, leiden clustering and run umap on the result.</span>
-</td>
-</tr>
-<tr data-index="38" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="2" data-listing-title-sort="Split modalities" data-listing-filename-sort="split_modalities.qmd">
+<tr data-index="20" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="3" data-listing-title-sort="Split modalities" data-listing-filename-sort="split_modalities.qmd">
 <td>
 <a href="../components/workflows/multiomics/split_modalities.html" class="title listing-title">Split modalities</a>
 </td>
@@ -1970,7 +1608,7 @@ Description
 <span class="listing-description">A pipeline to split a multimodal mudata files into several unimodal mudata files.</span>
 </td>
 </tr>
-<tr data-index="39" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="20" data-listing-title-sort="Totalvi leiden" data-listing-filename-sort="totalvi_leiden.qmd">
+<tr data-index="21" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="20" data-listing-title-sort="Totalvi leiden" data-listing-filename-sort="totalvi_leiden.qmd">
 <td>
 <a href="../components/workflows/integration/totalvi_leiden.html" class="title listing-title">Totalvi leiden</a>
 </td>
@@ -1981,25 +1619,11 @@ Description
 <span class="listing-description">Run totalVI integration followed by neighbour calculations, leiden clustering and run umap on the result.</span>
 </td>
 </tr>
-<tr data-index="40" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="21" data-listing-title-sort="Totalvi leiden" data-listing-filename-sort="totalvi_leiden.qmd">
-<td>
-<a href="../components/workflows/multiomics/integration/totalvi_leiden.html" class="title listing-title">Totalvi leiden</a>
-</td>
-<td>
-<span class="listing-namespace">Multiomics/integration</span>
-</td>
-<td>
-<span class="listing-description">Run totalVI integration followed by neighbour calculations, leiden clustering and run umap on the result.</span>
-</td>
-</tr>
 </tbody>
 </table>
 <div class="listing-no-matching d-none">
 No matching items
 </div>
-<nav id="workflows-pagination" class="listing-pagination" aria-label="Page Navigation">
-  <ul class="pagination"></ul>
-</nav>
 </div>
 </section>
 <section id="modules" class="level2">
@@ -2036,7 +1660,7 @@ Description
 </tr>
 </thead>
 <tbody class="list">
-<tr data-index="0" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="4" data-listing-title-sort="Add id" data-listing-filename-sort="add_id.qmd">
+<tr data-index="0" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="4" data-listing-title-sort="Add id" data-listing-filename-sort="add_id.qmd">
 <td>
 <a href="../components/modules/metadata/add_id.html" class="title listing-title">Add id</a>
 </td>
@@ -2047,7 +1671,7 @@ Description
 <span class="listing-description">Add id of .obs.</span>
 </td>
 </tr>
-<tr data-index="1" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="21" data-listing-title-sort="BD Rhapsody" data-listing-filename-sort="bd_rhapsody.qmd">
+<tr data-index="1" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="21" data-listing-title-sort="BD Rhapsody" data-listing-filename-sort="bd_rhapsody.qmd">
 <td>
 <a href="../components/modules/mapping/bd_rhapsody.html" class="title listing-title">BD Rhapsody</a>
 </td>
@@ -2058,7 +1682,7 @@ Description
 <span class="listing-description">A wrapper for the BD Rhapsody Analysis CWL v1.10.1 pipeline</span>
 </td>
 </tr>
-<tr data-index="2" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="25" data-listing-title-sort="Bbknn" data-listing-filename-sort="bbknn.qmd">
+<tr data-index="2" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="25" data-listing-title-sort="Bbknn" data-listing-filename-sort="bbknn.qmd">
 <td>
 <a href="../components/modules/neighbors/bbknn.html" class="title listing-title">Bbknn</a>
 </td>
@@ -2069,7 +1693,7 @@ Description
 <span class="listing-description">BBKNN network generation</span>
 </td>
 </tr>
-<tr data-index="3" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="3" data-listing-title-sort="Bcftools" data-listing-filename-sort="bcftools.qmd">
+<tr data-index="3" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="3" data-listing-title-sort="Bcftools" data-listing-filename-sort="bcftools.qmd">
 <td>
 <a href="../components/modules/genetic_demux/bcftools.html" class="title listing-title">Bcftools</a>
 </td>
@@ -2080,7 +1704,7 @@ Description
 <span class="listing-description">Filter the variants called by freebayes or cellSNP</span>
 </td>
 </tr>
-<tr data-index="4" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="3" data-listing-title-sort="Bcl convert" data-listing-filename-sort="bcl_convert.qmd">
+<tr data-index="4" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="3" data-listing-title-sort="Bcl convert" data-listing-filename-sort="bcl_convert.qmd">
 <td>
 <a href="../components/modules/demux/bcl_convert.html" class="title listing-title">Bcl convert</a>
 </td>
@@ -2091,7 +1715,7 @@ Description
 <span class="listing-description">Convert bcl files to fastq files using bcl-convert.</span>
 </td>
 </tr>
-<tr data-index="5" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="3" data-listing-title-sort="Bcl2fastq" data-listing-filename-sort="bcl2fastq.qmd">
+<tr data-index="5" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="3" data-listing-title-sort="Bcl2fastq" data-listing-filename-sort="bcl2fastq.qmd">
 <td>
 <a href="../components/modules/demux/bcl2fastq.html" class="title listing-title">Bcl2fastq</a>
 </td>
@@ -2102,7 +1726,7 @@ Description
 <span class="listing-description">Convert bcl files to fastq files using bcl2fastq</span>
 </td>
 </tr>
-<tr data-index="6" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="2" data-listing-title-sort="Build bdrhap reference" data-listing-filename-sort="build_bdrhap_reference.qmd">
+<tr data-index="6" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="2" data-listing-title-sort="Build bdrhap reference" data-listing-filename-sort="build_bdrhap_reference.qmd">
 <td>
 <a href="../components/modules/reference/build_bdrhap_reference.html" class="title listing-title">Build bdrhap reference</a>
 </td>
@@ -2113,7 +1737,7 @@ Description
 <span class="listing-description">Compile a reference into a STAR index compatible with the BD Rhapsody pipeline.</span>
 </td>
 </tr>
-<tr data-index="7" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="2" data-listing-title-sort="Build cellranger reference" data-listing-filename-sort="build_cellranger_reference.qmd">
+<tr data-index="7" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="2" data-listing-title-sort="Build cellranger reference" data-listing-filename-sort="build_cellranger_reference.qmd">
 <td>
 <a href="../components/modules/reference/build_cellranger_reference.html" class="title listing-title">Build cellranger reference</a>
 </td>
@@ -2124,7 +1748,7 @@ Description
 <span class="listing-description">Build a Cell Ranger-compatible reference folder from user-supplied genome FASTA and gene GTF files.</span>
 </td>
 </tr>
-<tr data-index="8" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="11" data-listing-title-sort="Calculate qc metrics" data-listing-filename-sort="calculate_qc_metrics.qmd">
+<tr data-index="8" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="11" data-listing-title-sort="Calculate qc metrics" data-listing-filename-sort="calculate_qc_metrics.qmd">
 <td>
 <a href="../components/modules/qc/calculate_qc_metrics.html" class="title listing-title">Calculate qc metrics</a>
 </td>
@@ -2135,7 +1759,7 @@ Description
 <span class="listing-description">Add basic quality control metrics to an .h5mu file.</span>
 </td>
 </tr>
-<tr data-index="9" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="76" data-listing-title-sort="Cellbender remove background" data-listing-filename-sort="cellbender_remove_background.qmd">
+<tr data-index="9" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="76" data-listing-title-sort="Cellbender remove background" data-listing-filename-sort="cellbender_remove_background.qmd">
 <td>
 <a href="../components/modules/correction/cellbender_remove_background.html" class="title listing-title">Cellbender remove background</a>
 </td>
@@ -2146,7 +1770,7 @@ Description
 <span class="listing-description">Eliminating technical artifacts from high-throughput single-cell RNA sequencing data.</span>
 </td>
 </tr>
-<tr data-index="10" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="29" data-listing-title-sort="Cellbender remove background v0 2" data-listing-filename-sort="cellbender_remove_background_v0_2.qmd">
+<tr data-index="10" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="29" data-listing-title-sort="Cellbender remove background v0 2" data-listing-filename-sort="cellbender_remove_background_v0_2.qmd">
 <td>
 <a href="../components/modules/correction/cellbender_remove_background_v0_2.html" class="title listing-title">Cellbender remove background v0 2</a>
 </td>
@@ -2157,7 +1781,7 @@ Description
 <span class="listing-description">Eliminating technical artifacts from high-throughput single-cell RNA sequencing data.</span>
 </td>
 </tr>
-<tr data-index="11" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="16" data-listing-title-sort="Cellranger count" data-listing-filename-sort="cellranger_count.qmd">
+<tr data-index="11" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="16" data-listing-title-sort="Cellranger count" data-listing-filename-sort="cellranger_count.qmd">
 <td>
 <a href="../components/modules/mapping/cellranger_count.html" class="title listing-title">Cellranger count</a>
 </td>
@@ -2168,7 +1792,7 @@ Description
 <span class="listing-description">Align fastq files using Cell Ranger count.</span>
 </td>
 </tr>
-<tr data-index="12" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="4" data-listing-title-sort="Cellranger count split" data-listing-filename-sort="cellranger_count_split.qmd">
+<tr data-index="12" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="4" data-listing-title-sort="Cellranger count split" data-listing-filename-sort="cellranger_count_split.qmd">
 <td>
 <a href="../components/modules/mapping/cellranger_count_split.html" class="title listing-title">Cellranger count split</a>
 </td>
@@ -2179,7 +1803,7 @@ Description
 <span class="listing-description">Split 10x Cell Ranger output directory into separate output fields.</span>
 </td>
 </tr>
-<tr data-index="13" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="3" data-listing-title-sort="Cellranger mkfastq" data-listing-filename-sort="cellranger_mkfastq.qmd">
+<tr data-index="13" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="3" data-listing-title-sort="Cellranger mkfastq" data-listing-filename-sort="cellranger_mkfastq.qmd">
 <td>
 <a href="../components/modules/demux/cellranger_mkfastq.html" class="title listing-title">Cellranger mkfastq</a>
 </td>
@@ -2190,7 +1814,7 @@ Description
 <span class="listing-description">Demultiplex raw sequencing data</span>
 </td>
 </tr>
-<tr data-index="14" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="33" data-listing-title-sort="Cellranger multi" data-listing-filename-sort="cellranger_multi.qmd">
+<tr data-index="14" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="33" data-listing-title-sort="Cellranger multi" data-listing-filename-sort="cellranger_multi.qmd">
 <td>
 <a href="../components/modules/mapping/cellranger_multi.html" class="title listing-title">Cellranger multi</a>
 </td>
@@ -2201,7 +1825,7 @@ Description
 <span class="listing-description">Align fastq files using Cell Ranger multi.</span>
 </td>
 </tr>
-<tr data-index="15" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="22" data-listing-title-sort="Cellsnp" data-listing-filename-sort="cellsnp.qmd">
+<tr data-index="15" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="22" data-listing-title-sort="Cellsnp" data-listing-filename-sort="cellsnp.qmd">
 <td>
 <a href="../components/modules/genetic_demux/cellsnp.html" class="title listing-title">Cellsnp</a>
 </td>
@@ -2212,7 +1836,7 @@ Description
 <span class="listing-description">cellSNP aims to pileup the expressed alleles in single-cell or bulk RNA-seq data.</span>
 </td>
 </tr>
-<tr data-index="16" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="14" data-listing-title-sort="Cellxgene census" data-listing-filename-sort="cellxgene_census.qmd">
+<tr data-index="16" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="12" data-listing-title-sort="Cellxgene census" data-listing-filename-sort="cellxgene_census.qmd">
 <td>
 <a href="../components/modules/query/cellxgene_census.html" class="title listing-title">Cellxgene census</a>
 </td>
@@ -2223,7 +1847,7 @@ Description
 <span class="listing-description">Query cells from a CellxGene Census or custom TileDBSoma object.</span>
 </td>
 </tr>
-<tr data-index="17" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="4" data-listing-title-sort="Clr" data-listing-filename-sort="clr.qmd">
+<tr data-index="17" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="4" data-listing-title-sort="Clr" data-listing-filename-sort="clr.qmd">
 <td>
 <a href="../components/modules/transform/clr.html" class="title listing-title">Clr</a>
 </td>
@@ -2234,7 +1858,7 @@ Description
 <span class="listing-description">Perform CLR normalization on CITE-seq data (Stoeckius et al., 2017)</span>
 </td>
 </tr>
-<tr data-index="18" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="2" data-listing-title-sort="Compress h5mu" data-listing-filename-sort="compress_h5mu.qmd">
+<tr data-index="18" data-listing-file-modified-sort="1720907305038" data-listing-reading-time-sort="2" data-listing-title-sort="Compress h5mu" data-listing-filename-sort="compress_h5mu.qmd">
 <td>
 <a href="../components/modules/compression/compress_h5mu.html" class="title listing-title">Compress h5mu</a>
 </td>
@@ -2245,7 +1869,7 @@ Description
 <span class="listing-description">Compress a MuData file.</span>
 </td>
 </tr>
-<tr data-index="19" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="17" data-listing-title-sort="Concat" data-listing-filename-sort="concat.qmd">
+<tr data-index="19" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="17" data-listing-title-sort="Concat" data-listing-filename-sort="concat.qmd">
 <td>
 <a href="../components/modules/dataflow/concat.html" class="title listing-title">Concat</a>
 </td>
@@ -2256,7 +1880,7 @@ Description
 <span class="listing-description">Concatenates several uni-modal samples in .h5mu files into a single file</span>
 </td>
 </tr>
-<tr data-index="20" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="17" data-listing-title-sort="Concatenate h5mu" data-listing-filename-sort="concatenate_h5mu.qmd">
+<tr data-index="20" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="17" data-listing-title-sort="Concatenate h5mu" data-listing-filename-sort="concatenate_h5mu.qmd">
 <td>
 <a href="../components/modules/dataflow/concatenate_h5mu.html" class="title listing-title">Concatenate h5mu</a>
 </td>
@@ -2267,7 +1891,7 @@ Description
 <span class="listing-description">Concatenates several uni-modal samples in .h5mu files into a single file</span>
 </td>
 </tr>
-<tr data-index="21" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="4" data-listing-title-sort="Delete layer" data-listing-filename-sort="delete_layer.qmd">
+<tr data-index="21" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="4" data-listing-title-sort="Delete layer" data-listing-filename-sort="delete_layer.qmd">
 <td>
 <a href="../components/modules/transform/delete_layer.html" class="title listing-title">Delete layer</a>
 </td>
@@ -2278,7 +1902,7 @@ Description
 <span class="listing-description">Delete an anndata layer from one or more modalities</span>
 </td>
 </tr>
-<tr data-index="22" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="7" data-listing-title-sort="Delimit fraction" data-listing-filename-sort="delimit_fraction.qmd">
+<tr data-index="22" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="7" data-listing-title-sort="Delimit fraction" data-listing-filename-sort="delimit_fraction.qmd">
 <td>
 <a href="../components/modules/filter/delimit_fraction.html" class="title listing-title">Delimit fraction</a>
 </td>
@@ -2289,7 +1913,7 @@ Description
 <span class="listing-description">Turns a column containing values between 0 and 1 into a boolean column based on thresholds</span>
 </td>
 </tr>
-<tr data-index="23" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="18" data-listing-title-sort="Demuxlet" data-listing-filename-sort="demuxlet.qmd">
+<tr data-index="23" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="18" data-listing-title-sort="Demuxlet" data-listing-filename-sort="demuxlet.qmd">
 <td>
 <a href="../components/modules/genetic_demux/demuxlet.html" class="title listing-title">Demuxlet</a>
 </td>
@@ -2300,7 +1924,7 @@ Description
 <span class="listing-description">Demuxlet is a software tool to deconvolute sample identity and identify multiplets when multiple samples are pooled by barcoded single cell sequencing.</span>
 </td>
 </tr>
-<tr data-index="24" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="4" data-listing-title-sort="Do filter" data-listing-filename-sort="do_filter.qmd">
+<tr data-index="24" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="4" data-listing-title-sort="Do filter" data-listing-filename-sort="do_filter.qmd">
 <td>
 <a href="../components/modules/filter/do_filter.html" class="title listing-title">Do filter</a>
 </td>
@@ -2311,7 +1935,7 @@ Description
 <span class="listing-description">Remove observations and variables based on specified .obs and .var columns</span>
 </td>
 </tr>
-<tr data-index="25" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="3" data-listing-title-sort="Download file" data-listing-filename-sort="download_file.qmd">
+<tr data-index="25" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="3" data-listing-title-sort="Download file" data-listing-filename-sort="download_file.qmd">
 <td>
 <a href="../components/modules/download/download_file.html" class="title listing-title">Download file</a>
 </td>
@@ -2322,7 +1946,7 @@ Description
 <span class="listing-description">Download a file</span>
 </td>
 </tr>
-<tr data-index="26" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="11" data-listing-title-sort="Dsc pileup" data-listing-filename-sort="dsc_pileup.qmd">
+<tr data-index="26" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="11" data-listing-title-sort="Dsc pileup" data-listing-filename-sort="dsc_pileup.qmd">
 <td>
 <a href="../components/modules/genetic_demux/dsc_pileup.html" class="title listing-title">Dsc pileup</a>
 </td>
@@ -2333,7 +1957,7 @@ Description
 <span class="listing-description">Dsc-pileup is a software tool to pileup reads and corresponding base quality for each overlapping SNPs and each barcode.</span>
 </td>
 </tr>
-<tr data-index="27" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="3" data-listing-title-sort="Fastqc" data-listing-filename-sort="fastqc.qmd">
+<tr data-index="27" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="3" data-listing-title-sort="Fastqc" data-listing-filename-sort="fastqc.qmd">
 <td>
 <a href="../components/modules/qc/fastqc.html" class="title listing-title">Fastqc</a>
 </td>
@@ -2344,7 +1968,7 @@ Description
 <span class="listing-description">Fastqc component, please see https://www.bioinformatics.babraham.ac.uk/projects/fastqc/.</span>
 </td>
 </tr>
-<tr data-index="28" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="4" data-listing-title-sort="Filter 10xh5" data-listing-filename-sort="filter_10xh5.qmd">
+<tr data-index="28" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="4" data-listing-title-sort="Filter 10xh5" data-listing-filename-sort="filter_10xh5.qmd">
 <td>
 <a href="../components/modules/process_10xh5/filter_10xh5.html" class="title listing-title">Filter 10xh5</a>
 </td>
@@ -2355,7 +1979,7 @@ Description
 <span class="listing-description">Filter a 10x h5 dataset</span>
 </td>
 </tr>
-<tr data-index="29" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="5" data-listing-title-sort="Filter with counts" data-listing-filename-sort="filter_with_counts.qmd">
+<tr data-index="29" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="5" data-listing-title-sort="Filter with counts" data-listing-filename-sort="filter_with_counts.qmd">
 <td>
 <a href="../components/modules/filter/filter_with_counts.html" class="title listing-title">Filter with counts</a>
 </td>
@@ -2366,7 +1990,7 @@ Description
 <span class="listing-description">Filter scRNA-seq data based on the primary QC metrics.</span>
 </td>
 </tr>
-<tr data-index="30" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="39" data-listing-title-sort="Filter with hvg" data-listing-filename-sort="filter_with_hvg.qmd">
+<tr data-index="30" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="39" data-listing-title-sort="Filter with hvg" data-listing-filename-sort="filter_with_hvg.qmd">
 <td>
 <a href="../components/modules/filter/filter_with_hvg.html" class="title listing-title">Filter with hvg</a>
 </td>
@@ -2377,7 +2001,7 @@ Description
 <span class="listing-description">Annotate highly variable genes [Satija15] [Zheng17] [Stuart19].</span>
 </td>
 </tr>
-<tr data-index="31" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="15" data-listing-title-sort="Filter with scrublet" data-listing-filename-sort="filter_with_scrublet.qmd">
+<tr data-index="31" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="15" data-listing-title-sort="Filter with scrublet" data-listing-filename-sort="filter_with_scrublet.qmd">
 <td>
 <a href="../components/modules/filter/filter_with_scrublet.html" class="title listing-title">Filter with scrublet</a>
 </td>
@@ -2388,7 +2012,7 @@ Description
 <span class="listing-description">Doublet detection using the Scrublet method (Wolock, Lopez and Klein, 2019).</span>
 </td>
 </tr>
-<tr data-index="32" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="25" data-listing-title-sort="Find neighbors" data-listing-filename-sort="find_neighbors.qmd">
+<tr data-index="32" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="25" data-listing-title-sort="Find neighbors" data-listing-filename-sort="find_neighbors.qmd">
 <td>
 <a href="../components/modules/neighbors/find_neighbors.html" class="title listing-title">Find neighbors</a>
 </td>
@@ -2399,7 +2023,7 @@ Description
 <span class="listing-description">Compute a neighborhood graph of observations [McInnes18].</span>
 </td>
 </tr>
-<tr data-index="33" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="60" data-listing-title-sort="Freebayes" data-listing-filename-sort="freebayes.qmd">
+<tr data-index="33" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="60" data-listing-title-sort="Freebayes" data-listing-filename-sort="freebayes.qmd">
 <td>
 <a href="../components/modules/genetic_demux/freebayes.html" class="title listing-title">Freebayes</a>
 </td>
@@ -2410,7 +2034,7 @@ Description
 <span class="listing-description">Freebayes is a Bayesian genetic variant detector designed to find small polymorphisms, specifically SNPs</span>
 </td>
 </tr>
-<tr data-index="34" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="12" data-listing-title-sort="Freemuxlet" data-listing-filename-sort="freemuxlet.qmd">
+<tr data-index="34" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="12" data-listing-title-sort="Freemuxlet" data-listing-filename-sort="freemuxlet.qmd">
 <td>
 <a href="../components/modules/genetic_demux/freemuxlet.html" class="title listing-title">Freemuxlet</a>
 </td>
@@ -2421,7 +2045,7 @@ Description
 <span class="listing-description">Freemuxlet is a software tool to deconvolute sample identity and identify multiplets when multiple samples are pooled by barcoded single cell sequencing.</span>
 </td>
 </tr>
-<tr data-index="35" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="4" data-listing-title-sort="From 10xh5 to h5mu" data-listing-filename-sort="from_10xh5_to_h5mu.qmd">
+<tr data-index="35" data-listing-file-modified-sort="1720907305038" data-listing-reading-time-sort="4" data-listing-title-sort="From 10xh5 to h5mu" data-listing-filename-sort="from_10xh5_to_h5mu.qmd">
 <td>
 <a href="../components/modules/convert/from_10xh5_to_h5mu.html" class="title listing-title">From 10xh5 to h5mu</a>
 </td>
@@ -2432,7 +2056,7 @@ Description
 <span class="listing-description">Converts a 10x h5 into an h5mu file</span>
 </td>
 </tr>
-<tr data-index="36" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="2" data-listing-title-sort="From 10xmtx to h5mu" data-listing-filename-sort="from_10xmtx_to_h5mu.qmd">
+<tr data-index="36" data-listing-file-modified-sort="1720907305038" data-listing-reading-time-sort="2" data-listing-title-sort="From 10xmtx to h5mu" data-listing-filename-sort="from_10xmtx_to_h5mu.qmd">
 <td>
 <a href="../components/modules/convert/from_10xmtx_to_h5mu.html" class="title listing-title">From 10xmtx to h5mu</a>
 </td>
@@ -2443,7 +2067,7 @@ Description
 <span class="listing-description">Converts a 10x mtx into an h5mu file</span>
 </td>
 </tr>
-<tr data-index="37" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="2" data-listing-title-sort="From bd to 10x molecular barcode tags" data-listing-filename-sort="from_bd_to_10x_molecular_barcode_tags.qmd">
+<tr data-index="37" data-listing-file-modified-sort="1720907305038" data-listing-reading-time-sort="2" data-listing-title-sort="From bd to 10x molecular barcode tags" data-listing-filename-sort="from_bd_to_10x_molecular_barcode_tags.qmd">
 <td>
 <a href="../components/modules/convert/from_bd_to_10x_molecular_barcode_tags.html" class="title listing-title">From bd to 10x molecular barcode tags</a>
 </td>
@@ -2454,7 +2078,7 @@ Description
 <span class="listing-description">Convert the molecular barcode sequence SAM tag from BD format (MA) to 10X format (UB)</span>
 </td>
 </tr>
-<tr data-index="38" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="2" data-listing-title-sort="From bdrhap to h5mu" data-listing-filename-sort="from_bdrhap_to_h5mu.qmd">
+<tr data-index="38" data-listing-file-modified-sort="1720907305038" data-listing-reading-time-sort="2" data-listing-title-sort="From bdrhap to h5mu" data-listing-filename-sort="from_bdrhap_to_h5mu.qmd">
 <td>
 <a href="../components/modules/convert/from_bdrhap_to_h5mu.html" class="title listing-title">From bdrhap to h5mu</a>
 </td>
@@ -2465,7 +2089,7 @@ Description
 <span class="listing-description">Convert the output of a BD Rhapsody WTA pipeline to a MuData h5 file</span>
 </td>
 </tr>
-<tr data-index="39" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="4" data-listing-title-sort="From cellranger multi to h5mu" data-listing-filename-sort="from_cellranger_multi_to_h5mu.qmd">
+<tr data-index="39" data-listing-file-modified-sort="1720907305038" data-listing-reading-time-sort="4" data-listing-title-sort="From cellranger multi to h5mu" data-listing-filename-sort="from_cellranger_multi_to_h5mu.qmd">
 <td>
 <a href="../components/modules/convert/from_cellranger_multi_to_h5mu.html" class="title listing-title">From cellranger multi to h5mu</a>
 </td>
@@ -2476,7 +2100,7 @@ Description
 <span class="listing-description">Converts the output from cellranger multi to a single .h5mu file.</span>
 </td>
 </tr>
-<tr data-index="40" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="3" data-listing-title-sort="From h5ad to h5mu" data-listing-filename-sort="from_h5ad_to_h5mu.qmd">
+<tr data-index="40" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="3" data-listing-title-sort="From h5ad to h5mu" data-listing-filename-sort="from_h5ad_to_h5mu.qmd">
 <td>
 <a href="../components/modules/convert/from_h5ad_to_h5mu.html" class="title listing-title">From h5ad to h5mu</a>
 </td>
@@ -2487,7 +2111,7 @@ Description
 <span class="listing-description">Converts a single layer h5ad file into a single MuData object</span>
 </td>
 </tr>
-<tr data-index="41" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="3" data-listing-title-sort="From h5mu to h5ad" data-listing-filename-sort="from_h5mu_to_h5ad.qmd">
+<tr data-index="41" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="3" data-listing-title-sort="From h5mu to h5ad" data-listing-filename-sort="from_h5mu_to_h5ad.qmd">
 <td>
 <a href="../components/modules/convert/from_h5mu_to_h5ad.html" class="title listing-title">From h5mu to h5ad</a>
 </td>
@@ -2498,7 +2122,7 @@ Description
 <span class="listing-description">Converts a h5mu file into a h5ad file</span>
 </td>
 </tr>
-<tr data-index="42" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="2" data-listing-title-sort="From h5mu to seurat" data-listing-filename-sort="from_h5mu_to_seurat.qmd">
+<tr data-index="42" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="2" data-listing-title-sort="From h5mu to seurat" data-listing-filename-sort="from_h5mu_to_seurat.qmd">
 <td>
 <a href="../components/modules/convert/from_h5mu_to_seurat.html" class="title listing-title">From h5mu to seurat</a>
 </td>
@@ -2509,7 +2133,7 @@ Description
 <span class="listing-description">Converts an h5mu file into a Seurat file.</span>
 </td>
 </tr>
-<tr data-index="43" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="9" data-listing-title-sort="Grep annotation column" data-listing-filename-sort="grep_annotation_column.qmd">
+<tr data-index="43" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="9" data-listing-title-sort="Grep annotation column" data-listing-filename-sort="grep_annotation_column.qmd">
 <td>
 <a href="../components/modules/metadata/grep_annotation_column.html" class="title listing-title">Grep annotation column</a>
 </td>
@@ -2520,7 +2144,7 @@ Description
 <span class="listing-description">Perform a regex lookup on a column from the annotation matrices .obs or .var.</span>
 </td>
 </tr>
-<tr data-index="44" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="10" data-listing-title-sort="Harmonypy" data-listing-filename-sort="harmonypy.qmd">
+<tr data-index="44" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="10" data-listing-title-sort="Harmonypy" data-listing-filename-sort="harmonypy.qmd">
 <td>
 <a href="../components/modules/integrate/harmonypy.html" class="title listing-title">Harmonypy</a>
 </td>
@@ -2531,7 +2155,7 @@ Description
 <span class="listing-description">Performs Harmony integration based as described in https://github.com/immunogenomics/harmony.</span>
 </td>
 </tr>
-<tr data-index="45" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="37" data-listing-title-sort="Highly variable features scanpy" data-listing-filename-sort="highly_variable_features_scanpy.qmd">
+<tr data-index="45" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="37" data-listing-title-sort="Highly variable features scanpy" data-listing-filename-sort="highly_variable_features_scanpy.qmd">
 <td>
 <a href="../components/modules/feature_annotation/highly_variable_features_scanpy.html" class="title listing-title">Highly variable features scanpy</a>
 </td>
@@ -2542,7 +2166,7 @@ Description
 <span class="listing-description">Annotate highly variable features [Satija15] [Zheng17] [Stuart19].</span>
 </td>
 </tr>
-<tr data-index="46" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="39" data-listing-title-sort="Htseq count" data-listing-filename-sort="htseq_count.qmd">
+<tr data-index="46" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="39" data-listing-title-sort="Htseq count" data-listing-filename-sort="htseq_count.qmd">
 <td>
 <a href="../components/modules/mapping/htseq_count.html" class="title listing-title">Htseq count</a>
 </td>
@@ -2553,7 +2177,7 @@ Description
 <span class="listing-description">Quantify gene expression for subsequent testing for differential expression.</span>
 </td>
 </tr>
-<tr data-index="47" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="3" data-listing-title-sort="Htseq count to h5mu" data-listing-filename-sort="htseq_count_to_h5mu.qmd">
+<tr data-index="47" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="3" data-listing-title-sort="Htseq count to h5mu" data-listing-filename-sort="htseq_count_to_h5mu.qmd">
 <td>
 <a href="../components/modules/mapping/htseq_count_to_h5mu.html" class="title listing-title">Htseq count to h5mu</a>
 </td>
@@ -2564,7 +2188,7 @@ Description
 <span class="listing-description">Convert the htseq table to a h5mu</span>
 </td>
 </tr>
-<tr data-index="48" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="4" data-listing-title-sort="Intersect obs" data-listing-filename-sort="intersect_obs.qmd">
+<tr data-index="48" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="4" data-listing-title-sort="Intersect obs" data-listing-filename-sort="intersect_obs.qmd">
 <td>
 <a href="../components/modules/filter/intersect_obs.html" class="title listing-title">Intersect obs</a>
 </td>
@@ -2575,7 +2199,7 @@ Description
 <span class="listing-description">Create an intersection between two or more modalities.</span>
 </td>
 </tr>
-<tr data-index="49" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="7" data-listing-title-sort="Join csv" data-listing-filename-sort="join_csv.qmd">
+<tr data-index="49" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="7" data-listing-title-sort="Join csv" data-listing-filename-sort="join_csv.qmd">
 <td>
 <a href="../components/modules/metadata/join_csv.html" class="title listing-title">Join csv</a>
 </td>
@@ -2586,7 +2210,7 @@ Description
 <span class="listing-description">Join a csv containing metadata to the .obs or .var field of a mudata file.</span>
 </td>
 </tr>
-<tr data-index="50" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="3" data-listing-title-sort="Join uns to obs" data-listing-filename-sort="join_uns_to_obs.qmd">
+<tr data-index="50" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="3" data-listing-title-sort="Join uns to obs" data-listing-filename-sort="join_uns_to_obs.qmd">
 <td>
 <a href="../components/modules/metadata/join_uns_to_obs.html" class="title listing-title">Join uns to obs</a>
 </td>
@@ -2597,7 +2221,7 @@ Description
 <span class="listing-description">Join a data frame of length 1 (1 row index value) in .uns containing metadata to the .obs of a mudata file.</span>
 </td>
 </tr>
-<tr data-index="51" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="14" data-listing-title-sort="Knn" data-listing-filename-sort="knn.qmd">
+<tr data-index="51" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="14" data-listing-title-sort="Knn" data-listing-filename-sort="knn.qmd">
 <td>
 <a href="../components/modules/labels_transfer/knn.html" class="title listing-title">Knn</a>
 </td>
@@ -2608,7 +2232,7 @@ Description
 <span class="listing-description">Performs label transfer from reference to query using KNN classifier</span>
 </td>
 </tr>
-<tr data-index="52" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="9" data-listing-title-sort="Leiden" data-listing-filename-sort="leiden.qmd">
+<tr data-index="52" data-listing-file-modified-sort="1720907305038" data-listing-reading-time-sort="9" data-listing-title-sort="Leiden" data-listing-filename-sort="leiden.qmd">
 <td>
 <a href="../components/modules/cluster/leiden.html" class="title listing-title">Leiden</a>
 </td>
@@ -2619,7 +2243,7 @@ Description
 <span class="listing-description">Cluster cells using the [Leiden algorithm] [Traag18] implemented in the [Scanpy framework] [Wolf18].</span>
 </td>
 </tr>
-<tr data-index="53" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="14" data-listing-title-sort="Lianapy" data-listing-filename-sort="lianapy.qmd">
+<tr data-index="53" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="14" data-listing-title-sort="Lianapy" data-listing-filename-sort="lianapy.qmd">
 <td>
 <a href="../components/modules/interpret/lianapy.html" class="title listing-title">Lianapy</a>
 </td>
@@ -2630,7 +2254,7 @@ Description
 <span class="listing-description">Performs LIANA integration based as described in https://github.com/saezlab/liana-py</span>
 </td>
 </tr>
-<tr data-index="54" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="4" data-listing-title-sort="Log1p" data-listing-filename-sort="log1p.qmd">
+<tr data-index="54" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="4" data-listing-title-sort="Log1p" data-listing-filename-sort="log1p.qmd">
 <td>
 <a href="../components/modules/transform/log1p.html" class="title listing-title">Log1p</a>
 </td>
@@ -2641,7 +2265,7 @@ Description
 <span class="listing-description">Logarithmize the data matrix.</span>
 </td>
 </tr>
-<tr data-index="55" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="5" data-listing-title-sort="Make params" data-listing-filename-sort="make_params.qmd">
+<tr data-index="55" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="5" data-listing-title-sort="Make params" data-listing-filename-sort="make_params.qmd">
 <td>
 <a href="../components/modules/files/make_params.html" class="title listing-title">Make params</a>
 </td>
@@ -2652,7 +2276,7 @@ Description
 <span class="listing-description">Looks for files in a directory and turn it in a params file.</span>
 </td>
 </tr>
-<tr data-index="56" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="4" data-listing-title-sort="Make reference" data-listing-filename-sort="make_reference.qmd">
+<tr data-index="56" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="4" data-listing-title-sort="Make reference" data-listing-filename-sort="make_reference.qmd">
 <td>
 <a href="../components/modules/reference/make_reference.html" class="title listing-title">Make reference</a>
 </td>
@@ -2663,7 +2287,7 @@ Description
 <span class="listing-description">Preprocess and build a transcriptome reference.</span>
 </td>
 </tr>
-<tr data-index="57" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="3" data-listing-title-sort="Merge" data-listing-filename-sort="merge.qmd">
+<tr data-index="57" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="3" data-listing-title-sort="Merge" data-listing-filename-sort="merge.qmd">
 <td>
 <a href="../components/modules/dataflow/merge.html" class="title listing-title">Merge</a>
 </td>
@@ -2674,7 +2298,7 @@ Description
 <span class="listing-description">Combine one or more single-modality .h5mu files together into one .h5mu file</span>
 </td>
 </tr>
-<tr data-index="58" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="6" data-listing-title-sort="Mermaid" data-listing-filename-sort="mermaid.qmd">
+<tr data-index="58" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="6" data-listing-title-sort="Mermaid" data-listing-filename-sort="mermaid.qmd">
 <td>
 <a href="../components/modules/report/mermaid.html" class="title listing-title">Mermaid</a>
 </td>
@@ -2685,7 +2309,7 @@ Description
 <span class="listing-description">Generates a network from mermaid code</span>
 </td>
 </tr>
-<tr data-index="59" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="4" data-listing-title-sort="Move layer" data-listing-filename-sort="move_layer.qmd">
+<tr data-index="59" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="4" data-listing-title-sort="Move layer" data-listing-filename-sort="move_layer.qmd">
 <td>
 <a href="../components/modules/transform/move_layer.html" class="title listing-title">Move layer</a>
 </td>
@@ -2696,7 +2320,7 @@ Description
 <span class="listing-description">Move a data matrix stored at the .layers or .X attributes in a MuData object to another layer.</span>
 </td>
 </tr>
-<tr data-index="60" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="4" data-listing-title-sort="Move obsm to obs" data-listing-filename-sort="move_obsm_to_obs.qmd">
+<tr data-index="60" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="4" data-listing-title-sort="Move obsm to obs" data-listing-filename-sort="move_obsm_to_obs.qmd">
 <td>
 <a href="../components/modules/metadata/move_obsm_to_obs.html" class="title listing-title">Move obsm to obs</a>
 </td>
@@ -2707,7 +2331,7 @@ Description
 <span class="listing-description">Move a matrix from .obsm to .obs.</span>
 </td>
 </tr>
-<tr data-index="61" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="632" data-listing-title-sort="Multi star" data-listing-filename-sort="multi_star.qmd">
+<tr data-index="61" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="632" data-listing-title-sort="Multi star" data-listing-filename-sort="multi_star.qmd">
 <td>
 <a href="../components/modules/mapping/multi_star.html" class="title listing-title">Multi star</a>
 </td>
@@ -2718,7 +2342,7 @@ Description
 <span class="listing-description">Align fastq files using STAR.</span>
 </td>
 </tr>
-<tr data-index="62" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="2" data-listing-title-sort="Multi star to h5mu" data-listing-filename-sort="multi_star_to_h5mu.qmd">
+<tr data-index="62" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="2" data-listing-title-sort="Multi star to h5mu" data-listing-filename-sort="multi_star_to_h5mu.qmd">
 <td>
 <a href="../components/modules/mapping/multi_star_to_h5mu.html" class="title listing-title">Multi star to h5mu</a>
 </td>
@@ -2729,7 +2353,7 @@ Description
 <span class="listing-description">Convert the output of <code>multi_star</code> to a h5mu</span>
 </td>
 </tr>
-<tr data-index="63" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="2" data-listing-title-sort="Multiqc" data-listing-filename-sort="multiqc.qmd">
+<tr data-index="63" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="2" data-listing-title-sort="Multiqc" data-listing-filename-sort="multiqc.qmd">
 <td>
 <a href="../components/modules/qc/multiqc.html" class="title listing-title">Multiqc</a>
 </td>
@@ -2740,7 +2364,7 @@ Description
 <span class="listing-description">MultiQC aggregates results from bioinformatics analyses across many samples into a single report.</span>
 </td>
 </tr>
-<tr data-index="64" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="13" data-listing-title-sort="Normalize total" data-listing-filename-sort="normalize_total.qmd">
+<tr data-index="64" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="13" data-listing-title-sort="Normalize total" data-listing-filename-sort="normalize_total.qmd">
 <td>
 <a href="../components/modules/transform/normalize_total.html" class="title listing-title">Normalize total</a>
 </td>
@@ -2751,7 +2375,7 @@ Description
 <span class="listing-description">Normalize counts per cell.</span>
 </td>
 </tr>
-<tr data-index="65" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="7" data-listing-title-sort="Pca" data-listing-filename-sort="pca.qmd">
+<tr data-index="65" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="7" data-listing-title-sort="Pca" data-listing-filename-sort="pca.qmd">
 <td>
 <a href="../components/modules/dimred/pca.html" class="title listing-title">Pca</a>
 </td>
@@ -2762,7 +2386,7 @@ Description
 <span class="listing-description">Computes PCA coordinates, loadings and variance decomposition.</span>
 </td>
 </tr>
-<tr data-index="66" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="11" data-listing-title-sort="Popv" data-listing-filename-sort="popv.qmd">
+<tr data-index="66" data-listing-file-modified-sort="1720907305038" data-listing-reading-time-sort="11" data-listing-title-sort="Popv" data-listing-filename-sort="popv.qmd">
 <td>
 <a href="../components/modules/annotate/popv.html" class="title listing-title">Popv</a>
 </td>
@@ -2773,7 +2397,7 @@ Description
 <span class="listing-description">Performs popular major vote cell typing on single cell sequence data using multiple algorithms.</span>
 </td>
 </tr>
-<tr data-index="67" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="1" data-listing-title-sort="Publish" data-listing-filename-sort="publish.qmd">
+<tr data-index="67" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="1" data-listing-title-sort="Publish" data-listing-filename-sort="publish.qmd">
 <td>
 <a href="../components/modules/transfer/publish.html" class="title listing-title">Publish</a>
 </td>
@@ -2784,18 +2408,7 @@ Description
 <span class="listing-description">Publish an artifact and optionally rename with parameters</span>
 </td>
 </tr>
-<tr data-index="68" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="1" data-listing-title-sort="Reference" data-listing-filename-sort="index.qmd">
-<td>
-<a href="../components/modules/index.html" class="title listing-title">Reference</a>
-</td>
-<td>
-<span class="listing-namespace">&nbsp;</span>
-</td>
-<td>
-<span class="listing-description">An overview of the workflows and modules in OpenPipelines</span>
-</td>
-</tr>
-<tr data-index="69" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="3" data-listing-title-sort="Regress out" data-listing-filename-sort="regress_out.qmd">
+<tr data-index="68" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="3" data-listing-title-sort="Regress out" data-listing-filename-sort="regress_out.qmd">
 <td>
 <a href="../components/modules/transform/regress_out.html" class="title listing-title">Regress out</a>
 </td>
@@ -2806,7 +2419,7 @@ Description
 <span class="listing-description">Regress out (mostly) unwanted sources of variation.</span>
 </td>
 </tr>
-<tr data-index="70" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="3" data-listing-title-sort="Remove modality" data-listing-filename-sort="remove_modality.qmd">
+<tr data-index="69" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="3" data-listing-title-sort="Remove modality" data-listing-filename-sort="remove_modality.qmd">
 <td>
 <a href="../components/modules/filter/remove_modality.html" class="title listing-title">Remove modality</a>
 </td>
@@ -2817,7 +2430,7 @@ Description
 <span class="listing-description">Remove a modality from a .h5mu file</span>
 </td>
 </tr>
-<tr data-index="71" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="2" data-listing-title-sort="Samtools" data-listing-filename-sort="samtools.qmd">
+<tr data-index="70" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="2" data-listing-title-sort="Samtools" data-listing-filename-sort="samtools.qmd">
 <td>
 <a href="../components/modules/genetic_demux/samtools.html" class="title listing-title">Samtools</a>
 </td>
@@ -2828,7 +2441,7 @@ Description
 <span class="listing-description">Filter the BAM according to the instruction of scSplit via Samtools.</span>
 </td>
 </tr>
-<tr data-index="72" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="18" data-listing-title-sort="Samtools sort" data-listing-filename-sort="samtools_sort.qmd">
+<tr data-index="71" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="18" data-listing-title-sort="Samtools sort" data-listing-filename-sort="samtools_sort.qmd">
 <td>
 <a href="../components/modules/mapping/samtools_sort.html" class="title listing-title">Samtools sort</a>
 </td>
@@ -2839,7 +2452,7 @@ Description
 <span class="listing-description">Sort and (optionally) index alignments.</span>
 </td>
 </tr>
-<tr data-index="73" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="4" data-listing-title-sort="Scale" data-listing-filename-sort="scale.qmd">
+<tr data-index="72" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="4" data-listing-title-sort="Scale" data-listing-filename-sort="scale.qmd">
 <td>
 <a href="../components/modules/transform/scale.html" class="title listing-title">Scale</a>
 </td>
@@ -2850,7 +2463,7 @@ Description
 <span class="listing-description">Scale data to unit variance and zero mean</span>
 </td>
 </tr>
-<tr data-index="74" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="11" data-listing-title-sort="Scanorama" data-listing-filename-sort="scanorama.qmd">
+<tr data-index="73" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="11" data-listing-title-sort="Scanorama" data-listing-filename-sort="scanorama.qmd">
 <td>
 <a href="../components/modules/integrate/scanorama.html" class="title listing-title">Scanorama</a>
 </td>
@@ -2861,7 +2474,7 @@ Description
 <span class="listing-description">Use Scanorama to integrate different experiments</span>
 </td>
 </tr>
-<tr data-index="75" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="11" data-listing-title-sort="Scarches" data-listing-filename-sort="scarches.qmd">
+<tr data-index="74" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="11" data-listing-title-sort="Scarches" data-listing-filename-sort="scarches.qmd">
 <td>
 <a href="../components/modules/integrate/scarches.html" class="title listing-title">Scarches</a>
 </td>
@@ -2872,7 +2485,7 @@ Description
 <span class="listing-description">Performs reference mapping with scArches</span>
 </td>
 </tr>
-<tr data-index="76" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="14" data-listing-title-sort="Scsplit" data-listing-filename-sort="scsplit.qmd">
+<tr data-index="75" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="14" data-listing-title-sort="Scsplit" data-listing-filename-sort="scsplit.qmd">
 <td>
 <a href="../components/modules/genetic_demux/scsplit.html" class="title listing-title">Scsplit</a>
 </td>
@@ -2883,7 +2496,7 @@ Description
 <span class="listing-description">scsplit is a genotype-free demultiplexing methode of pooled single-cell RNA-seq, using a hidden state model for identifying genetically distinct samples within a mixed population.</span>
 </td>
 </tr>
-<tr data-index="77" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="7" data-listing-title-sort="Scvelo" data-listing-filename-sort="scvelo.qmd">
+<tr data-index="76" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="7" data-listing-title-sort="Scvelo" data-listing-filename-sort="scvelo.qmd">
 <td>
 <a href="../components/modules/velocity/scvelo.html" class="title listing-title">Scvelo</a>
 </td>
@@ -2895,7 +2508,7 @@ Description
 Namespace: <code>velocity</code></span>
 </td>
 </tr>
-<tr data-index="78" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="36" data-listing-title-sort="Scvi" data-listing-filename-sort="scvi.qmd">
+<tr data-index="77" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="36" data-listing-title-sort="Scvi" data-listing-filename-sort="scvi.qmd">
 <td>
 <a href="../components/modules/integrate/scvi.html" class="title listing-title">Scvi</a>
 </td>
@@ -2906,7 +2519,7 @@ Namespace: <code>velocity</code></span>
 <span class="listing-description">Performs scvi integration as done in the human lung cell atlas https://github.com/LungCellAtlas/HLCA</span>
 </td>
 </tr>
-<tr data-index="79" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="10" data-listing-title-sort="Souporcell" data-listing-filename-sort="souporcell.qmd">
+<tr data-index="78" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="10" data-listing-title-sort="Souporcell" data-listing-filename-sort="souporcell.qmd">
 <td>
 <a href="../components/modules/genetic_demux/souporcell.html" class="title listing-title">Souporcell</a>
 </td>
@@ -2917,7 +2530,7 @@ Namespace: <code>velocity</code></span>
 <span class="listing-description">souporcell is a method for clustering mixed-genotype scRNAseq experiments by individual.</span>
 </td>
 </tr>
-<tr data-index="80" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="3" data-listing-title-sort="Split modalities" data-listing-filename-sort="split_modalities.qmd">
+<tr data-index="79" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="3" data-listing-title-sort="Split modalities" data-listing-filename-sort="split_modalities.qmd">
 <td>
 <a href="../components/modules/dataflow/split_modalities.html" class="title listing-title">Split modalities</a>
 </td>
@@ -2928,7 +2541,7 @@ Namespace: <code>velocity</code></span>
 <span class="listing-description">Split the modalities from a single .h5mu multimodal sample into seperate .h5mu files.</span>
 </td>
 </tr>
-<tr data-index="81" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="623" data-listing-title-sort="Star align" data-listing-filename-sort="star_align.qmd">
+<tr data-index="80" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="623" data-listing-title-sort="Star align" data-listing-filename-sort="star_align.qmd">
 <td>
 <a href="../components/modules/mapping/star_align.html" class="title listing-title">Star align</a>
 </td>
@@ -2939,7 +2552,7 @@ Namespace: <code>velocity</code></span>
 <span class="listing-description">Align fastq files using STAR.</span>
 </td>
 </tr>
-<tr data-index="82" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="623" data-listing-title-sort="Star align v273a" data-listing-filename-sort="star_align_v273a.qmd">
+<tr data-index="81" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="623" data-listing-title-sort="Star align v273a" data-listing-filename-sort="star_align_v273a.qmd">
 <td>
 <a href="../components/modules/mapping/star_align_v273a.html" class="title listing-title">Star align v273a</a>
 </td>
@@ -2950,7 +2563,7 @@ Namespace: <code>velocity</code></span>
 <span class="listing-description">Align fastq files using STAR.</span>
 </td>
 </tr>
-<tr data-index="83" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="7" data-listing-title-sort="Star build reference" data-listing-filename-sort="star_build_reference.qmd">
+<tr data-index="82" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="7" data-listing-title-sort="Star build reference" data-listing-filename-sort="star_build_reference.qmd">
 <td>
 <a href="../components/modules/mapping/star_build_reference.html" class="title listing-title">Star build reference</a>
 </td>
@@ -2961,7 +2574,7 @@ Namespace: <code>velocity</code></span>
 <span class="listing-description">Create a reference for STAR from a set of fasta files.</span>
 </td>
 </tr>
-<tr data-index="84" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="3" data-listing-title-sort="Subset h5mu" data-listing-filename-sort="subset_h5mu.qmd">
+<tr data-index="83" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="3" data-listing-title-sort="Subset h5mu" data-listing-filename-sort="subset_h5mu.qmd">
 <td>
 <a href="../components/modules/filter/subset_h5mu.html" class="title listing-title">Subset h5mu</a>
 </td>
@@ -2972,7 +2585,7 @@ Namespace: <code>velocity</code></span>
 <span class="listing-description">Create a subset of a mudata file by selecting the first number of observations</span>
 </td>
 </tr>
-<tr data-index="85" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="4" data-listing-title-sort="Sync test resources" data-listing-filename-sort="sync_test_resources.qmd">
+<tr data-index="84" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="4" data-listing-title-sort="Sync test resources" data-listing-filename-sort="sync_test_resources.qmd">
 <td>
 <a href="../components/modules/download/sync_test_resources.html" class="title listing-title">Sync test resources</a>
 </td>
@@ -2983,7 +2596,7 @@ Namespace: <code>velocity</code></span>
 <span class="listing-description">Synchronise the test resources from s3://openpipelines-data to resources_test</span>
 </td>
 </tr>
-<tr data-index="86" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="9" data-listing-title-sort="Totalvi" data-listing-filename-sort="totalvi.qmd">
+<tr data-index="85" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="9" data-listing-title-sort="Totalvi" data-listing-filename-sort="totalvi.qmd">
 <td>
 <a href="../components/modules/integrate/totalvi.html" class="title listing-title">Totalvi</a>
 </td>
@@ -2994,7 +2607,7 @@ Namespace: <code>velocity</code></span>
 <span class="listing-description">Performs mapping to the reference by totalvi model: https://docs.scvi-tools.org/en/stable/tutorials/notebooks/scarches_scvi_tools.html#Reference-mapping-with-TOTALVI</span>
 </td>
 </tr>
-<tr data-index="87" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="15" data-listing-title-sort="Tsne" data-listing-filename-sort="tsne.qmd">
+<tr data-index="86" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="15" data-listing-title-sort="Tsne" data-listing-filename-sort="tsne.qmd">
 <td>
 <a href="../components/modules/dimred/tsne.html" class="title listing-title">Tsne</a>
 </td>
@@ -3005,7 +2618,7 @@ Namespace: <code>velocity</code></span>
 <span class="listing-description">t-SNE (t-Distributed Stochastic Neighbor Embedding) is a dimensionality reduction technique used to visualize high-dimensional data in a low-dimensional space, revealing patterns and clusters by preserving local data similarities</span>
 </td>
 </tr>
-<tr data-index="88" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="17" data-listing-title-sort="Umap" data-listing-filename-sort="umap.qmd">
+<tr data-index="87" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="17" data-listing-title-sort="Umap" data-listing-filename-sort="umap.qmd">
 <td>
 <a href="../components/modules/dimred/umap.html" class="title listing-title">Umap</a>
 </td>
@@ -3016,7 +2629,7 @@ Namespace: <code>velocity</code></span>
 <span class="listing-description">UMAP (Uniform Manifold Approximation and Projection) is a manifold learning technique suitable for visualizing high-dimensional data.</span>
 </td>
 </tr>
-<tr data-index="89" data-listing-file-modified-sort="1720089205307" data-listing-reading-time-sort="7" data-listing-title-sort="Velocyto" data-listing-filename-sort="velocyto.qmd">
+<tr data-index="88" data-listing-file-modified-sort="1720907305046" data-listing-reading-time-sort="7" data-listing-title-sort="Velocyto" data-listing-filename-sort="velocyto.qmd">
 <td>
 <a href="../components/modules/velocity/velocyto.html" class="title listing-title">Velocyto</a>
 </td>
@@ -3027,7 +2640,7 @@ Namespace: <code>velocity</code></span>
 <span class="listing-description">Runs the velocity analysis on a BAM file, outputting a loom file.</span>
 </td>
 </tr>
-<tr data-index="90" data-listing-file-modified-sort="1720089205299" data-listing-reading-time-sort="4" data-listing-title-sort="Velocyto to h5mu" data-listing-filename-sort="velocyto_to_h5mu.qmd">
+<tr data-index="89" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="4" data-listing-title-sort="Velocyto to h5mu" data-listing-filename-sort="velocyto_to_h5mu.qmd">
 <td>
 <a href="../components/modules/convert/velocyto_to_h5mu.html" class="title listing-title">Velocyto to h5mu</a>
 </td>
@@ -3038,7 +2651,7 @@ Namespace: <code>velocity</code></span>
 <span class="listing-description">Convert a velocyto loom file to a h5mu file.</span>
 </td>
 </tr>
-<tr data-index="91" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="8" data-listing-title-sort="Vireo" data-listing-filename-sort="vireo.qmd">
+<tr data-index="90" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="8" data-listing-title-sort="Vireo" data-listing-filename-sort="vireo.qmd">
 <td>
 <a href="../components/modules/genetic_demux/vireo.html" class="title listing-title">Vireo</a>
 </td>
@@ -3049,7 +2662,7 @@ Namespace: <code>velocity</code></span>
 <span class="listing-description">Vireo is primarily designed for demultiplexing cells into donors by modelling of expressed alleles.</span>
 </td>
 </tr>
-<tr data-index="92" data-listing-file-modified-sort="1720089205303" data-listing-reading-time-sort="22" data-listing-title-sort="Xgboost" data-listing-filename-sort="xgboost.qmd">
+<tr data-index="91" data-listing-file-modified-sort="1720907305042" data-listing-reading-time-sort="22" data-listing-title-sort="Xgboost" data-listing-filename-sort="xgboost.qmd">
 <td>
 <a href="../components/modules/labels_transfer/xgboost.html" class="title listing-title">Xgboost</a>
 </td>

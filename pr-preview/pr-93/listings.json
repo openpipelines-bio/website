@@ -1,17 +1,5 @@
 [
   {
-    "listing": "/user_guide/index.html",
-    "items": [
-      "/user_guide/getting_started.html",
-      "/user_guide/running_pipelines.html",
-      "/user_guide/parameter_lists.html",
-      "/user_guide/ingestion.html",
-      "/user_guide/processing.html",
-      "/user_guide/downstream.html",
-      "/user_guide/bug_reports.html"
-    ]
-  },
-  {
     "listing": "/index.html",
     "items": [
       "/fundamentals/philosophy.html",
@@ -41,20 +29,26 @@
     ]
   },
   {
-    "listing": "/fundamentals/index.html",
+    "listing": "/user_guide/index.html",
     "items": [
-      "/fundamentals/philosophy.html",
-      "/fundamentals/concepts.html",
-      "/fundamentals/architecture.html",
-      "/fundamentals/roadmap.html"
+      "/user_guide/getting_started.html",
+      "/user_guide/running_pipelines.html",
+      "/user_guide/parameter_lists.html",
+      "/user_guide/ingestion.html",
+      "/user_guide/processing.html",
+      "/user_guide/downstream.html",
+      "/user_guide/bug_reports.html"
     ]
   },
   {
-    "listing": "/more_information/index.html",
+    "listing": "/contributing/index.html",
     "items": [
-      "/more_information/cheat_sheets.html",
-      "/more_information/code_of_conduct.html",
-      "/more_information/faq.html"
+      "/contributing/getting_started.html",
+      "/contributing/project_structure.html",
+      "/contributing/creating_components.html",
+      "/contributing/creating_pipelines.html",
+      "/contributing/running_tests.html",
+      "/contributing/pull_requests.html"
     ]
   },
   {
@@ -77,47 +71,28 @@
   {
     "listing": "/components/index.html",
     "items": [
-      "/components/workflows/index.html",
       "/components/workflows/ingestion/bd_rhapsody.html",
       "/components/workflows/integration/bbknn_leiden.html",
-      "/components/workflows/multiomics/integration/bbknn_leiden.html",
       "/components/workflows/ingestion/cellranger_mapping.html",
       "/components/workflows/ingestion/cellranger_multi.html",
       "/components/workflows/ingestion/cellranger_postprocessing.html",
       "/components/workflows/ingestion/conversion.html",
       "/components/workflows/ingestion/demux.html",
       "/components/workflows/multiomics/dimensionality_reduction.html",
-      "/components/workflows/multiomics/full_pipeline.html",
       "/components/workflows/gdo/gdo_singlesample.html",
-      "/components/workflows/integration/common/harmony_leiden.html",
       "/components/workflows/integration/harmony_leiden.html",
-      "/components/workflows/multiomics/integration/harmony_leiden.html",
-      "/components/workflows/integration/initialize_integration/initialize_integration.html",
-      "/components/workflows/multiomics/integration/initialize_integration.html",
-      "/components/workflows/multiomics/integration.html",
-      "/components/workflows/multiomics/integration/leiden_scvi.html",
       "/components/workflows/ingestion/make_reference.html",
-      "/components/workflows/multiomics/multisample.html",
       "/components/workflows/multiomics/process_batches.html",
       "/components/workflows/multiomics/process_samples.html",
-      "/components/workflows/multiomics/prot_multisample.html",
       "/components/workflows/prot/prot_multisample.html",
-      "/components/workflows/multiomics/prot_singlesample.html",
       "/components/workflows/prot/prot_singlesample.html",
       "/components/workflows/qc/qc.html",
-      "/components/workflows/multiomics/rna_multisample.html",
       "/components/workflows/rna/rna_multisample.html",
-      "/components/workflows/multiomics/rna_singlesample.html",
       "/components/workflows/rna/rna_singlesample.html",
       "/components/workflows/integration/scanorama_leiden.html",
-      "/components/workflows/integration/scanorama_leiden/scanorama_leiden.html",
-      "/components/workflows/multiomics/integration/scanorama_leiden.html",
-      "/components/workflows/integration/scvi/scvi.html",
       "/components/workflows/integration/scvi_leiden.html",
-      "/components/workflows/multiomics/integration/scvi_leiden.html",
       "/components/workflows/multiomics/split_modalities.html",
       "/components/workflows/integration/totalvi_leiden.html",
-      "/components/workflows/multiomics/integration/totalvi_leiden.html",
       "/components/modules/metadata/add_id.html",
       "/components/modules/mapping/bd_rhapsody.html",
       "/components/modules/neighbors/bbknn.html",
@@ -186,7 +161,6 @@
       "/components/modules/dimred/pca.html",
       "/components/modules/annotate/popv.html",
       "/components/modules/transfer/publish.html",
-      "/components/modules/index.html",
       "/components/modules/transform/regress_out.html",
       "/components/modules/filter/remove_modality.html",
       "/components/modules/genetic_demux/samtools.html",
@@ -214,18 +188,20 @@
     ]
   },
   {
-    "listing": "/components/modules/index.html",
-    "items": []
+    "listing": "/fundamentals/index.html",
+    "items": [
+      "/fundamentals/philosophy.html",
+      "/fundamentals/concepts.html",
+      "/fundamentals/architecture.html",
+      "/fundamentals/roadmap.html"
+    ]
   },
   {
-    "listing": "/contributing/index.html",
+    "listing": "/more_information/index.html",
     "items": [
-      "/contributing/getting_started.html",
-      "/contributing/project_structure.html",
-      "/contributing/creating_components.html",
-      "/contributing/creating_pipelines.html",
-      "/contributing/running_tests.html",
-      "/contributing/pull_requests.html"
+      "/more_information/cheat_sheets.html",
+      "/more_information/code_of_conduct.html",
+      "/more_information/faq.html"
     ]
   }
 ]
