@@ -137,15 +137,14 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ## Visualisation
 
 ```{mermaid}
-%%| column: screen-inset-shaded
-flowchart LR
+flowchart TB
     v0(Channel.fromList)
     v18(normalize_total)
     v38(log1p)
     v58(delete_layer)
     v78(highly_variable_features_scanpy)
     v189(Output)
-    subgraph rna_qc
+    subgraph group_rna_qc [rna_qc]
         v90(filter)
         v108(grep_annotation_column)
         v121(mix)
@@ -163,6 +162,18 @@ flowchart LR
     v121-->v130
     v130-->v150
     v150-->v189
+    style group_rna_qc fill:#F0F0F0,stroke:#969696;
+    style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v18 fill:#e3dcea,stroke:#7a4baa;
+    style v38 fill:#e3dcea,stroke:#7a4baa;
+    style v58 fill:#e3dcea,stroke:#7a4baa;
+    style v78 fill:#e3dcea,stroke:#7a4baa;
+    style v90 fill:#e3dcea,stroke:#7a4baa;
+    style v108 fill:#e3dcea,stroke:#7a4baa;
+    style v121 fill:#e3dcea,stroke:#7a4baa;
+    style v130 fill:#e3dcea,stroke:#7a4baa;
+    style v150 fill:#e3dcea,stroke:#7a4baa;
+    style v189 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 

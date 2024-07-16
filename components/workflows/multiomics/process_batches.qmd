@@ -131,10 +131,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ## Visualisation
 
 ```{mermaid}
-%%| column: screen-inset-shaded
-flowchart LR
-    v0(Channel.fromList)
-    v11(filter)
+flowchart TB
     v55(flatMap)
     v370(mix)
     v372(mix)
@@ -145,10 +142,12 @@ flowchart LR
     v556(concat)
     v565(publish)
     v593(Output)
-    subgraph split_modalities_workflow
+    subgraph group_split_modalities_workflow [split_modalities_workflow]
+        v0(Channel.fromList)
+        v11(filter)
         v27(split_modalities_component)
     end
-    subgraph rna_multisample
+    subgraph group_rna_multisample [rna_multisample]
         v78(normalize_total)
         v98(log1p)
         v118(delete_layer)
@@ -159,7 +158,7 @@ flowchart LR
         v190(calculate_qc_metrics)
         v210(publish)
     end
-    subgraph prot_multisample
+    subgraph group_prot_multisample [prot_multisample]
         v263(clr)
         v275(filter)
         v293(grep_annotation_column)
@@ -167,12 +166,12 @@ flowchart LR
         v315(calculate_qc_metrics)
         v335(publish)
     end
-    subgraph dimensionality_reduction_rna
+    subgraph group_dimensionality_reduction_rna [dimensionality_reduction_rna]
         v417(pca)
         v437(find_neighbors)
         v457(umap)
     end
-    subgraph dimensionality_reduction_prot
+    subgraph group_dimensionality_reduction_prot [dimensionality_reduction_prot]
         v495(pca)
         v515(find_neighbors)
         v535(umap)
@@ -216,6 +215,45 @@ flowchart LR
     v535-->v556
     v556-->v565
     v565-->v593
+    style group_split_modalities_workflow fill:#F0F0F0,stroke:#969696;
+    style group_rna_multisample fill:#F0F0F0,stroke:#969696;
+    style group_prot_multisample fill:#F0F0F0,stroke:#969696;
+    style group_dimensionality_reduction_rna fill:#F0F0F0,stroke:#969696;
+    style group_dimensionality_reduction_prot fill:#F0F0F0,stroke:#969696;
+    style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v11 fill:#e3dcea,stroke:#7a4baa;
+    style v27 fill:#e3dcea,stroke:#7a4baa;
+    style v55 fill:#e3dcea,stroke:#7a4baa;
+    style v78 fill:#e3dcea,stroke:#7a4baa;
+    style v98 fill:#e3dcea,stroke:#7a4baa;
+    style v118 fill:#e3dcea,stroke:#7a4baa;
+    style v138 fill:#e3dcea,stroke:#7a4baa;
+    style v150 fill:#e3dcea,stroke:#7a4baa;
+    style v168 fill:#e3dcea,stroke:#7a4baa;
+    style v181 fill:#e3dcea,stroke:#7a4baa;
+    style v190 fill:#e3dcea,stroke:#7a4baa;
+    style v210 fill:#e3dcea,stroke:#7a4baa;
+    style v370 fill:#e3dcea,stroke:#7a4baa;
+    style v263 fill:#e3dcea,stroke:#7a4baa;
+    style v275 fill:#e3dcea,stroke:#7a4baa;
+    style v293 fill:#e3dcea,stroke:#7a4baa;
+    style v306 fill:#e3dcea,stroke:#7a4baa;
+    style v315 fill:#e3dcea,stroke:#7a4baa;
+    style v335 fill:#e3dcea,stroke:#7a4baa;
+    style v372 fill:#e3dcea,stroke:#7a4baa;
+    style v388 fill:#e3dcea,stroke:#7a4baa;
+    style v404 fill:#e3dcea,stroke:#7a4baa;
+    style v478 fill:#e3dcea,stroke:#7a4baa;
+    style v417 fill:#e3dcea,stroke:#7a4baa;
+    style v437 fill:#e3dcea,stroke:#7a4baa;
+    style v457 fill:#e3dcea,stroke:#7a4baa;
+    style v482 fill:#e3dcea,stroke:#7a4baa;
+    style v556 fill:#e3dcea,stroke:#7a4baa;
+    style v495 fill:#e3dcea,stroke:#7a4baa;
+    style v515 fill:#e3dcea,stroke:#7a4baa;
+    style v535 fill:#e3dcea,stroke:#7a4baa;
+    style v565 fill:#e3dcea,stroke:#7a4baa;
+    style v593 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 

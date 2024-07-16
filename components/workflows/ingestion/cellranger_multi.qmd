@@ -184,8 +184,7 @@ Arguments relevant to the analysis of gene expression data.
 ## Visualisation
 
 ```{mermaid}
-%%| column: screen-inset-shaded
-flowchart LR
+flowchart TB
     v0(Channel.fromList)
     v17(cellranger_multi_component)
     v37(from_cellranger_multi_to_h5mu)
@@ -193,6 +192,10 @@ flowchart LR
     v0-->v17
     v17-->v37
     v37-->v64
+    style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v17 fill:#e3dcea,stroke:#7a4baa;
+    style v37 fill:#e3dcea,stroke:#7a4baa;
+    style v64 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 
