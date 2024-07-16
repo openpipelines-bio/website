@@ -15,6 +15,100 @@ flowchart TD
   ingest["Ingestion"] --> split --> unimodalsinglesample["Unimodal Single Sample Processing"] --> concat --> unimodalmultisample["Unimodal Multi Sample Processing"] --> merging --> integation_setup["Integration Setup"] --> integration["Integration"]  --> downstreamprocessing["Downstream Processing"]
 ```
 
+```{mermaid}
+flowchart TB
+  subgraph ingestion
+    direction TB
+    subgraph cellranger_multi
+      direction TB
+      mapping_10x --> convert_to_h5mu_10x
+      mapping_10x[mapping]
+      convert_to_h5mu_10x[convert_to_h5mu]
+    end
+    subgraph bdrhap_v1
+      direction TB
+      mapping_bd1 --> convert_to_h5mu_bd1
+      mapping_bd1[mapping]
+      convert_to_h5mu_bd1[convert_to_h5mu]
+    end
+    subgraph bdrhap_v2
+      direction TB
+      mapping_bd2 --> convert_to_h5mu_bd2
+      mapping_bd2[mapping]
+      convert_to_h5mu_bd2[convert_to_h5mu]
+    end
+    cellranger_multi:::subwf
+    bdrhap_v1:::subwf
+    bdrhap_v2:::subwf
+  end
+  ingestion:::wf
+  subgraph process_samples
+    split_modalities --> rna_singlesample & prot_singlesample & gdo_singlesample & atac_singlesample & other_modalities --> concat --> process_batches
+    split_modalities
+    rna_singlesample
+    prot_singlesample
+    gdo_singlesample
+    atac_singlesample
+    other_modalities
+    concat
+    subgraph process_batches
+      direction LR
+      split_modalities2 --> rna_multisample & prot_multisample & atac_multisample & other_modalities2 --> merge
+      split_modalities2[split_modalities]
+      other_modalities2[other_modalities]
+      rna_multisample
+      prot_multisample
+      merge
+    end
+    process_batches:::subwf
+    atac_multisample
+  end
+  process_samples:::wf
+  raw_counts --- ingestion --> raw_h5mu
+  raw_h5mu --- process_samples --> processed_h5mu
+  subgraph integration
+    direction LR
+    integration_method --> find_neighbors --> leiden --> umap
+    integration_method -.- intmeth
+    integration_method
+    find_neighbors
+    leiden
+    umap
+    subgraph intmeth [integration_method]
+      bbknn
+      harmony
+      scanorama
+      scvi
+      totalvi
+      scgpt_integration
+    end
+    intmeth:::info
+  end
+  integration:::wf
+  processed_h5mu --- integration ---> integrated_h5mu
+  subgraph celltype_annotation
+    direction TB
+    integration_method2[integration_method]
+    celltypist
+    scanvi
+    scgpt_annotation
+    onclass
+    svm
+    randomforest
+    pynndescent_knn
+    consensus_voting
+    integration_method2 --> pynndescent_knn --> consensus_voting
+    celltypist & scanvi & scgpt_annotation & onclass & svm & randomforest --> consensus_voting
+  end
+  reference_atlas --> celltype_annotation
+  celltype_annotation:::wf
+  integrated_h5mu --- celltype_annotation --> annotated_h5mu
+
+  classDef wf fill:#f0f0f0,stroke:#525252
+  classDef subwf fill:#d9d9d9,stroke:#525252
+  classDef info fill:#f0f0f0,stroke:#525252,stroke-dasharray: 4 4
+```
+
 1. [Ingestion](#ingestion): Convert raw sequencing data or count tables into MuData data for further processing.
 2. [Splitting modalities](#sec-splitting): Creating several MuData objects, one per modality, out of a multimodal input sample.
 3. [Unimodal Single Sample Processing](#sec-single-sample): tools applied to each modality of samples individually. Mostly involves the selection of true from false cells.
