@@ -207,8 +207,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ## Visualisation
 
 ```{mermaid}
-%%| column: screen-inset-shaded
-flowchart LR
+flowchart TB
     v0(Channel.fromList)
     v18(totalvi)
     v50(concat)
@@ -219,7 +218,7 @@ flowchart LR
     v102(umap)
     v206(publish)
     v233(Output)
-    subgraph totalvi_leiden
+    subgraph group_totalvi_leiden [totalvi_leiden]
         v134(concat)
         v123(find_neighbors)
         v144(leiden)
@@ -244,6 +243,23 @@ flowchart LR
     v177-->v186
     v186-->v206
     v206-->v233
+    style group_totalvi_leiden fill:#F0F0F0,stroke:#969696;
+    style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v18 fill:#e3dcea,stroke:#7a4baa;
+    style v50 fill:#e3dcea,stroke:#7a4baa;
+    style v39 fill:#e3dcea,stroke:#7a4baa;
+    style v60 fill:#e3dcea,stroke:#7a4baa;
+    style v80 fill:#e3dcea,stroke:#7a4baa;
+    style v93 fill:#e3dcea,stroke:#7a4baa;
+    style v102 fill:#e3dcea,stroke:#7a4baa;
+    style v134 fill:#e3dcea,stroke:#7a4baa;
+    style v123 fill:#e3dcea,stroke:#7a4baa;
+    style v144 fill:#e3dcea,stroke:#7a4baa;
+    style v164 fill:#e3dcea,stroke:#7a4baa;
+    style v177 fill:#e3dcea,stroke:#7a4baa;
+    style v186 fill:#e3dcea,stroke:#7a4baa;
+    style v206 fill:#e3dcea,stroke:#7a4baa;
+    style v233 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 

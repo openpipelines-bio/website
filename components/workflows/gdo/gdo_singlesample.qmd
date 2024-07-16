@@ -109,8 +109,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ## Visualisation
 
 ```{mermaid}
-%%| column: screen-inset-shaded
-flowchart LR
+flowchart TB
     v0(Channel.fromList)
     v18(gdo_filter_with_counts)
     v38(gdo_do_filter)
@@ -118,6 +117,10 @@ flowchart LR
     v0-->v18
     v18-->v38
     v38-->v66
+    style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v18 fill:#e3dcea,stroke:#7a4baa;
+    style v38 fill:#e3dcea,stroke:#7a4baa;
+    style v66 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 

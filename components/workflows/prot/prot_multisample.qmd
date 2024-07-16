@@ -115,12 +115,11 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ## Visualisation
 
 ```{mermaid}
-%%| column: screen-inset-shaded
-flowchart LR
+flowchart TB
     v0(Channel.fromList)
     v18(clr)
     v129(Output)
-    subgraph prot_qc
+    subgraph group_prot_qc [prot_qc]
         v30(filter)
         v48(grep_annotation_column)
         v61(mix)
@@ -135,6 +134,15 @@ flowchart LR
     v61-->v70
     v70-->v90
     v90-->v129
+    style group_prot_qc fill:#F0F0F0,stroke:#969696;
+    style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v18 fill:#e3dcea,stroke:#7a4baa;
+    style v30 fill:#e3dcea,stroke:#7a4baa;
+    style v48 fill:#e3dcea,stroke:#7a4baa;
+    style v61 fill:#e3dcea,stroke:#7a4baa;
+    style v70 fill:#e3dcea,stroke:#7a4baa;
+    style v90 fill:#e3dcea,stroke:#7a4baa;
+    style v129 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 

@@ -91,8 +91,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ## Visualisation
 
 ```{mermaid}
-%%| column: screen-inset-shaded
-flowchart LR
+flowchart TB
     v0(Channel.fromList)
     v2(filter)
     v18(split_modalities_component)
@@ -100,6 +99,10 @@ flowchart LR
     v0-->v2
     v2-->v18
     v18-->v51
+    style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v2 fill:#e3dcea,stroke:#7a4baa;
+    style v18 fill:#e3dcea,stroke:#7a4baa;
+    style v51 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 

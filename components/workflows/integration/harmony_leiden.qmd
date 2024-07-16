@@ -145,8 +145,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ## Visualisation
 
 ```{mermaid}
-%%| column: screen-inset-shaded
-flowchart LR
+flowchart TB
     v0(Channel.fromList)
     v18(harmonypy)
     v49(concat)
@@ -165,6 +164,15 @@ flowchart LR
     v49-->v92
     v92-->v101
     v101-->v128
+    style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v18 fill:#e3dcea,stroke:#7a4baa;
+    style v49 fill:#e3dcea,stroke:#7a4baa;
+    style v38 fill:#e3dcea,stroke:#7a4baa;
+    style v59 fill:#e3dcea,stroke:#7a4baa;
+    style v79 fill:#e3dcea,stroke:#7a4baa;
+    style v92 fill:#e3dcea,stroke:#7a4baa;
+    style v101 fill:#e3dcea,stroke:#7a4baa;
+    style v128 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 
