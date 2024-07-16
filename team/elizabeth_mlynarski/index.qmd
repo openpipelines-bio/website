@@ -1,0 +1,15 @@
+---
+title: Elizabeth Mlynarski
+image: https://www.gravatar.com/avatar/0f1e0c40668bfc2a1032da9b6347f9fe
+role: Contributor
+organizations:
+- name: Janssen R&D US
+  role: Principal Scientist Computational Genomics
+links:
+- icon: bi-envelope
+  text: E-mail
+  href: mailto:emlynars@its.jnj.com
+about:
+  template: jolla
+---
+

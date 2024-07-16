@@ -47,6 +47,7 @@ modality: "prot"
 # output_compression: "gzip"
 # input_layer: "foo"
 # output_layer: "foo"
+axis: 0
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
@@ -70,14 +71,15 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name                   |Description                                                  |Attributes                                 |
+|Name                   |Description                                                                                                                                           |Attributes                                 |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--input`              |Input h5mu file                                              |`file`, required, example: `"input.h5mu"`  |
-|`--modality`           |                                                             |`string`, default: `"prot"`                |
-|`--output`             |Output h5mu file.                                            |`file`, required, default: `"output.h5mu"` |
-|`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`                |
-|`--input_layer`        |Input layer to use. By default, .X is used.                  |`string`                                   |
-|`--output_layer`       |Output layer to use. By default, use X.                      |`string`                                   |
+|`--input`              |Input h5mu file                                                                                                                                       |`file`, required, example: `"input.h5mu"`  |
+|`--modality`           |                                                                                                                                                      |`string`, default: `"prot"`                |
+|`--output`             |Output h5mu file.                                                                                                                                     |`file`, required, default: `"output.h5mu"` |
+|`--output_compression` |The compression format to be used on the output h5mu object.                                                                                          |`string`, example: `"gzip"`                |
+|`--input_layer`        |Input layer to use. By default, .X is used.                                                                                                           |`string`                                   |
+|`--output_layer`       |Output layer to use. By default, use X.                                                                                                               |`string`                                   |
+|`--axis`               |Axis across which CLR is performed. If set to 0, CLR is performed across observations (cells). If set to 1, CLR is performed across features (genes). |`integer`, default: `0`                    |
 
 ## Authors
 
