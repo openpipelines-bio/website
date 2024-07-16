@@ -1503,14 +1503,14 @@ Note
 <li><p>Dries De Maeyer <a href="https://github.com/ddemaeyer"><i class="fa-brands fa-github" aria-label="github"></i></a> <a href="https://linkedin.com/in/dries-de-maeyer-b46a814"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a> (author)</p></li>
 </ul>
 </section>
-<section id="visualisation" class="level2 page-columns page-full">
+<section id="visualisation" class="level2">
 <h2 class="anchored" data-anchor-id="visualisation">Visualisation</h2>
-<div class="cell page-columns page-full" data-layout-align="default">
-<div class="cell-output-display column-screen-inset-shaded">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
-<pre class="mermaid mermaid-js">flowchart LR
+<pre class="mermaid mermaid-js">flowchart TB
     v0(Channel.fromList)
     v17(cellranger_count)
     v37(cellranger_count_split)
@@ -1520,6 +1520,11 @@ Note
     v17--&gt;v37
     v37--&gt;v57
     v57--&gt;v84
+    style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v17 fill:#e3dcea,stroke:#7a4baa;
+    style v37 fill:#e3dcea,stroke:#7a4baa;
+    style v57 fill:#e3dcea,stroke:#7a4baa;
+    style v84 fill:#e3dcea,stroke:#7a4baa;
 
 </pre>
 </div>

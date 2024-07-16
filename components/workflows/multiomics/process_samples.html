@@ -1787,14 +1787,14 @@ Note
 <li>Dries Schaumont <a href="https://github.com/DriesSchaumont"><i class="fa-brands fa-github" aria-label="github"></i></a> <a href="https://orcid.org/0000-0002-4389-0440"><i class="fa-brands fa-orcid" aria-label="orcid"></i></a> <a href="https://linkedin.com/in/dries-schaumont"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a> (author, maintainer)</li>
 </ul>
 </section>
-<section id="visualisation" class="level2 page-columns page-full">
+<section id="visualisation" class="level2">
 <h2 class="anchored" data-anchor-id="visualisation">Visualisation</h2>
-<div class="cell page-columns page-full" data-layout-align="default">
-<div class="cell-output-display column-screen-inset-shaded">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
-<pre class="mermaid mermaid-js">flowchart LR
+<pre class="mermaid mermaid-js">flowchart TB
     v0(Channel.fromList)
     v20(add_id)
     v32(filter)
@@ -1804,10 +1804,10 @@ Note
     v405(concatenate_h5mu)
     v429(filter)
     v1022(Output)
-    subgraph split_modalities_workflow
+    subgraph group_split_modalities_workflow [split_modalities_workflow]
         v48(split_modalities_component)
     end
-    subgraph rna_singlesample
+    subgraph group_rna_singlesample [rna_singlesample]
         v90(filter)
         v108(grep_annotation_column)
         v121(mix)
@@ -1820,33 +1820,18 @@ Note
         v221(rna_do_filter)
         v241(filter_with_scrublet)
     end
-    subgraph prot_singlesample
+    subgraph group_prot_singlesample [prot_singlesample]
         v282(prot_filter_with_counts)
         v302(prot_do_filter)
     end
-    subgraph gdo_singlesample
+    subgraph group_gdo_singlesample [gdo_singlesample]
         v344(gdo_filter_with_counts)
         v364(gdo_do_filter)
     end
-    subgraph process_batches
+    subgraph group_process_batches [process_batches]
         v445(split_modalities_component)
         v473(flatMap)
-        v496(normalize_total)
-        v516(log1p)
-        v536(delete_layer)
-        v556(highly_variable_features_scanpy)
-        v568(filter)
-        v586(grep_annotation_column)
-        v599(mix)
-        v608(calculate_qc_metrics)
-        v628(publish)
         v788(mix)
-        v681(clr)
-        v693(filter)
-        v711(grep_annotation_column)
-        v724(mix)
-        v733(calculate_qc_metrics)
-        v753(publish)
         v790(mix)
         v806(merge)
         v822(branch)
@@ -1860,6 +1845,25 @@ Note
         v933(find_neighbors)
         v953(umap)
         v983(publish)
+        subgraph group_rna_multisample [rna_multisample]
+            v496(normalize_total)
+            v516(log1p)
+            v536(delete_layer)
+            v556(highly_variable_features_scanpy)
+            v568(filter)
+            v586(grep_annotation_column)
+            v599(mix)
+            v608(calculate_qc_metrics)
+            v628(publish)
+        end
+        subgraph group_prot_multisample [prot_multisample]
+            v681(clr)
+            v693(filter)
+            v711(grep_annotation_column)
+            v724(mix)
+            v733(calculate_qc_metrics)
+            v753(publish)
+        end
     end
     v176--&gt;v192
     v388--&gt;v390
@@ -1927,6 +1931,69 @@ Note
     v953--&gt;v974
     v974--&gt;v983
     v983--&gt;v1022
+    style group_split_modalities_workflow fill:#F0F0F0,stroke:#969696;
+    style group_rna_singlesample fill:#F0F0F0,stroke:#969696;
+    style group_prot_singlesample fill:#F0F0F0,stroke:#969696;
+    style group_gdo_singlesample fill:#F0F0F0,stroke:#969696;
+    style group_process_batches fill:#F0F0F0,stroke:#969696;
+    style group_rna_multisample fill:#D9D9D9,stroke:#737373;
+    style group_prot_multisample fill:#D9D9D9,stroke:#737373;
+    style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v20 fill:#e3dcea,stroke:#7a4baa;
+    style v32 fill:#e3dcea,stroke:#7a4baa;
+    style v48 fill:#e3dcea,stroke:#7a4baa;
+    style v76 fill:#e3dcea,stroke:#7a4baa;
+    style v90 fill:#e3dcea,stroke:#7a4baa;
+    style v108 fill:#e3dcea,stroke:#7a4baa;
+    style v121 fill:#e3dcea,stroke:#7a4baa;
+    style v130 fill:#e3dcea,stroke:#7a4baa;
+    style v150 fill:#e3dcea,stroke:#7a4baa;
+    style v176 fill:#e3dcea,stroke:#7a4baa;
+    style v192 fill:#e3dcea,stroke:#7a4baa;
+    style v181 fill:#e3dcea,stroke:#7a4baa;
+    style v201 fill:#e3dcea,stroke:#7a4baa;
+    style v221 fill:#e3dcea,stroke:#7a4baa;
+    style v241 fill:#e3dcea,stroke:#7a4baa;
+    style v388 fill:#e3dcea,stroke:#7a4baa;
+    style v282 fill:#e3dcea,stroke:#7a4baa;
+    style v302 fill:#e3dcea,stroke:#7a4baa;
+    style v344 fill:#e3dcea,stroke:#7a4baa;
+    style v364 fill:#e3dcea,stroke:#7a4baa;
+    style v390 fill:#e3dcea,stroke:#7a4baa;
+    style v405 fill:#e3dcea,stroke:#7a4baa;
+    style v429 fill:#e3dcea,stroke:#7a4baa;
+    style v445 fill:#e3dcea,stroke:#7a4baa;
+    style v473 fill:#e3dcea,stroke:#7a4baa;
+    style v496 fill:#e3dcea,stroke:#7a4baa;
+    style v516 fill:#e3dcea,stroke:#7a4baa;
+    style v536 fill:#e3dcea,stroke:#7a4baa;
+    style v556 fill:#e3dcea,stroke:#7a4baa;
+    style v568 fill:#e3dcea,stroke:#7a4baa;
+    style v586 fill:#e3dcea,stroke:#7a4baa;
+    style v599 fill:#e3dcea,stroke:#7a4baa;
+    style v608 fill:#e3dcea,stroke:#7a4baa;
+    style v628 fill:#e3dcea,stroke:#7a4baa;
+    style v788 fill:#e3dcea,stroke:#7a4baa;
+    style v681 fill:#e3dcea,stroke:#7a4baa;
+    style v693 fill:#e3dcea,stroke:#7a4baa;
+    style v711 fill:#e3dcea,stroke:#7a4baa;
+    style v724 fill:#e3dcea,stroke:#7a4baa;
+    style v733 fill:#e3dcea,stroke:#7a4baa;
+    style v753 fill:#e3dcea,stroke:#7a4baa;
+    style v790 fill:#e3dcea,stroke:#7a4baa;
+    style v806 fill:#e3dcea,stroke:#7a4baa;
+    style v822 fill:#e3dcea,stroke:#7a4baa;
+    style v896 fill:#e3dcea,stroke:#7a4baa;
+    style v835 fill:#e3dcea,stroke:#7a4baa;
+    style v855 fill:#e3dcea,stroke:#7a4baa;
+    style v875 fill:#e3dcea,stroke:#7a4baa;
+    style v900 fill:#e3dcea,stroke:#7a4baa;
+    style v974 fill:#e3dcea,stroke:#7a4baa;
+    style v913 fill:#e3dcea,stroke:#7a4baa;
+    style v933 fill:#e3dcea,stroke:#7a4baa;
+    style v953 fill:#e3dcea,stroke:#7a4baa;
+    style v983 fill:#e3dcea,stroke:#7a4baa;
+    style v1022 fill:#e3dcea,stroke:#7a4baa;
 
 </pre>
 </div>

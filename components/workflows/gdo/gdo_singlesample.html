@@ -1483,14 +1483,14 @@ Note
 <li>Dries Schaumont <a href="https://github.com/DriesSchaumont"><i class="fa-brands fa-github" aria-label="github"></i></a> <a href="https://orcid.org/0000-0002-4389-0440"><i class="fa-brands fa-orcid" aria-label="orcid"></i></a> <a href="https://linkedin.com/in/dries-schaumont"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a> (author)</li>
 </ul>
 </section>
-<section id="visualisation" class="level2 page-columns page-full">
+<section id="visualisation" class="level2">
 <h2 class="anchored" data-anchor-id="visualisation">Visualisation</h2>
-<div class="cell page-columns page-full" data-layout-align="default">
-<div class="cell-output-display column-screen-inset-shaded">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
-<pre class="mermaid mermaid-js">flowchart LR
+<pre class="mermaid mermaid-js">flowchart TB
     v0(Channel.fromList)
     v18(gdo_filter_with_counts)
     v38(gdo_do_filter)
@@ -1498,6 +1498,10 @@ Note
     v0--&gt;v18
     v18--&gt;v38
     v38--&gt;v66
+    style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v18 fill:#e3dcea,stroke:#7a4baa;
+    style v38 fill:#e3dcea,stroke:#7a4baa;
+    style v66 fill:#e3dcea,stroke:#7a4baa;
 
 </pre>
 </div>

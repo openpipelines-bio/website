@@ -1650,14 +1650,14 @@ Note
 <li>Robrecht Cannoodt <a href="https://github.com/rcannood"><i class="fa-brands fa-github" aria-label="github"></i></a> <a href="https://orcid.org/0000-0003-3641-729X"><i class="fa-brands fa-orcid" aria-label="orcid"></i></a> <a href="https://linkedin.com/in/robrechtcannoodt"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a> (maintainer)</li>
 </ul>
 </section>
-<section id="visualisation" class="level2 page-columns page-full">
+<section id="visualisation" class="level2">
 <h2 class="anchored" data-anchor-id="visualisation">Visualisation</h2>
-<div class="cell page-columns page-full" data-layout-align="default">
-<div class="cell-output-display column-screen-inset-shaded">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
-<pre class="mermaid mermaid-js">flowchart LR
+<pre class="mermaid mermaid-js">flowchart TB
     v0(Channel.fromList)
     v17(bd_rhapsody_component)
     v38(from_bdrhap_to_h5mu)
@@ -1665,6 +1665,10 @@ Note
     v0--&gt;v17
     v17--&gt;v38
     v38--&gt;v65
+    style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v17 fill:#e3dcea,stroke:#7a4baa;
+    style v38 fill:#e3dcea,stroke:#7a4baa;
+    style v65 fill:#e3dcea,stroke:#7a4baa;
 
 </pre>
 </div>

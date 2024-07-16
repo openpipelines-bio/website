@@ -1554,21 +1554,21 @@ Note
 <li><p>Dries Schaumont <a href="https://github.com/DriesSchaumont"><i class="fa-brands fa-github" aria-label="github"></i></a> <a href="https://orcid.org/0000-0002-4389-0440"><i class="fa-brands fa-orcid" aria-label="orcid"></i></a> <a href="https://linkedin.com/in/dries-schaumont"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a> (author)</p></li>
 </ul>
 </section>
-<section id="visualisation" class="level2 page-columns page-full">
+<section id="visualisation" class="level2">
 <h2 class="anchored" data-anchor-id="visualisation">Visualisation</h2>
-<div class="cell page-columns page-full" data-layout-align="default">
-<div class="cell-output-display column-screen-inset-shaded">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
-<pre class="mermaid mermaid-js">flowchart LR
+<pre class="mermaid mermaid-js">flowchart TB
     v0(Channel.fromList)
     v18(normalize_total)
     v38(log1p)
     v58(delete_layer)
     v78(highly_variable_features_scanpy)
     v189(Output)
-    subgraph rna_qc
+    subgraph group_rna_qc [rna_qc]
         v90(filter)
         v108(grep_annotation_column)
         v121(mix)
@@ -1586,6 +1586,18 @@ Note
     v121--&gt;v130
     v130--&gt;v150
     v150--&gt;v189
+    style group_rna_qc fill:#F0F0F0,stroke:#969696;
+    style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v18 fill:#e3dcea,stroke:#7a4baa;
+    style v38 fill:#e3dcea,stroke:#7a4baa;
+    style v58 fill:#e3dcea,stroke:#7a4baa;
+    style v78 fill:#e3dcea,stroke:#7a4baa;
+    style v90 fill:#e3dcea,stroke:#7a4baa;
+    style v108 fill:#e3dcea,stroke:#7a4baa;
+    style v121 fill:#e3dcea,stroke:#7a4baa;
+    style v130 fill:#e3dcea,stroke:#7a4baa;
+    style v150 fill:#e3dcea,stroke:#7a4baa;
+    style v189 fill:#e3dcea,stroke:#7a4baa;
 
 </pre>
 </div>

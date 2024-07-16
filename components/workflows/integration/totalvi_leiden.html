@@ -1756,14 +1756,14 @@ Note
 <li>Dries Schaumont <a href="https://github.com/DriesSchaumont"><i class="fa-brands fa-github" aria-label="github"></i></a> <a href="https://orcid.org/0000-0002-4389-0440"><i class="fa-brands fa-orcid" aria-label="orcid"></i></a> <a href="https://linkedin.com/in/dries-schaumont"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a> (author)</li>
 </ul>
 </section>
-<section id="visualisation" class="level2 page-columns page-full">
+<section id="visualisation" class="level2">
 <h2 class="anchored" data-anchor-id="visualisation">Visualisation</h2>
-<div class="cell page-columns page-full" data-layout-align="default">
-<div class="cell-output-display column-screen-inset-shaded">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
-<pre class="mermaid mermaid-js">flowchart LR
+<pre class="mermaid mermaid-js">flowchart TB
     v0(Channel.fromList)
     v18(totalvi)
     v50(concat)
@@ -1774,7 +1774,7 @@ Note
     v102(umap)
     v206(publish)
     v233(Output)
-    subgraph totalvi_leiden
+    subgraph group_totalvi_leiden [totalvi_leiden]
         v134(concat)
         v123(find_neighbors)
         v144(leiden)
@@ -1799,6 +1799,23 @@ Note
     v177--&gt;v186
     v186--&gt;v206
     v206--&gt;v233
+    style group_totalvi_leiden fill:#F0F0F0,stroke:#969696;
+    style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v18 fill:#e3dcea,stroke:#7a4baa;
+    style v50 fill:#e3dcea,stroke:#7a4baa;
+    style v39 fill:#e3dcea,stroke:#7a4baa;
+    style v60 fill:#e3dcea,stroke:#7a4baa;
+    style v80 fill:#e3dcea,stroke:#7a4baa;
+    style v93 fill:#e3dcea,stroke:#7a4baa;
+    style v102 fill:#e3dcea,stroke:#7a4baa;
+    style v134 fill:#e3dcea,stroke:#7a4baa;
+    style v123 fill:#e3dcea,stroke:#7a4baa;
+    style v144 fill:#e3dcea,stroke:#7a4baa;
+    style v164 fill:#e3dcea,stroke:#7a4baa;
+    style v177 fill:#e3dcea,stroke:#7a4baa;
+    style v186 fill:#e3dcea,stroke:#7a4baa;
+    style v206 fill:#e3dcea,stroke:#7a4baa;
+    style v233 fill:#e3dcea,stroke:#7a4baa;
 
 </pre>
 </div>

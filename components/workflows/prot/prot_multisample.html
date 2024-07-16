@@ -1501,18 +1501,18 @@ Note
 <li>Dries Schaumont <a href="https://github.com/DriesSchaumont"><i class="fa-brands fa-github" aria-label="github"></i></a> <a href="https://orcid.org/0000-0002-4389-0440"><i class="fa-brands fa-orcid" aria-label="orcid"></i></a> <a href="https://linkedin.com/in/dries-schaumont"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a> (author)</li>
 </ul>
 </section>
-<section id="visualisation" class="level2 page-columns page-full">
+<section id="visualisation" class="level2">
 <h2 class="anchored" data-anchor-id="visualisation">Visualisation</h2>
-<div class="cell page-columns page-full" data-layout-align="default">
-<div class="cell-output-display column-screen-inset-shaded">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
-<pre class="mermaid mermaid-js">flowchart LR
+<pre class="mermaid mermaid-js">flowchart TB
     v0(Channel.fromList)
     v18(clr)
     v129(Output)
-    subgraph prot_qc
+    subgraph group_prot_qc [prot_qc]
         v30(filter)
         v48(grep_annotation_column)
         v61(mix)
@@ -1527,6 +1527,15 @@ Note
     v61--&gt;v70
     v70--&gt;v90
     v90--&gt;v129
+    style group_prot_qc fill:#F0F0F0,stroke:#969696;
+    style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v18 fill:#e3dcea,stroke:#7a4baa;
+    style v30 fill:#e3dcea,stroke:#7a4baa;
+    style v48 fill:#e3dcea,stroke:#7a4baa;
+    style v61 fill:#e3dcea,stroke:#7a4baa;
+    style v70 fill:#e3dcea,stroke:#7a4baa;
+    style v90 fill:#e3dcea,stroke:#7a4baa;
+    style v129 fill:#e3dcea,stroke:#7a4baa;
 
 </pre>
 </div>

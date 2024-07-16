@@ -1542,15 +1542,14 @@ Note
 <li><p>Dries Schaumont <a href="https://github.com/DriesSchaumont"><i class="fa-brands fa-github" aria-label="github"></i></a> <a href="https://orcid.org/0000-0002-4389-0440"><i class="fa-brands fa-orcid" aria-label="orcid"></i></a> <a href="https://linkedin.com/in/dries-schaumont"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a> (author)</p></li>
 </ul>
 </section>
-<section id="visualisation" class="level2 page-columns page-full">
+<section id="visualisation" class="level2">
 <h2 class="anchored" data-anchor-id="visualisation">Visualisation</h2>
-<div class="cell page-columns page-full" data-layout-align="default">
-<div class="cell-output-display column-screen-inset-shaded">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
-<pre class="mermaid mermaid-js">flowchart LR
-    v0(Channel.fromList)
+<pre class="mermaid mermaid-js">flowchart TB
     v97(branch)
     v113(concat)
     v102(delimit_fraction)
@@ -1558,7 +1557,8 @@ Note
     v142(rna_do_filter)
     v162(filter_with_scrublet)
     v189(Output)
-    subgraph qc
+    subgraph group_qc [qc]
+        v0(Channel.fromList)
         v11(filter)
         v29(grep_annotation_column)
         v42(mix)
@@ -1579,6 +1579,20 @@ Note
     v122--&gt;v142
     v142--&gt;v162
     v162--&gt;v189
+    style group_qc fill:#F0F0F0,stroke:#969696;
+    style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v11 fill:#e3dcea,stroke:#7a4baa;
+    style v29 fill:#e3dcea,stroke:#7a4baa;
+    style v42 fill:#e3dcea,stroke:#7a4baa;
+    style v51 fill:#e3dcea,stroke:#7a4baa;
+    style v71 fill:#e3dcea,stroke:#7a4baa;
+    style v97 fill:#e3dcea,stroke:#7a4baa;
+    style v113 fill:#e3dcea,stroke:#7a4baa;
+    style v102 fill:#e3dcea,stroke:#7a4baa;
+    style v122 fill:#e3dcea,stroke:#7a4baa;
+    style v142 fill:#e3dcea,stroke:#7a4baa;
+    style v162 fill:#e3dcea,stroke:#7a4baa;
+    style v189 fill:#e3dcea,stroke:#7a4baa;
 
 </pre>
 </div>
