@@ -1,0 +1,15 @@
+---
+title: Weiwei Schultz
+image: https://www.gravatar.com/avatar/f998934538f55157b5b1ce32909e8965
+role: Contributor
+organizations:
+- name: Janssen R&D US
+  role: Associate Director Data Sciences
+links:
+- icon: bi-envelope
+  text: E-mail
+  href: mailto:wschult2@its.jnj.com
+about:
+  template: jolla
+---
+

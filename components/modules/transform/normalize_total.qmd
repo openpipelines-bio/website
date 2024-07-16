@@ -50,7 +50,7 @@ modality: "rna"
 # output: "$id.$key.output.h5mu"
 # output_compression: "gzip"
 # output_layer: "foo"
-target_sum: 10000
+# target_sum: 123
 exclude_highly_expressed: false
 
 # Nextflow input-output arguments
@@ -83,7 +83,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--output`                   |Output h5mu file.                                                                                                                                                                                                                                                                      |`file`, required, default: `"output.h5mu"` |
 |`--output_compression`       |The compression format to be used on the output h5mu object.                                                                                                                                                                                                                           |`string`, example: `"gzip"`                |
 |`--output_layer`             |Output layer to use. By default, use X.                                                                                                                                                                                                                                                |`string`                                   |
-|`--target_sum`               |If None, after normalization, each observation (cell) has a total count equal to the median of total counts for observations (cells) before normalization.                                                                                                                             |`integer`, default: `10000`                |
+|`--target_sum`               |If None, after normalization, each observation (cell) has a total count equal to the median of total counts for observations (cells) before normalization.                                                                                                                             |`integer`                                  |
 |`--exclude_highly_expressed` |Exclude (very) highly expressed genes for the computation of the normalization factor (size factor) for each cell. A gene is considered highly expressed, if it has more than max_fraction of the total counts in at least one cell. The not-excluded genes will sum up to target_sum. |`boolean_true`                             |
 
 ## Authors

@@ -42,7 +42,7 @@ nextflow run openpipelines-bio/openpipeline \
 ```yaml
 # Arguments
 mode: "files"
-input: # please fill in - example: "fastq_dir/"
+input: # please fill in - example: "fastq_dir"
 # output: "$id.$key.output.output"
 # threads: 123
 

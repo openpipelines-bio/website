@@ -49,7 +49,7 @@ input: # please fill in - example: "dataset.h5mu"
 # output: "$id.$key.output.h5mu"
 
 # QC metrics calculation options
-# var_qc_metrics: ["ercc", "highly_variable"]
+# var_qc_metrics: ["ercc,highly_variable"]
 top_n_vars: [50, 100, 200, 500]
 output_obs_num_nonzero_vars: "num_nonzero_vars"
 output_obs_total_counts_vars: "total_counts"
@@ -57,6 +57,9 @@ output_var_num_nonzero_obs: "num_nonzero_obs"
 output_var_total_counts_obs: "total_counts"
 output_var_obs_mean: "obs_mean"
 output_var_pct_dropout: "pct_dropout"
+
+# CLR arguments
+clr_axis: 0
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
@@ -106,6 +109,13 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--output_var_total_counts_obs`  |Name of the column in .var describing, for each feature (column), the sum of the stored values in the rows.                                                                                                                                                                               |`string`, default: `"total_counts"`                                      |
 |`--output_var_obs_mean`          |Name of the column in .obs providing the mean of the values in each row.                                                                                                                                                                                                                  |`string`, default: `"obs_mean"`                                          |
 |`--output_var_pct_dropout`       |Name of the column in .obs providing for each feature the percentage of observations the feature does not appear on (i.e. is missing). Same as `--output_var_num_nonzero_obs` but percentage based.                                                                                       |`string`, default: `"pct_dropout"`                                       |
+
+
+### CLR arguments
+
+|Name         |Description                         |Attributes              |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--clr_axis` |Axis across which CLR is performed. |`integer`, default: `0` |
 
 ## Authors
 

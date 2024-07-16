@@ -1,0 +1,102 @@
+---
+title: "Binning"
+namespace: "Scgpt"
+description: "Conversion of (pre-processed) expression count data into relative values (bins) to address scale differences across sequencing batches"
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `binning`  
+Namespace: `scgpt`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/scgpt/binning/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 1.0.1 -latest \
+  -main-script target/nextflow/scgpt/binning/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Inputs
+input: # please fill in - example: "input.h5mu"
+modality: "rna"
+# input_layer: "foo"
+n_input_bins: 51
+
+# Outputs
+# output: "$id.$key.output.h5mu"
+# output_compression: "gzip"
+binned_layer: "binned"
+# seed: 123
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 1.0.1 -latest \
+  -profile docker \
+  -main-script target/nextflow/scgpt/binning/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Inputs
+
+|Name             |Description                                                                                      |Attributes                                |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--input`        |Input h5mu file.                                                                                 |`file`, required, example: `"input.h5mu"` |
+|`--modality`     |                                                                                                 |`string`, default: `"rna"`                |
+|`--input_layer`  |Mudata layer (key from .layers) to use as input data for binning. If not specified, .X is used.  |`string`                                  |
+|`--n_input_bins` |The number of bins to discretize the data into. When no value is provided, data won't be binned. |`integer`, default: `51`                  |
+
+
+### Outputs
+
+|Name                   |Description                                                |Attributes                                 |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--output`             |The output h5mu file containing the binned data.           |`file`, required, example: `"output.h5mu"` |
+|`--output_compression` |The compression algorithm to use for the output h5mu file. |`string`, example: `"gzip"`                |
+|`--binned_layer`       |The name of the adata layer to write the binned data to.   |`string`, default: `"binned"`              |
+|`--seed`               |Seed for random number generation.                         |`integer`                                  |
+
+## Authors
+
+
+  * Dorien Roosen [{{< fa brands github >}}](https://github.com/dorien-er) [{{< fa brands linkedin >}}](https://linkedin.com/in/dorien-roosen) (maintainer, author)
+
+  * Elizabeth Mlynarski (author)
+
+  * Weiwei Schultz (contributor)
+
