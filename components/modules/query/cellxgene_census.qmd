@@ -14,7 +14,7 @@ ID: `cellxgene_census`
 Namespace: `query`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/query/cellxgene_census/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/query/cellxgene_census/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -32,7 +32,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 1.0.2 -latest \
   -main-script target/nextflow/query/cellxgene_census/main.nf \
   --help
 ```
@@ -74,7 +74,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 1.0.2 -latest \
   -profile docker \
   -main-script target/nextflow/query/cellxgene_census/main.nf \
   -params-file params.yaml
@@ -91,11 +91,11 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 Open CellxGene Census by version or URI.
 
 
-|Name                     |Description                                                                                                                                                                                                      |Attributes                              |
+|Name                     |Description                                                                                                                                                                                                                                                                                                           |Attributes                              |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--input_uri`            |If specified, a URI containing the Census SOMA objects. If specified, will take precedence over the `--census_version` argument.                                                                                 |`string`, example: `"s3://bucket/path"` |
-|`--census_version`       |Which release of CellxGene census to use. Possible values are "latest", "stable", or the date of one of the releases (e.g. "2023-07-25"). For more information, check the documentation on [Census data releases](https://chanzuckerberg.github.io/cellxgene-census/cellxgene_census_docsite_data_release_info.html).|`string`, example: `"stable"`           |
-|`--add_dataset_metadata` |If true, the experiment metadata will be added to the cell metadata. More specifically: `collection_id`, `collection_name`, `collection_doi`, `dataset_title`.                                                   |`boolean_true`                          |
+|`--input_uri`            |If specified, a URI containing the Census SOMA objects. If specified, will take precedence over the `--census_version` argument.                                                                                                                                                                                      |`string`, example: `"s3://bucket/path"` |
+|`--census_version`       |Which release of CellxGene census to use. Possible values are "latest", "stable", or the date of one of the releases (e.g. "2023-07-25"). For more information, check the documentation on [Census data releases](https://chanzuckerberg.github.io/cellxgene-census/cellxgene_census_docsite_data_release_info.html). |`string`, example: `"stable"`           |
+|`--add_dataset_metadata` |If true, the experiment metadata will be added to the cell metadata. More specifically: `collection_id`, `collection_name`, `collection_doi`, `dataset_title`.                                                                                                                                                        |`boolean_true`                          |
 
 
 ### Cell query

@@ -14,7 +14,7 @@ ID: `tsne`
 Namespace: `dimred`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/dimred/tsne/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/dimred/tsne/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 1.0.2 -latest \
   -main-script target/nextflow/dimred/tsne/main.nf \
   --help
 ```
@@ -67,7 +67,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 1.0.2 -latest \
   -profile docker \
   -main-script target/nextflow/dimred/tsne/main.nf \
   -params-file params.yaml

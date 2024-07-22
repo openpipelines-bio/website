@@ -14,7 +14,7 @@ ID: `from_bd_to_10x_molecular_barcode_tags`
 Namespace: `convert`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/convert/from_bd_to_10x_molecular_barcode_tags/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/convert/from_bd_to_10x_molecular_barcode_tags/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 1.0.2 -latest \
   -main-script target/nextflow/convert/from_bd_to_10x_molecular_barcode_tags/main.nf \
   --help
 ```
@@ -54,7 +54,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 1.0.2 -latest \
   -profile docker \
   -main-script target/nextflow/convert/from_bd_to_10x_molecular_barcode_tags/main.nf \
   -params-file params.yaml
