@@ -14,7 +14,7 @@ ID: `bcl2fastq`
 Namespace: `demux`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/demux/bcl2fastq/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.7/src/demux/bcl2fastq/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 0.12.7 -latest \
   -main-script target/nextflow/demux/bcl2fastq/main.nf \
   --help
 ```
@@ -55,7 +55,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 0.12.7 -latest \
   -profile docker \
   -main-script target/nextflow/demux/bcl2fastq/main.nf \
   -params-file params.yaml
