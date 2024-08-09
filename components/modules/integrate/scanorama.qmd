@@ -14,7 +14,7 @@ ID: `scanorama`
 Namespace: `integrate`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/integrate/scanorama/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.7/src/integrate/scanorama/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 0.12.7 -latest \
   -main-script target/nextflow/integrate/scanorama/main.nf \
   --help
 ```
@@ -50,7 +50,7 @@ obsm_input: "X_pca"
 obsm_output: "X_scanorama"
 knn: 20
 batch_size: 5000
-sigma: 15
+sigma: 15.0
 approx: true
 alpha: 0.1
 
@@ -62,7 +62,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 0.12.7 -latest \
   -profile docker \
   -main-script target/nextflow/integrate/scanorama/main.nf \
   -params-file params.yaml

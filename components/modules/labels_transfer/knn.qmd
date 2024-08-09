@@ -14,7 +14,7 @@ ID: `knn`
 Namespace: `labels_transfer`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/labels_transfer/knn/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.7/src/labels_transfer/knn/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 0.12.7 -latest \
   -main-script target/nextflow/labels_transfer/knn/main.nf \
   --help
 ```
@@ -40,6 +40,22 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
+# Outputs
+# output: "$id.$key.output.output"
+# output_obs_predictions: ["foo"]
+# output_obs_uncertainty: ["foo"]
+output_uns_parameters: "labels_transfer"
+
+# Input dataset (query) arguments
+input: # please fill in - example: "path/to/file"
+modality: "rna"
+# input_obsm_features: "X_integrated_scanvi"
+
+# Reference dataset arguments
+# reference: "https:/zenodo.org/record/6337966/files/HLCA_emb_and_metadata.h5ad"
+reference_obsm_features: # please fill in - example: "X_integrated_scanvi"
+reference_obs_targets: ["ann_level_1", "ann_level_2", "ann_level_3", "ann_level_4", "ann_level_5", "ann_finest_level"]
+
 # Learning parameters
 n_neighbors: # please fill in - example: 123
 
@@ -51,7 +67,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 0.12.7 -latest \
   -profile docker \
   -main-script target/nextflow/labels_transfer/knn/main.nf \
   -params-file params.yaml
@@ -78,7 +94,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |:----------|:--------------------------------------------------|:--------------------|
 |`--reference`               |The reference data to train classifiers on.                                                                                                                                                    |`file`, example: `"https:/zenodo.org/record/6337966/files/HLCA_emb_and_metadata.h5ad"`                                                          |
 |`--reference_obsm_features` |The `.obsm` key of the embedding to use for the classifier's training. Make sure that embedding was obtained in the same way as the query embedding (e.g. by the same model or preprocessing). |`string`, required, default: `"X_integrated_scanvi"`                                                                                            |
-|`--reference_obs_targets`   |The `.obs` key of the target labels to tranfer.                                                                                                                                                |List of `string`, default: `"ann_level_1", "ann_level_2", "ann_level_3", "ann_level_4", "ann_level_5", "ann_finest_level"`, multiple_sep: `";"` |
+|`--reference_obs_targets`   |The `.obs` key of the target labels to tranfer.                                                                                                                                                |List of `string`, default: `"ann_level_1", "ann_level_2", "ann_level_3", "ann_level_4", "ann_level_5", "ann_finest_level"`, multiple_sep: `","` |
 
 
 ### Outputs
@@ -86,8 +102,8 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |Name                       |Description                                                                                                                                                                                                                              |Attributes                             |
 |:----------|:--------------------------------------------------|:--------------------|
 |`--output`                 |The query data in .h5mu format with predicted labels transfered from the reference.                                                                                                                                                      |`file`, required                       |
-|`--output_obs_predictions` |In which `.obs` slots to store the predicted information. If provided, must have the same length as `--reference_obs_targets`. If empty, will default to the `reference_obs_targets` combined with the `"_pred"` suffix.                 |List of `string`, multiple_sep: `";"`  |
-|`--output_obs_uncertainty` |In which `.obs` slots to store the uncertainty of the predictions. If provided, must have the same length as `--reference_obs_targets`. If empty, will default to the `reference_obs_targets` combined with the `"_uncertainty"` suffix. |List of `string`, multiple_sep: `";"`  |
+|`--output_obs_predictions` |In which `.obs` slots to store the predicted information. If provided, must have the same length as `--reference_obs_targets`. If empty, will default to the `reference_obs_targets` combined with the `"_pred"` suffix.                 |List of `string`, multiple_sep: `":"`  |
+|`--output_obs_uncertainty` |In which `.obs` slots to store the uncertainty of the predictions. If provided, must have the same length as `--reference_obs_targets`. If empty, will default to the `reference_obs_targets` combined with the `"_uncertainty"` suffix. |List of `string`, multiple_sep: `":"`  |
 |`--output_uns_parameters`  |The `.uns` key to store additional information about the parameters used for the label transfer.                                                                                                                                         |`string`, default: `"labels_transfer"` |
 
 

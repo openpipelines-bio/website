@@ -14,7 +14,7 @@ ID: `filter_with_hvg`
 Namespace: `filter`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/filter/filter_with_hvg/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/0.12.7/src/filter/filter_with_hvg/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -37,7 +37,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 0.12.7 -latest \
   -main-script target/nextflow/filter/filter_with_hvg/main.nf \
   --help
 ```
@@ -59,7 +59,7 @@ do_subset: false
 flavor: "seurat"
 # n_top_genes: 123
 min_mean: 0.0125
-max_mean: 3
+max_mean: 3.0
 min_disp: 0.5
 # max_disp: 123.0
 span: 0.3
@@ -74,7 +74,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 0.12.7 -latest \
   -profile docker \
   -main-script target/nextflow/filter/filter_with_hvg/main.nf \
   -params-file params.yaml
