@@ -1,0 +1,12 @@
+---
+title: Elizabeth Mlynarski
+image: /images/avatar.svg
+role: Contributor
+organizations:
+- name: Janssen R&D US
+  role: Principal Scientist Computational Genomics
+links: []
+about:
+  template: jolla
+---
+

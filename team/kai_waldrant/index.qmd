@@ -5,14 +5,23 @@ role: Contributor
 organizations:
 - name: Data Intuitive
   href: https://www.data-intuitive.com
-  role: Bioinformatics Workflow Developer
+  role: Bioinformatician
+- name: Open Problems
+  href: https://openproblems.bio
+  role: Contributor
 links:
+- icon: bi-envelope
+  text: E-mail
+  href: mailto:kai@data-intuitive.com
 - icon: bi-github
   text: GitHub
   href: https://github.com/KaiWaldrant
+- icon: fa-brands fa-orcid
+  text: ORCID
+  href: https://orcid.org/0009-0003-8555-1361
 - icon: bi-linkedin
   text: LinkedIn
-  href: https://www.linkedin.com/in/kai-waldrant-b8b86160
+  href: https://www.linkedin.com/in/kaiwaldrant
 about:
   template: jolla
 ---
