@@ -1,5 +1,5 @@
 ---
-title: User Guide
+title: User guide
 sidebar: true
 listing:
   template: ../templates/listing.ejs

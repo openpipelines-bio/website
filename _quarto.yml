@@ -33,33 +33,29 @@ website:
         url: https://github.com/openpipelines-bio/openpipeline
         aria-label: GitHub
   sidebar:
-    - id: components
-      title: Components
+    - id: reference
+      title: Reference
+      contents: components
+      collapse-level: 3
+    - id: guide
+      title: Guide
       contents:
-        - components
-        - text: Workflows
+        - id: fundamentals
           collapse-level: 3
-          contents: components/workflows/**
-        - text: Modules
+          section: Fundamentals
+          contents: fundamentals/*
+        - id: user_guide
+          section: User guide
           collapse-level: 3
-          contents:
-            - auto: components/modules/**
-    - id: user_guide
-      collapse-level: 3
-      title: User guide
-      contents: user_guide
-    - id: fundamentals
-      collapse-level: 3
-      title: Fundamentals
-      contents: fundamentals
-    - id: contributing
-      collapse-level: 3
-      title: Contributing
-      contents: contributing
-    - id: more_information
-      collapse-level: 3
-      title: More information
-      contents: more_information
+          contents: user_guide/*
+        - id: contributing
+          collapse-level: 3
+          section: Contributing
+          contents: contributing/*
+        - id: more_information
+          collapse-level: 3
+          section: More information
+          contents: more_information/*
 
 format:
   html:

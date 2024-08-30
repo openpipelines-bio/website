@@ -1,0 +1,20 @@
+---
+title: "Workflows"
+description: An overview of the workflows in OpenPipelines
+order: 40
+listing:
+  - id: workflows
+    type: table
+    contents: "**.qmd"
+    fields: [title, namespace, description]
+    field-display-names: 
+        title: Name
+        namespace: Namespace
+        description: Description
+---
+
+
+## Workflows
+
+:::{#workflows}
+:::
