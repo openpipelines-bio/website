@@ -115,7 +115,7 @@ nextflow run ... --param_list param_list.csv
 
 # Passing `param_list` to Nextflow's `params-file`
 
-The `param_list` can also be passed via Nextflow's `param-file`, such that both the event-specific and global parameters can be passed via a file.
+The `param_list` can also be passed via Nextflow's `params-file`, such that both the event-specific and global parameters can be passed via a file.
 
 ## As a YAML file
 
