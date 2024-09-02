@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Pass a large number of inputs to a workflow">
+<meta name="description" content="Passing multiple inputs to a workflow">
 
-<title>Passing parameter lists – OpenPipelines</title>
+<title>Parameter lists – OpenPipelines</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -174,7 +174,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../user_guide/index.html">User guide</a></li><li class="breadcrumb-item"><a href="../user_guide/parameter_lists.html">Passing parameter lists</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../user_guide/index.html">User guide</a></li><li class="breadcrumb-item"><a href="../user_guide/parameter_lists.html">Parameter lists</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -245,7 +245,7 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../user_guide/parameter_lists.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Passing parameter lists</span></a>
+ <span class="menu-text">Parameter lists</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -360,11 +360,13 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#csv-file" id="toc-csv-file" class="nav-link active" data-scroll-target="#csv-file">CSV file</a></li>
-  <li><a href="#yaml-file" id="toc-yaml-file" class="nav-link" data-scroll-target="#yaml-file">YAML file</a></li>
-  <li><a href="#yaml-blob" id="toc-yaml-blob" class="nav-link" data-scroll-target="#yaml-blob">YAML blob</a></li>
-  <li><a href="#as-a-nextflow-config" id="toc-as-a-nextflow-config" class="nav-link" data-scroll-target="#as-a-nextflow-config">As a Nextflow config</a></li>
-  <li><a href="#global-parameters" id="toc-global-parameters" class="nav-link" data-scroll-target="#global-parameters">Global parameters</a></li>
+  <li><a href="#event-specific-and-global-parameters" id="toc-event-specific-and-global-parameters" class="nav-link active" data-scroll-target="#event-specific-and-global-parameters">Event-specific and global parameters</a></li>
+  <li><a href="#other-param_list-file-types" id="toc-other-param_list-file-types" class="nav-link" data-scroll-target="#other-param_list-file-types">Other <code>param_list</code> file types</a>
+  <ul class="collapse">
+  <li><a href="#json-file" id="toc-json-file" class="nav-link" data-scroll-target="#json-file">JSON file</a></li>
+  <li><a href="#csv-file" id="toc-csv-file" class="nav-link" data-scroll-target="#csv-file">CSV file</a></li>
+  </ul></li>
+  <li><a href="#passing-param_list-to-nextflows-params-file" id="toc-passing-param_list-to-nextflows-params-file" class="nav-link" data-scroll-target="#passing-param_list-to-nextflows-params-file">Passing <code>param_list</code> to Nextflow’s <code>params-file</code></a></li>
   <li><a href="#resolving-paths" id="toc-resolving-paths" class="nav-link" data-scroll-target="#resolving-paths">Resolving paths</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/openpipelines-bio/website/edit/main/user_guide/parameter_lists.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -372,14 +374,14 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../user_guide/index.html">User guide</a></li><li class="breadcrumb-item"><a href="../user_guide/parameter_lists.html">Passing parameter lists</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../user_guide/index.html">User guide</a></li><li class="breadcrumb-item"><a href="../user_guide/parameter_lists.html">Parameter lists</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Passing parameter lists</h1>
+<h1 class="title">Parameter lists</h1>
 </div>
 
 <div>
   <div class="description">
-    Pass a large number of inputs to a workflow
+    Passing multiple inputs to a workflow
   </div>
 </div>
 
@@ -396,73 +398,99 @@ gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
 </header>
 
 
-<p>Using Viash’s VDSL3 nextflow platform, an optional <code>--param_list</code> argument can be used to pass a large number of inputs to a workflow. A <code>param_list</code> can either be a csv file, a json file, a yaml file, a yaml blob, or be passed as a nextflow config file.</p>
-<section id="csv-file" class="level2">
-<h2 class="anchored" data-anchor-id="csv-file">CSV file</h2>
-<p>The following example shows how to use a csv file as a parameter list. The csv file has two columns, <code>id</code> and <code>input</code>. The <code>id</code> column is used to name the output file, and the <code>input</code> column is used as the input file. The <code>input</code> column is relativized to the location of the csv file.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cat param_list.csv</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span>,input</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">foo,foo.txt</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">bar,bar.txt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run ... <span class="at">--param_list</span> param_list.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="yaml-file" class="level2">
-<h2 class="anchored" data-anchor-id="yaml-file">YAML file</h2>
-<p>The following example shows how to use a yaml file as a parameter list.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cat param_list.yaml</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> id: foo</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">input:</span> foo.txt</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> id: bar</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">input:</span> bar.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run ... <span class="at">--param_list</span> param_list.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="yaml-blob" class="level2">
-<h2 class="anchored" data-anchor-id="yaml-blob">YAML blob</h2>
-<p>The following example shows how to use a yaml blob as a parameter list.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run ... <span class="at">--param_list</span> <span class="st">"[ {'id': 'foo', 'input': 'foo.txt'}, {'id': 'bar', 'input': 'bar.txt'} ]"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="as-a-nextflow-config" class="level2">
-<h2 class="anchored" data-anchor-id="as-a-nextflow-config">As a Nextflow config</h2>
-<p>The following example shows how to use a <code>nextflow.config</code> file as a parameter list.</p>
-<pre><code>$ cat params.config
-params {
-  param_list: [
-    ['id': 'foo', 'input': 'foo.txt'],
-    ['id': 'bar', 'input': 'bar.txt']
-  ]
-}</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run ... <span class="at">-params-file</span> params.config</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="global-parameters" class="level2">
-<h2 class="anchored" data-anchor-id="global-parameters">Global parameters</h2>
-<p>Note that a <code>param_list</code> can be combined with setting parameters that are set for all parameter sets. These ‘global’ parameters will always be overwritten with their counterpart that was specified in a more specific manner for a single parameter set.</p>
-<p>For example, using <code>--param_list param_list.yaml --ref global.txt</code> with the following <code>param_list.yaml</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> foo</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> foo.txt</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> bar</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> bar.txt</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">ref</span><span class="kw">:</span><span class="at"> custom_bar_ref.txt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Will result in the following parameter sets being processed:</p>
+<p>Using the <a href="https://viash.io/guide/nextflow_vdsl3/"><strong>Viash VDSL3 Nextflow platform</strong></a>, an optional <code>--param_list</code> argument can be passed to OpenPipelines workflows. The <code>--param_list</code> argument enables passing multiple inputs to a workflow, resulting in a multi-event nextflow channel.</p>
+<section id="event-specific-and-global-parameters" class="level1">
+<h1>Event-specific and global parameters</h1>
+<p>The creation of multi-event Nextflow channels has the advantage of passing <strong>event-specific parameters</strong> for each input file. In the following <code>param_list</code> file, a multi-event Nextflow channel is created for two input files: <code>foo.txt</code> and <code>bar.txt</code>. For each input, an id and additional parameters that are specific for each input can be passed as event-specific parameters (here: <code>event_param</code>).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">$cat</span> param_list.yaml</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> id: foo</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">input:</span> foo.txt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">event_param:</span> lorem</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> id: bar</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">input:</span> bar.txt</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="ex">event_param:</span> ipsum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run ... <span class="at">--param_list</span> param_list.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The event-specific parameters in the <code>param_list</code> file can be combined with <strong>global parameters</strong> that apply to all the input events. For example, combining the above <code>param_list</code> file with a global parameter <code>--global_param</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run ... <span class="at">--param_list</span> param_list.yaml <span class="at">--global_param</span> baz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>will result in the following events being processed:</p>
 <ul>
-<li><code>id</code>: <code>foo</code>, <code>input</code>: <code>foo.txt</code>, <code>ref</code>: <code>global.txt</code></li>
-<li><code>id</code>: <code>bar</code>, <code>input</code>: <code>bar.txt</code>, <code>ref</code>: <code>custom_bar_ref.txt</code></li>
+<li><code>id</code>: <code>foo</code>, <code>input</code>: <code>foo.txt</code>, <code>event_param</code>: <code>lorem</code>, <code>global_param</code>: <code>baz</code></li>
+<li><code>id</code>: <code>bar</code>, <code>input</code>: <code>bar.txt</code>, <code>event_param</code>: <code>ipsum</code>, <code>global_param</code>: <code>baz</code></li>
+</ul>
+<p>Note that event-sepcific parameters defined in the <code>param_list</code> will always overwrite global parameters. For example, running</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run ... <span class="at">--param_list</span> param_list.yaml <span class="at">--global_param</span> baz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>with the following <code>param_list.yaml</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="va">$cat</span> param_list.yaml</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> id: foo</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">input:</span> foo.txt</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> id: bar</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">input:</span> bar.txt</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">global_param:</span> ipsum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Will result in the following events being processed:</p>
+<ul>
+<li><code>id</code>: <code>foo</code>, <code>input</code>: <code>foo.txt</code>, <code>event_param</code>: <code>lorem</code></li>
+<li><code>id</code>: <code>bar</code>, <code>input</code>: <code>bar.txt</code>, <code>event_param</code>: <code>ipsum</code></li>
 </ul>
 </section>
-<section id="resolving-paths" class="level2">
-<h2 class="anchored" data-anchor-id="resolving-paths">Resolving paths</h2>
-<p>If the <code>--param_list</code> is a file (CSV, YAML, or JSON), all files in the <code>param_list</code> are relativized to the location of the <code>param_list</code> file. If the <code>--param_list</code> is a YAML blob or a Nextflow config, all files in the <code>param_list</code> are relativized to the current working directory.</p>
-<p>For example, with a <code>param_list.yaml</code> file located in the <code>data</code> directory:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cat /data/param_list.yaml</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> id: foo</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">input:</span> foo.txt</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> id: bar</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">input:</span> /path/to/bar.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="other-param_list-file-types" class="level1">
+<h1>Other <code>param_list</code> file types</h1>
+<p>In addition to passing the <code>param_list</code> as a yaml file as seen in the examples above, it can also be passed as a json or csv file.</p>
+<section id="json-file" class="level2">
+<h2 class="anchored" data-anchor-id="json-file">JSON file</h2>
+<p>The following example shows how to use a json file as a parameter list.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cat param_list.json</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"id"</span>: <span class="st">"foo"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="er">"input":</span> <span class="er">"foo.txt",</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"event_param"</span><span class="ex">:</span> <span class="st">"lorem"</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span><span class="ex">,</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">{</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"id"</span><span class="ex">:</span> <span class="st">"bar"</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"input"</span><span class="ex">:</span> <span class="st">"bar.txt"</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"event_param"</span><span class="ex">:</span> <span class="st">"ipsum"</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">}</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="ex">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run ... <span class="at">--param_list</span> param_list.json</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="csv-file" class="level2">
+<h2 class="anchored" data-anchor-id="csv-file">CSV file</h2>
+<p>The following example shows how to use a csv file as a parameter list.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cat param_list.csv</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span>,input,event_param</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">foo,foo.txt,lorem</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">bar,bar.txt,ipsum</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run ... <span class="at">--param_list</span> param_list.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="passing-param_list-to-nextflows-params-file" class="level1">
+<h1>Passing <code>param_list</code> to Nextflow’s <code>params-file</code></h1>
+<p>The <code>param_list</code> can also be passed via Nextflow’s <code>params-file</code>, such that both the event-specific and global parameters are passed via a file. The following example shows how to use a <code>params-file</code> yamle file containing the <code>param_list</code>.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cat params-file.yaml</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">param_list:</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-</span> id: foo</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">input:</span> foo.txt</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">event_param:</span> lorem</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-</span> id: bar</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">input:</span> bar.txt</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">event_param:</span> ipsum</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="ex">global_param:</span> baz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run ... <span class="at">-params-file</span> params-file.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="resolving-paths" class="level1">
+<h1>Resolving paths</h1>
+<p>All files defined in the <code>param_list</code> are relative to the location of the <code>param_list</code> file. For example, with a <code>param_list.yaml</code> file located in the <code>data</code> directory:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cat /data/param_list.yaml</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> id: foo</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">input:</span> foo.txt</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> id: bar</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">input:</span> /path/to/bar.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This will result in the following parameter sets being processed:</p>
 <ul>
 <li><code>id</code>: <code>foo</code>, <code>input</code>: <code>/data/foo.txt</code></li>
 <li><code>id</code>: <code>bar</code>, <code>input</code>: <code>/path/to/bar.txt</code></li>
 </ul>
-<p>Note that this also works when the param list is located on a remote location, such as an S3 bucket. In that case, the files in the param list are relativized to the location of the param list on the remote location.</p>
+<p>Note that this also works when the param list is located on a remote location, such as an S3 bucket. In that case, the files in the param list are relative to the location of the param list on the remote location.</p>
 
 
 </section>

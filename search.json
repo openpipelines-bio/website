@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "OpenPipelines",
     "section": "",
-    "text": "Fundamentals\n  \n    \n  \n    \n        \n  \n  Philosophy\n  \n    \n    \n        \n  \n  Concepts\n  \n    \n    \n        \n  \n  Architecture\n  \n    \n    \n        \n  \n  Roadmap\n  \n    \n    \n  \n    \n\n\nNo matching items\n\n\n\n\n\n\n  \n  User guide\n  \n    \n  \n    \n        \n  \n  Getting started\n  \n    \n    \n        \n  \n  Running pipelines\n  \n    \n    \n        \n  \n  Passing parameter lists\n  \n    \n    \n        \n  \n  Ingestion\n  \n    \n    \n        \n  \n  Processing\n  \n    \n    \n        \n  \n  Downstream\n  \n    \n    \n        \n  \n  Bug reports\n  \n    \n    \n  \n    \n\n\nNo matching items\n\n\n\n\n\n\n  \n  Contributing\n  \n    \n  \n    \n        \n  \n  Getting started\n  \n    \n    \n        \n  \n  Project structure\n  \n    \n    \n        \n  \n  Creating components\n  \n    \n    \n        \n  \n  Creating pipelines\n  \n    \n    \n        \n  \n  Running tests\n  \n    \n    \n        \n  \n  Publishing your changes\n  \n    \n    \n  \n    \n\n\nNo matching items\n\n\n\n\n\n\n  \n  More information\n  \n    \n  \n    \n        \n  \n  Cheat sheets\n  \n    \n    \n        \n  \n  Code of conduct\n  \n    \n    \n        \n  \n  FAQ\n  \n    \n    \n  \n    \n\n\nNo matching items"
+    "text": "Fundamentals\n  \n    \n  \n    \n        \n  \n  Philosophy\n  \n    \n    \n        \n  \n  Concepts\n  \n    \n    \n        \n  \n  Architecture\n  \n    \n    \n        \n  \n  Roadmap\n  \n    \n    \n  \n    \n\n\nNo matching items\n\n\n\n\n\n\n  \n  User guide\n  \n    \n  \n    \n        \n  \n  Getting started\n  \n    \n    \n        \n  \n  Running pipelines\n  \n    \n    \n        \n  \n  Parameter lists\n  \n    \n    \n        \n  \n  Ingestion\n  \n    \n    \n        \n  \n  Processing\n  \n    \n    \n        \n  \n  Downstream\n  \n    \n    \n        \n  \n  Bug reports\n  \n    \n    \n  \n    \n\n\nNo matching items\n\n\n\n\n\n\n  \n  Contributing\n  \n    \n  \n    \n        \n  \n  Getting started\n  \n    \n    \n        \n  \n  Project structure\n  \n    \n    \n        \n  \n  Creating components\n  \n    \n    \n        \n  \n  Creating pipelines\n  \n    \n    \n        \n  \n  Running tests\n  \n    \n    \n        \n  \n  Publishing your changes\n  \n    \n    \n  \n    \n\n\nNo matching items\n\n\n\n\n\n\n  \n  More information\n  \n    \n  \n    \n        \n  \n  Cheat sheets\n  \n    \n    \n        \n  \n  Code of conduct\n  \n    \n    \n        \n  \n  FAQ\n  \n    \n    \n  \n    \n\n\nNo matching items"
   },
   {
     "objectID": "user_guide/bug_reports.html",
@@ -7005,85 +7005,37 @@
   {
     "objectID": "user_guide/parameter_lists.html",
     "href": "user_guide/parameter_lists.html",
-    "title": "Passing parameter lists",
+    "title": "Parameter lists",
     "section": "",
-    "text": "Using Viash’s VDSL3 nextflow platform, an optional --param_list argument can be used to pass a large number of inputs to a workflow. A param_list can either be a csv file, a json file, a yaml file, a yaml blob, or be passed as a nextflow config file.",
+    "text": "Using the Viash VDSL3 Nextflow platform, an optional --param_list argument can be passed to OpenPipelines workflows. The --param_list argument enables passing multiple inputs to a workflow, resulting in a multi-event nextflow channel.",
     "crumbs": [
       "Fundamentals",
       "User guide",
-      "Passing parameter lists"
+      "Parameter lists"
+    ]
+  },
+  {
+    "objectID": "user_guide/parameter_lists.html#json-file",
+    "href": "user_guide/parameter_lists.html#json-file",
+    "title": "Parameter lists",
+    "section": "JSON file",
+    "text": "JSON file\nThe following example shows how to use a json file as a parameter list.\n$ cat param_list.json\n[\n    {\n        \"id\": \"foo\",\n        \"input\": \"foo.txt\",\n        \"event_param\": \"lorem\"\n    },\n    {\n        \"id\": \"bar\",\n        \"input\": \"bar.txt\",\n        \"event_param\": \"ipsum\"\n    }\n]\nnextflow run ... --param_list param_list.json",
+    "crumbs": [
+      "Fundamentals",
+      "User guide",
+      "Parameter lists"
     ]
   },
   {
     "objectID": "user_guide/parameter_lists.html#csv-file",
     "href": "user_guide/parameter_lists.html#csv-file",
-    "title": "Passing parameter lists",
+    "title": "Parameter lists",
     "section": "CSV file",
-    "text": "CSV file\nThe following example shows how to use a csv file as a parameter list. The csv file has two columns, id and input. The id column is used to name the output file, and the input column is used as the input file. The input column is relativized to the location of the csv file.\n$ cat param_list.csv\nid,input\nfoo,foo.txt\nbar,bar.txt\nnextflow run ... --param_list param_list.csv",
+    "text": "CSV file\nThe following example shows how to use a csv file as a parameter list.\n$ cat param_list.csv\nid,input,event_param\nfoo,foo.txt,lorem\nbar,bar.txt,ipsum\nnextflow run ... --param_list param_list.csv",
     "crumbs": [
       "Fundamentals",
       "User guide",
-      "Passing parameter lists"
-    ]
-  },
-  {
-    "objectID": "user_guide/parameter_lists.html#yaml-file",
-    "href": "user_guide/parameter_lists.html#yaml-file",
-    "title": "Passing parameter lists",
-    "section": "YAML file",
-    "text": "YAML file\nThe following example shows how to use a yaml file as a parameter list.\n$ cat param_list.yaml\n- id: foo\n  input: foo.txt\n- id: bar\n  input: bar.txt\nnextflow run ... --param_list param_list.yaml",
-    "crumbs": [
-      "Fundamentals",
-      "User guide",
-      "Passing parameter lists"
-    ]
-  },
-  {
-    "objectID": "user_guide/parameter_lists.html#yaml-blob",
-    "href": "user_guide/parameter_lists.html#yaml-blob",
-    "title": "Passing parameter lists",
-    "section": "YAML blob",
-    "text": "YAML blob\nThe following example shows how to use a yaml blob as a parameter list.\nnextflow run ... --param_list \"[ {'id': 'foo', 'input': 'foo.txt'}, {'id': 'bar', 'input': 'bar.txt'} ]\"",
-    "crumbs": [
-      "Fundamentals",
-      "User guide",
-      "Passing parameter lists"
-    ]
-  },
-  {
-    "objectID": "user_guide/parameter_lists.html#as-a-nextflow-config",
-    "href": "user_guide/parameter_lists.html#as-a-nextflow-config",
-    "title": "Passing parameter lists",
-    "section": "As a Nextflow config",
-    "text": "As a Nextflow config\nThe following example shows how to use a nextflow.config file as a parameter list.\n$ cat params.config\nparams {\n  param_list: [\n    ['id': 'foo', 'input': 'foo.txt'],\n    ['id': 'bar', 'input': 'bar.txt']\n  ]\n}\nnextflow run ... -params-file params.config",
-    "crumbs": [
-      "Fundamentals",
-      "User guide",
-      "Passing parameter lists"
-    ]
-  },
-  {
-    "objectID": "user_guide/parameter_lists.html#global-parameters",
-    "href": "user_guide/parameter_lists.html#global-parameters",
-    "title": "Passing parameter lists",
-    "section": "Global parameters",
-    "text": "Global parameters\nNote that a param_list can be combined with setting parameters that are set for all parameter sets. These ‘global’ parameters will always be overwritten with their counterpart that was specified in a more specific manner for a single parameter set.\nFor example, using --param_list param_list.yaml --ref global.txt with the following param_list.yaml:\n- id: foo\n  input: foo.txt\n- id: bar\n  input: bar.txt\n  ref: custom_bar_ref.txt\nWill result in the following parameter sets being processed:\n\nid: foo, input: foo.txt, ref: global.txt\nid: bar, input: bar.txt, ref: custom_bar_ref.txt",
-    "crumbs": [
-      "Fundamentals",
-      "User guide",
-      "Passing parameter lists"
-    ]
-  },
-  {
-    "objectID": "user_guide/parameter_lists.html#resolving-paths",
-    "href": "user_guide/parameter_lists.html#resolving-paths",
-    "title": "Passing parameter lists",
-    "section": "Resolving paths",
-    "text": "Resolving paths\nIf the --param_list is a file (CSV, YAML, or JSON), all files in the param_list are relativized to the location of the param_list file. If the --param_list is a YAML blob or a Nextflow config, all files in the param_list are relativized to the current working directory.\nFor example, with a param_list.yaml file located in the data directory:\n$ cat /data/param_list.yaml\n- id: foo\n  input: foo.txt\n- id: bar\n  input: /path/to/bar.txt\nThis will result in the following parameter sets being processed:\n\nid: foo, input: /data/foo.txt\nid: bar, input: /path/to/bar.txt\n\nNote that this also works when the param list is located on a remote location, such as an S3 bucket. In that case, the files in the param list are relativized to the location of the param list on the remote location.",
-    "crumbs": [
-      "Fundamentals",
-      "User guide",
-      "Passing parameter lists"
+      "Parameter lists"
     ]
   },
   {
@@ -7091,7 +7043,7 @@
     "href": "user_guide/index.html",
     "title": "User guide",
     "section": "",
-    "text": "Getting started: Setting up infrastructure\n  \n  \n  \n    Running pipelines: Run a pipeline from CLI or Nextflow Tower\n  \n  \n  \n    Passing parameter lists: Pass a large number of inputs to a workflow\n  \n  \n  \n    Ingestion: From sequencing to count tables\n  \n  \n  \n    Processing: From count tables to integrated data\n  \n  \n  \n    Downstream: Celltyping and cell-cell communication\n  \n  \n  \n    Bug reports: How to report bugs\n  \n  \n\n\nNo matching items",
+    "text": "Getting started: Setting up infrastructure\n  \n  \n  \n    Running pipelines: Run a pipeline from CLI or Nextflow Tower\n  \n  \n  \n    Parameter lists: Passing multiple inputs to a workflow\n  \n  \n  \n    Ingestion: From sequencing to count tables\n  \n  \n  \n    Processing: From count tables to integrated data\n  \n  \n  \n    Downstream: Celltyping and cell-cell communication\n  \n  \n  \n    Bug reports: How to report bugs\n  \n  \n\n\nNo matching items",
     "crumbs": [
       "Fundamentals",
       "User guide"
