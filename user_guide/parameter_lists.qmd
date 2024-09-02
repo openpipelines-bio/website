@@ -1,9 +1,10 @@
 ---
-title: Passing parameter lists
+title: Parameter lists
+description: Passing multiple inputs to a workflow 
 order: 15
 ---
 
-Using **Viash's VDSL3 Nextflow platform**, an optional `--param_list` argument can be passed to OpenPipelines workflows. `--param_list` enables passing a large number of inputs to a workflow, resulting in a multi-event nextflow channel. 
+Using the [**Viash VDSL3 Nextflow platform**](https://viash.io/guide/nextflow_vdsl3/), an optional `--param_list` argument can be passed to OpenPipelines workflows. The `--param_list` argument enables passing multiple inputs to a workflow, resulting in a multi-event nextflow channel. 
 
 # Event-specific and global parameters
 
@@ -23,15 +24,16 @@ $cat param_list.yaml
 nextflow run ... --param_list param_list.yaml
 ```
 
-The event-specific parameters in the `param_list` file can be combined with **global parameters** that apply to all the input events. For example, the combining `--param_list param_list.yaml` with `--global_param baz`: 
+The event-specific parameters in the `param_list` file can be combined with **global parameters** that apply to all the input events. For example, combining the above `param_list` file with a global parameter `--global_param`: 
 
 ```bash
 nextflow run ... --param_list param_list.yaml --global_param baz
 ```
 
-Will result in the following events being processed:
-* `id`: `foo`, `input`: `foo.txt`, `event_param`: `lorem`, `global_param`: `baz`
-* `id`: `bar`, `input`: `bar.txt`, `event_param`: `ipsum`, `global_param`: `baz`
+will result in the following events being processed:
+
+  * `id`: `foo`, `input`: `foo.txt`, `event_param`: `lorem`, `global_param`: `baz`
+  * `id`: `bar`, `input`: `bar.txt`, `event_param`: `ipsum`, `global_param`: `baz`
 
 Note that event-sepcific parameters defined in the `param_list` will always overwrite global parameters. For example, 
 running
@@ -42,7 +44,8 @@ nextflow run ... --param_list param_list.yaml --global_param baz
 
 with the following `param_list.yaml`:
 
-```yaml
+```bash
+$cat param_list.yaml
 - id: foo
   input: foo.txt
 - id: bar
@@ -55,29 +58,12 @@ Will result in the following events being processed:
 * `id`: `foo`, `input`: `foo.txt`, `event_param`: `lorem`
 * `id`: `bar`, `input`: `bar.txt`, `event_param`: `ipsum`
 
-# `param_list` file types
+# Other `param_list` file types
 
-A `param_list` can either be a yaml file, a json file or a csv file.
-
-## YAML file
-The following example shows how to use a yaml file as a parameter list.
-
-```bash
-$ cat param_list.yaml
-- id: foo
-  input: foo.txt
-  event_param: lorem
-- id: bar
-  input: bar.txt
-  event_param: ipsum
-```
-
-```bash
-nextflow run ... --param_list param_list.yaml
-```
+In addition to passing the `param_list` as a yaml file as seen in the examples above, it can also be passed as a json or csv file.
 
 ## JSON file
-The following example shows how to use a yaml file as a parameter list.
+The following example shows how to use a json file as a parameter list.
 
 ```bash
 $ cat param_list.json
@@ -115,11 +101,7 @@ nextflow run ... --param_list param_list.csv
 
 # Passing `param_list` to Nextflow's `params-file`
 
-The `param_list` can also be passed via Nextflow's `params-file`, such that both the event-specific and global parameters can be passed via a file.
-
-## As a YAML file
-
-The following example shows how to use a YAML file as a `params-file` containing the `param_list`.
+The `param_list` can also be passed via Nextflow's `params-file`, such that both the event-specific and global parameters are passed via a file. The following example shows how to use a `params-file` yamle file containing the `param_list`.
 
 ```bash
 $ cat params-file.yaml
@@ -137,30 +119,9 @@ global_param: baz
 nextflow run ... -params-file params-file.yaml
 ```
 
-## As a Nextflow config
+# Resolving paths
 
-The following example shows how to use a Nextflow config file as a `params-file` containing the `param_list`.
-
-```
-$ cat params.config
-params {
-  param_list: [
-    ['id': 'foo', 'input': 'foo.txt', 'event_param': lorem],
-    ['id': 'bar', 'input': 'bar.txt', 'event_param': ipsum]
-  ],
-  global_param: baz
-}
-```
-
-```bash
-nextflow run ... -params-file params.config
-```
-
-## Resolving paths
-
-All files defined in the `param_list` are relative to the location of the `param_list` file. If the `--param_list` is a YAML blob or a Nextflow config, all files in the `param_list` are relative to the current working directory.
-
-For example, with a `param_list.yaml` file located in the `data` directory:
+All files defined in the `param_list` are relative to the location of the `param_list` file. For example, with a `param_list.yaml` file located in the `data` directory:
 
 ```bash
 $ cat /data/param_list.yaml
