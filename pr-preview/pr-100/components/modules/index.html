@@ -1,0 +1,2848 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.54">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="An overview of the modules in OpenPipelines">
+
+<title>Modules – OpenPipelines</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-listing/list.min.js"></script>
+<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-modules .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-namespace','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      page: 30,
+    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
+      searchColumns: ["listing-title","listing-author"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-modules'] = new List('listing-modules', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KKE3LFPPV8"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/logo.svg" alt="" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../fundamentals/index.html"> 
+<span class="menu-text">Fundamentals</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../user_guide/index.html"> 
+<span class="menu-text">User guide</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../contributing/index.html"> 
+<span class="menu-text">Contributing</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../components/index.html" aria-current="page"> 
+<span class="menu-text">Reference</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../team/index.html"> 
+<span class="menu-text">Team</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/openpipelines-bio/openpipeline"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../components/index.html">Reference</a></li><li class="breadcrumb-item"><a href="../../components/modules/index.html">Modules</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../components/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reference</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../components/workflows/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Workflows</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Gdo</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/workflows/gdo/gdo_singlesample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Gdo singlesample</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Ingestion</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/workflows/ingestion/bd_rhapsody.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">BD Rhapsody</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/workflows/ingestion/cellranger_mapping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cell Ranger mapping</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/workflows/ingestion/cellranger_multi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cell Ranger multi</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/workflows/ingestion/cellranger_postprocessing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cell Ranger post-processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/workflows/ingestion/conversion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Conversion</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/workflows/ingestion/demux.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Demux</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/workflows/ingestion/make_reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Make reference</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Integration</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/workflows/integration/bbknn_leiden.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bbknn leiden</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/workflows/integration/harmony_leiden.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Harmony leiden</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/workflows/integration/scanorama_leiden.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scanorama leiden</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/workflows/integration/scvi_leiden.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scvi leiden</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/workflows/integration/totalvi_leiden.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Totalvi leiden</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Multiomics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/workflows/multiomics/dimensionality_reduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dimensionality reduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/workflows/multiomics/process_batches.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Process batches</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/workflows/multiomics/process_samples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Process samples</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/workflows/multiomics/split_modalities.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Split modalities</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Prot</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/workflows/prot/prot_multisample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prot multisample</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/workflows/prot/prot_singlesample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prot singlesample</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">Qc</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/workflows/qc/qc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Qc</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">Rna</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/workflows/rna/rna_multisample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rna multisample</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/workflows/rna/rna_singlesample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rna singlesample</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../components/modules/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Modules</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+ <span class="menu-text">Annotate</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/annotate/popv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Popv</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
+ <span class="menu-text">Cluster</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/cluster/leiden.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Leiden</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false">
+ <span class="menu-text">Compression</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/compression/compress_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Compress h5mu</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false">
+ <span class="menu-text">Convert</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/convert/from_10xh5_to_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">From 10xh5 to h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/convert/from_10xmtx_to_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">From 10xmtx to h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/convert/from_bd_to_10x_molecular_barcode_tags.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">From bd to 10x molecular barcode tags</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/convert/from_bdrhap_to_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">From bdrhap to h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/convert/from_cellranger_multi_to_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">From cellranger multi to h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/convert/from_h5ad_to_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">From h5ad to h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/convert/from_h5mu_to_h5ad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">From h5mu to h5ad</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/convert/from_h5mu_to_seurat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">From h5mu to seurat</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/convert/velocyto_to_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Velocyto to h5mu</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false">
+ <span class="menu-text">Correction</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/correction/cellbender_remove_background.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cellbender remove background</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/correction/cellbender_remove_background_v0_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cellbender remove background v0 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false">
+ <span class="menu-text">Dataflow</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/dataflow/concat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Concat</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/dataflow/concatenate_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Concatenate h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/dataflow/merge.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Merge</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/dataflow/split_modalities.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Split modalities</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false">
+ <span class="menu-text">Demux</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/demux/bcl_convert.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bcl convert</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/demux/bcl2fastq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bcl2fastq</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/demux/cellranger_mkfastq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cellranger mkfastq</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="false">
+ <span class="menu-text">Dimred</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/dimred/pca.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pca</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/dimred/tsne.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tsne</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/dimred/umap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Umap</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false">
+ <span class="menu-text">Download</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/download/download_file.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Download file</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/download/sync_test_resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sync test resources</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="false">
+ <span class="menu-text">Feature Annotation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-20" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/feature_annotation/highly_variable_features_scanpy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Highly variable features scanpy</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-21" role="navigation" aria-expanded="false">
+ <span class="menu-text">Files</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-21" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-21" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/files/make_params.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Make params</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-22" role="navigation" aria-expanded="false">
+ <span class="menu-text">Filter</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-22" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-22" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/filter/delimit_fraction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Delimit fraction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/filter/do_filter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Do filter</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/filter/filter_with_counts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filter with counts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/filter/filter_with_hvg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filter with hvg</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/filter/filter_with_scrublet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filter with scrublet</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/filter/intersect_obs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intersect obs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/filter/remove_modality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Remove modality</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/filter/subset_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Subset h5mu</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-23" role="navigation" aria-expanded="false">
+ <span class="menu-text">Genetic Demux</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-23" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-23" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/genetic_demux/bcftools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bcftools</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/genetic_demux/cellsnp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cellsnp</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/genetic_demux/demuxlet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Demuxlet</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/genetic_demux/dsc_pileup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dsc pileup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/genetic_demux/freebayes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Freebayes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/genetic_demux/freemuxlet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Freemuxlet</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/genetic_demux/samtools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Samtools</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/genetic_demux/scsplit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scsplit</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/genetic_demux/souporcell.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Souporcell</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/genetic_demux/vireo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Vireo</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-24" role="navigation" aria-expanded="false">
+ <span class="menu-text">Integrate</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-24" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-24" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/integrate/harmonypy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Harmonypy</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/integrate/scanorama.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scanorama</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/integrate/scarches.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scarches</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/integrate/scvi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scvi</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/integrate/totalvi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Totalvi</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-25" role="navigation" aria-expanded="false">
+ <span class="menu-text">Interpret</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-25" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-25" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/interpret/lianapy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lianapy</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-26" role="navigation" aria-expanded="false">
+ <span class="menu-text">Labels Transfer</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-26" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-26" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/labels_transfer/knn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Knn</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/labels_transfer/xgboost.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Xgboost</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-27" role="navigation" aria-expanded="false">
+ <span class="menu-text">Mapping</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-27" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-27" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/mapping/bd_rhapsody.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">BD Rhapsody</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/mapping/cellranger_count.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cellranger count</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/mapping/cellranger_count_split.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cellranger count split</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/mapping/cellranger_multi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cellranger multi</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/mapping/htseq_count.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Htseq count</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/mapping/htseq_count_to_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Htseq count to h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/mapping/multi_star.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multi star</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/mapping/multi_star_to_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multi star to h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/mapping/samtools_sort.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Samtools sort</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/mapping/star_align.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Star align</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/mapping/star_align_v273a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Star align v273a</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/mapping/star_build_reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Star build reference</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-28" role="navigation" aria-expanded="false">
+ <span class="menu-text">Metadata</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-28" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-28" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/metadata/add_id.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Add id</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/metadata/grep_annotation_column.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Grep annotation column</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/metadata/join_csv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Join csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/metadata/join_uns_to_obs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Join uns to obs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/metadata/move_obsm_to_obs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Move obsm to obs</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-29" role="navigation" aria-expanded="false">
+ <span class="menu-text">Neighbors</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-29" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-29" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/neighbors/bbknn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bbknn</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/neighbors/find_neighbors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Find neighbors</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-30" role="navigation" aria-expanded="false">
+ <span class="menu-text">Process 10xh5</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-30" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-30" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/process_10xh5/filter_10xh5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filter 10xh5</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-31" role="navigation" aria-expanded="false">
+ <span class="menu-text">Qc</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-31" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-31" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/qc/calculate_qc_metrics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Calculate qc metrics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/qc/fastqc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fastqc</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/qc/multiqc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multiqc</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-32" role="navigation" aria-expanded="false">
+ <span class="menu-text">Query</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-32" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-32" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/query/cellxgene_census.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cellxgene census</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-33" role="navigation" aria-expanded="false">
+ <span class="menu-text">Reference</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-33" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-33" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/reference/build_bdrhap_reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Build bdrhap reference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/reference/build_cellranger_reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Build cellranger reference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/reference/make_reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Make reference</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-34" role="navigation" aria-expanded="false">
+ <span class="menu-text">Report</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-34" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-34" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/report/mermaid.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mermaid</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-35" role="navigation" aria-expanded="false">
+ <span class="menu-text">Transfer</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-35" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-35" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/transfer/publish.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Publish</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-36" role="navigation" aria-expanded="false">
+ <span class="menu-text">Transform</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-36" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-36" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/transform/clr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Clr</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/transform/delete_layer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Delete layer</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/transform/log1p.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Log1p</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/transform/move_layer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Move layer</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/transform/normalize_total.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Normalize total</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/transform/regress_out.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Regress out</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/transform/scale.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scale</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-37" role="navigation" aria-expanded="false">
+ <span class="menu-text">Velocity</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-37" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-37" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/velocity/scvelo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scvelo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/modules/velocity/velocyto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Velocyto</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#modules" id="toc-modules" class="nav-link active" data-scroll-target="#modules">Modules</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/openpipelines-bio/website/edit/main/components/modules/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../components/index.html">Reference</a></li><li class="breadcrumb-item"><a href="../../components/modules/index.html">Modules</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Modules</h1>
+</div>
+
+<div>
+  <div class="description">
+    An overview of the modules in OpenPipelines
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="modules" class="level2">
+<h2 class="anchored" data-anchor-id="modules">Modules</h2>
+<div id="listing-modules" class="quarto-listing quarto-listing-container-table">
+<div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+     <select id="listing-modules-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-modules'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+       <option value="" disabled="" selected="" hidden="">Order By</option>
+       <option value="index" data-direction="asc">Default</option>
+         <option value="listing-title-sort" data-direction="asc">
+          Name
+        </option>
+     </select>
+  </div>
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
+</div>
+<table class="quarto-listing-table table">
+<thead>
+<tr>
+<th>
+<a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Name</a>
+</th>
+<th>
+Namespace
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody class="list">
+<tr data-index="0" data-listing-file-modified-sort="1728027109825" data-listing-reading-time-sort="4" data-listing-word-count-sort="688" data-listing-title-sort="Add id" data-listing-filename-sort="add_id.qmd">
+<td>
+<a href="../../components/modules/metadata/add_id.html" class="title listing-title">Add id</a>
+</td>
+<td>
+<span class="listing-namespace">Metadata</span>
+</td>
+<td>
+<span class="listing-description">Add id of .obs.</span>
+</td>
+</tr>
+<tr data-index="1" data-listing-file-modified-sort="1728027109823" data-listing-reading-time-sort="21" data-listing-word-count-sort="4094" data-listing-title-sort="BD Rhapsody" data-listing-filename-sort="bd_rhapsody.qmd">
+<td>
+<a href="../../components/modules/mapping/bd_rhapsody.html" class="title listing-title">BD Rhapsody</a>
+</td>
+<td>
+<span class="listing-namespace">Mapping</span>
+</td>
+<td>
+<span class="listing-description">A wrapper for the BD Rhapsody Analysis CWL v1.10.1 pipeline</span>
+</td>
+</tr>
+<tr data-index="2" data-listing-file-modified-sort="1728027109825" data-listing-reading-time-sort="25" data-listing-word-count-sort="4856" data-listing-title-sort="Bbknn" data-listing-filename-sort="bbknn.qmd">
+<td>
+<a href="../../components/modules/neighbors/bbknn.html" class="title listing-title">Bbknn</a>
+</td>
+<td>
+<span class="listing-namespace">Neighbors</span>
+</td>
+<td>
+<span class="listing-description">BBKNN network generation</span>
+</td>
+</tr>
+<tr data-index="3" data-listing-file-modified-sort="1728027109821" data-listing-reading-time-sort="3" data-listing-word-count-sort="585" data-listing-title-sort="Bcftools" data-listing-filename-sort="bcftools.qmd">
+<td>
+<a href="../../components/modules/genetic_demux/bcftools.html" class="title listing-title">Bcftools</a>
+</td>
+<td>
+<span class="listing-namespace">Genetic demux</span>
+</td>
+<td>
+<span class="listing-description">Filter the variants called by freebayes or cellSNP</span>
+</td>
+</tr>
+<tr data-index="4" data-listing-file-modified-sort="1728027109820" data-listing-reading-time-sort="3" data-listing-word-count-sort="516" data-listing-title-sort="Bcl convert" data-listing-filename-sort="bcl_convert.qmd">
+<td>
+<a href="../../components/modules/demux/bcl_convert.html" class="title listing-title">Bcl convert</a>
+</td>
+<td>
+<span class="listing-namespace">Demux</span>
+</td>
+<td>
+<span class="listing-description">Convert bcl files to fastq files using bcl-convert.</span>
+</td>
+</tr>
+<tr data-index="5" data-listing-file-modified-sort="1728027109820" data-listing-reading-time-sort="3" data-listing-word-count-sort="430" data-listing-title-sort="Bcl2fastq" data-listing-filename-sort="bcl2fastq.qmd">
+<td>
+<a href="../../components/modules/demux/bcl2fastq.html" class="title listing-title">Bcl2fastq</a>
+</td>
+<td>
+<span class="listing-namespace">Demux</span>
+</td>
+<td>
+<span class="listing-description">Convert bcl files to fastq files using bcl2fastq</span>
+</td>
+</tr>
+<tr data-index="6" data-listing-file-modified-sort="1728027109826" data-listing-reading-time-sort="2" data-listing-word-count-sort="357" data-listing-title-sort="Build bdrhap reference" data-listing-filename-sort="build_bdrhap_reference.qmd">
+<td>
+<a href="../../components/modules/reference/build_bdrhap_reference.html" class="title listing-title">Build bdrhap reference</a>
+</td>
+<td>
+<span class="listing-namespace">Reference</span>
+</td>
+<td>
+<span class="listing-description">Compile a reference into a STAR index compatible with the BD Rhapsody pipeline.</span>
+</td>
+</tr>
+<tr data-index="7" data-listing-file-modified-sort="1728027109826" data-listing-reading-time-sort="2" data-listing-word-count-sort="358" data-listing-title-sort="Build cellranger reference" data-listing-filename-sort="build_cellranger_reference.qmd">
+<td>
+<a href="../../components/modules/reference/build_cellranger_reference.html" class="title listing-title">Build cellranger reference</a>
+</td>
+<td>
+<span class="listing-namespace">Reference</span>
+</td>
+<td>
+<span class="listing-description">Build a Cell Ranger-compatible reference folder from user-supplied genome FASTA and gene GTF files.</span>
+</td>
+</tr>
+<tr data-index="8" data-listing-file-modified-sort="1728027109826" data-listing-reading-time-sort="11" data-listing-word-count-sort="2173" data-listing-title-sort="Calculate qc metrics" data-listing-filename-sort="calculate_qc_metrics.qmd">
+<td>
+<a href="../../components/modules/qc/calculate_qc_metrics.html" class="title listing-title">Calculate qc metrics</a>
+</td>
+<td>
+<span class="listing-namespace">Qc</span>
+</td>
+<td>
+<span class="listing-description">Add basic quality control metrics to an .h5mu file.</span>
+</td>
+</tr>
+<tr data-index="9" data-listing-file-modified-sort="1728027109819" data-listing-reading-time-sort="76" data-listing-word-count-sort="15011" data-listing-title-sort="Cellbender remove background" data-listing-filename-sort="cellbender_remove_background.qmd">
+<td>
+<a href="../../components/modules/correction/cellbender_remove_background.html" class="title listing-title">Cellbender remove background</a>
+</td>
+<td>
+<span class="listing-namespace">Correction</span>
+</td>
+<td>
+<span class="listing-description">Eliminating technical artifacts from high-throughput single-cell RNA sequencing data.</span>
+</td>
+</tr>
+<tr data-index="10" data-listing-file-modified-sort="1728027109820" data-listing-reading-time-sort="29" data-listing-word-count-sort="5741" data-listing-title-sort="Cellbender remove background v0 2" data-listing-filename-sort="cellbender_remove_background_v0_2.qmd">
+<td>
+<a href="../../components/modules/correction/cellbender_remove_background_v0_2.html" class="title listing-title">Cellbender remove background v0 2</a>
+</td>
+<td>
+<span class="listing-namespace">Correction</span>
+</td>
+<td>
+<span class="listing-description">Eliminating technical artifacts from high-throughput single-cell RNA sequencing data.</span>
+</td>
+</tr>
+<tr data-index="11" data-listing-file-modified-sort="1728027109823" data-listing-reading-time-sort="16" data-listing-word-count-sort="3012" data-listing-title-sort="Cellranger count" data-listing-filename-sort="cellranger_count.qmd">
+<td>
+<a href="../../components/modules/mapping/cellranger_count.html" class="title listing-title">Cellranger count</a>
+</td>
+<td>
+<span class="listing-namespace">Mapping</span>
+</td>
+<td>
+<span class="listing-description">Align fastq files using Cell Ranger count.</span>
+</td>
+</tr>
+<tr data-index="12" data-listing-file-modified-sort="1728027109823" data-listing-reading-time-sort="4" data-listing-word-count-sort="684" data-listing-title-sort="Cellranger count split" data-listing-filename-sort="cellranger_count_split.qmd">
+<td>
+<a href="../../components/modules/mapping/cellranger_count_split.html" class="title listing-title">Cellranger count split</a>
+</td>
+<td>
+<span class="listing-namespace">Mapping</span>
+</td>
+<td>
+<span class="listing-description">Split 10x Cell Ranger output directory into separate output fields.</span>
+</td>
+</tr>
+<tr data-index="13" data-listing-file-modified-sort="1728027109820" data-listing-reading-time-sort="3" data-listing-word-count-sort="580" data-listing-title-sort="Cellranger mkfastq" data-listing-filename-sort="cellranger_mkfastq.qmd">
+<td>
+<a href="../../components/modules/demux/cellranger_mkfastq.html" class="title listing-title">Cellranger mkfastq</a>
+</td>
+<td>
+<span class="listing-namespace">Demux</span>
+</td>
+<td>
+<span class="listing-description">Demultiplex raw sequencing data</span>
+</td>
+</tr>
+<tr data-index="14" data-listing-file-modified-sort="1728027109823" data-listing-reading-time-sort="33" data-listing-word-count-sort="6476" data-listing-title-sort="Cellranger multi" data-listing-filename-sort="cellranger_multi.qmd">
+<td>
+<a href="../../components/modules/mapping/cellranger_multi.html" class="title listing-title">Cellranger multi</a>
+</td>
+<td>
+<span class="listing-namespace">Mapping</span>
+</td>
+<td>
+<span class="listing-description">Align fastq files using Cell Ranger multi.</span>
+</td>
+</tr>
+<tr data-index="15" data-listing-file-modified-sort="1728027109821" data-listing-reading-time-sort="22" data-listing-word-count-sort="4276" data-listing-title-sort="Cellsnp" data-listing-filename-sort="cellsnp.qmd">
+<td>
+<a href="../../components/modules/genetic_demux/cellsnp.html" class="title listing-title">Cellsnp</a>
+</td>
+<td>
+<span class="listing-namespace">Genetic demux</span>
+</td>
+<td>
+<span class="listing-description">cellSNP aims to pileup the expressed alleles in single-cell or bulk RNA-seq data.</span>
+</td>
+</tr>
+<tr data-index="16" data-listing-file-modified-sort="1728027109826" data-listing-reading-time-sort="14" data-listing-word-count-sort="2662" data-listing-title-sort="Cellxgene census" data-listing-filename-sort="cellxgene_census.qmd">
+<td>
+<a href="../../components/modules/query/cellxgene_census.html" class="title listing-title">Cellxgene census</a>
+</td>
+<td>
+<span class="listing-namespace">Query</span>
+</td>
+<td>
+<span class="listing-description">Query cells from a CellxGene Census or custom TileDBSoma object.</span>
+</td>
+</tr>
+<tr data-index="17" data-listing-file-modified-sort="1728027109827" data-listing-reading-time-sort="4" data-listing-word-count-sort="631" data-listing-title-sort="Clr" data-listing-filename-sort="clr.qmd">
+<td>
+<a href="../../components/modules/transform/clr.html" class="title listing-title">Clr</a>
+</td>
+<td>
+<span class="listing-namespace">Transform</span>
+</td>
+<td>
+<span class="listing-description">Perform CLR normalization on CITE-seq data (Stoeckius et al., 2017)</span>
+</td>
+</tr>
+<tr data-index="18" data-listing-file-modified-sort="1728027109819" data-listing-reading-time-sort="2" data-listing-word-count-sort="274" data-listing-title-sort="Compress h5mu" data-listing-filename-sort="compress_h5mu.qmd">
+<td>
+<a href="../../components/modules/compression/compress_h5mu.html" class="title listing-title">Compress h5mu</a>
+</td>
+<td>
+<span class="listing-namespace">Compression</span>
+</td>
+<td>
+<span class="listing-description">Compress a MuData file.</span>
+</td>
+</tr>
+<tr data-index="19" data-listing-file-modified-sort="1728027109820" data-listing-reading-time-sort="17" data-listing-word-count-sort="3328" data-listing-title-sort="Concat" data-listing-filename-sort="concat.qmd">
+<td>
+<a href="../../components/modules/dataflow/concat.html" class="title listing-title">Concat</a>
+</td>
+<td>
+<span class="listing-namespace">Dataflow</span>
+</td>
+<td>
+<span class="listing-description">Concatenates several uni-modal samples in .h5mu files into a single file</span>
+</td>
+</tr>
+<tr data-index="20" data-listing-file-modified-sort="1728027109820" data-listing-reading-time-sort="17" data-listing-word-count-sort="3328" data-listing-title-sort="Concatenate h5mu" data-listing-filename-sort="concatenate_h5mu.qmd">
+<td>
+<a href="../../components/modules/dataflow/concatenate_h5mu.html" class="title listing-title">Concatenate h5mu</a>
+</td>
+<td>
+<span class="listing-namespace">Dataflow</span>
+</td>
+<td>
+<span class="listing-description">Concatenates several uni-modal samples in .h5mu files into a single file</span>
+</td>
+</tr>
+<tr data-index="21" data-listing-file-modified-sort="1728027109827" data-listing-reading-time-sort="4" data-listing-word-count-sort="695" data-listing-title-sort="Delete layer" data-listing-filename-sort="delete_layer.qmd">
+<td>
+<a href="../../components/modules/transform/delete_layer.html" class="title listing-title">Delete layer</a>
+</td>
+<td>
+<span class="listing-namespace">Transform</span>
+</td>
+<td>
+<span class="listing-description">Delete an anndata layer from one or more modalities</span>
+</td>
+</tr>
+<tr data-index="22" data-listing-file-modified-sort="1728027109821" data-listing-reading-time-sort="7" data-listing-word-count-sort="1202" data-listing-title-sort="Delimit fraction" data-listing-filename-sort="delimit_fraction.qmd">
+<td>
+<a href="../../components/modules/filter/delimit_fraction.html" class="title listing-title">Delimit fraction</a>
+</td>
+<td>
+<span class="listing-namespace">Filter</span>
+</td>
+<td>
+<span class="listing-description">Turns a column containing values between 0 and 1 into a boolean column based on thresholds</span>
+</td>
+</tr>
+<tr data-index="23" data-listing-file-modified-sort="1728027109821" data-listing-reading-time-sort="18" data-listing-word-count-sort="3570" data-listing-title-sort="Demuxlet" data-listing-filename-sort="demuxlet.qmd">
+<td>
+<a href="../../components/modules/genetic_demux/demuxlet.html" class="title listing-title">Demuxlet</a>
+</td>
+<td>
+<span class="listing-namespace">Genetic demux</span>
+</td>
+<td>
+<span class="listing-description">Demuxlet is a software tool to deconvolute sample identity and identify multiplets when multiple samples are pooled by barcoded single cell sequencing.</span>
+</td>
+</tr>
+<tr data-index="24" data-listing-file-modified-sort="1728027109821" data-listing-reading-time-sort="4" data-listing-word-count-sort="677" data-listing-title-sort="Do filter" data-listing-filename-sort="do_filter.qmd">
+<td>
+<a href="../../components/modules/filter/do_filter.html" class="title listing-title">Do filter</a>
+</td>
+<td>
+<span class="listing-namespace">Filter</span>
+</td>
+<td>
+<span class="listing-description">Remove observations and variables based on specified .obs and .var columns</span>
+</td>
+</tr>
+<tr data-index="25" data-listing-file-modified-sort="1728027109821" data-listing-reading-time-sort="3" data-listing-word-count-sort="534" data-listing-title-sort="Download file" data-listing-filename-sort="download_file.qmd">
+<td>
+<a href="../../components/modules/download/download_file.html" class="title listing-title">Download file</a>
+</td>
+<td>
+<span class="listing-namespace">Download</span>
+</td>
+<td>
+<span class="listing-description">Download a file</span>
+</td>
+</tr>
+<tr data-index="26" data-listing-file-modified-sort="1728027109822" data-listing-reading-time-sort="11" data-listing-word-count-sort="2182" data-listing-title-sort="Dsc pileup" data-listing-filename-sort="dsc_pileup.qmd">
+<td>
+<a href="../../components/modules/genetic_demux/dsc_pileup.html" class="title listing-title">Dsc pileup</a>
+</td>
+<td>
+<span class="listing-namespace">Genetic demux</span>
+</td>
+<td>
+<span class="listing-description">Dsc-pileup is a software tool to pileup reads and corresponding base quality for each overlapping SNPs and each barcode.</span>
+</td>
+</tr>
+<tr data-index="27" data-listing-file-modified-sort="1728027109826" data-listing-reading-time-sort="3" data-listing-word-count-sort="591" data-listing-title-sort="Fastqc" data-listing-filename-sort="fastqc.qmd">
+<td>
+<a href="../../components/modules/qc/fastqc.html" class="title listing-title">Fastqc</a>
+</td>
+<td>
+<span class="listing-namespace">Qc</span>
+</td>
+<td>
+<span class="listing-description">Fastqc component, please see https://www.bioinformatics.babraham.ac.uk/projects/fastqc/.</span>
+</td>
+</tr>
+<tr data-index="28" data-listing-file-modified-sort="1728027109825" data-listing-reading-time-sort="4" data-listing-word-count-sort="728" data-listing-title-sort="Filter 10xh5" data-listing-filename-sort="filter_10xh5.qmd">
+<td>
+<a href="../../components/modules/process_10xh5/filter_10xh5.html" class="title listing-title">Filter 10xh5</a>
+</td>
+<td>
+<span class="listing-namespace">Process 10xh5</span>
+</td>
+<td>
+<span class="listing-description">Filter a 10x h5 dataset</span>
+</td>
+</tr>
+<tr data-index="29" data-listing-file-modified-sort="1728027109821" data-listing-reading-time-sort="5" data-listing-word-count-sort="950" data-listing-title-sort="Filter with counts" data-listing-filename-sort="filter_with_counts.qmd">
+<td>
+<a href="../../components/modules/filter/filter_with_counts.html" class="title listing-title">Filter with counts</a>
+</td>
+<td>
+<span class="listing-namespace">Filter</span>
+</td>
+<td>
+<span class="listing-description">Filter scRNA-seq data based on the primary QC metrics.</span>
+</td>
+</tr>
+<tr data-index="30" data-listing-file-modified-sort="1728027109821" data-listing-reading-time-sort="39" data-listing-word-count-sort="7742" data-listing-title-sort="Filter with hvg" data-listing-filename-sort="filter_with_hvg.qmd">
+<td>
+<a href="../../components/modules/filter/filter_with_hvg.html" class="title listing-title">Filter with hvg</a>
+</td>
+<td>
+<span class="listing-namespace">Filter</span>
+</td>
+<td>
+<span class="listing-description">Annotate highly variable genes [Satija15] [Zheng17] [Stuart19].</span>
+</td>
+</tr>
+<tr data-index="31" data-listing-file-modified-sort="1728027109821" data-listing-reading-time-sort="15" data-listing-word-count-sort="2901" data-listing-title-sort="Filter with scrublet" data-listing-filename-sort="filter_with_scrublet.qmd">
+<td>
+<a href="../../components/modules/filter/filter_with_scrublet.html" class="title listing-title">Filter with scrublet</a>
+</td>
+<td>
+<span class="listing-namespace">Filter</span>
+</td>
+<td>
+<span class="listing-description">Doublet detection using the Scrublet method (Wolock, Lopez and Klein, 2019).</span>
+</td>
+</tr>
+<tr data-index="32" data-listing-file-modified-sort="1728027109825" data-listing-reading-time-sort="25" data-listing-word-count-sort="4974" data-listing-title-sort="Find neighbors" data-listing-filename-sort="find_neighbors.qmd">
+<td>
+<a href="../../components/modules/neighbors/find_neighbors.html" class="title listing-title">Find neighbors</a>
+</td>
+<td>
+<span class="listing-namespace">Neighbors</span>
+</td>
+<td>
+<span class="listing-description">Compute a neighborhood graph of observations [McInnes18].</span>
+</td>
+</tr>
+<tr data-index="33" data-listing-file-modified-sort="1728027109822" data-listing-reading-time-sort="60" data-listing-word-count-sort="11927" data-listing-title-sort="Freebayes" data-listing-filename-sort="freebayes.qmd">
+<td>
+<a href="../../components/modules/genetic_demux/freebayes.html" class="title listing-title">Freebayes</a>
+</td>
+<td>
+<span class="listing-namespace">Genetic demux</span>
+</td>
+<td>
+<span class="listing-description">Freebayes is a Bayesian genetic variant detector designed to find small polymorphisms, specifically SNPs</span>
+</td>
+</tr>
+<tr data-index="34" data-listing-file-modified-sort="1728027109822" data-listing-reading-time-sort="12" data-listing-word-count-sort="2372" data-listing-title-sort="Freemuxlet" data-listing-filename-sort="freemuxlet.qmd">
+<td>
+<a href="../../components/modules/genetic_demux/freemuxlet.html" class="title listing-title">Freemuxlet</a>
+</td>
+<td>
+<span class="listing-namespace">Genetic demux</span>
+</td>
+<td>
+<span class="listing-description">Freemuxlet is a software tool to deconvolute sample identity and identify multiplets when multiple samples are pooled by barcoded single cell sequencing.</span>
+</td>
+</tr>
+<tr data-index="35" data-listing-file-modified-sort="1728027109819" data-listing-reading-time-sort="4" data-listing-word-count-sort="725" data-listing-title-sort="From 10xh5 to h5mu" data-listing-filename-sort="from_10xh5_to_h5mu.qmd">
+<td>
+<a href="../../components/modules/convert/from_10xh5_to_h5mu.html" class="title listing-title">From 10xh5 to h5mu</a>
+</td>
+<td>
+<span class="listing-namespace">Convert</span>
+</td>
+<td>
+<span class="listing-description">Converts a 10x h5 into an h5mu file</span>
+</td>
+</tr>
+<tr data-index="36" data-listing-file-modified-sort="1728027109819" data-listing-reading-time-sort="2" data-listing-word-count-sort="335" data-listing-title-sort="From 10xmtx to h5mu" data-listing-filename-sort="from_10xmtx_to_h5mu.qmd">
+<td>
+<a href="../../components/modules/convert/from_10xmtx_to_h5mu.html" class="title listing-title">From 10xmtx to h5mu</a>
+</td>
+<td>
+<span class="listing-namespace">Convert</span>
+</td>
+<td>
+<span class="listing-description">Converts a 10x mtx into an h5mu file</span>
+</td>
+</tr>
+<tr data-index="37" data-listing-file-modified-sort="1728027109819" data-listing-reading-time-sort="2" data-listing-word-count-sort="296" data-listing-title-sort="From bd to 10x molecular barcode tags" data-listing-filename-sort="from_bd_to_10x_molecular_barcode_tags.qmd">
+<td>
+<a href="../../components/modules/convert/from_bd_to_10x_molecular_barcode_tags.html" class="title listing-title">From bd to 10x molecular barcode tags</a>
+</td>
+<td>
+<span class="listing-namespace">Convert</span>
+</td>
+<td>
+<span class="listing-description">Convert the molecular barcode sequence SAM tag from BD format (MA) to 10X format (UB)</span>
+</td>
+</tr>
+<tr data-index="38" data-listing-file-modified-sort="1728027109819" data-listing-reading-time-sort="2" data-listing-word-count-sort="373" data-listing-title-sort="From bdrhap to h5mu" data-listing-filename-sort="from_bdrhap_to_h5mu.qmd">
+<td>
+<a href="../../components/modules/convert/from_bdrhap_to_h5mu.html" class="title listing-title">From bdrhap to h5mu</a>
+</td>
+<td>
+<span class="listing-namespace">Convert</span>
+</td>
+<td>
+<span class="listing-description">Convert the output of a BD Rhapsody WTA pipeline to a MuData h5 file</span>
+</td>
+</tr>
+<tr data-index="39" data-listing-file-modified-sort="1728027109819" data-listing-reading-time-sort="4" data-listing-word-count-sort="622" data-listing-title-sort="From cellranger multi to h5mu" data-listing-filename-sort="from_cellranger_multi_to_h5mu.qmd">
+<td>
+<a href="../../components/modules/convert/from_cellranger_multi_to_h5mu.html" class="title listing-title">From cellranger multi to h5mu</a>
+</td>
+<td>
+<span class="listing-namespace">Convert</span>
+</td>
+<td>
+<span class="listing-description">Converts the output from cellranger multi to a single .h5mu file.</span>
+</td>
+</tr>
+<tr data-index="40" data-listing-file-modified-sort="1728027109819" data-listing-reading-time-sort="3" data-listing-word-count-sort="425" data-listing-title-sort="From h5ad to h5mu" data-listing-filename-sort="from_h5ad_to_h5mu.qmd">
+<td>
+<a href="../../components/modules/convert/from_h5ad_to_h5mu.html" class="title listing-title">From h5ad to h5mu</a>
+</td>
+<td>
+<span class="listing-namespace">Convert</span>
+</td>
+<td>
+<span class="listing-description">Converts a single layer h5ad file into a single MuData object</span>
+</td>
+</tr>
+<tr data-index="41" data-listing-file-modified-sort="1728027109819" data-listing-reading-time-sort="3" data-listing-word-count-sort="482" data-listing-title-sort="From h5mu to h5ad" data-listing-filename-sort="from_h5mu_to_h5ad.qmd">
+<td>
+<a href="../../components/modules/convert/from_h5mu_to_h5ad.html" class="title listing-title">From h5mu to h5ad</a>
+</td>
+<td>
+<span class="listing-namespace">Convert</span>
+</td>
+<td>
+<span class="listing-description">Converts a h5mu file into a h5ad file</span>
+</td>
+</tr>
+<tr data-index="42" data-listing-file-modified-sort="1728027109819" data-listing-reading-time-sort="2" data-listing-word-count-sort="278" data-listing-title-sort="From h5mu to seurat" data-listing-filename-sort="from_h5mu_to_seurat.qmd">
+<td>
+<a href="../../components/modules/convert/from_h5mu_to_seurat.html" class="title listing-title">From h5mu to seurat</a>
+</td>
+<td>
+<span class="listing-namespace">Convert</span>
+</td>
+<td>
+<span class="listing-description">Converts an h5mu file into a Seurat file.</span>
+</td>
+</tr>
+<tr data-index="43" data-listing-file-modified-sort="1728027109825" data-listing-reading-time-sort="9" data-listing-word-count-sort="1639" data-listing-title-sort="Grep annotation column" data-listing-filename-sort="grep_annotation_column.qmd">
+<td>
+<a href="../../components/modules/metadata/grep_annotation_column.html" class="title listing-title">Grep annotation column</a>
+</td>
+<td>
+<span class="listing-namespace">Metadata</span>
+</td>
+<td>
+<span class="listing-description">Perform a regex lookup on a column from the annotation matrices .obs or .var.</span>
+</td>
+</tr>
+<tr data-index="44" data-listing-file-modified-sort="1728027109822" data-listing-reading-time-sort="10" data-listing-word-count-sort="1944" data-listing-title-sort="Harmonypy" data-listing-filename-sort="harmonypy.qmd">
+<td>
+<a href="../../components/modules/integrate/harmonypy.html" class="title listing-title">Harmonypy</a>
+</td>
+<td>
+<span class="listing-namespace">Integrate</span>
+</td>
+<td>
+<span class="listing-description">Performs Harmony integration based as described in https://github.com/immunogenomics/harmony.</span>
+</td>
+</tr>
+<tr data-index="45" data-listing-file-modified-sort="1728027109821" data-listing-reading-time-sort="37" data-listing-word-count-sort="7379" data-listing-title-sort="Highly variable features scanpy" data-listing-filename-sort="highly_variable_features_scanpy.qmd">
+<td>
+<a href="../../components/modules/feature_annotation/highly_variable_features_scanpy.html" class="title listing-title">Highly variable features scanpy</a>
+</td>
+<td>
+<span class="listing-namespace">Feature annotation</span>
+</td>
+<td>
+<span class="listing-description">Annotate highly variable features [Satija15] [Zheng17] [Stuart19].</span>
+</td>
+</tr>
+<tr data-index="46" data-listing-file-modified-sort="1728027109823" data-listing-reading-time-sort="39" data-listing-word-count-sort="7607" data-listing-title-sort="Htseq count" data-listing-filename-sort="htseq_count.qmd">
+<td>
+<a href="../../components/modules/mapping/htseq_count.html" class="title listing-title">Htseq count</a>
+</td>
+<td>
+<span class="listing-namespace">Mapping</span>
+</td>
+<td>
+<span class="listing-description">Quantify gene expression for subsequent testing for differential expression.</span>
+</td>
+</tr>
+<tr data-index="47" data-listing-file-modified-sort="1728027109823" data-listing-reading-time-sort="3" data-listing-word-count-sort="599" data-listing-title-sort="Htseq count to h5mu" data-listing-filename-sort="htseq_count_to_h5mu.qmd">
+<td>
+<a href="../../components/modules/mapping/htseq_count_to_h5mu.html" class="title listing-title">Htseq count to h5mu</a>
+</td>
+<td>
+<span class="listing-namespace">Mapping</span>
+</td>
+<td>
+<span class="listing-description">Convert the htseq table to a h5mu</span>
+</td>
+</tr>
+<tr data-index="48" data-listing-file-modified-sort="1728027109821" data-listing-reading-time-sort="4" data-listing-word-count-sort="642" data-listing-title-sort="Intersect obs" data-listing-filename-sort="intersect_obs.qmd">
+<td>
+<a href="../../components/modules/filter/intersect_obs.html" class="title listing-title">Intersect obs</a>
+</td>
+<td>
+<span class="listing-namespace">Filter</span>
+</td>
+<td>
+<span class="listing-description">Create an intersection between two or more modalities.</span>
+</td>
+</tr>
+<tr data-index="49" data-listing-file-modified-sort="1728027109825" data-listing-reading-time-sort="7" data-listing-word-count-sort="1251" data-listing-title-sort="Join csv" data-listing-filename-sort="join_csv.qmd">
+<td>
+<a href="../../components/modules/metadata/join_csv.html" class="title listing-title">Join csv</a>
+</td>
+<td>
+<span class="listing-namespace">Metadata</span>
+</td>
+<td>
+<span class="listing-description">Join a csv containing metadata to the .obs or .var field of a mudata file.</span>
+</td>
+</tr>
+<tr data-index="50" data-listing-file-modified-sort="1728027109825" data-listing-reading-time-sort="3" data-listing-word-count-sort="573" data-listing-title-sort="Join uns to obs" data-listing-filename-sort="join_uns_to_obs.qmd">
+<td>
+<a href="../../components/modules/metadata/join_uns_to_obs.html" class="title listing-title">Join uns to obs</a>
+</td>
+<td>
+<span class="listing-namespace">Metadata</span>
+</td>
+<td>
+<span class="listing-description">Join a data frame of length 1 (1 row index value) in .uns containing metadata to the .obs of a mudata file.</span>
+</td>
+</tr>
+<tr data-index="51" data-listing-file-modified-sort="1728027109822" data-listing-reading-time-sort="14" data-listing-word-count-sort="2642" data-listing-title-sort="Knn" data-listing-filename-sort="knn.qmd">
+<td>
+<a href="../../components/modules/labels_transfer/knn.html" class="title listing-title">Knn</a>
+</td>
+<td>
+<span class="listing-namespace">Labels transfer</span>
+</td>
+<td>
+<span class="listing-description">Performs label transfer from reference to query using KNN classifier</span>
+</td>
+</tr>
+<tr data-index="52" data-listing-file-modified-sort="1728027109818" data-listing-reading-time-sort="9" data-listing-word-count-sort="1616" data-listing-title-sort="Leiden" data-listing-filename-sort="leiden.qmd">
+<td>
+<a href="../../components/modules/cluster/leiden.html" class="title listing-title">Leiden</a>
+</td>
+<td>
+<span class="listing-namespace">Cluster</span>
+</td>
+<td>
+<span class="listing-description">Cluster cells using the [Leiden algorithm] [Traag18] implemented in the [Scanpy framework] [Wolf18].</span>
+</td>
+</tr>
+<tr data-index="53" data-listing-file-modified-sort="1728027109822" data-listing-reading-time-sort="14" data-listing-word-count-sort="2734" data-listing-title-sort="Lianapy" data-listing-filename-sort="lianapy.qmd">
+<td>
+<a href="../../components/modules/interpret/lianapy.html" class="title listing-title">Lianapy</a>
+</td>
+<td>
+<span class="listing-namespace">Interpret</span>
+</td>
+<td>
+<span class="listing-description">Performs LIANA integration based as described in https://github.com/saezlab/liana-py</span>
+</td>
+</tr>
+<tr data-index="54" data-listing-file-modified-sort="1728027109827" data-listing-reading-time-sort="4" data-listing-word-count-sort="765" data-listing-title-sort="Log1p" data-listing-filename-sort="log1p.qmd">
+<td>
+<a href="../../components/modules/transform/log1p.html" class="title listing-title">Log1p</a>
+</td>
+<td>
+<span class="listing-namespace">Transform</span>
+</td>
+<td>
+<span class="listing-description">Logarithmize the data matrix.</span>
+</td>
+</tr>
+<tr data-index="55" data-listing-file-modified-sort="1728027109821" data-listing-reading-time-sort="5" data-listing-word-count-sort="904" data-listing-title-sort="Make params" data-listing-filename-sort="make_params.qmd">
+<td>
+<a href="../../components/modules/files/make_params.html" class="title listing-title">Make params</a>
+</td>
+<td>
+<span class="listing-namespace">Files</span>
+</td>
+<td>
+<span class="listing-description">Looks for files in a directory and turn it in a params file.</span>
+</td>
+</tr>
+<tr data-index="56" data-listing-file-modified-sort="1728027109826" data-listing-reading-time-sort="4" data-listing-word-count-sort="613" data-listing-title-sort="Make reference" data-listing-filename-sort="make_reference.qmd">
+<td>
+<a href="../../components/modules/reference/make_reference.html" class="title listing-title">Make reference</a>
+</td>
+<td>
+<span class="listing-namespace">Reference</span>
+</td>
+<td>
+<span class="listing-description">Preprocess and build a transcriptome reference.</span>
+</td>
+</tr>
+<tr data-index="57" data-listing-file-modified-sort="1728027109820" data-listing-reading-time-sort="3" data-listing-word-count-sort="471" data-listing-title-sort="Merge" data-listing-filename-sort="merge.qmd">
+<td>
+<a href="../../components/modules/dataflow/merge.html" class="title listing-title">Merge</a>
+</td>
+<td>
+<span class="listing-namespace">Dataflow</span>
+</td>
+<td>
+<span class="listing-description">Combine one or more single-modality .h5mu files together into one .h5mu file</span>
+</td>
+</tr>
+<tr data-index="58" data-listing-file-modified-sort="1728027109826" data-listing-reading-time-sort="6" data-listing-word-count-sort="1068" data-listing-title-sort="Mermaid" data-listing-filename-sort="mermaid.qmd">
+<td>
+<a href="../../components/modules/report/mermaid.html" class="title listing-title">Mermaid</a>
+</td>
+<td>
+<span class="listing-namespace">Report</span>
+</td>
+<td>
+<span class="listing-description">Generates a network from mermaid code</span>
+</td>
+</tr>
+<tr data-index="59" data-listing-file-modified-sort="1728027109827" data-listing-reading-time-sort="4" data-listing-word-count-sort="678" data-listing-title-sort="Move layer" data-listing-filename-sort="move_layer.qmd">
+<td>
+<a href="../../components/modules/transform/move_layer.html" class="title listing-title">Move layer</a>
+</td>
+<td>
+<span class="listing-namespace">Transform</span>
+</td>
+<td>
+<span class="listing-description">Move a data matrix stored at the .layers or .X attributes in a MuData object to another layer.</span>
+</td>
+</tr>
+<tr data-index="60" data-listing-file-modified-sort="1728027109825" data-listing-reading-time-sort="4" data-listing-word-count-sort="617" data-listing-title-sort="Move obsm to obs" data-listing-filename-sort="move_obsm_to_obs.qmd">
+<td>
+<a href="../../components/modules/metadata/move_obsm_to_obs.html" class="title listing-title">Move obsm to obs</a>
+</td>
+<td>
+<span class="listing-namespace">Metadata</span>
+</td>
+<td>
+<span class="listing-description">Move a matrix from .obsm to .obs.</span>
+</td>
+</tr>
+<tr data-index="61" data-listing-file-modified-sort="1728027109824" data-listing-reading-time-sort="632" data-listing-word-count-sort="126205" data-listing-title-sort="Multi star" data-listing-filename-sort="multi_star.qmd">
+<td>
+<a href="../../components/modules/mapping/multi_star.html" class="title listing-title">Multi star</a>
+</td>
+<td>
+<span class="listing-namespace">Mapping</span>
+</td>
+<td>
+<span class="listing-description">Align fastq files using STAR.</span>
+</td>
+</tr>
+<tr data-index="62" data-listing-file-modified-sort="1728027109824" data-listing-reading-time-sort="2" data-listing-word-count-sort="400" data-listing-title-sort="Multi star to h5mu" data-listing-filename-sort="multi_star_to_h5mu.qmd">
+<td>
+<a href="../../components/modules/mapping/multi_star_to_h5mu.html" class="title listing-title">Multi star to h5mu</a>
+</td>
+<td>
+<span class="listing-namespace">Mapping</span>
+</td>
+<td>
+<span class="listing-description">Convert the output of <code>multi_star</code> to a h5mu</span>
+</td>
+</tr>
+<tr data-index="63" data-listing-file-modified-sort="1728027109826" data-listing-reading-time-sort="2" data-listing-word-count-sort="328" data-listing-title-sort="Multiqc" data-listing-filename-sort="multiqc.qmd">
+<td>
+<a href="../../components/modules/qc/multiqc.html" class="title listing-title">Multiqc</a>
+</td>
+<td>
+<span class="listing-namespace">Qc</span>
+</td>
+<td>
+<span class="listing-description">MultiQC aggregates results from bioinformatics analyses across many samples into a single report.</span>
+</td>
+</tr>
+<tr data-index="64" data-listing-file-modified-sort="1728027109827" data-listing-reading-time-sort="13" data-listing-word-count-sort="2532" data-listing-title-sort="Normalize total" data-listing-filename-sort="normalize_total.qmd">
+<td>
+<a href="../../components/modules/transform/normalize_total.html" class="title listing-title">Normalize total</a>
+</td>
+<td>
+<span class="listing-namespace">Transform</span>
+</td>
+<td>
+<span class="listing-description">Normalize counts per cell.</span>
+</td>
+</tr>
+<tr data-index="65" data-listing-file-modified-sort="1728027109820" data-listing-reading-time-sort="7" data-listing-word-count-sort="1367" data-listing-title-sort="Pca" data-listing-filename-sort="pca.qmd">
+<td>
+<a href="../../components/modules/dimred/pca.html" class="title listing-title">Pca</a>
+</td>
+<td>
+<span class="listing-namespace">Dimred</span>
+</td>
+<td>
+<span class="listing-description">Computes PCA coordinates, loadings and variance decomposition.</span>
+</td>
+</tr>
+<tr data-index="66" data-listing-file-modified-sort="1728027109818" data-listing-reading-time-sort="11" data-listing-word-count-sort="2185" data-listing-title-sort="Popv" data-listing-filename-sort="popv.qmd">
+<td>
+<a href="../../components/modules/annotate/popv.html" class="title listing-title">Popv</a>
+</td>
+<td>
+<span class="listing-namespace">Annotate</span>
+</td>
+<td>
+<span class="listing-description">Performs popular major vote cell typing on single cell sequence data using multiple algorithms.</span>
+</td>
+</tr>
+<tr data-index="67" data-listing-file-modified-sort="1728027109826" data-listing-reading-time-sort="1" data-listing-word-count-sort="158" data-listing-title-sort="Publish" data-listing-filename-sort="publish.qmd">
+<td>
+<a href="../../components/modules/transfer/publish.html" class="title listing-title">Publish</a>
+</td>
+<td>
+<span class="listing-namespace">Transfer</span>
+</td>
+<td>
+<span class="listing-description">Publish an artifact and optionally rename with parameters</span>
+</td>
+</tr>
+<tr data-index="68" data-listing-file-modified-sort="1728027109827" data-listing-reading-time-sort="3" data-listing-word-count-sort="533" data-listing-title-sort="Regress out" data-listing-filename-sort="regress_out.qmd">
+<td>
+<a href="../../components/modules/transform/regress_out.html" class="title listing-title">Regress out</a>
+</td>
+<td>
+<span class="listing-namespace">Transform</span>
+</td>
+<td>
+<span class="listing-description">Regress out (mostly) unwanted sources of variation.</span>
+</td>
+</tr>
+<tr data-index="69" data-listing-file-modified-sort="1728027109821" data-listing-reading-time-sort="3" data-listing-word-count-sort="510" data-listing-title-sort="Remove modality" data-listing-filename-sort="remove_modality.qmd">
+<td>
+<a href="../../components/modules/filter/remove_modality.html" class="title listing-title">Remove modality</a>
+</td>
+<td>
+<span class="listing-namespace">Filter</span>
+</td>
+<td>
+<span class="listing-description">Remove a modality from a .h5mu file</span>
+</td>
+</tr>
+<tr data-index="70" data-listing-file-modified-sort="1728027109822" data-listing-reading-time-sort="2" data-listing-word-count-sort="220" data-listing-title-sort="Samtools" data-listing-filename-sort="samtools.qmd">
+<td>
+<a href="../../components/modules/genetic_demux/samtools.html" class="title listing-title">Samtools</a>
+</td>
+<td>
+<span class="listing-namespace">Genetic demux</span>
+</td>
+<td>
+<span class="listing-description">Filter the BAM according to the instruction of scSplit via Samtools.</span>
+</td>
+</tr>
+<tr data-index="71" data-listing-file-modified-sort="1728027109824" data-listing-reading-time-sort="18" data-listing-word-count-sort="3538" data-listing-title-sort="Samtools sort" data-listing-filename-sort="samtools_sort.qmd">
+<td>
+<a href="../../components/modules/mapping/samtools_sort.html" class="title listing-title">Samtools sort</a>
+</td>
+<td>
+<span class="listing-namespace">Mapping</span>
+</td>
+<td>
+<span class="listing-description">Sort and (optionally) index alignments.</span>
+</td>
+</tr>
+<tr data-index="72" data-listing-file-modified-sort="1728027109827" data-listing-reading-time-sort="4" data-listing-word-count-sort="724" data-listing-title-sort="Scale" data-listing-filename-sort="scale.qmd">
+<td>
+<a href="../../components/modules/transform/scale.html" class="title listing-title">Scale</a>
+</td>
+<td>
+<span class="listing-namespace">Transform</span>
+</td>
+<td>
+<span class="listing-description">Scale data to unit variance and zero mean</span>
+</td>
+</tr>
+<tr data-index="73" data-listing-file-modified-sort="1728027109822" data-listing-reading-time-sort="11" data-listing-word-count-sort="2181" data-listing-title-sort="Scanorama" data-listing-filename-sort="scanorama.qmd">
+<td>
+<a href="../../components/modules/integrate/scanorama.html" class="title listing-title">Scanorama</a>
+</td>
+<td>
+<span class="listing-namespace">Integrate</span>
+</td>
+<td>
+<span class="listing-description">Use Scanorama to integrate different experiments</span>
+</td>
+</tr>
+<tr data-index="74" data-listing-file-modified-sort="1728027109822" data-listing-reading-time-sort="11" data-listing-word-count-sort="2003" data-listing-title-sort="Scarches" data-listing-filename-sort="scarches.qmd">
+<td>
+<a href="../../components/modules/integrate/scarches.html" class="title listing-title">Scarches</a>
+</td>
+<td>
+<span class="listing-namespace">Integrate</span>
+</td>
+<td>
+<span class="listing-description">Performs reference mapping with scArches</span>
+</td>
+</tr>
+<tr data-index="75" data-listing-file-modified-sort="1728027109822" data-listing-reading-time-sort="14" data-listing-word-count-sort="2608" data-listing-title-sort="Scsplit" data-listing-filename-sort="scsplit.qmd">
+<td>
+<a href="../../components/modules/genetic_demux/scsplit.html" class="title listing-title">Scsplit</a>
+</td>
+<td>
+<span class="listing-namespace">Genetic demux</span>
+</td>
+<td>
+<span class="listing-description">scsplit is a genotype-free demultiplexing methode of pooled single-cell RNA-seq, using a hidden state model for identifying genetically distinct samples within a mixed population.</span>
+</td>
+</tr>
+<tr data-index="76" data-listing-file-modified-sort="1728027109827" data-listing-reading-time-sort="7" data-listing-word-count-sort="1239" data-listing-title-sort="Scvelo" data-listing-filename-sort="scvelo.qmd">
+<td>
+<a href="../../components/modules/velocity/scvelo.html" class="title listing-title">Scvelo</a>
+</td>
+<td>
+<span class="listing-namespace">Velocity</span>
+</td>
+<td>
+<span class="listing-description">ID: <code>scvelo</code><br>
+Namespace: <code>velocity</code></span>
+</td>
+</tr>
+<tr data-index="77" data-listing-file-modified-sort="1728027109822" data-listing-reading-time-sort="36" data-listing-word-count-sort="7163" data-listing-title-sort="Scvi" data-listing-filename-sort="scvi.qmd">
+<td>
+<a href="../../components/modules/integrate/scvi.html" class="title listing-title">Scvi</a>
+</td>
+<td>
+<span class="listing-namespace">Integrate</span>
+</td>
+<td>
+<span class="listing-description">Performs scvi integration as done in the human lung cell atlas https://github.com/LungCellAtlas/HLCA</span>
+</td>
+</tr>
+<tr data-index="78" data-listing-file-modified-sort="1728027109822" data-listing-reading-time-sort="10" data-listing-word-count-sort="1973" data-listing-title-sort="Souporcell" data-listing-filename-sort="souporcell.qmd">
+<td>
+<a href="../../components/modules/genetic_demux/souporcell.html" class="title listing-title">Souporcell</a>
+</td>
+<td>
+<span class="listing-namespace">Genetic demux</span>
+</td>
+<td>
+<span class="listing-description">souporcell is a method for clustering mixed-genotype scRNAseq experiments by individual.</span>
+</td>
+</tr>
+<tr data-index="79" data-listing-file-modified-sort="1728027109820" data-listing-reading-time-sort="3" data-listing-word-count-sort="456" data-listing-title-sort="Split modalities" data-listing-filename-sort="split_modalities.qmd">
+<td>
+<a href="../../components/modules/dataflow/split_modalities.html" class="title listing-title">Split modalities</a>
+</td>
+<td>
+<span class="listing-namespace">Dataflow</span>
+</td>
+<td>
+<span class="listing-description">Split the modalities from a single .h5mu multimodal sample into seperate .h5mu files.</span>
+</td>
+</tr>
+<tr data-index="80" data-listing-file-modified-sort="1728027109824" data-listing-reading-time-sort="623" data-listing-word-count-sort="124596" data-listing-title-sort="Star align" data-listing-filename-sort="star_align.qmd">
+<td>
+<a href="../../components/modules/mapping/star_align.html" class="title listing-title">Star align</a>
+</td>
+<td>
+<span class="listing-namespace">Mapping</span>
+</td>
+<td>
+<span class="listing-description">Align fastq files using STAR.</span>
+</td>
+</tr>
+<tr data-index="81" data-listing-file-modified-sort="1728027109825" data-listing-reading-time-sort="623" data-listing-word-count-sort="124584" data-listing-title-sort="Star align v273a" data-listing-filename-sort="star_align_v273a.qmd">
+<td>
+<a href="../../components/modules/mapping/star_align_v273a.html" class="title listing-title">Star align v273a</a>
+</td>
+<td>
+<span class="listing-namespace">Mapping</span>
+</td>
+<td>
+<span class="listing-description">Align fastq files using STAR.</span>
+</td>
+</tr>
+<tr data-index="82" data-listing-file-modified-sort="1728027109825" data-listing-reading-time-sort="7" data-listing-word-count-sort="1334" data-listing-title-sort="Star build reference" data-listing-filename-sort="star_build_reference.qmd">
+<td>
+<a href="../../components/modules/mapping/star_build_reference.html" class="title listing-title">Star build reference</a>
+</td>
+<td>
+<span class="listing-namespace">Mapping</span>
+</td>
+<td>
+<span class="listing-description">Create a reference for STAR from a set of fasta files.</span>
+</td>
+</tr>
+<tr data-index="83" data-listing-file-modified-sort="1728027109821" data-listing-reading-time-sort="3" data-listing-word-count-sort="549" data-listing-title-sort="Subset h5mu" data-listing-filename-sort="subset_h5mu.qmd">
+<td>
+<a href="../../components/modules/filter/subset_h5mu.html" class="title listing-title">Subset h5mu</a>
+</td>
+<td>
+<span class="listing-namespace">Filter</span>
+</td>
+<td>
+<span class="listing-description">Create a subset of a mudata file by selecting the first number of observations</span>
+</td>
+</tr>
+<tr data-index="84" data-listing-file-modified-sort="1728027109821" data-listing-reading-time-sort="4" data-listing-word-count-sort="709" data-listing-title-sort="Sync test resources" data-listing-filename-sort="sync_test_resources.qmd">
+<td>
+<a href="../../components/modules/download/sync_test_resources.html" class="title listing-title">Sync test resources</a>
+</td>
+<td>
+<span class="listing-namespace">Download</span>
+</td>
+<td>
+<span class="listing-description">Synchronise the test resources from s3://openpipelines-data to resources_test</span>
+</td>
+</tr>
+<tr data-index="85" data-listing-file-modified-sort="1728027109822" data-listing-reading-time-sort="9" data-listing-word-count-sort="1692" data-listing-title-sort="Totalvi" data-listing-filename-sort="totalvi.qmd">
+<td>
+<a href="../../components/modules/integrate/totalvi.html" class="title listing-title">Totalvi</a>
+</td>
+<td>
+<span class="listing-namespace">Integrate</span>
+</td>
+<td>
+<span class="listing-description">Performs mapping to the reference by totalvi model: https://docs.scvi-tools.org/en/stable/tutorials/notebooks/scarches_scvi_tools.html#Reference-mapping-with-TOTALVI</span>
+</td>
+</tr>
+<tr data-index="86" data-listing-file-modified-sort="1728027109821" data-listing-reading-time-sort="15" data-listing-word-count-sort="2930" data-listing-title-sort="Tsne" data-listing-filename-sort="tsne.qmd">
+<td>
+<a href="../../components/modules/dimred/tsne.html" class="title listing-title">Tsne</a>
+</td>
+<td>
+<span class="listing-namespace">Dimred</span>
+</td>
+<td>
+<span class="listing-description">t-SNE (t-Distributed Stochastic Neighbor Embedding) is a dimensionality reduction technique used to visualize high-dimensional data in a low-dimensional space, revealing patterns and clusters by preserving local data similarities</span>
+</td>
+</tr>
+<tr data-index="87" data-listing-file-modified-sort="1728027109821" data-listing-reading-time-sort="17" data-listing-word-count-sort="3212" data-listing-title-sort="Umap" data-listing-filename-sort="umap.qmd">
+<td>
+<a href="../../components/modules/dimred/umap.html" class="title listing-title">Umap</a>
+</td>
+<td>
+<span class="listing-namespace">Dimred</span>
+</td>
+<td>
+<span class="listing-description">UMAP (Uniform Manifold Approximation and Projection) is a manifold learning technique suitable for visualizing high-dimensional data.</span>
+</td>
+</tr>
+<tr data-index="88" data-listing-file-modified-sort="1728027109827" data-listing-reading-time-sort="7" data-listing-word-count-sort="1379" data-listing-title-sort="Velocyto" data-listing-filename-sort="velocyto.qmd">
+<td>
+<a href="../../components/modules/velocity/velocyto.html" class="title listing-title">Velocyto</a>
+</td>
+<td>
+<span class="listing-namespace">Velocity</span>
+</td>
+<td>
+<span class="listing-description">Runs the velocity analysis on a BAM file, outputting a loom file.</span>
+</td>
+</tr>
+<tr data-index="89" data-listing-file-modified-sort="1728027109819" data-listing-reading-time-sort="4" data-listing-word-count-sort="637" data-listing-title-sort="Velocyto to h5mu" data-listing-filename-sort="velocyto_to_h5mu.qmd">
+<td>
+<a href="../../components/modules/convert/velocyto_to_h5mu.html" class="title listing-title">Velocyto to h5mu</a>
+</td>
+<td>
+<span class="listing-namespace">Convert</span>
+</td>
+<td>
+<span class="listing-description">Convert a velocyto loom file to a h5mu file.</span>
+</td>
+</tr>
+<tr data-index="90" data-listing-file-modified-sort="1728027109822" data-listing-reading-time-sort="8" data-listing-word-count-sort="1446" data-listing-title-sort="Vireo" data-listing-filename-sort="vireo.qmd">
+<td>
+<a href="../../components/modules/genetic_demux/vireo.html" class="title listing-title">Vireo</a>
+</td>
+<td>
+<span class="listing-namespace">Genetic demux</span>
+</td>
+<td>
+<span class="listing-description">Vireo is primarily designed for demultiplexing cells into donors by modelling of expressed alleles.</span>
+</td>
+</tr>
+<tr data-index="91" data-listing-file-modified-sort="1728027109822" data-listing-reading-time-sort="22" data-listing-word-count-sort="4292" data-listing-title-sort="Xgboost" data-listing-filename-sort="xgboost.qmd">
+<td>
+<a href="../../components/modules/labels_transfer/xgboost.html" class="title listing-title">Xgboost</a>
+</td>
+<td>
+<span class="listing-namespace">Labels transfer</span>
+</td>
+<td>
+<span class="listing-description">Performs label transfer from reference to query using XGBoost classifier</span>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+<nav id="modules-pagination" class="listing-pagination" aria-label="Page Navigation">
+  <ul class="pagination"></ul>
+</nav>
+</div>
+
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/openpipelines\.bio");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© OpenPipelines.bio 2022</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openpipelines-bio/website/edit/main/components/modules/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
