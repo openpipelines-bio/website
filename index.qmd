@@ -1,6 +1,10 @@
 ---
 title: "OpenPipelines"
-subtitle: "Best-practice workflows for single-cell single- and multi-omics data"
+subtitle: |
+  OpenPipelines: Best-Practice Workflows for Single-Cell Multi-Omics Analysis
+
+  [Get started](/user_guide){class="btn btn-primary"}
+  [Our approach](/fundamentals/concepts){class="btn btn-primary"}
 sidebar: false
 page-layout: full
 title-block-banner: "#f0f5f5"
@@ -28,6 +32,78 @@ listing:
 library(rmarkdown)
 library(languageserver)
 ```
+
+
+## Key features
+
+::::{layout-nrow=1}
+
+:::{.card}
+### Best practices
+
+Aligned with the latest recommendations in single-cell research
+:::
+
+:::{.card}
+### Evolving with the field
+
+Regularly updated to incorporate new methods and tools
+:::
+
+:::{.card}
+### Multimodal
+
+Seamlessly processes single-cell RNA-seq, ADT, VDJ, ATAC-seq, and more
+:::
+
+
+:::{.card}
+### High-quality workflows
+
+Designed with portability, reproducibility, and scalability in mind
+:::
+
+::::
+
+:::{.alt-background}
+## Architecture
+
+```{mermaid}
+%%| classes: lightbox
+flowchart LR
+  subgraph ingestion
+  end
+  ingestion:::wf
+  subgraph process_samples
+    direction LR
+    split_modalities --> gex & atac & adt & vdj & other --> merge
+    split_modalities[Split]:::subwf
+    gex[GEX]:::subwf
+    atac[ATAC]:::subwf
+    adt[ADT]:::subwf
+    vdj[VDJ]:::subwf
+    other[Other]:::subwf
+    merge[Merge]:::subwf
+  end
+  process_samples:::wf
+  raw_counts --- ingestion --> raw_h5mu
+  raw_h5mu --- split_modalities
+  merge --> processed_h5mu
+  integration[Integration]:::wf
+  processed_h5mu --- integration ---> integrated_h5mu
+  subgraph downstream[Downstream]
+    integrated_h5mu & reference_atlas --> celltype_annotation --> annotated_h5mu
+    celltype_annotation[Cell type annotation]:::subwf
+  end
+  downstream:::wf
+  integrated_h5mu --- downstream
+
+  classDef wf fill:#f0f0f0,stroke:#525252
+  classDef subwf fill:#d9d9d9,stroke:#525252
+  classDef info fill:#f0f0f0,stroke:#525252,stroke-dasharray: 4 4
+```
+
+:::
 
 
 ::::{layout-nrow=1}
