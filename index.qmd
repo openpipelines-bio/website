@@ -26,6 +26,7 @@ listing:
     type: default
     template: templates/bullet_listing.ejs
     contents: more_information
+toc: false
 ---
 
 ```{r eval=FALSE, include=FALSE}
@@ -36,75 +37,116 @@ library(languageserver)
 
 ## Key features
 
-::::{layout-nrow=1}
+::::{layout-ncol=3}
 
 :::{.card}
-### Best practices
+#### Modular
 
-Aligned with the latest recommendations in single-cell research
+Reusable components built with Viash for flexible pipeline construction.
+
+<!--OpenPipelines employs a modular design where individual components are built using Viash, enabling reusability and flexibility in constructing pipelines.-->
 :::
 
 :::{.card}
-### Evolving with the field
+#### Scalable
 
-Regularly updated to incorporate new methods and tools
+Leverage Nextflow for execution on various platforms (local, cloud, HPC).
+
+<!-- Leveraging Nextflow, OpenPipelines allows for scalable execution of pipelines on various platforms, including local machines, AWS Batch, Google Cloud Batch, and HPC clusters.-->
 :::
 
 :::{.card}
-### Multimodal
+#### Reproducible
 
-Seamlessly processes single-cell RNA-seq, ADT, VDJ, ATAC-seq, and more
+Containerized components and unit testing ensure reliable analyses.
+
+<!--By unit testing and containerizing each individual component, OpenPipelines ensures reproducibility of analyses.-->
 :::
 
 
 :::{.card}
-### High-quality workflows
+#### Collaborative
 
-Designed with portability, reproducibility, and scalability in mind
+A framework for sharing and integrating components to foster teamwork.
+
+<!--OpenPipelines fosters collaboration by providing a framework for sharing and integrating components.-->
+:::
+
+
+:::{.card}
+#### Living Best Practices
+
+Adapts to evolving single-cell analysis by incorporating current best practices and novel methods.
+
+<!--OpenPipelines adapts to the evolving landscape of single-cell analysis by incorporating living [sc-best-practices](https://sc-best-practices.org) and leveraging novel computational methods from [openproblems.bio](https://openproblems.bio).-->
+:::
+
+:::{.card}
+#### Multimodal
+
+Supports diverse single-cell data types (RNA, protein, VDJ, ATAC) for multi-omics analyses.
+
+<!--OpenPipelines supports various single-cell modalities, including transcriptomics, proteomics, immunomics, and epigenomics data, enabling comprehensive multi-omics analyses.-->
 :::
 
 ::::
 
 :::{.alt-background}
-## Architecture
+## Overview
 
 ```{mermaid}
 %%| classes: lightbox
 flowchart LR
-  subgraph ingestion
-  end
-  ingestion:::wf
-  subgraph process_samples
+  %% Ingestion
+  subgraph ingestion[Step 1: Ingestion]
     direction LR
-    split_modalities --> gex & atac & adt & vdj & other --> merge
-    split_modalities[Split]:::subwf
+    10x_ingestion[10x Ingestion]:::subwf
+    bd_ingestion[BD Rhapsody\nIngestion]:::subwf
+    own_h5mu[Own H5MU]:::subwf
+  end
+  ingestion:::info
+
+  %% Process samples
+  subgraph process_samples[Step 2: Process Samples]
+    direction LR
     gex[GEX]:::subwf
     atac[ATAC]:::subwf
     adt[ADT]:::subwf
     vdj[VDJ]:::subwf
     other[Other]:::subwf
-    merge[Merge]:::subwf
   end
-  process_samples:::wf
-  raw_counts --- ingestion --> raw_h5mu
-  raw_h5mu --- split_modalities
-  merge --> processed_h5mu
-  integration[Integration]:::wf
-  processed_h5mu --- integration ---> integrated_h5mu
-  subgraph downstream[Downstream]
-    integrated_h5mu & reference_atlas --> celltype_annotation --> annotated_h5mu
-    celltype_annotation[Cell type annotation]:::subwf
+  process_samples:::info
+
+  %% Integration and downstream
+  subgraph integration[Step 3: Integration]
+    direction LR
+    harmony[Harmony]:::subwf
+    scvi[scVI]:::subwf
+    scanvi[scanVI]:::subwf
+    etc[...]:::subwf
   end
-  downstream:::wf
-  integrated_h5mu --- downstream
+  integration[Integration]:::info
+  
+  subgraph downstream[Step 4: Downstream]
+    direction LR
+    celltype_annotation[Cell Type\nAnnotation]:::subwf
+    markergenes[Marker Genes\nAnalysis]:::subwf
+    differential[Differential\nExpression]:::subwf
+    gene_signature_analysis[Gene Signature\nAnalysis]:::subwf
+    ccc[Cell-Cell\nCommunication]:::subwf
+  end
+
+  ingestion --> process_samples --> integration --> downstream
 
   classDef wf fill:#f0f0f0,stroke:#525252
   classDef subwf fill:#d9d9d9,stroke:#525252
   classDef info fill:#f0f0f0,stroke:#525252,stroke-dasharray: 4 4
 ```
 
+
 :::
 
+## Getting Started
 
 ::::{layout-nrow=1}
 
