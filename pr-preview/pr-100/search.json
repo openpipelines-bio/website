@@ -3620,21 +3620,28 @@
     "href": "index.html",
     "title": "OpenPipelines",
     "section": "",
-    "text": "Aligned with the latest recommendations in single-cell research\n\n\n\nRegularly updated to incorporate new methods and tools\n\n\n\nSeamlessly processes single-cell RNA-seq, ADT, VDJ, ATAC-seq, and more\n\n\n\nDesigned with portability, reproducibility, and scalability in mind"
+    "text": "Reusable components built with Viash for flexible pipeline construction.\n\n\n\n\nLeverage Nextflow for execution on various platforms (local, cloud, HPC).\n\n\n\n\nContainerized components and unit testing ensure reliable analyses.\n\n\n\n\n\n\nA framework for sharing and integrating components to foster teamwork.\n\n\n\n\nAdapts to evolving single-cell analysis by incorporating current best practices and novel methods.\n\n\n\n\nSupports diverse single-cell data types (RNA, protein, VDJ, ATAC) for multi-omics analyses."
   },
   {
     "objectID": "index.html#key-features",
     "href": "index.html#key-features",
     "title": "OpenPipelines",
     "section": "",
-    "text": "Aligned with the latest recommendations in single-cell research\n\n\n\nRegularly updated to incorporate new methods and tools\n\n\n\nSeamlessly processes single-cell RNA-seq, ADT, VDJ, ATAC-seq, and more\n\n\n\nDesigned with portability, reproducibility, and scalability in mind"
+    "text": "Reusable components built with Viash for flexible pipeline construction.\n\n\n\n\nLeverage Nextflow for execution on various platforms (local, cloud, HPC).\n\n\n\n\nContainerized components and unit testing ensure reliable analyses.\n\n\n\n\n\n\nA framework for sharing and integrating components to foster teamwork.\n\n\n\n\nAdapts to evolving single-cell analysis by incorporating current best practices and novel methods.\n\n\n\n\nSupports diverse single-cell data types (RNA, protein, VDJ, ATAC) for multi-omics analyses."
   },
   {
-    "objectID": "index.html#architecture",
-    "href": "index.html#architecture",
+    "objectID": "index.html#overview",
+    "href": "index.html#overview",
     "title": "OpenPipelines",
-    "section": "Architecture",
-    "text": "Architecture\n\n\n\n\n\nflowchart LR\n  subgraph ingestion\n  end\n  ingestion:::wf\n  subgraph process_samples\n    direction LR\n    split_modalities --&gt; gex & atac & adt & vdj & other --&gt; merge\n    split_modalities[Split]:::subwf\n    gex[GEX]:::subwf\n    atac[ATAC]:::subwf\n    adt[ADT]:::subwf\n    vdj[VDJ]:::subwf\n    other[Other]:::subwf\n    merge[Merge]:::subwf\n  end\n  process_samples:::wf\n  raw_counts --- ingestion --&gt; raw_h5mu\n  raw_h5mu --- split_modalities\n  merge --&gt; processed_h5mu\n  integration[Integration]:::wf\n  processed_h5mu --- integration ---&gt; integrated_h5mu\n  subgraph downstream[Downstream]\n    integrated_h5mu & reference_atlas --&gt; celltype_annotation --&gt; annotated_h5mu\n    celltype_annotation[Cell type annotation]:::subwf\n  end\n  downstream:::wf\n  integrated_h5mu --- downstream\n\n  classDef wf fill:#f0f0f0,stroke:#525252\n  classDef subwf fill:#d9d9d9,stroke:#525252\n  classDef info fill:#f0f0f0,stroke:#525252,stroke-dasharray: 4 4"
+    "section": "Overview",
+    "text": "Overview\n\n\n\n\n\nflowchart LR\n  %% Ingestion\n  subgraph ingestion[Step 1: Ingestion]\n    direction LR\n    10x_ingestion[10x Ingestion]:::subwf\n    bd_ingestion[BD Rhapsody\\nIngestion]:::subwf\n    own_h5mu[Own H5MU]:::subwf\n  end\n  ingestion:::info\n\n  %% Process samples\n  subgraph process_samples[Step 2: Process Samples]\n    direction LR\n    gex[GEX]:::subwf\n    atac[ATAC]:::subwf\n    adt[ADT]:::subwf\n    vdj[VDJ]:::subwf\n    other[Other]:::subwf\n  end\n  process_samples:::info\n\n  %% Integration and downstream\n  subgraph integration[Step 3: Integration]\n    direction LR\n    harmony[Harmony]:::subwf\n    scvi[scVI]:::subwf\n    scanvi[scanVI]:::subwf\n    etc[...]:::subwf\n  end\n  integration[Integration]:::info\n  \n  subgraph downstream[Step 4: Downstream]\n    direction LR\n    celltype_annotation[Cell Type\\nAnnotation]:::subwf\n    markergenes[Marker Genes\\nAnalysis]:::subwf\n    differential[Differential\\nExpression]:::subwf\n    gene_signature_analysis[Gene Signature\\nAnalysis]:::subwf\n    ccc[Cell-Cell\\nCommunication]:::subwf\n  end\n\n  ingestion --&gt; process_samples --&gt; integration --&gt; downstream\n\n  classDef wf fill:#f0f0f0,stroke:#525252\n  classDef subwf fill:#d9d9d9,stroke:#525252\n  classDef info fill:#f0f0f0,stroke:#525252,stroke-dasharray: 4 4"
+  },
+  {
+    "objectID": "index.html#getting-started",
+    "href": "index.html#getting-started",
+    "title": "OpenPipelines",
+    "section": "Getting Started",
+    "text": "Getting Started\n\n\n\n\n\n\n\n\n  \n  Fundamentals\n  \n    \n  \n    \n        \n  \n  Philosophy\n  \n    \n    \n        \n  \n  Concepts\n  \n    \n    \n        \n  \n  Architecture\n  \n    \n    \n        \n  \n  Roadmap\n  \n    \n    \n  \n    \n\n\nNo matching items\n\n\n\n\n\n\n  \n  User guide\n  \n    \n  \n    \n        \n  \n  Getting started\n  \n    \n    \n        \n  \n  Running pipelines\n  \n    \n    \n        \n  \n  Parameter lists\n  \n    \n    \n        \n  \n  Ingestion\n  \n    \n    \n        \n  \n  Processing\n  \n    \n    \n        \n  \n  Downstream\n  \n    \n    \n        \n  \n  Bug reports\n  \n    \n    \n  \n    \n\n\nNo matching items\n\n\n\n\n\n\n  \n  Contributing\n  \n    \n  \n    \n        \n  \n  Getting started\n  \n    \n    \n        \n  \n  Project structure\n  \n    \n    \n        \n  \n  Creating components\n  \n    \n    \n        \n  \n  Creating pipelines\n  \n    \n    \n        \n  \n  Running tests\n  \n    \n    \n        \n  \n  Publishing your changes\n  \n    \n    \n  \n    \n\n\nNo matching items\n\n\n\n\n\n\n  \n  More information\n  \n    \n  \n    \n        \n  \n  Cheat sheets\n  \n    \n    \n        \n  \n  Code of conduct\n  \n    \n    \n        \n  \n  FAQ\n  \n    \n    \n  \n    \n\n\nNo matching items"
   },
   {
     "objectID": "components/index.html",

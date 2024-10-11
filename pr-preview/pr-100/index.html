@@ -302,7 +302,7 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
+    <div class="quarto-title column-page">
       <h1 class="title">OpenPipelines</h1>
             <p class="subtitle lead"></p><p>OpenPipelines: Best-Practice Workflows for Single-Cell Multi-Omics Analysis</p>
 <p><a href="./user_guide" class="btn btn-primary">Get started</a> <a href="./fundamentals/concepts" class="btn btn-primary">Our approach</a></p><p></p>
@@ -310,7 +310,7 @@ window.Quarto = {
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta column-page">
 
       
     
@@ -321,18 +321,9 @@ window.Quarto = {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#key-features" id="toc-key-features" class="nav-link active" data-scroll-target="#key-features">Key features</a></li>
-  <li><a href="#architecture" id="toc-architecture" class="nav-link" data-scroll-target="#architecture">Architecture</a></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/openpipelines-bio/website/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
-    </div>
+    
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
 
 
 
@@ -343,61 +334,91 @@ window.Quarto = {
 <div>
 
 </div>
-<div class="quarto-layout-panel" data-layout-nrow="1">
+<div class="quarto-layout-panel" data-layout-ncol="3">
 <div class="quarto-layout-row">
-<section id="best-practices" class="level3 card quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
-<h3 class="anchored" data-anchor-id="best-practices">Best practices</h3>
-<p>Aligned with the latest recommendations in single-cell research</p>
+<section id="modular" class="level4 card quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<h4 class="anchored" data-anchor-id="modular">Modular</h4>
+<p>Reusable components built with Viash for flexible pipeline construction.</p>
+<!--OpenPipelines employs a modular design where individual components are built using Viash, enabling reusability and flexibility in constructing pipelines.-->
 </section>
-<section id="evolving-with-the-field" class="level3 card quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
-<h3 class="anchored" data-anchor-id="evolving-with-the-field">Evolving with the field</h3>
-<p>Regularly updated to incorporate new methods and tools</p>
+<section id="scalable" class="level4 card quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<h4 class="anchored" data-anchor-id="scalable">Scalable</h4>
+<p>Leverage Nextflow for execution on various platforms (local, cloud, HPC).</p>
+<!-- Leveraging Nextflow, OpenPipelines allows for scalable execution of pipelines on various platforms, including local machines, AWS Batch, Google Cloud Batch, and HPC clusters.-->
 </section>
-<section id="multimodal" class="level3 card quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
-<h3 class="anchored" data-anchor-id="multimodal">Multimodal</h3>
-<p>Seamlessly processes single-cell RNA-seq, ADT, VDJ, ATAC-seq, and more</p>
+<section id="reproducible" class="level4 card quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<h4 class="anchored" data-anchor-id="reproducible">Reproducible</h4>
+<p>Containerized components and unit testing ensure reliable analyses.</p>
+<!--By unit testing and containerizing each individual component, OpenPipelines ensures reproducibility of analyses.-->
 </section>
-<section id="high-quality-workflows" class="level3 card quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
-<h3 class="anchored" data-anchor-id="high-quality-workflows">High-quality workflows</h3>
-<p>Designed with portability, reproducibility, and scalability in mind</p>
+</div>
+<div class="quarto-layout-row">
+<section id="collaborative" class="level4 card quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<h4 class="anchored" data-anchor-id="collaborative">Collaborative</h4>
+<p>A framework for sharing and integrating components to foster teamwork.</p>
+<!--OpenPipelines fosters collaboration by providing a framework for sharing and integrating components.-->
+</section>
+<section id="living-best-practices" class="level4 card quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<h4 class="anchored" data-anchor-id="living-best-practices">Living Best Practices</h4>
+<p>Adapts to evolving single-cell analysis by incorporating current best practices and novel methods.</p>
+<!--OpenPipelines adapts to the evolving landscape of single-cell analysis by incorporating living [sc-best-practices](https://sc-best-practices.org) and leveraging novel computational methods from [openproblems.bio](https://openproblems.bio).-->
+</section>
+<section id="multimodal" class="level4 card quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<h4 class="anchored" data-anchor-id="multimodal">Multimodal</h4>
+<p>Supports diverse single-cell data types (RNA, protein, VDJ, ATAC) for multi-omics analyses.</p>
+<!--OpenPipelines supports various single-cell modalities, including transcriptomics, proteomics, immunomics, and epigenomics data, enabling comprehensive multi-omics analyses.-->
 </section>
 </div>
 </div>
 </section>
-<section id="architecture" class="level2 alt-background">
-<h2 class="anchored" data-anchor-id="architecture">Architecture</h2>
+<section id="overview" class="level2 alt-background">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <div class="cell lightbox" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart LR
-  subgraph ingestion
-  end
-  ingestion:::wf
-  subgraph process_samples
+  %% Ingestion
+  subgraph ingestion[Step 1: Ingestion]
     direction LR
-    split_modalities --&gt; gex &amp; atac &amp; adt &amp; vdj &amp; other --&gt; merge
-    split_modalities[Split]:::subwf
+    10x_ingestion[10x Ingestion]:::subwf
+    bd_ingestion[BD Rhapsody\nIngestion]:::subwf
+    own_h5mu[Own H5MU]:::subwf
+  end
+  ingestion:::info
+
+  %% Process samples
+  subgraph process_samples[Step 2: Process Samples]
+    direction LR
     gex[GEX]:::subwf
     atac[ATAC]:::subwf
     adt[ADT]:::subwf
     vdj[VDJ]:::subwf
     other[Other]:::subwf
-    merge[Merge]:::subwf
   end
-  process_samples:::wf
-  raw_counts --- ingestion --&gt; raw_h5mu
-  raw_h5mu --- split_modalities
-  merge --&gt; processed_h5mu
-  integration[Integration]:::wf
-  processed_h5mu --- integration ---&gt; integrated_h5mu
-  subgraph downstream[Downstream]
-    integrated_h5mu &amp; reference_atlas --&gt; celltype_annotation --&gt; annotated_h5mu
-    celltype_annotation[Cell type annotation]:::subwf
+  process_samples:::info
+
+  %% Integration and downstream
+  subgraph integration[Step 3: Integration]
+    direction LR
+    harmony[Harmony]:::subwf
+    scvi[scVI]:::subwf
+    scanvi[scanVI]:::subwf
+    etc[...]:::subwf
   end
-  downstream:::wf
-  integrated_h5mu --- downstream
+  integration[Integration]:::info
+  
+  subgraph downstream[Step 4: Downstream]
+    direction LR
+    celltype_annotation[Cell Type\nAnnotation]:::subwf
+    markergenes[Marker Genes\nAnalysis]:::subwf
+    differential[Differential\nExpression]:::subwf
+    gene_signature_analysis[Gene Signature\nAnalysis]:::subwf
+    ccc[Cell-Cell\nCommunication]:::subwf
+  end
+
+  ingestion --&gt; process_samples --&gt; integration --&gt; downstream
 
   classDef wf fill:#f0f0f0,stroke:#525252
   classDef subwf fill:#d9d9d9,stroke:#525252
@@ -409,6 +430,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
 <div>
 
 </div>
@@ -607,6 +630,7 @@ No matching items
 
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1037,7 +1061,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openpipelines-bio/website/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions"><ul><li><a href="https://github.com/openpipelines-bio/website/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
