@@ -1,5 +1,49 @@
 [
   {
+    "listing": "/more_information/index.html",
+    "items": [
+      "/more_information/cheat_sheets.html",
+      "/more_information/code_of_conduct.html",
+      "/more_information/faq.html"
+    ]
+  },
+  {
+    "listing": "/team/index.html",
+    "items": [
+      "/team/angela_oliveira_pisco/index.html",
+      "/team/dorien_roosen/index.html",
+      "/team/dries_de_maeyer/index.html",
+      "/team/dries_schaumont/index.html",
+      "/team/elizabeth_mlynarski/index.html",
+      "/team/isabelle_bergiers/index.html",
+      "/team/jakub_majercik/index.html",
+      "/team/kai_waldrant/index.html",
+      "/team/malte_d_luecken/index.html",
+      "/team/marijke_van_moerbeke/index.html",
+      "/team/matthias_beyens/index.html",
+      "/team/mauro_saporita/index.html",
+      "/team/povilas_gibas/index.html",
+      "/team/robrecht_cannoodt/index.html",
+      "/team/samuel_dsouza/index.html",
+      "/team/toni_verbeiren/index.html",
+      "/team/vladimir_shitov/index.html",
+      "/team/weiwei_schultz/index.html",
+      "/team/xichen_wu/index.html"
+    ]
+  },
+  {
+    "listing": "/user_guide/index.html",
+    "items": [
+      "/user_guide/getting_started.html",
+      "/user_guide/running_pipelines.html",
+      "/user_guide/parameter_lists.html",
+      "/user_guide/ingestion.html",
+      "/user_guide/processing.html",
+      "/user_guide/downstream.html",
+      "/user_guide/bug_reports.html"
+    ]
+  },
+  {
     "listing": "/contributing/index.html",
     "items": [
       "/contributing/getting_started.html",
@@ -35,6 +79,35 @@
       "/components/workflows/integration/scvi_leiden.html",
       "/components/workflows/multiomics/split_modalities.html",
       "/components/workflows/integration/totalvi_leiden.html"
+    ]
+  },
+  {
+    "listing": "/index.html",
+    "items": [
+      "/fundamentals/philosophy.html",
+      "/fundamentals/concepts.html",
+      "/fundamentals/architecture.html",
+      "/fundamentals/roadmap.html",
+      "/fundamentals/index.html",
+      "/user_guide/getting_started.html",
+      "/user_guide/running_pipelines.html",
+      "/user_guide/parameter_lists.html",
+      "/user_guide/ingestion.html",
+      "/user_guide/processing.html",
+      "/user_guide/downstream.html",
+      "/user_guide/bug_reports.html",
+      "/user_guide/index.html",
+      "/contributing/getting_started.html",
+      "/contributing/project_structure.html",
+      "/contributing/creating_components.html",
+      "/contributing/creating_pipelines.html",
+      "/contributing/running_tests.html",
+      "/contributing/pull_requests.html",
+      "/contributing/index.html",
+      "/more_information/cheat_sheets.html",
+      "/more_information/code_of_conduct.html",
+      "/more_information/faq.html",
+      "/more_information/index.html"
     ]
   },
   {
@@ -157,88 +230,6 @@
     ]
   },
   {
-    "listing": "/more_information/index.html",
-    "items": [
-      "/more_information/cheat_sheets.html",
-      "/more_information/code_of_conduct.html",
-      "/more_information/faq.html"
-    ]
-  },
-  {
-    "listing": "/user_guide/index.html",
-    "items": [
-      "/user_guide/getting_started.html",
-      "/user_guide/running_pipelines.html",
-      "/user_guide/parameter_lists.html",
-      "/user_guide/ingestion.html",
-      "/user_guide/processing.html",
-      "/user_guide/downstream.html",
-      "/user_guide/bug_reports.html"
-    ]
-  },
-  {
-    "listing": "/fundamentals/index.html",
-    "items": [
-      "/fundamentals/philosophy.html",
-      "/fundamentals/concepts.html",
-      "/fundamentals/architecture.html",
-      "/fundamentals/roadmap.html"
-    ]
-  },
-  {
-    "listing": "/index.html",
-    "items": [
-      "/fundamentals/philosophy.html",
-      "/fundamentals/concepts.html",
-      "/fundamentals/architecture.html",
-      "/fundamentals/roadmap.html",
-      "/fundamentals/index.html",
-      "/user_guide/getting_started.html",
-      "/user_guide/running_pipelines.html",
-      "/user_guide/parameter_lists.html",
-      "/user_guide/ingestion.html",
-      "/user_guide/processing.html",
-      "/user_guide/downstream.html",
-      "/user_guide/bug_reports.html",
-      "/user_guide/index.html",
-      "/contributing/getting_started.html",
-      "/contributing/project_structure.html",
-      "/contributing/creating_components.html",
-      "/contributing/creating_pipelines.html",
-      "/contributing/running_tests.html",
-      "/contributing/pull_requests.html",
-      "/contributing/index.html",
-      "/more_information/cheat_sheets.html",
-      "/more_information/code_of_conduct.html",
-      "/more_information/faq.html",
-      "/more_information/index.html"
-    ]
-  },
-  {
-    "listing": "/team/index.html",
-    "items": [
-      "/team/angela_oliveira_pisco/index.html",
-      "/team/dorien_roosen/index.html",
-      "/team/dries_de_maeyer/index.html",
-      "/team/dries_schaumont/index.html",
-      "/team/elizabeth_mlynarski/index.html",
-      "/team/isabelle_bergiers/index.html",
-      "/team/jakub_majercik/index.html",
-      "/team/kai_waldrant/index.html",
-      "/team/malte_d_luecken/index.html",
-      "/team/marijke_van_moerbeke/index.html",
-      "/team/matthias_beyens/index.html",
-      "/team/mauro_saporita/index.html",
-      "/team/povilas_gibas/index.html",
-      "/team/robrecht_cannoodt/index.html",
-      "/team/samuel_dsouza/index.html",
-      "/team/toni_verbeiren/index.html",
-      "/team/vladimir_shitov/index.html",
-      "/team/weiwei_schultz/index.html",
-      "/team/xichen_wu/index.html"
-    ]
-  },
-  {
     "listing": "/components/modules/index.html",
     "items": [
       "/components/modules/metadata/add_id.html",
@@ -333,6 +324,15 @@
       "/components/modules/convert/velocyto_to_h5mu.html",
       "/components/modules/genetic_demux/vireo.html",
       "/components/modules/labels_transfer/xgboost.html"
+    ]
+  },
+  {
+    "listing": "/fundamentals/index.html",
+    "items": [
+      "/fundamentals/philosophy.html",
+      "/fundamentals/concepts.html",
+      "/fundamentals/architecture.html",
+      "/fundamentals/roadmap.html"
     ]
   }
 ]
