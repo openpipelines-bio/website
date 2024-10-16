@@ -1,6 +1,10 @@
 ---
 title: "OpenPipelines"
-subtitle: "Best-practice workflows for single-cell single- and multi-omics data"
+subtitle: |
+  OpenPipelines: Best-Practice Workflows for Single-Cell Multi-Omics Analysis
+
+  [Get started](/user_guide){class="btn btn-primary"}
+  [Our approach](/fundamentals/concepts){class="btn btn-primary"}
 sidebar: false
 page-layout: full
 title-block-banner: "#f0f5f5"
@@ -22,6 +26,7 @@ listing:
     type: default
     template: templates/bullet_listing.ejs
     contents: more_information
+toc: false
 ---
 
 ```{r eval=FALSE, include=FALSE}
@@ -29,6 +34,119 @@ library(rmarkdown)
 library(languageserver)
 ```
 
+
+## Key features
+
+::::{layout-ncol=3}
+
+:::{.card}
+#### Modular
+
+Reusable components built with Viash for flexible pipeline construction.
+
+<!--OpenPipelines employs a modular design where individual components are built using Viash, enabling reusability and flexibility in constructing pipelines.-->
+:::
+
+:::{.card}
+#### Scalable
+
+Leverage Nextflow for execution on various platforms (local, cloud, HPC).
+
+<!-- Leveraging Nextflow, OpenPipelines allows for scalable execution of pipelines on various platforms, including local machines, AWS Batch, Google Cloud Batch, and HPC clusters.-->
+:::
+
+:::{.card}
+#### Reproducible
+
+Containerized components and unit testing ensure reliable analyses.
+
+<!--By unit testing and containerizing each individual component, OpenPipelines ensures reproducibility of analyses.-->
+:::
+
+
+:::{.card}
+#### Collaborative
+
+A framework for sharing and integrating components to foster teamwork.
+
+<!--OpenPipelines fosters collaboration by providing a framework for sharing and integrating components.-->
+:::
+
+
+:::{.card}
+#### Living Best Practices
+
+Adapts to evolving single-cell analysis by incorporating current best practices and novel methods.
+
+<!--OpenPipelines adapts to the evolving landscape of single-cell analysis by incorporating living [sc-best-practices](https://sc-best-practices.org) and leveraging novel computational methods from [openproblems.bio](https://openproblems.bio).-->
+:::
+
+:::{.card}
+#### Multimodal
+
+Supports diverse single-cell data types (RNA, protein, VDJ, ATAC) for multi-omics analyses.
+
+<!--OpenPipelines supports various single-cell modalities, including transcriptomics, proteomics, immunomics, and epigenomics data, enabling comprehensive multi-omics analyses.-->
+:::
+
+::::
+
+:::{.alt-background}
+## Overview
+
+```{mermaid}
+%%| classes: lightbox
+flowchart LR
+  %% Ingestion
+  subgraph ingestion[Step 1: Ingestion]
+    direction LR
+    10x_ingestion[10x Ingestion]:::subwf
+    bd_ingestion[BD Rhapsody\nIngestion]:::subwf
+    own_h5mu[Own H5MU]:::subwf
+  end
+  ingestion:::info
+
+  %% Process samples
+  subgraph process_samples[Step 2: Process Samples]
+    direction LR
+    gex[GEX]:::subwf
+    atac[ATAC]:::subwf
+    adt[ADT]:::subwf
+    vdj[VDJ]:::subwf
+    other[Other]:::subwf
+  end
+  process_samples:::info
+
+  %% Integration and downstream
+  subgraph integration[Step 3: Integration]
+    direction LR
+    harmony[Harmony]:::subwf
+    scvi[scVI]:::subwf
+    scanvi[scanVI]:::subwf
+    etc[...]:::subwf
+  end
+  integration[Integration]:::info
+  
+  subgraph downstream[Step 4: Downstream]
+    direction LR
+    celltype_annotation[Cell Type\nAnnotation]:::subwf
+    markergenes[Marker Genes\nAnalysis]:::subwf
+    differential[Differential\nExpression]:::subwf
+    gene_signature_analysis[Gene Signature\nAnalysis]:::subwf
+    ccc[Cell-Cell\nCommunication]:::subwf
+  end
+
+  ingestion --> process_samples --> integration --> downstream
+
+  classDef wf fill:#f0f0f0,stroke:#525252
+  classDef subwf fill:#d9d9d9,stroke:#525252
+  classDef info fill:#f0f0f0,stroke:#525252,stroke-dasharray: 4 4
+```
+
+
+:::
+
+## Getting Started
 
 ::::{layout-nrow=1}
 
