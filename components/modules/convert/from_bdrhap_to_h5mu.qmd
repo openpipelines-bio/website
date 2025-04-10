@@ -1,7 +1,7 @@
 ---
 title: "From bdrhap to h5mu"
 namespace: "Convert"
-description: "Convert the output of a BD Rhapsody WTA pipeline to a MuData h5 file"
+description: "Convert the output of a BD Rhapsody pipeline v2.x to a MuData h5 file"
 type: "module"
 toc: false
 ---
@@ -14,7 +14,7 @@ ID: `from_bdrhap_to_h5mu`
 Namespace: `convert`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/convert/from_bdrhap_to_h5mu/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v2.1.0-rc.2/src/convert/from_bdrhap_to_h5mu/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r v2.1.0-rc.2 -latest \
   -main-script target/nextflow/convert/from_bdrhap_to_h5mu/main.nf \
   --help
 ```
@@ -42,7 +42,7 @@ nextflow run openpipelines-bio/openpipeline \
 ```yaml
 # Inputs
 id: # please fill in - example: "my_id"
-input: # please fill in - example: "input_dir/"
+input: # please fill in - example: "sample.h5mu"
 
 # Outputs
 # output: "$id.$key.output.h5mu"
@@ -51,12 +51,14 @@ input: # please fill in - example: "input_dir/"
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
 # param_list: "my_params.yaml"
+
+# Arguments
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r v2.1.0-rc.2 -latest \
   -profile docker \
   -main-script target/nextflow/convert/from_bdrhap_to_h5mu/main.nf \
   -params-file params.yaml
@@ -70,10 +72,10 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Inputs
 
-|Name      |Description                           |Attributes                               |
+|Name      |Description                                |Attributes                                 |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--id`    |A sample ID.                          |`string`, required, example: `"my_id"`   |
-|`--input` |The output of a BD Rhapsody workflow. |`file`, required, example: `"input_dir"` |
+|`--id`    |A sample ID.                               |`string`, required, example: `"my_id"`     |
+|`--input` |The output h5mu of a BD Rhapsody workflow. |`file`, required, example: `"sample.h5mu"` |
 
 
 ### Outputs
@@ -86,5 +88,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ## Authors
 
 
-  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (maintainer)
+  * Dorien Roosen [{{< fa brands github >}}](https://github.com/dorien-er) [{{< fa brands linkedin >}}](https://linkedin.com/in/dorien-roosen) (author, maintainer)
+
+  * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (author)
 

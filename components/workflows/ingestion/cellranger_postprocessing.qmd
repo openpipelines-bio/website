@@ -14,7 +14,7 @@ ID: `cellranger_postprocessing`
 Namespace: `workflows/ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/workflows/ingestion/cellranger_postprocessing/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v2.1.0-rc.2/src/workflows/ingestion/cellranger_postprocessing/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r v2.1.0-rc.2 -latest \
   -main-script target/nextflow/workflows/ingestion/cellranger_postprocessing/main.nf \
   --help
 ```
@@ -45,7 +45,7 @@ id: # please fill in - example: "foo"
 input: # please fill in - example: "input.h5mu"
 
 # Outputs
-# output: "$id.$key.output.output"
+# output: "$id.$key.output"
 
 # Correction arguments
 perform_correction: false
@@ -58,12 +58,14 @@ cellbender_epochs: 150
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
 # param_list: "my_params.yaml"
+
+# Arguments
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r v2.1.0-rc.2 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/ingestion/cellranger_postprocessing/main.nf \
   -params-file params.yaml
@@ -118,29 +120,64 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 flowchart TB
     v0(Channel.fromList)
     v2(filter)
-    v18(cellbender_remove_background)
-    v31(mix)
-    v41(filter_with_counts)
-    v54(mix)
-    v63(publish)
-    v90(Output)
+    v14(branch)
+    v41(concat)
+    v19(cellbender_remove_background)
+    v26(cross)
+    v36(cross)
+    v45(branch)
+    v72(concat)
+    v50(filter_with_counts)
+    v57(cross)
+    v67(cross)
+    v79(cross)
+    v86(cross)
+    v98(cross)
+    v105(cross)
+    v109(Output)
+    v14-->v41
+    v45-->v72
     v0-->v2
-    v2-->v18
-    v18-->v31
-    v2-->v31
-    v31-->v41
-    v41-->v54
-    v31-->v54
-    v54-->v63
-    v63-->v90
+    v14-->v19
+    v19-->v26
+    v14-->v26
+    v14-->v36
+    v36-->v41
+    v45-->v50
+    v50-->v57
+    v45-->v57
+    v45-->v67
+    v67-->v72
+    v72-->v79
+    v2-->v79
+    v79-->v86
+    v2-->v86
+    v2-->v98
+    v98-->v105
+    v2-->v105
+    v105-->v109
+    v2-->v14
+    v19-->v36
+    v41-->v45
+    v50-->v67
+    v72-->v98
     style v0 fill:#e3dcea,stroke:#7a4baa;
     style v2 fill:#e3dcea,stroke:#7a4baa;
-    style v18 fill:#e3dcea,stroke:#7a4baa;
-    style v31 fill:#e3dcea,stroke:#7a4baa;
+    style v14 fill:#e3dcea,stroke:#7a4baa;
     style v41 fill:#e3dcea,stroke:#7a4baa;
-    style v54 fill:#e3dcea,stroke:#7a4baa;
-    style v63 fill:#e3dcea,stroke:#7a4baa;
-    style v90 fill:#e3dcea,stroke:#7a4baa;
+    style v19 fill:#e3dcea,stroke:#7a4baa;
+    style v26 fill:#e3dcea,stroke:#7a4baa;
+    style v36 fill:#e3dcea,stroke:#7a4baa;
+    style v45 fill:#e3dcea,stroke:#7a4baa;
+    style v72 fill:#e3dcea,stroke:#7a4baa;
+    style v50 fill:#e3dcea,stroke:#7a4baa;
+    style v57 fill:#e3dcea,stroke:#7a4baa;
+    style v67 fill:#e3dcea,stroke:#7a4baa;
+    style v79 fill:#e3dcea,stroke:#7a4baa;
+    style v86 fill:#e3dcea,stroke:#7a4baa;
+    style v98 fill:#e3dcea,stroke:#7a4baa;
+    style v105 fill:#e3dcea,stroke:#7a4baa;
+    style v109 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 

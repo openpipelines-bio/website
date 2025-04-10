@@ -1,0 +1,98 @@
+---
+title: "Tfidf"
+namespace: "Transform"
+description: "Perform TF-IDF normalization of the data (typically, ATAC)."
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `tfidf`  
+Namespace: `transform`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v2.1.0-rc.2/src/transform/tfidf/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+TF-IDF stands for "term frequency - inverse document frequency". It is a technique from natural language processing analysis.
+In the context of ATAC data, "terms" are the features (genes) and "documents" are the observations (cells). 
+TF-IDF normalization is applied to single-cell ATAC-seq data to highlight the importance of specific genomic regions (typically peaks)
+across different cells while down-weighting regions that are commonly accessible across many cells. 
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r v2.1.0-rc.2 -latest \
+  -main-script target/nextflow/transform/tfidf/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Arguments
+input: # please fill in - example: "input.h5mu"
+modality: "atac"
+# input_layer: "foo"
+# output: "$id.$key.output"
+# output_compression: "gzip"
+output_layer: "tfidf"
+scale_factor: 10000
+log_idf: true
+log_tf: true
+log_tfidf: false
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r v2.1.0-rc.2 -latest \
+  -profile docker \
+  -main-script target/nextflow/transform/tfidf/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument group
+
+### Arguments
+
+|Name                   |Description                                                                                                  |Attributes                                |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--input`              |Input h5mu file                                                                                              |`file`, required, example: `"input.h5mu"` |
+|`--modality`           |                                                                                                             |`string`, default: `"atac"`               |
+|`--input_layer`        |Input layer to use. By default, X is normalized                                                              |`string`                                  |
+|`--output`             |Output h5mu file.                                                                                            |`file`, required                          |
+|`--output_compression` |The compression format to be used on the output h5mu object.                                                 |`string`, example: `"gzip"`               |
+|`--output_layer`       |Output layer to use.                                                                                         |`string`, default: `"tfidf"`              |
+|`--scale_factor`       |Scale factor to multiply the TF-IDF matrix by.                                                               |`integer`, default: `10000`               |
+|`--log_idf`            |Whether to log-transform IDF term.                                                                           |`boolean`, default: `TRUE`                |
+|`--log_tf`             |Whether to log-transform TF term.                                                                            |`boolean`, default: `TRUE`                |
+|`--log_tfidf`          |Whether to log-transform TF*IDF term (False by default). Can only be used when log_tf and log_idf are False. |`boolean`, default: `FALSE`               |
+
+## Authors
+
+
+  * Vladimir Shitov [{{< fa brands github >}}](https://github.com/vladimirshitov) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-1960-8812) [{{< fa brands linkedin >}}](https://linkedin.com/in/vladimir-shitov-9a659513b) (maintainer)
+

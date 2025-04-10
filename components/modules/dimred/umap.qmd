@@ -14,7 +14,7 @@ ID: `umap`
 Namespace: `dimred`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/dimred/umap/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v2.1.0-rc.2/src/dimred/umap/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r v2.1.0-rc.2 -latest \
   -main-script target/nextflow/dimred/umap/main.nf \
   --help
 ```
@@ -68,7 +68,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r v2.1.0-rc.2 -latest \
   -profile docker \
   -main-script target/nextflow/dimred/umap/main.nf \
   -params-file params.yaml
@@ -109,7 +109,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--alpha`                |The initial learning rate for the embedding optimization.                                                                                                                                                                                                                                                                                                                                 |`double`, default: `1`          |
 |`--gamma`                |Weighting applied to negative samples in low dimensional embedding optimization. Values higher than one will result in greater weight being given to negative samples.                                                                                                                                                                                                                    |`double`, default: `1`          |
 |`--negative_sample_rate` |The number of negative edge/1-simplex samples to use per positive edge/1-simplex sample in optimizing the low dimensional embedding.                                                                                                                                                                                                                                                      |`integer`, default: `5`         |
-|`--init_pos`             |How to initialize the low dimensional embedding. Called `init` in the original UMAP. Options are:  * Any key from `.obsm` * `'paga'`: positions from `paga()` * `'spectral'`: use a spectral embedding of the graph * `'random'`: assign initial embedding positions at random.                                                                                                           |`string`, default: `"spectral"` |
+|`--init_pos`             |How to initialize the low dimensional embedding. Called `init` in the original UMAP. Options are:    * Any key from `.obsm` * `'paga'`: positions from `paga()` * `'spectral'`: use a spectral embedding of the graph * `'random'`: assign initial embedding positions at random.                                                                                                         |`string`, default: `"spectral"` |
 
 ## Authors
 

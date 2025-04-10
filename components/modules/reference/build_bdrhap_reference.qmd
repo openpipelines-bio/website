@@ -1,7 +1,7 @@
 ---
 title: "Build bdrhap reference"
 namespace: "Reference"
-description: "Compile a reference into a STAR index compatible with the BD Rhapsody pipeline."
+description: "The Reference Files Generator creates an archive containing Genome Index and Transcriptome annotation files needed for the BD Rhapsody Sequencing Analysis Pipeline."
 type: "module"
 toc: false
 ---
@@ -14,10 +14,16 @@ ID: `build_bdrhap_reference`
 Namespace: `reference`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/reference/build_bdrhap_reference/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v2.1.0-rc.2/src/reference/build_bdrhap_reference/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
+The app takes as input one or more FASTA and GTF files
+and produces a compressed archive in the form of a tar.gz file. The 
+archive contains:
+  
+- STAR index
+- Filtered GTF file
 
 
 ## Example commands
@@ -30,7 +36,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r v2.1.0-rc.2 -latest \
   -main-script target/nextflow/reference/build_bdrhap_reference/main.nf \
   --help
 ```
@@ -40,10 +46,19 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
+# Inputs
+genome_fasta: # please fill in - example: ["genome_sequence.fa.gz"]
+gtf: # please fill in - example: ["transcriptome_annotation.gtf.gz"]
+# extra_sequences: ["path/to/file"]
+
+# Outputs
+# reference_archive: "$id.$key.reference_archive.gz"
+
 # Arguments
-genome_fasta: # please fill in - example: "genome_sequence.fa.gz"
-transcriptome_gtf: # please fill in - example: "transcriptome_annotation.gtf.gz"
-# output: "$id.$key.output.gz"
+mitochondrial_contigs: ["chrM", "chrMT", "M", "MT"]
+filtering_off: false
+wta_only_index: false
+# extra_star_params: "--limitGenomeGenerateRAM 48000 --genomeSAindexNbases 11"
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
@@ -53,7 +68,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r v2.1.0-rc.2 -latest \
   -profile docker \
   -main-script target/nextflow/reference/build_bdrhap_reference/main.nf \
   -params-file params.yaml
@@ -63,20 +78,37 @@ nextflow run openpipelines-bio/openpipeline \
 Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
 :::
 
-## Argument group
+## Argument groups
+
+### Inputs
+
+|Name                |Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |Attributes                                                                                  |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--genome_fasta`    |Reference genome file in FASTA or FASTA.GZ format. The BD Rhapsody Sequencing Analysis Pipeline uses GRCh38 for Human and GRCm39 for Mouse.                                                                                                                                                                                                                                                                                                                                                    |List of `file`, required, example: `"genome_sequence.fa.gz"`, multiple_sep: `";"`           |
+|`--gtf`             |File path to the transcript annotation files in GTF or GTF.GZ format. The Sequence Analysis Pipeline requires the 'gene_name' or  'gene_id' attribute to be set on each gene and exon feature. Gene and exon feature lines must have the same attribute, and exons must have a corresponding gene with the same value. For TCR/BCR assays, the TCR or BCR gene segments must have the 'gene_type' or 'gene_biotype' attribute set, and the value should begin with 'TR' or 'IG', respectively. |List of `file`, required, example: `"transcriptome_annotation.gtf.gz"`, multiple_sep: `";"` |
+|`--extra_sequences` |File path to additional sequences in FASTA format to use when building the STAR index. (e.g. transgenes or CRISPR guide barcodes). GTF lines for these sequences will be automatically generated and combined with the main GTF.                                                                                                                                                                                                                                                               |List of `file`, multiple_sep: `";"`                                                         |
+
+
+### Outputs
+
+|Name                  |Description                                                                                                                                                                        |Attributes                                      |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--reference_archive` |A Compressed archive containing the Reference Genome Index and annotation GTF files. This archive is meant to be used as an input in the BD Rhapsody Sequencing Analysis Pipeline. |`file`, required, example: `"reference.tar.gz"` |
+
 
 ### Arguments
 
-|Name                  |Description                         |Attributes                                                     |
+|Name                      |Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |Attributes                                                                     |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--genome_fasta`      |Reference genome fasta.             |`file`, required, example: `"genome_sequence.fa.gz"`           |
-|`--transcriptome_gtf` |Reference transcriptome annotation. |`file`, required, example: `"transcriptome_annotation.gtf.gz"` |
-|`--output`            |Star index                          |`file`, required, example: `"star_index.tar.gz"`               |
+|`--mitochondrial_contigs` |Names of the Mitochondrial contigs in the provided Reference Genome. Fragments originating from contigs other than these are identified as 'nuclear fragments' in the ATACseq analysis pipeline.                                                                                                                                                                                                                                                                                                                                                                                     |List of `string`, default: `"chrM", "chrMT", "M", "MT"`, multiple_sep: `";"`   |
+|`--filtering_off`         |By default the input Transcript Annotation files are filtered based on the gene_type/gene_biotype attribute. Only features  having the following attribute values are kept:    - protein_coding   - lncRNA    - IG_LV_gene   - IG_V_gene   - IG_V_pseudogene   - IG_D_gene   - IG_J_gene   - IG_J_pseudogene   - IG_C_gene   - IG_C_pseudogene   - TR_V_gene   - TR_V_pseudogene   - TR_D_gene   - TR_J_gene   - TR_J_pseudogene   - TR_C_gene    If you have already pre-filtered the input Annotation files and/or wish to turn-off the filtering, please set this option to True. |`boolean_true`                                                                 |
+|`--wta_only_index`        |Build a WTA only index, otherwise builds a WTA + ATAC index.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |`boolean_true`                                                                 |
+|`--extra_star_params`     |Additional parameters to pass to STAR when building the genome index. Specify exactly like how you would on the command line.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |`string`, example: `"--limitGenomeGenerateRAM 48000 --genomeSAindexNbases 11"` |
 
 ## Authors
 
 
-  * Angela Oliveira Pisco [{{< fa brands github >}}](https://github.com/aopisco) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-0142-2355) [{{< fa brands linkedin >}}](https://linkedin.com/in/aopisco) (author)
-
   * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (author, maintainer)
+
+  * Weiwei Schultz (contributor)
 

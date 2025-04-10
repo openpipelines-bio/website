@@ -14,7 +14,7 @@ ID: `clr`
 Namespace: `transform`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/transform/clr/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v2.1.0-rc.2/src/transform/clr/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r v2.1.0-rc.2 -latest \
   -main-script target/nextflow/transform/clr/main.nf \
   --help
 ```
@@ -43,10 +43,11 @@ nextflow run openpipelines-bio/openpipeline \
 # Arguments
 input: # please fill in - example: "input.h5mu"
 modality: "prot"
-# output: "$id.$key.output.h5mu"
+# output: "output.h5mu"
 # output_compression: "gzip"
 # input_layer: "foo"
 # output_layer: "foo"
+axis: 0
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
@@ -56,7 +57,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r v2.1.0-rc.2 -latest \
   -profile docker \
   -main-script target/nextflow/transform/clr/main.nf \
   -params-file params.yaml
@@ -70,14 +71,15 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name                   |Description                                                  |Attributes                                 |
+|Name                   |Description                                                                                                                                           |Attributes                                 |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--input`              |Input h5mu file                                              |`file`, required, example: `"input.h5mu"`  |
-|`--modality`           |                                                             |`string`, default: `"prot"`                |
-|`--output`             |Output h5mu file.                                            |`file`, required, default: `"output.h5mu"` |
-|`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`                |
-|`--input_layer`        |Input layer to use. By default, .X is used.                  |`string`                                   |
-|`--output_layer`       |Output layer to use. By default, use X.                      |`string`                                   |
+|`--input`              |Input h5mu file                                                                                                                                       |`file`, required, example: `"input.h5mu"`  |
+|`--modality`           |                                                                                                                                                      |`string`, default: `"prot"`                |
+|`--output`             |Output h5mu file.                                                                                                                                     |`file`, required, default: `"output.h5mu"` |
+|`--output_compression` |The compression format to be used on the output h5mu object.                                                                                          |`string`, example: `"gzip"`                |
+|`--input_layer`        |Input layer to use. By default, .X is used.                                                                                                           |`string`                                   |
+|`--output_layer`       |Output layer to use. By default, use X.                                                                                                               |`string`                                   |
+|`--axis`               |Axis across which CLR is performed. If set to 0, CLR is performed across observations (cells). If set to 1, CLR is performed across features (genes). |`integer`, default: `0`                    |
 
 ## Authors
 

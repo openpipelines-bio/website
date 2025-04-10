@@ -1,6 +1,6 @@
 ---
-title: "Star build reference"
-namespace: "Mapping"
+title: "Build star reference"
+namespace: "Reference"
 description: "Create a reference for STAR from a set of fasta files."
 type: "module"
 toc: false
@@ -10,11 +10,11 @@ toc: false
 
 ### Info
 
-ID: `star_build_reference`  
-Namespace: `mapping`
+ID: `build_star_reference`  
+Namespace: `reference`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/mapping/star_build_reference/config.vsh.yml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v2.1.0-rc.2/src/reference/build_star_reference/config.vsh.yml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,8 +30,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
-  -main-script target/nextflow/mapping/star_build_reference/main.nf \
+  -r v2.1.0-rc.2 -latest \
+  -main-script target/nextflow/reference/build_star_reference/main.nf \
   --help
 ```
 
@@ -43,7 +43,7 @@ nextflow run openpipelines-bio/openpipeline \
 # Input/Output
 genome_fasta: # please fill in - example: ["chr1.fasta", "chr2.fasta"]
 # transcriptome_gtf: "path/to/file"
-# output: "$id.$key.output.output"
+# output: "$id.$key.output"
 
 # Genome indexing arguments
 genomeSAindexNbases: 14
@@ -51,14 +51,16 @@ genomeSAindexNbases: 14
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
 # param_list: "my_params.yaml"
+
+# Arguments
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r v2.1.0-rc.2 -latest \
   -profile docker \
-  -main-script target/nextflow/mapping/star_build_reference/main.nf \
+  -main-script target/nextflow/reference/build_star_reference/main.nf \
   -params-file params.yaml
 ```
 

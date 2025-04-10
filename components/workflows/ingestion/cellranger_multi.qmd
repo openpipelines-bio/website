@@ -14,7 +14,7 @@ ID: `cellranger_multi`
 Namespace: `workflows/ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/workflows/ingestion/cellranger_multi/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v2.1.0-rc.2/src/workflows/ingestion/cellranger_multi/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r v2.1.0-rc.2 -latest \
   -main-script target/nextflow/workflows/ingestion/cellranger_multi/main.nf \
   --help
 ```
@@ -40,18 +40,8 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Inputs
-id: # please fill in - example: "foo"
-# input: ["sample_S1_L001_R1_001.fastq.gz", "sample_S1_L001_R2_001.fastq.gz"]
-gex_reference: # please fill in - example: "reference_genome.tar.gz"
-# vdj_reference: "reference_vdj.tar.gz"
-# feature_reference: "feature_reference.csv"
-# vdj_inner_enrichment_primers: "enrichment_primers.txt"
-
-# Outputs
-# output_raw: "$id.$key.output_raw.output_raw"
-# output_h5mu: "$id.$key.output_h5mu.h5mu"
-uns_metrics: "metrics_cellranger"
+# Input files
+# input: ["mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"]
 
 # Feature type-specific input files
 # gex_input: ["mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"]
@@ -64,33 +54,76 @@ uns_metrics: "metrics_cellranger"
 # vdj_b_input: ["mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"]
 # agc_input: ["mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"]
 
-# Cell multiplexing parameters
-# cell_multiplex_sample_id: "foo"
-# cell_multiplex_oligo_ids: "foo"
-# cell_multiplex_description: "foo"
-
-# Gene expression arguments
-# gex_expect_cells: 3000
-gex_chemistry: "auto"
-gex_secondary_analysis: false
-gex_generate_bam: true
-gex_include_introns: true
-
 # Library arguments
 # library_id: ["mysample1"]
 # library_type: ["Gene Expression"]
 # library_subsample: ["0.5"]
 # library_lanes: ["1-4"]
+# library_chemistry: "foo"
+
+# Sample parameters
+# sample_ids: ["foo"]
+# sample_description: ["foo"]
+# sample_expect_cells: [3000]
+# sample_force_cells: [3000]
+
+# Feature Barcode library specific arguments
+# feature_reference: "feature_reference.csv"
+# feature_r1_length: 123
+# feature_r2_length: 123
+# min_crispr_umi: 123
+
+# Gene expression arguments
+gex_reference: # please fill in - example: "reference_genome.tar.gz"
+gex_secondary_analysis: false
+gex_generate_bam: false
+# gex_expect_cells: 3000
+# gex_force_cells: 3000
+gex_include_introns: true
+# gex_r1_length: 123
+# gex_r2_length: 123
+gex_chemistry: "auto"
+
+# VDJ related parameters
+# vdj_reference: "reference_vdj.tar.gz"
+# vdj_inner_enrichment_primers: "enrichment_primers.txt"
+# vdj_r1_length: 123
+# vdj_r2_length: 123
+
+# Cell multiplexing parameters
+# cell_multiplex_oligo_ids: ["foo"]
+# min_assignment_confidence: 123.0
+# cmo_set: "path/to/file"
+# barcode_sample_assignment: "path/to/file"
+
+# Fixed RNA profiling paramaters
+# probe_set: "path/to/file"
+# filter_probes: true
+# probe_barcode_ids: ["foo"]
+
+# Antigen Capture (BEAM) libary arguments
+# control_id: ["foo"]
+# mhc_allele: ["foo"]
+
+# General arguments
+check_library_compatibility: true
+
+# Outputs
+# output_raw: "$id.$key.output_raw"
+# output_h5mu: "$id.$key.output_h5mu.h5mu"
+uns_metrics: "metrics_cellranger"
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
 # param_list: "my_params.yaml"
+
+# Arguments
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r v2.1.0-rc.2 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/ingestion/cellranger_multi/main.nf \
   -params-file params.yaml
@@ -102,27 +135,24 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ## Argument groups
 
-### Inputs
+### Input files
 
-|Name                             |Description                                                                                                                                                                                                                                                                                                                          |Attributes                                                                                                         |
+|Name      |Description                                                                                                                                                                              |Attributes                                                                                                             |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--id`                           |ID of the sample.                                                                                                                                                                                                                                                                                                                    |`string`, required, example: `"foo"`                                                                               |
-|`--input`                        |The fastq.gz files to align. Can also be a single directory containing fastq.gz files.                                                                                                                                                                                                                                               |List of `file`, example: `"sample_S1_L001_R1_001.fastq.gz", "sample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
-|`--gex_reference`                |Genome refence index built by Cell Ranger mkref.                                                                                                                                                                                                                                                                                     |`file`, required, example: `"reference_genome.tar.gz"`                                                             |
-|`--vdj_reference`                |VDJ refence index built by Cell Ranger mkref.                                                                                                                                                                                                                                                                                        |`file`, example: `"reference_vdj.tar.gz"`                                                                          |
-|`--feature_reference`            |Path to the Feature reference CSV file, declaring Feature Barcode constructs and associated barcodes. Required only for Antibody Capture  or CRISPR Guide Capture libraries. See  https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/using/feature-bc-analysis#feature-ref  for more information. |`file`, example: `"feature_reference.csv"`                                                                         |
-|`--vdj_inner_enrichment_primers` |V(D)J Immune Profiling libraries: if inner enrichment primers other than those provided  in the 10x Genomics kits are used, they need to be specified here as a text file with one primer per line.                                                                                                                                  |`file`, example: `"enrichment_primers.txt"`                                                                        |
+|`--input` |The FASTQ files to be analyzed. FASTQ files should conform to the naming conventions of bcl2fastq and mkfastq: `[Sample Name]_S[Sample Index]_L00[Lane Number]_[Read Type]_001.fastq.gz` |List of `file`, example: `"mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
 
 
 ### Feature type-specific input files
 
-Helper functionality to allow feature type-specific input files, without the need to specify library_type or library_id. The library_id will be inferred from the input paths.
+Helper functionality to allow feature type-specific input files, without the need to specify
+library_type or library_id. The library_id will be inferred from the input paths.
+
 
 
 |Name               |Description                                                                                                                                                                                                       |Attributes                                                                                                             |
 |:----------|:--------------------------------------------------|:--------------------|
 |`--gex_input`      |The FASTQ files to be analyzed for Gene Expression. FASTQ files should conform to the naming conventions of bcl2fastq and mkfastq: `[Sample Name]_S[Sample Index]_L00[Lane Number]_[Read Type]_001.fastq.gz`      |List of `file`, example: `"mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
-|`--abc_input`      |The FASTQ files to be analyzed for Antibody Capture. FASTQ files should conform to the naming conventions of bcl2fastq and mkfastq: `[Sample Name]_S[Sample Index]_L00[Lane Number]_[Read Type]_001.fastq.gz`     |List of `file`, example: `"mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
+|`--abc_input`      |The FASTQ files to be analyzed for Antibody Capture. FASTQ files should conform to  the naming conventions of bcl2fastq and mkfastq: `[Sample Name]_S[Sample Index]_L00[Lane Number]_[Read Type]_001.fastq.gz`    |List of `file`, example: `"mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
 |`--cgc_input`      |The FASTQ files to be analyzed for CRISPR Guide Capture. FASTQ files should conform to the naming conventions of bcl2fastq and mkfastq: `[Sample Name]_S[Sample Index]_L00[Lane Number]_[Read Type]_001.fastq.gz` |List of `file`, example: `"mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
 |`--mux_input`      |The FASTQ files to be analyzed for Multiplexing Capture. FASTQ files should conform to the naming conventions of bcl2fastq and mkfastq: `[Sample Name]_S[Sample Index]_L00[Lane Number]_[Read Type]_001.fastq.gz` |List of `file`, example: `"mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
 |`--vdj_input`      |The FASTQ files to be analyzed for VDJ. FASTQ files should conform to the naming conventions of bcl2fastq and mkfastq: `[Sample Name]_S[Sample Index]_L00[Lane Number]_[Read Type]_001.fastq.gz`                  |List of `file`, example: `"mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
@@ -132,25 +162,35 @@ Helper functionality to allow feature type-specific input files, without the nee
 |`--agc_input`      |The FASTQ files to be analyzed for Antigen Capture. FASTQ files should conform to the naming conventions of bcl2fastq and mkfastq: `[Sample Name]_S[Sample Index]_L00[Lane Number]_[Read Type]_001.fastq.gz`      |List of `file`, example: `"mysample_S1_L001_R1_001.fastq.gz", "mysample_S1_L001_R2_001.fastq.gz"`, multiple_sep: `";"` |
 
 
-### Outputs
+### Library arguments
 
-|Name            |Description                                               |Attributes                                 |
+|Name                  |Description                                                                                                                                                                         |Attributes                                                          |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--output_raw`  |The raw output folder.                                    |`file`, required, example: `"output_dir"`  |
-|`--output_h5mu` |The converted h5mu file.                                  |`file`, required, example: `"output.h5mu"` |
-|`--uns_metrics` |Name of the .uns slot under which to QC metrics (if any). |`string`, default: `"metrics_cellranger"`  |
+|`--library_id`        |The Illumina sample name to analyze. This must exactly match the 'Sample Name'part of the FASTQ files specified in the `--input` argument.                                          |List of `string`, example: `"mysample1"`, multiple_sep: `";"`       |
+|`--library_type`      |The underlying feature type of the library.                                                                                                                                         |List of `string`, example: `"Gene Expression"`, multiple_sep: `";"` |
+|`--library_subsample` |The rate at which reads from the provided FASTQ files are sampled. Must be strictly greater than 0 and less than or equal to 1.                                                     |List of `string`, example: `"0.5"`, multiple_sep: `";"`             |
+|`--library_lanes`     |Lanes associated with this sample. Defaults to using all lanes.                                                                                                                     |List of `string`, example: `"1-4"`, multiple_sep: `";"`             |
+|`--library_chemistry` |Only applicable to FRP. Library-specific assay configuration. By default, the assay configuration is detected automatically. Typically, users will not need to specify a chemistry. |`string`                                                            |
 
 
-### Cell multiplexing parameters
+### Sample parameters
 
-Arguments related to cell multiplexing.
-
-
-|Name                           |Description                                                                                                                                                                                            |Attributes |
+|Name                    |Description                                                                                                                                                           |Attributes                                              |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--cell_multiplex_sample_id`   |A name to identify a multiplexed sample. Must be alphanumeric with hyphens and/or underscores,  and less than 64 characters. Required for Cell Multiplexing libraries.                                 |`string`   |
-|`--cell_multiplex_oligo_ids`   |The Cell Multiplexing oligo IDs used to multiplex this sample. If multiple CMOs were used for a sample, separate IDs with a pipe (e.g., CMO301&#124;CMO302). Required for Cell Multiplexing libraries. |`string`   |
-|`--cell_multiplex_description` |A description for the sample.                                                                                                                                                                          |`string`   |
+|`--sample_ids`          |A name to identify a multiplexed sample. Must be alphanumeric with hyphens and/or underscores, and less than 64 characters. Required for Cell Multiplexing libraries. |List of `string`, multiple_sep: `";"`                   |
+|`--sample_description`  |A description for the sample.                                                                                                                                         |List of `string`, multiple_sep: `";"`                   |
+|`--sample_expect_cells` |Expected number of recovered cells, used as input to cell calling algorithm.                                                                                          |List of `integer`, example: `3000`, multiple_sep: `";"` |
+|`--sample_force_cells`  |Force pipeline to use this number of cells, bypassing cell detection.                                                                                                 |List of `integer`, example: `3000`, multiple_sep: `";"` |
+
+
+### Feature Barcode library specific arguments
+
+|Name                  |Description                                                                                                                                                                                                                                                                                                                        |Attributes                                 |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--feature_reference` |Path to the Feature reference CSV file, declaring Feature Barcode constructs and associated barcodes. Required only for Antibody Capture or CRISPR Guide Capture libraries. See https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/using/feature-bc-analysis#feature-ref for more information." |`file`, example: `"feature_reference.csv"` |
+|`--feature_r1_length` |Limit the length of the input Read 1 sequence of V(D)J libraries to the first N bases, where N is the user-supplied value. Note that the length includes the Barcode and UMI sequences so do not set this below 26.                                                                                                                |`integer`                                  |
+|`--feature_r2_length` |Limit the length of the input Read 2 sequence of V(D)J libraries to the first N bases, where N is a user-supplied value. Trimming occurs before sequencing metrics are computed and therefore, limiting the length of Read 2 may affect Q30 scores.                                                                                |`integer`                                  |
+|`--min_crispr_umi`    |Set the minimum number of CRISPR guide RNA UMIs required for protospacer detection. If a lower or higher sensitivity is desired for detection, this value can be customized according to specific experimental needs. Applicable only to datasets that include a CRISPR Guide Capture library.                                     |`integer`                                  |
 
 
 ### Gene expression arguments
@@ -158,23 +198,79 @@ Arguments related to cell multiplexing.
 Arguments relevant to the analysis of gene expression data.
 
 
-|Name                       |Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |Attributes                  |
+|Name                       |Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |Attributes                                             |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--gex_expect_cells`       |Expected number of recovered cells, used as input to cell calling algorithm.                                                                                                                                                                                                                                                                                                                                                                                                                                      |`integer`, example: `3000`  |
-|`--gex_chemistry`          |Assay configuration. - auto: autodetect mode - threeprime: Single Cell 3' - fiveprime: Single Cell 5' - SC3Pv1: Single Cell 3' v1 - SC3Pv2: Single Cell 3' v2 - SC3Pv3: Single Cell 3' v3 - SC3Pv3LT: Single Cell 3' v3 LT - SC3Pv3HT: Single Cell 3' v3 HT - SC5P-PE: Single Cell 5' paired-end - SC5P-R2: Single Cell 5' R2-only - SC-FB: Single Cell Antibody-only 3' v2 or 5' See https://kb.10xgenomics.com/hc/en-us/articles/115003764132-How-does-Cell-Ranger-auto-detect-chemistry- for more information. |`string`, default: `"auto"` |
-|`--gex_secondary_analysis` |Whether or not to run the secondary analysis e.g. clustering.                                                                                                                                                                                                                                                                                                                                                                                                                                                     |`boolean`, default: `FALSE` |
-|`--gex_generate_bam`       |Whether to generate a BAM file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |`boolean`, default: `TRUE`  |
-|`--gex_include_introns`    |Include intronic reads in count (default=true unless --target-panel is specified in which case default=false)                                                                                                                                                                                                                                                                                                                                                                                                     |`boolean`, default: `TRUE`  |
+|`--gex_reference`          |Genome refence index built by Cell Ranger mkref.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |`file`, required, example: `"reference_genome.tar.gz"` |
+|`--gex_secondary_analysis` |Whether or not to run the secondary analysis e.g. clustering.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |`boolean`, default: `FALSE`                            |
+|`--gex_generate_bam`       |Whether to generate a BAM file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |`boolean`, default: `FALSE`                            |
+|`--gex_expect_cells`       |Expected number of recovered cells, used as input to cell calling algorithm.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |`integer`, example: `3000`                             |
+|`--gex_force_cells`        |Force pipeline to use this number of cells, bypassing cell detection.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |`integer`, example: `3000`                             |
+|`--gex_include_introns`    |Whether or not to include intronic reads in counts. This option does not apply to Fixed RNA Profiling analysis.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |`boolean`, default: `TRUE`                             |
+|`--gex_r1_length`          |Limit the length of the input Read 1 sequence of V(D)J libraries to the first N bases, where N is the user-supplied value. Note that the length includes the Barcode and UMI sequences so do not set this below 26.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |`integer`                                              |
+|`--gex_r2_length`          |Limit the length of the input Read 2 sequence of V(D)J libraries to the first N bases, where N is a user-supplied value. Trimming occurs before sequencing metrics are computed and therefore, limiting the length of Read 2 may affect Q30 scores.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |`integer`                                              |
+|`--gex_chemistry`          |Assay configuration. Either specify a single value which will be applied to all libraries, or a number of values that is equal to the number of libararies. The latter is only applicable to only applicable to Fixed RNA Profiling.   - auto: Chemistry autodetection (default)   - threeprime: Single Cell 3'   - SC3Pv1, SC3Pv2, SC3Pv3, SC3Pv4: Single Cell 3' v1, v2, v3, or v4   - SC3Pv3HT: Single Cell 3' v3.1 HT   - SC-FB: Single Cell Antibody-only 3' v2 or 5'   - fiveprime: Single Cell 5'   - SC5P-PE: Paired-end Single Cell 5'   - SC5P-R2: R2-only Single Cell 5'   - SC5P-R2-v3: R2-only Single Cell 5' v3   - SCP5-PE-v3: Single Cell 5' paired-end v3 (GEM-X)   - SC5PHT : Single Cell 5' v2 HT   - SFRP: Fixed RNA Profiling (Singleplex)   - MFRP: Fixed RNA Profiling (Multiplex, Probe Barcode on R2)   - MFRP-R1: Fixed RNA Profiling (Multiplex, Probe Barcode on R1)   - MFRP-RNA: Fixed RNA Profiling (Multiplex, RNA, Probe Barcode on R2)   - MFRP-Ab: Fixed RNA Profiling (Multiplex, Antibody, Probe Barcode at R2:69)   - MFRP-Ab-R2pos50: Fixed RNA Profiling (Multiplex, Antibody, Probe Barcode at R2:50)   - MFRP-RNA-R1: Fixed RNA Profiling (Multiplex, RNA, Probe Barcode on R1)   - MFRP-Ab-R1: Fixed RNA Profiling (Multiplex, Antibody, Probe Barcode on R1)   - ARC-v1 for analyzing the Gene Expression portion of Multiome data. If Cell Ranger auto-detects ARC-v1 chemistry, an error is triggered. See https://kb.10xgenomics.com/hc/en-us/articles/115003764132-How-does-Cell-Ranger-auto-detect-chemistry- for more information. |`string`, default: `"auto"`                            |
 
 
-### Library arguments
+### VDJ related parameters
 
-|Name                  |Description                                                                                                                                                                 |Attributes                                                          |
+|Name                             |Description                                                                                                                                                                                                                                         |Attributes                                  |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--library_id`        |The Illumina sample name to analyze. This must exactly match the 'Sample Name' part of the FASTQ files specified in the `--input` argument.                                 |List of `string`, example: `"mysample1"`, multiple_sep: `";"`       |
-|`--library_type`      |The underlying feature type of the library. Possible values: "Gene Expression", "VDJ", "VDJ-T", "VDJ-B", "Antibody Capture", "CRISPR Guide Capture", "Multiplexing Capture" |List of `string`, example: `"Gene Expression"`, multiple_sep: `";"` |
-|`--library_subsample` |Optional. The rate at which reads from the provided FASTQ files are sampled. Must be strictly greater than 0 and less than or equal to 1.                                   |List of `string`, example: `"0.5"`, multiple_sep: `";"`             |
-|`--library_lanes`     |Lanes associated with this sample. Defaults to using all lanes.                                                                                                             |List of `string`, example: `"1-4"`, multiple_sep: `";"`             |
+|`--vdj_reference`                |VDJ refence index built by Cell Ranger mkref.                                                                                                                                                                                                       |`file`, example: `"reference_vdj.tar.gz"`   |
+|`--vdj_inner_enrichment_primers` |V(D)J Immune Profiling libraries: if inner enrichment primers other than those provided  in the 10x Genomics kits are used, they need to be specified here as a text file with one primer per line.                                                 |`file`, example: `"enrichment_primers.txt"` |
+|`--vdj_r1_length`                |Limit the length of the input Read 1 sequence of V(D)J libraries to the first N bases, where N is the user-supplied value. Note that the length includes the Barcode and UMI sequences so do not set this below 26.                                 |`integer`                                   |
+|`--vdj_r2_length`                |Limit the length of the input Read 2 sequence of V(D)J libraries to the first N bases, where N is a user-supplied value.  Trimming occurs before sequencing metrics are computed and therefore, limiting the length of Read 2 may affect Q30 scores |`integer`                                   |
+
+
+### Cell multiplexing parameters
+
+|Name                          |Description                                                                                                                                                                                                                                                                                                                    |Attributes                            |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--cell_multiplex_oligo_ids`  |The Cell Multiplexing oligo IDs used to multiplex this sample. If multiple CMOs were used for a sample, separate IDs with a pipe (e.g., CMO301&#124;CMO302). Required for Cell Multiplexing libraries.                                                                                                                         |List of `string`, multiple_sep: `";"` |
+|`--min_assignment_confidence` |The minimum estimated likelihood to call a sample as tagged with a Cell Multiplexing Oligo (CMO) instead of "Unassigned". Users may wish to tolerate a higher rate of mis-assignment in order to obtain more singlets to include in their analysis, or a lower rate of mis-assignment at the cost of obtaining fewer singlets. |`double`                              |
+|`--cmo_set`                   |Path to a custom CMO set CSV file, declaring CMO constructs and associated barcodes. If the default CMO reference IDs that are built into the Cell Ranger software are required, this option does not need to be used.                                                                                                         |`file`                                |
+|`--barcode_sample_assignment` |Path to a barcode-sample assignment CSV file that specifies the barcodes that belong to each sample.                                                                                                                                                                                                                           |`file`                                |
+
+
+### Fixed RNA profiling paramaters
+
+|Name                  |Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |Attributes                            |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--probe_set`         |A probe set reference CSV file. It specifies the sequences used as a reference for probe alignment and the gene ID associated with each probe. It must include 4 columns (probe file format 1.0.0): gene_id,probe_seq,probe_id,included,region and an optional 5th column (probe file format 1.0.1). - gene_id: The Ensembl gene identifier targeted by the probe. - probe_seq: The nucleotide sequence of the probe, which is complementary to the transcript sequence. - probe_id: The probe identifier, whose format is described in Probe identifiers. - included: A TRUE or FALSE flag specifying whether the probe is included in the filtered counts matrix output or excluded by the probe filter.              See filter-probes option of cellranger multi. All probes of a gene must be marked TRUE in the included column for that gene to be included. - region: Present only in v1.0.1 probe set reference CSV. The gene boundary targeted by the probe. Accepted values are spliced or unspliced.  The file also contains a number of required metadata fields in the header in the format #key=value: - panel_name: The name of the probe set. - panel_type: Always predesigned for predesigned probe sets. - reference_genome: The reference genome build used for probe design. - reference_version: The version of the Cell Ranger reference transcriptome used for probe design. - probe_set_file_format: The version of the probe set file format specification that this file conforms to. |`file`                                |
+|`--filter_probes`     |If 'false', include all non-deprecated probes listed in the probe set reference CSV file. If 'true' or not set, probes that are predicted to have off-target activity to homologous genes are excluded from analysis. Not filtering will result in UMI counts from all non-deprecated probes, including those with predicted off-target activity, to be used in the analysis. Probes whose ID is prefixed with DEPRECATED are always excluded from the analysis.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |`boolean`                             |
+|`--probe_barcode_ids` |The Fixed RNA Probe Barcode ID used for this sample, and for multiplex GEX + Antibody Capture libraries, the corresponding Antibody Multiplexing Barcode IDs. 10x recommends specifying both barcodes (e.g., BC001+AB001) when an Antibody Capture library is present. The barcode pair order is BC+AB and they are separated with a "+" (no spaces). Alternatively, you can specify the Probe Barcode ID alone and Cell Ranger's barcode pairing auto-detection algorithm will automatically match to the corresponding Antibody Multiplexing Barcode.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |List of `string`, multiple_sep: `";"` |
+
+
+### Antigen Capture (BEAM) libary arguments
+
+These arguments are recommended if an Antigen Capture (BEAM) library is present. 
+It is needed to calculate the antigen specificity score.
+
+
+
+|Name           |Description                                                                                                                                                                                                                                                                                                                              |Attributes                            |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--control_id` |A user-defined ID for any negative controls used in the T/BCR Antigen Capture assay. Must match id specified in the feature reference CSV. May only include ASCII characters and must not use whitespace, slash, quote, or comma characters.  Each ID must be unique and must not collide with a gene identifier from the transcriptome. |List of `string`, multiple_sep: `";"` |
+|`--mhc_allele` |The MHC allele for TCR Antigen Capture libraries. Must match mhc_allele name specified in the Feature Reference CSV.                                                                                                                                                                                                                     |List of `string`, multiple_sep: `";"` |
+
+
+### General arguments
+
+These arguments are applicable to all library types.
+
+
+
+|Name                            |Description                                                                                                                                                                                                                                                                                                                                                                                                                           |Attributes                 |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--check_library_compatibility` |Optional. This option allows users to disable the check that evaluates 10x Barcode overlap between ibraries when multiple libraries are specified (e.g., Gene Expression + Antibody Capture). Setting this option to false will disable the check across all library combinations. We recommend running this check (default), however if the pipeline errors out, users can bypass the check to generate outputs for troubleshooting. |`boolean`, default: `TRUE` |
+
+
+### Outputs
+
+|Name            |Description                                                                                                         |Attributes                                |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--output_raw`  |The raw output folder.                                                                                              |`file`, required, example: `"output_dir"` |
+|`--output_h5mu` |Locations for the output files. Must contain a wildcard (*) character, which will be replaced with the sample name. |`file`, required, example: `"*.h5mu"`     |
+|`--uns_metrics` |Name of the .uns slot under which to QC metrics (if any).                                                           |`string`, default: `"metrics_cellranger"` |
 
 ## Authors
 
@@ -186,16 +282,63 @@ Arguments relevant to the analysis of gene expression data.
 ```{mermaid}
 flowchart TB
     v0(Channel.fromList)
+    v2(filter)
+    v9(filter)
+    v39(concat)
     v17(cellranger_multi_component)
-    v37(from_cellranger_multi_to_h5mu)
-    v64(Output)
-    v0-->v17
-    v17-->v37
-    v37-->v64
+    v24(cross)
+    v34(cross)
+    v44(filter)
+    v49(from_cellranger_multi_to_h5mu)
+    v56(cross)
+    v66(cross)
+    v77(flatMap)
+    v83(cross)
+    v90(cross)
+    v102(cross)
+    v109(cross)
+    v113(Output)
+    v0-->v2
+    v2-->v9
+    v9-->v17
+    v17-->v24
+    v9-->v24
+    v9-->v34
+    v34-->v39
+    v44-->v49
+    v49-->v56
+    v44-->v56
+    v44-->v66
+    v77-->v83
+    v2-->v83
+    v83-->v90
+    v2-->v90
+    v2-->v102
+    v102-->v109
+    v2-->v109
+    v109-->v113
+    v17-->v34
+    v39-->v44
+    v49-->v66
+    v66-->v77
+    v77-->v102
     style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v2 fill:#e3dcea,stroke:#7a4baa;
+    style v9 fill:#e3dcea,stroke:#7a4baa;
+    style v39 fill:#e3dcea,stroke:#7a4baa;
     style v17 fill:#e3dcea,stroke:#7a4baa;
-    style v37 fill:#e3dcea,stroke:#7a4baa;
-    style v64 fill:#e3dcea,stroke:#7a4baa;
+    style v24 fill:#e3dcea,stroke:#7a4baa;
+    style v34 fill:#e3dcea,stroke:#7a4baa;
+    style v44 fill:#e3dcea,stroke:#7a4baa;
+    style v49 fill:#e3dcea,stroke:#7a4baa;
+    style v56 fill:#e3dcea,stroke:#7a4baa;
+    style v66 fill:#e3dcea,stroke:#7a4baa;
+    style v77 fill:#e3dcea,stroke:#7a4baa;
+    style v83 fill:#e3dcea,stroke:#7a4baa;
+    style v90 fill:#e3dcea,stroke:#7a4baa;
+    style v102 fill:#e3dcea,stroke:#7a4baa;
+    style v109 fill:#e3dcea,stroke:#7a4baa;
+    style v113 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 

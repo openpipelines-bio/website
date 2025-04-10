@@ -14,7 +14,7 @@ ID: `build_cellranger_reference`
 Namespace: `reference`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/reference/build_cellranger_reference/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v2.1.0-rc.2/src/reference/build_cellranger_reference/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r v2.1.0-rc.2 -latest \
   -main-script target/nextflow/reference/build_cellranger_reference/main.nf \
   --help
 ```
@@ -43,7 +43,8 @@ nextflow run openpipelines-bio/openpipeline \
 # Arguments
 genome_fasta: # please fill in - example: "genome_sequence.fa.gz"
 transcriptome_gtf: # please fill in - example: "transcriptome_annotation.gtf.gz"
-# output: "$id.$key.output.output"
+# reference_version: "foo"
+# output: "$id.$key.output"
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
@@ -53,7 +54,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r v2.1.0-rc.2 -latest \
   -profile docker \
   -main-script target/nextflow/reference/build_cellranger_reference/main.nf \
   -params-file params.yaml
@@ -67,11 +68,12 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name                  |Description                         |Attributes                                                     |
+|Name                  |Description                                                 |Attributes                                                     |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--genome_fasta`      |Reference genome fasta.             |`file`, required, example: `"genome_sequence.fa.gz"`           |
-|`--transcriptome_gtf` |Reference transcriptome annotation. |`file`, required, example: `"transcriptome_annotation.gtf.gz"` |
-|`--output`            |Output folder                       |`file`, required, example: `"cellranger_reference"`            |
+|`--genome_fasta`      |Reference genome fasta.                                     |`file`, required, example: `"genome_sequence.fa.gz"`           |
+|`--transcriptome_gtf` |Reference transcriptome annotation.                         |`file`, required, example: `"transcriptome_annotation.gtf.gz"` |
+|`--reference_version` |Optional reference version string to include with reference |`string`                                                       |
+|`--output`            |Output folder                                               |`file`, required, example: `"cellranger_reference"`            |
 
 ## Authors
 

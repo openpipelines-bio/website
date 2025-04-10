@@ -1,0 +1,114 @@
+---
+title: "Cross check genes"
+namespace: "Scgpt"
+description: "Cross-check genes with pre-trained scGPT model"
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `cross_check_genes`  
+Namespace: `scgpt`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v2.1.0-rc.2/src/scgpt/cross_check_genes/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r v2.1.0-rc.2 -latest \
+  -main-script target/nextflow/scgpt/cross_check_genes/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Inputs
+input: # please fill in - example: "input.h5mu"
+modality: "rna"
+vocab_file: # please fill in - example: "resources_test/scgpt/vocab.json"
+# input_var_gene_names: "gene_name"
+# var_input: "foo"
+
+# Outputs
+# output: "$id.$key.output.h5mu"
+# output_compression: "gzip"
+output_var_filter: "id_in_vocab"
+
+# Arguments
+pad_token: "<pad>"
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r v2.1.0-rc.2 -latest \
+  -profile docker \
+  -main-script target/nextflow/scgpt/cross_check_genes/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Inputs
+
+|Name                     |Description                                                                                                                |Attributes                                                     |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--input`                |The input h5mu file containing of pre-processed data.                                                                      |`file`, required, example: `"input.h5mu"`                      |
+|`--modality`             |The modality key of the MuData object containing the RNA AnnData object.                                                   |`string`, default: `"rna"`                                     |
+|`--vocab_file`           |Model vocabulary file path.                                                                                                |`file`, required, example: `"resources_test/scgpt/vocab.json"` |
+|`--input_var_gene_names` |The name of the adata.var column containing gene names. By default the .var index will be used.                            |`string`, example: `"gene_name"`                               |
+|`--var_input`            |.var column containing highly variable genes. If provided, will only cross-check HVG filtered genes with model vocabulary. |`string`                                                       |
+
+
+### Outputs
+
+|Name                   |Description                                                                                                                               |Attributes                                 |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--output`             |The output cross-checked anndata file.                                                                                                    |`file`, required, example: `"output.h5mu"` |
+|`--output_compression` |                                                                                                                                          |`string`, example: `"gzip"`                |
+|`--output_var_filter`  |In which .var slot to store a boolean array corresponding to which observations should be filtered out based on HVG and model vocabulary. |`string`, default: `"id_in_vocab"`         |
+
+
+### Arguments
+
+|Name          |Description                          |Attributes                   |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--pad_token` |The padding token used in the model. |`string`, default: `"<pad>"` |
+
+## Authors
+
+
+  * Jakub Majercik [{{< fa brands github >}}](https://github.com/jakubmajercik) [{{< fa brands linkedin >}}](https://linkedin.com/in/jakubmajercik) (author)
+
+  * Dorien Roosen [{{< fa brands github >}}](https://github.com/dorien-er) [{{< fa brands linkedin >}}](https://linkedin.com/in/dorien-roosen) (maintainer, author)
+
+  * Elizabeth Mlynarski (author)
+
+  * Weiwei Schultz (contributor)
+

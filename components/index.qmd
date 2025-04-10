@@ -4,7 +4,7 @@ description: An overview of the workflows and modules in OpenPipelines
 listing:
   - id: workflows
     type: table
-    contents: "workflows/*/*.qmd"
+    contents: "workflows/**/*.qmd"
     fields: [title, namespace, description]
     field-display-names: 
         title: Name
@@ -12,7 +12,7 @@ listing:
         description: Description
   - id: modules
     type: table
-    contents: "modules/*/*.qmd"
+    contents: "modules/**/*.qmd"
     fields: [title, namespace, description]
     field-display-names: 
         title: Name

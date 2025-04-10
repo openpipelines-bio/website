@@ -14,7 +14,7 @@ ID: `totalvi`
 Namespace: `integrate`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/integrate/totalvi/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v2.1.0-rc.2/src/integrate/totalvi/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r v2.1.0-rc.2 -latest \
   -main-script target/nextflow/integrate/totalvi/main.nf \
   --help
 ```
@@ -53,12 +53,12 @@ obs_batch: "sample_id"
 # var_input: "foo"
 
 # Outputs
-# output: "$id.$key.output.output"
+# output: "$id.$key.output"
 obsm_output: "X_integrated_totalvi"
 obsm_normalized_rna_output: "X_totalvi_normalized_rna"
 obsm_normalized_protein_output: "X_totalvi_normalized_protein"
-# reference_model_path: "$id.$key.reference_model_path.reference_model_path"
-# query_model_path: "$id.$key.query_model_path.query_model_path"
+# reference_model_path: "totalvi_model_reference"
+# query_model_path: "totalvi_model_query"
 
 # Learning parameters
 max_epochs: 400
@@ -68,12 +68,14 @@ weight_decay: 0.0
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
 # param_list: "my_params.yaml"
+
+# Arguments
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r v2.1.0-rc.2 -latest \
   -profile docker \
   -main-script target/nextflow/integrate/totalvi/main.nf \
   -params-file params.yaml

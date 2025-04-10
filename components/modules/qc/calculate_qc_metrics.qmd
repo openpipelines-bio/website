@@ -14,7 +14,7 @@ ID: `calculate_qc_metrics`
 Namespace: `qc`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/qc/calculate_qc_metrics/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v2.1.0-rc.2/src/qc/calculate_qc_metrics/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -27,13 +27,13 @@ Var metrics (name in this component -> name in scanpy):
   - obs_mean -> mean_{expr_type}
   - total_counts -> total_{expr_type}
 
-Obs metrics:
-  - num_nonzero_vars -> n_genes_by_{expr_type}
-  - pct_{var_qc_metrics} -> pct_{expr_type}_{qc_var}
-  - total_counts_{var_qc_metrics} -> total_{expr_type}_{qc_var}
-  - pct_of_counts_in_top_{top_n_vars}_vars -> pct_{expr_type}_in_top_{n}_{var_type}
-  - total_counts -> total_{expr_type}
-  
+  Obs metrics:
+    - num_nonzero_vars -> n_genes_by_{expr_type}
+    - pct_{var_qc_metrics} -> pct_{expr_type}_{qc_var}
+    - total_counts_{var_qc_metrics} -> total_{expr_type}_{qc_var}
+    - pct_of_counts_in_top_{top_n_vars}_vars -> pct_{expr_type}_in_top_{n}_{var_type}
+    - total_counts -> total_{expr_type}
+    
 
 
 ## Example commands
@@ -46,7 +46,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r v2.1.0-rc.2 -latest \
   -main-script target/nextflow/qc/calculate_qc_metrics/main.nf \
   --help
 ```
@@ -61,10 +61,6 @@ input: # please fill in - example: "input.h5mu"
 modality: "rna"
 # layer: "raw_counts"
 
-# Outputs
-# output: "$id.$key.output.h5mu"
-# output_compression: "gzip"
-
 # Metrics added to .obs
 # var_qc_metrics: ["ercc,highly_variable,mitochondrial"]
 # var_qc_metrics_fill_na_value: true
@@ -78,15 +74,21 @@ output_var_total_counts_obs: "total_counts"
 output_var_obs_mean: "obs_mean"
 output_var_pct_dropout: "pct_dropout"
 
+# Outputs
+# output: "$id.$key.output.h5mu"
+# output_compression: "gzip"
+
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
 # param_list: "my_params.yaml"
+
+# Arguments
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r v2.1.0-rc.2 -latest \
   -profile docker \
   -main-script target/nextflow/qc/calculate_qc_metrics/main.nf \
   -params-file params.yaml
