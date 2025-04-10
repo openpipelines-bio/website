@@ -1,7 +1,7 @@
 ---
 title: "scVI Annotation"
 namespace: "Workflows/annotation"
-description: ""Cell type annotation workflow that performs scVI integration of reference and query dataset followed by KNN label transfer."
+description: "Cell type annotation workflow that performs scVI integration of reference and query dataset followed by KNN label transfer."
 type: "workflow"
 toc: false
 ---
@@ -20,7 +20,7 @@ Namespace: `workflows/annotation`
 
 
 The query and reference datasets are expected to be pre-processed in the same way, for example with the `process_samples` workflow of OpenPipeline. Note that this workflow will integrate the reference dataset from scratch and integrate the query dataset in the same embedding space. 
-The workflow does not currently output the trained SCVI reference model."
+The workflow does not currently output the trained SCVI reference model.
 
 
 ## Example commands
