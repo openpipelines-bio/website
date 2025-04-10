@@ -14,7 +14,7 @@ ID: `prot_singlesample`
 Namespace: `workflows/prot`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/workflows/prot/prot_singlesample/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v2.1.0-rc.2/src/workflows/prot/prot_singlesample/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r v2.1.0-rc.2 -latest \
   -main-script target/nextflow/workflows/prot/prot_singlesample/main.nf \
   --help
 ```
@@ -58,12 +58,14 @@ input: # please fill in - example: "dataset.h5mu"
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
 # param_list: "my_params.yaml"
+
+# Arguments
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r v2.1.0-rc.2 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/prot/prot_singlesample/main.nf \
   -params-file params.yaml
@@ -115,16 +117,60 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ```{mermaid}
 flowchart TB
     v0(Channel.fromList)
+    v2(filter)
+    v10(filter)
     v18(prot_filter_with_counts)
-    v38(prot_do_filter)
-    v66(Output)
-    v0-->v18
-    v18-->v38
-    v38-->v66
+    v25(cross)
+    v35(cross)
+    v41(filter)
+    v71(concat)
+    v49(prot_do_filter)
+    v56(cross)
+    v66(cross)
+    v78(cross)
+    v85(cross)
+    v97(cross)
+    v104(cross)
+    v108(Output)
+    v0-->v2
+    v2-->v10
+    v10-->v18
+    v18-->v25
+    v10-->v25
+    v10-->v35
+    v41-->v49
+    v49-->v56
+    v41-->v56
+    v41-->v66
+    v66-->v71
+    v71-->v78
+    v2-->v78
+    v78-->v85
+    v2-->v85
+    v2-->v97
+    v97-->v104
+    v2-->v104
+    v104-->v108
+    v35-->v41
+    v18-->v35
+    v49-->v66
+    v71-->v97
     style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v2 fill:#e3dcea,stroke:#7a4baa;
+    style v10 fill:#e3dcea,stroke:#7a4baa;
     style v18 fill:#e3dcea,stroke:#7a4baa;
-    style v38 fill:#e3dcea,stroke:#7a4baa;
+    style v25 fill:#e3dcea,stroke:#7a4baa;
+    style v35 fill:#e3dcea,stroke:#7a4baa;
+    style v41 fill:#e3dcea,stroke:#7a4baa;
+    style v71 fill:#e3dcea,stroke:#7a4baa;
+    style v49 fill:#e3dcea,stroke:#7a4baa;
+    style v56 fill:#e3dcea,stroke:#7a4baa;
     style v66 fill:#e3dcea,stroke:#7a4baa;
+    style v78 fill:#e3dcea,stroke:#7a4baa;
+    style v85 fill:#e3dcea,stroke:#7a4baa;
+    style v97 fill:#e3dcea,stroke:#7a4baa;
+    style v104 fill:#e3dcea,stroke:#7a4baa;
+    style v108 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 

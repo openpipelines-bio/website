@@ -1,0 +1,121 @@
+---
+title: "Split h5mu train test"
+namespace: "Dataflow"
+description: "Split mudata object into training and testing (and validation) datasets based on observations into separate mudata objects."
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `split_h5mu_train_test`  
+Namespace: `dataflow`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v2.1.0-rc.2/src/dataflow/split_h5mu_train_test/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r v2.1.0-rc.2 -latest \
+  -main-script target/nextflow/dataflow/split_h5mu_train_test/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Inputs
+input: # please fill in - example: "input.h5mu"
+modality: "rna"
+
+# Outputs
+# output_train: "$id.$key.output_train.h5mu"
+# output_test: "$id.$key.output_test.h5mu"
+# output_val: "$id.$key.output_val.h5mu"
+# compression: "gzip"
+
+# Split arguments
+test_size: 0.2
+# val_size: 123.0
+shuffle: false
+# random_state: 123
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+
+# Arguments
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r v2.1.0-rc.2 -latest \
+  -profile docker \
+  -main-script target/nextflow/dataflow/split_h5mu_train_test/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Inputs
+
+Input dataset in mudata format.
+
+
+|Name         |Description                                                   |Attributes                                |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--input`    |The input (query) data to be labeled. Should be a .h5mu file. |`file`, required, example: `"input.h5mu"` |
+|`--modality` |Which modality to process.                                    |`string`, default: `"rna"`                |
+
+
+### Outputs
+
+Output arguments.
+
+
+|Name             |Description                                  |Attributes                                       |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--output_train` |The output training data in mudata format.   |`file`, required, example: `"output_train.h5mu"` |
+|`--output_test`  |The output testing data in mudata format.    |`file`, required, example: `"output_test.h5mu"`  |
+|`--output_val`   |The output validation data in mudata format. |`file`, example: `"output_val.h5mu"`             |
+|`--compression`  |                                             |`string`, example: `"gzip"`                      |
+
+
+### Split arguments
+
+Model arguments.
+
+
+|Name             |Description                                                       |Attributes               |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--test_size`    |The proportion of the dataset to include in the test split.       |`double`, default: `0.2` |
+|`--val_size`     |The proportion of the dataset to include in the validation split. |`double`                 |
+|`--shuffle`      |Whether or not to shuffle the data before splitting.              |`boolean_true`           |
+|`--random_state` |The seed used by the random number generator.                     |`integer`                |
+
+## Authors
+
+
+  * Jakub Majercik [{{< fa brands github >}}](https://github.com/jakubmajercik) [{{< fa brands linkedin >}}](https://linkedin.com/in/jakubmajercik) (author)
+

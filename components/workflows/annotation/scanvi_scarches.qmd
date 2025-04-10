@@ -1,0 +1,338 @@
+---
+title: "scANVI - scArches workflow"
+namespace: "Workflows/annotation"
+description: "Cell type annotation workflow using ScanVI with scArches for reference mapping."
+type: "workflow"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `scanvi_scarches`  
+Namespace: `workflows/annotation`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v2.1.0-rc.2/src/workflows/annotation/scanvi_scarches/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r v2.1.0-rc.2 -latest \
+  -main-script target/nextflow/workflows/annotation/scanvi_scarches/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Query Input
+id: # please fill in - example: "foo"
+input: # please fill in - example: "input.h5mu"
+modality: "rna"
+# layer: "foo"
+input_obs_batch_label: # please fill in - example: "sample"
+# input_obs_size_factor: "foo"
+# input_var_gene_names: "foo"
+
+# Reference input
+reference: # please fill in - example: "reference.h5mu"
+reference_obs_target: # please fill in - example: "cell_type"
+reference_obs_batch_label: # please fill in - example: "sample"
+# reference_obs_size_factor: "foo"
+unlabeled_category: "Unknown"
+# reference_var_hvg: "foo"
+# reference_var_gene_names: "foo"
+
+# scVI, scANVI and scArches training options
+# early_stopping: true
+early_stopping_monitor: "elbo_validation"
+early_stopping_patience: 45
+early_stopping_min_delta: 0.0
+# max_epochs: 123
+reduce_lr_on_plateau: true
+lr_factor: 0.6
+lr_patience: 30.0
+
+# Leiden clustering options
+leiden_resolution: [1.0]
+
+# Neighbor classifier arguments
+knn_weights: "uniform"
+knn_n_neighbors: 15
+
+# Outputs
+# output: "$id.$key.output.h5mu"
+output_obs_predictions: "scanvi_pred"
+output_obs_probability: "scanvi_probabilities"
+output_obsm_integrated: "X_integrated_scanvi"
+# output_compression: "gzip"
+# output_model: "$id.$key.output_model"
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+
+# Arguments
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r v2.1.0-rc.2 -latest \
+  -profile docker \
+  -main-script target/nextflow/workflows/annotation/scanvi_scarches/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Query Input
+
+|Name                      |Description                                                                                                                                                                                                        |Attributes                                |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--id`                    |ID of the sample.                                                                                                                                                                                                  |`string`, required, example: `"foo"`      |
+|`--input`                 |Input dataset consisting of the (unlabeled) query observations. The dataset is expected to be pre-processed in the same way as --reference.                                                                        |`file`, required, example: `"input.h5mu"` |
+|`--modality`              |Which modality to process. Should match the modality of the --reference dataset.                                                                                                                                   |`string`, default: `"rna"`                |
+|`--layer`                 |Which layer to use for integration if .X is not to be used. Should match the layer of the --reference dataset.                                                                                                     |`string`                                  |
+|`--input_obs_batch_label` |The .obs field in the input (query) dataset containing the batch labels.                                                                                                                                           |`string`, required, example: `"sample"`   |
+|`--input_obs_size_factor` |Key in adata.obs for size factor information. Instead of using library size as a size factor, the provided size factor column will be used as offset in the mean of the likelihood. Assumed to be on linear scale. |`string`                                  |
+|`--input_var_gene_names`  |.var column containing gene names. By default, use the index.                                                                                                                                                      |`string`                                  |
+
+
+### Reference input
+
+|Name                          |Description                                                                                                                                                                                                        |Attributes                                    |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--reference`                 |Reference dataset consisting of the labeled observations to train the KNN classifier on. The dataset is expected to be pre-processed in the same way as the --input query dataset.                                 |`file`, required, example: `"reference.h5mu"` |
+|`--reference_obs_target`      |The `.obs` key containing the target labels.                                                                                                                                                                       |`string`, required, example: `"cell_type"`    |
+|`--reference_obs_batch_label` |The .obs field in the reference dataset containing the batch labels.                                                                                                                                               |`string`, required, example: `"sample"`       |
+|`--reference_obs_size_factor` |Key in adata.obs for size factor information. Instead of using library size as a size factor, the provided size factor column will be used as offset in the mean of the likelihood. Assumed to be on linear scale. |`string`                                      |
+|`--unlabeled_category`        |Value in the --reference_obs_batch_label field that indicates unlabeled observations                                                                                                                               |`string`, default: `"Unknown"`                |
+|`--reference_var_hvg`         |.var column containing highly variable genes. If not provided, genes will not be subset.                                                                                                                           |`string`                                      |
+|`--reference_var_gene_names`  |.var column containing gene names. By default, use the index.                                                                                                                                                      |`string`                                      |
+
+
+### scVI, scANVI and scArches training options
+
+|Name                         |Description                                                                                                                                          |Attributes                             |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--early_stopping`           |Whether to perform early stopping with respect to the validation set.                                                                                |`boolean`                              |
+|`--early_stopping_monitor`   |Metric logged during validation set epoch.                                                                                                           |`string`, default: `"elbo_validation"` |
+|`--early_stopping_patience`  |Number of validation epochs with no improvement after which training will be stopped.                                                                |`integer`, default: `45`               |
+|`--early_stopping_min_delta` |Minimum change in the monitored quantity to qualify as an improvement, i.e. an absolute change of less than min_delta, will count as no improvement. |`double`, default: `0`                 |
+|`--max_epochs`               |Number of passes through the dataset, defaults to (20000 / number of cells) * 400 or 400; whichever is smallest.                                     |`integer`                              |
+|`--reduce_lr_on_plateau`     |Whether to monitor validation loss and reduce learning rate when validation set `lr_scheduler_metric` plateaus.                                      |`boolean`, default: `TRUE`             |
+|`--lr_factor`                |Factor to reduce learning rate.                                                                                                                      |`double`, default: `0.6`               |
+|`--lr_patience`              |Number of epochs with no improvement after which learning rate will be reduced.                                                                      |`double`, default: `30`                |
+
+
+### Leiden clustering options
+
+|Name                  |Description                                                                    |Attributes                                          |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--leiden_resolution` |Control the coarseness of the clustering. Higher values lead to more clusters. |List of `double`, default: `1`, multiple_sep: `";"` |
+
+
+### Neighbor classifier arguments
+
+|Name                |Description                                                                                                                                                                                                                  |Attributes                     |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--knn_weights`     |Weight function used in prediction. Possible values are: `uniform` (all points in each neighborhood are weighted equally) or  `distance` (weight points by the inverse of their distance)                                    |`string`, default: `"uniform"` |
+|`--knn_n_neighbors` |The number of neighbors to use in k-neighbor graph structure used for fast approximate nearest neighbor search with PyNNDescent.  Larger values will result in more accurate search results at the cost of computation time. |`integer`, default: `15`       |
+
+
+### Outputs
+
+|Name                       |Description                                                                                                  |Attributes                                  |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--output`                 |The query data in .h5mu format with predicted labels predicted from the classifier trained on the reference. |`file`, required, example: `"output.h5mu"`  |
+|`--output_obs_predictions` |In which .obs slot to store the predicted labels.                                                            |`string`, default: `"scanvi_pred"`          |
+|`--output_obs_probability` |In which. obs slot to store the probabilities of the predicted labels.                                       |`string`, default: `"scanvi_probabilities"` |
+|`--output_obsm_integrated` |In which .obsm slot to store the integrated embedding.                                                       |`string`, default: `"X_integrated_scanvi"`  |
+|`--output_compression`     |The compression format to be used on the output h5mu object.                                                 |`string`, example: `"gzip"`                 |
+|`--output_model`           |Path to the resulting scANVI model that was updated with query data.                                         |`file`                                      |
+
+## Authors
+
+
+  * Dorien Roosen [{{< fa brands github >}}](https://github.com/dorien-er) [{{< fa brands linkedin >}}](https://linkedin.com/in/dorien-roosen) (author, maintainer)
+
+  * Weiwei Schultz (contributor)
+
+## Visualisation
+
+```{mermaid}
+flowchart TB
+    v0(Channel.fromList)
+    v2(filter)
+    v10(filter)
+    v18(scvi)
+    v25(cross)
+    v35(cross)
+    v41(filter)
+    v49(scanvi)
+    v56(cross)
+    v66(cross)
+    v72(filter)
+    v80(scarches)
+    v87(cross)
+    v97(cross)
+    v104(filter)
+    v258(concat)
+    v113(filter)
+    v128(cross)
+    v138(cross)
+    v147(branch)
+    v174(concat)
+    v159(cross)
+    v169(cross)
+    v178(branch)
+    v205(concat)
+    v190(cross)
+    v200(cross)
+    v209(branch)
+    v236(concat)
+    v221(cross)
+    v231(cross)
+    v243(cross)
+    v253(cross)
+    v265(cross)
+    v272(cross)
+    v284(cross)
+    v291(cross)
+    v295(Output)
+    subgraph group_neighbors_leiden_umap [neighbors_leiden_umap]
+        v121(find_neighbors)
+        v152(leiden)
+        v183(move_obsm_to_obs)
+        v214(umap)
+    end
+    v147-->v174
+    v178-->v205
+    v209-->v236
+    v0-->v2
+    v2-->v10
+    v10-->v18
+    v18-->v25
+    v10-->v25
+    v10-->v35
+    v41-->v49
+    v49-->v56
+    v41-->v56
+    v41-->v66
+    v72-->v80
+    v80-->v87
+    v72-->v87
+    v72-->v97
+    v104-->v113
+    v113-->v121
+    v121-->v128
+    v113-->v128
+    v113-->v138
+    v147-->v152
+    v152-->v159
+    v147-->v159
+    v147-->v169
+    v169-->v174
+    v178-->v183
+    v183-->v190
+    v178-->v190
+    v178-->v200
+    v200-->v205
+    v209-->v214
+    v214-->v221
+    v209-->v221
+    v209-->v231
+    v231-->v236
+    v236-->v243
+    v104-->v243
+    v104-->v253
+    v253-->v258
+    v258-->v265
+    v2-->v265
+    v265-->v272
+    v2-->v272
+    v2-->v284
+    v284-->v291
+    v2-->v291
+    v291-->v295
+    v35-->v41
+    v18-->v35
+    v66-->v72
+    v49-->v66
+    v97-->v104
+    v80-->v97
+    v121-->v138
+    v138-->v147
+    v152-->v169
+    v174-->v178
+    v183-->v200
+    v205-->v209
+    v214-->v231
+    v236-->v253
+    v258-->v284
+    style group_neighbors_leiden_umap fill:#F0F0F0,stroke:#969696;
+    style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v2 fill:#e3dcea,stroke:#7a4baa;
+    style v10 fill:#e3dcea,stroke:#7a4baa;
+    style v18 fill:#e3dcea,stroke:#7a4baa;
+    style v25 fill:#e3dcea,stroke:#7a4baa;
+    style v35 fill:#e3dcea,stroke:#7a4baa;
+    style v41 fill:#e3dcea,stroke:#7a4baa;
+    style v49 fill:#e3dcea,stroke:#7a4baa;
+    style v56 fill:#e3dcea,stroke:#7a4baa;
+    style v66 fill:#e3dcea,stroke:#7a4baa;
+    style v72 fill:#e3dcea,stroke:#7a4baa;
+    style v80 fill:#e3dcea,stroke:#7a4baa;
+    style v87 fill:#e3dcea,stroke:#7a4baa;
+    style v97 fill:#e3dcea,stroke:#7a4baa;
+    style v104 fill:#e3dcea,stroke:#7a4baa;
+    style v258 fill:#e3dcea,stroke:#7a4baa;
+    style v113 fill:#e3dcea,stroke:#7a4baa;
+    style v121 fill:#e3dcea,stroke:#7a4baa;
+    style v128 fill:#e3dcea,stroke:#7a4baa;
+    style v138 fill:#e3dcea,stroke:#7a4baa;
+    style v147 fill:#e3dcea,stroke:#7a4baa;
+    style v174 fill:#e3dcea,stroke:#7a4baa;
+    style v152 fill:#e3dcea,stroke:#7a4baa;
+    style v159 fill:#e3dcea,stroke:#7a4baa;
+    style v169 fill:#e3dcea,stroke:#7a4baa;
+    style v178 fill:#e3dcea,stroke:#7a4baa;
+    style v205 fill:#e3dcea,stroke:#7a4baa;
+    style v183 fill:#e3dcea,stroke:#7a4baa;
+    style v190 fill:#e3dcea,stroke:#7a4baa;
+    style v200 fill:#e3dcea,stroke:#7a4baa;
+    style v209 fill:#e3dcea,stroke:#7a4baa;
+    style v236 fill:#e3dcea,stroke:#7a4baa;
+    style v214 fill:#e3dcea,stroke:#7a4baa;
+    style v221 fill:#e3dcea,stroke:#7a4baa;
+    style v231 fill:#e3dcea,stroke:#7a4baa;
+    style v243 fill:#e3dcea,stroke:#7a4baa;
+    style v253 fill:#e3dcea,stroke:#7a4baa;
+    style v265 fill:#e3dcea,stroke:#7a4baa;
+    style v272 fill:#e3dcea,stroke:#7a4baa;
+    style v284 fill:#e3dcea,stroke:#7a4baa;
+    style v291 fill:#e3dcea,stroke:#7a4baa;
+    style v295 fill:#e3dcea,stroke:#7a4baa;
+
+```
+

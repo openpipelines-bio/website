@@ -14,7 +14,7 @@ ID: `cellranger_mkfastq`
 Namespace: `demux`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/demux/cellranger_mkfastq/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v2.1.0-rc.2/src/demux/cellranger_mkfastq/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r v2.1.0-rc.2 -latest \
   -main-script target/nextflow/demux/cellranger_mkfastq/main.nf \
   --help
 ```
@@ -43,8 +43,8 @@ nextflow run openpipelines-bio/openpipeline \
 # Arguments
 input: # please fill in - example: "/path/to/bcl"
 sample_sheet: # please fill in - example: "SampleSheet.csv"
-# output: "$id.$key.output.output"
-# reports: "$id.$key.reports.reports"
+# output: "fastqs"
+# reports: "$id.$key.reports"
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
@@ -54,7 +54,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r v2.1.0-rc.2 -latest \
   -profile docker \
   -main-script target/nextflow/demux/cellranger_mkfastq/main.nf \
   -params-file params.yaml

@@ -14,7 +14,7 @@ ID: `bcl_convert`
 Namespace: `demux`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/demux/bcl_convert/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v2.1.0-rc.2/src/demux/bcl_convert/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -33,7 +33,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r v2.1.0-rc.2 -latest \
   -main-script target/nextflow/demux/bcl_convert/main.nf \
   --help
 ```
@@ -46,9 +46,13 @@ nextflow run openpipelines-bio/openpipeline \
 # Arguments
 input: # please fill in - example: "bcl_dir"
 sample_sheet: # please fill in - example: "bcl_dir"
-# output: "$id.$key.output.output"
-# reports: "$id.$key.reports.reports"
+# output: "$id.$key.output"
+# reports: "$id.$key.reports"
 test_mode: false
+strict_mode: false
+# tiles: "foo"
+# exclude_tiles: "foo"
+# no_lane_splitting: true
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
@@ -58,7 +62,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r v2.1.0-rc.2 -latest \
   -profile docker \
   -main-script target/nextflow/demux/bcl_convert/main.nf \
   -params-file params.yaml
@@ -72,13 +76,17 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name             |Description                                                       |Attributes                               |
+|Name                  |Description                                                       |Attributes                               |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--input`        |Input run directory                                               |`file`, required, example: `"bcl_dir"`   |
-|`--sample_sheet` |Pointer to the sample sheet                                       |`file`, required, example: `"bcl_dir"`   |
-|`--output`       |Output directory containig fastq files                            |`file`, required, example: `"fastq_dir"` |
-|`--reports`      |Reports directory                                                 |`file`, example: `"reports_dir"`         |
-|`--test_mode`    |Should bcl-convert be run in test mode (using --first-tile-only)? |`boolean`, default: `FALSE`              |
+|`--input`             |Input run directory                                               |`file`, required, example: `"bcl_dir"`   |
+|`--sample_sheet`      |Pointer to the sample sheet                                       |`file`, required, example: `"bcl_dir"`   |
+|`--output`            |Output directory containig fastq files                            |`file`, required, example: `"fastq_dir"` |
+|`--reports`           |Reports directory                                                 |`file`, example: `"reports_dir"`         |
+|`--test_mode`         |Should bcl-convert be run in test mode (using --first-tile-only)? |`boolean`, default: `FALSE`              |
+|`--strict_mode`       |Abort if any files are missing.                                   |`boolean`, default: `FALSE`              |
+|`--tiles`             |Process only a subset of tiles by a regular expression.           |`string`                                 |
+|`--exclude_tiles`     |Exclude set of tiles by a regular expression                      |`string`                                 |
+|`--no_lane_splitting` |Wheter to avoid splitting FASTQ file by lane.                     |`boolean`                                |
 
 ## Authors
 
@@ -86,4 +94,8 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
   * Toni Verbeiren [{{< fa brands github >}}](https://github.com/tverbeiren) [{{< fa brands linkedin >}}](https://linkedin.com/in/verbeiren) (author, maintainer)
 
   * Marijke Van Moerbeke [{{< fa brands github >}}](https://github.com/mvanmoerbeke) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-3097-5621) [{{< fa brands linkedin >}}](https://linkedin.com/in/marijke-van-moerbeke-84303a34) (author)
+
+  * Weiwei Schultz (contributor)
+
+  * Dorien Roosen [{{< fa brands github >}}](https://github.com/dorien-er) [{{< fa brands linkedin >}}](https://linkedin.com/in/dorien-roosen) (author)
 

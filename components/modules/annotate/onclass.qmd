@@ -1,0 +1,164 @@
+---
+title: "Onclass"
+namespace: "Annotate"
+description: "OnClass is a python package for single-cell cell type annotation."
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `onclass`  
+Namespace: `annotate`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v2.1.0-rc.2/src/annotate/onclass/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+It uses the Cell Ontology to capture the cell type similarity. 
+These similarities enable OnClass to annotate cell types that are never seen in the training data
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r v2.1.0-rc.2 -latest \
+  -main-script target/nextflow/annotate/onclass/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Inputs
+input: # please fill in - example: "input.h5mu"
+modality: "rna"
+# input_layer: "foo"
+# input_var_gene_names: "foo"
+input_reference_gene_overlap: 100
+
+# Ongoloty
+cl_nlp_emb_file: # please fill in - example: "path/to/file"
+cl_ontology_file: # please fill in - example: "path/to/file"
+cl_obo_file: # please fill in - example: "path/to/file"
+
+# Reference
+# reference: "reference.h5mu"
+# reference_layer: "foo"
+reference_obs_target: # please fill in - example: "cell_ontology_class"
+# reference_var_gene_names: "foo"
+# reference_var_input: "foo"
+unknown_celltype: "Unknown"
+
+# Outputs
+# output: "$id.$key.output.h5mu"
+# output_compression: "gzip"
+output_obs_predictions: "onclass_pred"
+output_obs_probability: "onclass_prob"
+
+# Model arguments
+# model: "foo"
+max_iter: 30
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+
+# Arguments
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r v2.1.0-rc.2 -latest \
+  -profile docker \
+  -main-script target/nextflow/annotate/onclass/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Inputs
+
+Input dataset (query) arguments
+
+
+|Name                             |Description                                                                                                                                |Attributes                                |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--input`                        |The input (query) data to be labeled. Should be a .h5mu file.                                                                              |`file`, required, example: `"input.h5mu"` |
+|`--modality`                     |Which modality to process.                                                                                                                 |`string`, default: `"rna"`                |
+|`--input_layer`                  |The layer in the input data to be used for cell type annotation if .X is not to be used.                                                   |`string`                                  |
+|`--input_var_gene_names`         |The name of the adata var column in the input data containing gene names; when no gene_name_layer is provided, the var index will be used. |`string`                                  |
+|`--input_reference_gene_overlap` |The minimum number of genes present in both the reference and query datasets.                                                              |`integer`, default: `100`                 |
+
+
+### Ongoloty
+
+Ontology input files
+
+
+|Name                 |Description                                      |Attributes       |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--cl_nlp_emb_file`  |The .nlp.emb file with the cell type embeddings. |`file`, required |
+|`--cl_ontology_file` |The .ontology file with the cell type ontology.  |`file`, required |
+|`--cl_obo_file`      |The .obo file with the cell type ontology.       |`file`, required |
+
+
+### Reference
+
+Arguments related to the reference dataset.
+
+
+|Name                         |Description                                                                                                                                    |Attributes                                           |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--reference`                |The reference data to train the CellTypist classifiers on. Only required if a pre-trained --model is not provided.                             |`file`, example: `"reference.h5mu"`                  |
+|`--reference_layer`          |The layer in the reference data to be used for cell type annotation if .X is not to be used.                                                   |`string`                                             |
+|`--reference_obs_target`     |The name of the adata obs column in the reference data containing cell type annotations.                                                       |`string`, required, example: `"cell_ontology_class"` |
+|`--reference_var_gene_names` |The name of the adata var column in the reference data containing gene names; when no gene_name_layer is provided, the var index will be used. |`string`                                             |
+|`--reference_var_input`      |.var column containing highly variable genes. By default, do not subset genes.                                                                 |`string`                                             |
+|`--unknown_celltype`         |Label for unknown cell types.                                                                                                                  |`string`, default: `"Unknown"`                       |
+
+
+### Outputs
+
+Output arguments.
+
+
+|Name                       |Description                                                        |Attributes                          |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--output`                 |Output h5mu file.                                                  |`file`, example: `"output.h5mu"`    |
+|`--output_compression`     |                                                                   |`string`, example: `"gzip"`         |
+|`--output_obs_predictions` |In which `.obs` slots to store the predicted information.          |`string`, default: `"onclass_pred"` |
+|`--output_obs_probability` |In which `.obs` slots to store the probability of the predictions. |`string`, default: `"onclass_prob"` |
+
+
+### Model arguments
+
+Model arguments
+
+
+|Name         |Description                                                                                                                                                                                                                                                                                                                              |Attributes               |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--model`    |"Pretrained model path without a file extension. If not provided, the model will be trained  on the reference data and --reference should be provided. The path namespace should contain:   - a .npz or .pkl file   - a .data file   - a .meta file   - a .index file e.g. /path/to/model/pretrained_model_target1 as saved by OnClass." |`string`                 |
+|`--max_iter` |Maximum number of iterations for training the model.                                                                                                                                                                                                                                                                                     |`integer`, default: `30` |
+
+## Authors
+
+
+  * Jakub Majercik [{{< fa brands github >}}](https://github.com/jakubmajercik) [{{< fa brands linkedin >}}](https://linkedin.com/in/jakubmajercik) (author)
+

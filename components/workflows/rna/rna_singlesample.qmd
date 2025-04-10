@@ -14,7 +14,7 @@ ID: `rna_singlesample`
 Namespace: `workflows/rna`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/workflows/rna/rna_singlesample/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v2.1.0-rc.2/src/workflows/rna/rna_singlesample/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r v2.1.0-rc.2 -latest \
   -main-script target/nextflow/workflows/rna/rna_singlesample/main.nf \
   --help
 ```
@@ -54,24 +54,31 @@ input: # please fill in - example: "dataset.h5mu"
 # min_genes_per_cell: 200
 # max_genes_per_cell: 1500000
 # min_cells_per_gene: 3
-# min_fraction_mito: 0
+# min_fraction_mito: 0.0
 # max_fraction_mito: 0.2
+# min_fraction_ribo: 0.0
+# max_fraction_ribo: 0.2
 
-# Mitochondrial gene detection
+# Mitochondrial & Ribosomal Gene Detection
+# var_gene_names: "gene_symbol"
 # var_name_mitochondrial_genes: "foo"
 # obs_name_mitochondrial_fraction: "foo"
-# var_gene_names: "gene_symbol"
 mitochondrial_gene_regex: "^[mM][tT]-"
+# var_name_ribosomal_genes: "foo"
+# obs_name_ribosomal_fraction: "foo"
+ribosomal_gene_regex: "^[Mm]?[Rr][Pp][LlSs]"
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
 # param_list: "my_params.yaml"
+
+# Arguments
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r v2.1.0-rc.2 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/rna/rna_singlesample/main.nf \
   -params-file params.yaml
@@ -110,16 +117,21 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--min_cells_per_gene` |Minimum of non-zero values per gene.                                                         |`integer`, example: `3`       |
 |`--min_fraction_mito`  |Minimum fraction of UMIs that are mitochondrial. Requires --obs_name_mitochondrial_fraction. |`double`, example: `0`        |
 |`--max_fraction_mito`  |Maximum fraction of UMIs that are mitochondrial. Requires --obs_name_mitochondrial_fraction. |`double`, example: `0.2`      |
+|`--min_fraction_ribo`  |Minimum fraction of UMIs that are ribosomal. Requires --obs_name_ribosomal_fraction.         |`double`, example: `0`        |
+|`--max_fraction_ribo`  |Maximum fraction of UMIs that are ribosomal. Requires --obs_name_ribosomal_fraction.         |`double`, example: `0.2`      |
 
 
-### Mitochondrial gene detection
+### Mitochondrial & Ribosomal Gene Detection
 
-|Name                                |Description                                                                                                                                                                                                                |Attributes                         |
+|Name                                |Description                                                                                                                                                                                                                                                                               |Attributes                                  |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--var_name_mitochondrial_genes`    |In which .var slot to store a boolean array corresponding the mitochondrial genes.                                                                                                                                         |`string`                           |
-|`--obs_name_mitochondrial_fraction` |When specified, write the fraction of counts originating from mitochondrial genes  (based on --mitochondrial_gene_regex) to an .obs column with the specified name. Requires --var_name_mitochondrial_genes.               |`string`                           |
-|`--var_gene_names`                  |.var column name to be used to detect mitochondrial genes instead of .var_names (default if not set). Gene names matching with the regex value from --mitochondrial_gene_regex will be identified as a mitochondrial gene. |`string`, example: `"gene_symbol"` |
-|`--mitochondrial_gene_regex`        |Regex string that identifies mitochondrial genes from --var_gene_names. By default will detect human and mouse mitochondrial genes from a gene symbol.                                                                     |`string`, default: `"^[mM][tT]-"`  |
+|`--var_gene_names`                  |.var column name to be used to detect mitochondrial/ribosomal genes instead of .var_names (default if not set). Gene names matching with the regex value from --mitochondrial_gene_regex or --ribosomal_gene_regex will be  identified as mitochondrial or ribosomal genes, respectively. |`string`, example: `"gene_symbol"`          |
+|`--var_name_mitochondrial_genes`    |In which .var slot to store a boolean array corresponding the mitochondrial genes.                                                                                                                                                                                                        |`string`                                    |
+|`--obs_name_mitochondrial_fraction` |When specified, write the fraction of counts originating from mitochondrial genes  (based on --mitochondrial_gene_regex) to an .obs column with the specified name. Requires --var_name_mitochondrial_genes.                                                                              |`string`                                    |
+|`--mitochondrial_gene_regex`        |Regex string that identifies mitochondrial genes from --var_gene_names. By default will detect human and mouse mitochondrial genes from a gene symbol.                                                                                                                                    |`string`, default: `"^[mM][tT]-"`           |
+|`--var_name_ribosomal_genes`        |In which .var slot to store a boolean array corresponding the ribosomal genes.                                                                                                                                                                                                            |`string`                                    |
+|`--obs_name_ribosomal_fraction`     |When specified, write the fraction of counts originating from ribosomal genes  (based on --ribosomal_gene_regex) to an .obs column with the specified name. Requires --var_name_ribosomal_genes.                                                                                          |`string`                                    |
+|`--ribosomal_gene_regex`            |Regex string that identifies ribosomal genes from --var_gene_names. By default will detect human and mouse ribosomal genes from a gene symbol.                                                                                                                                            |`string`, default: `"^[Mm]?[Rr][Pp][LlSs]"` |
 
 ## Authors
 
@@ -134,49 +146,178 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ```{mermaid}
 flowchart TB
-    v97(branch)
-    v113(concat)
-    v102(delimit_fraction)
-    v122(rna_filter_with_counts)
-    v142(rna_do_filter)
-    v162(filter_with_scrublet)
-    v189(Output)
+    v0(Channel.fromList)
+    v2(filter)
+    v11(filter)
+    v23(branch)
+    v50(concat)
+    v35(cross)
+    v45(cross)
+    v54(branch)
+    v81(concat)
+    v66(cross)
+    v76(cross)
+    v82(filter)
+    v112(concat)
+    v97(cross)
+    v107(cross)
+    v119(cross)
+    v129(cross)
+    v138(branch)
+    v165(concat)
+    v143(delimit_fraction)
+    v150(cross)
+    v160(cross)
+    v169(branch)
+    v196(concat)
+    v174(delimit_fraction)
+    v181(cross)
+    v191(cross)
+    v197(filter)
+    v205(rna_filter_with_counts)
+    v212(cross)
+    v222(cross)
+    v228(filter)
+    v236(rna_do_filter)
+    v243(cross)
+    v253(cross)
+    v259(filter)
+    v289(concat)
+    v267(filter_with_scrublet)
+    v274(cross)
+    v284(cross)
+    v296(cross)
+    v303(cross)
+    v315(cross)
+    v322(cross)
+    v326(Output)
     subgraph group_qc [qc]
-        v0(Channel.fromList)
-        v11(filter)
-        v29(grep_annotation_column)
-        v42(mix)
-        v51(calculate_qc_metrics)
-        v71(publish)
+        v28(grep_mitochondrial_genes)
+        v59(grep_ribosomal_genes)
+        v90(calculate_qc_metrics)
     end
-    v97-->v113
-    v97-->v102
-    v0-->v11
-    v11-->v29
-    v29-->v42
-    v11-->v42
-    v42-->v51
-    v51-->v71
-    v71-->v97
-    v102-->v113
-    v113-->v122
-    v122-->v142
-    v142-->v162
-    v162-->v189
+    v23-->v50
+    v54-->v81
+    v81-->v82
+    v138-->v165
+    v169-->v196
+    v196-->v197
+    v0-->v2
+    v2-->v11
+    v23-->v28
+    v28-->v35
+    v23-->v35
+    v23-->v45
+    v45-->v50
+    v54-->v59
+    v59-->v66
+    v54-->v66
+    v54-->v76
+    v76-->v81
+    v82-->v90
+    v90-->v97
+    v82-->v97
+    v82-->v107
+    v107-->v112
+    v112-->v119
+    v11-->v119
+    v11-->v129
+    v138-->v143
+    v143-->v150
+    v138-->v150
+    v138-->v160
+    v160-->v165
+    v169-->v174
+    v174-->v181
+    v169-->v181
+    v169-->v191
+    v191-->v196
+    v197-->v205
+    v205-->v212
+    v197-->v212
+    v197-->v222
+    v228-->v236
+    v236-->v243
+    v228-->v243
+    v228-->v253
+    v259-->v267
+    v267-->v274
+    v259-->v274
+    v259-->v284
+    v284-->v289
+    v289-->v296
+    v2-->v296
+    v296-->v303
+    v2-->v303
+    v2-->v315
+    v315-->v322
+    v2-->v322
+    v322-->v326
+    v11-->v23
+    v28-->v45
+    v50-->v54
+    v59-->v76
+    v90-->v107
+    v112-->v129
+    v129-->v138
+    v143-->v160
+    v165-->v169
+    v174-->v191
+    v222-->v228
+    v205-->v222
+    v253-->v259
+    v236-->v253
+    v267-->v284
+    v289-->v315
     style group_qc fill:#F0F0F0,stroke:#969696;
     style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v2 fill:#e3dcea,stroke:#7a4baa;
     style v11 fill:#e3dcea,stroke:#7a4baa;
-    style v29 fill:#e3dcea,stroke:#7a4baa;
-    style v42 fill:#e3dcea,stroke:#7a4baa;
-    style v51 fill:#e3dcea,stroke:#7a4baa;
-    style v71 fill:#e3dcea,stroke:#7a4baa;
+    style v23 fill:#e3dcea,stroke:#7a4baa;
+    style v50 fill:#e3dcea,stroke:#7a4baa;
+    style v28 fill:#e3dcea,stroke:#7a4baa;
+    style v35 fill:#e3dcea,stroke:#7a4baa;
+    style v45 fill:#e3dcea,stroke:#7a4baa;
+    style v54 fill:#e3dcea,stroke:#7a4baa;
+    style v81 fill:#e3dcea,stroke:#7a4baa;
+    style v59 fill:#e3dcea,stroke:#7a4baa;
+    style v66 fill:#e3dcea,stroke:#7a4baa;
+    style v76 fill:#e3dcea,stroke:#7a4baa;
+    style v82 fill:#e3dcea,stroke:#7a4baa;
+    style v112 fill:#e3dcea,stroke:#7a4baa;
+    style v90 fill:#e3dcea,stroke:#7a4baa;
     style v97 fill:#e3dcea,stroke:#7a4baa;
-    style v113 fill:#e3dcea,stroke:#7a4baa;
-    style v102 fill:#e3dcea,stroke:#7a4baa;
-    style v122 fill:#e3dcea,stroke:#7a4baa;
-    style v142 fill:#e3dcea,stroke:#7a4baa;
-    style v162 fill:#e3dcea,stroke:#7a4baa;
-    style v189 fill:#e3dcea,stroke:#7a4baa;
+    style v107 fill:#e3dcea,stroke:#7a4baa;
+    style v119 fill:#e3dcea,stroke:#7a4baa;
+    style v129 fill:#e3dcea,stroke:#7a4baa;
+    style v138 fill:#e3dcea,stroke:#7a4baa;
+    style v165 fill:#e3dcea,stroke:#7a4baa;
+    style v143 fill:#e3dcea,stroke:#7a4baa;
+    style v150 fill:#e3dcea,stroke:#7a4baa;
+    style v160 fill:#e3dcea,stroke:#7a4baa;
+    style v169 fill:#e3dcea,stroke:#7a4baa;
+    style v196 fill:#e3dcea,stroke:#7a4baa;
+    style v174 fill:#e3dcea,stroke:#7a4baa;
+    style v181 fill:#e3dcea,stroke:#7a4baa;
+    style v191 fill:#e3dcea,stroke:#7a4baa;
+    style v197 fill:#e3dcea,stroke:#7a4baa;
+    style v205 fill:#e3dcea,stroke:#7a4baa;
+    style v212 fill:#e3dcea,stroke:#7a4baa;
+    style v222 fill:#e3dcea,stroke:#7a4baa;
+    style v228 fill:#e3dcea,stroke:#7a4baa;
+    style v236 fill:#e3dcea,stroke:#7a4baa;
+    style v243 fill:#e3dcea,stroke:#7a4baa;
+    style v253 fill:#e3dcea,stroke:#7a4baa;
+    style v259 fill:#e3dcea,stroke:#7a4baa;
+    style v289 fill:#e3dcea,stroke:#7a4baa;
+    style v267 fill:#e3dcea,stroke:#7a4baa;
+    style v274 fill:#e3dcea,stroke:#7a4baa;
+    style v284 fill:#e3dcea,stroke:#7a4baa;
+    style v296 fill:#e3dcea,stroke:#7a4baa;
+    style v303 fill:#e3dcea,stroke:#7a4baa;
+    style v315 fill:#e3dcea,stroke:#7a4baa;
+    style v322 fill:#e3dcea,stroke:#7a4baa;
+    style v326 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 

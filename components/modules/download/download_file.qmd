@@ -14,7 +14,7 @@ ID: `download_file`
 Namespace: `download`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/download/download_file/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v2.1.0-rc.2/src/download/download_file/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r v2.1.0-rc.2 -latest \
   -main-script target/nextflow/download/download_file/main.nf \
   --help
 ```
@@ -53,7 +53,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r v2.1.0-rc.2 -latest \
   -profile docker \
   -main-script target/nextflow/download/download_file/main.nf \
   -params-file params.yaml
