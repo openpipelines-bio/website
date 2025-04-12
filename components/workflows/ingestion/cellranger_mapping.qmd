@@ -14,7 +14,7 @@ ID: `cellranger_mapping`
 Namespace: `workflows/ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/workflows/ingestion/cellranger_mapping/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/workflows/ingestion/cellranger_mapping/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 2.1.0 -latest \
   -main-script target/nextflow/workflows/ingestion/cellranger_mapping/main.nf \
   --help
 ```
@@ -46,7 +46,7 @@ input: # please fill in - example: ["sample_S1_L001_R1_001.fastq.gz", "sample_S1
 reference: # please fill in - example: "reference.tar.gz"
 
 # Outputs
-# output_raw: "$id.$key.output_raw.output_raw"
+# output_raw: "$id.$key.output_raw"
 # output_h5mu: "$id.$key.output_h5mu.h5mu"
 uns_metrics: "metrics_summary"
 output_type: "raw"
@@ -61,12 +61,14 @@ include_introns: true
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
 # param_list: "my_params.yaml"
+
+# Arguments
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 2.1.0 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/ingestion/cellranger_mapping/main.nf \
   -params-file params.yaml
@@ -121,19 +123,74 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ```{mermaid}
 flowchart TB
     v0(Channel.fromList)
+    v2(filter)
+    v9(filter)
     v17(cellranger_count)
-    v37(cellranger_count_split)
-    v57(from_10xh5_to_h5mu)
-    v84(Output)
-    v0-->v17
-    v17-->v37
-    v37-->v57
-    v57-->v84
+    v24(cross)
+    v34(cross)
+    v40(filter)
+    v48(cellranger_count_split)
+    v55(cross)
+    v65(cross)
+    v71(filter)
+    v101(concat)
+    v79(from_10xh5_to_h5mu)
+    v86(cross)
+    v96(cross)
+    v108(cross)
+    v115(cross)
+    v127(cross)
+    v134(cross)
+    v138(Output)
+    v0-->v2
+    v2-->v9
+    v9-->v17
+    v17-->v24
+    v9-->v24
+    v9-->v34
+    v40-->v48
+    v48-->v55
+    v40-->v55
+    v40-->v65
+    v71-->v79
+    v79-->v86
+    v71-->v86
+    v71-->v96
+    v96-->v101
+    v101-->v108
+    v2-->v108
+    v108-->v115
+    v2-->v115
+    v2-->v127
+    v127-->v134
+    v2-->v134
+    v134-->v138
+    v34-->v40
+    v17-->v34
+    v65-->v71
+    v48-->v65
+    v79-->v96
+    v101-->v127
     style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v2 fill:#e3dcea,stroke:#7a4baa;
+    style v9 fill:#e3dcea,stroke:#7a4baa;
     style v17 fill:#e3dcea,stroke:#7a4baa;
-    style v37 fill:#e3dcea,stroke:#7a4baa;
-    style v57 fill:#e3dcea,stroke:#7a4baa;
-    style v84 fill:#e3dcea,stroke:#7a4baa;
+    style v24 fill:#e3dcea,stroke:#7a4baa;
+    style v34 fill:#e3dcea,stroke:#7a4baa;
+    style v40 fill:#e3dcea,stroke:#7a4baa;
+    style v48 fill:#e3dcea,stroke:#7a4baa;
+    style v55 fill:#e3dcea,stroke:#7a4baa;
+    style v65 fill:#e3dcea,stroke:#7a4baa;
+    style v71 fill:#e3dcea,stroke:#7a4baa;
+    style v101 fill:#e3dcea,stroke:#7a4baa;
+    style v79 fill:#e3dcea,stroke:#7a4baa;
+    style v86 fill:#e3dcea,stroke:#7a4baa;
+    style v96 fill:#e3dcea,stroke:#7a4baa;
+    style v108 fill:#e3dcea,stroke:#7a4baa;
+    style v115 fill:#e3dcea,stroke:#7a4baa;
+    style v127 fill:#e3dcea,stroke:#7a4baa;
+    style v134 fill:#e3dcea,stroke:#7a4baa;
+    style v138 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 

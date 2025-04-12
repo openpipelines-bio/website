@@ -14,7 +14,7 @@ ID: `scarches`
 Namespace: `integrate`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/integrate/scarches/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/integrate/scarches/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -main-script target/nextflow/integrate/scarches/main.nf \
   --help
 ```
@@ -42,15 +42,23 @@ nextflow run openpipelines-bio/openpipeline \
 ```yaml
 # Inputs
 input: # please fill in - example: "path/to/file"
+# layer: "foo"
 modality: "rna"
+# input_obs_batch: "foo"
+# input_obs_label: "foo"
+# input_var_gene_names: "foo"
+# input_obs_size_factor: "foo"
+
+# Reference
 reference: # please fill in - example: "path/to/file"
-dataset_name: "test_dataset"
 
 # Outputs
-# output: "$id.$key.output.output"
+# output: "$id.$key.output"
 # output_compression: "gzip"
-# model_output: "$id.$key.model_output.model_output"
+# model_output: "model"
 obsm_output: "X_integrated_scanvi"
+obs_output_predictions: "scanvi_pred"
+obs_output_probabilities: "scanvi_proba"
 
 # Early stopping arguments
 # early_stopping: true
@@ -59,20 +67,22 @@ early_stopping_patience: 45
 early_stopping_min_delta: 0.0
 
 # Learning parameters
-max_epochs: # please fill in - example: 123
+# max_epochs: 123
 reduce_lr_on_plateau: true
 lr_factor: 0.6
-lr_patience: 30
+lr_patience: 30.0
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
 # param_list: "my_params.yaml"
+
+# Arguments
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -profile docker \
   -main-script target/nextflow/integrate/scarches/main.nf \
   -params-file params.yaml
@@ -86,22 +96,37 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Inputs
 
-|Name             |Description                                                                                                                             |Attributes                          |
+Arguments related to the input (query) dataset
+
+
+|Name                      |Description                                                                                                                                                                                                        |Attributes                 |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--input`        |Input h5mu file to use as a query                                                                                                       |`file`, required                    |
-|`--modality`     |                                                                                                                                        |`string`, default: `"rna"`          |
-|`--reference`    |Path to the directory with reference model or a web link. For HLCA use https://zenodo.org/record/6337966/files/HLCA_reference_model.zip |`file`, required                    |
-|`--dataset_name` |Name of query dataset to use as a batch name. If not set, name of the input file is used                                                |`string`, default: `"test_dataset"` |
+|`--input`                 |Input h5mu file to use as a query                                                                                                                                                                                  |`file`, required           |
+|`--layer`                 |Layer to be used for scArches, if .X is not to be used.                                                                                                                                                            |`string`                   |
+|`--modality`              |                                                                                                                                                                                                                   |`string`, default: `"rna"` |
+|`--input_obs_batch`       |Name of the .obs column with batch information.                                                                                                                                                                    |`string`                   |
+|`--input_obs_label`       |Name of the .obs column with celltype information.                                                                                                                                                                 |`string`                   |
+|`--input_var_gene_names`  |Name of the .var column with gene names, if the var .index is not to be used.                                                                                                                                      |`string`                   |
+|`--input_obs_size_factor` |Key in adata.obs for size factor information. Instead of using library size as a size factor, the provided size factor column will be used as offset in the mean of the likelihood. Assumed to be on linear scale. |`string`                   |
+
+
+### Reference
+
+|Name          |Description                                               |Attributes       |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--reference` |Path to the directory with reference model or a web link. |`file`, required |
 
 
 ### Outputs
 
-|Name                   |Description                                                      |Attributes                                 |
+|Name                         |Description                                                                                                           |Attributes                                 |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--output`             |Output h5mu file.                                                |`file`, required                           |
-|`--output_compression` |The compression format to be used on the output h5mu object.     |`string`, example: `"gzip"`                |
-|`--model_output`       |Output directory for model                                       |`file`, default: `"model"`                 |
-|`--obsm_output`        |In which .obsm slot to store the resulting integrated embedding. |`string`, default: `"X_integrated_scanvi"` |
+|`--output`                   |Output h5mu file.                                                                                                     |`file`, required                           |
+|`--output_compression`       |The compression format to be used on the output h5mu object.                                                          |`string`, example: `"gzip"`                |
+|`--model_output`             |Output directory for model                                                                                            |`file`, default: `"model"`                 |
+|`--obsm_output`              |In which .obsm slot to store the resulting integrated embedding.                                                      |`string`, default: `"X_integrated_scanvi"` |
+|`--obs_output_predictions`   |In which .obs slot to store the resulting label predictions. Only relevant if a scANVI model was provided.            |`string`, default: `"scanvi_pred"`         |
+|`--obs_output_probabilities` |In which .obs slot to store the probabilities of the label predictions. Only relevant if a scANVI model was provided. |`string`, default: `"scanvi_proba"`        |
 
 
 ### Early stopping arguments
@@ -118,7 +143,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 |Name                     |Description                                                                                                      |Attributes                 |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--max_epochs`           |Number of passes through the dataset, defaults to (20000 / number of cells) * 400 or 400; whichever is smallest. |`integer`, required        |
+|`--max_epochs`           |Number of passes through the dataset, defaults to (20000 / number of cells) * 400 or 400; whichever is smallest. |`integer`                  |
 |`--reduce_lr_on_plateau` |Whether to monitor validation loss and reduce learning rate when validation set `lr_scheduler_metric` plateaus.  |`boolean`, default: `TRUE` |
 |`--lr_factor`            |Factor to reduce learning rate.                                                                                  |`double`, default: `0.6`   |
 |`--lr_patience`          |Number of epochs with no improvement after which learning rate will be reduced.                                  |`double`, default: `30`    |
@@ -126,5 +151,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ## Authors
 
 
-  * Vladimir Shitov [{{< fa brands github >}}](https://github.com/vladimirshitov) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-1960-8812) [{{< fa brands linkedin >}}](https://linkedin.com/in/vladimir-shitov-9a659513b)
+  * Vladimir Shitov [{{< fa brands github >}}](https://github.com/vladimirshitov) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-1960-8812) [{{< fa brands linkedin >}}](https://linkedin.com/in/vladimir-shitov-9a659513b) (author)
+
+  * Dorien Roosen [{{< fa brands github >}}](https://github.com/dorien-er) [{{< fa brands linkedin >}}](https://linkedin.com/in/dorien-roosen) (maintainer)
 

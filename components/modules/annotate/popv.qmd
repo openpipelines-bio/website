@@ -14,7 +14,7 @@ ID: `popv`
 Namespace: `annotate`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/annotate/popv/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/annotate/popv/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -main-script target/nextflow/annotate/popv/main.nf \
   --help
 ```
@@ -49,18 +49,18 @@ modality: "rna"
 # input_obs_label: "foo"
 unknown_celltype_label: "unknown"
 
+# Reference
+reference: # please fill in - example: "TS_Bladder_filtered.h5ad"
+# reference_layer: "foo"
+reference_obs_label: "cell_ontology_class"
+reference_obs_batch: "donor_assay"
+
 # Outputs
 # output: "$id.$key.output.h5mu"
 # output_compression: "gzip"
 
 # Arguments
 methods: # please fill in - example: ["knn_on_scvi", "scanvi"]
-
-# Reference
-reference: # please fill in - example: "TS_Bladder_filtered.h5ad"
-# reference_layer: "foo"
-reference_obs_label: "cell_ontology_class"
-reference_obs_batch: "donor_assay"
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
@@ -70,7 +70,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -profile docker \
   -main-script target/nextflow/annotate/popv/main.nf \
   -params-file params.yaml

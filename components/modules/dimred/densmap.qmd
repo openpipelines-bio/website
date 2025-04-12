@@ -1,0 +1,136 @@
+---
+title: "Densmap"
+namespace: "Dimred"
+description: "A modification of UMAP that adds an extra cost term in order to preserve information  about the relative local density of the data."
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `densmap`  
+Namespace: `dimred`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/dimred/densmap/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+It is performed on the same inputs as UMAP
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 2.1.0 -latest \
+  -main-script target/nextflow/dimred/densmap/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Inputs
+input: # please fill in - example: "input.h5mu"
+modality: "rna"
+uns_neighbors: "neighbors"
+obsm_pca: # please fill in - example: "foo"
+
+# Outputs
+# output: "$id.$key.output.h5mu"
+# output_compression: "gzip"
+obsm_output: "X_densmap"
+
+# Arguments UMAP
+min_dist: 0.5
+spread: 1.0
+num_components: 2
+max_iter: 0
+alpha: 1.0
+gamma: 1.0
+negative_sample_rate: 5
+init_pos: "spectral"
+
+# Arguments densMAP
+lambda: 2.0
+fraction: 0.3
+var_shift: 0.1
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+
+# Arguments
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 2.1.0 -latest \
+  -profile docker \
+  -main-script target/nextflow/dimred/densmap/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Inputs
+
+|Name              |Description                                                            |Attributes                                |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--input`         |Input h5mu file                                                        |`file`, required, example: `"input.h5mu"` |
+|`--modality`      |                                                                       |`string`, default: `"rna"`                |
+|`--uns_neighbors` |The `.uns` neighbors slot as output by the `find_neighbors` component. |`string`, default: `"neighbors"`          |
+|`--obsm_pca`      |The slot in `.obsm` where the PCA results are stored.                  |`string`, required                        |
+
+
+### Outputs
+
+|Name                   |Description                                                  |Attributes                                 |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--output`             |Output h5mu file.                                            |`file`, required, example: `"output.h5mu"` |
+|`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`                |
+|`--obsm_output`        |The .obsm key to use for storing the densMAP results..       |`string`, default: `"X_densmap"`           |
+
+
+### Arguments UMAP
+
+|Name                     |Description                                                                                                                                                                                                                                                                                                                                                                                   |Attributes                      |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--min_dist`             |The effective minimum distance between embedded points. Smaller values will result  in a more clustered/clumped embedding where nearby points on the manifold are drawn  closer together, while larger values will result on a more even dispersal of points.  The value should be set relative to the spread value, which determines the scale at  which embedded points will be spread out. |`double`, default: `0.5`        |
+|`--spread`               |The effective scale of embedded points. In combination with `min_dist` this  determines how clustered/clumped the embedded points are.                                                                                                                                                                                                                                                        |`double`, default: `1`          |
+|`--num_components`       |The number of dimensions of the embedding.                                                                                                                                                                                                                                                                                                                                                    |`integer`, default: `2`         |
+|`--max_iter`             |The number of iterations (epochs) of the optimization. Called `n_epochs`  in the original UMAP. Default is set to 500 if  neighbors['connectivities'].shape[0] <= 10000, else 200.                                                                                                                                                                                                            |`integer`, default: `0`         |
+|`--alpha`                |The initial learning rate for the embedding optimization.                                                                                                                                                                                                                                                                                                                                     |`double`, default: `1`          |
+|`--gamma`                |Weighting applied to negative samples in low dimensional embedding optimization.  Values higher than one will result in greater weight being given to negative samples.                                                                                                                                                                                                                       |`double`, default: `1`          |
+|`--negative_sample_rate` |The number of negative samples to select per positive sample in the optimization process. Increasing this value will result in greater repulsive force being applied, greater optimization cost, but slightly more accuracy.                                                                                                                                                                  |`integer`, default: `5`         |
+|`--init_pos`             |How to initialize the low dimensional embedding. Called `init` in the original UMAP. Options are:    * Any key from `.obsm` * `'paga'`: positions from `paga()` * `'spectral'`: use a spectral embedding of the graph * `'random'`: assign initial embedding positions at random.                                                                                                             |`string`, default: `"spectral"` |
+
+
+### Arguments densMAP
+
+|Name          |Description                                                                                                                                                                                                                                                                             |Attributes               |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--lambda`    |Controls the regularization weight of the density correlation term in densMAP.  Higher values prioritize density preservation over the UMAP objective, and vice versa  for values closer to zero. Setting this parameter to zero is equivalent to running  the original UMAP algorithm. |`double`, default: `2`   |
+|`--fraction`  |Controls the fraction of epochs (between 0 and 1) where the density-augmented objective  is used in densMAP. The first (1 - dens_frac) fraction of epochs optimize the original  UMAP objective before introducing the density correlation term.                                        |`double`, default: `0.3` |
+|`--var_shift` |A small constant added to the variance of local radii in the embedding when calculating  the density correlation objective to prevent numerical instability from dividing by a  small number.                                                                                           |`double`, default: `0.1` |
+
+## Authors
+
+
+  * Jakub Majercik [{{< fa brands github >}}](https://github.com/jakubmajercik) [{{< fa brands linkedin >}}](https://linkedin.com/in/jakubmajercik) (maintainer)
+

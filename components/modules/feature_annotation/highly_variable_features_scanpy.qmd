@@ -14,7 +14,7 @@ ID: `highly_variable_features_scanpy`
 Namespace: `feature_annotation`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/feature_annotation/highly_variable_features_scanpy/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/feature_annotation/highly_variable_features_scanpy/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -37,7 +37,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -main-script target/nextflow/feature_annotation/highly_variable_features_scanpy/main.nf \
   --help
 ```
@@ -51,6 +51,7 @@ nextflow run openpipelines-bio/openpipeline \
 input: # please fill in - example: "input.h5mu"
 modality: "rna"
 # layer: "foo"
+# var_input: "foo"
 # output: "$id.$key.output.h5mu"
 # output_compression: "gzip"
 var_name_filter: "filter_with_hvg"
@@ -58,7 +59,7 @@ varm_name: "hvg"
 flavor: "seurat"
 # n_top_features: 123
 min_mean: 0.0125
-max_mean: 3
+max_mean: 3.0
 min_disp: 0.5
 # max_disp: 123.0
 span: 0.3
@@ -73,7 +74,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -profile docker \
   -main-script target/nextflow/feature_annotation/highly_variable_features_scanpy/main.nf \
   -params-file params.yaml
@@ -92,6 +93,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--input`              |Input h5mu file                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |`file`, required, example: `"input.h5mu"` |
 |`--modality`           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |`string`, default: `"rna"`                |
 |`--layer`              |use adata.layers[layer] for expression values instead of adata.X.                                                                                                                                                                                                                                                                                                                                                                                                                                    |`string`                                  |
+|`--var_input`          |If specified, use boolean array in adata.var[var_input] to calculate hvg on subset of vars.                                                                                                                                                                                                                                                                                                                                                                                                          |`string`                                  |
 |`--output`             |Output h5mu file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |`file`, example: `"output.h5mu"`          |
 |`--output_compression` |The compression format to be used on the output h5mu object.                                                                                                                                                                                                                                                                                                                                                                                                                                         |`string`, example: `"gzip"`               |
 |`--var_name_filter`    |In which .var slot to store a boolean array corresponding to which observations should be filtered out.                                                                                                                                                                                                                                                                                                                                                                                              |`string`, default: `"filter_with_hvg"`    |

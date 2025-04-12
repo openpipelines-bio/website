@@ -14,7 +14,7 @@ ID: `scvelo`
 Namespace: `velocity`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/velocity/scvelo/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/velocity/scvelo/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -main-script target/nextflow/velocity/scvelo/main.nf \
   --help
 ```
@@ -42,9 +42,15 @@ nextflow run openpipelines-bio/openpipeline \
 ```yaml
 # Inputs
 input: # please fill in - example: "path/to/file"
+# counts_layer: "foo"
+modality: # please fill in - example: "foo"
+layer_spliced: "spliced"
+layer_unspliced: "unspliced"
+layer_ambiguous: "ambiguous"
 
 # Outputs
-# output: "$id.$key.output.output"
+# output: "$id.$key.output"
+# output_h5mu: "$id.$key.output_h5mu"
 # output_compression: "gzip"
 
 # Filtering and normalization
@@ -64,12 +70,14 @@ n_neighbors: 30
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
 # param_list: "my_params.yaml"
+
+# Arguments
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -profile docker \
   -main-script target/nextflow/velocity/scvelo/main.nf \
   -params-file params.yaml
@@ -83,9 +91,14 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Inputs
 
-|Name      |Description         |Attributes       |
+|Name                |Description                                            |Attributes                       |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--input` |Velocyto loom file. |`file`, required |
+|`--input`           |Input MuData file                                      |`file`, required                 |
+|`--counts_layer`    |Name of the counts layer, if not specified, X is used. |`string`                         |
+|`--modality`        |Input modality                                         |`string`, required               |
+|`--layer_spliced`   |                                                       |`string`, default: `"spliced"`   |
+|`--layer_unspliced` |                                                       |`string`, default: `"unspliced"` |
+|`--layer_ambiguous` |                                                       |`string`, default: `"ambiguous"` |
 
 
 ### Outputs
@@ -93,6 +106,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |Name                   |Description                                                  |Attributes                  |
 |:----------|:--------------------------------------------------|:--------------------|
 |`--output`             |Output directory. If it does not exist, will be created.     |`file`, required            |
+|`--output_h5mu`        |Output mudata file.                                          |`file`, required            |
 |`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"` |
 
 

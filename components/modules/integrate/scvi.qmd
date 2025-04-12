@@ -14,7 +14,7 @@ ID: `scvi`
 Namespace: `integrate`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/integrate/scvi/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/integrate/scvi/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -main-script target/nextflow/integrate/scvi/main.nf \
   --help
 ```
@@ -45,6 +45,7 @@ input: # please fill in - example: "path/to/file"
 modality: "rna"
 # input_layer: "foo"
 obs_batch: "sample_id"
+# var_gene_names: "foo"
 # var_input: "foo"
 # obs_labels: "foo"
 # obs_size_factor: "foo"
@@ -52,8 +53,8 @@ obs_batch: "sample_id"
 # obs_continuous_covariate: ["foo"]
 
 # Outputs
-# output: "$id.$key.output.output"
-# output_model: "$id.$key.output_model.output_model"
+# output: "$id.$key.output"
+# output_model: "$id.$key.output_model"
 # output_compression: "gzip"
 obsm_output: "X_scvi_integrated"
 
@@ -82,7 +83,7 @@ early_stopping_min_delta: 0.0
 # max_epochs: 123
 reduce_lr_on_plateau: true
 lr_factor: 0.6
-lr_patience: 30
+lr_patience: 30.0
 
 # Data validition
 n_obs_min_count: 0
@@ -91,12 +92,14 @@ n_var_min_count: 0
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
 # param_list: "my_params.yaml"
+
+# Arguments
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -profile docker \
   -main-script target/nextflow/integrate/scvi/main.nf \
   -params-file params.yaml
@@ -116,6 +119,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--modality`                  |                                                                                                                                                                                                                                                                                                                                                |`string`, default: `"rna"`            |
 |`--input_layer`               |Input layer to use. If None, X is used                                                                                                                                                                                                                                                                                                          |`string`                              |
 |`--obs_batch`                 |Column name discriminating between your batches.                                                                                                                                                                                                                                                                                                |`string`, default: `"sample_id"`      |
+|`--var_gene_names`            |.var column containing gene names. By default, use the index.                                                                                                                                                                                                                                                                                   |`string`                              |
 |`--var_input`                 |.var column containing highly variable genes. By default, do not subset genes.                                                                                                                                                                                                                                                                  |`string`                              |
 |`--obs_labels`                |Key in adata.obs for label information. Categories will automatically be  converted into integer categories and saved to adata.obs['_scvi_labels']. If None, assigns the same label to all the data.                                                                                                                                            |`string`                              |
 |`--obs_size_factor`           |Key in adata.obs for size factor information. Instead of using library size as a size factor, the provided size factor column will be used as offset in the mean of the likelihood. Assumed to be on linear scale.                                                                                                                              |`string`                              |

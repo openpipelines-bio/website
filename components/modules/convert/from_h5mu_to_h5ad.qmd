@@ -14,7 +14,7 @@ ID: `from_h5mu_to_h5ad`
 Namespace: `convert`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/convert/from_h5mu_to_h5ad/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/convert/from_h5mu_to_h5ad/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -main-script target/nextflow/convert/from_h5mu_to_h5ad/main.nf \
   --help
 ```
@@ -43,7 +43,7 @@ nextflow run openpipelines-bio/openpipeline \
 # Arguments
 input: # please fill in - example: "input.h5mu"
 modality: "rna"
-# output: "$id.$key.output.h5ad"
+# output: "output.h5ad"
 output_compression: "gzip"
 
 # Nextflow input-output arguments
@@ -54,7 +54,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -profile docker \
   -main-script target/nextflow/convert/from_h5mu_to_h5ad/main.nf \
   -params-file params.yaml

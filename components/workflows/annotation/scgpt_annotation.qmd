@@ -1,0 +1,295 @@
+---
+title: "scGPT Annotation"
+namespace: "Workflows/annotation"
+description: "Cell type annotation workflow using scGPT."
+type: "workflow"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `scgpt_annotation`  
+Namespace: `workflows/annotation`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/workflows/annotation/scgpt_annotation/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+The workflow takes a pre-processed h5mu file as query input, and performs
+  - subsetting for HVG
+  - cross-checking of genes with the model vocabulary
+  - binning of gene counts
+  - padding and tokenizing of genes
+  - transformer-based cell type prediction
+Note that cell-type prediction using scGPT is only possible using a fine-tuned scGPT model
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 2.1.0 -latest \
+  -main-script target/nextflow/workflows/annotation/scgpt_annotation/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Query input
+id: # please fill in - example: "foo"
+input: # please fill in - example: "input.h5mu"
+modality: "rna"
+# input_layer: "foo"
+# input_var_gene_names: "foo"
+input_obs_batch_label: # please fill in - example: "foo"
+
+# Model input
+model: # please fill in - example: "best_model.pt"
+model_config: # please fill in - example: "args.json"
+model_vocab: # please fill in - example: "vocab.json"
+finetuned_checkpoints_key: "model_state_dict"
+label_mapper_key: "id_to_class"
+
+# Outputs
+# output: "$id.$key.output.h5mu"
+# output_compression: "gzip"
+output_obs_predictions: "scgpt_pred"
+output_obs_probability: "scgpt_probability"
+
+# Padding arguments
+pad_token: "<pad>"
+pad_value: -2
+
+# HVG subset arguments
+n_hvg: 1200
+hvg_flavor: "cell_ranger"
+
+# Tokenization arguments
+# max_seq_len: 123
+
+# Embedding arguments
+dsbn: true
+batch_size: 64
+
+# Binning arguments
+n_input_bins: 51
+# seed: 123
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+
+# Arguments
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 2.1.0 -latest \
+  -profile docker \
+  -main-script target/nextflow/workflows/annotation/scgpt_annotation/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Query input
+
+|Name                      |Description                                                                                              |Attributes                                |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--id`                    |ID of the sample.                                                                                        |`string`, required, example: `"foo"`      |
+|`--input`                 |Path to the input file.                                                                                  |`file`, required, example: `"input.h5mu"` |
+|`--modality`              |                                                                                                         |`string`, default: `"rna"`                |
+|`--input_layer`           |The layer of the input dataset to process if .X is not to be used. Should contain log normalized counts. |`string`                                  |
+|`--input_var_gene_names`  |The .var field in the input (query) containing gene names; if not provided, the var index will be used.  |`string`                                  |
+|`--input_obs_batch_label` |The .obs field in the input (query) dataset containing the batch labels.                                 |`string`, required                        |
+
+
+### Model input
+
+|Name                          |Description                                                                                                                                                        |Attributes                                   |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--model`                     |The scGPT model file.  Must be a fine-tuned model that contains keys for checkpoints (--finetuned_checkpoints_key) and cell type label mapper(--label_mapper_key). |`file`, required, example: `"best_model.pt"` |
+|`--model_config`              |The scGPT model configuration file.                                                                                                                                |`file`, required, example: `"args.json"`     |
+|`--model_vocab`               |The scGPT model vocabulary file.                                                                                                                                   |`file`, required, example: `"vocab.json"`    |
+|`--finetuned_checkpoints_key` |Key in the model file containing the pre-trained checkpoints.                                                                                                      |`string`, default: `"model_state_dict"`      |
+|`--label_mapper_key`          |Key in the model file containing the cell type class to label mapper dictionary.                                                                                   |`string`, default: `"id_to_class"`           |
+
+
+### Outputs
+
+|Name                       |Description                                                              |Attributes                                 |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--output`                 |Output file path                                                         |`file`, required, example: `"output.h5mu"` |
+|`--output_compression`     |The compression algorithm to use for the output h5mu file.               |`string`, example: `"gzip"`                |
+|`--output_obs_predictions` |The name of the adata.obs column to write predicted cell type labels to. |`string`, default: `"scgpt_pred"`          |
+|`--output_obs_probability` |The name of the adata.obs column to write predicted cell type labels to. |`string`, default: `"scgpt_probability"`   |
+
+
+### Padding arguments
+
+|Name          |Description                     |Attributes                   |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--pad_token` |Token used for padding.         |`string`, default: `"<pad>"` |
+|`--pad_value` |The value of the padding token. |`integer`, default: `-2`     |
+
+
+### HVG subset arguments
+
+|Name           |Description                                                                                                                                                                      |Attributes                         |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--n_hvg`      |Number of highly variable genes to subset for.                                                                                                                                   |`integer`, default: `1200`         |
+|`--hvg_flavor` |Method to be used for identifying highly variable genes.  Note that the default for this workflow (`cell_ranger`) is not the default method for scanpy hvg detection (`seurat`). |`string`, default: `"cell_ranger"` |
+
+
+### Tokenization arguments
+
+|Name            |Description                                        |Attributes |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--max_seq_len` |The maximum sequence length of the tokenized data. |`integer`  |
+
+
+### Embedding arguments
+
+|Name           |Description                                        |Attributes                 |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--dsbn`       |Apply domain-specific batch normalization          |`boolean`, default: `TRUE` |
+|`--batch_size` |The batch size to be used for embedding inference. |`integer`, default: `64`   |
+
+
+### Binning arguments
+
+|Name             |Description                                                                                      |Attributes               |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--n_input_bins` |The number of bins to discretize the data into; When no value is provided, data won't be binned. |`integer`, default: `51` |
+|`--seed`         |Seed for random number generation used for binning. If not set, no seed is used.                 |`integer`                |
+
+## Authors
+
+
+  * Dorien Roosen [{{< fa brands github >}}](https://github.com/dorien-er) [{{< fa brands linkedin >}}](https://linkedin.com/in/dorien-roosen) (author, maintainer)
+
+  * Elizabeth Mlynarski (contributor)
+
+  * Weiwei Schultz (contributor)
+
+## Visualisation
+
+```{mermaid}
+flowchart TB
+    v0(Channel.fromList)
+    v2(filter)
+    v10(filter)
+    v18(highly_variable_features_scanpy)
+    v25(cross)
+    v35(cross)
+    v41(filter)
+    v49(cross_check_genes)
+    v56(cross)
+    v66(cross)
+    v72(filter)
+    v80(binning)
+    v87(cross)
+    v97(cross)
+    v103(filter)
+    v111(pad_tokenize)
+    v118(cross)
+    v128(cross)
+    v134(filter)
+    v164(concat)
+    v142(scgpt_celltype_annotation)
+    v149(cross)
+    v159(cross)
+    v170(cross)
+    v177(cross)
+    v189(cross)
+    v196(cross)
+    v200(Output)
+    v0-->v2
+    v2-->v10
+    v10-->v18
+    v18-->v25
+    v10-->v25
+    v10-->v35
+    v41-->v49
+    v49-->v56
+    v41-->v56
+    v41-->v66
+    v72-->v80
+    v80-->v87
+    v72-->v87
+    v72-->v97
+    v103-->v111
+    v111-->v118
+    v103-->v118
+    v103-->v128
+    v134-->v142
+    v142-->v149
+    v134-->v149
+    v134-->v159
+    v159-->v164
+    v164-->v170
+    v2-->v170
+    v170-->v177
+    v2-->v177
+    v2-->v189
+    v189-->v196
+    v2-->v196
+    v196-->v200
+    v35-->v41
+    v18-->v35
+    v66-->v72
+    v49-->v66
+    v97-->v103
+    v80-->v97
+    v128-->v134
+    v111-->v128
+    v142-->v159
+    v164-->v189
+    style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v2 fill:#e3dcea,stroke:#7a4baa;
+    style v10 fill:#e3dcea,stroke:#7a4baa;
+    style v18 fill:#e3dcea,stroke:#7a4baa;
+    style v25 fill:#e3dcea,stroke:#7a4baa;
+    style v35 fill:#e3dcea,stroke:#7a4baa;
+    style v41 fill:#e3dcea,stroke:#7a4baa;
+    style v49 fill:#e3dcea,stroke:#7a4baa;
+    style v56 fill:#e3dcea,stroke:#7a4baa;
+    style v66 fill:#e3dcea,stroke:#7a4baa;
+    style v72 fill:#e3dcea,stroke:#7a4baa;
+    style v80 fill:#e3dcea,stroke:#7a4baa;
+    style v87 fill:#e3dcea,stroke:#7a4baa;
+    style v97 fill:#e3dcea,stroke:#7a4baa;
+    style v103 fill:#e3dcea,stroke:#7a4baa;
+    style v111 fill:#e3dcea,stroke:#7a4baa;
+    style v118 fill:#e3dcea,stroke:#7a4baa;
+    style v128 fill:#e3dcea,stroke:#7a4baa;
+    style v134 fill:#e3dcea,stroke:#7a4baa;
+    style v164 fill:#e3dcea,stroke:#7a4baa;
+    style v142 fill:#e3dcea,stroke:#7a4baa;
+    style v149 fill:#e3dcea,stroke:#7a4baa;
+    style v159 fill:#e3dcea,stroke:#7a4baa;
+    style v170 fill:#e3dcea,stroke:#7a4baa;
+    style v177 fill:#e3dcea,stroke:#7a4baa;
+    style v189 fill:#e3dcea,stroke:#7a4baa;
+    style v196 fill:#e3dcea,stroke:#7a4baa;
+    style v200 fill:#e3dcea,stroke:#7a4baa;
+
+```
+

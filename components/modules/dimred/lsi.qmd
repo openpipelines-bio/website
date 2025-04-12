@@ -1,0 +1,118 @@
+---
+title: "Lsi"
+namespace: "Dimred"
+description: "Runs Latent Semantic Indexing."
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `lsi`  
+Namespace: `dimred`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/dimred/lsi/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+Computes cell embeddings, feature loadings and singular values. Uses the implementation of scipy
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 2.1.0 -latest \
+  -main-script target/nextflow/dimred/lsi/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Inputs
+input: # please fill in - example: "input.h5mu"
+modality: "atac"
+# layer: "foo"
+# var_input: "foo"
+
+# LSI options
+num_components: 50
+scale_embeddings: true
+
+# Outputs
+# output: "$id.$key.output.h5mu"
+output_compression: "gzip"
+obsm_output: "X_lsi"
+varm_output: "lsi"
+uns_output: "lsi"
+overwrite: false
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+
+# Arguments
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 2.1.0 -latest \
+  -profile docker \
+  -main-script target/nextflow/dimred/lsi/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Inputs
+
+|Name          |Description                                                                                                                |Attributes                                |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--input`     |Path to input h5mu file                                                                                                    |`file`, required, example: `"input.h5mu"` |
+|`--modality`  |On which modality to run LSI on.                                                                                           |`string`, default: `"atac"`               |
+|`--layer`     |Use specified layer for expression values. If not specified, uses adata.X.                                                 |`string`                                  |
+|`--var_input` |Column name in .var matrix that will be used to select which genes to run the LSI on. If not specified, uses all features. |`string`                                  |
+
+
+### LSI options
+
+|Name                 |Description                                      |Attributes                 |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--num_components`   |Number of components to compute.                 |`integer`, default: `50`   |
+|`--scale_embeddings` |Scale embeddings to zero mean and unit variance. |`boolean`, default: `TRUE` |
+
+
+### Outputs
+
+|Name                   |Description                                                  |Attributes                                 |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--output`             |Output h5mu file.                                            |`file`, required, example: `"output.h5mu"` |
+|`--output_compression` |The compression format to be used on the output h5mu object. |`string`, default: `"gzip"`                |
+|`--obsm_output`        |In which .obsm slot to store the resulting embedding.        |`string`, default: `"X_lsi"`               |
+|`--varm_output`        |In which .varm slot to store the resulting loadings matrix.  |`string`, default: `"lsi"`                 |
+|`--uns_output`         |In which .uns slot to store the stdev.                       |`string`, default: `"lsi"`                 |
+|`--overwrite`          |Allow overwriting .obsm, .varm and .uns slots.               |`boolean_true`                             |
+
+## Authors
+
+
+  * Sarah Ouologuem [{{< fa brands github >}}](https://github.com/SarahOuologuem) [{{< fa brands orcid >}}](https://orcid.org/0009-0005-3398-1700) (contributor)
+
+  * Vladimir Shitov [{{< fa brands github >}}](https://github.com/vladimirshitov) [{{< fa brands orcid >}}](https://orcid.org/0000-0002-1960-8812) [{{< fa brands linkedin >}}](https://linkedin.com/in/vladimir-shitov-9a659513b) (contributor)
+

@@ -14,7 +14,7 @@ ID: `rna_multisample`
 Namespace: `workflows/rna`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/workflows/rna/rna_multisample/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/workflows/rna/rna_multisample/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 2.1.0 -latest \
   -main-script target/nextflow/workflows/rna/rna_multisample/main.nf \
   --help
 ```
@@ -65,15 +65,23 @@ output_var_total_counts_obs: "total_counts"
 output_var_obs_mean: "obs_mean"
 output_var_pct_dropout: "pct_dropout"
 
+# RNA Scaling options
+enable_scaling: false
+scaling_output_layer: "scaled"
+# scaling_max_value: 123.0
+scaling_zero_center: true
+
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
 # param_list: "my_params.yaml"
+
+# Arguments
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 2.1.0 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/rna/rna_multisample/main.nf \
   -params-file params.yaml
@@ -116,14 +124,30 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 |Name                             |Description                                                                                                                                                                                                                    |Attributes                                                                                             |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--var_qc_metrics`               |Keys to select a boolean (containing only True or False) column from .var. For each cell, calculate the proportion of total values for genes which are labeled 'True',  compared to the total sum of the values for all genes. |List of `string`, default: `"filter_with_hvg"`, example: `"ercc,highly_variable"`, multiple_sep: `";"` |
-|`--top_n_vars`                   |Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. `--top_n_vars 20,50` finds cumulative proportion to the 20th and 50th most expressed vars.                |List of `integer`, default: `50, 100, 200, 500`, multiple_sep: `";"`                                   |
+|`--var_qc_metrics`               |Keys to select a boolean (containing only True or False) column from .var. For each cell, calculate the proportion of total values for genes which are labeled 'True',  compared to the total sum of the values for all genes. |List of `string`, default: `"filter_with_hvg"`, example: `"ercc,highly_variable"`, multiple_sep: `","` |
+|`--top_n_vars`                   |Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. `--top_n_vars 20,50` finds cumulative proportion to the 20th and 50th most expressed vars.                |List of `integer`, default: `50, 100, 200, 500`, multiple_sep: `","`                                   |
 |`--output_obs_num_nonzero_vars`  |Name of column in .obs describing, for each observation, the number of stored values (including explicit zeroes). In other words, the name of the column that counts for each row the number of columns that contain data.     |`string`, default: `"num_nonzero_vars"`                                                                |
 |`--output_obs_total_counts_vars` |Name of the column for .obs describing, for each observation (row), the sum of the stored values in the columns.                                                                                                               |`string`, default: `"total_counts"`                                                                    |
 |`--output_var_num_nonzero_obs`   |Name of column describing, for each feature, the number of stored values (including explicit zeroes). In other words, the name of the column that counts for each column the number of rows that contain data.                 |`string`, default: `"num_nonzero_obs"`                                                                 |
 |`--output_var_total_counts_obs`  |Name of the column in .var describing, for each feature (column), the sum of the stored values in the rows.                                                                                                                    |`string`, default: `"total_counts"`                                                                    |
 |`--output_var_obs_mean`          |Name of the column in .obs providing the mean of the values in each row.                                                                                                                                                       |`string`, default: `"obs_mean"`                                                                        |
 |`--output_var_pct_dropout`       |Name of the column in .obs providing for each feature the percentage of observations the feature does not appear on (i.e. is missing). Same as `--num_nonzero_obs` but percentage based.                                       |`string`, default: `"pct_dropout"`                                                                     |
+
+
+### RNA Scaling options
+
+Options for enabling scaling of the log-normalized data to unit variance and zero mean.
+The scaled data will be output a different layer and representation with reduced dimensions
+will be created and stored in addition to the non-scaled data.
+
+
+
+|Name                     |Description                                                                              |Attributes                    |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--enable_scaling`       |Enable scaling for the RNA modality.                                                     |`boolean_true`                |
+|`--scaling_output_layer` |Output layer where the scaled log-normalized data will be stored.                        |`string`, default: `"scaled"` |
+|`--scaling_max_value`    |Clip (truncate) data to this value after scaling. If not specified, do not clip.         |`double`                      |
+|`--scaling_zero_center`  |If set, omit zero-centering variables, which allows to handle sparse input efficiently." |`boolean_false`               |
 
 ## Authors
 
@@ -139,41 +163,173 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ```{mermaid}
 flowchart TB
     v0(Channel.fromList)
+    v2(filter)
+    v10(filter)
     v18(normalize_total)
-    v38(log1p)
-    v58(delete_layer)
-    v78(highly_variable_features_scanpy)
-    v189(Output)
+    v25(cross)
+    v35(cross)
+    v41(filter)
+    v49(log1p)
+    v56(cross)
+    v66(cross)
+    v72(filter)
+    v80(delete_layer)
+    v87(cross)
+    v97(cross)
+    v106(branch)
+    v133(concat)
+    v111(scale)
+    v118(cross)
+    v128(cross)
+    v134(filter)
+    v142(highly_variable_features_scanpy)
+    v149(cross)
+    v159(cross)
+    v165(filter)
+    v288(concat)
+    v177(branch)
+    v204(concat)
+    v189(cross)
+    v199(cross)
+    v208(branch)
+    v235(concat)
+    v220(cross)
+    v230(cross)
+    v236(filter)
+    v266(concat)
+    v251(cross)
+    v261(cross)
+    v273(cross)
+    v283(cross)
+    v295(cross)
+    v302(cross)
+    v314(cross)
+    v321(cross)
+    v325(Output)
     subgraph group_rna_qc [rna_qc]
-        v90(filter)
-        v108(grep_annotation_column)
-        v121(mix)
-        v130(calculate_qc_metrics)
-        v150(publish)
+        v182(grep_mitochondrial_genes)
+        v213(grep_ribosomal_genes)
+        v244(calculate_qc_metrics)
     end
-    v0-->v18
-    v18-->v38
-    v38-->v58
-    v58-->v78
-    v78-->v90
-    v90-->v108
-    v108-->v121
-    v90-->v121
-    v121-->v130
-    v130-->v150
-    v150-->v189
+    v106-->v133
+    v133-->v134
+    v177-->v204
+    v208-->v235
+    v235-->v236
+    v0-->v2
+    v2-->v10
+    v10-->v18
+    v18-->v25
+    v10-->v25
+    v10-->v35
+    v41-->v49
+    v49-->v56
+    v41-->v56
+    v41-->v66
+    v72-->v80
+    v80-->v87
+    v72-->v87
+    v72-->v97
+    v106-->v111
+    v111-->v118
+    v106-->v118
+    v106-->v128
+    v128-->v133
+    v134-->v142
+    v142-->v149
+    v134-->v149
+    v134-->v159
+    v177-->v182
+    v182-->v189
+    v177-->v189
+    v177-->v199
+    v199-->v204
+    v208-->v213
+    v213-->v220
+    v208-->v220
+    v208-->v230
+    v230-->v235
+    v236-->v244
+    v244-->v251
+    v236-->v251
+    v236-->v261
+    v261-->v266
+    v266-->v273
+    v165-->v273
+    v165-->v283
+    v283-->v288
+    v288-->v295
+    v2-->v295
+    v295-->v302
+    v2-->v302
+    v2-->v314
+    v314-->v321
+    v2-->v321
+    v321-->v325
+    v35-->v41
+    v18-->v35
+    v66-->v72
+    v49-->v66
+    v80-->v97
+    v97-->v106
+    v111-->v128
+    v159-->v165
+    v142-->v159
+    v165-->v177
+    v182-->v199
+    v204-->v208
+    v213-->v230
+    v244-->v261
+    v266-->v283
+    v288-->v314
     style group_rna_qc fill:#F0F0F0,stroke:#969696;
     style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v2 fill:#e3dcea,stroke:#7a4baa;
+    style v10 fill:#e3dcea,stroke:#7a4baa;
     style v18 fill:#e3dcea,stroke:#7a4baa;
-    style v38 fill:#e3dcea,stroke:#7a4baa;
-    style v58 fill:#e3dcea,stroke:#7a4baa;
-    style v78 fill:#e3dcea,stroke:#7a4baa;
-    style v90 fill:#e3dcea,stroke:#7a4baa;
-    style v108 fill:#e3dcea,stroke:#7a4baa;
-    style v121 fill:#e3dcea,stroke:#7a4baa;
-    style v130 fill:#e3dcea,stroke:#7a4baa;
-    style v150 fill:#e3dcea,stroke:#7a4baa;
+    style v25 fill:#e3dcea,stroke:#7a4baa;
+    style v35 fill:#e3dcea,stroke:#7a4baa;
+    style v41 fill:#e3dcea,stroke:#7a4baa;
+    style v49 fill:#e3dcea,stroke:#7a4baa;
+    style v56 fill:#e3dcea,stroke:#7a4baa;
+    style v66 fill:#e3dcea,stroke:#7a4baa;
+    style v72 fill:#e3dcea,stroke:#7a4baa;
+    style v80 fill:#e3dcea,stroke:#7a4baa;
+    style v87 fill:#e3dcea,stroke:#7a4baa;
+    style v97 fill:#e3dcea,stroke:#7a4baa;
+    style v106 fill:#e3dcea,stroke:#7a4baa;
+    style v133 fill:#e3dcea,stroke:#7a4baa;
+    style v111 fill:#e3dcea,stroke:#7a4baa;
+    style v118 fill:#e3dcea,stroke:#7a4baa;
+    style v128 fill:#e3dcea,stroke:#7a4baa;
+    style v134 fill:#e3dcea,stroke:#7a4baa;
+    style v142 fill:#e3dcea,stroke:#7a4baa;
+    style v149 fill:#e3dcea,stroke:#7a4baa;
+    style v159 fill:#e3dcea,stroke:#7a4baa;
+    style v165 fill:#e3dcea,stroke:#7a4baa;
+    style v288 fill:#e3dcea,stroke:#7a4baa;
+    style v177 fill:#e3dcea,stroke:#7a4baa;
+    style v204 fill:#e3dcea,stroke:#7a4baa;
+    style v182 fill:#e3dcea,stroke:#7a4baa;
     style v189 fill:#e3dcea,stroke:#7a4baa;
+    style v199 fill:#e3dcea,stroke:#7a4baa;
+    style v208 fill:#e3dcea,stroke:#7a4baa;
+    style v235 fill:#e3dcea,stroke:#7a4baa;
+    style v213 fill:#e3dcea,stroke:#7a4baa;
+    style v220 fill:#e3dcea,stroke:#7a4baa;
+    style v230 fill:#e3dcea,stroke:#7a4baa;
+    style v236 fill:#e3dcea,stroke:#7a4baa;
+    style v266 fill:#e3dcea,stroke:#7a4baa;
+    style v244 fill:#e3dcea,stroke:#7a4baa;
+    style v251 fill:#e3dcea,stroke:#7a4baa;
+    style v261 fill:#e3dcea,stroke:#7a4baa;
+    style v273 fill:#e3dcea,stroke:#7a4baa;
+    style v283 fill:#e3dcea,stroke:#7a4baa;
+    style v295 fill:#e3dcea,stroke:#7a4baa;
+    style v302 fill:#e3dcea,stroke:#7a4baa;
+    style v314 fill:#e3dcea,stroke:#7a4baa;
+    style v321 fill:#e3dcea,stroke:#7a4baa;
+    style v325 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 

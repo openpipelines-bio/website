@@ -14,7 +14,7 @@ ID: `qc`
 Namespace: `workflows/qc`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/workflows/qc/qc/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/workflows/qc/qc/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 2.1.0 -latest \
   -main-script target/nextflow/workflows/qc/qc/main.nf \
   --help
 ```
@@ -46,17 +46,17 @@ input: # please fill in - example: "input.h5mu"
 modality: "rna"
 # layer: "raw_counts"
 
-# Outputs
-# output: "$id.$key.output.h5mu"
-
-# Mitochondrial Gene Detection
+# Mitochondrial & Ribosomal Gene Detection
+# var_gene_names: "gene_symbol"
 # var_name_mitochondrial_genes: "foo"
 # obs_name_mitochondrial_fraction: "foo"
-# var_gene_names: "gene_symbol"
 mitochondrial_gene_regex: "^[mM][tT]-"
+# var_name_ribosomal_genes: "foo"
+# obs_name_ribosomal_fraction: "foo"
+ribosomal_gene_regex: "^[Mm]?[Rr][Pp][LlSs]"
 
 # QC metrics calculation options
-# var_qc_metrics: ["ercc", "highly_variable"]
+# var_qc_metrics: ["ercc,highly_variable"]
 top_n_vars: [50, 100, 200, 500]
 output_obs_num_nonzero_vars: "num_nonzero_vars"
 output_obs_total_counts_vars: "total_counts"
@@ -65,15 +65,20 @@ output_var_total_counts_obs: "total_counts"
 output_var_obs_mean: "obs_mean"
 output_var_pct_dropout: "pct_dropout"
 
+# Outputs
+# output: "$id.$key.output.h5mu"
+
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
 # param_list: "my_params.yaml"
+
+# Arguments
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 2.1.0 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/qc/qc/main.nf \
   -params-file params.yaml
@@ -95,22 +100,25 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--layer`    |Layer to calculate qc metrics for. |`string`, example: `"raw_counts"`         |
 
 
-### Mitochondrial Gene Detection
+### Mitochondrial & Ribosomal Gene Detection
 
-|Name                                |Description                                                                                                                                                                                                                |Attributes                         |
+|Name                                |Description                                                                                                                                                                                                                                                                               |Attributes                                  |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--var_name_mitochondrial_genes`    |In which .var slot to store a boolean array corresponding the mitochondrial genes.                                                                                                                                         |`string`                           |
-|`--obs_name_mitochondrial_fraction` |.Obs slot to store the fraction of reads found to be mitochondrial. Defaults to 'fraction_' suffixed by the value of --var_name_mitochondrial_genes                                                                        |`string`                           |
-|`--var_gene_names`                  |.var column name to be used to detect mitochondrial genes instead of .var_names (default if not set). Gene names matching with the regex value from --mitochondrial_gene_regex will be identified as a mitochondrial gene. |`string`, example: `"gene_symbol"` |
-|`--mitochondrial_gene_regex`        |Regex string that identifies mitochondrial genes from --var_gene_names. By default will detect human and mouse mitochondrial genes from a gene symbol.                                                                     |`string`, default: `"^[mM][tT]-"`  |
+|`--var_gene_names`                  |.var column name to be used to detect mitochondrial/ribosomal genes instead of .var_names (default if not set). Gene names matching with the regex value from --mitochondrial_gene_regex or --ribosomal_gene_regex will be  identified as mitochondrial or ribosomal genes, respectively. |`string`, example: `"gene_symbol"`          |
+|`--var_name_mitochondrial_genes`    |In which .var slot to store a boolean array corresponding the mitochondrial genes.                                                                                                                                                                                                        |`string`                                    |
+|`--obs_name_mitochondrial_fraction` |.Obs slot to store the fraction of reads found to be mitochondrial. Defaults to 'fraction_' suffixed by the value of --var_name_mitochondrial_genes                                                                                                                                       |`string`                                    |
+|`--mitochondrial_gene_regex`        |Regex string that identifies mitochondrial genes from --var_gene_names. By default will detect human and mouse mitochondrial genes from a gene symbol.                                                                                                                                    |`string`, default: `"^[mM][tT]-"`           |
+|`--var_name_ribosomal_genes`        |In which .var slot to store a boolean array corresponding the ribosomal genes.                                                                                                                                                                                                            |`string`                                    |
+|`--obs_name_ribosomal_fraction`     |When specified, write the fraction of counts originating from ribosomal genes  (based on --ribosomal_gene_regex) to an .obs column with the specified name. Requires --var_name_ribosomal_genes.                                                                                          |`string`                                    |
+|`--ribosomal_gene_regex`            |Regex string that identifies ribosomal genes from --var_gene_names. By default will detect human and mouse ribosomal genes from a gene symbol.                                                                                                                                            |`string`, default: `"^[Mm]?[Rr][Pp][LlSs]"` |
 
 
 ### QC metrics calculation options
 
 |Name                             |Description                                                                                                                                                                                                                                                                               |Attributes                                                               |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--var_qc_metrics`               |Keys to select a boolean (containing only True or False) column from .var. For each cell, calculate the proportion of total values for genes which are labeled 'True',  compared to the total sum of the values for all genes. Defaults to the value from --var_name_mitochondrial_genes. |List of `string`, example: `"ercc,highly_variable"`, multiple_sep: `";"` |
-|`--top_n_vars`                   |Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. `--top_n_vars 20,50` finds cumulative proportion to the 20th and 50th most expressed vars.                                                                           |List of `integer`, default: `50, 100, 200, 500`, multiple_sep: `";"`     |
+|`--var_qc_metrics`               |Keys to select a boolean (containing only True or False) column from .var. For each cell, calculate the proportion of total values for genes which are labeled 'True',  compared to the total sum of the values for all genes. Defaults to the value from --var_name_mitochondrial_genes. |List of `string`, example: `"ercc,highly_variable"`, multiple_sep: `","` |
+|`--top_n_vars`                   |Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. `--top_n_vars 20,50` finds cumulative proportion to the 20th and 50th most expressed vars.                                                                           |List of `integer`, default: `50, 100, 200, 500`, multiple_sep: `","`     |
 |`--output_obs_num_nonzero_vars`  |Name of column in .obs describing, for each observation, the number of stored values (including explicit zeroes). In other words, the name of the column that counts for each row the number of columns that contain data.                                                                |`string`, default: `"num_nonzero_vars"`                                  |
 |`--output_obs_total_counts_vars` |Name of the column for .obs describing, for each observation (row), the sum of the stored values in the columns.                                                                                                                                                                          |`string`, default: `"total_counts"`                                      |
 |`--output_var_num_nonzero_obs`   |Name of column describing, for each feature, the number of stored values (including explicit zeroes). In other words, the name of the column that counts for each column the number of rows that contain data.                                                                            |`string`, default: `"num_nonzero_obs"`                                   |
@@ -136,25 +144,81 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 flowchart TB
     v0(Channel.fromList)
     v2(filter)
-    v20(grep_annotation_column)
-    v33(mix)
-    v42(calculate_qc_metrics)
-    v62(publish)
-    v90(Output)
+    v14(branch)
+    v41(concat)
+    v19(grep_mitochondrial_genes)
+    v26(cross)
+    v36(cross)
+    v45(branch)
+    v72(concat)
+    v50(grep_ribosomal_genes)
+    v57(cross)
+    v67(cross)
+    v73(filter)
+    v103(concat)
+    v81(calculate_qc_metrics)
+    v88(cross)
+    v98(cross)
+    v110(cross)
+    v117(cross)
+    v129(cross)
+    v136(cross)
+    v140(Output)
+    v14-->v41
+    v45-->v72
+    v72-->v73
     v0-->v2
-    v2-->v20
-    v20-->v33
-    v2-->v33
-    v33-->v42
-    v42-->v62
-    v62-->v90
+    v14-->v19
+    v19-->v26
+    v14-->v26
+    v14-->v36
+    v36-->v41
+    v45-->v50
+    v50-->v57
+    v45-->v57
+    v45-->v67
+    v67-->v72
+    v73-->v81
+    v81-->v88
+    v73-->v88
+    v73-->v98
+    v98-->v103
+    v103-->v110
+    v2-->v110
+    v110-->v117
+    v2-->v117
+    v2-->v129
+    v129-->v136
+    v2-->v136
+    v136-->v140
+    v2-->v14
+    v19-->v36
+    v41-->v45
+    v50-->v67
+    v81-->v98
+    v103-->v129
     style v0 fill:#e3dcea,stroke:#7a4baa;
     style v2 fill:#e3dcea,stroke:#7a4baa;
-    style v20 fill:#e3dcea,stroke:#7a4baa;
-    style v33 fill:#e3dcea,stroke:#7a4baa;
-    style v42 fill:#e3dcea,stroke:#7a4baa;
-    style v62 fill:#e3dcea,stroke:#7a4baa;
-    style v90 fill:#e3dcea,stroke:#7a4baa;
+    style v14 fill:#e3dcea,stroke:#7a4baa;
+    style v41 fill:#e3dcea,stroke:#7a4baa;
+    style v19 fill:#e3dcea,stroke:#7a4baa;
+    style v26 fill:#e3dcea,stroke:#7a4baa;
+    style v36 fill:#e3dcea,stroke:#7a4baa;
+    style v45 fill:#e3dcea,stroke:#7a4baa;
+    style v72 fill:#e3dcea,stroke:#7a4baa;
+    style v50 fill:#e3dcea,stroke:#7a4baa;
+    style v57 fill:#e3dcea,stroke:#7a4baa;
+    style v67 fill:#e3dcea,stroke:#7a4baa;
+    style v73 fill:#e3dcea,stroke:#7a4baa;
+    style v103 fill:#e3dcea,stroke:#7a4baa;
+    style v81 fill:#e3dcea,stroke:#7a4baa;
+    style v88 fill:#e3dcea,stroke:#7a4baa;
+    style v98 fill:#e3dcea,stroke:#7a4baa;
+    style v110 fill:#e3dcea,stroke:#7a4baa;
+    style v117 fill:#e3dcea,stroke:#7a4baa;
+    style v129 fill:#e3dcea,stroke:#7a4baa;
+    style v136 fill:#e3dcea,stroke:#7a4baa;
+    style v140 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 

@@ -14,7 +14,7 @@ ID: `dsc_pileup`
 Namespace: `genetic_demux`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/genetic_demux/dsc_pileup/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/genetic_demux/dsc_pileup/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -32,7 +32,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -main-script target/nextflow/genetic_demux/dsc_pileup/main.nf \
   --help
 ```
@@ -64,18 +64,20 @@ min_uniq: 0
 min_snp: 0
 
 # Output
-# output: "$id.$key.output.output"
+# output: "$id.$key.output"
 # out: "demuxlet_dsc"
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
 # param_list: "my_params.yaml"
+
+# Arguments
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -profile docker \
   -main-script target/nextflow/genetic_demux/dsc_pileup/main.nf \
   -params-file params.yaml
