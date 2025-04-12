@@ -1,0 +1,90 @@
+/* css styles */
+
+h1, h2 {
+  margin-top: 0;
+  border-bottom: 0;
+}
+
+h1 {
+  font-size: 1.6rem;
+}
+
+h2 {
+  font-size: 1.2rem;  
+}
+
+header > .quarto-title h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+
+#navbarCollapse {
+  background-color: #ffffff;
+}
+
+#quarto-header nav.navbar {
+  padding: 0; 
+  background-color: #ffffff;
+  border-color: #ffffff;
+}
+
+a.navbar-brand-logo > img {
+  max-height: 2rem;
+  margin: 0.5rem;
+}
+
+.mermaid svg {
+  display: block;
+  margin: auto;
+}
+.cluster-label {
+  padding-bottom: 60px;
+
+}
+
+#fig-architecture path[class*="LS-titlebox"] {
+  display: none;
+
+}
+
+#fig-architecture .nodes > g[id*="titlebox"] > rect.label-container {
+  fill: none;
+  stroke: none;
+}
+
+.home .title {
+  text-align: center;
+}
+
+.card {
+  margin: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+}
+
+.card .card-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  
+}
+
+.card .card-text {
+  font-size: 1rem;
+}
+
+/* expand background to full width, beyond the container */
+.alt-background {
+  background-color: #e7f9ec;
+  position: relative;
+}
+.alt-background:before {
+  content: "";
+  background-color: #e7f9ec;
+  position: absolute;
+  height: 100%;
+  width: 10000px;
+  left: -5000px;
+  z-index: -1;
+}

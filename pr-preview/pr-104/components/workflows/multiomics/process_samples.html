@@ -1,0 +1,3596 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="A pipeline to analyse multiple multiomics samples.">
+
+<title>Process samples – OpenPipelines</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KKE3LFPPV8"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-KKE3LFPPV8', { 'anonymize_ip': true});
+</script>
+<script src="../../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../images/logo.svg" alt="" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../fundamentals/index.html"> 
+<span class="menu-text">Fundamentals</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../user_guide/index.html"> 
+<span class="menu-text">User guide</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../contributing/index.html"> 
+<span class="menu-text">Contributing</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../../components/index.html" aria-current="page"> 
+<span class="menu-text">Reference</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../team/index.html"> 
+<span class="menu-text">Team</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/openpipelines-bio/openpipeline"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../components/index.html">Reference</a></li><li class="breadcrumb-item">Workflows</li><li class="breadcrumb-item"><a href="../../../components/workflows/multiomics/dimensionality_reduction.html">Multiomics</a></li><li class="breadcrumb-item"><a href="../../../components/workflows/multiomics/process_samples.html">Process samples</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../components/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reference</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Modules</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Annotate</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/annotate/celltypist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Celltypist</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/annotate/onclass.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Onclass</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/annotate/popv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Popv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/annotate/random_forest_annotation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Random forest annotation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/annotate/scanvi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scanvi</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/annotate/svm_annotation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Svm annotation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Cluster</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/cluster/leiden.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Leiden</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Compression</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/compression/compress_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Compress h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/compression/tar_extract.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tar extract</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Convert</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/convert/from_10xh5_to_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">From 10xh5 to h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/convert/from_10xmtx_to_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">From 10xmtx to h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/convert/from_bd_to_10x_molecular_barcode_tags.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">From bd to 10x molecular barcode tags</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/convert/from_bdrhap_to_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">From bdrhap to h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/convert/from_cellranger_multi_to_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">From cellranger multi to h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/convert/from_h5ad_to_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">From h5ad to h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/convert/from_h5ad_to_seurat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">From h5ad to seurat</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/convert/from_h5mu_to_h5ad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">From h5mu to h5ad</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/convert/from_h5mu_to_seurat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">From h5mu to seurat</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/convert/velocyto_to_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Velocyto to h5mu</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Correction</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/correction/cellbender_remove_background.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cellbender remove background</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/correction/cellbender_remove_background_v0_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cellbender remove background v0 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">Dataflow</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/dataflow/concatenate_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Concatenate h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/dataflow/merge.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Merge</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/dataflow/split_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Split h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/dataflow/split_h5mu_train_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Split h5mu train test</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/dataflow/split_modalities.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Split modalities</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">Demux</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/demux/bcl_convert.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bcl convert</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/demux/bcl2fastq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bcl2fastq</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/demux/cellranger_atac_mkfastq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cellranger atac mkfastq</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/demux/cellranger_mkfastq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cellranger mkfastq</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+ <span class="menu-text">Dimred</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/dimred/densmap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Densmap</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/dimred/lsi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lsi</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/dimred/pca.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pca</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/dimred/tsne.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tsne</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/dimred/umap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Umap</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+ <span class="menu-text">Download</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/download/download_file.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Download file</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/download/sync_test_resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sync test resources</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
+ <span class="menu-text">Feature Annotation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/feature_annotation/align_query_reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Align query reference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/feature_annotation/highly_variable_features_scanpy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Highly variable features scanpy</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/feature_annotation/score_genes_cell_cycle_scanpy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Score genes cell cycle scanpy</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false">
+ <span class="menu-text">Files</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/files/make_params.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Make params</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false">
+ <span class="menu-text">Filter</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/filter/delimit_fraction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Delimit fraction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/filter/do_filter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Do filter</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/filter/filter_with_counts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filter with counts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/filter/filter_with_scrublet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filter with scrublet</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/filter/intersect_obs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intersect obs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/filter/remove_modality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Remove modality</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/filter/subset_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Subset h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/filter/subset_obsp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Subset obsp</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false">
+ <span class="menu-text">Genetic Demux</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/genetic_demux/bcftools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bcftools</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/genetic_demux/cellsnp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cellsnp</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/genetic_demux/demuxlet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Demuxlet</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/genetic_demux/dsc_pileup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dsc pileup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/genetic_demux/freebayes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Freebayes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/genetic_demux/freemuxlet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Freemuxlet</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/genetic_demux/samtools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Samtools</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/genetic_demux/scsplit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scsplit</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/genetic_demux/souporcell.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Souporcell</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/genetic_demux/vireo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Vireo</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false">
+ <span class="menu-text">Integrate</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/integrate/harmonypy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Harmonypy</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/integrate/scanorama.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scanorama</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/integrate/scarches.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scarches</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/integrate/scvi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scvi</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/integrate/totalvi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Totalvi</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false">
+ <span class="menu-text">Interpret</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/interpret/lianapy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lianapy</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="false">
+ <span class="menu-text">Labels Transfer</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/labels_transfer/knn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Knn</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/labels_transfer/xgboost.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Xgboost</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false">
+ <span class="menu-text">Mapping</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/mapping/bd_rhapsody.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bd rhapsody</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/mapping/cellranger_atac_count.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cellranger atac count</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/mapping/cellranger_count.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cellranger count</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/mapping/cellranger_count_split.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cellranger count split</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/mapping/cellranger_multi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cellranger multi</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/mapping/htseq_count.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Htseq count</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/mapping/htseq_count_to_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Htseq count to h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/mapping/multi_star.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multi star</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/mapping/multi_star_to_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multi star to h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/mapping/samtools_sort.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Samtools sort</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/mapping/star_align.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Star align</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/mapping/star_align_v273a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Star align v273a</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="false">
+ <span class="menu-text">Metadata</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-20" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/metadata/add_id.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Add id</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/metadata/grep_annotation_column.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Grep annotation column</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/metadata/join_csv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Join csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/metadata/join_uns_to_obs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Join uns to obs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/metadata/move_obsm_to_obs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Move obsm to obs</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-21" role="navigation" aria-expanded="false">
+ <span class="menu-text">Neighbors</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-21" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-21" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/neighbors/bbknn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bbknn</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/neighbors/find_neighbors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Find neighbors</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-22" role="navigation" aria-expanded="false">
+ <span class="menu-text">Process 10xh5</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-22" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-22" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/process_10xh5/filter_10xh5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filter 10xh5</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-23" role="navigation" aria-expanded="false">
+ <span class="menu-text">Qc</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-23" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-23" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/qc/calculate_atac_qc_metrics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Calculate atac qc metrics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/qc/calculate_qc_metrics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Calculate qc metrics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/qc/fastqc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fastqc</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/qc/multiqc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multiqc</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-24" role="navigation" aria-expanded="false">
+ <span class="menu-text">Query</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-24" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-24" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/query/cellxgene_census.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cellxgene census</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-25" role="navigation" aria-expanded="false">
+ <span class="menu-text">Reference</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-25" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-25" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/reference/build_bdrhap_reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Build bdrhap reference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/reference/build_cellranger_arc_reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Build cellranger arc reference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/reference/build_cellranger_reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Build cellranger reference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/reference/build_star_reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Build star reference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/reference/cellranger_mkgtf.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cellranger mkgtf</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/reference/make_reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Make reference</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-26" role="navigation" aria-expanded="false">
+ <span class="menu-text">Report</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-26" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-26" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/report/mermaid.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mermaid</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-27" role="navigation" aria-expanded="false">
+ <span class="menu-text">Scgpt</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-27" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-27" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/scgpt/binning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Binning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/scgpt/cell_type_annotation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cell type annotation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/scgpt/cross_check_genes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cross check genes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/scgpt/embedding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Embedding</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/scgpt/pad_tokenize.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pad tokenize</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-28" role="navigation" aria-expanded="false">
+ <span class="menu-text">Transfer</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-28" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-28" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/transfer/publish.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Publish</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-29" role="navigation" aria-expanded="false">
+ <span class="menu-text">Transform</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-29" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-29" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/transform/bpcells_regress_out.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bpcells regress out</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/transform/clr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Clr</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/transform/delete_layer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Delete layer</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/transform/log1p.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Log1p</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/transform/move_layer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Move layer</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/transform/normalize_total.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Normalize total</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/transform/regress_out.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Regress out</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/transform/scale.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scale</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/transform/tfidf.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tfidf</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-30" role="navigation" aria-expanded="false">
+ <span class="menu-text">Velocity</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-30" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-30" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/velocity/scvelo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scvelo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/modules/velocity/velocyto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Velocyto</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-31" role="navigation" aria-expanded="true">
+ <span class="menu-text">Workflows</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-31" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-31" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-32" role="navigation" aria-expanded="false">
+ <span class="menu-text">Annotation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-32" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-32" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/annotation/harmony_knn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Harmony integration followed by KNN label transfer</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/annotation/scanvi_scarches.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">scANVI - scArches workflow</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/annotation/scgpt_annotation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">scGPT Annotation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/annotation/scvi_knn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">scVI Annotation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-33" role="navigation" aria-expanded="false">
+ <span class="menu-text">Gdo</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-33" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-33" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/gdo/gdo_singlesample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">GDO Singlesample</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-34" role="navigation" aria-expanded="false">
+ <span class="menu-text">Ingestion</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-34" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-34" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/ingestion/bd_rhapsody.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">BD Rhapsody</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/ingestion/cellranger_mapping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cell Ranger mapping</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/ingestion/cellranger_multi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cell Ranger multi</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/ingestion/cellranger_postprocessing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cell Ranger post-processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/ingestion/conversion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Convert to MuData</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/ingestion/demux.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Demux</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/ingestion/make_reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Make reference</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-35" role="navigation" aria-expanded="false">
+ <span class="menu-text">Integration</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-35" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-35" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/integration/bbknn_leiden.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bbknn leiden</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/integration/harmony_leiden.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Harmony leiden</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/integration/scanorama_leiden.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scanorama leiden</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/integration/scgpt_leiden.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scgpt leiden</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/integration/scvi_leiden.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scvi leiden</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/integration/totalvi_leiden.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Totalvi leiden</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-36" role="navigation" aria-expanded="true">
+ <span class="menu-text">Multiomics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-36" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-36" class="collapse list-unstyled sidebar-section depth3 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/multiomics/dimensionality_reduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dimensionality reduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/multiomics/neighbors_leiden_umap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Neighbors leiden umap</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/multiomics/process_batches.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Process batches</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/multiomics/process_samples.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Process samples</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/multiomics/split_h5mu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Split h5mu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/multiomics/split_modalities.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Split modalities</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-37" role="navigation" aria-expanded="false">
+ <span class="menu-text">Prot</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-37" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-37" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/prot/prot_multisample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prot multisample</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/prot/prot_singlesample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prot singlesample</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-38" role="navigation" aria-expanded="false">
+ <span class="menu-text">Qc</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-38" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-38" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/qc/qc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Qc</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-39" role="navigation" aria-expanded="false">
+ <span class="menu-text">Rna</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-39" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-39" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/rna/rna_multisample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rna multisample</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../components/workflows/rna/rna_singlesample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rna singlesample</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../components/index.html">Reference</a></li><li class="breadcrumb-item">Workflows</li><li class="breadcrumb-item"><a href="../../../components/workflows/multiomics/dimensionality_reduction.html">Multiomics</a></li><li class="breadcrumb-item"><a href="../../../components/workflows/multiomics/process_samples.html">Process samples</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Process samples</h1>
+</div>
+
+<div>
+  <div class="description">
+    A pipeline to analyse multiple multiomics samples.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+
+<div class="no-row-height column-margin column-container"><div class="">
+<section id="info" class="level3">
+<h3 class="anchored" data-anchor-id="info">Info</h3>
+<p>ID: <code>process_samples</code><br>
+Namespace: <code>workflows/multiomics</code></p>
+</section>
+<section id="links" class="level3">
+<h3 class="anchored" data-anchor-id="links">Links</h3>
+<p><a href="https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/workflows/multiomics/process_samples/config.vsh.yaml" class="btn-action btn-sm btn-info btn" role="button">Source</a></p>
+</section>
+</div></div><section id="example-commands" class="level2">
+<h2 class="anchored" data-anchor-id="example-commands">Example commands</h2>
+<p>You can run the pipeline using <code>nextflow run</code>.</p>
+<section id="view-help" class="level3">
+<h3 class="anchored" data-anchor-id="view-help">View help</h3>
+<p>You can use <code>--help</code> as a parameter to get an overview of the possible parameters.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> 2.1.0 <span class="at">-latest</span> <span class="dt">\</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> target/nextflow/workflows/multiomics/process_samples/main.nf <span class="dt">\</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="run-command" class="level3">
+<h3 class="anchored" data-anchor-id="run-command">Run command</h3>
+<details>
+<summary>
+Example of <code>params.yaml</code>
+</summary>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inputs</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="co"> # please fill in - example: "foo"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">input</span><span class="kw">:</span><span class="co"> # please fill in - example: "input.h5mu"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># rna_layer: "foo"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># prot_layer: "foo"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># gdo_layer: "foo"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Outputs</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># output: "$id.$key.output.h5mu"</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample ID options</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">add_id_to_obs</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">add_id_obs_output</span><span class="kw">:</span><span class="at"> </span><span class="st">"sample_id"</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">add_id_make_observation_keys_unique</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># RNA filtering options</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># rna_min_counts: 200</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># rna_max_counts: 5000000</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># rna_min_genes_per_cell: 200</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># rna_max_genes_per_cell: 1500000</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># rna_min_cells_per_gene: 3</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># rna_min_fraction_mito: 0.0</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co"># rna_max_fraction_mito: 0.2</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># rna_min_fraction_ribo: 0.0</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># rna_max_fraction_ribo: 0.2</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># CITE-seq filtering options</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># prot_min_counts: 3</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co"># prot_max_counts: 5000000</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co"># prot_min_proteins_per_cell: 200</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co"># prot_max_proteins_per_cell: 100000000</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="co"># prot_min_cells_per_protein: 3</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="co"># GDO filtering options</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="co"># gdo_min_counts: 3</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co"># gdo_max_counts: 5000000</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="co"># gdo_min_guides_per_cell: 200</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="co"># gdo_max_guides_per_cell: 100000000</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="co"># gdo_min_cells_per_guide: 3</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Highly variable features detection</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="fu">highly_variable_features_var_output</span><span class="kw">:</span><span class="at"> </span><span class="st">"filter_with_hvg"</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="fu">highly_variable_features_obs_batch_key</span><span class="kw">:</span><span class="at"> </span><span class="st">"sample_id"</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Mitochondrial &amp; Ribosomal Gene Detection</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="co"># var_gene_names: "gene_symbol"</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="co"># var_name_mitochondrial_genes: "foo"</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="co"># obs_name_mitochondrial_fraction: "foo"</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="fu">mitochondrial_gene_regex</span><span class="kw">:</span><span class="at"> </span><span class="st">"^[mM][tT]-"</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="co"># var_name_ribosomal_genes: "foo"</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="co"># obs_name_ribosomal_fraction: "foo"</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="fu">ribosomal_gene_regex</span><span class="kw">:</span><span class="at"> </span><span class="st">"^[Mm]?[Rr][Pp][LlSs]"</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="co"># QC metrics calculation options</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="co"># var_qc_metrics: ["ercc,highly_variable"]</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="fu">top_n_vars</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="dv">50</span><span class="kw">,</span><span class="at"> </span><span class="dv">100</span><span class="kw">,</span><span class="at"> </span><span class="dv">200</span><span class="kw">,</span><span class="at"> </span><span class="dv">500</span><span class="kw">]</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="co"># PCA options</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="fu">pca_overwrite</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a><span class="co"># CLR options</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="fu">clr_axis</span><span class="kw">:</span><span class="at"> </span><span class="dv">0</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="co"># RNA Scaling options</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a><span class="fu">rna_enable_scaling</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a><span class="fu">rna_scaling_output_layer</span><span class="kw">:</span><span class="at"> </span><span class="st">"scaled"</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a><span class="fu">rna_scaling_pca_obsm_output</span><span class="kw">:</span><span class="at"> </span><span class="st">"scaled_pca"</span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a><span class="fu">rna_scaling_pca_loadings_varm_output</span><span class="kw">:</span><span class="at"> </span><span class="st">"scaled_pca_loadings"</span></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a><span class="fu">rna_scaling_pca_variance_uns_output</span><span class="kw">:</span><span class="at"> </span><span class="st">"scaled_pca_variance"</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a><span class="fu">rna_scaling_umap_obsm_output</span><span class="kw">:</span><span class="at"> </span><span class="st">"scaled_umap"</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="co"># rna_scaling_max_value: 123.0</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a><span class="fu">rna_scaling_zero_center</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a><span class="co"># Nextflow input-output arguments</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a><span class="fu">publish_dir</span><span class="kw">:</span><span class="co"> # please fill in - example: "output/"</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a><span class="co"># param_list: "my_params.yaml"</span></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a><span class="co"># Arguments</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run openpipelines-bio/openpipeline <span class="dt">\</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> 2.1.0 <span class="at">-latest</span> <span class="dt">\</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-profile</span> docker <span class="dt">\</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> target/nextflow/workflows/multiomics/process_samples/main.nf <span class="dt">\</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">-params-file</span> params.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Replace <code>-profile docker</code> with <code>-profile podman</code> or <code>-profile singularity</code> depending on the desired backend.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="argument-groups" class="level2">
+<h2 class="anchored" data-anchor-id="argument-groups">Argument groups</h2>
+<section id="inputs" class="level3">
+<h3 class="anchored" data-anchor-id="inputs">Inputs</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 61%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--id</code></td>
+<td style="text-align: left;">ID of the sample.</td>
+<td style="text-align: left;"><code>string</code>, required, example: <code>"foo"</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--input</code></td>
+<td style="text-align: left;">Path to the sample.</td>
+<td style="text-align: left;"><code>file</code>, required, example: <code>"input.h5mu"</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--rna_layer</code></td>
+<td style="text-align: left;">Input layer for the gene expression modality. If not specified, .X is used.</td>
+<td style="text-align: left;"><code>string</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--prot_layer</code></td>
+<td style="text-align: left;">Input layer for the antibody capture modality. If not specified, .X is used.</td>
+<td style="text-align: left;"><code>string</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--gdo_layer</code></td>
+<td style="text-align: left;">Input layer for the guide-derived oligonucleotide (GDO) data. If not specified, .X is used.</td>
+<td style="text-align: left;"><code>string</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="outputs" class="level3">
+<h3 class="anchored" data-anchor-id="outputs">Outputs</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 61%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--output</code></td>
+<td style="text-align: left;">Destination path to the output.</td>
+<td style="text-align: left;"><code>file</code>, required, example: <code>"output.h5mu"</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="sample-id-options" class="level3">
+<h3 class="anchored" data-anchor-id="sample-id-options">Sample ID options</h3>
+<p>Options for adding the id to .obs on the MuData object. Having a sample id present in a requirement of several components for this pipeline.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 61%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--add_id_to_obs</code></td>
+<td style="text-align: left;">Add the value passed with –id to .obs.</td>
+<td style="text-align: left;"><code>boolean</code>, default: <code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--add_id_obs_output</code></td>
+<td style="text-align: left;">.Obs column to add the sample IDs to. Required and only used when –add_id_to_obs is set to ‘true’</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"sample_id"</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--add_id_make_observation_keys_unique</code></td>
+<td style="text-align: left;">Join the id to the .obs index (.obs_names). Only used when –add_id_to_obs is set to ‘true’.</td>
+<td style="text-align: left;"><code>boolean</code>, default: <code>TRUE</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="rna-filtering-options" class="level3">
+<h3 class="anchored" data-anchor-id="rna-filtering-options">RNA filtering options</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 61%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--rna_min_counts</code></td>
+<td style="text-align: left;">Minimum number of counts captured per cell.</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>200</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--rna_max_counts</code></td>
+<td style="text-align: left;">Maximum number of counts captured per cell.</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>5000000</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--rna_min_genes_per_cell</code></td>
+<td style="text-align: left;">Minimum of non-zero values per cell.</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>200</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--rna_max_genes_per_cell</code></td>
+<td style="text-align: left;">Maximum of non-zero values per cell.</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>1500000</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--rna_min_cells_per_gene</code></td>
+<td style="text-align: left;">Minimum of non-zero values per gene.</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>3</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--rna_min_fraction_mito</code></td>
+<td style="text-align: left;">Minimum fraction of UMIs that are mitochondrial.</td>
+<td style="text-align: left;"><code>double</code>, example: <code>0</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--rna_max_fraction_mito</code></td>
+<td style="text-align: left;">Maximum fraction of UMIs that are mitochondrial.</td>
+<td style="text-align: left;"><code>double</code>, example: <code>0.2</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--rna_min_fraction_ribo</code></td>
+<td style="text-align: left;">Minimum fraction of UMIs that are mitochondrial.</td>
+<td style="text-align: left;"><code>double</code>, example: <code>0</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--rna_max_fraction_ribo</code></td>
+<td style="text-align: left;">Maximum fraction of UMIs that are mitochondrial.</td>
+<td style="text-align: left;"><code>double</code>, example: <code>0.2</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cite-seq-filtering-options" class="level3">
+<h3 class="anchored" data-anchor-id="cite-seq-filtering-options">CITE-seq filtering options</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 61%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--prot_min_counts</code></td>
+<td style="text-align: left;">Minimum number of counts per cell.</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>3</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--prot_max_counts</code></td>
+<td style="text-align: left;">Minimum number of counts per cell.</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>5000000</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--prot_min_proteins_per_cell</code></td>
+<td style="text-align: left;">Minimum of non-zero values per cell.</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>200</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--prot_max_proteins_per_cell</code></td>
+<td style="text-align: left;">Maximum of non-zero values per cell.</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>100000000</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--prot_min_cells_per_protein</code></td>
+<td style="text-align: left;">Minimum of non-zero values per protein.</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>3</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gdo-filtering-options" class="level3">
+<h3 class="anchored" data-anchor-id="gdo-filtering-options">GDO filtering options</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 61%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--gdo_min_counts</code></td>
+<td style="text-align: left;">Minimum number of counts per cell.</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>3</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--gdo_max_counts</code></td>
+<td style="text-align: left;">Minimum number of counts per cell.</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>5000000</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--gdo_min_guides_per_cell</code></td>
+<td style="text-align: left;">Minimum of non-zero values per cell.</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>200</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--gdo_max_guides_per_cell</code></td>
+<td style="text-align: left;">Maximum of non-zero values per cell.</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>100000000</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--gdo_min_cells_per_guide</code></td>
+<td style="text-align: left;">Minimum of non-zero values per guide.</td>
+<td style="text-align: left;"><code>integer</code>, example: <code>3</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="highly-variable-features-detection" class="level3">
+<h3 class="anchored" data-anchor-id="highly-variable-features-detection">Highly variable features detection</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 61%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--highly_variable_features_var_output</code></td>
+<td style="text-align: left;">In which .var slot to store a boolean array corresponding to the highly variable genes.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"filter_with_hvg"</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--highly_variable_features_obs_batch_key</code></td>
+<td style="text-align: left;">If specified, highly-variable genes are selected within each batch separately and merged. This simple process avoids the selection of batch-specific genes and acts as a lightweight batch correction method.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"sample_id"</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mitochondrial-ribosomal-gene-detection" class="level3">
+<h3 class="anchored" data-anchor-id="mitochondrial-ribosomal-gene-detection">Mitochondrial &amp; Ribosomal Gene Detection</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 61%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--var_gene_names</code></td>
+<td style="text-align: left;">.var column name to be used to detect mitochondrial/ribosomal genes instead of .var_names (default if not set). Gene names matching with the regex value from –mitochondrial_gene_regex or –ribosomal_gene_regex will be identified as mitochondrial or ribosomal genes, respectively.</td>
+<td style="text-align: left;"><code>string</code>, example: <code>"gene_symbol"</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--var_name_mitochondrial_genes</code></td>
+<td style="text-align: left;">In which .var slot to store a boolean array corresponding the mitochondrial genes.</td>
+<td style="text-align: left;"><code>string</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--obs_name_mitochondrial_fraction</code></td>
+<td style="text-align: left;">When specified, write the fraction of counts originating from mitochondrial genes (based on –mitochondrial_gene_regex) to an .obs column with the specified name. Requires –var_name_mitochondrial_genes.</td>
+<td style="text-align: left;"><code>string</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--mitochondrial_gene_regex</code></td>
+<td style="text-align: left;">Regex string that identifies mitochondrial genes from –var_gene_names. By default will detect human and mouse mitochondrial genes from a gene symbol.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"^[mM][tT]-"</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--var_name_ribosomal_genes</code></td>
+<td style="text-align: left;">In which .var slot to store a boolean array corresponding the ribosomal genes.</td>
+<td style="text-align: left;"><code>string</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--obs_name_ribosomal_fraction</code></td>
+<td style="text-align: left;">When specified, write the fraction of counts originating from ribosomal genes (based on –ribosomal_gene_regex) to an .obs column with the specified name. Requires –var_name_ribosomal_genes.</td>
+<td style="text-align: left;"><code>string</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--ribosomal_gene_regex</code></td>
+<td style="text-align: left;">Regex string that identifies ribosomal genes from –var_gene_names. By default will detect human and mouse ribosomal genes from a gene symbol.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"^[Mm]?[Rr][Pp][LlSs]"</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="qc-metrics-calculation-options" class="level3">
+<h3 class="anchored" data-anchor-id="qc-metrics-calculation-options">QC metrics calculation options</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 61%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--var_qc_metrics</code></td>
+<td style="text-align: left;">Keys to select a boolean (containing only True or False) column from .var. For each cell, calculate the proportion of total values for genes which are labeled ‘True’, compared to the total sum of the values for all genes. Defaults to the combined values specified for –var_name_mitochondrial_genes and –highly_variable_features_var_output.</td>
+<td style="text-align: left;">List of <code>string</code>, example: <code>"ercc,highly_variable"</code>, multiple_sep: <code>","</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--top_n_vars</code></td>
+<td style="text-align: left;">Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. <code>--top_n_vars 20,50</code> finds cumulative proportion to the 20th and 50th most expressed vars.</td>
+<td style="text-align: left;">List of <code>integer</code>, default: <code>50, 100, 200, 500</code>, multiple_sep: <code>","</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pca-options" class="level3">
+<h3 class="anchored" data-anchor-id="pca-options">PCA options</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 61%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--pca_overwrite</code></td>
+<td style="text-align: left;">Allow overwriting slots for PCA output.</td>
+<td style="text-align: left;"><code>boolean_true</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="clr-options" class="level3">
+<h3 class="anchored" data-anchor-id="clr-options">CLR options</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 61%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--clr_axis</code></td>
+<td style="text-align: left;">Axis to perform the CLR transformation on.</td>
+<td style="text-align: left;"><code>integer</code>, default: <code>0</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="rna-scaling-options" class="level3">
+<h3 class="anchored" data-anchor-id="rna-scaling-options">RNA Scaling options</h3>
+<p>Options for enabling scaling of the log-normalized data to unit variance and zero mean. The scaled data will be output a different layer and representation with reduced dimensions will be created and stored in addition to the non-scaled data.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 61%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>--rna_enable_scaling</code></td>
+<td style="text-align: left;">Enable scaling for the RNA modality.</td>
+<td style="text-align: left;"><code>boolean_true</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--rna_scaling_output_layer</code></td>
+<td style="text-align: left;">Output layer where the scaled log-normalized data will be stored.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"scaled"</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--rna_scaling_pca_obsm_output</code></td>
+<td style="text-align: left;">Name of the .obsm key where the PCA representation of the log-normalized and scaled data is stored.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"scaled_pca"</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--rna_scaling_pca_loadings_varm_output</code></td>
+<td style="text-align: left;">Name of the .varm key where the PCA loadings of the log-normalized and scaled data is stored.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"scaled_pca_loadings"</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--rna_scaling_pca_variance_uns_output</code></td>
+<td style="text-align: left;">Name of the .uns key where the variance and variance ratio will be stored as a map. The map will contain two keys: variance and variance_ratio respectively.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"scaled_pca_variance"</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--rna_scaling_umap_obsm_output</code></td>
+<td style="text-align: left;">Name of the .obsm key where the UMAP representation of the log-normalized and scaled data is stored.</td>
+<td style="text-align: left;"><code>string</code>, default: <code>"scaled_umap"</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>--rna_scaling_max_value</code></td>
+<td style="text-align: left;">Clip (truncate) data to this value after scaling. If not specified, do not clip.</td>
+<td style="text-align: left;"><code>double</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>--rna_scaling_zero_center</code></td>
+<td style="text-align: left;">If set, omit zero-centering variables, which allows to handle sparse input efficiently.”</td>
+<td style="text-align: left;"><code>boolean_false</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="authors" class="level2">
+<h2 class="anchored" data-anchor-id="authors">Authors</h2>
+<ul>
+<li>Dries Schaumont <a href="https://github.com/DriesSchaumont"><i class="fa-brands fa-github" aria-label="github"></i></a> <a href="https://orcid.org/0000-0002-4389-0440"><i class="fa-brands fa-orcid" aria-label="orcid"></i></a> <a href="https://linkedin.com/in/dries-schaumont"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a> (author, maintainer)</li>
+</ul>
+</section>
+<section id="visualisation" class="level2">
+<h2 class="anchored" data-anchor-id="visualisation">Visualisation</h2>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+    v0(Channel.fromList)
+    v2(filter)
+    v15(filter)
+    v20(add_id)
+    v27(cross)
+    v37(cross)
+    v43(filter)
+    v54(filter)
+    v66(cross)
+    v76(cross)
+    v86(concat)
+    v93(cross)
+    v103(cross)
+    v109(flatMap)
+    v115(filter)
+    v124(filter)
+    v136(branch)
+    v163(concat)
+    v148(cross)
+    v158(cross)
+    v167(branch)
+    v194(concat)
+    v179(cross)
+    v189(cross)
+    v195(filter)
+    v225(concat)
+    v210(cross)
+    v220(cross)
+    v232(cross)
+    v242(cross)
+    v251(branch)
+    v278(concat)
+    v263(cross)
+    v273(cross)
+    v282(branch)
+    v309(concat)
+    v294(cross)
+    v304(cross)
+    v310(filter)
+    v325(cross)
+    v335(cross)
+    v341(filter)
+    v356(cross)
+    v366(cross)
+    v372(filter)
+    v402(concat)
+    v387(cross)
+    v397(cross)
+    v409(cross)
+    v419(cross)
+    v621(mix)
+    v430(filter)
+    v438(filter)
+    v453(cross)
+    v463(cross)
+    v469(filter)
+    v499(concat)
+    v484(cross)
+    v494(cross)
+    v506(cross)
+    v516(cross)
+    v527(filter)
+    v535(filter)
+    v550(cross)
+    v560(cross)
+    v566(filter)
+    v596(concat)
+    v581(cross)
+    v591(cross)
+    v603(cross)
+    v613(cross)
+    v623(mix)
+    v630(filter)
+    v638(concatenate_h5mu)
+    v645(cross)
+    v655(cross)
+    v664(filter)
+    v1959(concat)
+    v673(filter)
+    v684(filter)
+    v696(cross)
+    v706(cross)
+    v716(concat)
+    v723(cross)
+    v733(cross)
+    v739(flatMap)
+    v747(filter)
+    v755(filter)
+    v770(cross)
+    v780(cross)
+    v786(filter)
+    v801(cross)
+    v811(cross)
+    v817(filter)
+    v832(cross)
+    v842(cross)
+    v851(branch)
+    v878(concat)
+    v863(cross)
+    v873(cross)
+    v879(filter)
+    v894(cross)
+    v904(cross)
+    v910(filter)
+    v1033(concat)
+    v922(branch)
+    v949(concat)
+    v934(cross)
+    v944(cross)
+    v953(branch)
+    v980(concat)
+    v965(cross)
+    v975(cross)
+    v981(filter)
+    v1011(concat)
+    v996(cross)
+    v1006(cross)
+    v1018(cross)
+    v1028(cross)
+    v1040(cross)
+    v1050(cross)
+    v1248(mix)
+    v1061(filter)
+    v1069(filter)
+    v1084(cross)
+    v1094(cross)
+    v1100(filter)
+    v1223(concat)
+    v1112(branch)
+    v1139(concat)
+    v1124(cross)
+    v1134(cross)
+    v1143(branch)
+    v1170(concat)
+    v1155(cross)
+    v1165(cross)
+    v1171(filter)
+    v1201(concat)
+    v1186(cross)
+    v1196(cross)
+    v1208(cross)
+    v1218(cross)
+    v1230(cross)
+    v1240(cross)
+    v1250(mix)
+    v1258(filter)
+    v1273(cross)
+    v1283(cross)
+    v1293(branch)
+    v1505(concat)
+    v1298(filter)
+    v1313(cross)
+    v1323(cross)
+    v1329(filter)
+    v1483(concat)
+    v1338(filter)
+    v1353(cross)
+    v1363(cross)
+    v1372(branch)
+    v1399(concat)
+    v1384(cross)
+    v1394(cross)
+    v1403(branch)
+    v1430(concat)
+    v1415(cross)
+    v1425(cross)
+    v1434(branch)
+    v1461(concat)
+    v1446(cross)
+    v1456(cross)
+    v1468(cross)
+    v1478(cross)
+    v1490(cross)
+    v1500(cross)
+    v1509(branch)
+    v1721(concat)
+    v1514(filter)
+    v1529(cross)
+    v1539(cross)
+    v1545(filter)
+    v1699(concat)
+    v1554(filter)
+    v1569(cross)
+    v1579(cross)
+    v1588(branch)
+    v1615(concat)
+    v1600(cross)
+    v1610(cross)
+    v1619(branch)
+    v1646(concat)
+    v1631(cross)
+    v1641(cross)
+    v1650(branch)
+    v1677(concat)
+    v1662(cross)
+    v1672(cross)
+    v1684(cross)
+    v1694(cross)
+    v1706(cross)
+    v1716(cross)
+    v1725(branch)
+    v1937(concat)
+    v1730(filter)
+    v1745(cross)
+    v1755(cross)
+    v1761(filter)
+    v1915(concat)
+    v1770(filter)
+    v1785(cross)
+    v1795(cross)
+    v1804(branch)
+    v1831(concat)
+    v1816(cross)
+    v1826(cross)
+    v1835(branch)
+    v1862(concat)
+    v1847(cross)
+    v1857(cross)
+    v1866(branch)
+    v1893(concat)
+    v1878(cross)
+    v1888(cross)
+    v1900(cross)
+    v1910(cross)
+    v1922(cross)
+    v1932(cross)
+    v1944(cross)
+    v1954(cross)
+    v1966(cross)
+    v1973(cross)
+    v1985(cross)
+    v1992(cross)
+    v1996(Output)
+    subgraph group_split_modalities_workflow [split_modalities_workflow]
+        v59(split_modalities_component)
+    end
+    subgraph group_rna_singlesample [rna_singlesample]
+        v141(grep_mitochondrial_genes)
+        v172(grep_ribosomal_genes)
+        v203(calculate_qc_metrics)
+        v256(delimit_fraction)
+        v287(delimit_fraction)
+        v318(rna_filter_with_counts)
+        v349(rna_do_filter)
+        v380(filter_with_scrublet)
+    end
+    subgraph group_prot_singlesample [prot_singlesample]
+        v446(prot_filter_with_counts)
+        v477(prot_do_filter)
+    end
+    subgraph group_gdo_singlesample [gdo_singlesample]
+        v543(gdo_filter_with_counts)
+        v574(gdo_do_filter)
+    end
+    subgraph group_process_batches [process_batches]
+        v689(split_modalities_component)
+        v1266(merge)
+        v1306(pca)
+        v1522(pca)
+        v1738(pca)
+        subgraph group_rna_multisample [rna_multisample]
+            v763(normalize_total)
+            v794(log1p)
+            v825(delete_layer)
+            v856(scale)
+            v887(highly_variable_features_scanpy)
+            v927(grep_mitochondrial_genes)
+            v958(grep_ribosomal_genes)
+            v989(calculate_qc_metrics)
+        end
+        subgraph group_prot_multisample [prot_multisample]
+            v1077(clr)
+            v1117(grep_mitochondrial_genes)
+            v1148(grep_ribosomal_genes)
+            v1179(calculate_qc_metrics)
+        end
+        subgraph group_neighbors_leiden_umap [neighbors_leiden_umap]
+            v1346(find_neighbors)
+            v1377(leiden)
+            v1408(move_obsm_to_obs)
+            v1439(umap)
+            v1562(find_neighbors)
+            v1593(leiden)
+            v1624(move_obsm_to_obs)
+            v1655(umap)
+            v1778(find_neighbors)
+            v1809(leiden)
+            v1840(move_obsm_to_obs)
+            v1871(umap)
+        end
+    end
+    v136--&gt;v163
+    v167--&gt;v194
+    v194--&gt;v195
+    v251--&gt;v278
+    v282--&gt;v309
+    v309--&gt;v310
+    v621--&gt;v623
+    v851--&gt;v878
+    v878--&gt;v879
+    v922--&gt;v949
+    v953--&gt;v980
+    v980--&gt;v981
+    v1112--&gt;v1139
+    v1143--&gt;v1170
+    v1170--&gt;v1171
+    v1248--&gt;v1250
+    v1293--&gt;v1505
+    v1372--&gt;v1399
+    v1403--&gt;v1430
+    v1434--&gt;v1461
+    v1509--&gt;v1721
+    v1588--&gt;v1615
+    v1619--&gt;v1646
+    v1650--&gt;v1677
+    v1725--&gt;v1937
+    v1804--&gt;v1831
+    v1835--&gt;v1862
+    v1866--&gt;v1893
+    v0--&gt;v2
+    v15--&gt;v20
+    v20--&gt;v27
+    v15--&gt;v27
+    v15--&gt;v37
+    v54--&gt;v59
+    v59--&gt;v66
+    v54--&gt;v66
+    v54--&gt;v76
+    v86--&gt;v93
+    v43--&gt;v93
+    v43--&gt;v103
+    v115--&gt;v124
+    v136--&gt;v141
+    v141--&gt;v148
+    v136--&gt;v148
+    v136--&gt;v158
+    v158--&gt;v163
+    v167--&gt;v172
+    v172--&gt;v179
+    v167--&gt;v179
+    v167--&gt;v189
+    v189--&gt;v194
+    v195--&gt;v203
+    v203--&gt;v210
+    v195--&gt;v210
+    v195--&gt;v220
+    v220--&gt;v225
+    v225--&gt;v232
+    v124--&gt;v232
+    v124--&gt;v242
+    v251--&gt;v256
+    v256--&gt;v263
+    v251--&gt;v263
+    v251--&gt;v273
+    v273--&gt;v278
+    v282--&gt;v287
+    v287--&gt;v294
+    v282--&gt;v294
+    v282--&gt;v304
+    v304--&gt;v309
+    v310--&gt;v318
+    v318--&gt;v325
+    v310--&gt;v325
+    v310--&gt;v335
+    v341--&gt;v349
+    v349--&gt;v356
+    v341--&gt;v356
+    v341--&gt;v366
+    v372--&gt;v380
+    v380--&gt;v387
+    v372--&gt;v387
+    v372--&gt;v397
+    v397--&gt;v402
+    v402--&gt;v409
+    v115--&gt;v409
+    v115--&gt;v419
+    v430--&gt;v438
+    v438--&gt;v446
+    v446--&gt;v453
+    v438--&gt;v453
+    v438--&gt;v463
+    v469--&gt;v477
+    v477--&gt;v484
+    v469--&gt;v484
+    v469--&gt;v494
+    v494--&gt;v499
+    v499--&gt;v506
+    v430--&gt;v506
+    v430--&gt;v516
+    v527--&gt;v535
+    v535--&gt;v543
+    v543--&gt;v550
+    v535--&gt;v550
+    v535--&gt;v560
+    v566--&gt;v574
+    v574--&gt;v581
+    v566--&gt;v581
+    v566--&gt;v591
+    v591--&gt;v596
+    v596--&gt;v603
+    v527--&gt;v603
+    v527--&gt;v613
+    v630--&gt;v638
+    v638--&gt;v645
+    v630--&gt;v645
+    v630--&gt;v655
+    v684--&gt;v689
+    v689--&gt;v696
+    v684--&gt;v696
+    v684--&gt;v706
+    v716--&gt;v723
+    v673--&gt;v723
+    v673--&gt;v733
+    v747--&gt;v755
+    v755--&gt;v763
+    v763--&gt;v770
+    v755--&gt;v770
+    v755--&gt;v780
+    v786--&gt;v794
+    v794--&gt;v801
+    v786--&gt;v801
+    v786--&gt;v811
+    v817--&gt;v825
+    v825--&gt;v832
+    v817--&gt;v832
+    v817--&gt;v842
+    v851--&gt;v856
+    v856--&gt;v863
+    v851--&gt;v863
+    v851--&gt;v873
+    v873--&gt;v878
+    v879--&gt;v887
+    v887--&gt;v894
+    v879--&gt;v894
+    v879--&gt;v904
+    v922--&gt;v927
+    v927--&gt;v934
+    v922--&gt;v934
+    v922--&gt;v944
+    v944--&gt;v949
+    v953--&gt;v958
+    v958--&gt;v965
+    v953--&gt;v965
+    v953--&gt;v975
+    v975--&gt;v980
+    v981--&gt;v989
+    v989--&gt;v996
+    v981--&gt;v996
+    v981--&gt;v1006
+    v1006--&gt;v1011
+    v1011--&gt;v1018
+    v910--&gt;v1018
+    v910--&gt;v1028
+    v1028--&gt;v1033
+    v1033--&gt;v1040
+    v747--&gt;v1040
+    v747--&gt;v1050
+    v1061--&gt;v1069
+    v1069--&gt;v1077
+    v1077--&gt;v1084
+    v1069--&gt;v1084
+    v1069--&gt;v1094
+    v1112--&gt;v1117
+    v1117--&gt;v1124
+    v1112--&gt;v1124
+    v1112--&gt;v1134
+    v1134--&gt;v1139
+    v1143--&gt;v1148
+    v1148--&gt;v1155
+    v1143--&gt;v1155
+    v1143--&gt;v1165
+    v1165--&gt;v1170
+    v1171--&gt;v1179
+    v1179--&gt;v1186
+    v1171--&gt;v1186
+    v1171--&gt;v1196
+    v1196--&gt;v1201
+    v1201--&gt;v1208
+    v1100--&gt;v1208
+    v1100--&gt;v1218
+    v1218--&gt;v1223
+    v1223--&gt;v1230
+    v1061--&gt;v1230
+    v1061--&gt;v1240
+    v1258--&gt;v1266
+    v1266--&gt;v1273
+    v1258--&gt;v1273
+    v1258--&gt;v1283
+    v1293--&gt;v1298
+    v1298--&gt;v1306
+    v1306--&gt;v1313
+    v1298--&gt;v1313
+    v1298--&gt;v1323
+    v1329--&gt;v1338
+    v1338--&gt;v1346
+    v1346--&gt;v1353
+    v1338--&gt;v1353
+    v1338--&gt;v1363
+    v1372--&gt;v1377
+    v1377--&gt;v1384
+    v1372--&gt;v1384
+    v1372--&gt;v1394
+    v1394--&gt;v1399
+    v1403--&gt;v1408
+    v1408--&gt;v1415
+    v1403--&gt;v1415
+    v1403--&gt;v1425
+    v1425--&gt;v1430
+    v1434--&gt;v1439
+    v1439--&gt;v1446
+    v1434--&gt;v1446
+    v1434--&gt;v1456
+    v1456--&gt;v1461
+    v1461--&gt;v1468
+    v1329--&gt;v1468
+    v1329--&gt;v1478
+    v1478--&gt;v1483
+    v1483--&gt;v1490
+    v1293--&gt;v1490
+    v1293--&gt;v1500
+    v1500--&gt;v1505
+    v1509--&gt;v1514
+    v1514--&gt;v1522
+    v1522--&gt;v1529
+    v1514--&gt;v1529
+    v1514--&gt;v1539
+    v1545--&gt;v1554
+    v1554--&gt;v1562
+    v1562--&gt;v1569
+    v1554--&gt;v1569
+    v1554--&gt;v1579
+    v1588--&gt;v1593
+    v1593--&gt;v1600
+    v1588--&gt;v1600
+    v1588--&gt;v1610
+    v1610--&gt;v1615
+    v1619--&gt;v1624
+    v1624--&gt;v1631
+    v1619--&gt;v1631
+    v1619--&gt;v1641
+    v1641--&gt;v1646
+    v1650--&gt;v1655
+    v1655--&gt;v1662
+    v1650--&gt;v1662
+    v1650--&gt;v1672
+    v1672--&gt;v1677
+    v1677--&gt;v1684
+    v1545--&gt;v1684
+    v1545--&gt;v1694
+    v1694--&gt;v1699
+    v1699--&gt;v1706
+    v1509--&gt;v1706
+    v1509--&gt;v1716
+    v1716--&gt;v1721
+    v1725--&gt;v1730
+    v1730--&gt;v1738
+    v1738--&gt;v1745
+    v1730--&gt;v1745
+    v1730--&gt;v1755
+    v1761--&gt;v1770
+    v1770--&gt;v1778
+    v1778--&gt;v1785
+    v1770--&gt;v1785
+    v1770--&gt;v1795
+    v1804--&gt;v1809
+    v1809--&gt;v1816
+    v1804--&gt;v1816
+    v1804--&gt;v1826
+    v1826--&gt;v1831
+    v1835--&gt;v1840
+    v1840--&gt;v1847
+    v1835--&gt;v1847
+    v1835--&gt;v1857
+    v1857--&gt;v1862
+    v1866--&gt;v1871
+    v1871--&gt;v1878
+    v1866--&gt;v1878
+    v1866--&gt;v1888
+    v1888--&gt;v1893
+    v1893--&gt;v1900
+    v1761--&gt;v1900
+    v1761--&gt;v1910
+    v1910--&gt;v1915
+    v1915--&gt;v1922
+    v1725--&gt;v1922
+    v1725--&gt;v1932
+    v1932--&gt;v1937
+    v1937--&gt;v1944
+    v664--&gt;v1944
+    v664--&gt;v1954
+    v1954--&gt;v1959
+    v1959--&gt;v1966
+    v2--&gt;v1966
+    v1966--&gt;v1973
+    v2--&gt;v1973
+    v2--&gt;v1985
+    v1985--&gt;v1992
+    v2--&gt;v1992
+    v1992--&gt;v1996
+    v2--&gt;v15
+    v37--&gt;v43
+    v20--&gt;v37
+    v103--&gt;v109
+    v43--&gt;v54
+    v76--&gt;v86
+    v59--&gt;v76
+    v86--&gt;v103
+    v109--&gt;v115
+    v419--&gt;v621
+    v124--&gt;v136
+    v141--&gt;v158
+    v163--&gt;v167
+    v172--&gt;v189
+    v203--&gt;v220
+    v225--&gt;v242
+    v242--&gt;v251
+    v256--&gt;v273
+    v278--&gt;v282
+    v287--&gt;v304
+    v335--&gt;v341
+    v318--&gt;v335
+    v366--&gt;v372
+    v349--&gt;v366
+    v380--&gt;v397
+    v402--&gt;v419
+    v109--&gt;v430
+    v516--&gt;v621
+    v463--&gt;v469
+    v446--&gt;v463
+    v477--&gt;v494
+    v499--&gt;v516
+    v109--&gt;v527
+    v613--&gt;v621
+    v560--&gt;v566
+    v543--&gt;v560
+    v574--&gt;v591
+    v596--&gt;v613
+    v109--&gt;v623
+    v623--&gt;v630
+    v638--&gt;v655
+    v655--&gt;v664
+    v664--&gt;v673
+    v733--&gt;v739
+    v673--&gt;v684
+    v706--&gt;v716
+    v689--&gt;v706
+    v716--&gt;v733
+    v739--&gt;v747
+    v1050--&gt;v1248
+    v780--&gt;v786
+    v763--&gt;v780
+    v811--&gt;v817
+    v794--&gt;v811
+    v825--&gt;v842
+    v842--&gt;v851
+    v856--&gt;v873
+    v904--&gt;v910
+    v887--&gt;v904
+    v910--&gt;v922
+    v927--&gt;v944
+    v949--&gt;v953
+    v958--&gt;v975
+    v989--&gt;v1006
+    v1011--&gt;v1028
+    v1033--&gt;v1050
+    v739--&gt;v1061
+    v1240--&gt;v1248
+    v1094--&gt;v1100
+    v1077--&gt;v1094
+    v1100--&gt;v1112
+    v1117--&gt;v1134
+    v1139--&gt;v1143
+    v1148--&gt;v1165
+    v1179--&gt;v1196
+    v1201--&gt;v1218
+    v1223--&gt;v1240
+    v739--&gt;v1250
+    v1250--&gt;v1258
+    v1266--&gt;v1283
+    v1283--&gt;v1293
+    v1323--&gt;v1329
+    v1306--&gt;v1323
+    v1346--&gt;v1363
+    v1363--&gt;v1372
+    v1377--&gt;v1394
+    v1399--&gt;v1403
+    v1408--&gt;v1425
+    v1430--&gt;v1434
+    v1439--&gt;v1456
+    v1461--&gt;v1478
+    v1483--&gt;v1500
+    v1505--&gt;v1509
+    v1539--&gt;v1545
+    v1522--&gt;v1539
+    v1562--&gt;v1579
+    v1579--&gt;v1588
+    v1593--&gt;v1610
+    v1615--&gt;v1619
+    v1624--&gt;v1641
+    v1646--&gt;v1650
+    v1655--&gt;v1672
+    v1677--&gt;v1694
+    v1699--&gt;v1716
+    v1721--&gt;v1725
+    v1755--&gt;v1761
+    v1738--&gt;v1755
+    v1778--&gt;v1795
+    v1795--&gt;v1804
+    v1809--&gt;v1826
+    v1831--&gt;v1835
+    v1840--&gt;v1857
+    v1862--&gt;v1866
+    v1871--&gt;v1888
+    v1893--&gt;v1910
+    v1915--&gt;v1932
+    v1937--&gt;v1954
+    v1959--&gt;v1985
+    style group_split_modalities_workflow fill:#F0F0F0,stroke:#969696;
+    style group_rna_singlesample fill:#F0F0F0,stroke:#969696;
+    style group_prot_singlesample fill:#F0F0F0,stroke:#969696;
+    style group_gdo_singlesample fill:#F0F0F0,stroke:#969696;
+    style group_process_batches fill:#F0F0F0,stroke:#969696;
+    style group_rna_multisample fill:#D9D9D9,stroke:#737373;
+    style group_prot_multisample fill:#D9D9D9,stroke:#737373;
+    style group_neighbors_leiden_umap fill:#D9D9D9,stroke:#737373;
+    style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v2 fill:#e3dcea,stroke:#7a4baa;
+    style v15 fill:#e3dcea,stroke:#7a4baa;
+    style v20 fill:#e3dcea,stroke:#7a4baa;
+    style v27 fill:#e3dcea,stroke:#7a4baa;
+    style v37 fill:#e3dcea,stroke:#7a4baa;
+    style v43 fill:#e3dcea,stroke:#7a4baa;
+    style v54 fill:#e3dcea,stroke:#7a4baa;
+    style v59 fill:#e3dcea,stroke:#7a4baa;
+    style v66 fill:#e3dcea,stroke:#7a4baa;
+    style v76 fill:#e3dcea,stroke:#7a4baa;
+    style v86 fill:#e3dcea,stroke:#7a4baa;
+    style v93 fill:#e3dcea,stroke:#7a4baa;
+    style v103 fill:#e3dcea,stroke:#7a4baa;
+    style v109 fill:#e3dcea,stroke:#7a4baa;
+    style v115 fill:#e3dcea,stroke:#7a4baa;
+    style v124 fill:#e3dcea,stroke:#7a4baa;
+    style v136 fill:#e3dcea,stroke:#7a4baa;
+    style v163 fill:#e3dcea,stroke:#7a4baa;
+    style v141 fill:#e3dcea,stroke:#7a4baa;
+    style v148 fill:#e3dcea,stroke:#7a4baa;
+    style v158 fill:#e3dcea,stroke:#7a4baa;
+    style v167 fill:#e3dcea,stroke:#7a4baa;
+    style v194 fill:#e3dcea,stroke:#7a4baa;
+    style v172 fill:#e3dcea,stroke:#7a4baa;
+    style v179 fill:#e3dcea,stroke:#7a4baa;
+    style v189 fill:#e3dcea,stroke:#7a4baa;
+    style v195 fill:#e3dcea,stroke:#7a4baa;
+    style v225 fill:#e3dcea,stroke:#7a4baa;
+    style v203 fill:#e3dcea,stroke:#7a4baa;
+    style v210 fill:#e3dcea,stroke:#7a4baa;
+    style v220 fill:#e3dcea,stroke:#7a4baa;
+    style v232 fill:#e3dcea,stroke:#7a4baa;
+    style v242 fill:#e3dcea,stroke:#7a4baa;
+    style v251 fill:#e3dcea,stroke:#7a4baa;
+    style v278 fill:#e3dcea,stroke:#7a4baa;
+    style v256 fill:#e3dcea,stroke:#7a4baa;
+    style v263 fill:#e3dcea,stroke:#7a4baa;
+    style v273 fill:#e3dcea,stroke:#7a4baa;
+    style v282 fill:#e3dcea,stroke:#7a4baa;
+    style v309 fill:#e3dcea,stroke:#7a4baa;
+    style v287 fill:#e3dcea,stroke:#7a4baa;
+    style v294 fill:#e3dcea,stroke:#7a4baa;
+    style v304 fill:#e3dcea,stroke:#7a4baa;
+    style v310 fill:#e3dcea,stroke:#7a4baa;
+    style v318 fill:#e3dcea,stroke:#7a4baa;
+    style v325 fill:#e3dcea,stroke:#7a4baa;
+    style v335 fill:#e3dcea,stroke:#7a4baa;
+    style v341 fill:#e3dcea,stroke:#7a4baa;
+    style v349 fill:#e3dcea,stroke:#7a4baa;
+    style v356 fill:#e3dcea,stroke:#7a4baa;
+    style v366 fill:#e3dcea,stroke:#7a4baa;
+    style v372 fill:#e3dcea,stroke:#7a4baa;
+    style v402 fill:#e3dcea,stroke:#7a4baa;
+    style v380 fill:#e3dcea,stroke:#7a4baa;
+    style v387 fill:#e3dcea,stroke:#7a4baa;
+    style v397 fill:#e3dcea,stroke:#7a4baa;
+    style v409 fill:#e3dcea,stroke:#7a4baa;
+    style v419 fill:#e3dcea,stroke:#7a4baa;
+    style v621 fill:#e3dcea,stroke:#7a4baa;
+    style v430 fill:#e3dcea,stroke:#7a4baa;
+    style v438 fill:#e3dcea,stroke:#7a4baa;
+    style v446 fill:#e3dcea,stroke:#7a4baa;
+    style v453 fill:#e3dcea,stroke:#7a4baa;
+    style v463 fill:#e3dcea,stroke:#7a4baa;
+    style v469 fill:#e3dcea,stroke:#7a4baa;
+    style v499 fill:#e3dcea,stroke:#7a4baa;
+    style v477 fill:#e3dcea,stroke:#7a4baa;
+    style v484 fill:#e3dcea,stroke:#7a4baa;
+    style v494 fill:#e3dcea,stroke:#7a4baa;
+    style v506 fill:#e3dcea,stroke:#7a4baa;
+    style v516 fill:#e3dcea,stroke:#7a4baa;
+    style v527 fill:#e3dcea,stroke:#7a4baa;
+    style v535 fill:#e3dcea,stroke:#7a4baa;
+    style v543 fill:#e3dcea,stroke:#7a4baa;
+    style v550 fill:#e3dcea,stroke:#7a4baa;
+    style v560 fill:#e3dcea,stroke:#7a4baa;
+    style v566 fill:#e3dcea,stroke:#7a4baa;
+    style v596 fill:#e3dcea,stroke:#7a4baa;
+    style v574 fill:#e3dcea,stroke:#7a4baa;
+    style v581 fill:#e3dcea,stroke:#7a4baa;
+    style v591 fill:#e3dcea,stroke:#7a4baa;
+    style v603 fill:#e3dcea,stroke:#7a4baa;
+    style v613 fill:#e3dcea,stroke:#7a4baa;
+    style v623 fill:#e3dcea,stroke:#7a4baa;
+    style v630 fill:#e3dcea,stroke:#7a4baa;
+    style v638 fill:#e3dcea,stroke:#7a4baa;
+    style v645 fill:#e3dcea,stroke:#7a4baa;
+    style v655 fill:#e3dcea,stroke:#7a4baa;
+    style v664 fill:#e3dcea,stroke:#7a4baa;
+    style v1959 fill:#e3dcea,stroke:#7a4baa;
+    style v673 fill:#e3dcea,stroke:#7a4baa;
+    style v684 fill:#e3dcea,stroke:#7a4baa;
+    style v689 fill:#e3dcea,stroke:#7a4baa;
+    style v696 fill:#e3dcea,stroke:#7a4baa;
+    style v706 fill:#e3dcea,stroke:#7a4baa;
+    style v716 fill:#e3dcea,stroke:#7a4baa;
+    style v723 fill:#e3dcea,stroke:#7a4baa;
+    style v733 fill:#e3dcea,stroke:#7a4baa;
+    style v739 fill:#e3dcea,stroke:#7a4baa;
+    style v747 fill:#e3dcea,stroke:#7a4baa;
+    style v755 fill:#e3dcea,stroke:#7a4baa;
+    style v763 fill:#e3dcea,stroke:#7a4baa;
+    style v770 fill:#e3dcea,stroke:#7a4baa;
+    style v780 fill:#e3dcea,stroke:#7a4baa;
+    style v786 fill:#e3dcea,stroke:#7a4baa;
+    style v794 fill:#e3dcea,stroke:#7a4baa;
+    style v801 fill:#e3dcea,stroke:#7a4baa;
+    style v811 fill:#e3dcea,stroke:#7a4baa;
+    style v817 fill:#e3dcea,stroke:#7a4baa;
+    style v825 fill:#e3dcea,stroke:#7a4baa;
+    style v832 fill:#e3dcea,stroke:#7a4baa;
+    style v842 fill:#e3dcea,stroke:#7a4baa;
+    style v851 fill:#e3dcea,stroke:#7a4baa;
+    style v878 fill:#e3dcea,stroke:#7a4baa;
+    style v856 fill:#e3dcea,stroke:#7a4baa;
+    style v863 fill:#e3dcea,stroke:#7a4baa;
+    style v873 fill:#e3dcea,stroke:#7a4baa;
+    style v879 fill:#e3dcea,stroke:#7a4baa;
+    style v887 fill:#e3dcea,stroke:#7a4baa;
+    style v894 fill:#e3dcea,stroke:#7a4baa;
+    style v904 fill:#e3dcea,stroke:#7a4baa;
+    style v910 fill:#e3dcea,stroke:#7a4baa;
+    style v1033 fill:#e3dcea,stroke:#7a4baa;
+    style v922 fill:#e3dcea,stroke:#7a4baa;
+    style v949 fill:#e3dcea,stroke:#7a4baa;
+    style v927 fill:#e3dcea,stroke:#7a4baa;
+    style v934 fill:#e3dcea,stroke:#7a4baa;
+    style v944 fill:#e3dcea,stroke:#7a4baa;
+    style v953 fill:#e3dcea,stroke:#7a4baa;
+    style v980 fill:#e3dcea,stroke:#7a4baa;
+    style v958 fill:#e3dcea,stroke:#7a4baa;
+    style v965 fill:#e3dcea,stroke:#7a4baa;
+    style v975 fill:#e3dcea,stroke:#7a4baa;
+    style v981 fill:#e3dcea,stroke:#7a4baa;
+    style v1011 fill:#e3dcea,stroke:#7a4baa;
+    style v989 fill:#e3dcea,stroke:#7a4baa;
+    style v996 fill:#e3dcea,stroke:#7a4baa;
+    style v1006 fill:#e3dcea,stroke:#7a4baa;
+    style v1018 fill:#e3dcea,stroke:#7a4baa;
+    style v1028 fill:#e3dcea,stroke:#7a4baa;
+    style v1040 fill:#e3dcea,stroke:#7a4baa;
+    style v1050 fill:#e3dcea,stroke:#7a4baa;
+    style v1248 fill:#e3dcea,stroke:#7a4baa;
+    style v1061 fill:#e3dcea,stroke:#7a4baa;
+    style v1069 fill:#e3dcea,stroke:#7a4baa;
+    style v1077 fill:#e3dcea,stroke:#7a4baa;
+    style v1084 fill:#e3dcea,stroke:#7a4baa;
+    style v1094 fill:#e3dcea,stroke:#7a4baa;
+    style v1100 fill:#e3dcea,stroke:#7a4baa;
+    style v1223 fill:#e3dcea,stroke:#7a4baa;
+    style v1112 fill:#e3dcea,stroke:#7a4baa;
+    style v1139 fill:#e3dcea,stroke:#7a4baa;
+    style v1117 fill:#e3dcea,stroke:#7a4baa;
+    style v1124 fill:#e3dcea,stroke:#7a4baa;
+    style v1134 fill:#e3dcea,stroke:#7a4baa;
+    style v1143 fill:#e3dcea,stroke:#7a4baa;
+    style v1170 fill:#e3dcea,stroke:#7a4baa;
+    style v1148 fill:#e3dcea,stroke:#7a4baa;
+    style v1155 fill:#e3dcea,stroke:#7a4baa;
+    style v1165 fill:#e3dcea,stroke:#7a4baa;
+    style v1171 fill:#e3dcea,stroke:#7a4baa;
+    style v1201 fill:#e3dcea,stroke:#7a4baa;
+    style v1179 fill:#e3dcea,stroke:#7a4baa;
+    style v1186 fill:#e3dcea,stroke:#7a4baa;
+    style v1196 fill:#e3dcea,stroke:#7a4baa;
+    style v1208 fill:#e3dcea,stroke:#7a4baa;
+    style v1218 fill:#e3dcea,stroke:#7a4baa;
+    style v1230 fill:#e3dcea,stroke:#7a4baa;
+    style v1240 fill:#e3dcea,stroke:#7a4baa;
+    style v1250 fill:#e3dcea,stroke:#7a4baa;
+    style v1258 fill:#e3dcea,stroke:#7a4baa;
+    style v1266 fill:#e3dcea,stroke:#7a4baa;
+    style v1273 fill:#e3dcea,stroke:#7a4baa;
+    style v1283 fill:#e3dcea,stroke:#7a4baa;
+    style v1293 fill:#e3dcea,stroke:#7a4baa;
+    style v1505 fill:#e3dcea,stroke:#7a4baa;
+    style v1298 fill:#e3dcea,stroke:#7a4baa;
+    style v1306 fill:#e3dcea,stroke:#7a4baa;
+    style v1313 fill:#e3dcea,stroke:#7a4baa;
+    style v1323 fill:#e3dcea,stroke:#7a4baa;
+    style v1329 fill:#e3dcea,stroke:#7a4baa;
+    style v1483 fill:#e3dcea,stroke:#7a4baa;
+    style v1338 fill:#e3dcea,stroke:#7a4baa;
+    style v1346 fill:#e3dcea,stroke:#7a4baa;
+    style v1353 fill:#e3dcea,stroke:#7a4baa;
+    style v1363 fill:#e3dcea,stroke:#7a4baa;
+    style v1372 fill:#e3dcea,stroke:#7a4baa;
+    style v1399 fill:#e3dcea,stroke:#7a4baa;
+    style v1377 fill:#e3dcea,stroke:#7a4baa;
+    style v1384 fill:#e3dcea,stroke:#7a4baa;
+    style v1394 fill:#e3dcea,stroke:#7a4baa;
+    style v1403 fill:#e3dcea,stroke:#7a4baa;
+    style v1430 fill:#e3dcea,stroke:#7a4baa;
+    style v1408 fill:#e3dcea,stroke:#7a4baa;
+    style v1415 fill:#e3dcea,stroke:#7a4baa;
+    style v1425 fill:#e3dcea,stroke:#7a4baa;
+    style v1434 fill:#e3dcea,stroke:#7a4baa;
+    style v1461 fill:#e3dcea,stroke:#7a4baa;
+    style v1439 fill:#e3dcea,stroke:#7a4baa;
+    style v1446 fill:#e3dcea,stroke:#7a4baa;
+    style v1456 fill:#e3dcea,stroke:#7a4baa;
+    style v1468 fill:#e3dcea,stroke:#7a4baa;
+    style v1478 fill:#e3dcea,stroke:#7a4baa;
+    style v1490 fill:#e3dcea,stroke:#7a4baa;
+    style v1500 fill:#e3dcea,stroke:#7a4baa;
+    style v1509 fill:#e3dcea,stroke:#7a4baa;
+    style v1721 fill:#e3dcea,stroke:#7a4baa;
+    style v1514 fill:#e3dcea,stroke:#7a4baa;
+    style v1522 fill:#e3dcea,stroke:#7a4baa;
+    style v1529 fill:#e3dcea,stroke:#7a4baa;
+    style v1539 fill:#e3dcea,stroke:#7a4baa;
+    style v1545 fill:#e3dcea,stroke:#7a4baa;
+    style v1699 fill:#e3dcea,stroke:#7a4baa;
+    style v1554 fill:#e3dcea,stroke:#7a4baa;
+    style v1562 fill:#e3dcea,stroke:#7a4baa;
+    style v1569 fill:#e3dcea,stroke:#7a4baa;
+    style v1579 fill:#e3dcea,stroke:#7a4baa;
+    style v1588 fill:#e3dcea,stroke:#7a4baa;
+    style v1615 fill:#e3dcea,stroke:#7a4baa;
+    style v1593 fill:#e3dcea,stroke:#7a4baa;
+    style v1600 fill:#e3dcea,stroke:#7a4baa;
+    style v1610 fill:#e3dcea,stroke:#7a4baa;
+    style v1619 fill:#e3dcea,stroke:#7a4baa;
+    style v1646 fill:#e3dcea,stroke:#7a4baa;
+    style v1624 fill:#e3dcea,stroke:#7a4baa;
+    style v1631 fill:#e3dcea,stroke:#7a4baa;
+    style v1641 fill:#e3dcea,stroke:#7a4baa;
+    style v1650 fill:#e3dcea,stroke:#7a4baa;
+    style v1677 fill:#e3dcea,stroke:#7a4baa;
+    style v1655 fill:#e3dcea,stroke:#7a4baa;
+    style v1662 fill:#e3dcea,stroke:#7a4baa;
+    style v1672 fill:#e3dcea,stroke:#7a4baa;
+    style v1684 fill:#e3dcea,stroke:#7a4baa;
+    style v1694 fill:#e3dcea,stroke:#7a4baa;
+    style v1706 fill:#e3dcea,stroke:#7a4baa;
+    style v1716 fill:#e3dcea,stroke:#7a4baa;
+    style v1725 fill:#e3dcea,stroke:#7a4baa;
+    style v1937 fill:#e3dcea,stroke:#7a4baa;
+    style v1730 fill:#e3dcea,stroke:#7a4baa;
+    style v1738 fill:#e3dcea,stroke:#7a4baa;
+    style v1745 fill:#e3dcea,stroke:#7a4baa;
+    style v1755 fill:#e3dcea,stroke:#7a4baa;
+    style v1761 fill:#e3dcea,stroke:#7a4baa;
+    style v1915 fill:#e3dcea,stroke:#7a4baa;
+    style v1770 fill:#e3dcea,stroke:#7a4baa;
+    style v1778 fill:#e3dcea,stroke:#7a4baa;
+    style v1785 fill:#e3dcea,stroke:#7a4baa;
+    style v1795 fill:#e3dcea,stroke:#7a4baa;
+    style v1804 fill:#e3dcea,stroke:#7a4baa;
+    style v1831 fill:#e3dcea,stroke:#7a4baa;
+    style v1809 fill:#e3dcea,stroke:#7a4baa;
+    style v1816 fill:#e3dcea,stroke:#7a4baa;
+    style v1826 fill:#e3dcea,stroke:#7a4baa;
+    style v1835 fill:#e3dcea,stroke:#7a4baa;
+    style v1862 fill:#e3dcea,stroke:#7a4baa;
+    style v1840 fill:#e3dcea,stroke:#7a4baa;
+    style v1847 fill:#e3dcea,stroke:#7a4baa;
+    style v1857 fill:#e3dcea,stroke:#7a4baa;
+    style v1866 fill:#e3dcea,stroke:#7a4baa;
+    style v1893 fill:#e3dcea,stroke:#7a4baa;
+    style v1871 fill:#e3dcea,stroke:#7a4baa;
+    style v1878 fill:#e3dcea,stroke:#7a4baa;
+    style v1888 fill:#e3dcea,stroke:#7a4baa;
+    style v1900 fill:#e3dcea,stroke:#7a4baa;
+    style v1910 fill:#e3dcea,stroke:#7a4baa;
+    style v1922 fill:#e3dcea,stroke:#7a4baa;
+    style v1932 fill:#e3dcea,stroke:#7a4baa;
+    style v1944 fill:#e3dcea,stroke:#7a4baa;
+    style v1954 fill:#e3dcea,stroke:#7a4baa;
+    style v1966 fill:#e3dcea,stroke:#7a4baa;
+    style v1973 fill:#e3dcea,stroke:#7a4baa;
+    style v1985 fill:#e3dcea,stroke:#7a4baa;
+    style v1992 fill:#e3dcea,stroke:#7a4baa;
+    style v1996 fill:#e3dcea,stroke:#7a4baa;
+
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/openpipelines\.bio");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© OpenPipelines.bio 2022</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions"><ul><li><a href="https://github.com/openpipelines-bio/website/edit/main/components/workflows/multiomics/process_samples.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openpipelines-bio/website/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
