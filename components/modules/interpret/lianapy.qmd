@@ -14,7 +14,7 @@ ID: `lianapy`
 Namespace: `interpret`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/interpret/lianapy/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/interpret/lianapy/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -main-script target/nextflow/interpret/lianapy/main.nf \
   --help
 ```
@@ -42,11 +42,11 @@ nextflow run openpipelines-bio/openpipeline \
 ```yaml
 # Arguments
 input: # please fill in - example: "path/to/file"
-# output: "$id.$key.output.output"
+# output: "$id.$key.output"
 output_compression: "gzip"
 modality: "rna"
 # layer: "foo"
-groupby: "bulk_labels"
+groupby: # please fill in - example: "foo"
 resource_name: "consensus"
 gene_symbol: "gene_symbol"
 expr_prop: 0.1
@@ -63,7 +63,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -profile docker \
   -main-script target/nextflow/interpret/lianapy/main.nf \
   -params-file params.yaml
@@ -84,7 +84,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--output_compression` |                                                                                                                                                                                                                                   |`string`, default: `"gzip"`        |
 |`--modality`           |                                                                                                                                                                                                                                   |`string`, default: `"rna"`         |
 |`--layer`              |Layer in anndata.AnnData.layers to use. If None, use mudata.mod[modality].X.                                                                                                                                                       |`string`                           |
-|`--groupby`            |The key of the observations grouping to consider.                                                                                                                                                                                  |`string`, default: `"bulk_labels"` |
+|`--groupby`            |The key of the observations grouping to consider.                                                                                                                                                                                  |`string`, required                 |
 |`--resource_name`      |Name of the resource to be loaded and use for ligand-receptor inference.                                                                                                                                                           |`string`, default: `"consensus"`   |
 |`--gene_symbol`        |Column name in var DataFrame in which gene symbol are stored.                                                                                                                                                                      |`string`, default: `"gene_symbol"` |
 |`--expr_prop`          |Minimum expression proportion for the ligands/receptors (and their subunits) in the corresponding cell identities. Set to '0', to return unfiltered results.                                                                       |`double`, default: `0.1`           |

@@ -1,0 +1,100 @@
+---
+title: "Subset obsp"
+namespace: "Filter"
+description: "Create a subset of an .obsp field in a mudata file, by filtering the columns based on the values of an .obs column."
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `subset_obsp`  
+Namespace: `filter`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/filter/subset_obsp/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+The resulting subset is moved to an .obsm slot
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 2.1.0 -latest \
+  -main-script target/nextflow/filter/subset_obsp/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Input
+input: # please fill in - example: "input.h5mu"
+modality: "rna"
+input_obsp_key: # please fill in - example: "foo"
+input_obs_key: # please fill in - example: "foo"
+input_obs_value: # please fill in - example: "foo"
+
+# Output
+# output: "$id.$key.output.h5mu"
+output_obsm_key: # please fill in - example: "foo"
+# output_compression: "gzip"
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+
+# Arguments
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 2.1.0 -latest \
+  -profile docker \
+  -main-script target/nextflow/filter/subset_obsp/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Input
+
+|Name                |Description                                |Attributes                                |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--input`           |Input h5mu file                            |`file`, required, example: `"input.h5mu"` |
+|`--modality`        |                                           |`string`, default: `"rna"`                |
+|`--input_obsp_key`  |The .obsp field to be filtered.            |`string`, required                        |
+|`--input_obs_key`   |The .obs column to filter on.              |`string`, required                        |
+|`--input_obs_value` |The value to filter on in the .obs column. |`string`, required                        |
+
+
+### Output
+
+|Name                   |Description                                                  |Attributes                       |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--output`             |Output h5mu file.                                            |`file`, example: `"output.h5mu"` |
+|`--output_obsm_key`    |The .obsm key to store the subset in.                        |`string`, required               |
+|`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`      |
+
+## Authors
+
+
+  * Dorien Roosen [{{< fa brands github >}}](https://github.com/dorien-er) [{{< fa brands linkedin >}}](https://linkedin.com/in/dorien-roosen) (author, maintainer)
+

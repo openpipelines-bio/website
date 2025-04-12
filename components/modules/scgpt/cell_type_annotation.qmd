@@ -1,0 +1,140 @@
+---
+title: "Cell type annotation"
+namespace: "Scgpt"
+description: "Annotate gene expression data with cell type classes through the scGPT model"
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `cell_type_annotation`  
+Namespace: `scgpt`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/scgpt/cell_type_annotation/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 2.1.0 -latest \
+  -main-script target/nextflow/scgpt/cell_type_annotation/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Model input
+model: # please fill in - example: "best_model.pt"
+model_config: # please fill in - example: "args.json"
+model_vocab: # please fill in - example: "vocab.json"
+finetuned_checkpoints_key: "model_state_dict"
+label_mapper_key: "id_to_class"
+
+# Query input
+input: # please fill in - example: "scgpt_preprocess_ouput.h5mu"
+modality: "rna"
+# obs_batch_label: "foo"
+obsm_gene_tokens: "gene_id_tokens"
+obsm_tokenized_values: "values_tokenized"
+
+# Outputs
+# output: "$id.$key.output.h5mu"
+output_compression: "gzip"
+output_obs_predictions: "scgpt_pred"
+output_obs_probability: "scgpt_probability"
+
+# Arguments
+pad_token: "<pad>"
+pad_value: -2
+n_input_bins: 51
+batch_size: 64
+dsbn: true
+# seed: 123
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 2.1.0 -latest \
+  -profile docker \
+  -main-script target/nextflow/scgpt/cell_type_annotation/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Model input
+
+|Name                          |Description                                                                      |Attributes                                   |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--model`                     |The model file containing checkpoints and cell type label mapper.                |`file`, required, example: `"best_model.pt"` |
+|`--model_config`              |The model configuration file.                                                    |`file`, required, example: `"args.json"`     |
+|`--model_vocab`               |Model vocabulary file directory.                                                 |`file`, required, example: `"vocab.json"`    |
+|`--finetuned_checkpoints_key` |Key in the model file containing the pretrained checkpoints.                     |`string`, default: `"model_state_dict"`      |
+|`--label_mapper_key`          |Key in the model file containing the cell type class to label mapper dictionary. |`string`, default: `"id_to_class"`           |
+
+
+### Query input
+
+|Name                      |Description                                                                                                                  |Attributes                                                 |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--input`                 |The input h5mu file containing of data that have been pre-processed (normalized, binned, genes cross-checked and tokenized). |`file`, required, example: `"scgpt_preprocess_ouput.h5mu"` |
+|`--modality`              |                                                                                                                             |`string`, default: `"rna"`                                 |
+|`--obs_batch_label`       |The name of the adata.obs column containing the batch labels. Required if dsbn is set to true.                               |`string`                                                   |
+|`--obsm_gene_tokens`      |The key of the .obsm array containing the gene token ids                                                                     |`string`, default: `"gene_id_tokens"`                      |
+|`--obsm_tokenized_values` |The key of the .obsm array containing the count values of the tokenized genes                                                |`string`, default: `"values_tokenized"`                    |
+
+
+### Outputs
+
+|Name                       |Description                                                                                       |Attributes                                     |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--output`                 |The output mudata file.                                                                           |`file`, required, example: `"output.h5mu"`     |
+|`--output_compression`     |The compression algorithm to use for the output h5mu file.                                        |`string`, default: `"gzip"`, example: `"gzip"` |
+|`--output_obs_predictions` |The name of the adata.obs column to write predicted cell type labels to.                          |`string`, default: `"scgpt_pred"`              |
+|`--output_obs_probability` |The name of the adata.obs column to write the probabilities of the predicted cell type labels to. |`string`, default: `"scgpt_probability"`       |
+
+
+### Arguments
+
+|Name             |Description                                                           |Attributes                   |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--pad_token`    |The padding token used in the model.                                  |`string`, default: `"<pad>"` |
+|`--pad_value`    |The value of the padding.                                             |`integer`, default: `-2`     |
+|`--n_input_bins` |The number of input bins.                                             |`integer`, default: `51`     |
+|`--batch_size`   |The batch size.                                                       |`integer`, default: `64`     |
+|`--dsbn`         |Whether to use domain-specific batch normalization.                   |`boolean`, default: `TRUE`   |
+|`--seed`         |Seed for random number generation. If not specified, no seed is used. |`integer`                    |
+
+## Authors
+
+
+  * Dorien Roosen [{{< fa brands github >}}](https://github.com/dorien-er) [{{< fa brands linkedin >}}](https://linkedin.com/in/dorien-roosen) (maintainer, author)
+
+  * Jakub Majercik [{{< fa brands github >}}](https://github.com/jakubmajercik) [{{< fa brands linkedin >}}](https://linkedin.com/in/jakubmajercik) (author)
+

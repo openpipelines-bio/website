@@ -14,7 +14,7 @@ ID: `prot_multisample`
 Namespace: `workflows/prot`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/workflows/prot/prot_multisample/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/workflows/prot/prot_multisample/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 2.1.0 -latest \
   -main-script target/nextflow/workflows/prot/prot_multisample/main.nf \
   --help
 ```
@@ -49,7 +49,7 @@ input: # please fill in - example: "dataset.h5mu"
 # output: "$id.$key.output.h5mu"
 
 # QC metrics calculation options
-# var_qc_metrics: ["ercc", "highly_variable"]
+# var_qc_metrics: ["ercc,highly_variable"]
 top_n_vars: [50, 100, 200, 500]
 output_obs_num_nonzero_vars: "num_nonzero_vars"
 output_obs_total_counts_vars: "total_counts"
@@ -58,15 +58,20 @@ output_var_total_counts_obs: "total_counts"
 output_var_obs_mean: "obs_mean"
 output_var_pct_dropout: "pct_dropout"
 
+# CLR arguments
+clr_axis: 0
+
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
 # param_list: "my_params.yaml"
+
+# Arguments
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 2.1.0 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/prot/prot_multisample/main.nf \
   -params-file params.yaml
@@ -98,14 +103,21 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 |Name                             |Description                                                                                                                                                                                                                                                                               |Attributes                                                               |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--var_qc_metrics`               |Keys to select a boolean (containing only True or False) column from .var. For each cell, calculate the proportion of total values for genes which are labeled 'True',  compared to the total sum of the values for all genes. Defaults to the value from --var_name_mitochondrial_genes. |List of `string`, example: `"ercc,highly_variable"`, multiple_sep: `";"` |
-|`--top_n_vars`                   |Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. `--top_n_vars 20,50` finds cumulative proportion to the 20th and 50th most expressed vars.                                                                           |List of `integer`, default: `50, 100, 200, 500`, multiple_sep: `";"`     |
+|`--var_qc_metrics`               |Keys to select a boolean (containing only True or False) column from .var. For each cell, calculate the proportion of total values for genes which are labeled 'True',  compared to the total sum of the values for all genes. Defaults to the value from --var_name_mitochondrial_genes. |List of `string`, example: `"ercc,highly_variable"`, multiple_sep: `","` |
+|`--top_n_vars`                   |Number of top vars to be used to calculate cumulative proportions. If not specified, proportions are not calculated. `--top_n_vars 20,50` finds cumulative proportion to the 20th and 50th most expressed vars.                                                                           |List of `integer`, default: `50, 100, 200, 500`, multiple_sep: `","`     |
 |`--output_obs_num_nonzero_vars`  |Name of column in .obs describing, for each observation, the number of stored values (including explicit zeroes). In other words, the name of the column that counts for each row the number of columns that contain data.                                                                |`string`, default: `"num_nonzero_vars"`                                  |
 |`--output_obs_total_counts_vars` |Name of the column for .obs describing, for each observation (row), the sum of the stored values in the columns.                                                                                                                                                                          |`string`, default: `"total_counts"`                                      |
 |`--output_var_num_nonzero_obs`   |Name of column describing, for each feature, the number of stored values (including explicit zeroes). In other words, the name of the column that counts for each column the number of rows that contain data.                                                                            |`string`, default: `"num_nonzero_obs"`                                   |
 |`--output_var_total_counts_obs`  |Name of the column in .var describing, for each feature (column), the sum of the stored values in the rows.                                                                                                                                                                               |`string`, default: `"total_counts"`                                      |
 |`--output_var_obs_mean`          |Name of the column in .obs providing the mean of the values in each row.                                                                                                                                                                                                                  |`string`, default: `"obs_mean"`                                          |
 |`--output_var_pct_dropout`       |Name of the column in .obs providing for each feature the percentage of observations the feature does not appear on (i.e. is missing). Same as `--output_var_num_nonzero_obs` but percentage based.                                                                                       |`string`, default: `"pct_dropout"`                                       |
+
+
+### CLR arguments
+
+|Name         |Description                         |Attributes              |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--clr_axis` |Axis across which CLR is performed. |`integer`, default: `0` |
 
 ## Authors
 
@@ -117,32 +129,113 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ```{mermaid}
 flowchart TB
     v0(Channel.fromList)
+    v2(filter)
+    v10(filter)
     v18(clr)
-    v129(Output)
+    v25(cross)
+    v35(cross)
+    v41(filter)
+    v164(concat)
+    v53(branch)
+    v80(concat)
+    v65(cross)
+    v75(cross)
+    v84(branch)
+    v111(concat)
+    v96(cross)
+    v106(cross)
+    v112(filter)
+    v142(concat)
+    v127(cross)
+    v137(cross)
+    v149(cross)
+    v159(cross)
+    v171(cross)
+    v178(cross)
+    v190(cross)
+    v197(cross)
+    v201(Output)
     subgraph group_prot_qc [prot_qc]
-        v30(filter)
-        v48(grep_annotation_column)
-        v61(mix)
-        v70(calculate_qc_metrics)
-        v90(publish)
+        v58(grep_mitochondrial_genes)
+        v89(grep_ribosomal_genes)
+        v120(calculate_qc_metrics)
     end
-    v0-->v18
-    v18-->v30
-    v30-->v48
-    v48-->v61
-    v30-->v61
-    v61-->v70
-    v70-->v90
-    v90-->v129
+    v53-->v80
+    v84-->v111
+    v111-->v112
+    v0-->v2
+    v2-->v10
+    v10-->v18
+    v18-->v25
+    v10-->v25
+    v10-->v35
+    v53-->v58
+    v58-->v65
+    v53-->v65
+    v53-->v75
+    v75-->v80
+    v84-->v89
+    v89-->v96
+    v84-->v96
+    v84-->v106
+    v106-->v111
+    v112-->v120
+    v120-->v127
+    v112-->v127
+    v112-->v137
+    v137-->v142
+    v142-->v149
+    v41-->v149
+    v41-->v159
+    v159-->v164
+    v164-->v171
+    v2-->v171
+    v171-->v178
+    v2-->v178
+    v2-->v190
+    v190-->v197
+    v2-->v197
+    v197-->v201
+    v35-->v41
+    v18-->v35
+    v41-->v53
+    v58-->v75
+    v80-->v84
+    v89-->v106
+    v120-->v137
+    v142-->v159
+    v164-->v190
     style group_prot_qc fill:#F0F0F0,stroke:#969696;
     style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v2 fill:#e3dcea,stroke:#7a4baa;
+    style v10 fill:#e3dcea,stroke:#7a4baa;
     style v18 fill:#e3dcea,stroke:#7a4baa;
-    style v30 fill:#e3dcea,stroke:#7a4baa;
-    style v48 fill:#e3dcea,stroke:#7a4baa;
-    style v61 fill:#e3dcea,stroke:#7a4baa;
-    style v70 fill:#e3dcea,stroke:#7a4baa;
-    style v90 fill:#e3dcea,stroke:#7a4baa;
-    style v129 fill:#e3dcea,stroke:#7a4baa;
+    style v25 fill:#e3dcea,stroke:#7a4baa;
+    style v35 fill:#e3dcea,stroke:#7a4baa;
+    style v41 fill:#e3dcea,stroke:#7a4baa;
+    style v164 fill:#e3dcea,stroke:#7a4baa;
+    style v53 fill:#e3dcea,stroke:#7a4baa;
+    style v80 fill:#e3dcea,stroke:#7a4baa;
+    style v58 fill:#e3dcea,stroke:#7a4baa;
+    style v65 fill:#e3dcea,stroke:#7a4baa;
+    style v75 fill:#e3dcea,stroke:#7a4baa;
+    style v84 fill:#e3dcea,stroke:#7a4baa;
+    style v111 fill:#e3dcea,stroke:#7a4baa;
+    style v89 fill:#e3dcea,stroke:#7a4baa;
+    style v96 fill:#e3dcea,stroke:#7a4baa;
+    style v106 fill:#e3dcea,stroke:#7a4baa;
+    style v112 fill:#e3dcea,stroke:#7a4baa;
+    style v142 fill:#e3dcea,stroke:#7a4baa;
+    style v120 fill:#e3dcea,stroke:#7a4baa;
+    style v127 fill:#e3dcea,stroke:#7a4baa;
+    style v137 fill:#e3dcea,stroke:#7a4baa;
+    style v149 fill:#e3dcea,stroke:#7a4baa;
+    style v159 fill:#e3dcea,stroke:#7a4baa;
+    style v171 fill:#e3dcea,stroke:#7a4baa;
+    style v178 fill:#e3dcea,stroke:#7a4baa;
+    style v190 fill:#e3dcea,stroke:#7a4baa;
+    style v197 fill:#e3dcea,stroke:#7a4baa;
+    style v201 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 

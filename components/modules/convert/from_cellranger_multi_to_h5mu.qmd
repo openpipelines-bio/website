@@ -14,7 +14,7 @@ ID: `from_cellranger_multi_to_h5mu`
 Namespace: `convert`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/convert/from_cellranger_multi_to_h5mu/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/convert/from_cellranger_multi_to_h5mu/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -27,7 +27,7 @@ By default, will map the following library type names to modality names:
   - VDJ-B: vdj_b
   - CRISPR Guide Capture: crispr
   - Multiplexing Capture: hashing
-
+  
 Other library types have their whitepace removed and dashes replaced by
 underscores to generate the modality name.
 
@@ -44,7 +44,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -main-script target/nextflow/convert/from_cellranger_multi_to_h5mu/main.nf \
   --help
 ```
@@ -56,7 +56,8 @@ nextflow run openpipelines-bio/openpipeline \
 ```yaml
 # Arguments
 input: # please fill in - example: "input_dir_containing_modalities"
-# output: "$id.$key.output.h5mu"
+# output: ["$id.$key.output_*.h5mu"]
+# sample_csv: "$id.$key.sample_csv.csv"
 # output_compression: "gzip"
 uns_metrics: "metrics_cellranger"
 
@@ -68,7 +69,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -profile docker \
   -main-script target/nextflow/convert/from_cellranger_multi_to_h5mu/main.nf \
   -params-file params.yaml
@@ -82,12 +83,13 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name                   |Description                                                        |Attributes                                                     |
+|Name                   |Description                                                                                                         |Attributes                                                     |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--input`              |Input folder. Must contain the output from a cellranger multi run. |`file`, required, example: `"input_dir_containing_modalities"` |
-|`--output`             |Output h5mu file.                                                  |`file`, example: `"output.h5mu"`                               |
-|`--output_compression` |                                                                   |`string`, example: `"gzip"`                                    |
-|`--uns_metrics`        |Name of the .uns slot under which to QC metrics (if any).          |`string`, default: `"metrics_cellranger"`                      |
+|`--input`              |Input folder. Must contain the output from a cellranger multi run.                                                  |`file`, required, example: `"input_dir_containing_modalities"` |
+|`--output`             |Locations for the output files. Must contain a wildcard (*) character, which will be replaced with the sample name. |List of `file`, example: `"*.h5mu"`, multiple_sep: `";"`       |
+|`--sample_csv`         |CSV file describing the sample name per output file                                                                 |`file`, example: `"samples.csv"`                               |
+|`--output_compression` |                                                                                                                    |`string`, example: `"gzip"`                                    |
+|`--uns_metrics`        |Name of the .uns slot under which to QC metrics (if any).                                                           |`string`, default: `"metrics_cellranger"`                      |
 
 ## Authors
 

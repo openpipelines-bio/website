@@ -1,7 +1,7 @@
 ---
 title: "Sync test resources"
 namespace: "Download"
-description: "Synchronise the test resources from s3://openpipelines-data to resources_test"
+description: "Sync test resources to the local filesystem"
 type: "module"
 toc: false
 ---
@@ -14,7 +14,7 @@ ID: `sync_test_resources`
 Namespace: `download`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/download/sync_test_resources/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/download/sync_test_resources/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -main-script target/nextflow/download/sync_test_resources/main.nf \
   --help
 ```
@@ -40,9 +40,13 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
+# Inputs
+input: "_viash.yaml"
+
+# Outputs
+# output: "."
+
 # Arguments
-input: "s3://openpipelines-data"
-# output: "$id.$key.output.output"
 quiet: false
 dryrun: false
 delete: false
@@ -56,7 +60,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -profile docker \
   -main-script target/nextflow/download/sync_test_resources/main.nf \
   -params-file params.yaml
@@ -66,18 +70,30 @@ nextflow run openpipelines-bio/openpipeline \
 Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
 :::
 
-## Argument group
+## Argument groups
+
+### Inputs
+
+|Name      |Description                                         |Attributes                       |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--input` |Path to the _viash.yaml project configuration file. |`file`, default: `"_viash.yaml"` |
+
+
+### Outputs
+
+|Name       |Description                                                  |Attributes             |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--output` |Path to the directory where the resources will be synced to. |`file`, default: `"."` |
+
 
 ### Arguments
 
-|Name        |Description                                                                                                |Attributes                                     |
+|Name        |Description                                                                                                |Attributes                            |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--input`   |Path to the S3 bucket to sync from.                                                                        |`string`, default: `"s3://openpipelines-data"` |
-|`--output`  |Path to the test resource directory.                                                                       |`file`, default: `"resources_test"`            |
-|`--quiet`   |Displays the operations that would be performed using the specified command without actually running them. |`boolean_true`                                 |
-|`--dryrun`  |Does not display the operations performed from the specified command.                                      |`boolean_true`                                 |
-|`--delete`  |Files that exist in the destination but not in the source are deleted during sync.                         |`boolean_true`                                 |
-|`--exclude` |Exclude all files or objects from the command that matches the specified pattern.                          |List of `string`, multiple_sep: `";"`          |
+|`--quiet`   |Displays the operations that would be performed using the specified command without actually running them. |`boolean_true`                        |
+|`--dryrun`  |Does not display the operations performed from the specified command.                                      |`boolean_true`                        |
+|`--delete`  |Files that exist in the destination but not in the source are deleted during sync.                         |`boolean_true`                        |
+|`--exclude` |Exclude all files or objects from the command that matches the specified pattern.                          |List of `string`, multiple_sep: `";"` |
 
 ## Authors
 

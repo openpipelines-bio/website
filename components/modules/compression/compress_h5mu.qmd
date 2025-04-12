@@ -14,7 +14,7 @@ ID: `compress_h5mu`
 Namespace: `compression`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/compression/compress_h5mu/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/compression/compress_h5mu/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -31,7 +31,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -main-script target/nextflow/compression/compress_h5mu/main.nf \
   --help
 ```
@@ -43,7 +43,7 @@ nextflow run openpipelines-bio/openpipeline \
 ```yaml
 # Arguments
 input: # please fill in - example: "sample_path"
-# output: "$id.$key.output.output"
+# output: "$id.$key.output"
 compression: "gzip"
 
 # Nextflow input-output arguments
@@ -54,7 +54,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -profile docker \
   -main-script target/nextflow/compression/compress_h5mu/main.nf \
   -params-file params.yaml

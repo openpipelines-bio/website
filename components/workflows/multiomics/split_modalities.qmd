@@ -14,7 +14,7 @@ ID: `split_modalities`
 Namespace: `workflows/multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/workflows/multiomics/split_modalities/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/workflows/multiomics/split_modalities/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 2.1.0 -latest \
   -main-script target/nextflow/workflows/multiomics/split_modalities/main.nf \
   --help
 ```
@@ -45,18 +45,20 @@ id: # please fill in - example: "foo"
 input: # please fill in - example: "input.h5mu"
 
 # Outputs
-# output: "$id.$key.output.output"
+# output: "$id.$key.output"
 # output_types: "$id.$key.output_types.csv"
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
 # param_list: "my_params.yaml"
+
+# Arguments
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 2.1.0 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/multiomics/split_modalities/main.nf \
   -params-file params.yaml
@@ -94,15 +96,45 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 flowchart TB
     v0(Channel.fromList)
     v2(filter)
+    v13(filter)
     v18(split_modalities_component)
-    v51(Output)
+    v25(cross)
+    v35(cross)
+    v45(concat)
+    v52(cross)
+    v59(cross)
+    v71(cross)
+    v78(cross)
+    v82(Output)
     v0-->v2
-    v2-->v18
-    v18-->v51
+    v13-->v18
+    v18-->v25
+    v13-->v25
+    v13-->v35
+    v45-->v52
+    v2-->v52
+    v52-->v59
+    v2-->v59
+    v2-->v71
+    v71-->v78
+    v2-->v78
+    v78-->v82
+    v2-->v13
+    v35-->v45
+    v18-->v35
+    v45-->v71
     style v0 fill:#e3dcea,stroke:#7a4baa;
     style v2 fill:#e3dcea,stroke:#7a4baa;
+    style v13 fill:#e3dcea,stroke:#7a4baa;
     style v18 fill:#e3dcea,stroke:#7a4baa;
-    style v51 fill:#e3dcea,stroke:#7a4baa;
+    style v25 fill:#e3dcea,stroke:#7a4baa;
+    style v35 fill:#e3dcea,stroke:#7a4baa;
+    style v45 fill:#e3dcea,stroke:#7a4baa;
+    style v52 fill:#e3dcea,stroke:#7a4baa;
+    style v59 fill:#e3dcea,stroke:#7a4baa;
+    style v71 fill:#e3dcea,stroke:#7a4baa;
+    style v78 fill:#e3dcea,stroke:#7a4baa;
+    style v82 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 

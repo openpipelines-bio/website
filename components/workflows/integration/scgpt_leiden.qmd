@@ -1,0 +1,374 @@
+---
+title: "Scgpt leiden"
+namespace: "Workflows/integration"
+description: "Run scGPT integration (cell embedding generation) followed by neighbour calculations, leiden clustering and run umap on the result."
+type: "workflow"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `scgpt_leiden`  
+Namespace: `workflows/integration`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/workflows/integration/scgpt_leiden/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 2.1.0 -latest \
+  -main-script target/nextflow/workflows/integration/scgpt_leiden/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Inputs
+id: # please fill in - example: "foo"
+input: # please fill in - example: "input.h5mu"
+modality: "rna"
+# input_layer: "foo"
+# var_gene_names: "foo"
+# obs_batch_label: "foo"
+
+# Model
+model: # please fill in - example: "resources_test/scgpt/best_model.pt"
+model_vocab: # please fill in - example: "resources_test/scgpt/vocab.json"
+model_config: # please fill in - example: "args.json"
+# finetuned_checkpoints_key: "model_state_dict"
+
+# Outputs
+# output: "$id.$key.output.h5mu"
+obsm_integrated: "X_scgpt"
+
+# Padding arguments
+pad_token: "<pad>"
+pad_value: -2
+
+# HVG subset arguments
+n_hvg: 1200
+hvg_flavor: "cell_ranger"
+
+# Tokenization arguments
+# max_seq_len: 123
+
+# Embedding arguments
+dsbn: true
+batch_size: 64
+
+# Binning arguments
+n_input_bins: 51
+# seed: 123
+
+# Clustering arguments
+leiden_resolution: [1.0]
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+
+# Arguments
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 2.1.0 -latest \
+  -profile docker \
+  -main-script target/nextflow/workflows/integration/scgpt_leiden/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Inputs
+
+|Name                |Description                                                                                                              |Attributes                                |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--id`              |ID of the sample.                                                                                                        |`string`, required, example: `"foo"`      |
+|`--input`           |Path to the input file.                                                                                                  |`file`, required, example: `"input.h5mu"` |
+|`--modality`        |                                                                                                                         |`string`, default: `"rna"`                |
+|`--input_layer`     |The layer of the input dataset to process if .X is not to be used. Should contain log normalized counts.                 |`string`                                  |
+|`--var_gene_names`  |The name of the adata var column containing gene names; when no gene_name_layer is provided, the var index will be used. |`string`                                  |
+|`--obs_batch_label` |The name of the adata obs column containing the batch labels.                                                            |`string`                                  |
+
+
+### Model
+
+|Name                          |Description                                                                                       |Attributes                                                        |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--model`                     |Path to scGPT model file.                                                                         |`file`, required, example: `"resources_test/scgpt/best_model.pt"` |
+|`--model_vocab`               |Path to scGPT model vocabulary file.                                                              |`file`, required, example: `"resources_test/scgpt/vocab.json"`    |
+|`--model_config`              |Path to scGPT model config file.                                                                  |`file`, required, example: `"args.json"`                          |
+|`--finetuned_checkpoints_key` |Key in the model file containing the pretrained checkpoints. Only relevant for fine-tuned models. |`string`, example: `"model_state_dict"`                           |
+
+
+### Outputs
+
+|Name                |Description                                                      |Attributes                                 |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--output`          |Output file path                                                 |`file`, required, example: `"output.h5mu"` |
+|`--obsm_integrated` |In which .obsm slot to store the resulting integrated embedding. |`string`, default: `"X_scgpt"`             |
+
+
+### Padding arguments
+
+|Name          |Description                     |Attributes                   |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--pad_token` |Token used for padding.         |`string`, default: `"<pad>"` |
+|`--pad_value` |The value of the padding token. |`integer`, default: `-2`     |
+
+
+### HVG subset arguments
+
+|Name           |Description                                                                                                                                                                      |Attributes                         |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--n_hvg`      |Number of highly variable genes to subset for.                                                                                                                                   |`integer`, default: `1200`         |
+|`--hvg_flavor` |Method to be used for identifying highly variable genes.  Note that the default for this workflow (`cell_ranger`) is not the default method for scanpy hvg detection (`seurat`). |`string`, default: `"cell_ranger"` |
+
+
+### Tokenization arguments
+
+|Name            |Description                                                                                            |Attributes |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--max_seq_len` |The maximum sequence length of the tokenized data. Defaults to the number of features if not provided. |`integer`  |
+
+
+### Embedding arguments
+
+|Name           |Description                                        |Attributes                 |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--dsbn`       |Apply domain-specific batch normalization          |`boolean`, default: `TRUE` |
+|`--batch_size` |The batch size to be used for embedding inference. |`integer`, default: `64`   |
+
+
+### Binning arguments
+
+|Name             |Description                                                                                      |Attributes               |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--n_input_bins` |The number of bins to discretize the data into; When no value is provided, data won't be binned. |`integer`, default: `51` |
+|`--seed`         |Seed for random number generation used for binning. If not set, no seed is used.                 |`integer`                |
+
+
+### Clustering arguments
+
+|Name                  |Description                                                                    |Attributes                                          |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--leiden_resolution` |Control the coarseness of the clustering. Higher values lead to more clusters. |List of `double`, default: `1`, multiple_sep: `";"` |
+
+## Authors
+
+
+  * Dorien Roosen [{{< fa brands github >}}](https://github.com/dorien-er) [{{< fa brands linkedin >}}](https://linkedin.com/in/dorien-roosen) (maintainer, author)
+
+  * Elizabeth Mlynarski (author)
+
+  * Weiwei Schultz (contributor)
+
+## Visualisation
+
+```{mermaid}
+flowchart TB
+    v0(Channel.fromList)
+    v2(filter)
+    v10(filter)
+    v18(highly_variable_features_scanpy)
+    v25(cross)
+    v35(cross)
+    v41(filter)
+    v49(cross_check_genes)
+    v56(cross)
+    v66(cross)
+    v72(filter)
+    v80(binning)
+    v87(cross)
+    v97(cross)
+    v103(filter)
+    v111(pad_tokenize)
+    v118(cross)
+    v128(cross)
+    v134(filter)
+    v142(embedding)
+    v149(cross)
+    v159(cross)
+    v165(filter)
+    v319(concat)
+    v174(filter)
+    v189(cross)
+    v199(cross)
+    v208(branch)
+    v235(concat)
+    v220(cross)
+    v230(cross)
+    v239(branch)
+    v266(concat)
+    v251(cross)
+    v261(cross)
+    v270(branch)
+    v297(concat)
+    v282(cross)
+    v292(cross)
+    v304(cross)
+    v314(cross)
+    v326(cross)
+    v333(cross)
+    v345(cross)
+    v352(cross)
+    v356(Output)
+    subgraph group_neighbors_leiden_umap [neighbors_leiden_umap]
+        v182(find_neighbors)
+        v213(leiden)
+        v244(move_obsm_to_obs)
+        v275(umap)
+    end
+    v208-->v235
+    v239-->v266
+    v270-->v297
+    v0-->v2
+    v2-->v10
+    v10-->v18
+    v18-->v25
+    v10-->v25
+    v10-->v35
+    v41-->v49
+    v49-->v56
+    v41-->v56
+    v41-->v66
+    v72-->v80
+    v80-->v87
+    v72-->v87
+    v72-->v97
+    v103-->v111
+    v111-->v118
+    v103-->v118
+    v103-->v128
+    v134-->v142
+    v142-->v149
+    v134-->v149
+    v134-->v159
+    v165-->v174
+    v174-->v182
+    v182-->v189
+    v174-->v189
+    v174-->v199
+    v208-->v213
+    v213-->v220
+    v208-->v220
+    v208-->v230
+    v230-->v235
+    v239-->v244
+    v244-->v251
+    v239-->v251
+    v239-->v261
+    v261-->v266
+    v270-->v275
+    v275-->v282
+    v270-->v282
+    v270-->v292
+    v292-->v297
+    v297-->v304
+    v165-->v304
+    v165-->v314
+    v314-->v319
+    v319-->v326
+    v2-->v326
+    v326-->v333
+    v2-->v333
+    v2-->v345
+    v345-->v352
+    v2-->v352
+    v352-->v356
+    v35-->v41
+    v18-->v35
+    v66-->v72
+    v49-->v66
+    v97-->v103
+    v80-->v97
+    v128-->v134
+    v111-->v128
+    v159-->v165
+    v142-->v159
+    v182-->v199
+    v199-->v208
+    v213-->v230
+    v235-->v239
+    v244-->v261
+    v266-->v270
+    v275-->v292
+    v297-->v314
+    v319-->v345
+    style group_neighbors_leiden_umap fill:#F0F0F0,stroke:#969696;
+    style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v2 fill:#e3dcea,stroke:#7a4baa;
+    style v10 fill:#e3dcea,stroke:#7a4baa;
+    style v18 fill:#e3dcea,stroke:#7a4baa;
+    style v25 fill:#e3dcea,stroke:#7a4baa;
+    style v35 fill:#e3dcea,stroke:#7a4baa;
+    style v41 fill:#e3dcea,stroke:#7a4baa;
+    style v49 fill:#e3dcea,stroke:#7a4baa;
+    style v56 fill:#e3dcea,stroke:#7a4baa;
+    style v66 fill:#e3dcea,stroke:#7a4baa;
+    style v72 fill:#e3dcea,stroke:#7a4baa;
+    style v80 fill:#e3dcea,stroke:#7a4baa;
+    style v87 fill:#e3dcea,stroke:#7a4baa;
+    style v97 fill:#e3dcea,stroke:#7a4baa;
+    style v103 fill:#e3dcea,stroke:#7a4baa;
+    style v111 fill:#e3dcea,stroke:#7a4baa;
+    style v118 fill:#e3dcea,stroke:#7a4baa;
+    style v128 fill:#e3dcea,stroke:#7a4baa;
+    style v134 fill:#e3dcea,stroke:#7a4baa;
+    style v142 fill:#e3dcea,stroke:#7a4baa;
+    style v149 fill:#e3dcea,stroke:#7a4baa;
+    style v159 fill:#e3dcea,stroke:#7a4baa;
+    style v165 fill:#e3dcea,stroke:#7a4baa;
+    style v319 fill:#e3dcea,stroke:#7a4baa;
+    style v174 fill:#e3dcea,stroke:#7a4baa;
+    style v182 fill:#e3dcea,stroke:#7a4baa;
+    style v189 fill:#e3dcea,stroke:#7a4baa;
+    style v199 fill:#e3dcea,stroke:#7a4baa;
+    style v208 fill:#e3dcea,stroke:#7a4baa;
+    style v235 fill:#e3dcea,stroke:#7a4baa;
+    style v213 fill:#e3dcea,stroke:#7a4baa;
+    style v220 fill:#e3dcea,stroke:#7a4baa;
+    style v230 fill:#e3dcea,stroke:#7a4baa;
+    style v239 fill:#e3dcea,stroke:#7a4baa;
+    style v266 fill:#e3dcea,stroke:#7a4baa;
+    style v244 fill:#e3dcea,stroke:#7a4baa;
+    style v251 fill:#e3dcea,stroke:#7a4baa;
+    style v261 fill:#e3dcea,stroke:#7a4baa;
+    style v270 fill:#e3dcea,stroke:#7a4baa;
+    style v297 fill:#e3dcea,stroke:#7a4baa;
+    style v275 fill:#e3dcea,stroke:#7a4baa;
+    style v282 fill:#e3dcea,stroke:#7a4baa;
+    style v292 fill:#e3dcea,stroke:#7a4baa;
+    style v304 fill:#e3dcea,stroke:#7a4baa;
+    style v314 fill:#e3dcea,stroke:#7a4baa;
+    style v326 fill:#e3dcea,stroke:#7a4baa;
+    style v333 fill:#e3dcea,stroke:#7a4baa;
+    style v345 fill:#e3dcea,stroke:#7a4baa;
+    style v352 fill:#e3dcea,stroke:#7a4baa;
+    style v356 fill:#e3dcea,stroke:#7a4baa;
+
+```
+

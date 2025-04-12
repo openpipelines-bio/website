@@ -14,7 +14,7 @@ ID: `htseq_count_to_h5mu`
 Namespace: `mapping`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/mapping/htseq_count_to_h5mu/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/mapping/htseq_count_to_h5mu/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -main-script target/nextflow/mapping/htseq_count_to_h5mu/main.nf \
   --help
 ```
@@ -40,24 +40,26 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Outputs
-# output: "$id.$key.output.h5mu"
-# output_compression: "gzip"
-
 # Input
 input_id: # please fill in - example: ["foo"]
 input_counts: # please fill in - example: ["counts.tsv"]
 reference: # please fill in - example: "gencode_v41_star"
 
+# Outputs
+# output: "$id.$key.output.h5mu"
+# output_compression: "gzip"
+
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
 # param_list: "my_params.yaml"
+
+# Arguments
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -profile docker \
   -main-script target/nextflow/mapping/htseq_count_to_h5mu/main.nf \
   -params-file params.yaml

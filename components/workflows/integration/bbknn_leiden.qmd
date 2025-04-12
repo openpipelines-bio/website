@@ -14,7 +14,7 @@ ID: `bbknn_leiden`
 Namespace: `workflows/integration`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/workflows/integration/bbknn_leiden/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/workflows/integration/bbknn_leiden/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 2.1.0 -latest \
   -main-script target/nextflow/workflows/integration/bbknn_leiden/main.nf \
   --help
 ```
@@ -61,7 +61,7 @@ n_pcs: 50
 
 # Clustering options
 obs_cluster: "bbknn_integration_leiden"
-leiden_resolution: [1]
+leiden_resolution: [1.0]
 
 # UMAP options
 obsm_umap: "X_leiden_bbknn_umap"
@@ -69,12 +69,14 @@ obsm_umap: "X_leiden_bbknn_umap"
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
 # param_list: "my_params.yaml"
+
+# Arguments
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 2.1.0 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/integration/bbknn_leiden/main.nf \
   -params-file params.yaml
@@ -143,29 +145,95 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ```{mermaid}
 flowchart TB
     v0(Channel.fromList)
-    v29(concat)
+    v2(filter)
+    v10(filter)
+    v40(concat)
     v18(bbknn)
-    v39(leiden)
-    v59(move_obsm_to_obs)
-    v72(mix)
-    v81(umap)
-    v108(Output)
-    v0-->v18
-    v18-->v29
-    v29-->v39
-    v39-->v59
-    v59-->v72
-    v29-->v72
-    v72-->v81
-    v81-->v108
+    v25(cross)
+    v35(cross)
+    v42(filter)
+    v50(leiden)
+    v57(cross)
+    v67(cross)
+    v73(filter)
+    v81(move_obsm_to_obs)
+    v88(cross)
+    v98(cross)
+    v105(mix)
+    v106(filter)
+    v136(concat)
+    v114(umap)
+    v121(cross)
+    v131(cross)
+    v143(cross)
+    v150(cross)
+    v162(cross)
+    v169(cross)
+    v173(Output)
+    v105-->v106
+    v0-->v2
+    v2-->v10
+    v10-->v18
+    v18-->v25
+    v10-->v25
+    v10-->v35
+    v35-->v40
+    v42-->v50
+    v50-->v57
+    v42-->v57
+    v42-->v67
+    v73-->v81
+    v81-->v88
+    v73-->v88
+    v73-->v98
+    v106-->v114
+    v114-->v121
+    v106-->v121
+    v106-->v131
+    v131-->v136
+    v136-->v143
+    v2-->v143
+    v143-->v150
+    v2-->v150
+    v2-->v162
+    v162-->v169
+    v2-->v169
+    v169-->v173
+    v18-->v35
+    v40-->v42
+    v67-->v73
+    v50-->v67
+    v98-->v105
+    v81-->v98
+    v40-->v105
+    v114-->v131
+    v136-->v162
     style v0 fill:#e3dcea,stroke:#7a4baa;
-    style v29 fill:#e3dcea,stroke:#7a4baa;
+    style v2 fill:#e3dcea,stroke:#7a4baa;
+    style v10 fill:#e3dcea,stroke:#7a4baa;
+    style v40 fill:#e3dcea,stroke:#7a4baa;
     style v18 fill:#e3dcea,stroke:#7a4baa;
-    style v39 fill:#e3dcea,stroke:#7a4baa;
-    style v59 fill:#e3dcea,stroke:#7a4baa;
-    style v72 fill:#e3dcea,stroke:#7a4baa;
+    style v25 fill:#e3dcea,stroke:#7a4baa;
+    style v35 fill:#e3dcea,stroke:#7a4baa;
+    style v42 fill:#e3dcea,stroke:#7a4baa;
+    style v50 fill:#e3dcea,stroke:#7a4baa;
+    style v57 fill:#e3dcea,stroke:#7a4baa;
+    style v67 fill:#e3dcea,stroke:#7a4baa;
+    style v73 fill:#e3dcea,stroke:#7a4baa;
     style v81 fill:#e3dcea,stroke:#7a4baa;
-    style v108 fill:#e3dcea,stroke:#7a4baa;
+    style v88 fill:#e3dcea,stroke:#7a4baa;
+    style v98 fill:#e3dcea,stroke:#7a4baa;
+    style v105 fill:#e3dcea,stroke:#7a4baa;
+    style v106 fill:#e3dcea,stroke:#7a4baa;
+    style v136 fill:#e3dcea,stroke:#7a4baa;
+    style v114 fill:#e3dcea,stroke:#7a4baa;
+    style v121 fill:#e3dcea,stroke:#7a4baa;
+    style v131 fill:#e3dcea,stroke:#7a4baa;
+    style v143 fill:#e3dcea,stroke:#7a4baa;
+    style v150 fill:#e3dcea,stroke:#7a4baa;
+    style v162 fill:#e3dcea,stroke:#7a4baa;
+    style v169 fill:#e3dcea,stroke:#7a4baa;
+    style v173 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 

@@ -14,7 +14,7 @@ ID: `totalvi_leiden`
 Namespace: `workflows/integration`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.1/src/workflows/integration/totalvi_leiden/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/workflows/integration/totalvi_leiden/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 2.1.0 -latest \
   -main-script target/nextflow/workflows/integration/totalvi_leiden/main.nf \
   --help
 ```
@@ -43,15 +43,15 @@ nextflow run openpipelines-bio/openpipeline \
 # Inputs
 id: # please fill in - example: "foo"
 input: # please fill in - example: "dataset.h5mu"
-layer: "log_normalized"
+# layer: "foo"
 modality: "rna"
 prot_modality: "prot"
 reference: # please fill in - example: "path/to/file"
 
 # Outputs
 # output: "$id.$key.output.h5mu"
-# reference_model_path: "$id.$key.reference_model_path.reference_model_path"
-# query_model_path: "$id.$key.query_model_path.query_model_path"
+# reference_model_path: "totalvi_model_reference"
+# query_model_path: "totalvi_model_query"
 
 # General TotalVI Options
 obs_batch: "sample_id"
@@ -81,11 +81,11 @@ prot_obsp_neighbor_connectivities: "totalvi_integration_connectivities"
 
 # Clustering options RNA
 rna_obs_cluster: "totalvi_integration_leiden"
-rna_leiden_resolution: [1]
+rna_leiden_resolution: [1.0]
 
 # Clustering options ADT
 prot_obs_cluster: "totalvi_integration_leiden"
-prot_leiden_resolution: [1]
+prot_leiden_resolution: [1.0]
 
 # Umap options
 obsm_umap: "X_totalvi_umap"
@@ -93,12 +93,14 @@ obsm_umap: "X_totalvi_umap"
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
 # param_list: "my_params.yaml"
+
+# Arguments
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.1 -latest \
+  -r 2.1.0 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/integration/totalvi_leiden/main.nf \
   -params-file params.yaml
@@ -116,7 +118,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |:----------|:--------------------------------------------------|:--------------------|
 |`--id`            |ID of the sample.                                                                     |`string`, required, example: `"foo"`        |
 |`--input`         |Path to the sample.                                                                   |`file`, required, example: `"dataset.h5mu"` |
-|`--layer`         |use specified layer for expression values instead of the .X object from the modality. |`string`, default: `"log_normalized"`       |
+|`--layer`         |use specified layer for expression values instead of the .X object from the modality. |`string`                                    |
 |`--modality`      |Which modality to process.                                                            |`string`, default: `"rna"`                  |
 |`--prot_modality` |Which modality to process.                                                            |`string`, default: `"prot"`                 |
 |`--reference`     |Input h5mu file with reference data to train the TOTALVI model.                       |`file`, required                            |
@@ -209,57 +211,210 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 ```{mermaid}
 flowchart TB
     v0(Channel.fromList)
+    v2(filter)
+    v10(filter)
     v18(totalvi)
-    v50(concat)
-    v39(find_neighbors)
-    v60(leiden)
-    v80(move_obsm_to_obs)
-    v93(mix)
-    v102(umap)
-    v206(publish)
-    v233(Output)
-    subgraph group_totalvi_leiden [totalvi_leiden]
-        v134(concat)
-        v123(find_neighbors)
-        v144(leiden)
-        v164(move_obsm_to_obs)
-        v177(mix)
-        v186(umap)
+    v25(cross)
+    v35(cross)
+    v41(filter)
+    v50(filter)
+    v65(cross)
+    v75(cross)
+    v84(branch)
+    v111(concat)
+    v96(cross)
+    v106(cross)
+    v115(branch)
+    v142(concat)
+    v127(cross)
+    v137(cross)
+    v146(branch)
+    v173(concat)
+    v158(cross)
+    v168(cross)
+    v180(cross)
+    v190(cross)
+    v196(filter)
+    v350(concat)
+    v205(filter)
+    v220(cross)
+    v230(cross)
+    v239(branch)
+    v266(concat)
+    v251(cross)
+    v261(cross)
+    v270(branch)
+    v297(concat)
+    v282(cross)
+    v292(cross)
+    v301(branch)
+    v328(concat)
+    v313(cross)
+    v323(cross)
+    v335(cross)
+    v345(cross)
+    v357(cross)
+    v364(cross)
+    v376(cross)
+    v383(cross)
+    v387(Output)
+    subgraph group_rna_neighbors_leiden_umap [rna_neighbors_leiden_umap]
+        v58(find_neighbors)
+        v89(leiden)
+        v120(move_obsm_to_obs)
+        v151(umap)
     end
-    v0-->v18
-    v18-->v39
-    v39-->v50
-    v50-->v60
-    v60-->v80
-    v80-->v93
-    v50-->v93
-    v93-->v102
-    v102-->v123
-    v123-->v134
-    v134-->v144
-    v144-->v164
-    v164-->v177
-    v134-->v177
-    v177-->v186
-    v186-->v206
-    v206-->v233
-    style group_totalvi_leiden fill:#F0F0F0,stroke:#969696;
+    subgraph group_adt_neighbors_leiden_umap [adt_neighbors_leiden_umap]
+        v213(find_neighbors)
+        v244(leiden)
+        v275(move_obsm_to_obs)
+        v306(umap)
+    end
+    v84-->v111
+    v115-->v142
+    v146-->v173
+    v239-->v266
+    v270-->v297
+    v301-->v328
+    v0-->v2
+    v2-->v10
+    v10-->v18
+    v18-->v25
+    v10-->v25
+    v10-->v35
+    v41-->v50
+    v50-->v58
+    v58-->v65
+    v50-->v65
+    v50-->v75
+    v84-->v89
+    v89-->v96
+    v84-->v96
+    v84-->v106
+    v106-->v111
+    v115-->v120
+    v120-->v127
+    v115-->v127
+    v115-->v137
+    v137-->v142
+    v146-->v151
+    v151-->v158
+    v146-->v158
+    v146-->v168
+    v168-->v173
+    v173-->v180
+    v41-->v180
+    v41-->v190
+    v196-->v205
+    v205-->v213
+    v213-->v220
+    v205-->v220
+    v205-->v230
+    v239-->v244
+    v244-->v251
+    v239-->v251
+    v239-->v261
+    v261-->v266
+    v270-->v275
+    v275-->v282
+    v270-->v282
+    v270-->v292
+    v292-->v297
+    v301-->v306
+    v306-->v313
+    v301-->v313
+    v301-->v323
+    v323-->v328
+    v328-->v335
+    v196-->v335
+    v196-->v345
+    v345-->v350
+    v350-->v357
+    v2-->v357
+    v357-->v364
+    v2-->v364
+    v2-->v376
+    v376-->v383
+    v2-->v383
+    v383-->v387
+    v35-->v41
+    v18-->v35
+    v190-->v196
+    v58-->v75
+    v75-->v84
+    v89-->v106
+    v111-->v115
+    v120-->v137
+    v142-->v146
+    v151-->v168
+    v173-->v190
+    v213-->v230
+    v230-->v239
+    v244-->v261
+    v266-->v270
+    v275-->v292
+    v297-->v301
+    v306-->v323
+    v328-->v345
+    v350-->v376
+    style group_rna_neighbors_leiden_umap fill:#F0F0F0,stroke:#969696;
+    style group_adt_neighbors_leiden_umap fill:#F0F0F0,stroke:#969696;
     style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v2 fill:#e3dcea,stroke:#7a4baa;
+    style v10 fill:#e3dcea,stroke:#7a4baa;
     style v18 fill:#e3dcea,stroke:#7a4baa;
+    style v25 fill:#e3dcea,stroke:#7a4baa;
+    style v35 fill:#e3dcea,stroke:#7a4baa;
+    style v41 fill:#e3dcea,stroke:#7a4baa;
     style v50 fill:#e3dcea,stroke:#7a4baa;
-    style v39 fill:#e3dcea,stroke:#7a4baa;
-    style v60 fill:#e3dcea,stroke:#7a4baa;
-    style v80 fill:#e3dcea,stroke:#7a4baa;
-    style v93 fill:#e3dcea,stroke:#7a4baa;
-    style v102 fill:#e3dcea,stroke:#7a4baa;
-    style v134 fill:#e3dcea,stroke:#7a4baa;
-    style v123 fill:#e3dcea,stroke:#7a4baa;
-    style v144 fill:#e3dcea,stroke:#7a4baa;
-    style v164 fill:#e3dcea,stroke:#7a4baa;
-    style v177 fill:#e3dcea,stroke:#7a4baa;
-    style v186 fill:#e3dcea,stroke:#7a4baa;
-    style v206 fill:#e3dcea,stroke:#7a4baa;
-    style v233 fill:#e3dcea,stroke:#7a4baa;
+    style v58 fill:#e3dcea,stroke:#7a4baa;
+    style v65 fill:#e3dcea,stroke:#7a4baa;
+    style v75 fill:#e3dcea,stroke:#7a4baa;
+    style v84 fill:#e3dcea,stroke:#7a4baa;
+    style v111 fill:#e3dcea,stroke:#7a4baa;
+    style v89 fill:#e3dcea,stroke:#7a4baa;
+    style v96 fill:#e3dcea,stroke:#7a4baa;
+    style v106 fill:#e3dcea,stroke:#7a4baa;
+    style v115 fill:#e3dcea,stroke:#7a4baa;
+    style v142 fill:#e3dcea,stroke:#7a4baa;
+    style v120 fill:#e3dcea,stroke:#7a4baa;
+    style v127 fill:#e3dcea,stroke:#7a4baa;
+    style v137 fill:#e3dcea,stroke:#7a4baa;
+    style v146 fill:#e3dcea,stroke:#7a4baa;
+    style v173 fill:#e3dcea,stroke:#7a4baa;
+    style v151 fill:#e3dcea,stroke:#7a4baa;
+    style v158 fill:#e3dcea,stroke:#7a4baa;
+    style v168 fill:#e3dcea,stroke:#7a4baa;
+    style v180 fill:#e3dcea,stroke:#7a4baa;
+    style v190 fill:#e3dcea,stroke:#7a4baa;
+    style v196 fill:#e3dcea,stroke:#7a4baa;
+    style v350 fill:#e3dcea,stroke:#7a4baa;
+    style v205 fill:#e3dcea,stroke:#7a4baa;
+    style v213 fill:#e3dcea,stroke:#7a4baa;
+    style v220 fill:#e3dcea,stroke:#7a4baa;
+    style v230 fill:#e3dcea,stroke:#7a4baa;
+    style v239 fill:#e3dcea,stroke:#7a4baa;
+    style v266 fill:#e3dcea,stroke:#7a4baa;
+    style v244 fill:#e3dcea,stroke:#7a4baa;
+    style v251 fill:#e3dcea,stroke:#7a4baa;
+    style v261 fill:#e3dcea,stroke:#7a4baa;
+    style v270 fill:#e3dcea,stroke:#7a4baa;
+    style v297 fill:#e3dcea,stroke:#7a4baa;
+    style v275 fill:#e3dcea,stroke:#7a4baa;
+    style v282 fill:#e3dcea,stroke:#7a4baa;
+    style v292 fill:#e3dcea,stroke:#7a4baa;
+    style v301 fill:#e3dcea,stroke:#7a4baa;
+    style v328 fill:#e3dcea,stroke:#7a4baa;
+    style v306 fill:#e3dcea,stroke:#7a4baa;
+    style v313 fill:#e3dcea,stroke:#7a4baa;
+    style v323 fill:#e3dcea,stroke:#7a4baa;
+    style v335 fill:#e3dcea,stroke:#7a4baa;
+    style v345 fill:#e3dcea,stroke:#7a4baa;
+    style v357 fill:#e3dcea,stroke:#7a4baa;
+    style v364 fill:#e3dcea,stroke:#7a4baa;
+    style v376 fill:#e3dcea,stroke:#7a4baa;
+    style v383 fill:#e3dcea,stroke:#7a4baa;
+    style v387 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 

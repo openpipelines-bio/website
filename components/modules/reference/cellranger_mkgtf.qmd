@@ -1,0 +1,80 @@
+---
+title: "Cellranger mkgtf"
+namespace: "Reference"
+description: "Make a GTF file - filter by a specific attribute."
+type: "module"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `cellranger_mkgtf`  
+Namespace: `reference`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/reference/cellranger_mkgtf/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 2.1.0 -latest \
+  -main-script target/nextflow/reference/cellranger_mkgtf/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Arguments
+input_gtf: # please fill in - example: "transcriptome_annotation.gtf.gz"
+# output_gtf: "$id.$key.output_gtf.gz"
+attribute: # please fill in - example: ["gene_type:transcribed_unprocessed_pseudogene", "gene_type:miRNA"]
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 2.1.0 -latest \
+  -profile docker \
+  -main-script target/nextflow/reference/cellranger_mkgtf/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument group
+
+### Arguments
+
+|Name           |Description                                                                                            |Attributes                                                                                                                    |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--input_gtf`  |Reference GTF annotation.                                                                              |`file`, required, example: `"transcriptome_annotation.gtf.gz"`                                                                |
+|`--output_gtf` |Output GTF file.                                                                                       |`file`, required, example: `"output.gtf.gz"`                                                                                  |
+|`--attribute`  |Key-value pair in attributes field to be kept in the GTF file of the format attribute:attribute_value. |List of `string`, required, example: `"gene_type:transcribed_unprocessed_pseudogene", "gene_type:miRNA"`, multiple_sep: `";"` |
+
+## Authors
+
+
+  * Jakub Majercik [{{< fa brands github >}}](https://github.com/jakubmajercik) [{{< fa brands linkedin >}}](https://linkedin.com/in/jakubmajercik) (author)
+

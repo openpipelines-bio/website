@@ -14,7 +14,7 @@ ID: `regress_out`
 Namespace: `transform`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/transform/regress_out/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/transform/regress_out/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -31,7 +31,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -main-script target/nextflow/transform/regress_out/main.nf \
   --help
 ```
@@ -43,10 +43,12 @@ nextflow run openpipelines-bio/openpipeline \
 ```yaml
 # Arguments
 input: # please fill in - example: "input.h5mu"
-# output: "$id.$key.output.h5mu"
+# output: "output.h5mu"
 # output_compression: "gzip"
 modality: "rna"
 # obs_keys: ["foo"]
+# input_layer: "X_normalized"
+# output_layer: "X_regressed"
 
 # Nextflow input-output arguments
 publish_dir: # please fill in - example: "output/"
@@ -56,7 +58,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -profile docker \
   -main-script target/nextflow/transform/regress_out/main.nf \
   -params-file params.yaml
@@ -70,13 +72,15 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Arguments
 
-|Name                   |Description                                                  |Attributes                                 |
+|Name                   |Description                                                                                                                           |Attributes                                 |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--input`              |Input h5mu file                                              |`file`, required, example: `"input.h5mu"`  |
-|`--output`             |Output h5mu file.                                            |`file`, required, default: `"output.h5mu"` |
-|`--output_compression` |The compression format to be used on the output h5mu object. |`string`, example: `"gzip"`                |
-|`--modality`           |Which modality (one or more) to run this component on.       |`string`, default: `"rna"`                 |
-|`--obs_keys`           |Which .obs keys to regress on.                               |List of `string`, multiple_sep: `";"`      |
+|`--input`              |Input h5mu file                                                                                                                       |`file`, required, example: `"input.h5mu"`  |
+|`--output`             |Output h5mu file.                                                                                                                     |`file`, required, default: `"output.h5mu"` |
+|`--output_compression` |The compression format to be used on the output h5mu object.                                                                          |`string`, example: `"gzip"`                |
+|`--modality`           |Which modality (one or more) to run this component on.                                                                                |`string`, default: `"rna"`                 |
+|`--obs_keys`           |Which .obs keys to regress on.                                                                                                        |List of `string`, multiple_sep: `";"`      |
+|`--input_layer`        |The layer of the adata object to regress on. If not provided, the X attribute of the adata object will be used.                       |`string`, example: `"X_normalized"`        |
+|`--output_layer`       |The layer of the adata object containing the regressed count data. If not provided, the X attribute of the adata object will be used. |`string`, example: `"X_regressed"`         |
 
 ## Authors
 

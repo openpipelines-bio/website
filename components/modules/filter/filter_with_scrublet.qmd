@@ -14,7 +14,7 @@ ID: `filter_with_scrublet`
 Namespace: `filter`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.2/src/filter/filter_with_scrublet/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/filter/filter_with_scrublet/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -49,7 +49,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -main-script target/nextflow/filter/filter_with_scrublet/main.nf \
   --help
 ```
@@ -68,9 +68,13 @@ modality: "rna"
 obs_name_filter: "filter_with_scrublet"
 do_subset: false
 obs_name_doublet_score: "scrublet_doublet_score"
+# expected_doublet_rate: 123.0
+# stdev_doublet_rate: 123.0
+# n_neighbors: 123
+# sim_doublet_ratio: 123.0
 min_counts: 2
 min_cells: 3
-min_gene_variablity_percent: 85
+min_gene_variablity_percent: 85.0
 num_pca_components: 30
 distance_metric: "euclidean"
 allow_automatic_threshold_detection_fail: false
@@ -83,7 +87,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 1.0.2 -latest \
+  -r 2.1.0 -latest \
   -profile docker \
   -main-script target/nextflow/filter/filter_with_scrublet/main.nf \
   -params-file params.yaml
@@ -107,6 +111,10 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--obs_name_filter`                          |In which .obs slot to store a boolean array corresponding to which observations should be filtered out.                                                                                |`string`, default: `"filter_with_scrublet"`   |
 |`--do_subset`                                |Whether to subset before storing the output.                                                                                                                                           |`boolean_true`                                |
 |`--obs_name_doublet_score`                   |Name of the doublet scores column in the obs slot of the returned object.                                                                                                              |`string`, default: `"scrublet_doublet_score"` |
+|`--expected_doublet_rate`                    |The estimated fraction of doublets as from the experimental setup.                                                                                                                     |`double`                                      |
+|`--stdev_doublet_rate`                       |Uncertainty in the expected doublet rate.                                                                                                                                              |`double`                                      |
+|`--n_neighbors`                              |Number of neighbors used to construct the KNN classifier of observed transcriptomes and simulated doublets.                                                                            |`integer`                                     |
+|`--sim_doublet_ratio`                        |Number of doublets to simulate relative to the number of observed transcriptomes.                                                                                                      |`double`                                      |
 |`--min_counts`                               |The number of minimal UMI counts per cell that have to be present for initial cell detection.                                                                                          |`integer`, default: `2`                       |
 |`--min_cells`                                |The number of cells in which UMIs for a gene were detected.                                                                                                                            |`integer`, default: `3`                       |
 |`--min_gene_variablity_percent`              |Used for gene filtering prior to PCA. Keep the most highly variable genes (in the top min_gene_variability_pctl percentile), as measured by the v-statistic [Klein et al., Cell 2015]. |`double`, default: `85`                       |
