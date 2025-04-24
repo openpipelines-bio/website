@@ -14,7 +14,7 @@ ID: `make_reference`
 Namespace: `workflows/ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/workflows/ingestion/make_reference/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/1.0.5/src/workflows/ingestion/make_reference/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.0 -latest \
+  -r 1.0.5 -latest \
   -main-script target/nextflow/workflows/ingestion/make_reference/main.nf \
   --help
 ```
@@ -46,25 +46,11 @@ genome_fasta: # please fill in - example: "https:/ftp.ebi.ac.uk/pub/databases/ge
 transcriptome_gtf: # please fill in - example: "https:/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_41/gencode.v41.annotation.gtf.gz"
 # ercc: "https:/assets.thermofisher.com/TFS-Assets/LSG/manuals/ERCC92.zip"
 
-# STAR Settings
-star_genome_sa_index_nbases: 14
-
-# BD Rhapsody Settings
-bdrhap_mitochondrial_contigs: ["chrM", "chrMT", "M", "MT"]
-bdrhap_filtering_off: false
-bdrhap_wta_only_index: false
-# bdrhap_extra_star_params: "--limitGenomeGenerateRAM 48000 --genomeSAindexNbases 11"
-
-# Cellranger ARC options
-# motifs_file: "path/to/file"
-# non_nuclear_contigs: ["foo"]
-
 # Outputs
 target: ["star"]
 # output_fasta: "$id.$key.output_fasta.gz"
 # output_gtf: "$id.$key.output_gtf.gz"
 # output_cellranger: "$id.$key.output_cellranger.gz"
-# output_cellranger_arc: "$id.$key.output_cellranger_arc.gz"
 # output_bd_rhapsody: "$id.$key.output_bd_rhapsody.gz"
 # output_star: "$id.$key.output_star.gz"
 
@@ -79,7 +65,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.0 -latest \
+  -r 1.0.5 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/ingestion/make_reference/main.nf \
   -params-file params.yaml
@@ -101,42 +87,16 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--ercc`              |ERCC sequence and annotation file.  |`file`, example: `"https:/assets.thermofisher.com/TFS-Assets/LSG/manuals/ERCC92.zip"`                                                   |
 
 
-### STAR Settings
-
-|Name                            |Description                                                                                                                                                                                                                                                     |Attributes               |
-|:----------|:--------------------------------------------------|:--------------------|
-|`--star_genome_sa_index_nbases` |Length (bases) of the SA pre-indexing string. Typically between 10 and 15. Longer strings will use much more memory, but allow faster searches. For small genomes, the parameter {genomeSAindexNbases must be scaled down to min(14, log2(GenomeLength)/2 - 1). |`integer`, default: `14` |
-
-
-### BD Rhapsody Settings
-
-|Name                             |Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |Attributes                                                                     |
-|:----------|:--------------------------------------------------|:--------------------|
-|`--bdrhap_mitochondrial_contigs` |Names of the Mitochondrial contigs in the provided Reference Genome. Fragments originating from contigs other than these are identified as 'nuclear fragments' in the ATACseq analysis pipeline.                                                                                                                                                                                                                                                                                                                                                                                     |List of `string`, default: `"chrM", "chrMT", "M", "MT"`, multiple_sep: `";"`   |
-|`--bdrhap_filtering_off`         |By default the input Transcript Annotation files are filtered based on the gene_type/gene_biotype attribute. Only features  having the following attribute values are kept:    - protein_coding   - lncRNA    - IG_LV_gene   - IG_V_gene   - IG_V_pseudogene   - IG_D_gene   - IG_J_gene   - IG_J_pseudogene   - IG_C_gene   - IG_C_pseudogene   - TR_V_gene   - TR_V_pseudogene   - TR_D_gene   - TR_J_gene   - TR_J_pseudogene   - TR_C_gene    If you have already pre-filtered the input Annotation files and/or wish to turn-off the filtering, please set this option to True. |`boolean_true`                                                                 |
-|`--bdrhap_wta_only_index`        |Build a WTA only index, otherwise builds a WTA + ATAC index.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |`boolean_true`                                                                 |
-|`--bdrhap_extra_star_params`     |Additional parameters to pass to STAR when building the genome index. Specify exactly like how you would on the command line.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |`string`, example: `"--limitGenomeGenerateRAM 48000 --genomeSAindexNbases 11"` |
-
-
-### Cellranger ARC options
-
-|Name                    |Description                                                                                                                                                                                                                                                                |Attributes                            |
-|:----------|:--------------------------------------------------|:--------------------|
-|`--motifs_file`         |Path to file containing transcription factor motifs in JASPAR format.                                                                                                                                                                                                      |`file`                                |
-|`--non_nuclear_contigs` |Name(s) of contig(s) that do not have any chromatin structure, for example,  mitochondria or plastids. These contigs are excluded from peak calling since the entire contig will be "open" due to a lack of chromatin structure. Leave empty if there are no such contigs. |List of `string`, multiple_sep: `";"` |
-
-
 ### Outputs
 
-|Name                      |Description                          |Attributes                                               |
+|Name                   |Description                          |Attributes                                               |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--target`                |Which reference indices to generate. |List of `string`, default: `"star"`, multiple_sep: `";"` |
-|`--output_fasta`          |Output genome sequence fasta.        |`file`, example: `"genome_sequence.fa.gz"`               |
-|`--output_gtf`            |Output transcriptome annotation gtf. |`file`, example: `"transcriptome_annotation.gtf.gz"`     |
-|`--output_cellranger`     |Output index                         |`file`, example: `"cellranger_index.tar.gz"`             |
-|`--output_cellranger_arc` |Output index                         |`file`, example: `"cellranger_index_arc.tar.gz"`         |
-|`--output_bd_rhapsody`    |Output index                         |`file`, example: `"bdrhap_index.tar.gz"`                 |
-|`--output_star`           |Output index                         |`file`, example: `"star_index.tar.gz"`                   |
+|`--target`             |Which reference indices to generate. |List of `string`, default: `"star"`, multiple_sep: `";"` |
+|`--output_fasta`       |Output genome sequence fasta.        |`file`, example: `"genome_sequence.fa.gz"`               |
+|`--output_gtf`         |Output transcriptome annotation gtf. |`file`, example: `"transcriptome_annotation.gtf.gz"`     |
+|`--output_cellranger`  |Output index                         |`file`, example: `"cellranger_index.tar.gz"`             |
+|`--output_bd_rhapsody` |Output index                         |`file`, example: `"bdrhap_index.tar.gz"`                 |
+|`--output_star`        |Output index                         |`file`, example: `"star_index.tar.gz"`                   |
 
 
 ### Arguments
@@ -152,122 +112,35 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
   * Robrecht Cannoodt [{{< fa brands github >}}](https://github.com/rcannood) [{{< fa brands orcid >}}](https://orcid.org/0000-0003-3641-729X) [{{< fa brands linkedin >}}](https://linkedin.com/in/robrechtcannoodt) (author, maintainer)
 
-  * Weiwei Schultz (contributor)
-
 ## Visualisation
 
 ```{mermaid}
 flowchart TB
     v0(Channel.fromList)
-    v2(filter)
-    v10(filter)
-    v18(make_reference_component)
-    v25(cross)
-    v35(cross)
-    v44(branch)
-    v71(concat)
-    v49(build_cellranger_arc_reference)
-    v56(cross)
-    v66(cross)
-    v75(branch)
-    v102(concat)
-    v80(build_cellranger_reference)
-    v87(cross)
-    v97(cross)
-    v106(branch)
-    v133(concat)
-    v111(build_star_reference)
-    v118(cross)
-    v128(cross)
-    v137(branch)
-    v164(concat)
-    v142(build_bdrhap_reference)
-    v149(cross)
-    v159(cross)
-    v171(cross)
-    v178(cross)
-    v190(cross)
-    v197(cross)
-    v201(Output)
-    v44-->v71
-    v75-->v102
-    v106-->v133
-    v137-->v164
-    v0-->v2
-    v2-->v10
-    v10-->v18
-    v18-->v25
-    v10-->v25
-    v10-->v35
-    v44-->v49
-    v49-->v56
-    v44-->v56
-    v44-->v66
-    v66-->v71
-    v75-->v80
-    v80-->v87
-    v75-->v87
-    v75-->v97
-    v97-->v102
-    v106-->v111
-    v111-->v118
-    v106-->v118
-    v106-->v128
-    v128-->v133
-    v137-->v142
-    v142-->v149
-    v137-->v149
-    v137-->v159
-    v159-->v164
-    v164-->v171
-    v2-->v171
-    v171-->v178
-    v2-->v178
-    v2-->v190
-    v190-->v197
-    v2-->v197
-    v197-->v201
-    v18-->v35
-    v35-->v44
-    v49-->v66
-    v71-->v75
-    v80-->v97
-    v102-->v106
-    v111-->v128
-    v133-->v137
-    v142-->v159
-    v164-->v190
+    v28(concat)
+    v17(make_reference_component)
+    v39(build_cellranger_reference)
+    v98(mix)
+    v62(build_bdrhap_reference)
+    v85(star_build_reference)
+    v117(Output)
+    v0-->v17
+    v17-->v28
+    v28-->v39
+    v39-->v98
+    v28-->v62
+    v62-->v98
+    v28-->v85
+    v85-->v98
+    v98-->v117
     style v0 fill:#e3dcea,stroke:#7a4baa;
-    style v2 fill:#e3dcea,stroke:#7a4baa;
-    style v10 fill:#e3dcea,stroke:#7a4baa;
-    style v18 fill:#e3dcea,stroke:#7a4baa;
-    style v25 fill:#e3dcea,stroke:#7a4baa;
-    style v35 fill:#e3dcea,stroke:#7a4baa;
-    style v44 fill:#e3dcea,stroke:#7a4baa;
-    style v71 fill:#e3dcea,stroke:#7a4baa;
-    style v49 fill:#e3dcea,stroke:#7a4baa;
-    style v56 fill:#e3dcea,stroke:#7a4baa;
-    style v66 fill:#e3dcea,stroke:#7a4baa;
-    style v75 fill:#e3dcea,stroke:#7a4baa;
-    style v102 fill:#e3dcea,stroke:#7a4baa;
-    style v80 fill:#e3dcea,stroke:#7a4baa;
-    style v87 fill:#e3dcea,stroke:#7a4baa;
-    style v97 fill:#e3dcea,stroke:#7a4baa;
-    style v106 fill:#e3dcea,stroke:#7a4baa;
-    style v133 fill:#e3dcea,stroke:#7a4baa;
-    style v111 fill:#e3dcea,stroke:#7a4baa;
-    style v118 fill:#e3dcea,stroke:#7a4baa;
-    style v128 fill:#e3dcea,stroke:#7a4baa;
-    style v137 fill:#e3dcea,stroke:#7a4baa;
-    style v164 fill:#e3dcea,stroke:#7a4baa;
-    style v142 fill:#e3dcea,stroke:#7a4baa;
-    style v149 fill:#e3dcea,stroke:#7a4baa;
-    style v159 fill:#e3dcea,stroke:#7a4baa;
-    style v171 fill:#e3dcea,stroke:#7a4baa;
-    style v178 fill:#e3dcea,stroke:#7a4baa;
-    style v190 fill:#e3dcea,stroke:#7a4baa;
-    style v197 fill:#e3dcea,stroke:#7a4baa;
-    style v201 fill:#e3dcea,stroke:#7a4baa;
+    style v28 fill:#e3dcea,stroke:#7a4baa;
+    style v17 fill:#e3dcea,stroke:#7a4baa;
+    style v39 fill:#e3dcea,stroke:#7a4baa;
+    style v98 fill:#e3dcea,stroke:#7a4baa;
+    style v62 fill:#e3dcea,stroke:#7a4baa;
+    style v85 fill:#e3dcea,stroke:#7a4baa;
+    style v117 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 
