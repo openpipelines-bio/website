@@ -14,7 +14,7 @@ ID: `scanorama_leiden`
 Namespace: `workflows/integration`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/workflows/integration/scanorama_leiden/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.1/src/workflows/integration/scanorama_leiden/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.0 -latest \
+  -r 2.1.1 -latest \
   -main-script target/nextflow/workflows/integration/scanorama_leiden/main.nf \
   --help
 ```
@@ -81,7 +81,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.0 -latest \
+  -r 2.1.1 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/integration/scanorama_leiden/main.nf \
   -params-file params.yaml
