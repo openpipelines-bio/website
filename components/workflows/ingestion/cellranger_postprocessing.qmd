@@ -14,7 +14,7 @@ ID: `cellranger_postprocessing`
 Namespace: `workflows/ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/workflows/ingestion/cellranger_postprocessing/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.0.1/src/workflows/ingestion/cellranger_postprocessing/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.0 -latest \
+  -r 2.0.1 -latest \
   -main-script target/nextflow/workflows/ingestion/cellranger_postprocessing/main.nf \
   --help
 ```
@@ -65,7 +65,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.0 -latest \
+  -r 2.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/ingestion/cellranger_postprocessing/main.nf \
   -params-file params.yaml
@@ -120,64 +120,81 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 flowchart TB
     v0(Channel.fromList)
     v2(filter)
-    v14(branch)
-    v41(concat)
-    v19(cellbender_remove_background)
-    v26(cross)
-    v36(cross)
-    v45(branch)
-    v72(concat)
-    v50(filter_with_counts)
-    v57(cross)
-    v67(cross)
-    v79(cross)
+    v12(branch)
+    v39(concat)
+    v17(cellbender_remove_background)
+    v24(cross)
+    v34(cross)
+    v43(branch)
+    v70(concat)
+    v48(filter_with_counts)
+    v55(cross)
+    v65(cross)
+    v71(filter)
+    v101(concat)
+    v79(publish)
     v86(cross)
-    v98(cross)
-    v105(cross)
-    v109(Output)
-    v14-->v41
-    v45-->v72
+    v96(cross)
+    v108(cross)
+    v115(cross)
+    v127(cross)
+    v134(cross)
+    v138(Output)
+    v12-->v39
+    v43-->v70
+    v70-->v71
     v0-->v2
-    v14-->v19
-    v19-->v26
-    v14-->v26
-    v14-->v36
-    v36-->v41
-    v45-->v50
-    v50-->v57
-    v45-->v57
-    v45-->v67
-    v67-->v72
-    v72-->v79
-    v2-->v79
+    v12-->v17
+    v17-->v24
+    v12-->v24
+    v12-->v34
+    v34-->v39
+    v43-->v48
+    v48-->v55
+    v43-->v55
+    v43-->v65
+    v65-->v70
+    v71-->v79
     v79-->v86
-    v2-->v86
-    v2-->v98
-    v98-->v105
-    v2-->v105
-    v105-->v109
-    v2-->v14
-    v19-->v36
-    v41-->v45
-    v50-->v67
-    v72-->v98
+    v71-->v86
+    v71-->v96
+    v96-->v101
+    v101-->v108
+    v2-->v108
+    v108-->v115
+    v2-->v115
+    v2-->v127
+    v127-->v134
+    v2-->v134
+    v134-->v138
+    v2-->v12
+    v17-->v34
+    v39-->v43
+    v48-->v65
+    v79-->v96
+    v101-->v127
     style v0 fill:#e3dcea,stroke:#7a4baa;
     style v2 fill:#e3dcea,stroke:#7a4baa;
-    style v14 fill:#e3dcea,stroke:#7a4baa;
-    style v41 fill:#e3dcea,stroke:#7a4baa;
-    style v19 fill:#e3dcea,stroke:#7a4baa;
-    style v26 fill:#e3dcea,stroke:#7a4baa;
-    style v36 fill:#e3dcea,stroke:#7a4baa;
-    style v45 fill:#e3dcea,stroke:#7a4baa;
-    style v72 fill:#e3dcea,stroke:#7a4baa;
-    style v50 fill:#e3dcea,stroke:#7a4baa;
-    style v57 fill:#e3dcea,stroke:#7a4baa;
-    style v67 fill:#e3dcea,stroke:#7a4baa;
+    style v12 fill:#e3dcea,stroke:#7a4baa;
+    style v39 fill:#e3dcea,stroke:#7a4baa;
+    style v17 fill:#e3dcea,stroke:#7a4baa;
+    style v24 fill:#e3dcea,stroke:#7a4baa;
+    style v34 fill:#e3dcea,stroke:#7a4baa;
+    style v43 fill:#e3dcea,stroke:#7a4baa;
+    style v70 fill:#e3dcea,stroke:#7a4baa;
+    style v48 fill:#e3dcea,stroke:#7a4baa;
+    style v55 fill:#e3dcea,stroke:#7a4baa;
+    style v65 fill:#e3dcea,stroke:#7a4baa;
+    style v71 fill:#e3dcea,stroke:#7a4baa;
+    style v101 fill:#e3dcea,stroke:#7a4baa;
     style v79 fill:#e3dcea,stroke:#7a4baa;
     style v86 fill:#e3dcea,stroke:#7a4baa;
-    style v98 fill:#e3dcea,stroke:#7a4baa;
-    style v105 fill:#e3dcea,stroke:#7a4baa;
-    style v109 fill:#e3dcea,stroke:#7a4baa;
+    style v96 fill:#e3dcea,stroke:#7a4baa;
+    style v108 fill:#e3dcea,stroke:#7a4baa;
+    style v115 fill:#e3dcea,stroke:#7a4baa;
+    style v127 fill:#e3dcea,stroke:#7a4baa;
+    style v134 fill:#e3dcea,stroke:#7a4baa;
+    style v138 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 

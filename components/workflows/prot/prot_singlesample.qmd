@@ -14,7 +14,7 @@ ID: `prot_singlesample`
 Namespace: `workflows/prot`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/workflows/prot/prot_singlesample/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.0.1/src/workflows/prot/prot_singlesample/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.0 -latest \
+  -r 2.0.1 -latest \
   -main-script target/nextflow/workflows/prot/prot_singlesample/main.nf \
   --help
 ```
@@ -65,7 +65,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.0 -latest \
+  -r 2.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/prot/prot_singlesample/main.nf \
   -params-file params.yaml

@@ -14,7 +14,7 @@ ID: `scgpt_leiden`
 Namespace: `workflows/integration`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/workflows/integration/scgpt_leiden/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.0.1/src/workflows/integration/scgpt_leiden/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.0 -latest \
+  -r 2.0.1 -latest \
   -main-script target/nextflow/workflows/integration/scgpt_leiden/main.nf \
   --help
 ```
@@ -64,7 +64,6 @@ pad_value: -2
 
 # HVG subset arguments
 n_hvg: 1200
-hvg_flavor: "cell_ranger"
 
 # Tokenization arguments
 # max_seq_len: 123
@@ -90,7 +89,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.0 -latest \
+  -r 2.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/integration/scgpt_leiden/main.nf \
   -params-file params.yaml
@@ -109,7 +108,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--id`              |ID of the sample.                                                                                                        |`string`, required, example: `"foo"`      |
 |`--input`           |Path to the input file.                                                                                                  |`file`, required, example: `"input.h5mu"` |
 |`--modality`        |                                                                                                                         |`string`, default: `"rna"`                |
-|`--input_layer`     |The layer of the input dataset to process if .X is not to be used. Should contain log normalized counts.                 |`string`                                  |
+|`--input_layer`     |Mudata layer (key from layers) to use as input data for hvg subsetting and binning; if not specified, X is used.         |`string`                                  |
 |`--var_gene_names`  |The name of the adata var column containing gene names; when no gene_name_layer is provided, the var index will be used. |`string`                                  |
 |`--obs_batch_label` |The name of the adata obs column containing the batch labels.                                                            |`string`                                  |
 
@@ -142,10 +141,9 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### HVG subset arguments
 
-|Name           |Description                                                                                                                                                                      |Attributes                         |
+|Name      |Description                                    |Attributes                 |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--n_hvg`      |Number of highly variable genes to subset for.                                                                                                                                   |`integer`, default: `1200`         |
-|`--hvg_flavor` |Method to be used for identifying highly variable genes.  Note that the default for this workflow (`cell_ranger`) is not the default method for scanpy hvg detection (`seurat`). |`string`, default: `"cell_ranger"` |
+|`--n_hvg` |Number of highly variable genes to subset for. |`integer`, default: `1200` |
 
 
 ### Tokenization arguments
@@ -213,38 +211,32 @@ flowchart TB
     v149(cross)
     v159(cross)
     v165(filter)
-    v319(concat)
-    v174(filter)
-    v189(cross)
-    v199(cross)
-    v208(branch)
-    v235(concat)
-    v220(cross)
-    v230(cross)
-    v239(branch)
-    v266(concat)
-    v251(cross)
-    v261(cross)
-    v270(branch)
-    v297(concat)
-    v282(cross)
-    v292(cross)
-    v304(cross)
+    v173(find_neighbors)
+    v180(cross)
+    v190(cross)
+    v199(branch)
+    v226(concat)
+    v204(leiden)
+    v211(cross)
+    v221(cross)
+    v230(branch)
+    v257(concat)
+    v235(move_obsm_to_obs)
+    v242(cross)
+    v252(cross)
+    v258(filter)
+    v288(concat)
+    v266(umap)
+    v273(cross)
+    v283(cross)
+    v295(cross)
+    v302(cross)
     v314(cross)
-    v326(cross)
-    v333(cross)
-    v345(cross)
-    v352(cross)
-    v356(Output)
-    subgraph group_neighbors_leiden_umap [neighbors_leiden_umap]
-        v182(find_neighbors)
-        v213(leiden)
-        v244(move_obsm_to_obs)
-        v275(umap)
-    end
-    v208-->v235
-    v239-->v266
-    v270-->v297
+    v321(cross)
+    v325(Output)
+    v199-->v226
+    v230-->v257
+    v257-->v258
     v0-->v2
     v2-->v10
     v10-->v18
@@ -267,38 +259,33 @@ flowchart TB
     v142-->v149
     v134-->v149
     v134-->v159
-    v165-->v174
-    v174-->v182
-    v182-->v189
-    v174-->v189
-    v174-->v199
-    v208-->v213
-    v213-->v220
-    v208-->v220
-    v208-->v230
+    v165-->v173
+    v173-->v180
+    v165-->v180
+    v165-->v190
+    v199-->v204
+    v204-->v211
+    v199-->v211
+    v199-->v221
+    v221-->v226
     v230-->v235
-    v239-->v244
-    v244-->v251
-    v239-->v251
-    v239-->v261
-    v261-->v266
-    v270-->v275
-    v275-->v282
-    v270-->v282
-    v270-->v292
-    v292-->v297
-    v297-->v304
-    v165-->v304
-    v165-->v314
-    v314-->v319
-    v319-->v326
-    v2-->v326
-    v326-->v333
-    v2-->v333
-    v2-->v345
-    v345-->v352
-    v2-->v352
-    v352-->v356
+    v235-->v242
+    v230-->v242
+    v230-->v252
+    v252-->v257
+    v258-->v266
+    v266-->v273
+    v258-->v273
+    v258-->v283
+    v283-->v288
+    v288-->v295
+    v2-->v295
+    v295-->v302
+    v2-->v302
+    v2-->v314
+    v314-->v321
+    v2-->v321
+    v321-->v325
     v35-->v41
     v18-->v35
     v66-->v72
@@ -309,16 +296,13 @@ flowchart TB
     v111-->v128
     v159-->v165
     v142-->v159
-    v182-->v199
-    v199-->v208
-    v213-->v230
-    v235-->v239
-    v244-->v261
-    v266-->v270
-    v275-->v292
-    v297-->v314
-    v319-->v345
-    style group_neighbors_leiden_umap fill:#F0F0F0,stroke:#969696;
+    v173-->v190
+    v190-->v199
+    v204-->v221
+    v226-->v230
+    v235-->v252
+    v266-->v283
+    v288-->v314
     style v0 fill:#e3dcea,stroke:#7a4baa;
     style v2 fill:#e3dcea,stroke:#7a4baa;
     style v10 fill:#e3dcea,stroke:#7a4baa;
@@ -342,33 +326,29 @@ flowchart TB
     style v149 fill:#e3dcea,stroke:#7a4baa;
     style v159 fill:#e3dcea,stroke:#7a4baa;
     style v165 fill:#e3dcea,stroke:#7a4baa;
-    style v319 fill:#e3dcea,stroke:#7a4baa;
-    style v174 fill:#e3dcea,stroke:#7a4baa;
-    style v182 fill:#e3dcea,stroke:#7a4baa;
-    style v189 fill:#e3dcea,stroke:#7a4baa;
+    style v173 fill:#e3dcea,stroke:#7a4baa;
+    style v180 fill:#e3dcea,stroke:#7a4baa;
+    style v190 fill:#e3dcea,stroke:#7a4baa;
     style v199 fill:#e3dcea,stroke:#7a4baa;
-    style v208 fill:#e3dcea,stroke:#7a4baa;
-    style v235 fill:#e3dcea,stroke:#7a4baa;
-    style v213 fill:#e3dcea,stroke:#7a4baa;
-    style v220 fill:#e3dcea,stroke:#7a4baa;
+    style v226 fill:#e3dcea,stroke:#7a4baa;
+    style v204 fill:#e3dcea,stroke:#7a4baa;
+    style v211 fill:#e3dcea,stroke:#7a4baa;
+    style v221 fill:#e3dcea,stroke:#7a4baa;
     style v230 fill:#e3dcea,stroke:#7a4baa;
-    style v239 fill:#e3dcea,stroke:#7a4baa;
+    style v257 fill:#e3dcea,stroke:#7a4baa;
+    style v235 fill:#e3dcea,stroke:#7a4baa;
+    style v242 fill:#e3dcea,stroke:#7a4baa;
+    style v252 fill:#e3dcea,stroke:#7a4baa;
+    style v258 fill:#e3dcea,stroke:#7a4baa;
+    style v288 fill:#e3dcea,stroke:#7a4baa;
     style v266 fill:#e3dcea,stroke:#7a4baa;
-    style v244 fill:#e3dcea,stroke:#7a4baa;
-    style v251 fill:#e3dcea,stroke:#7a4baa;
-    style v261 fill:#e3dcea,stroke:#7a4baa;
-    style v270 fill:#e3dcea,stroke:#7a4baa;
-    style v297 fill:#e3dcea,stroke:#7a4baa;
-    style v275 fill:#e3dcea,stroke:#7a4baa;
-    style v282 fill:#e3dcea,stroke:#7a4baa;
-    style v292 fill:#e3dcea,stroke:#7a4baa;
-    style v304 fill:#e3dcea,stroke:#7a4baa;
+    style v273 fill:#e3dcea,stroke:#7a4baa;
+    style v283 fill:#e3dcea,stroke:#7a4baa;
+    style v295 fill:#e3dcea,stroke:#7a4baa;
+    style v302 fill:#e3dcea,stroke:#7a4baa;
     style v314 fill:#e3dcea,stroke:#7a4baa;
-    style v326 fill:#e3dcea,stroke:#7a4baa;
-    style v333 fill:#e3dcea,stroke:#7a4baa;
-    style v345 fill:#e3dcea,stroke:#7a4baa;
-    style v352 fill:#e3dcea,stroke:#7a4baa;
-    style v356 fill:#e3dcea,stroke:#7a4baa;
+    style v321 fill:#e3dcea,stroke:#7a4baa;
+    style v325 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 

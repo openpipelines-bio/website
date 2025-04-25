@@ -14,7 +14,7 @@ ID: `scvi_leiden`
 Namespace: `workflows/integration`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/workflows/integration/scvi_leiden/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.0.1/src/workflows/integration/scvi_leiden/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.0 -latest \
+  -r 2.0.1 -latest \
   -main-script target/nextflow/workflows/integration/scvi_leiden/main.nf \
   --help
 ```
@@ -85,7 +85,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.0 -latest \
+  -r 2.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/integration/scvi_leiden/main.nf \
   -params-file params.yaml
@@ -171,88 +171,73 @@ flowchart TB
     v25(cross)
     v35(cross)
     v41(filter)
-    v195(concat)
-    v50(filter)
-    v65(cross)
-    v75(cross)
-    v84(branch)
-    v111(concat)
-    v96(cross)
-    v106(cross)
-    v115(branch)
-    v142(concat)
-    v127(cross)
-    v137(cross)
-    v146(branch)
-    v173(concat)
-    v158(cross)
-    v168(cross)
-    v180(cross)
-    v190(cross)
-    v202(cross)
-    v209(cross)
-    v221(cross)
-    v228(cross)
-    v232(Output)
-    subgraph group_neighbors_leiden_umap [neighbors_leiden_umap]
-        v58(find_neighbors)
-        v89(leiden)
-        v120(move_obsm_to_obs)
-        v151(umap)
-    end
-    v84-->v111
-    v115-->v142
-    v146-->v173
+    v71(concat)
+    v49(find_neighbors)
+    v56(cross)
+    v66(cross)
+    v73(filter)
+    v81(leiden)
+    v88(cross)
+    v98(cross)
+    v104(filter)
+    v112(move_obsm_to_obs)
+    v119(cross)
+    v129(cross)
+    v136(mix)
+    v137(filter)
+    v167(concat)
+    v145(umap)
+    v152(cross)
+    v162(cross)
+    v174(cross)
+    v181(cross)
+    v193(cross)
+    v200(cross)
+    v204(Output)
+    v136-->v137
     v0-->v2
     v2-->v10
     v10-->v18
     v18-->v25
     v10-->v25
     v10-->v35
-    v41-->v50
-    v50-->v58
-    v58-->v65
-    v50-->v65
-    v50-->v75
-    v84-->v89
-    v89-->v96
-    v84-->v96
-    v84-->v106
-    v106-->v111
-    v115-->v120
-    v120-->v127
-    v115-->v127
-    v115-->v137
-    v137-->v142
-    v146-->v151
-    v151-->v158
-    v146-->v158
-    v146-->v168
-    v168-->v173
-    v173-->v180
-    v41-->v180
-    v41-->v190
-    v190-->v195
-    v195-->v202
-    v2-->v202
-    v202-->v209
-    v2-->v209
-    v2-->v221
-    v221-->v228
-    v2-->v228
-    v228-->v232
+    v41-->v49
+    v49-->v56
+    v41-->v56
+    v41-->v66
+    v66-->v71
+    v73-->v81
+    v81-->v88
+    v73-->v88
+    v73-->v98
+    v104-->v112
+    v112-->v119
+    v104-->v119
+    v104-->v129
+    v137-->v145
+    v145-->v152
+    v137-->v152
+    v137-->v162
+    v162-->v167
+    v167-->v174
+    v2-->v174
+    v174-->v181
+    v2-->v181
+    v2-->v193
+    v193-->v200
+    v2-->v200
+    v200-->v204
     v35-->v41
     v18-->v35
-    v58-->v75
-    v75-->v84
-    v89-->v106
-    v111-->v115
-    v120-->v137
-    v142-->v146
-    v151-->v168
-    v173-->v190
-    v195-->v221
-    style group_neighbors_leiden_umap fill:#F0F0F0,stroke:#969696;
+    v49-->v66
+    v71-->v73
+    v98-->v104
+    v81-->v98
+    v129-->v136
+    v112-->v129
+    v71-->v136
+    v145-->v162
+    v167-->v193
     style v0 fill:#e3dcea,stroke:#7a4baa;
     style v2 fill:#e3dcea,stroke:#7a4baa;
     style v10 fill:#e3dcea,stroke:#7a4baa;
@@ -260,33 +245,29 @@ flowchart TB
     style v25 fill:#e3dcea,stroke:#7a4baa;
     style v35 fill:#e3dcea,stroke:#7a4baa;
     style v41 fill:#e3dcea,stroke:#7a4baa;
-    style v195 fill:#e3dcea,stroke:#7a4baa;
-    style v50 fill:#e3dcea,stroke:#7a4baa;
-    style v58 fill:#e3dcea,stroke:#7a4baa;
-    style v65 fill:#e3dcea,stroke:#7a4baa;
-    style v75 fill:#e3dcea,stroke:#7a4baa;
-    style v84 fill:#e3dcea,stroke:#7a4baa;
-    style v111 fill:#e3dcea,stroke:#7a4baa;
-    style v89 fill:#e3dcea,stroke:#7a4baa;
-    style v96 fill:#e3dcea,stroke:#7a4baa;
-    style v106 fill:#e3dcea,stroke:#7a4baa;
-    style v115 fill:#e3dcea,stroke:#7a4baa;
-    style v142 fill:#e3dcea,stroke:#7a4baa;
-    style v120 fill:#e3dcea,stroke:#7a4baa;
-    style v127 fill:#e3dcea,stroke:#7a4baa;
+    style v71 fill:#e3dcea,stroke:#7a4baa;
+    style v49 fill:#e3dcea,stroke:#7a4baa;
+    style v56 fill:#e3dcea,stroke:#7a4baa;
+    style v66 fill:#e3dcea,stroke:#7a4baa;
+    style v73 fill:#e3dcea,stroke:#7a4baa;
+    style v81 fill:#e3dcea,stroke:#7a4baa;
+    style v88 fill:#e3dcea,stroke:#7a4baa;
+    style v98 fill:#e3dcea,stroke:#7a4baa;
+    style v104 fill:#e3dcea,stroke:#7a4baa;
+    style v112 fill:#e3dcea,stroke:#7a4baa;
+    style v119 fill:#e3dcea,stroke:#7a4baa;
+    style v129 fill:#e3dcea,stroke:#7a4baa;
+    style v136 fill:#e3dcea,stroke:#7a4baa;
     style v137 fill:#e3dcea,stroke:#7a4baa;
-    style v146 fill:#e3dcea,stroke:#7a4baa;
-    style v173 fill:#e3dcea,stroke:#7a4baa;
-    style v151 fill:#e3dcea,stroke:#7a4baa;
-    style v158 fill:#e3dcea,stroke:#7a4baa;
-    style v168 fill:#e3dcea,stroke:#7a4baa;
-    style v180 fill:#e3dcea,stroke:#7a4baa;
-    style v190 fill:#e3dcea,stroke:#7a4baa;
-    style v202 fill:#e3dcea,stroke:#7a4baa;
-    style v209 fill:#e3dcea,stroke:#7a4baa;
-    style v221 fill:#e3dcea,stroke:#7a4baa;
-    style v228 fill:#e3dcea,stroke:#7a4baa;
-    style v232 fill:#e3dcea,stroke:#7a4baa;
+    style v167 fill:#e3dcea,stroke:#7a4baa;
+    style v145 fill:#e3dcea,stroke:#7a4baa;
+    style v152 fill:#e3dcea,stroke:#7a4baa;
+    style v162 fill:#e3dcea,stroke:#7a4baa;
+    style v174 fill:#e3dcea,stroke:#7a4baa;
+    style v181 fill:#e3dcea,stroke:#7a4baa;
+    style v193 fill:#e3dcea,stroke:#7a4baa;
+    style v200 fill:#e3dcea,stroke:#7a4baa;
+    style v204 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 

@@ -14,7 +14,7 @@ ID: `rna_multisample`
 Namespace: `workflows/rna`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/workflows/rna/rna_multisample/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.0.1/src/workflows/rna/rna_multisample/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.0 -latest \
+  -r 2.0.1 -latest \
   -main-script target/nextflow/workflows/rna/rna_multisample/main.nf \
   --help
 ```
@@ -81,7 +81,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.0 -latest \
+  -r 2.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/rna/rna_multisample/main.nf \
   -params-file params.yaml
@@ -186,36 +186,33 @@ flowchart TB
     v149(cross)
     v159(cross)
     v165(filter)
-    v288(concat)
-    v177(branch)
-    v204(concat)
-    v189(cross)
-    v199(cross)
-    v208(branch)
-    v235(concat)
-    v220(cross)
-    v230(cross)
-    v236(filter)
-    v266(concat)
-    v251(cross)
-    v261(cross)
-    v273(cross)
-    v283(cross)
-    v295(cross)
-    v302(cross)
-    v314(cross)
-    v321(cross)
-    v325(Output)
+    v291(concat)
+    v175(filter)
+    v190(cross)
+    v200(cross)
+    v207(mix)
+    v208(filter)
+    v223(cross)
+    v233(cross)
+    v239(filter)
+    v269(concat)
+    v254(cross)
+    v264(cross)
+    v276(cross)
+    v286(cross)
+    v298(cross)
+    v305(cross)
+    v317(cross)
+    v324(cross)
+    v328(Output)
     subgraph group_rna_qc [rna_qc]
-        v182(grep_mitochondrial_genes)
-        v213(grep_ribosomal_genes)
-        v244(calculate_qc_metrics)
+        v183(grep_annotation_column)
+        v216(calculate_qc_metrics)
+        v247(publish)
     end
     v106-->v133
     v133-->v134
-    v177-->v204
-    v208-->v235
-    v235-->v236
+    v207-->v208
     v0-->v2
     v2-->v10
     v10-->v18
@@ -239,33 +236,31 @@ flowchart TB
     v142-->v149
     v134-->v149
     v134-->v159
-    v177-->v182
-    v182-->v189
-    v177-->v189
-    v177-->v199
-    v199-->v204
-    v208-->v213
-    v213-->v220
-    v208-->v220
-    v208-->v230
-    v230-->v235
-    v236-->v244
-    v244-->v251
-    v236-->v251
-    v236-->v261
-    v261-->v266
-    v266-->v273
-    v165-->v273
-    v165-->v283
-    v283-->v288
-    v288-->v295
-    v2-->v295
-    v295-->v302
-    v2-->v302
-    v2-->v314
-    v314-->v321
-    v2-->v321
-    v321-->v325
+    v175-->v183
+    v183-->v190
+    v175-->v190
+    v175-->v200
+    v208-->v216
+    v216-->v223
+    v208-->v223
+    v208-->v233
+    v239-->v247
+    v247-->v254
+    v239-->v254
+    v239-->v264
+    v264-->v269
+    v269-->v276
+    v165-->v276
+    v165-->v286
+    v286-->v291
+    v291-->v298
+    v2-->v298
+    v298-->v305
+    v2-->v305
+    v2-->v317
+    v317-->v324
+    v2-->v324
+    v324-->v328
     v35-->v41
     v18-->v35
     v66-->v72
@@ -275,13 +270,15 @@ flowchart TB
     v111-->v128
     v159-->v165
     v142-->v159
-    v165-->v177
-    v182-->v199
-    v204-->v208
-    v213-->v230
-    v244-->v261
-    v266-->v283
-    v288-->v314
+    v165-->v175
+    v200-->v207
+    v183-->v200
+    v165-->v207
+    v233-->v239
+    v216-->v233
+    v247-->v264
+    v269-->v286
+    v291-->v317
     style group_rna_qc fill:#F0F0F0,stroke:#969696;
     style v0 fill:#e3dcea,stroke:#7a4baa;
     style v2 fill:#e3dcea,stroke:#7a4baa;
@@ -307,29 +304,28 @@ flowchart TB
     style v149 fill:#e3dcea,stroke:#7a4baa;
     style v159 fill:#e3dcea,stroke:#7a4baa;
     style v165 fill:#e3dcea,stroke:#7a4baa;
-    style v288 fill:#e3dcea,stroke:#7a4baa;
-    style v177 fill:#e3dcea,stroke:#7a4baa;
-    style v204 fill:#e3dcea,stroke:#7a4baa;
-    style v182 fill:#e3dcea,stroke:#7a4baa;
-    style v189 fill:#e3dcea,stroke:#7a4baa;
-    style v199 fill:#e3dcea,stroke:#7a4baa;
+    style v291 fill:#e3dcea,stroke:#7a4baa;
+    style v175 fill:#e3dcea,stroke:#7a4baa;
+    style v183 fill:#e3dcea,stroke:#7a4baa;
+    style v190 fill:#e3dcea,stroke:#7a4baa;
+    style v200 fill:#e3dcea,stroke:#7a4baa;
+    style v207 fill:#e3dcea,stroke:#7a4baa;
     style v208 fill:#e3dcea,stroke:#7a4baa;
-    style v235 fill:#e3dcea,stroke:#7a4baa;
-    style v213 fill:#e3dcea,stroke:#7a4baa;
-    style v220 fill:#e3dcea,stroke:#7a4baa;
-    style v230 fill:#e3dcea,stroke:#7a4baa;
-    style v236 fill:#e3dcea,stroke:#7a4baa;
-    style v266 fill:#e3dcea,stroke:#7a4baa;
-    style v244 fill:#e3dcea,stroke:#7a4baa;
-    style v251 fill:#e3dcea,stroke:#7a4baa;
-    style v261 fill:#e3dcea,stroke:#7a4baa;
-    style v273 fill:#e3dcea,stroke:#7a4baa;
-    style v283 fill:#e3dcea,stroke:#7a4baa;
-    style v295 fill:#e3dcea,stroke:#7a4baa;
-    style v302 fill:#e3dcea,stroke:#7a4baa;
-    style v314 fill:#e3dcea,stroke:#7a4baa;
-    style v321 fill:#e3dcea,stroke:#7a4baa;
-    style v325 fill:#e3dcea,stroke:#7a4baa;
+    style v216 fill:#e3dcea,stroke:#7a4baa;
+    style v223 fill:#e3dcea,stroke:#7a4baa;
+    style v233 fill:#e3dcea,stroke:#7a4baa;
+    style v239 fill:#e3dcea,stroke:#7a4baa;
+    style v269 fill:#e3dcea,stroke:#7a4baa;
+    style v247 fill:#e3dcea,stroke:#7a4baa;
+    style v254 fill:#e3dcea,stroke:#7a4baa;
+    style v264 fill:#e3dcea,stroke:#7a4baa;
+    style v276 fill:#e3dcea,stroke:#7a4baa;
+    style v286 fill:#e3dcea,stroke:#7a4baa;
+    style v298 fill:#e3dcea,stroke:#7a4baa;
+    style v305 fill:#e3dcea,stroke:#7a4baa;
+    style v317 fill:#e3dcea,stroke:#7a4baa;
+    style v324 fill:#e3dcea,stroke:#7a4baa;
+    style v328 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 

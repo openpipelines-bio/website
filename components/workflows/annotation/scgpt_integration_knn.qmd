@@ -1,0 +1,533 @@
+---
+title: "scGPT Annotation"
+namespace: "Workflows/annotation"
+description: "Cell type annotation workflow that performs scGPT integration of reference and query dataset followed by KNN label transfer."
+type: "workflow"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `scgpt_integration_knn`  
+Namespace: `workflows/annotation`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.0.1/src/workflows/annotation/scgpt_integration_knn/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 2.0.1 -latest \
+  -main-script target/nextflow/workflows/annotation/scgpt_integration_knn/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Query Input
+id: # please fill in - example: "foo"
+input: # please fill in - example: "input.h5mu"
+modality: "rna"
+# input_layer: "foo"
+# input_var_gene_names: "foo"
+input_obs_batch_label: # please fill in - example: "sample"
+overwrite_existing_key: false
+
+# Reference input
+reference: # please fill in - example: "reference.h5mu"
+reference_obs_targets: # please fill in - example: ["ann_level_1", "ann_level_2", "ann_level_3", "ann_level_4", "ann_level_5", "ann_finest_level"]
+# reference_var_gene_names: "foo"
+reference_obs_batch_label: # please fill in - example: "sample"
+
+# scGPT model
+model: # please fill in - example: "resources_test/scgpt/best_model.pt"
+model_vocab: # please fill in - example: "resources_test/scgpt/vocab.json"
+model_config: # please fill in - example: "args.json"
+# finetuned_checkpoints_key: "model_state_dict"
+
+# Padding arguments
+pad_token: "<pad>"
+pad_value: -2
+
+# HVG subset arguments
+n_hvg: 1200
+
+# Tokenization arguments
+# max_seq_len: 123
+
+# Embedding arguments
+dsbn: true
+batch_size: 64
+
+# Binning arguments
+n_input_bins: 51
+# seed: 123
+
+# Leiden clustering options
+leiden_resolution: [1.0]
+
+# Neighbor classifier arguments
+weights: "uniform"
+n_neighbors: 15
+
+# Outputs
+# output: "$id.$key.output.h5mu"
+# output_obs_predictions: ["foo"]
+# output_obs_probability: ["foo"]
+output_obsm_integrated: "X_integrated_scgpt"
+# output_compression: "gzip"
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+
+# Arguments
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r 2.0.1 -latest \
+  -profile docker \
+  -main-script target/nextflow/workflows/annotation/scgpt_integration_knn/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Query Input
+
+|Name                       |Description                                                                                                                                                   |Attributes                                |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--id`                     |ID of the sample.                                                                                                                                             |`string`, required, example: `"foo"`      |
+|`--input`                  |Input dataset consisting of the (unlabeled) query observations. The dataset is expected to be pre-processed in the same way as --reference.                   |`file`, required, example: `"input.h5mu"` |
+|`--modality`               |Which modality to process. Should match the modality of the --reference dataset.                                                                              |`string`, default: `"rna"`                |
+|`--input_layer`            |Mudata layer (key from layers) to use as input data for scGPT integration; if not specified, X is used. Should match the layer name of the reference dataset. |`string`                                  |
+|`--input_var_gene_names`   |The .var field in the input (query) dataset containing gene names; if not provided, the .var index will be used.                                              |`string`                                  |
+|`--input_obs_batch_label`  |The .obs field in the input (query) dataset containing the batch labels.                                                                                      |`string`, required, example: `"sample"`   |
+|`--overwrite_existing_key` |If provided, will overwrite existing fields in the input dataset when data are copied during the reference alignment process.                                 |`boolean_true`                            |
+
+
+### Reference input
+
+|Name                          |Description                                                                                                                                                                                                                                        |Attributes                                                                                                                                                |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--reference`                 |Reference dataset consisting of observations with cell type labels present in the .obs --reference_obs_batch_label column to train the classifier on. The dataset is expected to be pre-processed in the same way as the --input query dataset(s). |`file`, required, example: `"reference.h5mu"`                                                                                                             |
+|`--reference_obs_targets`     |The `.obs` key(s) of the target labels to tranfer.                                                                                                                                                                                                 |List of `string`, required, example: `"ann_level_1", "ann_level_2", "ann_level_3", "ann_level_4", "ann_level_5", "ann_finest_level"`, multiple_sep: `";"` |
+|`--reference_var_gene_names`  |The .var field in the reference dataset containing gene names; if not provided, the .var index will be used.                                                                                                                                       |`string`                                                                                                                                                  |
+|`--reference_obs_batch_label` |The .obs field in the reference dataset containing the batch labels.                                                                                                                                                                               |`string`, required, example: `"sample"`                                                                                                                   |
+
+
+### scGPT model
+
+|Name                          |Description                                                                                                                                                                                      |Attributes                                                        |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--model`                     |The scGPT model file. Can either be a foundation model or a fine-tuned model.  If the model file is a fine-tuned model, it must contain a key for the checkpoints (--finetuned_checkpoints_key). |`file`, required, example: `"resources_test/scgpt/best_model.pt"` |
+|`--model_vocab`               |The scGPT model vocabulary file.                                                                                                                                                                 |`file`, required, example: `"resources_test/scgpt/vocab.json"`    |
+|`--model_config`              |The scGPT model configuration file.                                                                                                                                                              |`file`, required, example: `"args.json"`                          |
+|`--finetuned_checkpoints_key` |Key in the model file containing the pretrained checkpoints. Must be provided when `--model` is a fine-tuned model.                                                                              |`string`, example: `"model_state_dict"`                           |
+
+
+### Padding arguments
+
+|Name          |Description                     |Attributes                   |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--pad_token` |Token used for padding.         |`string`, default: `"<pad>"` |
+|`--pad_value` |The value of the padding token. |`integer`, default: `-2`     |
+
+
+### HVG subset arguments
+
+|Name      |Description                                    |Attributes                 |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--n_hvg` |Number of highly variable genes to subset for. |`integer`, default: `1200` |
+
+
+### Tokenization arguments
+
+|Name            |Description                                                                                            |Attributes |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--max_seq_len` |The maximum sequence length of the tokenized data. Defaults to the number of features if not provided. |`integer`  |
+
+
+### Embedding arguments
+
+|Name           |Description                                        |Attributes                 |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--dsbn`       |Apply domain-specific batch normalization          |`boolean`, default: `TRUE` |
+|`--batch_size` |The batch size to be used for embedding inference. |`integer`, default: `64`   |
+
+
+### Binning arguments
+
+|Name             |Description                                                                                      |Attributes               |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--n_input_bins` |The number of bins to discretize the data into; When no value is provided, data won't be binned. |`integer`, default: `51` |
+|`--seed`         |Seed for random number generation used for binning. If not set, no seed is used.                 |`integer`                |
+
+
+### Leiden clustering options
+
+|Name                  |Description                                                                    |Attributes                                          |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--leiden_resolution` |Control the coarseness of the clustering. Higher values lead to more clusters. |List of `double`, default: `1`, multiple_sep: `";"` |
+
+
+### Neighbor classifier arguments
+
+|Name            |Description                                                                                                                                                                                                                  |Attributes                     |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--weights`     |Weight function used in prediction. Possible values are: `uniform` (all points in each neighborhood are weighted equally) or  `distance` (weight points by the inverse of their distance)                                    |`string`, default: `"uniform"` |
+|`--n_neighbors` |The number of neighbors to use in k-neighbor graph structure used for fast approximate nearest neighbor search with PyNNDescent.  Larger values will result in more accurate search results at the cost of computation time. |`integer`, default: `15`       |
+
+
+### Outputs
+
+|Name                       |Description                                                                                                                                                                                                                              |Attributes                                 |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--output`                 |The query data in .h5mu format with predicted labels predicted from the classifier trained on the reference.                                                                                                                             |`file`, required, example: `"output.h5mu"` |
+|`--output_obs_predictions` |In which `.obs` slots to store the predicted information. If provided, must have the same length as `--reference_obs_targets`. If empty, will default to the `reference_obs_targets` combined with the `"_pred"` suffix.                 |List of `string`, multiple_sep: `";"`      |
+|`--output_obs_probability` |In which `.obs` slots to store the probability of the predictions. If provided, must have the same length as `--reference_obs_targets`. If empty, will default to the `reference_obs_targets` combined with the `"_probability"` suffix. |List of `string`, multiple_sep: `";"`      |
+|`--output_obsm_integrated` |In which .obsm slot to store the integrated embedding.                                                                                                                                                                                   |`string`, default: `"X_integrated_scgpt"`  |
+|`--output_compression`     |The compression format to be used on the output h5mu object.                                                                                                                                                                             |`string`, example: `"gzip"`                |
+
+## Authors
+
+
+  * Dorien Roosen [{{< fa brands github >}}](https://github.com/dorien-er) [{{< fa brands linkedin >}}](https://linkedin.com/in/dorien-roosen) (author, maintainer)
+
+  * Elizabeth Mlynarski (author)
+
+  * Weiwei Schultz (contributor)
+
+## Visualisation
+
+```{mermaid}
+flowchart TB
+    v0(Channel.fromList)
+    v2(filter)
+    v12(filter)
+    v20(add_id)
+    v27(cross)
+    v37(cross)
+    v43(filter)
+    v51(add_id)
+    v58(cross)
+    v68(cross)
+    v74(filter)
+    v82(duplicate_obs)
+    v89(cross)
+    v99(cross)
+    v105(filter)
+    v113(duplicate_obs)
+    v120(cross)
+    v130(cross)
+    v136(filter)
+    v144(duplicate_var)
+    v151(cross)
+    v161(cross)
+    v167(filter)
+    v175(duplicate_var)
+    v182(cross)
+    v192(cross)
+    v198(filter)
+    v206(concatenate_h5mu)
+    v213(cross)
+    v223(cross)
+    v230(filter)
+    v238(filter)
+    v253(cross)
+    v263(cross)
+    v269(filter)
+    v284(cross)
+    v294(cross)
+    v300(filter)
+    v315(cross)
+    v325(cross)
+    v331(filter)
+    v346(cross)
+    v356(cross)
+    v362(filter)
+    v377(cross)
+    v387(cross)
+    v393(filter)
+    v408(cross)
+    v418(cross)
+    v427(branch)
+    v454(concat)
+    v439(cross)
+    v449(cross)
+    v458(branch)
+    v485(concat)
+    v470(cross)
+    v480(cross)
+    v486(filter)
+    v516(concat)
+    v501(cross)
+    v511(cross)
+    v523(cross)
+    v533(cross)
+    v540(filter)
+    v548(split_h5mu)
+    v555(cross)
+    v565(cross)
+    v574(filter)
+    v604(concat)
+    v582(knn)
+    v589(cross)
+    v599(cross)
+    v610(cross)
+    v617(cross)
+    v629(cross)
+    v636(cross)
+    v640(Output)
+    subgraph group_scgpt_leiden_workflow [scgpt_leiden_workflow]
+        v246(highly_variable_features_scanpy)
+        v277(cross_check_genes)
+        v308(binning)
+        v339(pad_tokenize)
+        v370(embedding)
+        v401(find_neighbors)
+        v432(leiden)
+        v463(move_obsm_to_obs)
+        v494(umap)
+    end
+    v427-->v454
+    v458-->v485
+    v485-->v486
+    v0-->v2
+    v2-->v12
+    v12-->v20
+    v20-->v27
+    v12-->v27
+    v12-->v37
+    v43-->v51
+    v51-->v58
+    v43-->v58
+    v43-->v68
+    v74-->v82
+    v82-->v89
+    v74-->v89
+    v74-->v99
+    v105-->v113
+    v113-->v120
+    v105-->v120
+    v105-->v130
+    v136-->v144
+    v144-->v151
+    v136-->v151
+    v136-->v161
+    v167-->v175
+    v175-->v182
+    v167-->v182
+    v167-->v192
+    v198-->v206
+    v206-->v213
+    v198-->v213
+    v198-->v223
+    v230-->v238
+    v238-->v246
+    v246-->v253
+    v238-->v253
+    v238-->v263
+    v269-->v277
+    v277-->v284
+    v269-->v284
+    v269-->v294
+    v300-->v308
+    v308-->v315
+    v300-->v315
+    v300-->v325
+    v331-->v339
+    v339-->v346
+    v331-->v346
+    v331-->v356
+    v362-->v370
+    v370-->v377
+    v362-->v377
+    v362-->v387
+    v393-->v401
+    v401-->v408
+    v393-->v408
+    v393-->v418
+    v427-->v432
+    v432-->v439
+    v427-->v439
+    v427-->v449
+    v449-->v454
+    v458-->v463
+    v463-->v470
+    v458-->v470
+    v458-->v480
+    v480-->v485
+    v486-->v494
+    v494-->v501
+    v486-->v501
+    v486-->v511
+    v511-->v516
+    v516-->v523
+    v230-->v523
+    v230-->v533
+    v540-->v548
+    v548-->v555
+    v540-->v555
+    v540-->v565
+    v574-->v582
+    v582-->v589
+    v574-->v589
+    v574-->v599
+    v599-->v604
+    v604-->v610
+    v2-->v610
+    v610-->v617
+    v2-->v617
+    v2-->v629
+    v629-->v636
+    v2-->v636
+    v636-->v640
+    v37-->v43
+    v20-->v37
+    v68-->v74
+    v51-->v68
+    v99-->v105
+    v82-->v99
+    v130-->v136
+    v113-->v130
+    v161-->v167
+    v144-->v161
+    v192-->v198
+    v175-->v192
+    v223-->v230
+    v206-->v223
+    v533-->v540
+    v263-->v269
+    v246-->v263
+    v294-->v300
+    v277-->v294
+    v325-->v331
+    v308-->v325
+    v356-->v362
+    v339-->v356
+    v387-->v393
+    v370-->v387
+    v401-->v418
+    v418-->v427
+    v432-->v449
+    v454-->v458
+    v463-->v480
+    v494-->v511
+    v516-->v533
+    v565-->v574
+    v548-->v565
+    v582-->v599
+    v604-->v629
+    style group_scgpt_leiden_workflow fill:#F0F0F0,stroke:#969696;
+    style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v2 fill:#e3dcea,stroke:#7a4baa;
+    style v12 fill:#e3dcea,stroke:#7a4baa;
+    style v20 fill:#e3dcea,stroke:#7a4baa;
+    style v27 fill:#e3dcea,stroke:#7a4baa;
+    style v37 fill:#e3dcea,stroke:#7a4baa;
+    style v43 fill:#e3dcea,stroke:#7a4baa;
+    style v51 fill:#e3dcea,stroke:#7a4baa;
+    style v58 fill:#e3dcea,stroke:#7a4baa;
+    style v68 fill:#e3dcea,stroke:#7a4baa;
+    style v74 fill:#e3dcea,stroke:#7a4baa;
+    style v82 fill:#e3dcea,stroke:#7a4baa;
+    style v89 fill:#e3dcea,stroke:#7a4baa;
+    style v99 fill:#e3dcea,stroke:#7a4baa;
+    style v105 fill:#e3dcea,stroke:#7a4baa;
+    style v113 fill:#e3dcea,stroke:#7a4baa;
+    style v120 fill:#e3dcea,stroke:#7a4baa;
+    style v130 fill:#e3dcea,stroke:#7a4baa;
+    style v136 fill:#e3dcea,stroke:#7a4baa;
+    style v144 fill:#e3dcea,stroke:#7a4baa;
+    style v151 fill:#e3dcea,stroke:#7a4baa;
+    style v161 fill:#e3dcea,stroke:#7a4baa;
+    style v167 fill:#e3dcea,stroke:#7a4baa;
+    style v175 fill:#e3dcea,stroke:#7a4baa;
+    style v182 fill:#e3dcea,stroke:#7a4baa;
+    style v192 fill:#e3dcea,stroke:#7a4baa;
+    style v198 fill:#e3dcea,stroke:#7a4baa;
+    style v206 fill:#e3dcea,stroke:#7a4baa;
+    style v213 fill:#e3dcea,stroke:#7a4baa;
+    style v223 fill:#e3dcea,stroke:#7a4baa;
+    style v230 fill:#e3dcea,stroke:#7a4baa;
+    style v238 fill:#e3dcea,stroke:#7a4baa;
+    style v246 fill:#e3dcea,stroke:#7a4baa;
+    style v253 fill:#e3dcea,stroke:#7a4baa;
+    style v263 fill:#e3dcea,stroke:#7a4baa;
+    style v269 fill:#e3dcea,stroke:#7a4baa;
+    style v277 fill:#e3dcea,stroke:#7a4baa;
+    style v284 fill:#e3dcea,stroke:#7a4baa;
+    style v294 fill:#e3dcea,stroke:#7a4baa;
+    style v300 fill:#e3dcea,stroke:#7a4baa;
+    style v308 fill:#e3dcea,stroke:#7a4baa;
+    style v315 fill:#e3dcea,stroke:#7a4baa;
+    style v325 fill:#e3dcea,stroke:#7a4baa;
+    style v331 fill:#e3dcea,stroke:#7a4baa;
+    style v339 fill:#e3dcea,stroke:#7a4baa;
+    style v346 fill:#e3dcea,stroke:#7a4baa;
+    style v356 fill:#e3dcea,stroke:#7a4baa;
+    style v362 fill:#e3dcea,stroke:#7a4baa;
+    style v370 fill:#e3dcea,stroke:#7a4baa;
+    style v377 fill:#e3dcea,stroke:#7a4baa;
+    style v387 fill:#e3dcea,stroke:#7a4baa;
+    style v393 fill:#e3dcea,stroke:#7a4baa;
+    style v401 fill:#e3dcea,stroke:#7a4baa;
+    style v408 fill:#e3dcea,stroke:#7a4baa;
+    style v418 fill:#e3dcea,stroke:#7a4baa;
+    style v427 fill:#e3dcea,stroke:#7a4baa;
+    style v454 fill:#e3dcea,stroke:#7a4baa;
+    style v432 fill:#e3dcea,stroke:#7a4baa;
+    style v439 fill:#e3dcea,stroke:#7a4baa;
+    style v449 fill:#e3dcea,stroke:#7a4baa;
+    style v458 fill:#e3dcea,stroke:#7a4baa;
+    style v485 fill:#e3dcea,stroke:#7a4baa;
+    style v463 fill:#e3dcea,stroke:#7a4baa;
+    style v470 fill:#e3dcea,stroke:#7a4baa;
+    style v480 fill:#e3dcea,stroke:#7a4baa;
+    style v486 fill:#e3dcea,stroke:#7a4baa;
+    style v516 fill:#e3dcea,stroke:#7a4baa;
+    style v494 fill:#e3dcea,stroke:#7a4baa;
+    style v501 fill:#e3dcea,stroke:#7a4baa;
+    style v511 fill:#e3dcea,stroke:#7a4baa;
+    style v523 fill:#e3dcea,stroke:#7a4baa;
+    style v533 fill:#e3dcea,stroke:#7a4baa;
+    style v540 fill:#e3dcea,stroke:#7a4baa;
+    style v548 fill:#e3dcea,stroke:#7a4baa;
+    style v555 fill:#e3dcea,stroke:#7a4baa;
+    style v565 fill:#e3dcea,stroke:#7a4baa;
+    style v574 fill:#e3dcea,stroke:#7a4baa;
+    style v604 fill:#e3dcea,stroke:#7a4baa;
+    style v582 fill:#e3dcea,stroke:#7a4baa;
+    style v589 fill:#e3dcea,stroke:#7a4baa;
+    style v599 fill:#e3dcea,stroke:#7a4baa;
+    style v610 fill:#e3dcea,stroke:#7a4baa;
+    style v617 fill:#e3dcea,stroke:#7a4baa;
+    style v629 fill:#e3dcea,stroke:#7a4baa;
+    style v636 fill:#e3dcea,stroke:#7a4baa;
+    style v640 fill:#e3dcea,stroke:#7a4baa;
+
+```
+

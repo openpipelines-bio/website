@@ -14,7 +14,7 @@ ID: `scgpt_annotation`
 Namespace: `workflows/annotation`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/workflows/annotation/scgpt_annotation/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.0.1/src/workflows/annotation/scgpt_annotation/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -37,7 +37,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.0 -latest \
+  -r 2.0.1 -latest \
   -main-script target/nextflow/workflows/annotation/scgpt_annotation/main.nf \
   --help
 ```
@@ -74,7 +74,6 @@ pad_value: -2
 
 # HVG subset arguments
 n_hvg: 1200
-hvg_flavor: "cell_ranger"
 
 # Tokenization arguments
 # max_seq_len: 123
@@ -97,7 +96,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.0 -latest \
+  -r 2.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/annotation/scgpt_annotation/main.nf \
   -params-file params.yaml
@@ -111,14 +110,14 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Query input
 
-|Name                      |Description                                                                                              |Attributes                                |
+|Name                      |Description                                                                                                      |Attributes                                |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--id`                    |ID of the sample.                                                                                        |`string`, required, example: `"foo"`      |
-|`--input`                 |Path to the input file.                                                                                  |`file`, required, example: `"input.h5mu"` |
-|`--modality`              |                                                                                                         |`string`, default: `"rna"`                |
-|`--input_layer`           |The layer of the input dataset to process if .X is not to be used. Should contain log normalized counts. |`string`                                  |
-|`--input_var_gene_names`  |The .var field in the input (query) containing gene names; if not provided, the var index will be used.  |`string`                                  |
-|`--input_obs_batch_label` |The .obs field in the input (query) dataset containing the batch labels.                                 |`string`, required                        |
+|`--id`                    |ID of the sample.                                                                                                |`string`, required, example: `"foo"`      |
+|`--input`                 |Path to the input file.                                                                                          |`file`, required, example: `"input.h5mu"` |
+|`--modality`              |                                                                                                                 |`string`, default: `"rna"`                |
+|`--input_layer`           |Mudata layer (key from layers) to use as input data for HVG subsetting and binning; if not specified, X is used. |`string`                                  |
+|`--input_var_gene_names`  |The .var field in the input (query) containing gene names; if not provided, the var index will be used.          |`string`                                  |
+|`--input_obs_batch_label` |The .obs field in the input (query) dataset containing the batch labels.                                         |`string`, required                        |
 
 
 ### Model input
@@ -152,10 +151,9 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### HVG subset arguments
 
-|Name           |Description                                                                                                                                                                      |Attributes                         |
+|Name      |Description                                    |Attributes                 |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--n_hvg`      |Number of highly variable genes to subset for.                                                                                                                                   |`integer`, default: `1200`         |
-|`--hvg_flavor` |Method to be used for identifying highly variable genes.  Note that the default for this workflow (`cell_ranger`) is not the default method for scanpy hvg detection (`seurat`). |`string`, default: `"cell_ranger"` |
+|`--n_hvg` |Number of highly variable genes to subset for. |`integer`, default: `1200` |
 
 
 ### Tokenization arguments

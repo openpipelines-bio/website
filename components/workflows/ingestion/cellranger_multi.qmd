@@ -14,7 +14,7 @@ ID: `cellranger_multi`
 Namespace: `workflows/ingestion`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.0/src/workflows/ingestion/cellranger_multi/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.0.1/src/workflows/ingestion/cellranger_multi/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.0 -latest \
+  -r 2.0.1 -latest \
   -main-script target/nextflow/workflows/ingestion/cellranger_multi/main.nf \
   --help
 ```
@@ -123,7 +123,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.0 -latest \
+  -r 2.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/ingestion/cellranger_multi/main.nf \
   -params-file params.yaml
@@ -284,61 +284,58 @@ flowchart TB
     v0(Channel.fromList)
     v2(filter)
     v9(filter)
-    v39(concat)
     v17(cellranger_multi_component)
     v24(cross)
     v34(cross)
-    v44(filter)
-    v49(from_cellranger_multi_to_h5mu)
-    v56(cross)
-    v66(cross)
-    v77(flatMap)
-    v83(cross)
-    v90(cross)
-    v102(cross)
-    v109(cross)
-    v113(Output)
+    v40(filter)
+    v48(from_cellranger_multi_to_h5mu)
+    v55(cross)
+    v65(cross)
+    v71(flatMap)
+    v77(cross)
+    v84(cross)
+    v96(cross)
+    v103(cross)
+    v107(Output)
     v0-->v2
     v2-->v9
     v9-->v17
     v17-->v24
     v9-->v24
     v9-->v34
-    v34-->v39
-    v44-->v49
-    v49-->v56
-    v44-->v56
-    v44-->v66
-    v77-->v83
-    v2-->v83
-    v83-->v90
-    v2-->v90
-    v2-->v102
-    v102-->v109
-    v2-->v109
-    v109-->v113
+    v40-->v48
+    v48-->v55
+    v40-->v55
+    v40-->v65
+    v71-->v77
+    v2-->v77
+    v77-->v84
+    v2-->v84
+    v2-->v96
+    v96-->v103
+    v2-->v103
+    v103-->v107
+    v34-->v40
     v17-->v34
-    v39-->v44
-    v49-->v66
-    v66-->v77
-    v77-->v102
+    v65-->v71
+    v48-->v65
+    v71-->v96
     style v0 fill:#e3dcea,stroke:#7a4baa;
     style v2 fill:#e3dcea,stroke:#7a4baa;
     style v9 fill:#e3dcea,stroke:#7a4baa;
-    style v39 fill:#e3dcea,stroke:#7a4baa;
     style v17 fill:#e3dcea,stroke:#7a4baa;
     style v24 fill:#e3dcea,stroke:#7a4baa;
     style v34 fill:#e3dcea,stroke:#7a4baa;
-    style v44 fill:#e3dcea,stroke:#7a4baa;
-    style v49 fill:#e3dcea,stroke:#7a4baa;
-    style v56 fill:#e3dcea,stroke:#7a4baa;
-    style v66 fill:#e3dcea,stroke:#7a4baa;
+    style v40 fill:#e3dcea,stroke:#7a4baa;
+    style v48 fill:#e3dcea,stroke:#7a4baa;
+    style v55 fill:#e3dcea,stroke:#7a4baa;
+    style v65 fill:#e3dcea,stroke:#7a4baa;
+    style v71 fill:#e3dcea,stroke:#7a4baa;
     style v77 fill:#e3dcea,stroke:#7a4baa;
-    style v83 fill:#e3dcea,stroke:#7a4baa;
-    style v90 fill:#e3dcea,stroke:#7a4baa;
-    style v102 fill:#e3dcea,stroke:#7a4baa;
-    style v109 fill:#e3dcea,stroke:#7a4baa;
-    style v113 fill:#e3dcea,stroke:#7a4baa;
+    style v84 fill:#e3dcea,stroke:#7a4baa;
+    style v96 fill:#e3dcea,stroke:#7a4baa;
+    style v103 fill:#e3dcea,stroke:#7a4baa;
+    style v107 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 
