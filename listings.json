@@ -24,12 +24,15 @@
     ]
   },
   {
-    "listing": "/fundamentals/index.html",
+    "listing": "/user_guide/index.html",
     "items": [
-      "/fundamentals/philosophy.html",
-      "/fundamentals/concepts.html",
-      "/fundamentals/architecture.html",
-      "/fundamentals/roadmap.html"
+      "/user_guide/getting_started.html",
+      "/user_guide/running_pipelines.html",
+      "/user_guide/parameter_lists.html",
+      "/user_guide/ingestion.html",
+      "/user_guide/processing.html",
+      "/user_guide/downstream.html",
+      "/user_guide/bug_reports.html"
     ]
   },
   {
@@ -62,6 +65,15 @@
     ]
   },
   {
+    "listing": "/fundamentals/index.html",
+    "items": [
+      "/fundamentals/philosophy.html",
+      "/fundamentals/concepts.html",
+      "/fundamentals/architecture.html",
+      "/fundamentals/roadmap.html"
+    ]
+  },
+  {
     "listing": "/contributing/index.html",
     "items": [
       "/contributing/getting_started.html",
@@ -70,14 +82,6 @@
       "/contributing/creating_pipelines.html",
       "/contributing/running_tests.html",
       "/contributing/pull_requests.html"
-    ]
-  },
-  {
-    "listing": "/more_information/index.html",
-    "items": [
-      "/more_information/cheat_sheets.html",
-      "/more_information/code_of_conduct.html",
-      "/more_information/faq.html"
     ]
   },
   {
@@ -231,15 +235,11 @@
     ]
   },
   {
-    "listing": "/user_guide/index.html",
+    "listing": "/more_information/index.html",
     "items": [
-      "/user_guide/getting_started.html",
-      "/user_guide/running_pipelines.html",
-      "/user_guide/parameter_lists.html",
-      "/user_guide/ingestion.html",
-      "/user_guide/processing.html",
-      "/user_guide/downstream.html",
-      "/user_guide/bug_reports.html"
+      "/more_information/cheat_sheets.html",
+      "/more_information/code_of_conduct.html",
+      "/more_information/faq.html"
     ]
   }
 ]
