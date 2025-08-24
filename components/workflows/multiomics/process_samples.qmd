@@ -14,7 +14,7 @@ ID: `process_samples`
 Namespace: `workflows/multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.1/src/workflows/multiomics/process_samples/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/3.0.0/src/workflows/multiomics/process_samples/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.1 -latest \
+  -r 3.0.0 -latest \
   -main-script target/nextflow/workflows/multiomics/process_samples/main.nf \
   --help
 ```
@@ -65,6 +65,7 @@ add_id_make_observation_keys_unique: true
 # rna_max_fraction_mito: 0.2
 # rna_min_fraction_ribo: 0.0
 # rna_max_fraction_ribo: 0.2
+skip_scrublet_doublet_detection: false
 
 # CITE-seq filtering options
 # prot_min_counts: 3
@@ -123,7 +124,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.1 -latest \
+  -r 3.0.0 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/multiomics/process_samples/main.nf \
   -params-file params.yaml
@@ -169,17 +170,18 @@ id present in a requirement of several components for this pipeline.
 
 ### RNA filtering options
 
-|Name                       |Description                                      |Attributes                    |
+|Name                                |Description                                      |Attributes                    |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--rna_min_counts`         |Minimum number of counts captured per cell.      |`integer`, example: `200`     |
-|`--rna_max_counts`         |Maximum number of counts captured per cell.      |`integer`, example: `5000000` |
-|`--rna_min_genes_per_cell` |Minimum of non-zero values per cell.             |`integer`, example: `200`     |
-|`--rna_max_genes_per_cell` |Maximum of non-zero values per cell.             |`integer`, example: `1500000` |
-|`--rna_min_cells_per_gene` |Minimum of non-zero values per gene.             |`integer`, example: `3`       |
-|`--rna_min_fraction_mito`  |Minimum fraction of UMIs that are mitochondrial. |`double`, example: `0`        |
-|`--rna_max_fraction_mito`  |Maximum fraction of UMIs that are mitochondrial. |`double`, example: `0.2`      |
-|`--rna_min_fraction_ribo`  |Minimum fraction of UMIs that are mitochondrial. |`double`, example: `0`        |
-|`--rna_max_fraction_ribo`  |Maximum fraction of UMIs that are mitochondrial. |`double`, example: `0.2`      |
+|`--rna_min_counts`                  |Minimum number of counts captured per cell.      |`integer`, example: `200`     |
+|`--rna_max_counts`                  |Maximum number of counts captured per cell.      |`integer`, example: `5000000` |
+|`--rna_min_genes_per_cell`          |Minimum of non-zero values per cell.             |`integer`, example: `200`     |
+|`--rna_max_genes_per_cell`          |Maximum of non-zero values per cell.             |`integer`, example: `1500000` |
+|`--rna_min_cells_per_gene`          |Minimum of non-zero values per gene.             |`integer`, example: `3`       |
+|`--rna_min_fraction_mito`           |Minimum fraction of UMIs that are mitochondrial. |`double`, example: `0`        |
+|`--rna_max_fraction_mito`           |Maximum fraction of UMIs that are mitochondrial. |`double`, example: `0.2`      |
+|`--rna_min_fraction_ribo`           |Minimum fraction of UMIs that are mitochondrial. |`double`, example: `0`        |
+|`--rna_max_fraction_ribo`           |Maximum fraction of UMIs that are mitochondrial. |`double`, example: `0.2`      |
+|`--skip_scrublet_doublet_detection` |Skip the scrublet doublet detection step.        |`boolean_true`                |
 
 
 ### CITE-seq filtering options
@@ -319,7 +321,7 @@ flowchart TB
     v341(filter)
     v356(cross)
     v366(cross)
-    v372(filter)
+    v375(branch)
     v402(concat)
     v387(cross)
     v397(cross)
@@ -572,6 +574,7 @@ flowchart TB
     v251-->v278
     v282-->v309
     v309-->v310
+    v375-->v402
     v621-->v623
     v851-->v878
     v878-->v879
@@ -643,10 +646,10 @@ flowchart TB
     v349-->v356
     v341-->v356
     v341-->v366
-    v372-->v380
+    v375-->v380
     v380-->v387
-    v372-->v387
-    v372-->v397
+    v375-->v387
+    v375-->v397
     v397-->v402
     v402-->v409
     v115-->v409
@@ -896,8 +899,8 @@ flowchart TB
     v287-->v304
     v335-->v341
     v318-->v335
-    v366-->v372
     v349-->v366
+    v366-->v375
     v380-->v397
     v402-->v419
     v109-->v430
@@ -1052,7 +1055,7 @@ flowchart TB
     style v349 fill:#e3dcea,stroke:#7a4baa;
     style v356 fill:#e3dcea,stroke:#7a4baa;
     style v366 fill:#e3dcea,stroke:#7a4baa;
-    style v372 fill:#e3dcea,stroke:#7a4baa;
+    style v375 fill:#e3dcea,stroke:#7a4baa;
     style v402 fill:#e3dcea,stroke:#7a4baa;
     style v380 fill:#e3dcea,stroke:#7a4baa;
     style v387 fill:#e3dcea,stroke:#7a4baa;
