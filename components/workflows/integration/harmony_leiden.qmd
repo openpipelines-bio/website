@@ -14,7 +14,7 @@ ID: `harmony_leiden`
 Namespace: `workflows/integration`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.1/src/workflows/integration/harmony_leiden/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/4.0.1/src/workflows/integration/harmony_leiden/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.1 -latest \
+  -r 4.0.1 -latest \
   -main-script target/nextflow/workflows/integration/harmony_leiden/main.nf \
   --help
 ```
@@ -41,13 +41,19 @@ nextflow run openpipelines-bio/openpipeline \
 <summary>Example of `params.yaml`</summary>
 ```yaml
 # Inputs
-id: # please fill in - example: "foo"
-input: # please fill in - example: "dataset.h5mu"
+# input: "dataset.h5mu"
+# tiledb_input_uri: "s3://bucket/path"
+# tiledb_s3_region: "us-west-2"
+# tiledb_endpoint: "foo"
+tiledb_s3_no_sign_request: false
+
+# Input slots
 layer: "log_normalized"
 modality: "rna"
 
 # Outputs
 # output: "$id.$key.output.h5mu"
+# output_tiledb: "$id.$key.output_tiledb"
 
 # Neighbour calculation
 uns_neighbors: "harmonypy_integration_neighbors"
@@ -77,7 +83,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.1 -latest \
+  -r 4.0.1 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/integration/harmony_leiden/main.nf \
   -params-file params.yaml
@@ -91,19 +97,29 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Inputs
 
-|Name         |Description                                                                           |Attributes                                  |
+|Name                          |Description                                                                             |Attributes                              |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--id`       |ID of the sample.                                                                     |`string`, required, example: `"foo"`        |
-|`--input`    |Path to the sample.                                                                   |`file`, required, example: `"dataset.h5mu"` |
-|`--layer`    |use specified layer for expression values instead of the .X object from the modality. |`string`, default: `"log_normalized"`       |
-|`--modality` |Which modality to process.                                                            |`string`, default: `"rna"`                  |
+|`--input`                     |Path to the sample. Mutually exclusive with the 'input_uri' argument.                   |`file`, example: `"dataset.h5mu"`       |
+|`--tiledb_input_uri`          |A URI containing the TileDB-SOMA objects. Mutually exclusive with the 'input' argument. |`string`, example: `"s3://bucket/path"` |
+|`--tiledb_s3_region`          |Region where the TileDB-SOMA database is hosted.                                        |`string`, example: `"us-west-2"`        |
+|`--tiledb_endpoint`           |Custom endpoint to use to connect to S3                                                 |`string`                                |
+|`--tiledb_s3_no_sign_request` |Do not sign S3 requests. Credentials will not be loaded if this argument is provided.   |`boolean`, default: `FALSE`             |
+
+
+### Input slots
+
+|Name         |Description                                                                           |Attributes                            |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--layer`    |use specified layer for expression values instead of the .X object from the modality. |`string`, default: `"log_normalized"` |
+|`--modality` |Which modality to process.                                                            |`string`, default: `"rna"`            |
 
 
 ### Outputs
 
-|Name       |Description                     |Attributes                                 |
+|Name              |Description                                                                                          |Attributes                                 |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--output` |Destination path to the output. |`file`, required, example: `"output.h5mu"` |
+|`--output`        |Destination path to the output.                                                                      |`file`, required, example: `"output.h5mu"` |
+|`--output_tiledb` |Output the TileDB database to the specified directory instead of adding it to the existing database. |`file`                                     |
 
 
 ### Neighbour calculation
@@ -150,127 +166,178 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 flowchart TB
     v0(Channel.fromList)
     v2(filter)
-    v10(filter)
-    v18(harmonypy)
-    v25(cross)
-    v35(cross)
-    v41(filter)
-    v195(concat)
-    v50(filter)
-    v65(cross)
-    v75(cross)
-    v84(branch)
-    v111(concat)
-    v96(cross)
-    v106(cross)
-    v115(branch)
-    v142(concat)
-    v127(cross)
-    v137(cross)
-    v146(branch)
-    v173(concat)
-    v158(cross)
-    v168(cross)
-    v180(cross)
+    v14(branch)
+    v41(concat)
+    v19(from_tiledb_to_h5mu)
+    v26(cross)
+    v36(cross)
+    v42(filter)
+    v50(harmonypy)
+    v57(cross)
+    v67(cross)
+    v73(filter)
+    v82(filter)
+    v97(cross)
+    v107(cross)
+    v116(branch)
+    v143(concat)
+    v128(cross)
+    v138(cross)
+    v147(branch)
+    v174(concat)
+    v159(cross)
+    v169(cross)
+    v178(branch)
+    v205(concat)
     v190(cross)
-    v202(cross)
-    v209(cross)
-    v221(cross)
-    v228(cross)
-    v232(Output)
+    v200(cross)
+    v212(cross)
+    v222(cross)
+    v231(branch)
+    v258(concat)
+    v236(move_mudata_obsm_to_tiledb)
+    v243(cross)
+    v253(cross)
+    v262(branch)
+    v289(concat)
+    v267(move_mudata_obs_to_tiledb)
+    v274(cross)
+    v284(cross)
+    v296(cross)
+    v303(cross)
+    v315(cross)
+    v322(cross)
+    v326(Output)
     subgraph group_neighbors_leiden_umap [neighbors_leiden_umap]
-        v58(find_neighbors)
-        v89(leiden)
-        v120(move_obsm_to_obs)
-        v151(umap)
+        v90(find_neighbors)
+        v121(leiden)
+        v152(move_obsm_to_obs)
+        v183(umap)
     end
-    v84-->v111
-    v115-->v142
-    v146-->v173
+    v14-->v41
+    v41-->v42
+    v116-->v143
+    v147-->v174
+    v178-->v205
+    v231-->v258
+    v262-->v289
     v0-->v2
-    v2-->v10
-    v10-->v18
-    v18-->v25
-    v10-->v25
-    v10-->v35
-    v41-->v50
-    v50-->v58
-    v58-->v65
-    v50-->v65
-    v50-->v75
-    v84-->v89
-    v89-->v96
-    v84-->v96
-    v84-->v106
-    v106-->v111
-    v115-->v120
-    v120-->v127
-    v115-->v127
-    v115-->v137
-    v137-->v142
-    v146-->v151
-    v151-->v158
-    v146-->v158
-    v146-->v168
-    v168-->v173
-    v173-->v180
-    v41-->v180
-    v41-->v190
-    v190-->v195
-    v195-->v202
-    v2-->v202
-    v202-->v209
-    v2-->v209
-    v2-->v221
-    v221-->v228
-    v2-->v228
-    v228-->v232
-    v35-->v41
-    v18-->v35
-    v58-->v75
-    v75-->v84
-    v89-->v106
-    v111-->v115
-    v120-->v137
-    v142-->v146
-    v151-->v168
-    v173-->v190
-    v195-->v221
+    v14-->v19
+    v19-->v26
+    v14-->v26
+    v14-->v36
+    v36-->v41
+    v42-->v50
+    v50-->v57
+    v42-->v57
+    v42-->v67
+    v73-->v82
+    v82-->v90
+    v90-->v97
+    v82-->v97
+    v82-->v107
+    v116-->v121
+    v121-->v128
+    v116-->v128
+    v116-->v138
+    v138-->v143
+    v147-->v152
+    v152-->v159
+    v147-->v159
+    v147-->v169
+    v169-->v174
+    v178-->v183
+    v183-->v190
+    v178-->v190
+    v178-->v200
+    v200-->v205
+    v205-->v212
+    v73-->v212
+    v73-->v222
+    v231-->v236
+    v236-->v243
+    v231-->v243
+    v231-->v253
+    v253-->v258
+    v262-->v267
+    v267-->v274
+    v262-->v274
+    v262-->v284
+    v284-->v289
+    v289-->v296
+    v2-->v296
+    v296-->v303
+    v2-->v303
+    v2-->v315
+    v315-->v322
+    v2-->v322
+    v322-->v326
+    v2-->v14
+    v19-->v36
+    v67-->v73
+    v50-->v67
+    v90-->v107
+    v107-->v116
+    v121-->v138
+    v143-->v147
+    v152-->v169
+    v174-->v178
+    v183-->v200
+    v205-->v222
+    v222-->v231
+    v236-->v253
+    v258-->v262
+    v267-->v284
+    v289-->v315
     style group_neighbors_leiden_umap fill:#F0F0F0,stroke:#969696;
     style v0 fill:#e3dcea,stroke:#7a4baa;
     style v2 fill:#e3dcea,stroke:#7a4baa;
-    style v10 fill:#e3dcea,stroke:#7a4baa;
-    style v18 fill:#e3dcea,stroke:#7a4baa;
-    style v25 fill:#e3dcea,stroke:#7a4baa;
-    style v35 fill:#e3dcea,stroke:#7a4baa;
+    style v14 fill:#e3dcea,stroke:#7a4baa;
     style v41 fill:#e3dcea,stroke:#7a4baa;
-    style v195 fill:#e3dcea,stroke:#7a4baa;
+    style v19 fill:#e3dcea,stroke:#7a4baa;
+    style v26 fill:#e3dcea,stroke:#7a4baa;
+    style v36 fill:#e3dcea,stroke:#7a4baa;
+    style v42 fill:#e3dcea,stroke:#7a4baa;
     style v50 fill:#e3dcea,stroke:#7a4baa;
-    style v58 fill:#e3dcea,stroke:#7a4baa;
-    style v65 fill:#e3dcea,stroke:#7a4baa;
-    style v75 fill:#e3dcea,stroke:#7a4baa;
-    style v84 fill:#e3dcea,stroke:#7a4baa;
-    style v111 fill:#e3dcea,stroke:#7a4baa;
-    style v89 fill:#e3dcea,stroke:#7a4baa;
-    style v96 fill:#e3dcea,stroke:#7a4baa;
-    style v106 fill:#e3dcea,stroke:#7a4baa;
-    style v115 fill:#e3dcea,stroke:#7a4baa;
-    style v142 fill:#e3dcea,stroke:#7a4baa;
-    style v120 fill:#e3dcea,stroke:#7a4baa;
-    style v127 fill:#e3dcea,stroke:#7a4baa;
-    style v137 fill:#e3dcea,stroke:#7a4baa;
-    style v146 fill:#e3dcea,stroke:#7a4baa;
-    style v173 fill:#e3dcea,stroke:#7a4baa;
-    style v151 fill:#e3dcea,stroke:#7a4baa;
-    style v158 fill:#e3dcea,stroke:#7a4baa;
-    style v168 fill:#e3dcea,stroke:#7a4baa;
-    style v180 fill:#e3dcea,stroke:#7a4baa;
+    style v57 fill:#e3dcea,stroke:#7a4baa;
+    style v67 fill:#e3dcea,stroke:#7a4baa;
+    style v73 fill:#e3dcea,stroke:#7a4baa;
+    style v82 fill:#e3dcea,stroke:#7a4baa;
+    style v90 fill:#e3dcea,stroke:#7a4baa;
+    style v97 fill:#e3dcea,stroke:#7a4baa;
+    style v107 fill:#e3dcea,stroke:#7a4baa;
+    style v116 fill:#e3dcea,stroke:#7a4baa;
+    style v143 fill:#e3dcea,stroke:#7a4baa;
+    style v121 fill:#e3dcea,stroke:#7a4baa;
+    style v128 fill:#e3dcea,stroke:#7a4baa;
+    style v138 fill:#e3dcea,stroke:#7a4baa;
+    style v147 fill:#e3dcea,stroke:#7a4baa;
+    style v174 fill:#e3dcea,stroke:#7a4baa;
+    style v152 fill:#e3dcea,stroke:#7a4baa;
+    style v159 fill:#e3dcea,stroke:#7a4baa;
+    style v169 fill:#e3dcea,stroke:#7a4baa;
+    style v178 fill:#e3dcea,stroke:#7a4baa;
+    style v205 fill:#e3dcea,stroke:#7a4baa;
+    style v183 fill:#e3dcea,stroke:#7a4baa;
     style v190 fill:#e3dcea,stroke:#7a4baa;
-    style v202 fill:#e3dcea,stroke:#7a4baa;
-    style v209 fill:#e3dcea,stroke:#7a4baa;
-    style v221 fill:#e3dcea,stroke:#7a4baa;
-    style v228 fill:#e3dcea,stroke:#7a4baa;
-    style v232 fill:#e3dcea,stroke:#7a4baa;
+    style v200 fill:#e3dcea,stroke:#7a4baa;
+    style v212 fill:#e3dcea,stroke:#7a4baa;
+    style v222 fill:#e3dcea,stroke:#7a4baa;
+    style v231 fill:#e3dcea,stroke:#7a4baa;
+    style v258 fill:#e3dcea,stroke:#7a4baa;
+    style v236 fill:#e3dcea,stroke:#7a4baa;
+    style v243 fill:#e3dcea,stroke:#7a4baa;
+    style v253 fill:#e3dcea,stroke:#7a4baa;
+    style v262 fill:#e3dcea,stroke:#7a4baa;
+    style v289 fill:#e3dcea,stroke:#7a4baa;
+    style v267 fill:#e3dcea,stroke:#7a4baa;
+    style v274 fill:#e3dcea,stroke:#7a4baa;
+    style v284 fill:#e3dcea,stroke:#7a4baa;
+    style v296 fill:#e3dcea,stroke:#7a4baa;
+    style v303 fill:#e3dcea,stroke:#7a4baa;
+    style v315 fill:#e3dcea,stroke:#7a4baa;
+    style v322 fill:#e3dcea,stroke:#7a4baa;
+    style v326 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 
