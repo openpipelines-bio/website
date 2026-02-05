@@ -14,7 +14,7 @@ ID: `rna_multisample`
 Namespace: `workflows/rna`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.1/src/workflows/rna/rna_multisample/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v4.0.0/src/workflows/rna/rna_multisample/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.1 -latest \
+  -r v4.0.0 -latest \
   -main-script target/nextflow/workflows/rna/rna_multisample/main.nf \
   --help
 ```
@@ -81,7 +81,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.1 -latest \
+  -r v4.0.0 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/rna/rna_multisample/main.nf \
   -params-file params.yaml
@@ -165,171 +165,188 @@ flowchart TB
     v0(Channel.fromList)
     v2(filter)
     v10(filter)
-    v18(normalize_total)
-    v25(cross)
-    v35(cross)
-    v41(filter)
-    v49(log1p)
-    v56(cross)
-    v66(cross)
-    v72(filter)
-    v80(delete_layer)
-    v87(cross)
-    v97(cross)
-    v106(branch)
-    v133(concat)
-    v111(scale)
-    v118(cross)
-    v128(cross)
-    v134(filter)
-    v142(highly_variable_features_scanpy)
-    v149(cross)
-    v159(cross)
-    v165(filter)
-    v288(concat)
-    v177(branch)
-    v204(concat)
-    v189(cross)
-    v199(cross)
-    v208(branch)
-    v235(concat)
-    v220(cross)
-    v230(cross)
-    v236(filter)
-    v266(concat)
-    v251(cross)
-    v261(cross)
-    v273(cross)
-    v283(cross)
-    v295(cross)
+    v17(filter)
+    v32(cross)
+    v42(cross)
+    v109(concat)
+    v116(cross)
+    v126(cross)
+    v135(branch)
+    v162(concat)
+    v140(scale)
+    v147(cross)
+    v157(cross)
+    v163(filter)
+    v171(highly_variable_features_scanpy)
+    v178(cross)
+    v188(cross)
+    v194(filter)
+    v317(concat)
+    v206(branch)
+    v233(concat)
+    v218(cross)
+    v228(cross)
+    v237(branch)
+    v264(concat)
+    v249(cross)
+    v259(cross)
+    v265(filter)
+    v295(concat)
+    v280(cross)
+    v290(cross)
     v302(cross)
-    v314(cross)
-    v321(cross)
-    v325(Output)
-    subgraph group_rna_qc [rna_qc]
-        v182(grep_mitochondrial_genes)
-        v213(grep_ribosomal_genes)
-        v244(calculate_qc_metrics)
+    v312(cross)
+    v324(cross)
+    v331(cross)
+    v343(cross)
+    v350(cross)
+    v354(Output)
+    subgraph group_log_normalize [log_normalize]
+        v25(normalize_total)
+        v48(filter)
+        v56(log1p)
+        v63(cross)
+        v73(cross)
+        v79(filter)
+        v87(delete_layer)
+        v94(cross)
+        v104(cross)
     end
-    v106-->v133
-    v133-->v134
-    v177-->v204
-    v208-->v235
-    v235-->v236
+    subgraph group_rna_qc [rna_qc]
+        v211(grep_mitochondrial_genes)
+        v242(grep_ribosomal_genes)
+        v273(calculate_qc_metrics)
+    end
+    v135-->v162
+    v162-->v163
+    v206-->v233
+    v237-->v264
+    v264-->v265
     v0-->v2
     v2-->v10
-    v10-->v18
-    v18-->v25
-    v10-->v25
-    v10-->v35
-    v41-->v49
-    v49-->v56
-    v41-->v56
-    v41-->v66
-    v72-->v80
-    v80-->v87
-    v72-->v87
-    v72-->v97
-    v106-->v111
-    v111-->v118
-    v106-->v118
-    v106-->v128
-    v128-->v133
-    v134-->v142
-    v142-->v149
-    v134-->v149
-    v134-->v159
-    v177-->v182
-    v182-->v189
-    v177-->v189
-    v177-->v199
-    v199-->v204
-    v208-->v213
-    v213-->v220
-    v208-->v220
-    v208-->v230
-    v230-->v235
-    v236-->v244
-    v244-->v251
-    v236-->v251
-    v236-->v261
-    v261-->v266
-    v266-->v273
-    v165-->v273
-    v165-->v283
-    v283-->v288
-    v288-->v295
-    v2-->v295
+    v10-->v17
+    v17-->v25
+    v25-->v32
+    v17-->v32
+    v17-->v42
+    v48-->v56
+    v56-->v63
+    v48-->v63
+    v48-->v73
+    v79-->v87
+    v87-->v94
+    v79-->v94
+    v79-->v104
+    v104-->v109
+    v109-->v116
+    v10-->v116
+    v10-->v126
+    v135-->v140
+    v140-->v147
+    v135-->v147
+    v135-->v157
+    v157-->v162
+    v163-->v171
+    v171-->v178
+    v163-->v178
+    v163-->v188
+    v206-->v211
+    v211-->v218
+    v206-->v218
+    v206-->v228
+    v228-->v233
+    v237-->v242
+    v242-->v249
+    v237-->v249
+    v237-->v259
+    v259-->v264
+    v265-->v273
+    v273-->v280
+    v265-->v280
+    v265-->v290
+    v290-->v295
     v295-->v302
-    v2-->v302
-    v2-->v314
-    v314-->v321
-    v2-->v321
-    v321-->v325
-    v35-->v41
-    v18-->v35
-    v66-->v72
-    v49-->v66
-    v80-->v97
-    v97-->v106
-    v111-->v128
-    v159-->v165
-    v142-->v159
-    v165-->v177
-    v182-->v199
-    v204-->v208
-    v213-->v230
-    v244-->v261
-    v266-->v283
-    v288-->v314
+    v194-->v302
+    v194-->v312
+    v312-->v317
+    v317-->v324
+    v2-->v324
+    v324-->v331
+    v2-->v331
+    v2-->v343
+    v343-->v350
+    v2-->v350
+    v350-->v354
+    v42-->v48
+    v25-->v42
+    v73-->v79
+    v56-->v73
+    v87-->v104
+    v109-->v126
+    v126-->v135
+    v140-->v157
+    v188-->v194
+    v171-->v188
+    v194-->v206
+    v211-->v228
+    v233-->v237
+    v242-->v259
+    v273-->v290
+    v295-->v312
+    v317-->v343
+    style group_log_normalize fill:#F0F0F0,stroke:#969696;
     style group_rna_qc fill:#F0F0F0,stroke:#969696;
     style v0 fill:#e3dcea,stroke:#7a4baa;
     style v2 fill:#e3dcea,stroke:#7a4baa;
     style v10 fill:#e3dcea,stroke:#7a4baa;
-    style v18 fill:#e3dcea,stroke:#7a4baa;
+    style v17 fill:#e3dcea,stroke:#7a4baa;
     style v25 fill:#e3dcea,stroke:#7a4baa;
-    style v35 fill:#e3dcea,stroke:#7a4baa;
-    style v41 fill:#e3dcea,stroke:#7a4baa;
-    style v49 fill:#e3dcea,stroke:#7a4baa;
+    style v32 fill:#e3dcea,stroke:#7a4baa;
+    style v42 fill:#e3dcea,stroke:#7a4baa;
+    style v48 fill:#e3dcea,stroke:#7a4baa;
     style v56 fill:#e3dcea,stroke:#7a4baa;
-    style v66 fill:#e3dcea,stroke:#7a4baa;
-    style v72 fill:#e3dcea,stroke:#7a4baa;
-    style v80 fill:#e3dcea,stroke:#7a4baa;
+    style v63 fill:#e3dcea,stroke:#7a4baa;
+    style v73 fill:#e3dcea,stroke:#7a4baa;
+    style v79 fill:#e3dcea,stroke:#7a4baa;
+    style v109 fill:#e3dcea,stroke:#7a4baa;
     style v87 fill:#e3dcea,stroke:#7a4baa;
-    style v97 fill:#e3dcea,stroke:#7a4baa;
-    style v106 fill:#e3dcea,stroke:#7a4baa;
-    style v133 fill:#e3dcea,stroke:#7a4baa;
-    style v111 fill:#e3dcea,stroke:#7a4baa;
-    style v118 fill:#e3dcea,stroke:#7a4baa;
-    style v128 fill:#e3dcea,stroke:#7a4baa;
-    style v134 fill:#e3dcea,stroke:#7a4baa;
-    style v142 fill:#e3dcea,stroke:#7a4baa;
-    style v149 fill:#e3dcea,stroke:#7a4baa;
-    style v159 fill:#e3dcea,stroke:#7a4baa;
-    style v165 fill:#e3dcea,stroke:#7a4baa;
-    style v288 fill:#e3dcea,stroke:#7a4baa;
-    style v177 fill:#e3dcea,stroke:#7a4baa;
-    style v204 fill:#e3dcea,stroke:#7a4baa;
-    style v182 fill:#e3dcea,stroke:#7a4baa;
-    style v189 fill:#e3dcea,stroke:#7a4baa;
-    style v199 fill:#e3dcea,stroke:#7a4baa;
-    style v208 fill:#e3dcea,stroke:#7a4baa;
-    style v235 fill:#e3dcea,stroke:#7a4baa;
-    style v213 fill:#e3dcea,stroke:#7a4baa;
-    style v220 fill:#e3dcea,stroke:#7a4baa;
-    style v230 fill:#e3dcea,stroke:#7a4baa;
-    style v236 fill:#e3dcea,stroke:#7a4baa;
-    style v266 fill:#e3dcea,stroke:#7a4baa;
-    style v244 fill:#e3dcea,stroke:#7a4baa;
-    style v251 fill:#e3dcea,stroke:#7a4baa;
-    style v261 fill:#e3dcea,stroke:#7a4baa;
-    style v273 fill:#e3dcea,stroke:#7a4baa;
-    style v283 fill:#e3dcea,stroke:#7a4baa;
+    style v94 fill:#e3dcea,stroke:#7a4baa;
+    style v104 fill:#e3dcea,stroke:#7a4baa;
+    style v116 fill:#e3dcea,stroke:#7a4baa;
+    style v126 fill:#e3dcea,stroke:#7a4baa;
+    style v135 fill:#e3dcea,stroke:#7a4baa;
+    style v162 fill:#e3dcea,stroke:#7a4baa;
+    style v140 fill:#e3dcea,stroke:#7a4baa;
+    style v147 fill:#e3dcea,stroke:#7a4baa;
+    style v157 fill:#e3dcea,stroke:#7a4baa;
+    style v163 fill:#e3dcea,stroke:#7a4baa;
+    style v171 fill:#e3dcea,stroke:#7a4baa;
+    style v178 fill:#e3dcea,stroke:#7a4baa;
+    style v188 fill:#e3dcea,stroke:#7a4baa;
+    style v194 fill:#e3dcea,stroke:#7a4baa;
+    style v317 fill:#e3dcea,stroke:#7a4baa;
+    style v206 fill:#e3dcea,stroke:#7a4baa;
+    style v233 fill:#e3dcea,stroke:#7a4baa;
+    style v211 fill:#e3dcea,stroke:#7a4baa;
+    style v218 fill:#e3dcea,stroke:#7a4baa;
+    style v228 fill:#e3dcea,stroke:#7a4baa;
+    style v237 fill:#e3dcea,stroke:#7a4baa;
+    style v264 fill:#e3dcea,stroke:#7a4baa;
+    style v242 fill:#e3dcea,stroke:#7a4baa;
+    style v249 fill:#e3dcea,stroke:#7a4baa;
+    style v259 fill:#e3dcea,stroke:#7a4baa;
+    style v265 fill:#e3dcea,stroke:#7a4baa;
     style v295 fill:#e3dcea,stroke:#7a4baa;
+    style v273 fill:#e3dcea,stroke:#7a4baa;
+    style v280 fill:#e3dcea,stroke:#7a4baa;
+    style v290 fill:#e3dcea,stroke:#7a4baa;
     style v302 fill:#e3dcea,stroke:#7a4baa;
-    style v314 fill:#e3dcea,stroke:#7a4baa;
-    style v321 fill:#e3dcea,stroke:#7a4baa;
-    style v325 fill:#e3dcea,stroke:#7a4baa;
+    style v312 fill:#e3dcea,stroke:#7a4baa;
+    style v324 fill:#e3dcea,stroke:#7a4baa;
+    style v331 fill:#e3dcea,stroke:#7a4baa;
+    style v343 fill:#e3dcea,stroke:#7a4baa;
+    style v350 fill:#e3dcea,stroke:#7a4baa;
+    style v354 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 
