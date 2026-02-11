@@ -14,7 +14,7 @@ ID: `rna_singlesample`
 Namespace: `workflows/rna`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.1/src/workflows/rna/rna_singlesample/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v4.0.2/src/workflows/rna/rna_singlesample/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.1 -latest \
+  -r v4.0.2 -latest \
   -main-script target/nextflow/workflows/rna/rna_singlesample/main.nf \
   --help
 ```
@@ -58,6 +58,7 @@ input: # please fill in - example: "dataset.h5mu"
 # max_fraction_mito: 0.2
 # min_fraction_ribo: 0.0
 # max_fraction_ribo: 0.2
+skip_scrublet_doublet_detection: false
 
 # Mitochondrial & Ribosomal Gene Detection
 # var_gene_names: "gene_symbol"
@@ -78,7 +79,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.1 -latest \
+  -r v4.0.2 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/rna/rna_singlesample/main.nf \
   -params-file params.yaml
@@ -108,17 +109,18 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Filtering options
 
-|Name                   |Description                                                                                  |Attributes                    |
+|Name                                |Description                                                                                  |Attributes                    |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--min_counts`         |Minimum number of counts captured per cell.                                                  |`integer`, example: `200`     |
-|`--max_counts`         |Maximum number of counts captured per cell.                                                  |`integer`, example: `5000000` |
-|`--min_genes_per_cell` |Minimum of non-zero values per cell.                                                         |`integer`, example: `200`     |
-|`--max_genes_per_cell` |Maximum of non-zero values per cell.                                                         |`integer`, example: `1500000` |
-|`--min_cells_per_gene` |Minimum of non-zero values per gene.                                                         |`integer`, example: `3`       |
-|`--min_fraction_mito`  |Minimum fraction of UMIs that are mitochondrial. Requires --obs_name_mitochondrial_fraction. |`double`, example: `0`        |
-|`--max_fraction_mito`  |Maximum fraction of UMIs that are mitochondrial. Requires --obs_name_mitochondrial_fraction. |`double`, example: `0.2`      |
-|`--min_fraction_ribo`  |Minimum fraction of UMIs that are ribosomal. Requires --obs_name_ribosomal_fraction.         |`double`, example: `0`        |
-|`--max_fraction_ribo`  |Maximum fraction of UMIs that are ribosomal. Requires --obs_name_ribosomal_fraction.         |`double`, example: `0.2`      |
+|`--min_counts`                      |Minimum number of counts captured per cell.                                                  |`integer`, example: `200`     |
+|`--max_counts`                      |Maximum number of counts captured per cell.                                                  |`integer`, example: `5000000` |
+|`--min_genes_per_cell`              |Minimum of non-zero values per cell.                                                         |`integer`, example: `200`     |
+|`--max_genes_per_cell`              |Maximum of non-zero values per cell.                                                         |`integer`, example: `1500000` |
+|`--min_cells_per_gene`              |Minimum of non-zero values per gene.                                                         |`integer`, example: `3`       |
+|`--min_fraction_mito`               |Minimum fraction of UMIs that are mitochondrial. Requires --obs_name_mitochondrial_fraction. |`double`, example: `0`        |
+|`--max_fraction_mito`               |Maximum fraction of UMIs that are mitochondrial. Requires --obs_name_mitochondrial_fraction. |`double`, example: `0.2`      |
+|`--min_fraction_ribo`               |Minimum fraction of UMIs that are ribosomal. Requires --obs_name_ribosomal_fraction.         |`double`, example: `0`        |
+|`--max_fraction_ribo`               |Maximum fraction of UMIs that are ribosomal. Requires --obs_name_ribosomal_fraction.         |`double`, example: `0.2`      |
+|`--skip_scrublet_doublet_detection` |Skip the scrublet doublet detection step.                                                    |`boolean_true`                |
 
 
 ### Mitochondrial & Ribosomal Gene Detection
@@ -153,14 +155,7 @@ flowchart TB
     v50(concat)
     v35(cross)
     v45(cross)
-    v54(branch)
-    v81(concat)
-    v66(cross)
-    v76(cross)
-    v82(filter)
     v112(concat)
-    v97(cross)
-    v107(cross)
     v119(cross)
     v129(cross)
     v138(branch)
@@ -181,7 +176,7 @@ flowchart TB
     v236(rna_do_filter)
     v243(cross)
     v253(cross)
-    v259(filter)
+    v262(branch)
     v289(concat)
     v267(filter_with_scrublet)
     v274(cross)
@@ -193,8 +188,15 @@ flowchart TB
     v326(Output)
     subgraph group_qc [qc]
         v28(grep_mitochondrial_genes)
+        v54(branch)
+        v81(concat)
         v59(grep_ribosomal_genes)
+        v66(cross)
+        v76(cross)
+        v82(filter)
         v90(calculate_qc_metrics)
+        v97(cross)
+        v107(cross)
     end
     v23-->v50
     v54-->v81
@@ -202,6 +204,7 @@ flowchart TB
     v138-->v165
     v169-->v196
     v196-->v197
+    v262-->v289
     v0-->v2
     v2-->v11
     v23-->v28
@@ -240,10 +243,10 @@ flowchart TB
     v236-->v243
     v228-->v243
     v228-->v253
-    v259-->v267
+    v262-->v267
     v267-->v274
-    v259-->v274
-    v259-->v284
+    v262-->v274
+    v262-->v284
     v284-->v289
     v289-->v296
     v2-->v296
@@ -265,8 +268,8 @@ flowchart TB
     v174-->v191
     v222-->v228
     v205-->v222
-    v253-->v259
     v236-->v253
+    v253-->v262
     v267-->v284
     v289-->v315
     style group_qc fill:#F0F0F0,stroke:#969696;
@@ -308,7 +311,7 @@ flowchart TB
     style v236 fill:#e3dcea,stroke:#7a4baa;
     style v243 fill:#e3dcea,stroke:#7a4baa;
     style v253 fill:#e3dcea,stroke:#7a4baa;
-    style v259 fill:#e3dcea,stroke:#7a4baa;
+    style v262 fill:#e3dcea,stroke:#7a4baa;
     style v289 fill:#e3dcea,stroke:#7a4baa;
     style v267 fill:#e3dcea,stroke:#7a4baa;
     style v274 fill:#e3dcea,stroke:#7a4baa;
