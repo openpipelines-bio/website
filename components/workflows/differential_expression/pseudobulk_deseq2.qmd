@@ -1,0 +1,254 @@
+---
+title: "Pseudobulk deseq2"
+namespace: "Workflows/differential expression"
+description: "Performs pseudobulk generation and subsequent differential expression analysis using DESeq2"
+type: "workflow"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `pseudobulk_deseq2`  
+Namespace: `workflows/differential_expression`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v4.0.2/src/workflows/differential_expression/pseudobulk_deseq2/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r v4.0.2 -latest \
+  -main-script target/nextflow/workflows/differential_expression/pseudobulk_deseq2/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Inputs
+input: # please fill in - example: "/path/to/input_file.h5mu"
+modality: "rna"
+# input_layer: "foo"
+obs_cell_group: # please fill in - example: "cell_type"
+# obs_groups: ["treatment", "disease"]
+# var_gene_names: "gene_symbol"
+
+# Pseudobulk Options
+aggregation_method: "sum"
+random_state: 0
+
+# Filtering options
+min_obs_per_sample: 30
+# filter_genes_min_samples: 123
+# filter_gene_patterns: ["MIR\d+", "AL\d+", "LINC\d+", "AC\d+", "AP\d+"]
+
+# DGEA options
+design_formula: # please fill in - example: "~ cell_type + disease + treatment"
+contrast_column: # please fill in - example: "treatment"
+contrast_values: # please fill in - example: ["ctrl", "stim"]
+p_adj_threshold: 0.05
+log2fc_threshold: 0.0
+
+# Outputs
+# output: "$id.$key.output"
+output_prefix: "deseq2_analysis"
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+
+# Arguments
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r v4.0.2 -latest \
+  -profile docker \
+  -main-script target/nextflow/workflows/differential_expression/pseudobulk_deseq2/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Inputs
+
+|Name               |Description                                                                                                                                                                                    |Attributes                                                               |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--input`          |Input h5mu file.                                                                                                                                                                               |`file`, required, example: `"/path/to/input_file.h5mu"`                  |
+|`--modality`       |Which modality from the input MuData file to process.                                                                                                                                          |`string`, default: `"rna"`                                               |
+|`--input_layer`    |Input layer to use. If None, X is used. This layer must contain raw counts.                                                                                                                    |`string`                                                                 |
+|`--obs_cell_group` |.obs field containing the variable to group on. Typically this field contains cell groups such as annotated cell types or clusters. If provided, will generate DESeq2 analysis per cell group. |`string`, required, example: `"cell_type"`                               |
+|`--obs_groups`     |.obs fields containing the experimental condition(s) to create pseudobulk samples for.                                                                                                         |List of `string`, example: `"treatment", "disease"`, multiple_sep: `";"` |
+|`--var_gene_names` |Name of the .var field that contains gene symbols. If not provided, .var.index will be used.                                                                                                   |`string`, example: `"gene_symbol"`                                       |
+
+
+### Pseudobulk Options
+
+|Name                   |Description                                                                  |Attributes                 |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--aggregation_method` |Method to aggregate the raw counts for pseudoreplicates. Either sum or mean. |`string`, default: `"sum"` |
+|`--random_state`       |The random seed for sampling.                                                |`integer`, default: `0`    |
+
+
+### Filtering options
+
+|Name                         |Description                                                                                                             |Attributes                                                                                       |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--min_obs_per_sample`       |Minimum number of observations per pseudobulk sample.                                                                   |`integer`, default: `30`                                                                         |
+|`--filter_genes_min_samples` |Minimum number of samples a gene must be expressed in to be included in the analysis. If None, no filtering is applied. |`integer`                                                                                        |
+|`--filter_gene_patterns`     |List of regex patterns to filter out genes. Genes matching any of these patterns will be excluded from the analysis.    |List of `string`, example: `"MIR\d+", "AL\d+", "LINC\d+", "AC\d+", "AP\d+"`, multiple_sep: `";"` |
+
+
+### DGEA options
+
+|Name                 |Description                                                                                                                            |Attributes                                                                 |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--design_formula`   |Design formula for DESeq2 analysis in R-style format. Specifies the statistical model to account for various factors.                  |`string`, required, example: `"~ cell_type + disease + treatment"`         |
+|`--contrast_column`  |Column in the metadata to use for the contrast. This column should contain the conditions to compare.                                  |`string`, required, example: `"treatment"`                                 |
+|`--contrast_values`  |Values to compare in the contrast column. First value is baseline, following values are different treatments.                          |List of `string`, required, example: `"ctrl", "stim"`, multiple_sep: `";"` |
+|`--p_adj_threshold`  |Adjusted p-value threshold for significance. Genes with adjusted p-values below this threshold will be considered significant.         |`double`, default: `0.05`                                                  |
+|`--log2fc_threshold` |Log2 fold change threshold for significance. Genes with absolute log2 fold change above this threshold will be considered significant. |`double`, default: `0`                                                     |
+
+
+### Outputs
+
+|Name              |Description                                                                                                    |Attributes                             |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--output`        |Output directory for DESeq2 results, containing one CSV file per cell group (as defined by `--obs_cell_group`) |`file`, required                       |
+|`--output_prefix` |Prefix for output CSV files: files will be named "{prefix}_{cell_group}.csv"                                   |`string`, default: `"deseq2_analysis"` |
+
+## Authors
+
+
+  * Jakub Majercik [{{< fa brands github >}}](https://github.com/jakubmajercik) [{{< fa brands linkedin >}}](https://linkedin.com/in/jakubmajercik) (author)
+
+  * Weiwei Schultz (contributor)
+
+## Visualisation
+
+```{mermaid}
+flowchart TB
+    v0(Channel.fromList)
+    v2(filter)
+    v9(filter)
+    v17(create_pseudobulk)
+    v24(cross)
+    v34(cross)
+    v40(filter)
+    v48(delimit_counts)
+    v55(cross)
+    v65(cross)
+    v74(branch)
+    v101(concat)
+    v79(filter_with_pattern)
+    v86(cross)
+    v96(cross)
+    v102(filter)
+    v110(filter_with_counts)
+    v117(cross)
+    v127(cross)
+    v133(filter)
+    v163(concat)
+    v141(deseq2)
+    v148(cross)
+    v158(cross)
+    v170(cross)
+    v177(cross)
+    v189(cross)
+    v196(cross)
+    v200(Output)
+    v74-->v101
+    v101-->v102
+    v0-->v2
+    v2-->v9
+    v9-->v17
+    v17-->v24
+    v9-->v24
+    v9-->v34
+    v40-->v48
+    v48-->v55
+    v40-->v55
+    v40-->v65
+    v74-->v79
+    v79-->v86
+    v74-->v86
+    v74-->v96
+    v96-->v101
+    v102-->v110
+    v110-->v117
+    v102-->v117
+    v102-->v127
+    v133-->v141
+    v141-->v148
+    v133-->v148
+    v133-->v158
+    v158-->v163
+    v163-->v170
+    v2-->v170
+    v170-->v177
+    v2-->v177
+    v2-->v189
+    v189-->v196
+    v2-->v196
+    v196-->v200
+    v34-->v40
+    v17-->v34
+    v48-->v65
+    v65-->v74
+    v79-->v96
+    v127-->v133
+    v110-->v127
+    v141-->v158
+    v163-->v189
+    style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v2 fill:#e3dcea,stroke:#7a4baa;
+    style v9 fill:#e3dcea,stroke:#7a4baa;
+    style v17 fill:#e3dcea,stroke:#7a4baa;
+    style v24 fill:#e3dcea,stroke:#7a4baa;
+    style v34 fill:#e3dcea,stroke:#7a4baa;
+    style v40 fill:#e3dcea,stroke:#7a4baa;
+    style v48 fill:#e3dcea,stroke:#7a4baa;
+    style v55 fill:#e3dcea,stroke:#7a4baa;
+    style v65 fill:#e3dcea,stroke:#7a4baa;
+    style v74 fill:#e3dcea,stroke:#7a4baa;
+    style v101 fill:#e3dcea,stroke:#7a4baa;
+    style v79 fill:#e3dcea,stroke:#7a4baa;
+    style v86 fill:#e3dcea,stroke:#7a4baa;
+    style v96 fill:#e3dcea,stroke:#7a4baa;
+    style v102 fill:#e3dcea,stroke:#7a4baa;
+    style v110 fill:#e3dcea,stroke:#7a4baa;
+    style v117 fill:#e3dcea,stroke:#7a4baa;
+    style v127 fill:#e3dcea,stroke:#7a4baa;
+    style v133 fill:#e3dcea,stroke:#7a4baa;
+    style v163 fill:#e3dcea,stroke:#7a4baa;
+    style v141 fill:#e3dcea,stroke:#7a4baa;
+    style v148 fill:#e3dcea,stroke:#7a4baa;
+    style v158 fill:#e3dcea,stroke:#7a4baa;
+    style v170 fill:#e3dcea,stroke:#7a4baa;
+    style v177 fill:#e3dcea,stroke:#7a4baa;
+    style v189 fill:#e3dcea,stroke:#7a4baa;
+    style v196 fill:#e3dcea,stroke:#7a4baa;
+    style v200 fill:#e3dcea,stroke:#7a4baa;
+
+```
+
