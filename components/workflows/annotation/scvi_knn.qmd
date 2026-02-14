@@ -1,7 +1,7 @@
 ---
 title: "scVI Annotation"
 namespace: "Workflows/annotation"
-description: "Cell type annotation workflow that performs scVI integration of reference and query dataset followed by KNN label transfer."
+description: ""Cell type annotation workflow that performs scVI integration of reference and query dataset followed by KNN label transfer."
 type: "workflow"
 toc: false
 ---
@@ -14,13 +14,14 @@ ID: `scvi_knn`
 Namespace: `workflows/annotation`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.1/src/workflows/annotation/scvi_knn/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/4.0.0/src/workflows/annotation/scvi_knn/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
 
 The query and reference datasets are expected to be pre-processed in the same way, for example with the `process_samples` workflow of OpenPipeline. Note that this workflow will integrate the reference dataset from scratch and integrate the query dataset in the same embedding space. 
-The workflow does not currently output the trained SCVI reference model
+The workflow does not currently output the trained SCVI reference model."
+
 
 ## Example commands
 
@@ -32,7 +33,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.1 -latest \
+  -r 4.0.0 -latest \
   -main-script target/nextflow/workflows/annotation/scvi_knn/main.nf \
   --help
 ```
@@ -97,7 +98,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.1 -latest \
+  -r 4.0.0 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/annotation/scvi_knn/main.nf \
   -params-file params.yaml

@@ -14,7 +14,7 @@ ID: `scgpt_leiden`
 Namespace: `workflows/integration`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.1/src/workflows/integration/scgpt_leiden/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/4.0.0/src/workflows/integration/scgpt_leiden/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.1 -latest \
+  -r 4.0.0 -latest \
   -main-script target/nextflow/workflows/integration/scgpt_leiden/main.nf \
   --help
 ```
@@ -90,7 +90,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.1 -latest \
+  -r 4.0.0 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/integration/scgpt_leiden/main.nf \
   -params-file params.yaml
@@ -108,7 +108,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |:----------|:--------------------------------------------------|:--------------------|
 |`--id`              |ID of the sample.                                                                                                        |`string`, required, example: `"foo"`      |
 |`--input`           |Path to the input file.                                                                                                  |`file`, required, example: `"input.h5mu"` |
-|`--modality`        |                                                                                                                         |`string`, default: `"rna"`                |
+|`--modality`        |Which modality from the input MuData file to process.                                                                    |`string`, default: `"rna"`                |
 |`--input_layer`     |The layer of the input dataset to process if .X is not to be used. Should contain log normalized counts.                 |`string`                                  |
 |`--var_gene_names`  |The name of the adata var column containing gene names; when no gene_name_layer is provided, the var index will be used. |`string`                                  |
 |`--obs_batch_label` |The name of the adata obs column containing the batch labels.                                                            |`string`                                  |
