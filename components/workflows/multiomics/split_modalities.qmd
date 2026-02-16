@@ -14,7 +14,7 @@ ID: `split_modalities`
 Namespace: `workflows/multiomics`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.1/src/workflows/multiomics/split_modalities/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/3.0.0/src/workflows/multiomics/split_modalities/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,8 +30,8 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.1 -latest \
-  -main-script target/nextflow/workflows/multiomics/split_modalities/main.nf \
+  -r 3.0.0 -latest \
+  -main-script target/_private/nextflow/workflows/multiomics/split_modalities/main.nf \
   --help
 ```
 
@@ -40,27 +40,15 @@ nextflow run openpipelines-bio/openpipeline \
 <details>
 <summary>Example of `params.yaml`</summary>
 ```yaml
-# Inputs
-id: # please fill in - example: "foo"
-input: # please fill in - example: "input.h5mu"
 
-# Outputs
-# output: "$id.$key.output"
-# output_types: "$id.$key.output_types.csv"
-
-# Nextflow input-output arguments
-publish_dir: # please fill in - example: "output/"
-# param_list: "my_params.yaml"
-
-# Arguments
 ```
 </details>
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.1 -latest \
+  -r 3.0.0 -latest \
   -profile docker \
-  -main-script target/nextflow/workflows/multiomics/split_modalities/main.nf \
+  -main-script target/_private/nextflow/workflows/multiomics/split_modalities/main.nf \
   -params-file params.yaml
 ```
 
