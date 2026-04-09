@@ -3,3 +3,138 @@ title: Downstream
 description: Celltyping and cell-cell communication
 order: 40
 ---
+
+Downstream analysis starts from an integrated H5MU file and extracts biological insight: what cell types are present, how they differ across conditions, how they communicate, and how they change over time. OpenPipelines provides components and workflows for the most common downstream tasks.
+
+## Cell type annotation
+
+Cell type annotation assigns a biological label to each cluster or cell. OpenPipelines supports several methods, ranging from marker-gene classifiers to reference-atlas-based transfer.
+
+### Automated annotation
+
+| Method | Component | Notes |
+|---|---|---|
+| CellTypist | `annotate/celltypist` | Logistic regression, large pretrained models |
+| SingleR | `annotate/singler` | Reference-based, R |
+| PopV | `annotate/popv` | Consensus across multiple methods |
+| scANVI | `annotate/scanvi` | VAE-based, uses prior labels |
+| OnClass | `annotate/onclass` | Ontology-aware annotation |
+
+Example using CellTypist with a pretrained model:
+
+```bash
+viash run src/annotate/celltypist/config.vsh.yaml -- \
+  --input cohort_01_integrated.h5mu \
+  --model "Immune_All_Low.pkl" \
+  --output cohort_01_annotated.h5mu
+```
+
+The `celltypist` and `scanvi_scarches` annotation workflows wrap these components and can be run with Nextflow directly:
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -main-script target/nextflow/workflows/annotation/celltypist/main.nf \
+  -revision 4.0.3 -latest \
+  -profile docker \
+  --id cohort_01 \
+  --input cohort_01_integrated.h5mu \
+  --model "Immune_All_Low.pkl" \
+  --output cohort_01_annotated.h5mu \
+  --publish_dir results/
+```
+
+### Label transfer
+
+If you have a well-annotated reference dataset and want to transfer labels to a query dataset, use the label transfer workflows:
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -main-script target/nextflow/workflows/annotation/harmony_knn/main.nf \
+  -revision 4.0.3 -latest \
+  -profile docker \
+  --id query_cohort \
+  --input query.h5mu \
+  --reference reference_atlas.h5mu \
+  --reference_obs_targets "cell_type" \
+  --output query_annotated.h5mu \
+  --publish_dir results/
+```
+
+Available label transfer methods:
+
+| Workflow | Method |
+|---|---|
+| `annotation/harmony_knn` | Harmony + KNN |
+| `annotation/scvi_knn` | scVI + KNN |
+| `annotation/scanvi_scarches` | scANVI + scArches (reference mapping) |
+
+## Differential expression
+
+OpenPipelines uses a pseudobulk approach for differential expression: cells are aggregated per sample and cell type to create pseudo-bulk counts, which are then tested with DESeq2.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -main-script target/nextflow/workflows/de/pseudobulk_deseq2/main.nf \
+  -revision 4.0.3 -latest \
+  -profile docker \
+  --id de_analysis \
+  --input cohort_01_annotated.h5mu \
+  --obs_cell_type "cell_type" \
+  --obs_sample_id "sample_id" \
+  --obs_group "condition" \
+  --reference_group "control" \
+  --output de_results.h5mu \
+  --publish_dir results/
+```
+
+The workflow runs in two steps:
+
+1. **`differential_expression/create_pseudobulk`** — aggregate cells per sample × cell type
+2. **`differential_expression/deseq2`** — run DESeq2 on the pseudobulk counts
+
+## RNA velocity
+
+RNA velocity estimates the future transcriptional state of cells using the ratio of spliced to unspliced RNA. OpenPipelines supports two tools:
+
+- **velocyto** — generates spliced/unspliced count matrices from BAM files
+- **scVelo** — computes velocity and projects it onto the UMAP
+
+```bash
+# Step 1: generate spliced/unspliced matrices from BAM
+viash run src/velocity/velocyto/config.vsh.yaml -- \
+  --input bam_file.bam \
+  --transcriptome reference.gtf \
+  --output velocity_counts.h5mu
+
+# Step 2: compute velocity with scVelo
+viash run src/velocity/scvelo/config.vsh.yaml -- \
+  --input velocity_counts.h5mu \
+  --output velocity_output.h5mu
+```
+
+## Cell-cell communication
+
+The `interpret/lianapy` component uses LIANA to infer ligand-receptor interactions between cell types from the expression data:
+
+```bash
+viash run src/interpret/lianapy/config.vsh.yaml -- \
+  --input cohort_01_annotated.h5mu \
+  --obs_cell_type "cell_type" \
+  --methods "natmi,connectome,logfc" \
+  --output lianapy_output.h5mu
+```
+
+LIANA combines multiple ligand-receptor databases and scoring methods, and stores results in `.uns` of the output H5MU.
+
+## Querying external resources
+
+OpenPipelines can query large external single-cell atlases directly:
+
+- **`query/cellxgene_census`** — fetch cells from the CZ CELLxGENE Census by tissue, cell type, or disease
+- **`query/tiledb_soma_healthcheck`** — validate connectivity to a TileDB-SOMA store
+
+These components are useful for pulling reference populations or augmenting your dataset with publicly available cells.
+
+---
+
+See the [Components reference](../components/) for the full argument list of each downstream component and workflow.

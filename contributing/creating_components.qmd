@@ -95,15 +95,203 @@ Resources checklist:
 
 ### The script file
 
-TODO
+The script file contains the actual implementation of the component. Viash injects the parsed CLI arguments into the script using a `## VIASH START` / `## VIASH END` marker block. During development, this block holds placeholder values so the script can be run directly in an IDE or REPL. At build time, Viash replaces the block with generated code that reads the actual CLI arguments.
+
+::: {.panel-tabset}
+
+# Python
+
+```python
+## VIASH START
+par = {
+    "input": "input.h5mu",
+    "output": "output.h5mu",
+    "modality": "rna",
+    "min_counts": 200,
+}
+meta = {
+    "resources_dir": ".",
+    "temp_dir": "/tmp",
+    "cpus": 1,
+    "memory_gb": 4,
+}
+## VIASH END
+
+import mudata as mu
+
+mdata = mu.read_h5mu(par["input"])
+adata = mdata.mod[par["modality"]]
+
+# ... component logic ...
+
+mdata.write_h5mu(par["output"])
+```
+
+# R
+
+```r
+## VIASH START
+par <- list(
+  input = "input.h5mu",
+  output = "output.h5mu",
+  modality = "rna"
+)
+meta <- list(
+  resources_dir = ".",
+  temp_dir = "/tmp",
+  cpus = 1L,
+  memory_gb = 4L
+)
+## VIASH END
+
+library(MuData)
+
+mdata <- readH5MU(par$input)
+
+# ... component logic ...
+
+writeH5MU(mdata, par$output)
+```
+
+# Bash
+
+```bash
+## VIASH START
+par_input="input.h5mu"
+par_output="output.h5mu"
+par_modality="rna"
+meta_cpus=1
+meta_memory_gb=4
+## VIASH END
+
+set -eo pipefail
+
+# unset boolean parameters before use
+[[ "$par_some_flag" == "false" ]] && unset par_some_flag
+
+# build argument array
+cmd_args=(
+  --input "$par_input"
+  --output "$par_output"
+  --modality "$par_modality"
+)
+[[ -n "$par_some_flag" ]] && cmd_args+=(--flag)
+
+mytool "${cmd_args[@]}"
+```
+
+:::
+
+Script checklist:
+
+  - The `## VIASH START` / `## VIASH END` block is present with realistic placeholder values
+  - Use `meta_cpus` and `meta_memory_gb` for resource-aware parallelism — never hardcode thread counts
+  - Bash scripts: use `set -eo pipefail` after `## VIASH END` and build CLI arguments as arrays
 
 ### Author information
 
-TODO
+Author information is centralised in `src/authors/`. Each contributor has a YAML file with their profile, which is merged into individual component configs using Viash's `__merge__` property. This keeps author information consistent across all components without duplication.
+
+To add yourself as an author:
+
+1. Create `src/authors/your_name.yaml`:
+
+```yaml
+name: Your Name
+info:
+  links:
+    - type: github
+      url: https://github.com/your_handle
+    - type: orcid
+      url: https://orcid.org/0000-0000-0000-0000
+```
+
+2. Reference it in your component's `config.vsh.yaml`:
+
+```yaml
+authors:
+  - __merge__: ../../authors/your_name.yaml
+    roles: [ author ]
+```
+
+Valid roles are `author` and `maintainer`. The `maintainer` role indicates who is responsible for keeping the component up to date.
 
 ## Adding dependencies
 
-TODO
+Dependencies are declared in the `engines` section of `config.vsh.yaml`. Viash uses this information to build the Docker image for the component. Always prefer installing packages through a package manager over building from source.
+
+::: {.panel-tabset}
+
+# Python (pip)
+
+```yaml
+engines:
+  - type: docker
+    image: python:3.11
+    setup:
+      - type: python
+        packages:
+          - mudata~=0.3
+          - scanpy>=1.9
+          - numpy
+```
+
+# Python (conda / BioContainers)
+
+BioContainers images from `quay.io/biocontainers` are preferred for bioinformatics tools because they pin exact versions including the build string (e.g. `tool:2.0.3--h5b5514e_1`), improving reproducibility:
+
+```yaml
+engines:
+  - type: docker
+    image: quay.io/biocontainers/scanpy:1.9.3--pyhdfd78af_0
+    setup:
+      - type: python
+        packages:
+          - mudata~=0.3
+```
+
+# R
+
+```yaml
+engines:
+  - type: docker
+    image: eddelbuettel/r2u:22.04
+    setup:
+      - type: r
+        cran:
+          - MuData
+          - Seurat
+        bioc:
+          - SingleR
+          - scran
+```
+
+# System packages (apt)
+
+```yaml
+engines:
+  - type: docker
+    image: ubuntu:22.04
+    setup:
+      - type: apt
+        packages:
+          - samtools
+          - libhdf5-dev
+      - type: python
+        packages:
+          - mudata
+```
+
+:::
+
+After editing the setup, rebuild the Docker image to verify it installs correctly:
+
+```bash
+viash build src/my_namespace/my_component/config.vsh.yaml \
+  -p docker --setup cb
+```
+
+The `cb` (cachedbuild) flag reuses cached layers where possible.
 
 ## Building components from their source
 When running or [testing individual components](#running-component-unittests), it is not necessary to execute an extra command to run the build step, `viash test` and `viash run` will build the component on the fly. However, before integrating components into a pipeline, you will need to build the components. More specifically, openpipelines uses Nextflow to combine components into pipelines, so we need to have at least the components build for `nextflow` platform as target. The easiest method to build the components is to use:

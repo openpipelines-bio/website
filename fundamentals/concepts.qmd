@@ -70,8 +70,16 @@ MuData
 
 # Modularity and a language independent framework 🔳
 
-TODO
+OpenPipelines is built on [Viash](https://viash.io/), a framework that separates the **logic** of a component (a script in Python, R, or Bash) from its **execution environment** (a Docker container) and its **orchestration layer** (Nextflow). This separation provides two key properties.
+
+**Language independence.** Each component can be written in whatever language best suits the task. A normalization step might be in Python, a statistical test in R, and a file conversion in Bash. Viash wraps each script with a generated CLI and injects the parsed arguments, so components are interchangeable regardless of language.
+
+**Modularity.** Because all components share a [common file format](#sec-common-file-format) and a generated CLI, they can be freely composed into pipelines. Adding, removing, or swapping a component requires only a change to the pipeline definition — no glue code, no format converters between steps. The same component can also be run standalone with `viash run`, tested with `viash test`, or built into a Docker image with `viash build`.
+
+At build time, Viash compiles each component into a Nextflow module. Workflows then chain these modules together using Nextflow DSL2, with data flowing through the pipeline as H5MU files on a shared channel. This means the pipeline scales from a laptop to an HPC cluster or cloud environment without changes to the component code.
 
 # A graphical interface 📺
 
-TODO
+[Seqera Platform](https://seqera.io/platform/) (previously Nextflow Tower) provides a web-based interface for launching, monitoring, and managing OpenPipelines workflows without using the command line. It supports multiple compute environments including AWS Batch, Google Cloud Batch, Azure Batch, and HPC schedulers.
+
+See the [User guide](../user_guide/running_pipelines.qmd) for instructions on how to launch workflows from the Seqera Platform UI and CLI.

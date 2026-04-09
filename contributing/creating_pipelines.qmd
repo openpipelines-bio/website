@@ -3,3 +3,324 @@ title: Creating pipelines
 description: A guide on how to create new workflows
 order: 30
 ---
+
+OpenPipelines workflows are Nextflow DSL2 pipelines, described to Viash through a `config.vsh.yaml` file. When built, Viash generates the final Nextflow modules from each component's source, and workflows chain those modules together through a shared channel-based state. This page walks through everything needed to create a new workflow from scratch.
+
+## Workflow structure
+
+Each workflow lives in its own folder under `src/workflows/[category]/[workflow_name]/`:
+
+```
+src/workflows/my_category/my_workflow/
+├── config.vsh.yaml    # Viash descriptor: arguments, dependencies, test resources
+├── main.nf            # Nextflow DSL2 workflow logic
+├── nextflow.config    # Nextflow configuration (resource labels, profile)
+└── test.nf            # Integration test workflow
+```
+
+Workflow categories loosely follow the analysis stage, e.g. `rna/`, `integration/`, `annotation/`, `multiomics/`.
+
+## The config file
+
+The `config.vsh.yaml` for a workflow is similar to a component config, with a few key differences: it lists `dependencies` (which components and workflows it uses), references a Nextflow script as its resource, and has a `nextflow` runner instead of `docker`/`native`.
+
+```yaml
+name: "my_workflow"
+namespace: "workflows/my_category"
+description: "Short description of what this workflow does."
+authors:
+  - __merge__: /src/authors/my_name.yaml
+    roles: [ author ]
+
+argument_groups:
+  - name: "Inputs"
+    arguments:
+      - name: "--id"
+        required: true
+        type: string
+        description: "Unique identifier for the sample."
+        example: sample_foo
+      - name: "--input"
+        required: true
+        type: file
+        description: "Path to the input H5MU file."
+        example: input.h5mu
+
+  - name: "Outputs"
+    arguments:
+      - name: "--output"
+        required: true
+        type: file
+        direction: output
+        description: "Path to the output H5MU file."
+        example: output.h5mu
+
+  - name: "Parameters"
+    arguments:
+      - name: "--modality"
+        type: string
+        default: "rna"
+        description: "Modality to process."
+
+dependencies:
+  - name: filter/filter_with_counts
+  - name: filter/do_filter
+  - name: workflows/qc/qc            # workflows can depend on other workflows
+
+resources:
+  - type: nextflow_script
+    path: main.nf
+    entrypoint: run_wf
+  - type: file
+    path: /src/workflows/utils/       # shared labels and helper configs
+
+test_resources:
+  - type: nextflow_script
+    path: test.nf
+    entrypoint: test_wf
+  - path: /resources_test/pbmc_1k_protein_v3
+
+runners:
+  - type: nextflow
+```
+
+:::{.callout-tip}
+Declare every component and sub-workflow your `main.nf` uses in `dependencies`. Viash uses this list to resolve and include the compiled modules at build time — imports are not written manually in the source `main.nf`.
+:::
+
+## The workflow script
+
+`main.nf` defines a single Nextflow workflow named `run_wf`. It receives an input channel of `[id, state]` tuples and emits an output channel in the same format.
+
+### Channel state
+
+All data flows through a Groovy Map called **state**. Instead of passing individual files between processes, each item in the channel is a tuple `[id, state]` where `state` holds all current values (inputs, outputs, parameters). Components read from the state via `fromState` and write back via `toState`.
+
+```groovy
+workflow run_wf {
+  take:
+  input_ch           // channel of [id, state] tuples
+
+  main:
+  output_ch = input_ch
+    | component_one.run(
+        fromState: ["input": "input", "modality": "modality"],
+        toState:   ["input": "output"]   // component output becomes next input
+      )
+    | component_two.run(
+        fromState: ["input": "input", "output": "output"],
+        toState:   ["output": "output"]
+      )
+    | setState(["output"])   // trim state to only the declared outputs
+
+  emit:
+  output_ch
+}
+```
+
+### fromState and toState
+
+`fromState` maps **state keys → component argument names**. `toState` maps **component output argument names → state keys** for the next step.
+
+```groovy
+| normalize_total.run(
+    fromState: [
+      "input":      "input",      // state.input   → --input
+      "modality":   "modality",   // state.modality → --modality
+      "target_sum": "target_sum"
+    ],
+    args: [
+      "output_layer": "normalized"   // hardcoded args not in state
+    ],
+    toState: [
+      "input": "output"    // component's --output → state.input for next step
+    ]
+  )
+```
+
+Use a **closure** for `fromState` or `toState` when the mapping involves logic:
+
+```groovy
+| filter_with_counts.run(
+    fromState: { id, state ->
+      [
+        "input":     state.input,
+        "min_counts": state.min_counts ?: 200,   // default if not set
+        "obs_name_filter": "filter_" + state.modality
+      ]
+    },
+    toState: { id, output, state ->
+      state + ["input": output.output]
+    }
+  )
+```
+
+### Conditional execution
+
+Use `runIf` to skip a step based on the current state:
+
+```groovy
+| filter_with_scrublet.run(
+    runIf: { id, state -> !state.skip_doublet_detection },
+    fromState: ["input": "input"],
+    toState:   ["input": "output"]
+  )
+```
+
+### Disambiguating repeated components
+
+If you run the same component more than once in a workflow, give each call a unique `key`:
+
+```groovy
+| filter_with_counts.run(
+    key:       "rna_filter_with_counts",
+    fromState: [...],
+    toState:   [...]
+  )
+| filter_with_counts.run(
+    key:       "prot_filter_with_counts",
+    fromState: [...],
+    toState:   [...]
+  )
+```
+
+### Input validation
+
+Use a `map` block at the start of the workflow to validate inputs and catch configuration errors early:
+
+```groovy
+workflow run_wf {
+  take:
+  input_ch
+
+  main:
+  output_ch = input_ch
+    | map { id, state ->
+        if (!workflow.stubRun) {
+          assert state.input : "--input is required"
+          assert state.output : "--output is required"
+        }
+        // stash the final output path before intermediate steps overwrite it
+        [id, state + ["workflow_output": state.output]]
+      }
+    | component_one.run(
+        fromState: ["input": "input"],
+        toState:   ["input": "output"]
+      )
+    | component_two.run(
+        fromState: ["input": "input", "output": "workflow_output"],
+        toState:   ["output": "output"]
+      )
+    | setState(["output"])
+
+  emit:
+  output_ch
+}
+```
+
+:::{.callout-note}
+Wrapping assertions in `!workflow.stubRun` avoids failures during stub runs, which are used for workflow graph validation without executing actual processes.
+:::
+
+## The Nextflow config
+
+`nextflow.config` wires in the shared resource labels and sets the `rootDir` parameter so Viash can resolve relative paths to utilities:
+
+```groovy
+manifest {
+  nextflowVersion = '!>=20.12.1-edge'
+}
+
+params {
+  rootDir = java.nio.file.Paths.get("$projectDir/../..").toAbsolutePath().normalize().toString()
+}
+
+includeConfig("${params.rootDir}/src/workflows/utils/labels.config")
+```
+
+## Resource labels
+
+Assign CPU and memory requirements by adding labels to a component's `config.vsh.yaml`. The labels are defined in `src/workflows/utils/labels.config` and scale automatically on retry:
+
+| Label | CPUs | Memory (attempt 1) |
+|---|---|---|
+| `singlecpu` | 1 | — |
+| `lowcpu` | 4 | — |
+| `midcpu` | 10 | — |
+| `highcpu` | 20 | — |
+| `lowmem` | — | 4 GB |
+| `midmem` | — | 25 GB |
+| `highmem` | — | 50 GB |
+| `veryhighmem` | — | 75 GB |
+
+Labels are declared in the component's runner config, not in the workflow itself — the workflow inherits them automatically from each component it runs.
+
+## Writing a test
+
+`test.nf` contains an integration test workflow that runs your workflow end-to-end and validates the output. It follows the same `[id, state]` channel pattern:
+
+```groovy
+include { my_workflow } from "./main.nf"
+
+workflow test_wf {
+  output_ch = Channel.fromList([
+      [
+        "test_sample",
+        [
+          "id":     "test_sample",
+          "input":  file("${meta.resources_dir}/pbmc_1k_protein_v3/pbmc_1k_protein_v3_filtered_feature_bc_matrix.h5mu"),
+          "output": "output.h5mu",
+        ]
+      ]
+    ])
+    | my_workflow.run(
+        fromState: ["id": "id", "input": "input", "output": "output"],
+        toState:   ["output": "output"]
+      )
+    | view { id, state ->
+        assert state.output.exists() : "Output file does not exist: ${state.output}"
+        "Output for ${id}: ${state.output}"
+      }
+}
+```
+
+## Building and running
+
+Build all workflows at once:
+
+```bash
+viash ns build --setup cb
+```
+
+Run a single workflow interactively:
+
+```bash
+nextflow run . \
+  -main-script target/nextflow/workflows/my_category/my_workflow/main.nf \
+  -profile docker \
+  --id my_sample \
+  --input path/to/input.h5mu \
+  --output path/to/output.h5mu \
+  --publish_dir results/
+```
+
+Run the workflow's integration test:
+
+```bash
+viash test src/workflows/my_category/my_workflow/config.vsh.yaml
+```
+
+Run all workflow tests in a namespace:
+
+```bash
+viash ns test --parallel -q workflows/my_category
+```
+
+:::{.callout-tip}
+Always put `--` between the config path and the component/workflow arguments when using `viash run`:
+
+```bash
+viash run src/workflows/my_category/my_workflow/config.vsh.yaml -- \
+  --input input.h5mu --output output.h5mu
+```
+:::

@@ -3,3 +3,154 @@ title: Processing
 description: From count tables to integrated data
 order: 30
 ---
+
+Processing takes the per-sample H5MU files produced during [ingestion](ingestion.qmd) and produces a clean, integrated dataset ready for downstream analysis. It covers quality control, normalization, dimensionality reduction, clustering, and batch correction.
+
+```{mermaid}
+%%| label: fig-processing-overview
+%%| fig-cap: Overview of the processing steps, from per-sample count tables to an integrated, clustered dataset.
+flowchart LR
+  h5mu["H5MU per sample"] --> single["Single-sample QC & filtering"]
+  single --> concat["Concatenation"]
+  concat --> multi["Multi-sample normalization & dim. reduction"]
+  multi --> integration["Integration / batch correction"]
+  integration --> out["Integrated H5MU"]
+```
+
+## Single-sample processing
+
+Each sample is first processed independently to apply QC filters. The `rna_singlesample` workflow handles the following steps:
+
+- QC metric calculation (counts, detected genes, mitochondrial fraction)
+- Cell filtering based on counts and gene thresholds
+- Doublet detection (Scrublet)
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -main-script target/nextflow/workflows/rna/rna_singlesample/main.nf \
+  -revision 4.0.3 -latest \
+  -profile docker \
+  --id sample_A \
+  --input sample_A.h5mu \
+  --output sample_A_processed.h5mu \
+  --min_counts 500 \
+  --max_counts 50000 \
+  --min_genes_per_cell 200 \
+  --var_name_mitochondrial_genes "mitochondrial" \
+  --publish_dir results/
+```
+
+For CITE-seq (GEX + protein), use `prot_singlesample` in addition to `rna_singlesample` to apply protein-specific QC and CLR normalization to the `prot` modality.
+
+Run single-sample processing across all samples using a parameter list:
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -main-script target/nextflow/workflows/rna/rna_singlesample/main.nf \
+  -revision 4.0.3 -latest \
+  -profile docker \
+  --param_list samples.csv \
+  --publish_dir results/
+```
+
+See [Parameter lists](parameter_lists.qmd) for the `samples.csv` format.
+
+## Multi-sample processing
+
+Once all samples have been processed individually, they are concatenated and normalized together. The `rna_multisample` workflow performs:
+
+- Concatenation of all per-sample H5MU files
+- Log-normalization and log1p transformation
+- Highly variable feature selection
+- PCA
+- Neighbor graph construction
+- UMAP
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -main-script target/nextflow/workflows/rna/rna_multisample/main.nf \
+  -revision 4.0.3 -latest \
+  -profile docker \
+  --id cohort_01 \
+  --input "results/sample_*.h5mu" \
+  --output cohort_01_multisample.h5mu \
+  --publish_dir results/
+```
+
+:::{.callout-tip}
+The `process_samples` workflow combines `rna_singlesample` (per sample) and `rna_multisample` into a single convenience workflow, and `process_batches` adds a batching step for very large cohorts. See the [Components reference](../components/) for details.
+:::
+
+## Integration and batch correction
+
+When samples come from multiple donors, batches, or sequencing runs, batch effects need to be corrected before clustering. OpenPipelines provides several integration workflows, all producing a corrected embedding that is then used for neighbor graph construction, Leiden clustering, and UMAP:
+
+| Workflow | Method | Best for |
+|---|---|---|
+| `harmony_leiden` | Harmony | Fast, embedding-based correction |
+| `scvi_leiden` | scVI | Deep learning, handles complex batches |
+| `scanorama_leiden` | Scanorama | Pan-datasets with partial overlap |
+| `bbknn_leiden` | BBKNN | Batch-balanced neighbor graphs |
+| `totalvi_leiden` | totalVI | Multiomics (RNA + protein) |
+
+Example with Harmony:
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -main-script target/nextflow/workflows/integration/harmony_leiden/main.nf \
+  -revision 4.0.3 -latest \
+  -profile docker \
+  --id cohort_01 \
+  --input cohort_01_multisample.h5mu \
+  --obs_covariates "batch" \
+  --output cohort_01_integrated.h5mu \
+  --publish_dir results/
+```
+
+Example with scVI:
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -main-script target/nextflow/workflows/integration/scvi_leiden/main.nf \
+  -revision 4.0.3 -latest \
+  -profile docker \
+  --id cohort_01 \
+  --input cohort_01_multisample.h5mu \
+  --obs_batch "batch" \
+  --output cohort_01_integrated.h5mu \
+  --publish_dir results/
+```
+
+## Using a parameters file
+
+For complex runs, store all parameters in a YAML file:
+
+```yaml
+# params.yaml
+id: cohort_01
+input: cohort_01_multisample.h5mu
+output: cohort_01_integrated.h5mu
+obs_covariates: "batch"
+leiden_resolution: 1.0
+```
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -main-script target/nextflow/workflows/integration/harmony_leiden/main.nf \
+  -revision 4.0.3 -latest \
+  -profile docker \
+  -params-file params.yaml \
+  --publish_dir results/
+```
+
+## Output
+
+The output is a single integrated H5MU file containing:
+
+- Corrected cell embeddings in `.obsm` (e.g. `X_integrated`)
+- Leiden cluster labels in `.obs`
+- UMAP coordinates in `.obsm`
+
+This file is the starting point for [downstream analysis](downstream.qmd) such as cell type annotation and differential expression.
+
+See the [Components reference](../components/) for the full argument list of each processing and integration workflow.
