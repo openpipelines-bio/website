@@ -44,7 +44,13 @@ flowchart TD
 
 If your sequencing provider delivers raw Illumina BCL files, convert them to per-sample FASTQ files before running OpenPipelines. This step sits **outside the core workflow** and is run independently.
 
-The `ingestion/demux` workflow supports bcl2fastq, BCL Convert, and Cell Ranger mkfastq. If you already have FASTQ files or a pre-built count matrix, skip directly to [Ingestion](#ingestion).
+The [`ingestion/demux`](../components/workflows/ingestion/demux.qmd) workflow supports three demultiplexers selected via `--demultiplexer`:
+
+- **bcl2fastq** — legacy Illumina tool
+- **BCL Convert** — current Illumina general-purpose demultiplexer
+- **cellranger mkfastq** — 10x Genomics wrapper around BCL Convert with convenience features for 10x libraries
+
+If you already have FASTQ files or a pre-built count matrix, skip directly to [Ingestion](#ingestion).
 
 ## Ingestion
 
@@ -54,15 +60,31 @@ OpenPipelines stores this count matrix — along with cell and gene metadata and
 
 ## Process samples
 
-Raw count matrices contain not only real cells but also empty droplets (barcodes that captured ambient RNA), damaged cells (high mitochondrial fraction), and doublets (two cells sequenced as one). **Per-sample QC** filters these out before samples are combined.
+Raw count matrices contain not only real cells but also empty droplets (barcodes that captured ambient RNA), damaged cells (high mitochondrial fraction), and doublets (two cells sequenced as one). The `process_samples` workflow handles all per-sample and multi-sample processing in a single command.
 
-Samples are then **concatenated and normalized together** — not per sample — because normalization methods like HVF selection and PCA need to see variation across the full cohort to identify biologically meaningful genes. The output of this stage is a single multi-sample H5MU with:
+### Per-sample QC (single-sample processing)
 
-- filtered, normalized count matrices per modality
-- a set of **highly variable features** (HVF) selected across the cohort
-- a **PCA embedding** — the compressed representation that all integration methods operate on
+Each sample is first split by modality. Per modality, cells are flagged for removal based on:
 
-`multiomics/process_samples` wraps all per-sample and multi-sample steps into a single command. For large cohorts, `multiomics/process_batches` adds a batching layer that processes groups of samples in parallel before merging, reducing peak memory. See [Processing](../user_guide/processing.qmd) for full details and examples.
+- **Total counts** — barcodes with zero counts or counts outside a defined range are removed.
+- **Number of detected genes** — minimum and maximum gene count thresholds filter empty droplets and low-quality cells.
+- **Mitochondrial fraction** — cells with a high fraction of reads mapping to mitochondrial genes are filtered out (damaged cells lose nuclear RNA while mitochondrial RNA leaks into the cytoplasm).
+
+For gene expression (RNA) data, **doublet detection** is then run using Scrublet, which scores each cell for its likelihood of being a doublet. Doublet scores are added to `.obs` rather than immediately removed, letting users apply their own threshold.
+
+For antibody capture (ADT/CITE-seq) data, the same count-based filtering is applied without doublet detection.
+
+### Multi-sample normalization and dimensionality reduction
+
+After per-sample QC, samples are **concatenated together** — not normalized per sample — because normalization methods need to see variation across the full cohort. A `sample_id` column is added to `.obs` to record the origin of each cell. When conflicting metadata is found across samples, the conflicting columns are moved to `.obsm` (observations) or `.varm` (variables) for inspection.
+
+The concatenated object then goes through:
+
+1. **Normalization** — each cell is scaled to a fixed total count (e.g. 10 000), then log1p-transformed (`X = ln(X + 1)`), stabilizing variance and making relative changes interpretable.
+2. **Highly variable feature (HVF) selection** — typically 2 000–3 000 genes with the most variation across cells are retained; the rest are de-prioritized. Driven by the Seurat method by default.
+3. **PCA** — Principal Component Analysis compresses the high-dimensional gene expression space into a smaller set of components that capture the major axes of variation. All integration methods operate in this reduced space.
+
+For large cohorts, [`process_batches`](../components/workflows/multiomics/process_batches.qmd) adds a batching layer that processes groups of samples through multi-sample normalization in parallel before merging, reducing peak memory. See [Processing](../user_guide/processing.qmd) for full details and examples.
 
 :::{.callout-note}
 ATAC data is carried through `process_samples` without dedicated QC or normalization — ATAC-specific processing workflows are not yet implemented. ATAC ingestion (`ingestion/cellranger_atac_count`) and a standalone QC metrics module (`calculate_atac_qc_metrics`) are available.
@@ -81,5 +103,51 @@ OpenPipelines provides one workflow per integration method. There is no single d
 After integration, the numbered Leiden clusters have no biological labels yet. **Annotation** assigns cell type identities — either by comparing marker gene expression to known references, or by transferring labels from an annotated atlas. This step is always run separately from the core pipeline and depends on the tissue and biological question.
 
 Beyond annotation, the integrated H5MU is the starting point for differential expression, RNA velocity, cell-cell communication, and population-level analyses. Some of these are available as OpenPipelines workflows; others are external tools that consume the H5MU directly. See [Downstream](../user_guide/downstream.qmd) for details and examples.
+
+---
+
+## Available workflows
+
+The table below lists all runnable OpenPipelines workflows and links to their component reference pages. Not every conceptual stage above has a single corresponding workflow — for instance, single-sample QC is part of `rna_singlesample` and `prot_singlesample`, and `process_samples` wraps several steps together.
+
+### Ingestion
+
+| Workflow | Description |
+|---|---|
+| [`ingestion/demux`](../components/workflows/ingestion/demux.qmd) | BCL → FASTQ demultiplexing (bcl2fastq, BCL Convert, mkfastq) |
+| [`ingestion/make_reference`](../components/workflows/ingestion/make_reference.qmd) | Build a genome reference index for mapping |
+| [`ingestion/cellranger_mapping`](../components/workflows/ingestion/cellranger_mapping.qmd) | 10x GEX-only mapping with Cell Ranger |
+| [`ingestion/cellranger_multi`](../components/workflows/ingestion/cellranger_multi.qmd) | 10x multiome mapping (GEX + ADT/HTO + VDJ) with Cell Ranger Multi |
+| [`ingestion/bd_rhapsody`](../components/workflows/ingestion/bd_rhapsody.qmd) | BD Rhapsody mapping |
+| [`ingestion/conversion`](../components/workflows/ingestion/conversion.qmd) | Convert pre-built count tables (10x HDF5, MEX, H5AD, Seurat) to H5MU |
+
+### Processing
+
+| Workflow | Description |
+|---|---|
+| [`rna/rna_singlesample`](../components/workflows/rna/rna_singlesample.qmd) | Per-sample QC and doublet detection for RNA |
+| [`prot/prot_singlesample`](../components/workflows/prot/prot_singlesample.qmd) | Per-sample QC and CLR normalization for ADT (CITE-seq) |
+| [`rna/rna_multisample`](../components/workflows/rna/rna_multisample.qmd) | Concatenation, normalization, HVF, PCA for RNA |
+| [`prot/prot_multisample`](../components/workflows/prot/prot_multisample.qmd) | Multi-sample normalization for ADT |
+| [`multiomics/process_samples`](../components/workflows/multiomics/process_samples.qmd) | Full single-sample + multi-sample processing in one command |
+| [`multiomics/process_batches`](../components/workflows/multiomics/process_batches.qmd) | Batched multi-sample processing for large cohorts |
+
+### Integration
+
+| Workflow | Method | Notes |
+|---|---|---|
+| [`integration/harmony_leiden`](../components/workflows/integration/harmony_leiden.qmd) | Harmony | Fast; good default for most datasets |
+| [`integration/scvi_leiden`](../components/workflows/integration/scvi_leiden.qmd) | scVI | Deep learning; handles large datasets and complex batch effects |
+| [`integration/scanorama_leiden`](../components/workflows/integration/scanorama_leiden.qmd) | Scanorama | Datasets with partial cell type overlap across batches |
+| [`integration/bbknn_leiden`](../components/workflows/integration/bbknn_leiden.qmd) | BBKNN | Batch-balanced neighbor graph; no corrected embedding produced |
+| [`integration/totalvi_leiden`](../components/workflows/integration/totalvi_leiden.qmd) | totalVI | Multiomics (RNA + ADT/CITE-seq); corrects both modalities jointly |
+
+### Annotation
+
+| Workflow | Method |
+|---|---|
+| [`annotation/harmony_knn`](../components/workflows/annotation/harmony_knn.qmd) | KNN label transfer from a reference atlas |
+| [`annotation/scvi_knn`](../components/workflows/annotation/scvi_knn.qmd) | KNN label transfer using scVI latent space |
+| [`annotation/scanvi_scarches`](../components/workflows/annotation/scanvi_scarches.qmd) | scANVI/scArches label transfer |
 
 See the [Components reference](../components/) for the full argument list of each workflow and component.
