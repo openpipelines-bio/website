@@ -4,7 +4,7 @@ description: Run a pipeline from CLI or Seqera Platform
 order: 10
 ---
 
-Dependening on whether you want to run a workflow locally or on cloud infrastructure, using Seqera Platform (Nextflow Tower) or not, you will need to use different commands.
+Depending on whether you want to run a workflow locally or on cloud infrastructure, using Seqera Platform (Nextflow Tower) or not, you will need to use different commands.
 
 ## Run locally from the CLI
 

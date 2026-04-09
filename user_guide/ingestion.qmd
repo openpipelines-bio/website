@@ -4,28 +4,49 @@ description: From sequencing to count tables
 order: 20
 ---
 
-Ingestion covers the steps that take raw sequencing output — BCL files from the sequencer or pre-converted FASTQ files — and produce per-sample count matrices stored as H5MU files. These H5MU files are the starting point for all downstream processing workflows.
+Ingestion is the first step handled by OpenPipelines: it takes the raw output of a sequencing instrument and produces a per-sample count matrix stored as an H5MU file. See the [Architecture](../fundamentals/architecture.qmd) page for how this fits into the full pipeline.
 
-```{mermaid}
-%%| label: fig-ingestion-overview
-%%| fig-cap: Overview of the ingestion step, from raw sequencer output to an H5MU count matrix.
-flowchart LR
-  bcl["BCL files"] --> demux["Demultiplexing"]
-  demux --> fastq["FASTQ files"]
-  fastq --> mapping["Mapping & quantification"]
-  mapping --> h5mu["H5MU (count matrix)"]
-  ref["Reference genome"] --> mapping
-```
+## What the sequencer produces
+
+A single-cell experiment starts with isolated cells. Each cell is barcoded (tagged with a unique short DNA sequence) and its RNA is captured and sequenced. The sequencer outputs either:
+
+- **FASTQ files** — plain text files containing the nucleotide reads and their quality scores. Most providers deliver these directly.
+- **BCL files** — the raw binary output of Illumina sequencers. These must first be demultiplexed into per-sample FASTQ files using the `demux` workflow.
+
+## What ingestion does
+
+Ingestion aligns the short reads in the FASTQ files back to a reference genome to determine which gene each read came from. It then uses the **cell barcode** embedded in each read to assign it to a cell, and the **UMI (Unique Molecular Identifier)** to count each original RNA molecule only once — removing the amplification bias introduced by PCR.
+
+The result is a **count matrix**: one row per cell, one column per gene, each entry being the number of RNA molecules detected for that gene in that cell. This matrix, together with cell and gene metadata, is stored in an H5MU file.
+
+## Which workflow to use
+
+The right workflow depends on your sequencing platform and library type:
+
+| Starting point | Library type | Workflow |
+|---|---|---|
+| BCL files | Any | `ingestion/demux` → then mapping workflow |
+| FASTQ | 10x GEX only | `ingestion/cellranger_mapping` |
+| FASTQ | 10x multiome (GEX + VDJ + ADT/HTO) | `ingestion/cellranger_multi` |
+| FASTQ | BD Rhapsody | `ingestion/bd_rhapsody` |
+| FASTQ | Generic (STAR aligner) | `mapping/star_align` + `convert/from_...` |
+| 10x HDF5 (`.h5`) | Pre-generated | `convert/from_10xh5_to_h5mu` |
+| 10x MEX (`.mtx`) | Pre-generated | `convert/from_10xmtx_to_h5mu` |
+| AnnData H5AD | Pre-generated | `convert/from_h5ad_to_h5mu` |
+| Seurat RDS | Pre-generated | `convert/from_seurat_to_h5mu` |
+
+:::{.callout-tip}
+If your sequencing provider already delivers a count matrix (e.g. Cell Ranger output), you can skip the mapping step and use one of the format converters directly.
+:::
 
 ## Reference genome
 
-Before mapping, a reference genome index must be prepared. OpenPipelines provides the `make_reference` workflow, which builds a reference compatible with Cell Ranger:
+Mapping requires a reference genome index. Build one with the `make_reference` workflow:
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
   -main-script target/nextflow/workflows/ingestion/make_reference/main.nf \
-  -revision 4.0.3 -latest \
-  -profile docker \
+  -revision 4.0.3 -latest -profile docker \
   --id GRCh38 \
   --genome_fasta Homo_sapiens.GRCh38.dna.primary_assembly.fa \
   --annotation_gtf Homo_sapiens.GRCh38.111.gtf \
@@ -33,17 +54,16 @@ nextflow run openpipelines-bio/openpipeline \
   --publish_dir results/
 ```
 
-Pre-built references from 10x Genomics can also be used directly with the mapping workflows.
+Pre-built 10x Genomics references can be used directly. If you plan to run RNA velocity analysis downstream, spliced and unspliced counts are extracted from the BAM files produced during mapping — no special reference is required at this stage. See [RNA velocity](downstream.qmd#rna-velocity) in the downstream section.
 
-## Demultiplexing (BCL → FASTQ)
+## Demultiplexing BCL files
 
-If starting from raw BCL files, the `demux` workflow converts them to per-sample FASTQ files using `bcl2fastq` or `bcl_convert`:
+If starting from BCL files (e.g. raw Illumina output), convert them to per-sample FASTQ files first:
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
   -main-script target/nextflow/workflows/ingestion/demux/main.nf \
-  -revision 4.0.3 -latest \
-  -profile docker \
+  -revision 4.0.3 -latest -profile docker \
   --id run_001 \
   --input /path/to/bcl_run/ \
   --sample_sheet SampleSheet.csv \
@@ -51,76 +71,57 @@ nextflow run openpipelines-bio/openpipeline \
   --publish_dir results/
 ```
 
-If your sequencing provider delivers FASTQ files directly, skip this step.
+## Mapping: 10x Genomics
 
-## Mapping and quantification
-
-OpenPipelines provides dedicated ingestion workflows for the two most common platforms.
-
-### 10x Genomics (Cell Ranger)
-
-The `cellranger_mapping` workflow aligns FASTQ files and generates a feature-barcode count matrix:
+### Single-library samples (GEX only)
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
   -main-script target/nextflow/workflows/ingestion/cellranger_mapping/main.nf \
-  -revision 4.0.3 -latest \
-  -profile docker \
+  -revision 4.0.3 -latest -profile docker \
   --id sample_A \
-  --input "fastq_dir/" \
+  --input "fastq/sample_A/" \
   --reference reference_genome/ \
   --output sample_A.h5mu \
   --publish_dir results/
 ```
 
-For multiomics experiments (GEX + VDJ + ADT/HTO from the same cell), use `cellranger_multi`, which handles multiple library types in a single Cell Ranger run:
+### Multi-library samples (GEX + ADT/HTO + VDJ)
+
+For CITE-seq or experiments with multiple library types captured from the same cells, Cell Ranger Multi aligns all libraries jointly:
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
   -main-script target/nextflow/workflows/ingestion/cellranger_multi/main.nf \
-  -revision 4.0.3 -latest \
-  -profile docker \
+  -revision 4.0.3 -latest -profile docker \
   --id sample_A \
-  --input "fastq_dir/" \
+  --input "fastq/sample_A/" \
   --gex_reference reference_genome/ \
   --feature_reference feature_reference.csv \
   --output sample_A.h5mu \
   --publish_dir results/
 ```
 
-### BD Rhapsody
+The `feature_reference.csv` describes the antibody or guide RNA sequences used in the experiment.
 
-For BD Rhapsody single-cell data, use the dedicated `bd_rhapsody` workflow:
+## Mapping: BD Rhapsody
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
   -main-script target/nextflow/workflows/ingestion/bd_rhapsody/main.nf \
-  -revision 4.0.3 -latest \
-  -profile docker \
+  -revision 4.0.3 -latest -profile docker \
   --id sample_A \
-  --input "fastq_dir/*.fastq.gz" \
+  --input "fastq/sample_A/*.fastq.gz" \
   --reference reference.tar.gz \
   --output sample_A.h5mu \
   --publish_dir results/
 ```
 
-## Format conversion
-
-If you already have count matrices in another format, OpenPipelines provides converters to H5MU:
-
-| Input format | Component |
-|---|---|
-| 10x HDF5 (`.h5`) | `convert/from_10xh5_to_h5mu` |
-| 10x MEX (`.mtx` + barcodes + features) | `convert/from_10xmtx_to_h5mu` |
-| BD Rhapsody output | `convert/from_bdrhap_to_h5mu` |
-| AnnData H5AD | `convert/from_h5ad_to_h5mu` |
-| Seurat RDS | `convert/from_seurat_to_h5mu` |
-
 ## Processing multiple samples at once
 
-Use `--param_list` to run ingestion over multiple samples in one command. See the [Parameter lists](parameter_lists.qmd) page for details on the supported formats (CSV, YAML, JSON).
+Use `--param_list` to run ingestion in parallel across many samples. See the [Parameter lists](parameter_lists.qmd) page for supported formats (CSV, YAML, JSON).
 
-Example `params.csv`:
+Example `samples.csv`:
 
 ```
 id,input,reference
@@ -132,14 +133,25 @@ sample_C,fastq/sample_C/,reference_genome/
 ```bash
 nextflow run openpipelines-bio/openpipeline \
   -main-script target/nextflow/workflows/ingestion/cellranger_mapping/main.nf \
-  -revision 4.0.3 -latest \
-  -profile docker \
-  --param_list params.csv \
+  -revision 4.0.3 -latest -profile docker \
+  --param_list samples.csv \
   --publish_dir results/
 ```
 
-## Output
+## What the H5MU output contains
 
-All ingestion workflows produce one H5MU file per sample. The H5MU file stores the count matrix in the `rna` modality (and additional modalities when applicable, e.g. `prot` for ADT, `vdj` for immune repertoire). This file is the input for the [processing workflows](processing.qmd).
+After ingestion, each sample is stored as a single H5MU file. Depending on the library type, this contains one or more modalities:
+
+| Modality key | Content |
+|---|---|
+| `rna` | RNA count matrix (cells × genes) |
+| `prot` | ADT count matrix — antibody-derived tags (CITE-seq protocol) |
+| `vdj_b` / `vdj_t` | Immune repertoire (B/T cell receptor sequences) |
+| `atac` | Chromatin accessibility (ATAC-seq peaks) |
+| `gdo` | Guide RNA / CRISPR perturbation data |
+
+Each modality stores the raw count matrix in `.X`, along with cell metadata in `.obs` and gene/feature metadata in `.var`. At this stage no filtering has been applied — the matrix contains both real cells and empty droplets.
+
+The next step is [single-sample QC and processing](processing.qmd), which removes empty droplets, low-quality cells, and doublets.
 
 See the [Components reference](../components/) for the full argument list of each ingestion workflow.

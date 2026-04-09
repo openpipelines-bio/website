@@ -4,7 +4,7 @@ description: Setting up infrastructure
 order: 0
 ---
 
-Depending on whether you plan to run the OpenPipelines workflows locally or in the cloud
+OpenPipelines workflows run on Nextflow and Docker. This page covers what you need to install depending on whether you plan to run workflows locally or in the cloud.
 
 ## Starting workflows locally
 

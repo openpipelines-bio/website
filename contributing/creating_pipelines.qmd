@@ -284,6 +284,19 @@ workflow test_wf {
 }
 ```
 
+## Dataflow utility components
+
+OpenPipelines provides ready-made components for common channel manipulation patterns. These are declared as regular dependencies in your `config.vsh.yaml` and used like any other component in `main.nf`:
+
+| Component | What it does |
+|---|---|
+| `dataflow/concatenate_h5mu` | Merge multiple H5MU files into one multi-sample object |
+| `dataflow/split_h5mu` | Split one H5MU into per-group files (e.g. by cell type label) |
+| `dataflow/merge` | Merge modalities from separate H5MU files into a single object |
+| `dataflow/split_modalities` | Split modalities out into separate H5MU files |
+
+See the [Components reference](../components/) for the full argument list of each.
+
 ## Building and running
 
 Build all workflows at once:

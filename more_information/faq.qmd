@@ -3,31 +3,48 @@ title: FAQ
 description: Frequently Asked Questions
 ---
 
-
 ## How can I add an external resource to my Viash component?
 
-It is possible to add additional resources such as a file containing helper functions or other resources. All you need to do is list those files under the `functionality.resources` section of your component and refer to them in your script using `meta["resources_dir"] + "/myresource.txt"`. Please visit the Viash documentation for concrete examples on how to add [helper functions](https://viash.io/guide/component/use-helper-functions.html) and [other resources](https://viash.io/guide/component/add-resources.html) to your component.
+Additional files such as helper scripts or configuration files can be included with a component by listing them under `resources` in `config.vsh.yaml`:
+
+```yaml
+resources:
+  - type: python_script
+    path: script.py
+  - type: file
+    path: helper_functions.py
+```
+
+Viash makes all listed resources available at runtime (including inside Docker containers) via `meta["resources_dir"]`. Reference them in your script as:
+
+```python
+helper_path = meta["resources_dir"] + "/helper_functions.py"
+```
+
+See the [Viash documentation](https://viash.io/guide/component/add-resources.html) for further examples.
 
 ## What does `__merge__` do?
 
-The `__merge__` field is used to merge another YAML into a Viash config. One of its uses is in making sure that all of the components in a task has the same API.
+`__merge__` is a Viash YAML directive that merges the contents of another YAML file into the current config at the point where it appears. In OpenPipelines it is used for author information:
 
-Each task in OpenProblems contains strict definitions of the input/output file interface of its components and the file formats of those files. These interfaces are stored as YAML files in the `api` subdirectory of each task.
-
-:::{.content-hidden}
-<!-- todo: add info on nextflow tags -->
-2. Nextflow ([docs](https://viash.io/guide))
-
-You can also change the memory and CPU utilization be editing the Nextflow labels section. Available options are `[low|med|high]` for each of `mem` and `cpu`. The corresponding resource values can be found in the `/src/wf_utils/labels.config` file.
-:::
-
-
-:::{.content-hidden}
-<!-- todo: add info on viewing the dockerfile -->
-Docker ([docs](https://viash.io/guide))
-
-**Tip #2:** You can view the dockerfile that Viash generates from the config file using the `---dockerfile` argument:
-```sh
-$ viash run -- ---dockerfile
+```yaml
+authors:
+  - __merge__: /src/authors/my_name.yaml
+    roles: [ author ]
 ```
-:::
+
+This pulls in the author's name, links, and ORCID from a central file in `src/authors/`, keeping that information consistent across all components without duplication.
+
+## How do I view the Dockerfile that Viash generates for my component?
+
+Pass `---dockerfile` (three dashes) to `viash run`:
+
+```bash
+viash run src/my_namespace/my_component/config.vsh.yaml -- ---dockerfile
+```
+
+This prints the generated Dockerfile without building it, which is useful for debugging dependency setup.
+
+## Where do I report bugs or request features?
+
+Open an issue on the [OpenPipelines GitHub repository](https://github.com/openpipelines-bio/openpipeline/issues). See the [bug reports](../user_guide/bug_reports.qmd) page for guidance on writing a useful report.
