@@ -4,21 +4,27 @@
 
 * Add descriptions to all pages and add listings to index pages.
 
-* Update documentation on creating components for developers.
+* Update documentation on creating components for developers, including updated config examples reflecting Viash 0.9.x syntax (`argument_groups`, `engines`, `runners`).
 
-* Update getting started page for developers
+* Add guide for creating new pipelines, covering workflow structure, config layout, `main.nf` conventions, and testing.
+
+* Expand user guide: ingestion, processing, and downstream analysis pages now contain full content covering workflow inputs, outputs, and usage patterns.
+
+* Rewrite architecture page to provide a concise, diagram-light overview of how OpenPipelines fits into a single-cell project.
+
+* Update getting started page for developers.
 
 * Update project structure.
 
-* Update information on running tests.
+* Update information on running tests, including how to generate local test data without downloading from S3.
 
-* Update "More information" pages
+* Update "More information" pages.
 
-* Write getting started page for user guide
+* Write getting started page for user guide.
 
-* Document how to run workflows
+* Document how to run workflows.
 
-* Document parameter lists
+* Document parameter lists.
 
 # OpenPipelines.bio v0.12.1
 
