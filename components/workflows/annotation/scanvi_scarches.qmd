@@ -14,7 +14,7 @@ ID: `scanvi_scarches`
 Namespace: `workflows/annotation`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.1/src/workflows/annotation/scanvi_scarches/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v4.1.1/src/workflows/annotation/scanvi_scarches/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
@@ -30,7 +30,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.1 -latest \
+  -r v4.1.1 -latest \
   -main-script target/nextflow/workflows/annotation/scanvi_scarches/main.nf \
   --help
 ```
@@ -45,17 +45,22 @@ id: # please fill in - example: "foo"
 input: # please fill in - example: "input.h5mu"
 modality: "rna"
 # layer: "foo"
-input_obs_batch_label: # please fill in - example: "sample"
+input_obs_batch_label: # please fill in - example: "sample_id"
 # input_obs_size_factor: "foo"
+# input_obs_categorical_covariate: ["foo"]
+# input_obs_continuous_covariate: ["foo"]
 # input_var_gene_names: "foo"
+sanitize_ensembl_ids: true
 
 # Reference input
 reference: # please fill in - example: "reference.h5mu"
 reference_obs_target: # please fill in - example: "cell_type"
-reference_obs_batch_label: # please fill in - example: "sample"
+reference_obs_batch_label: # please fill in - example: "sample_id"
 # reference_obs_size_factor: "foo"
+# reference_obs_categorical_covariate: ["foo"]
+# reference_obs_continuous_covariate: ["foo"]
 unlabeled_category: "Unknown"
-# reference_var_hvg: "foo"
+reference_var_hvg: "filter_with_hvg"
 # reference_var_gene_names: "foo"
 
 # scVI, scANVI and scArches training options
@@ -93,7 +98,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.1 -latest \
+  -r v4.1.1 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/annotation/scanvi_scarches/main.nf \
   -params-file params.yaml
@@ -107,28 +112,33 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Query Input
 
-|Name                      |Description                                                                                                                                                                                                        |Attributes                                |
+|Name                                |Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |Attributes                                                      |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--id`                    |ID of the sample.                                                                                                                                                                                                  |`string`, required, example: `"foo"`      |
-|`--input`                 |Input dataset consisting of the (unlabeled) query observations. The dataset is expected to be pre-processed in the same way as --reference.                                                                        |`file`, required, example: `"input.h5mu"` |
-|`--modality`              |Which modality to process. Should match the modality of the --reference dataset.                                                                                                                                   |`string`, default: `"rna"`                |
-|`--layer`                 |Which layer to use for integration if .X is not to be used. Should match the layer of the --reference dataset.                                                                                                     |`string`                                  |
-|`--input_obs_batch_label` |The .obs field in the input (query) dataset containing the batch labels.                                                                                                                                           |`string`, required, example: `"sample"`   |
-|`--input_obs_size_factor` |Key in adata.obs for size factor information. Instead of using library size as a size factor, the provided size factor column will be used as offset in the mean of the likelihood. Assumed to be on linear scale. |`string`                                  |
-|`--input_var_gene_names`  |.var column containing gene names. By default, use the index.                                                                                                                                                      |`string`                                  |
+|`--id`                              |ID of the sample.                                                                                                                                                                                                                                                                                                                                                                                                                                                              |`string`, required, example: `"foo"`                            |
+|`--input`                           |Input dataset consisting of the (unlabeled) query observations. The dataset is expected to be pre-processed in the same way as --reference.                                                                                                                                                                                                                                                                                                                                    |`file`, required, example: `"input.h5mu"`                       |
+|`--modality`                        |Which modality to process. Should match the modality of the --reference dataset.                                                                                                                                                                                                                                                                                                                                                                                               |`string`, default: `"rna"`                                      |
+|`--layer`                           |Which layer to use for integration if .X is not to be used. Should match the layer of the --reference dataset.                                                                                                                                                                                                                                                                                                                                                                 |`string`                                                        |
+|`--input_obs_batch_label`           |The .obs field in the input (query) dataset containing the batch labels.                                                                                                                                                                                                                                                                                                                                                                                                       |`string`, required, default: `"sample_id"`, example: `"sample"` |
+|`--input_obs_size_factor`           |Key in adata.obs for size factor information. Instead of using library size as a size factor, the provided size factor column will be used as offset in the mean of the likelihood. Assumed to be on linear scale.                                                                                                                                                                                                                                                             |`string`                                                        |
+|`--input_obs_categorical_covariate` |Keys in adata.obs that correspond to categorical data. These covariates can be added in addition to the batch covariate and are also treated as nuisance factors (i.e., the model tries to minimize their effects on the latent space). Thus, these should not be used for biologically-relevant factors that you do _not_ want to correct for. Important: the order of the categorical covariates matters and should match the order of the covariates in the reference data. |List of `string`, multiple_sep: `";"`                           |
+|`--input_obs_continuous_covariate`  |Keys in adata.obs that correspond to continuous data. These covariates can be added in addition to the batch covariate and are also treated as nuisance factors (i.e., the model tries to minimize their effects on the latent space). Thus, these should not be used for biologically-relevant factors that you do _not_ want to correct for. Important: the order of the continuous covariates matters and should match the order of the covariates in the reference data.   |List of `string`, multiple_sep: `";"`                           |
+|`--input_var_gene_names`            |.var column containing gene names. By default, use the index.                                                                                                                                                                                                                                                                                                                                                                                                                  |`string`                                                        |
+|`--sanitize_ensembl_ids`            |Whether to sanitize ensembl ids by removing version numbers.                                                                                                                                                                                                                                                                                                                                                                                                                   |`boolean`, default: `TRUE`                                      |
 
 
 ### Reference input
 
-|Name                          |Description                                                                                                                                                                                                        |Attributes                                    |
+|Name                                    |Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                |Attributes                                                      |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--reference`                 |Reference dataset consisting of the labeled observations to train the KNN classifier on. The dataset is expected to be pre-processed in the same way as the --input query dataset.                                 |`file`, required, example: `"reference.h5mu"` |
-|`--reference_obs_target`      |The `.obs` key containing the target labels.                                                                                                                                                                       |`string`, required, example: `"cell_type"`    |
-|`--reference_obs_batch_label` |The .obs field in the reference dataset containing the batch labels.                                                                                                                                               |`string`, required, example: `"sample"`       |
-|`--reference_obs_size_factor` |Key in adata.obs for size factor information. Instead of using library size as a size factor, the provided size factor column will be used as offset in the mean of the likelihood. Assumed to be on linear scale. |`string`                                      |
-|`--unlabeled_category`        |Value in the --reference_obs_batch_label field that indicates unlabeled observations                                                                                                                               |`string`, default: `"Unknown"`                |
-|`--reference_var_hvg`         |.var column containing highly variable genes. If not provided, genes will not be subset.                                                                                                                           |`string`                                      |
-|`--reference_var_gene_names`  |.var column containing gene names. By default, use the index.                                                                                                                                                      |`string`                                      |
+|`--reference`                           |Reference dataset consisting of the labeled observations to train the KNN classifier on. The dataset is expected to be pre-processed in the same way as the --input query dataset.                                                                                                                                                                                                                                                                                         |`file`, required, example: `"reference.h5mu"`                   |
+|`--reference_obs_target`                |The `.obs` key containing the target labels.                                                                                                                                                                                                                                                                                                                                                                                                                               |`string`, required, example: `"cell_type"`                      |
+|`--reference_obs_batch_label`           |The .obs field in the reference dataset containing the batch labels.                                                                                                                                                                                                                                                                                                                                                                                                       |`string`, required, default: `"sample_id"`, example: `"sample"` |
+|`--reference_obs_size_factor`           |Key in adata.obs for size factor information. Instead of using library size as a size factor, the provided size factor column will be used as offset in the mean of the likelihood. Assumed to be on linear scale.                                                                                                                                                                                                                                                         |`string`                                                        |
+|`--reference_obs_categorical_covariate` |Keys in adata.obs that correspond to categorical data. These covariates can be added in addition to the batch covariate and are also treated as nuisance factors (i.e., the model tries to minimize their effects on the latent space). Thus, these should not be used for biologically-relevant factors that you do _not_ want to correct for. Important: the order of the categorical covariates matters and should match the order of the covariates in the query data. |List of `string`, multiple_sep: `";"`                           |
+|`--reference_obs_continuous_covariate`  |Keys in adata.obs that correspond to continuous data. These covariates can be added in addition to the batch covariate and are also treated as nuisance factors (i.e., the model tries to minimize their effects on the latent space). Thus, these should not be used for biologically-relevant factors that you do _not_ want to correct for. Important: the order of the continuous covariates matters and should match the order of the covariates in the query data.   |List of `string`, multiple_sep: `";"`                           |
+|`--unlabeled_category`                  |Value in the --reference_obs_batch_label field that indicates unlabeled observations                                                                                                                                                                                                                                                                                                                                                                                       |`string`, default: `"Unknown"`                                  |
+|`--reference_var_hvg`                   |.var column containing highly variable genes. If not provided, genes will not be subset.                                                                                                                                                                                                                                                                                                                                                                                   |`string`, default: `"filter_with_hvg"`                          |
+|`--reference_var_gene_names`            |.var column containing gene names. By default, use the index.                                                                                                                                                                                                                                                                                                                                                                                                              |`string`                                                        |
 
 
 ### scVI, scANVI and scArches training options
@@ -162,14 +172,14 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 ### Outputs
 
-|Name                       |Description                                                                                                  |Attributes                                  |
+|Name                       |Description                                                            |Attributes                                  |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--output`                 |The query data in .h5mu format with predicted labels predicted from the classifier trained on the reference. |`file`, required, example: `"output.h5mu"`  |
-|`--output_obs_predictions` |In which .obs slot to store the predicted labels.                                                            |`string`, default: `"scanvi_pred"`          |
-|`--output_obs_probability` |In which. obs slot to store the probabilities of the predicted labels.                                       |`string`, default: `"scanvi_probabilities"` |
-|`--output_obsm_integrated` |In which .obsm slot to store the integrated embedding.                                                       |`string`, default: `"X_integrated_scanvi"`  |
-|`--output_compression`     |The compression format to be used on the output h5mu object.                                                 |`string`, example: `"gzip"`                 |
-|`--output_model`           |Path to the resulting scANVI model that was updated with query data.                                         |`file`                                      |
+|`--output`                 |The annotated output .h5mu file.                                       |`file`, required, example: `"output.h5mu"`  |
+|`--output_obs_predictions` |In which .obs slot to store the predicted labels.                      |`string`, default: `"scanvi_pred"`          |
+|`--output_obs_probability` |In which. obs slot to store the probabilities of the predicted labels. |`string`, default: `"scanvi_probabilities"` |
+|`--output_obsm_integrated` |In which .obsm slot to store the integrated embedding.                 |`string`, default: `"X_integrated_scanvi"`  |
+|`--output_compression`     |The compression format to be used on the output h5mu object.           |`string`, example: `"gzip"`                 |
+|`--output_model`           |Path to the resulting scANVI model that was updated with query data.   |`file`                                      |
 
 ## Authors
 
