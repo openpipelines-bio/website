@@ -1,7 +1,7 @@
 ---
 title: "scVI Annotation"
 namespace: "Workflows/annotation"
-description: "Cell type annotation workflow that performs scVI integration of reference and query dataset followed by KNN label transfer."
+description: ""Cell type annotation workflow that performs scVI integration of reference and query dataset followed by KNN label transfer."
 type: "workflow"
 toc: false
 ---
@@ -14,13 +14,14 @@ ID: `scvi_knn`
 Namespace: `workflows/annotation`
 
 ### Links
-[Source](https://github.com/openpipelines-bio/openpipeline/blob/2.1.1/src/workflows/annotation/scvi_knn/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v4.1.1/src/workflows/annotation/scvi_knn/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
 
 :::
 
 
 The query and reference datasets are expected to be pre-processed in the same way, for example with the `process_samples` workflow of OpenPipeline. Note that this workflow will integrate the reference dataset from scratch and integrate the query dataset in the same embedding space. 
-The workflow does not currently output the trained SCVI reference model
+The workflow does not currently output the trained SCVI reference model."
+
 
 ## Example commands
 
@@ -32,7 +33,7 @@ You can use `--help` as a parameter to get an overview of the possible parameter
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.1 -latest \
+  -r v4.1.1 -latest \
   -main-script target/nextflow/workflows/annotation/scvi_knn/main.nf \
   --help
 ```
@@ -52,6 +53,7 @@ input_obs_batch_label: # please fill in - example: "sample"
 # input_var_gene_names: "foo"
 input_reference_gene_overlap: 100
 overwrite_existing_key: false
+sanitize_ensembl_ids: true
 
 # Reference input
 reference: # please fill in - example: "reference.h5mu"
@@ -97,7 +99,7 @@ publish_dir: # please fill in - example: "output/"
 
 ```bash
 nextflow run openpipelines-bio/openpipeline \
-  -r 2.1.1 -latest \
+  -r v4.1.1 -latest \
   -profile docker \
   -main-script target/nextflow/workflows/annotation/scvi_knn/main.nf \
   -params-file params.yaml
@@ -122,6 +124,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 |`--input_var_gene_names`         |The .var field in the input (query) dataset containing gene names; if not provided, the .var index will be used.              |`string`                                  |
 |`--input_reference_gene_overlap` |The minimum number of genes present in both the reference and query datasets.                                                 |`integer`, default: `100`                 |
 |`--overwrite_existing_key`       |If provided, will overwrite existing fields in the input dataset when data are copied during the reference alignment process. |`boolean_true`                            |
+|`--sanitize_ensembl_ids`         |Whether to sanitize ensembl ids by removing version numbers.                                                                  |`boolean`, default: `TRUE`                |
 
 
 ### Reference input
@@ -176,7 +179,7 @@ Replace `-profile docker` with `-profile podman` or `-profile singularity` depen
 
 |Name                       |Description                                                                                                                                                                                                                              |Attributes                                 |
 |:----------|:--------------------------------------------------|:--------------------|
-|`--output`                 |The query data in .h5mu format with predicted labels predicted from the classifier trained on the reference.                                                                                                                             |`file`, required, example: `"output.h5mu"` |
+|`--output`                 |The annotated output .h5mu file.                                                                                                                                                                                                         |`file`, required, example: `"output.h5mu"` |
 |`--output_obs_predictions` |In which `.obs` slots to store the predicted cell labels. If provided, must have the same length as `--reference_obs_targets`. If empty, will default to the `reference_obs_targets` combined with the `"_pred"` suffix.                 |List of `string`, multiple_sep: `";"`      |
 |`--output_obs_probability` |In which `.obs` slots to store the probability of the predictions. If provided, must have the same length as `--reference_obs_targets`. If empty, will default to the `reference_obs_targets` combined with the `"_probability"` suffix. |List of `string`, multiple_sep: `";"`      |
 |`--output_obsm_integrated` |In which .obsm slot to store the integrated embedding.                                                                                                                                                                                   |`string`, default: `"X_integrated_scvi"`   |
@@ -219,72 +222,90 @@ flowchart TB
     v188(cross)
     v198(cross)
     v204(filter)
-    v212(filter)
-    v227(cross)
-    v237(cross)
-    v243(filter)
-    v397(concat)
-    v252(filter)
-    v267(cross)
-    v277(cross)
-    v286(branch)
-    v313(concat)
-    v298(cross)
-    v308(cross)
-    v317(branch)
-    v344(concat)
-    v329(cross)
-    v339(cross)
-    v348(branch)
-    v375(concat)
-    v360(cross)
-    v370(cross)
-    v382(cross)
+    v216(branch)
+    v243(concat)
+    v228(cross)
+    v238(cross)
+    v244(filter)
+    v259(cross)
+    v269(cross)
+    v275(filter)
+    v284(filter)
+    v299(cross)
+    v309(cross)
+    v318(branch)
+    v345(concat)
+    v330(cross)
+    v340(cross)
+    v349(branch)
+    v376(concat)
+    v361(cross)
+    v371(cross)
+    v380(branch)
+    v407(concat)
     v392(cross)
-    v404(cross)
+    v402(cross)
     v414(cross)
-    v420(filter)
-    v428(delete_aligned_counts_layer)
-    v435(cross)
+    v424(cross)
+    v433(branch)
+    v460(concat)
     v445(cross)
-    v451(filter)
-    v462(filter)
-    v474(cross)
-    v484(cross)
-    v494(concat)
-    v501(cross)
-    v511(cross)
-    v519(filter)
-    v527(knn)
-    v534(cross)
-    v544(cross)
-    v552(mix)
-    v555(filter)
-    v585(concat)
-    v563(merge)
-    v570(cross)
-    v580(cross)
-    v592(cross)
-    v599(cross)
-    v611(cross)
-    v618(cross)
-    v622(Output)
+    v455(cross)
+    v464(branch)
+    v491(concat)
+    v476(cross)
+    v486(cross)
+    v498(cross)
+    v508(cross)
+    v514(filter)
+    v522(delete_aligned_counts_layer)
+    v529(cross)
+    v539(cross)
+    v545(filter)
+    v556(filter)
+    v568(cross)
+    v578(cross)
+    v588(concat)
+    v595(cross)
+    v605(cross)
+    v613(filter)
+    v621(knn)
+    v628(cross)
+    v638(cross)
+    v646(mix)
+    v649(filter)
+    v679(concat)
+    v657(merge)
+    v664(cross)
+    v674(cross)
+    v686(cross)
+    v693(cross)
+    v705(cross)
+    v712(cross)
+    v716(Output)
     subgraph group_split_modalities [split_modalities]
         v57(split_modalities_component)
     end
     subgraph group_scvi_leiden_workflow [scvi_leiden_workflow]
-        v220(scvi)
-        v260(find_neighbors)
-        v291(leiden)
-        v322(move_obsm_to_obs)
-        v353(umap)
+        v221(from_tiledb_to_h5mu)
+        v252(scvi)
+        v292(find_neighbors)
+        v323(leiden)
+        v354(move_obsm_to_obs)
+        v385(umap)
+        v438(move_mudata_obsm_to_tiledb)
+        v469(move_mudata_obs_to_tiledb)
     end
     subgraph group_split_h5mu [split_h5mu]
-        v467(split_h5mu_component)
+        v561(split_h5mu_component)
     end
-    v286-->v313
-    v317-->v344
-    v348-->v375
+    v216-->v243
+    v243-->v244
+    v318-->v345
+    v349-->v376
+    v380-->v407
+    v433-->v460
+    v464-->v491
     v0-->v2
     v2-->v10
     v10-->v18
@@ -310,66 +331,79 @@ flowchart TB
     v181-->v188
     v173-->v188
     v173-->v198
-    v204-->v212
-    v212-->v220
-    v220-->v227
-    v212-->v227
-    v212-->v237
-    v243-->v252
-    v252-->v260
-    v260-->v267
-    v252-->v267
-    v252-->v277
-    v286-->v291
-    v291-->v298
-    v286-->v298
-    v286-->v308
-    v308-->v313
-    v317-->v322
-    v322-->v329
-    v317-->v329
-    v317-->v339
-    v339-->v344
-    v348-->v353
-    v353-->v360
-    v348-->v360
-    v348-->v370
-    v370-->v375
-    v375-->v382
-    v243-->v382
-    v243-->v392
-    v392-->v397
-    v397-->v404
-    v204-->v404
-    v204-->v414
-    v420-->v428
-    v428-->v435
-    v420-->v435
-    v420-->v445
-    v462-->v467
-    v467-->v474
-    v462-->v474
-    v462-->v484
-    v494-->v501
-    v451-->v501
-    v451-->v511
-    v519-->v527
-    v527-->v534
-    v519-->v534
-    v519-->v544
-    v555-->v563
-    v563-->v570
-    v555-->v570
-    v555-->v580
-    v580-->v585
-    v585-->v592
-    v2-->v592
-    v592-->v599
-    v2-->v599
-    v2-->v611
-    v611-->v618
-    v2-->v618
-    v618-->v622
+    v216-->v221
+    v221-->v228
+    v216-->v228
+    v216-->v238
+    v238-->v243
+    v244-->v252
+    v252-->v259
+    v244-->v259
+    v244-->v269
+    v275-->v284
+    v284-->v292
+    v292-->v299
+    v284-->v299
+    v284-->v309
+    v318-->v323
+    v323-->v330
+    v318-->v330
+    v318-->v340
+    v340-->v345
+    v349-->v354
+    v354-->v361
+    v349-->v361
+    v349-->v371
+    v371-->v376
+    v380-->v385
+    v385-->v392
+    v380-->v392
+    v380-->v402
+    v402-->v407
+    v407-->v414
+    v275-->v414
+    v275-->v424
+    v433-->v438
+    v438-->v445
+    v433-->v445
+    v433-->v455
+    v455-->v460
+    v464-->v469
+    v469-->v476
+    v464-->v476
+    v464-->v486
+    v486-->v491
+    v491-->v498
+    v204-->v498
+    v204-->v508
+    v514-->v522
+    v522-->v529
+    v514-->v529
+    v514-->v539
+    v556-->v561
+    v561-->v568
+    v556-->v568
+    v556-->v578
+    v588-->v595
+    v545-->v595
+    v545-->v605
+    v613-->v621
+    v621-->v628
+    v613-->v628
+    v613-->v638
+    v649-->v657
+    v657-->v664
+    v649-->v664
+    v649-->v674
+    v674-->v679
+    v679-->v686
+    v2-->v686
+    v686-->v693
+    v2-->v693
+    v2-->v705
+    v705-->v712
+    v2-->v712
+    v712-->v716
     v35-->v41
     v18-->v35
     v101-->v107
@@ -384,31 +418,37 @@ flowchart TB
     v150-->v167
     v198-->v204
     v181-->v198
-    v414-->v420
-    v237-->v243
-    v220-->v237
-    v260-->v277
-    v277-->v286
-    v291-->v308
-    v313-->v317
-    v322-->v339
-    v344-->v348
-    v353-->v370
-    v375-->v392
-    v397-->v414
-    v445-->v451
-    v428-->v445
-    v511-->v519
-    v451-->v462
-    v484-->v494
-    v467-->v484
-    v494-->v511
-    v544-->v552
-    v527-->v544
-    v107-->v552
-    v552-->v555
-    v563-->v580
-    v585-->v611
+    v508-->v514
+    v204-->v216
+    v221-->v238
+    v269-->v275
+    v252-->v269
+    v292-->v309
+    v309-->v318
+    v323-->v340
+    v345-->v349
+    v354-->v371
+    v376-->v380
+    v385-->v402
+    v407-->v424
+    v424-->v433
+    v438-->v455
+    v460-->v464
+    v469-->v486
+    v491-->v508
+    v539-->v545
+    v522-->v539
+    v605-->v613
+    v545-->v556
+    v578-->v588
+    v561-->v578
+    v588-->v605
+    v638-->v646
+    v621-->v638
+    v107-->v646
+    v646-->v649
+    v657-->v674
+    v679-->v705
     style group_split_modalities fill:#F0F0F0,stroke:#969696;
     style group_scvi_leiden_workflow fill:#F0F0F0,stroke:#969696;
     style group_split_h5mu fill:#F0F0F0,stroke:#969696;
@@ -440,62 +480,76 @@ flowchart TB
     style v188 fill:#e3dcea,stroke:#7a4baa;
     style v198 fill:#e3dcea,stroke:#7a4baa;
     style v204 fill:#e3dcea,stroke:#7a4baa;
-    style v212 fill:#e3dcea,stroke:#7a4baa;
-    style v220 fill:#e3dcea,stroke:#7a4baa;
-    style v227 fill:#e3dcea,stroke:#7a4baa;
-    style v237 fill:#e3dcea,stroke:#7a4baa;
+    style v216 fill:#e3dcea,stroke:#7a4baa;
     style v243 fill:#e3dcea,stroke:#7a4baa;
-    style v397 fill:#e3dcea,stroke:#7a4baa;
+    style v221 fill:#e3dcea,stroke:#7a4baa;
+    style v228 fill:#e3dcea,stroke:#7a4baa;
+    style v238 fill:#e3dcea,stroke:#7a4baa;
+    style v244 fill:#e3dcea,stroke:#7a4baa;
     style v252 fill:#e3dcea,stroke:#7a4baa;
-    style v260 fill:#e3dcea,stroke:#7a4baa;
-    style v267 fill:#e3dcea,stroke:#7a4baa;
-    style v277 fill:#e3dcea,stroke:#7a4baa;
-    style v286 fill:#e3dcea,stroke:#7a4baa;
-    style v313 fill:#e3dcea,stroke:#7a4baa;
-    style v291 fill:#e3dcea,stroke:#7a4baa;
-    style v298 fill:#e3dcea,stroke:#7a4baa;
-    style v308 fill:#e3dcea,stroke:#7a4baa;
-    style v317 fill:#e3dcea,stroke:#7a4baa;
-    style v344 fill:#e3dcea,stroke:#7a4baa;
-    style v322 fill:#e3dcea,stroke:#7a4baa;
-    style v329 fill:#e3dcea,stroke:#7a4baa;
-    style v339 fill:#e3dcea,stroke:#7a4baa;
-    style v348 fill:#e3dcea,stroke:#7a4baa;
-    style v375 fill:#e3dcea,stroke:#7a4baa;
-    style v353 fill:#e3dcea,stroke:#7a4baa;
-    style v360 fill:#e3dcea,stroke:#7a4baa;
-    style v370 fill:#e3dcea,stroke:#7a4baa;
-    style v382 fill:#e3dcea,stroke:#7a4baa;
+    style v259 fill:#e3dcea,stroke:#7a4baa;
+    style v269 fill:#e3dcea,stroke:#7a4baa;
+    style v275 fill:#e3dcea,stroke:#7a4baa;
+    style v284 fill:#e3dcea,stroke:#7a4baa;
+    style v292 fill:#e3dcea,stroke:#7a4baa;
+    style v299 fill:#e3dcea,stroke:#7a4baa;
+    style v309 fill:#e3dcea,stroke:#7a4baa;
+    style v318 fill:#e3dcea,stroke:#7a4baa;
+    style v345 fill:#e3dcea,stroke:#7a4baa;
+    style v323 fill:#e3dcea,stroke:#7a4baa;
+    style v330 fill:#e3dcea,stroke:#7a4baa;
+    style v340 fill:#e3dcea,stroke:#7a4baa;
+    style v349 fill:#e3dcea,stroke:#7a4baa;
+    style v376 fill:#e3dcea,stroke:#7a4baa;
+    style v354 fill:#e3dcea,stroke:#7a4baa;
+    style v361 fill:#e3dcea,stroke:#7a4baa;
+    style v371 fill:#e3dcea,stroke:#7a4baa;
+    style v380 fill:#e3dcea,stroke:#7a4baa;
+    style v407 fill:#e3dcea,stroke:#7a4baa;
+    style v385 fill:#e3dcea,stroke:#7a4baa;
     style v392 fill:#e3dcea,stroke:#7a4baa;
-    style v404 fill:#e3dcea,stroke:#7a4baa;
+    style v402 fill:#e3dcea,stroke:#7a4baa;
     style v414 fill:#e3dcea,stroke:#7a4baa;
-    style v420 fill:#e3dcea,stroke:#7a4baa;
-    style v428 fill:#e3dcea,stroke:#7a4baa;
-    style v435 fill:#e3dcea,stroke:#7a4baa;
+    style v424 fill:#e3dcea,stroke:#7a4baa;
+    style v433 fill:#e3dcea,stroke:#7a4baa;
+    style v460 fill:#e3dcea,stroke:#7a4baa;
+    style v438 fill:#e3dcea,stroke:#7a4baa;
     style v445 fill:#e3dcea,stroke:#7a4baa;
-    style v451 fill:#e3dcea,stroke:#7a4baa;
-    style v462 fill:#e3dcea,stroke:#7a4baa;
-    style v467 fill:#e3dcea,stroke:#7a4baa;
-    style v474 fill:#e3dcea,stroke:#7a4baa;
-    style v484 fill:#e3dcea,stroke:#7a4baa;
-    style v494 fill:#e3dcea,stroke:#7a4baa;
-    style v501 fill:#e3dcea,stroke:#7a4baa;
-    style v511 fill:#e3dcea,stroke:#7a4baa;
-    style v519 fill:#e3dcea,stroke:#7a4baa;
-    style v527 fill:#e3dcea,stroke:#7a4baa;
-    style v534 fill:#e3dcea,stroke:#7a4baa;
-    style v544 fill:#e3dcea,stroke:#7a4baa;
-    style v552 fill:#e3dcea,stroke:#7a4baa;
-    style v555 fill:#e3dcea,stroke:#7a4baa;
-    style v585 fill:#e3dcea,stroke:#7a4baa;
-    style v563 fill:#e3dcea,stroke:#7a4baa;
-    style v570 fill:#e3dcea,stroke:#7a4baa;
-    style v580 fill:#e3dcea,stroke:#7a4baa;
-    style v592 fill:#e3dcea,stroke:#7a4baa;
-    style v599 fill:#e3dcea,stroke:#7a4baa;
-    style v611 fill:#e3dcea,stroke:#7a4baa;
-    style v618 fill:#e3dcea,stroke:#7a4baa;
-    style v622 fill:#e3dcea,stroke:#7a4baa;
+    style v455 fill:#e3dcea,stroke:#7a4baa;
+    style v464 fill:#e3dcea,stroke:#7a4baa;
+    style v491 fill:#e3dcea,stroke:#7a4baa;
+    style v469 fill:#e3dcea,stroke:#7a4baa;
+    style v476 fill:#e3dcea,stroke:#7a4baa;
+    style v486 fill:#e3dcea,stroke:#7a4baa;
+    style v498 fill:#e3dcea,stroke:#7a4baa;
+    style v508 fill:#e3dcea,stroke:#7a4baa;
+    style v514 fill:#e3dcea,stroke:#7a4baa;
+    style v522 fill:#e3dcea,stroke:#7a4baa;
+    style v529 fill:#e3dcea,stroke:#7a4baa;
+    style v539 fill:#e3dcea,stroke:#7a4baa;
+    style v545 fill:#e3dcea,stroke:#7a4baa;
+    style v556 fill:#e3dcea,stroke:#7a4baa;
+    style v561 fill:#e3dcea,stroke:#7a4baa;
+    style v568 fill:#e3dcea,stroke:#7a4baa;
+    style v578 fill:#e3dcea,stroke:#7a4baa;
+    style v588 fill:#e3dcea,stroke:#7a4baa;
+    style v595 fill:#e3dcea,stroke:#7a4baa;
+    style v605 fill:#e3dcea,stroke:#7a4baa;
+    style v613 fill:#e3dcea,stroke:#7a4baa;
+    style v621 fill:#e3dcea,stroke:#7a4baa;
+    style v628 fill:#e3dcea,stroke:#7a4baa;
+    style v638 fill:#e3dcea,stroke:#7a4baa;
+    style v646 fill:#e3dcea,stroke:#7a4baa;
+    style v649 fill:#e3dcea,stroke:#7a4baa;
+    style v679 fill:#e3dcea,stroke:#7a4baa;
+    style v657 fill:#e3dcea,stroke:#7a4baa;
+    style v664 fill:#e3dcea,stroke:#7a4baa;
+    style v674 fill:#e3dcea,stroke:#7a4baa;
+    style v686 fill:#e3dcea,stroke:#7a4baa;
+    style v693 fill:#e3dcea,stroke:#7a4baa;
+    style v705 fill:#e3dcea,stroke:#7a4baa;
+    style v712 fill:#e3dcea,stroke:#7a4baa;
+    style v716 fill:#e3dcea,stroke:#7a4baa;
 
 ```
 

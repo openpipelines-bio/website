@@ -1,0 +1,590 @@
+---
+title: "Process singlesample"
+namespace: "Workflows/multiomics"
+description: "A pipeline to analyse a single multiomics sample."
+type: "workflow"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `process_singlesample`  
+Namespace: `workflows/multiomics`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v4.1.1/src/workflows/multiomics/process_singlesample/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r v4.1.1 -latest \
+  -main-script target/nextflow/workflows/multiomics/process_singlesample/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Inputs
+input: # please fill in - example: "input.h5mu"
+# rna_layer: "foo"
+# prot_layer: "foo"
+# gdo_layer: "foo"
+
+# Outputs
+# output: "$id.$key.output.h5mu"
+
+# Sample ID options
+add_id_to_obs: true
+add_id_obs_output: "sample_id"
+add_id_make_observation_keys_unique: true
+
+# RNA filtering options
+# rna_min_counts: 200
+# rna_max_counts: 5000000
+# rna_min_genes_per_cell: 200
+# rna_max_genes_per_cell: 1500000
+# rna_min_cells_per_gene: 3
+# rna_min_fraction_mito: 0.0
+# rna_max_fraction_mito: 0.2
+# rna_min_fraction_ribo: 0.0
+# rna_max_fraction_ribo: 0.2
+skip_scrublet_doublet_detection: false
+
+# CITE-seq filtering options
+# prot_min_counts: 3
+# prot_max_counts: 5000000
+# prot_min_proteins_per_cell: 200
+# prot_max_proteins_per_cell: 100000000
+# prot_min_cells_per_protein: 3
+
+# GDO filtering options
+# gdo_min_counts: 3
+# gdo_max_counts: 5000000
+# gdo_min_guides_per_cell: 200
+# gdo_max_guides_per_cell: 100000000
+# gdo_min_cells_per_guide: 3
+
+# Cross-modality filtering
+intersect_obs: false
+
+# Mitochondrial & Ribosomal Gene Detection
+# var_gene_names: "gene_symbol"
+# var_name_mitochondrial_genes: "foo"
+# obs_name_mitochondrial_fraction: "foo"
+mitochondrial_gene_regex: "^[mM][tT]-"
+# var_name_ribosomal_genes: "foo"
+# obs_name_ribosomal_fraction: "foo"
+ribosomal_gene_regex: "^[Mm]?[Rr][Pp][LlSs]"
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+
+# Arguments
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r v4.1.1 -latest \
+  -profile docker \
+  -main-script target/nextflow/workflows/multiomics/process_singlesample/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Inputs
+
+|Name           |Description                                                                                 |Attributes                                |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--input`      |Path to the sample.                                                                         |`file`, required, example: `"input.h5mu"` |
+|`--rna_layer`  |Input layer for the gene expression modality. If not specified, .X is used.                 |`string`                                  |
+|`--prot_layer` |Input layer for the antibody capture modality. If not specified, .X is used.                |`string`                                  |
+|`--gdo_layer`  |Input layer for the guide-derived oligonucleotide (GDO) data. If not specified, .X is used. |`string`                                  |
+
+
+### Outputs
+
+|Name       |Description                     |Attributes                                 |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--output` |Destination path to the output. |`file`, required, example: `"output.h5mu"` |
+
+
+### Sample ID options
+
+Options for adding the id to .obs on the MuData object. Having a sample 
+id present in a requirement of several components for this pipeline.
+
+
+
+|Name                                    |Description                                                                                         |Attributes                       |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--add_id_to_obs`                       |Add the value passed with --id to .obs.                                                             |`boolean`, default: `TRUE`       |
+|`--add_id_obs_output`                   |.Obs column to add the sample IDs to. Required and only used when  --add_id_to_obs is set to 'true' |`string`, default: `"sample_id"` |
+|`--add_id_make_observation_keys_unique` |Join the id to the .obs index (.obs_names).  Only used when --add_id_to_obs is set to 'true'.       |`boolean`, default: `TRUE`       |
+
+
+### RNA filtering options
+
+|Name                                |Description                                      |Attributes                    |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--rna_min_counts`                  |Minimum number of counts captured per cell.      |`integer`, example: `200`     |
+|`--rna_max_counts`                  |Maximum number of counts captured per cell.      |`integer`, example: `5000000` |
+|`--rna_min_genes_per_cell`          |Minimum of non-zero values per cell.             |`integer`, example: `200`     |
+|`--rna_max_genes_per_cell`          |Maximum of non-zero values per cell.             |`integer`, example: `1500000` |
+|`--rna_min_cells_per_gene`          |Minimum of non-zero values per gene.             |`integer`, example: `3`       |
+|`--rna_min_fraction_mito`           |Minimum fraction of UMIs that are mitochondrial. |`double`, example: `0`        |
+|`--rna_max_fraction_mito`           |Maximum fraction of UMIs that are mitochondrial. |`double`, example: `0.2`      |
+|`--rna_min_fraction_ribo`           |Minimum fraction of UMIs that are mitochondrial. |`double`, example: `0`        |
+|`--rna_max_fraction_ribo`           |Maximum fraction of UMIs that are mitochondrial. |`double`, example: `0.2`      |
+|`--skip_scrublet_doublet_detection` |Skip the scrublet doublet detection step.        |`boolean_true`                |
+
+
+### CITE-seq filtering options
+
+|Name                           |Description                             |Attributes                      |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--prot_min_counts`            |Minimum number of counts per cell.      |`integer`, example: `3`         |
+|`--prot_max_counts`            |Minimum number of counts per cell.      |`integer`, example: `5000000`   |
+|`--prot_min_proteins_per_cell` |Minimum of non-zero values per cell.    |`integer`, example: `200`       |
+|`--prot_max_proteins_per_cell` |Maximum of non-zero values per cell.    |`integer`, example: `100000000` |
+|`--prot_min_cells_per_protein` |Minimum of non-zero values per protein. |`integer`, example: `3`         |
+
+
+### GDO filtering options
+
+|Name                        |Description                           |Attributes                      |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--gdo_min_counts`          |Minimum number of counts per cell.    |`integer`, example: `3`         |
+|`--gdo_max_counts`          |Minimum number of counts per cell.    |`integer`, example: `5000000`   |
+|`--gdo_min_guides_per_cell` |Minimum of non-zero values per cell.  |`integer`, example: `200`       |
+|`--gdo_max_guides_per_cell` |Maximum of non-zero values per cell.  |`integer`, example: `100000000` |
+|`--gdo_min_cells_per_guide` |Minimum of non-zero values per guide. |`integer`, example: `3`         |
+
+
+### Cross-modality filtering
+
+|Name              |Description                                                                                                                                            |Attributes     |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--intersect_obs` |After per-modality filtering, remove observations that are not present in all processed modalities so that each modality shares the same set of cells. |`boolean_true` |
+
+
+### Mitochondrial & Ribosomal Gene Detection
+
+|Name                                |Description                                                                                                                                                                                                                                                                               |Attributes                                  |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--var_gene_names`                  |.var column name to be used to detect mitochondrial/ribosomal genes instead of .var_names (default if not set). Gene names matching with the regex value from --mitochondrial_gene_regex or --ribosomal_gene_regex will be  identified as mitochondrial or ribosomal genes, respectively. |`string`, example: `"gene_symbol"`          |
+|`--var_name_mitochondrial_genes`    |In which .var slot to store a boolean array corresponding the mitochondrial genes.                                                                                                                                                                                                        |`string`                                    |
+|`--obs_name_mitochondrial_fraction` |When specified, write the fraction of counts originating from mitochondrial genes  (based on --mitochondrial_gene_regex) to an .obs column with the specified name. Requires --var_name_mitochondrial_genes.                                                                              |`string`                                    |
+|`--mitochondrial_gene_regex`        |Regex string that identifies mitochondrial genes from --var_gene_names. By default will detect human and mouse mitochondrial genes from a gene symbol.                                                                                                                                    |`string`, default: `"^[mM][tT]-"`           |
+|`--var_name_ribosomal_genes`        |In which .var slot to store a boolean array corresponding the ribosomal genes.                                                                                                                                                                                                            |`string`                                    |
+|`--obs_name_ribosomal_fraction`     |When specified, write the fraction of counts originating from ribosomal genes  (based on --ribosomal_gene_regex) to an .obs column with the specified name. Requires --var_name_ribosomal_genes.                                                                                          |`string`                                    |
+|`--ribosomal_gene_regex`            |Regex string that identifies ribosomal genes from --var_gene_names. By default will detect human and mouse ribosomal genes from a gene symbol.                                                                                                                                            |`string`, default: `"^[Mm]?[Rr][Pp][LlSs]"` |
+
+## Authors
+
+
+  * Dorien Roosen [{{< fa brands github >}}](https://github.com/dorien-er) [{{< fa brands linkedin >}}](https://linkedin.com/in/dorien-roosen) (author)
+
+## Visualisation
+
+```{mermaid}
+flowchart TB
+    v0(Channel.fromList)
+    v2(filter)
+    v10(filter)
+    v23(filter)
+    v35(cross)
+    v45(cross)
+    v117(flatMap)
+    v631(mix)
+    v639(cross)
+    v649(cross)
+    v658(filter)
+    v666(merge)
+    v673(cross)
+    v683(cross)
+    v693(branch)
+    v720(concat)
+    v698(intersect_obs)
+    v705(cross)
+    v715(cross)
+    v728(cross)
+    v735(cross)
+    v747(cross)
+    v754(cross)
+    v758(Output)
+    subgraph group_process_singlesample_base [process_singlesample_base]
+        v28(add_id)
+        v51(filter)
+        v62(filter)
+        v67(split_modalities_component)
+        v74(cross)
+        v84(cross)
+        v94(concat)
+        v101(cross)
+        v111(cross)
+        v123(filter)
+        v132(filter)
+        v144(branch)
+        v171(concat)
+        v156(cross)
+        v166(cross)
+        v175(branch)
+        v202(concat)
+        v187(cross)
+        v197(cross)
+        v203(filter)
+        v233(concat)
+        v218(cross)
+        v228(cross)
+        v240(cross)
+        v250(cross)
+        v259(branch)
+        v286(concat)
+        v271(cross)
+        v281(cross)
+        v290(branch)
+        v317(concat)
+        v302(cross)
+        v312(cross)
+        v318(filter)
+        v333(cross)
+        v343(cross)
+        v349(filter)
+        v364(cross)
+        v374(cross)
+        v383(branch)
+        v410(concat)
+        v395(cross)
+        v405(cross)
+        v417(cross)
+        v427(cross)
+        v629(mix)
+        v438(filter)
+        v446(filter)
+        v461(cross)
+        v471(cross)
+        v477(filter)
+        v507(concat)
+        v492(cross)
+        v502(cross)
+        v514(cross)
+        v524(cross)
+        v535(filter)
+        v543(filter)
+        v558(cross)
+        v568(cross)
+        v574(filter)
+        v604(concat)
+        v589(cross)
+        v599(cross)
+        v611(cross)
+        v621(cross)
+        subgraph group_rna_singlesample [rna_singlesample]
+            v149(grep_mitochondrial_genes)
+            v180(grep_ribosomal_genes)
+            v211(calculate_qc_metrics)
+            v264(delimit_fraction)
+            v295(delimit_fraction)
+            v326(rna_filter_with_counts)
+            v357(rna_do_filter)
+            v388(filter_with_scrublet)
+        end
+        subgraph group_prot_singlesample [prot_singlesample]
+            v454(prot_filter_with_counts)
+            v485(prot_do_filter)
+        end
+        subgraph group_gdo_singlesample [gdo_singlesample]
+            v551(gdo_filter_with_counts)
+            v582(gdo_do_filter)
+        end
+    end
+    v144-->v171
+    v175-->v202
+    v202-->v203
+    v259-->v286
+    v290-->v317
+    v317-->v318
+    v383-->v410
+    v629-->v631
+    v693-->v720
+    v0-->v2
+    v2-->v10
+    v23-->v28
+    v28-->v35
+    v23-->v35
+    v23-->v45
+    v62-->v67
+    v67-->v74
+    v62-->v74
+    v62-->v84
+    v94-->v101
+    v51-->v101
+    v51-->v111
+    v123-->v132
+    v144-->v149
+    v149-->v156
+    v144-->v156
+    v144-->v166
+    v166-->v171
+    v175-->v180
+    v180-->v187
+    v175-->v187
+    v175-->v197
+    v197-->v202
+    v203-->v211
+    v211-->v218
+    v203-->v218
+    v203-->v228
+    v228-->v233
+    v233-->v240
+    v132-->v240
+    v132-->v250
+    v259-->v264
+    v264-->v271
+    v259-->v271
+    v259-->v281
+    v281-->v286
+    v290-->v295
+    v295-->v302
+    v290-->v302
+    v290-->v312
+    v312-->v317
+    v318-->v326
+    v326-->v333
+    v318-->v333
+    v318-->v343
+    v349-->v357
+    v357-->v364
+    v349-->v364
+    v349-->v374
+    v383-->v388
+    v388-->v395
+    v383-->v395
+    v383-->v405
+    v405-->v410
+    v410-->v417
+    v123-->v417
+    v123-->v427
+    v438-->v446
+    v446-->v454
+    v454-->v461
+    v446-->v461
+    v446-->v471
+    v477-->v485
+    v485-->v492
+    v477-->v492
+    v477-->v502
+    v502-->v507
+    v507-->v514
+    v438-->v514
+    v438-->v524
+    v535-->v543
+    v543-->v551
+    v551-->v558
+    v543-->v558
+    v543-->v568
+    v574-->v582
+    v582-->v589
+    v574-->v589
+    v574-->v599
+    v599-->v604
+    v604-->v611
+    v535-->v611
+    v535-->v621
+    v631-->v639
+    v10-->v639
+    v10-->v649
+    v658-->v666
+    v666-->v673
+    v658-->v673
+    v658-->v683
+    v693-->v698
+    v698-->v705
+    v693-->v705
+    v693-->v715
+    v715-->v720
+    v720-->v728
+    v2-->v728
+    v728-->v735
+    v2-->v735
+    v2-->v747
+    v747-->v754
+    v2-->v754
+    v754-->v758
+    v10-->v23
+    v45-->v51
+    v28-->v45
+    v111-->v117
+    v51-->v62
+    v84-->v94
+    v67-->v84
+    v94-->v111
+    v117-->v123
+    v427-->v629
+    v132-->v144
+    v149-->v166
+    v171-->v175
+    v180-->v197
+    v211-->v228
+    v233-->v250
+    v250-->v259
+    v264-->v281
+    v286-->v290
+    v295-->v312
+    v343-->v349
+    v326-->v343
+    v357-->v374
+    v374-->v383
+    v388-->v405
+    v410-->v427
+    v117-->v438
+    v524-->v629
+    v471-->v477
+    v454-->v471
+    v485-->v502
+    v507-->v524
+    v117-->v535
+    v621-->v629
+    v568-->v574
+    v551-->v568
+    v582-->v599
+    v604-->v621
+    v117-->v631
+    v631-->v649
+    v649-->v658
+    v666-->v683
+    v683-->v693
+    v698-->v715
+    v720-->v747
+    style group_process_singlesample_base fill:#F0F0F0,stroke:#969696;
+    style group_rna_singlesample fill:#D9D9D9,stroke:#737373;
+    style group_prot_singlesample fill:#D9D9D9,stroke:#737373;
+    style group_gdo_singlesample fill:#D9D9D9,stroke:#737373;
+    style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v2 fill:#e3dcea,stroke:#7a4baa;
+    style v10 fill:#e3dcea,stroke:#7a4baa;
+    style v23 fill:#e3dcea,stroke:#7a4baa;
+    style v28 fill:#e3dcea,stroke:#7a4baa;
+    style v35 fill:#e3dcea,stroke:#7a4baa;
+    style v45 fill:#e3dcea,stroke:#7a4baa;
+    style v51 fill:#e3dcea,stroke:#7a4baa;
+    style v62 fill:#e3dcea,stroke:#7a4baa;
+    style v67 fill:#e3dcea,stroke:#7a4baa;
+    style v74 fill:#e3dcea,stroke:#7a4baa;
+    style v84 fill:#e3dcea,stroke:#7a4baa;
+    style v94 fill:#e3dcea,stroke:#7a4baa;
+    style v101 fill:#e3dcea,stroke:#7a4baa;
+    style v111 fill:#e3dcea,stroke:#7a4baa;
+    style v117 fill:#e3dcea,stroke:#7a4baa;
+    style v123 fill:#e3dcea,stroke:#7a4baa;
+    style v132 fill:#e3dcea,stroke:#7a4baa;
+    style v144 fill:#e3dcea,stroke:#7a4baa;
+    style v171 fill:#e3dcea,stroke:#7a4baa;
+    style v149 fill:#e3dcea,stroke:#7a4baa;
+    style v156 fill:#e3dcea,stroke:#7a4baa;
+    style v166 fill:#e3dcea,stroke:#7a4baa;
+    style v175 fill:#e3dcea,stroke:#7a4baa;
+    style v202 fill:#e3dcea,stroke:#7a4baa;
+    style v180 fill:#e3dcea,stroke:#7a4baa;
+    style v187 fill:#e3dcea,stroke:#7a4baa;
+    style v197 fill:#e3dcea,stroke:#7a4baa;
+    style v203 fill:#e3dcea,stroke:#7a4baa;
+    style v233 fill:#e3dcea,stroke:#7a4baa;
+    style v211 fill:#e3dcea,stroke:#7a4baa;
+    style v218 fill:#e3dcea,stroke:#7a4baa;
+    style v228 fill:#e3dcea,stroke:#7a4baa;
+    style v240 fill:#e3dcea,stroke:#7a4baa;
+    style v250 fill:#e3dcea,stroke:#7a4baa;
+    style v259 fill:#e3dcea,stroke:#7a4baa;
+    style v286 fill:#e3dcea,stroke:#7a4baa;
+    style v264 fill:#e3dcea,stroke:#7a4baa;
+    style v271 fill:#e3dcea,stroke:#7a4baa;
+    style v281 fill:#e3dcea,stroke:#7a4baa;
+    style v290 fill:#e3dcea,stroke:#7a4baa;
+    style v317 fill:#e3dcea,stroke:#7a4baa;
+    style v295 fill:#e3dcea,stroke:#7a4baa;
+    style v302 fill:#e3dcea,stroke:#7a4baa;
+    style v312 fill:#e3dcea,stroke:#7a4baa;
+    style v318 fill:#e3dcea,stroke:#7a4baa;
+    style v326 fill:#e3dcea,stroke:#7a4baa;
+    style v333 fill:#e3dcea,stroke:#7a4baa;
+    style v343 fill:#e3dcea,stroke:#7a4baa;
+    style v349 fill:#e3dcea,stroke:#7a4baa;
+    style v357 fill:#e3dcea,stroke:#7a4baa;
+    style v364 fill:#e3dcea,stroke:#7a4baa;
+    style v374 fill:#e3dcea,stroke:#7a4baa;
+    style v383 fill:#e3dcea,stroke:#7a4baa;
+    style v410 fill:#e3dcea,stroke:#7a4baa;
+    style v388 fill:#e3dcea,stroke:#7a4baa;
+    style v395 fill:#e3dcea,stroke:#7a4baa;
+    style v405 fill:#e3dcea,stroke:#7a4baa;
+    style v417 fill:#e3dcea,stroke:#7a4baa;
+    style v427 fill:#e3dcea,stroke:#7a4baa;
+    style v629 fill:#e3dcea,stroke:#7a4baa;
+    style v438 fill:#e3dcea,stroke:#7a4baa;
+    style v446 fill:#e3dcea,stroke:#7a4baa;
+    style v454 fill:#e3dcea,stroke:#7a4baa;
+    style v461 fill:#e3dcea,stroke:#7a4baa;
+    style v471 fill:#e3dcea,stroke:#7a4baa;
+    style v477 fill:#e3dcea,stroke:#7a4baa;
+    style v507 fill:#e3dcea,stroke:#7a4baa;
+    style v485 fill:#e3dcea,stroke:#7a4baa;
+    style v492 fill:#e3dcea,stroke:#7a4baa;
+    style v502 fill:#e3dcea,stroke:#7a4baa;
+    style v514 fill:#e3dcea,stroke:#7a4baa;
+    style v524 fill:#e3dcea,stroke:#7a4baa;
+    style v535 fill:#e3dcea,stroke:#7a4baa;
+    style v543 fill:#e3dcea,stroke:#7a4baa;
+    style v551 fill:#e3dcea,stroke:#7a4baa;
+    style v558 fill:#e3dcea,stroke:#7a4baa;
+    style v568 fill:#e3dcea,stroke:#7a4baa;
+    style v574 fill:#e3dcea,stroke:#7a4baa;
+    style v604 fill:#e3dcea,stroke:#7a4baa;
+    style v582 fill:#e3dcea,stroke:#7a4baa;
+    style v589 fill:#e3dcea,stroke:#7a4baa;
+    style v599 fill:#e3dcea,stroke:#7a4baa;
+    style v611 fill:#e3dcea,stroke:#7a4baa;
+    style v621 fill:#e3dcea,stroke:#7a4baa;
+    style v631 fill:#e3dcea,stroke:#7a4baa;
+    style v639 fill:#e3dcea,stroke:#7a4baa;
+    style v649 fill:#e3dcea,stroke:#7a4baa;
+    style v658 fill:#e3dcea,stroke:#7a4baa;
+    style v666 fill:#e3dcea,stroke:#7a4baa;
+    style v673 fill:#e3dcea,stroke:#7a4baa;
+    style v683 fill:#e3dcea,stroke:#7a4baa;
+    style v693 fill:#e3dcea,stroke:#7a4baa;
+    style v720 fill:#e3dcea,stroke:#7a4baa;
+    style v698 fill:#e3dcea,stroke:#7a4baa;
+    style v705 fill:#e3dcea,stroke:#7a4baa;
+    style v715 fill:#e3dcea,stroke:#7a4baa;
+    style v728 fill:#e3dcea,stroke:#7a4baa;
+    style v735 fill:#e3dcea,stroke:#7a4baa;
+    style v747 fill:#e3dcea,stroke:#7a4baa;
+    style v754 fill:#e3dcea,stroke:#7a4baa;
+    style v758 fill:#e3dcea,stroke:#7a4baa;
+
+```
+
