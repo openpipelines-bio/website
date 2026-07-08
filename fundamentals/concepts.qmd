@@ -78,6 +78,38 @@ OpenPipelines is built on [Viash](https://viash.io/), a framework that separates
 
 At build time, Viash compiles each component into a Nextflow module. Workflows then chain these modules together using Nextflow DSL2, with data flowing through the pipeline as H5MU files on a shared channel. This means the pipeline scales from a laptop to an HPC cluster or cloud environment without changes to the component code.
 
+```{mermaid}
+%%| label: fig-techstack
+%%| fig-width: 7
+%%| fig-cap: "OpenPipelines technology stack. Components (code in R, Python, or Bash) are wrapped by Viash into Docker images and Nextflow modules, which are assembled into Nextflow workflows that run unchanged on local, cloud, and HPC platforms."
+%%{init: {"theme":"base", "themeVariables":{"fontSize":"14px"}}}%%
+graph LR
+    classDef input fill:#f5f5f5,stroke:#aaaaaa,color:#444
+    classDef light fill:#eaf5e6,stroke:#b3d99e,color:#000
+    classDef mid   fill:#d5e8d4,stroke:#82b366,color:#000
+    classDef core  fill:#a9d69a,stroke:#5a9e57,color:#000
+
+    MuData["<b>MuData</b>"]:::input
+    R["<b>R scripts</b>"]:::light
+    Python["<b>Python scripts</b>"]:::light
+    Bash["<b>Bash scripts</b>"]:::light
+    Viash["<b>Viash component</b>"]:::core
+    Docker["<b>Docker images</b>"]:::mid
+    Modules["<b>Nextflow modules</b>"]:::mid
+    Nextflow["<b>Nextflow workflows</b>"]:::core
+    Local["<b>Local execution</b>"]:::light
+    AWS["<b>AWS Batch</b>"]:::light
+    GCP["<b>Google Cloud Batch</b>"]:::light
+    HPC["<b>HPC</b>"]:::light
+    More["<b>...</b>"]:::light
+
+    MuData --> R & Python & Bash
+    R & Python & Bash --> Viash
+    Viash --> Docker & Modules
+    Docker & Modules --> Nextflow
+    Nextflow --> Local & AWS & GCP & HPC & More
+```
+
 # A graphical interface 📺
 
 [Seqera Platform](https://seqera.io/platform/) (previously Nextflow Tower) provides a web-based interface for launching, monitoring, and managing OpenPipelines workflows without using the command line. It supports multiple compute environments including AWS Batch, Google Cloud Batch, Azure Batch, and HPC schedulers.

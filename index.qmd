@@ -100,47 +100,50 @@ flowchart LR
   %% Ingestion
   subgraph ingestion[Step 1: Ingestion]
     direction LR
-    10x_ingestion[10x Ingestion]:::subwf
-    bd_ingestion[BD Rhapsody\nIngestion]:::subwf
-    own_h5mu[Own H5MU]:::subwf
+    10x_ingestion[10x Ingestion]:::ingest
+    bd_ingestion[BD Rhapsody\nIngestion]:::ingest
+    own_h5mu[Own H5MU]:::ingest
   end
-  ingestion:::info
+  ingestion:::box
 
   %% Process samples
   subgraph process_samples[Step 2: Process Samples]
     direction LR
-    gex[GEX]:::subwf
-    atac[ATAC]:::subwf
-    adt[ADT]:::subwf
-    vdj[VDJ]:::subwf
-    other[Other]:::subwf
+    gex[GEX]:::process
+    atac[ATAC]:::process
+    adt[ADT]:::process
+    vdj[VDJ]:::process
+    other[Other]:::process
   end
-  process_samples:::info
+  process_samples:::box
 
   %% Integration and downstream
   subgraph integration[Step 3: Integration]
     direction LR
-    harmony[Harmony]:::subwf
-    scvi[scVI]:::subwf
-    scanvi[scanVI]:::subwf
-    etc[...]:::subwf
+    harmony[Harmony]:::integ
+    scvi[scVI]:::integ
+    scanvi[scanVI]:::integ
+    etc[...]:::integ
   end
-  integration[Integration]:::info
-  
+  integration:::box
+
   subgraph downstream[Step 4: Downstream]
     direction LR
-    celltype_annotation[Cell Type\nAnnotation]:::subwf
-    markergenes[Marker Genes\nAnalysis]:::subwf
-    differential[Differential\nExpression]:::subwf
-    gene_signature_analysis[Gene Signature\nAnalysis]:::subwf
-    ccc[Cell-Cell\nCommunication]:::subwf
+    celltype_annotation[Cell Type\nAnnotation]:::down
+    markergenes[Marker Genes\nAnalysis]:::down
+    differential[Differential\nExpression]:::down
+    gene_signature_analysis[Gene Signature\nAnalysis]:::down
+    ccc[Cell-Cell\nCommunication]:::down
   end
+  downstream:::box
 
   ingestion --> process_samples --> integration --> downstream
 
-  classDef wf fill:#f0f0f0,stroke:#525252
-  classDef subwf fill:#d9d9d9,stroke:#525252
-  classDef info fill:#f0f0f0,stroke:#525252,stroke-dasharray: 4 4
+  classDef ingest  fill:#d5e8d4,stroke:#82b366,color:#000
+  classDef process fill:#dae8fc,stroke:#6c8ebf,color:#000
+  classDef integ   fill:#ffe6cc,stroke:#d6b656,color:#000
+  classDef down    fill:#f8cecc,stroke:#b85450,color:#000
+  classDef box     fill:#f7f7f7,stroke:#cccccc,stroke-dasharray: 4 4
 ```
 
 

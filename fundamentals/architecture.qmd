@@ -4,45 +4,44 @@ description: How OpenPipelines fits into a single-cell project
 order: 30
 ---
 
-OpenPipelines provides modular, best-practice Nextflow workflows for single-cell data processing — from raw sequencing output to a batch-corrected, clustered dataset. The diagram below shows how OpenPipelines fits into a typical project, what is covered by the core workflows, and what sits outside.
+OpenPipelines provides modular, best-practice Nextflow workflows for single-cell data processing — from raw sequencing output to a batch-corrected, clustered dataset. The diagram below shows the five pipeline stages a single-cell dataset flows through, from raw experimental data to integrated and annotated results, together with the cross-cutting QC-reporting and spatial branches.
 
 ```{mermaid}
 %%| label: fig-architecture
-%%| fig-cap: "Overview of a single-cell project. Demultiplexing and downstream analyses sit outside the OpenPipelines core; ingestion, sample processing, and integration are handled by OpenPipelines core workflows."
+%%| fig-width: 7
+%%| fig-cap: "Overview of the OpenPipelines architecture. A single-cell dataset flows through five pipeline stages — demultiplexing & mapping, ingestion & conversion, QC & preprocessing, integration & clustering, and downstream analysis — starting from raw experimental data (grey). Data can enter either as raw FASTQ (after demultiplexing) or as pre-built count matrices. Cross-cutting QC reporting and the spatial branch feed off the core flow."
+%%{init: {"theme":"base", "themeVariables":{"fontSize":"14px"}}}%%
 flowchart TD
   classDef external fill:#f5f5f5,stroke:#aaaaaa,color:#444
-  classDef prewf   fill:#fff3cd,stroke:#c9a227,color:#333
+  classDef map     fill:#e1d5e7,stroke:#9673a6,color:#000
   classDef ingest  fill:#d5e8d4,stroke:#82b366,color:#000
   classDef process fill:#dae8fc,stroke:#6c8ebf,color:#000
   classDef integ   fill:#ffe6cc,stroke:#d6b656,color:#000
   classDef down    fill:#f8cecc,stroke:#b85450,color:#000
+  classDef spatial fill:#d0f0f5,stroke:#3a9db5,color:#000
+  classDef qc      fill:#fff3cd,stroke:#c9a227,color:#000
 
-  wetlab["Experiment & sequencing\n(10x Chromium · BD Rhapsody · ...)"]:::external
-  bcl["BCL files"]:::external
-  demux["ingestion/demux\nBCL → FASTQ"]:::prewf
-  fastq["FASTQ files\n(or pre-built count tables)"]:::external
+  wetlab["<b>Experiment &amp; sequencing</b><br>10x Chromium<br>BD Rhapsody<br>Xenium (spatial)"]:::external
+  fastq["<b>FASTQ files</b><br>or pre-built count matrices"]:::external
 
-  subgraph OP["  OpenPipelines — Core Workflows  "]
-    direction TB
-    ingest["Ingestion\ncellranger_mapping · cellranger_multi\nbd_rhapsody · ingestion/conversion\n→ H5MU per sample"]:::ingest
-    process["Process samples\nrna_singlesample · prot_singlesample · concat\nrna_multisample · prot_multisample\n→ QC · filter · norm · HVF · PCA"]:::process
-    integ["Integration\nharmony_leiden · scvi_leiden · scanorama_leiden\nbbknn_leiden · totalvi_leiden\n→ batch correction · Leiden clustering · UMAP"]:::integ
-  end
+  map["<b>1. Demultiplexing &amp; mapping</b><br>demux (BCL to FASTQ)<br>cellranger_multi<br>bd_rhapsody<br>star_align"]:::map
+  ingest["<b>2. Ingestion &amp; conversion</b><br>from_cellranger_multi_to_h5mu<br>from_xenium_to_h5mu<br>to MuData (H5MU) per sample"]:::ingest
+  process["<b>3. QC &amp; preprocessing</b><br>filter_with_counts<br>cellbender_remove_background<br>clr / normalize / HVF<br>pca"]:::process
+  integ["<b>4. Integration &amp; clustering</b><br>harmony_leiden<br>scvi_leiden<br>totalvi_leiden<br>bbknn<br>to Leiden clusters + UMAP"]:::integ
+  down["<b>5. Downstream analysis</b><br>scanvi_scarches<br>celltypist<br>singler<br>lianapy<br>deseq2"]:::down
+  qcreport["<b>QC reporting</b><br>generate_qc_report"]:::qc
+  spatial["<b>Spatial</b><br>from_xenium_to_h5mu<br>spatial_neighborhood_graph<br>spatial_autocorr"]:::spatial
 
-  downstream["Downstream & annotation\ncelltypist · singler · popv · harmony_knn\nDE · RNA velocity · LIANA · BEYOND\n(optional · separate · mostly outside OP)"]:::down
-
-  wetlab --> bcl
-  bcl --> demux --> fastq
-  wetlab -.->|"FASTQ or\ncount tables"| fastq
-  fastq --> ingest
-  ingest --> process
-  process --> integ
-  integ --> downstream
+  wetlab --> map --> ingest --> process --> integ --> down
+  fastq -.-> ingest
+  process -.-> qcreport
+  ingest -.-> spatial
+  spatial -.-> down
 ```
 
 ## Demultiplexing
 
-If your sequencing provider delivers raw Illumina BCL files, convert them to per-sample FASTQ files before running OpenPipelines. This step sits **outside the core workflow** and is run independently.
+If your sequencing provider delivers raw Illumina BCL files, convert them to per-sample FASTQ files at the start of the pipeline. This step is **often already performed upstream** by your sequencing provider, but is also available within OpenPipelines.
 
 The [`ingestion/demux`](../components/workflows/ingestion/demux.qmd) workflow supports three demultiplexers selected via `--demultiplexer`:
 
