@@ -3,3 +3,159 @@ title: Downstream
 description: Celltyping and cell-cell communication
 order: 40
 ---
+
+Downstream analysis turns the integrated, clustered dataset from [processing](processing.qmd) into biological findings: what cell types are present, how they differ across conditions, how they communicate, and how they change over developmental or disease trajectories. See the [Architecture](../fundamentals/architecture.qmd) for the full pipeline overview.
+
+:::{.callout-note}
+The analyses on this page are **not part of the core OpenPipelines processing pipeline**. They are optional next steps that depend on the biological question being asked.
+
+- **OP workflow wrappers** — OpenPipelines provides ready-to-run workflows for some analyses: `pseudobulk_deseq2` (wraps DESeq2), `lianapy` (wraps LIANA), `velocyto` and `scvelo` (RNA velocity). These call the underlying tools through Nextflow and produce H5MU output.
+- **External tools** — The BEYOND methodology has no OP workflow wrapper; it consumes the annotated H5MU directly using its own Python package.
+- **Custom analysis** — You are free to load the output H5MU into any analysis environment (Scanpy, Seurat, or custom scripts) for analyses not covered here.
+:::
+
+## Cell type annotation
+
+After integration and clustering, each cluster is a group of cells with similar expression profiles — but the clusters are just numbers. Annotation assigns a biological cell type label to each cluster or individual cell.
+
+There are two main strategies:
+
+**Marker-based (manual)**: Inspect the expression of known marker genes (e.g. *CD3D* for T cells, *CD19* for B cells, *GFAP* for astrocytes) per cluster and assign labels manually. This gives full control but requires domain expertise and is not scalable.
+
+**Reference-based (automated)**: Transfer labels from a previously annotated reference dataset. OpenPipelines supports several automated methods:
+
+| Method | Component / Workflow | Notes |
+|---|---|---|
+| CellTypist | `annotation/celltypist` | Logistic regression; large library of pretrained immune cell models |
+| SingleR | `annotate/singler` | Correlation-based; uses Bioconductor reference datasets |
+| PopV | `annotate/popv` | Consensus across multiple methods; robust for diverse atlases |
+| scANVI | `annotation/scanvi_scarches` | Variational autoencoder; preserves query-specific biology |
+| KNN transfer | `annotation/harmony_knn`, `annotation/scvi_knn` | Direct label transfer from reference embedding |
+
+### Running CellTypist
+
+CellTypist provides pretrained models for many immune and non-immune tissues. If you do not have your own reference:
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -main-script target/nextflow/workflows/annotation/celltypist/main.nf \
+  -revision 4.0.3 -latest -profile docker \
+  --id cohort_01 \
+  --input cohort_01_integrated.h5mu \
+  --model "Immune_All_Low.pkl" \
+  --output cohort_01_annotated.h5mu \
+  --publish_dir results/
+```
+
+Available models are listed at [celltypist.org](https://www.celltypist.org/models). For brain or non-immune data, the `Human_AdultAged_Hippocampus.pkl` or similar tissue-specific models are available.
+
+### Label transfer from a custom reference
+
+If you have an annotated reference atlas, transfer its labels to your query:
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -main-script target/nextflow/workflows/annotation/harmony_knn/main.nf \
+  -revision 4.0.3 -latest -profile docker \
+  --id query \
+  --input query_integrated.h5mu \
+  --reference reference_atlas.h5mu \
+  --reference_obs_targets "cell_type" \
+  --output query_annotated.h5mu \
+  --publish_dir results/
+```
+
+### Querying public atlases
+
+OpenPipelines can fetch cells directly from the CZ CELLxGENE Census to use as a reference:
+
+```bash
+viash run src/query/cellxgene_census/config.vsh.yaml -- \
+  --tissue "brain" \
+  --cell_type "neuron" \
+  --output census_neurons.h5mu
+```
+
+## Differential expression
+
+Differential expression (DE) identifies genes that are expressed at different levels across conditions (e.g. disease vs. control, treated vs. untreated) within a cell type.
+
+**Why pseudobulk?** A naive approach of treating each cell as an independent observation inflates the sample size (a dataset with 10 donors × 5,000 cells pretends to have 50,000 replicates). This inflated n produces false positives. The **pseudobulk** approach correctly treats biological replicates as the unit of analysis: cells are summed per donor per cell type, producing a count matrix with one row per donor — and standard bulk RNA-seq statistics (DESeq2) are applied to these aggregated counts.
+
+The `pseudobulk_deseq2` workflow runs both steps:
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -main-script target/nextflow/workflows/de/pseudobulk_deseq2/main.nf \
+  -revision 4.0.3 -latest -profile docker \
+  --id de_ExN \
+  --input cohort_01_annotated.h5mu \
+  --obs_cell_type "cell_type" \
+  --obs_sample_id "sample_id" \
+  --obs_group "condition" \
+  --reference_group "control" \
+  --output de_results.h5mu \
+  --publish_dir results/
+```
+
+Results are stored in `.uns` of the output H5MU, one entry per cell type containing log fold changes, p-values, and adjusted p-values.
+
+:::{.callout-note}
+You need at least 3–4 biological replicates (donors/samples) per group for DESeq2 to produce reliable estimates. Single-sample or two-sample DE should be treated with caution.
+:::
+
+## RNA velocity
+
+RNA velocity estimates the *future* transcriptional state of each cell by measuring the ratio of unspliced (nascent, pre-mRNA) to spliced (mature mRNA) counts. A high unspliced/spliced ratio for a gene suggests it is being actively transcribed, giving the cell a "velocity" in gene expression space that points toward its likely future state.
+
+This is useful for studying:
+- Differentiation trajectories (stem cells → mature cell types)
+- Cell cycle progression
+- Response to stimuli over time
+
+The OpenPipelines velocity workflow runs in two steps:
+
+```bash
+# Step 1: extract spliced/unspliced counts from aligned BAM files
+viash run src/velocity/velocyto/config.vsh.yaml -- \
+  --input aligned.bam \
+  --transcriptome annotation.gtf \
+  --output velocity_counts.h5mu
+
+# Step 2: compute velocity with scVelo and project onto UMAP
+viash run src/velocity/scvelo/config.vsh.yaml -- \
+  --input velocity_counts.h5mu \
+  --output velocity_output.h5mu
+```
+
+## Cell-cell communication
+
+Cells communicate via ligand-receptor pairs: one cell secretes a ligand (e.g. a cytokine) and a neighbouring cell expresses the matching receptor. Inferring this communication network from expression data reveals how cell types coordinate in tissue.
+
+The `interpret/lianapy` component uses [LIANA](https://liana-py.readthedocs.io/) to score ligand-receptor interactions across all cell type pairs:
+
+```bash
+viash run src/interpret/lianapy/config.vsh.yaml -- \
+  --input cohort_01_annotated.h5mu \
+  --obs_cell_type "cell_type" \
+  --methods "natmi,connectome,logfc" \
+  --output lianapy_output.h5mu
+```
+
+LIANA aggregates results from multiple interaction databases and scoring methods, storing ranked ligand-receptor pairs in `.uns["liana_res"]`.
+
+## Population-level disease analysis (BEYOND)
+
+For disease atlas projects with multiple donors, the [BEYOND methodology](https://github.com/naomihabiblab/BEYOND_DLPFC) integrates the annotated atlas into a population-level analysis framework. OpenPipelines provides components for the BEYOND workflow:
+
+- `cluster/cellular_communities` — groups cell types into co-varying communities across donors
+- `metadata/calculate_proportions` — computes per-donor cell type proportions
+- `trajectory/pseudotime_dynamics` — fits pseudotime dynamics across donor states
+- `stats/trait_associations` — associates cellular proportions with clinical traits
+- `interpret/pathway_enrichment` — gene set enrichment on community-associated genes
+
+These components are designed to run after cell type annotation, on a multi-donor annotated atlas.
+
+---
+
+See the [Components reference](../components/) for the full argument list of each downstream component and workflow.

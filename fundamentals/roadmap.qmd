@@ -97,7 +97,7 @@ flowchart TB
       scanorama:::done
       scvi:::done
       totalvi:::done
-      scgpt_integration:::wip
+      scgpt_integration:::todo
     end
     intmeth:::info
   end
@@ -106,9 +106,9 @@ flowchart TB
   subgraph celltype_annotation
     direction TB
     integration_method2[integration_method]:::done
-    celltypist:::wip
+    celltypist:::done
     scanvi:::wip
-    scgpt_annotation:::wip
+    scgpt_annotation:::todo
     onclass:::todo
     svm:::todo
     randomforest:::todo

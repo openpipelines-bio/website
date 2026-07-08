@@ -1,5 +1,197 @@
 ---
-title: Processing
-description: From count tables to integrated data
+title: Processing & Integration
+description: From count tables to a batch-corrected, clustered dataset
 order: 30
 ---
+
+Processing takes the per-sample H5MU files from [ingestion](ingestion.qmd) and produces a clean, batch-corrected dataset with Leiden clusters and a UMAP — ready for [cell type annotation and downstream analysis](downstream.qmd). See the [Architecture](../fundamentals/architecture.qmd) for the full pipeline overview.
+
+The recommended entry point is **`process_samples`**, which wraps per-sample QC, sample concatenation, normalization, and dimensionality reduction into a single command. For large cohorts, **`process_batches`** adds a batching layer that processes groups of samples in parallel before merging. The sections below explain what each step does and how to configure it. Integration is a separate workflow run after `process_samples`.
+
+## Single-sample QC and filtering
+
+The count matrix from ingestion contains not only real cells but also:
+
+- **Empty droplets** — barcodes that captured ambient RNA rather than a real cell (very low counts).
+- **Dying or damaged cells** — real cells with low total counts and a high fraction of mitochondrial RNA. Mitochondrial genes are transcribed in the mitochondria and their RNA leaks into the cytoplasm when the cell membrane is damaged, inflating the mitochondrial fraction relative to nuclear RNA.
+- **Doublets** — two cells captured together and sequenced as one, appearing as a cell with roughly double the expected count depth.
+
+The `rna_singlesample` workflow applies per-sample QC filters to remove these:
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -main-script target/nextflow/workflows/rna/rna_singlesample/main.nf \
+  -revision 4.0.3 -latest -profile docker \
+  --id sample_A \
+  --input sample_A.h5mu \
+  --output sample_A_filtered.h5mu \
+  --min_counts 500 \
+  --max_counts 50000 \
+  --min_genes_per_cell 200 \
+  --var_name_mitochondrial_genes "mitochondrial" \
+  --max_fraction_mito 0.2 \
+  --publish_dir results/
+```
+
+:::{.callout-tip}
+QC thresholds are dataset-specific. Inspect the count distribution (`total_counts`, `n_genes_by_counts`, `pct_counts_mt`) before choosing cutoffs. A common first pass is to plot these as violin plots or scatter plots and apply thresholds at natural breakpoints.
+:::
+
+For CITE-seq data (RNA + ADT), run `prot_singlesample` alongside `rna_singlesample` to apply CLR (Centered Log-Ratio) normalization to the ADT (`prot`) modality.
+
+Process all samples in parallel with a parameter list:
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -main-script target/nextflow/workflows/rna/rna_singlesample/main.nf \
+  -revision 4.0.3 -latest -profile docker \
+  --param_list samples.csv \
+  --min_counts 500 \
+  --max_counts 50000 \
+  --min_genes_per_cell 200 \
+  --publish_dir results/
+```
+
+## Multi-sample normalization and dimensionality reduction
+
+After filtering, samples are concatenated and normalized together. The `rna_multisample` workflow performs:
+
+1. **Concatenation** — all per-sample H5MU files are joined into one object.
+2. **Normalization** — each cell is scaled to a fixed total count (e.g. 10,000), making cells comparable regardless of sequencing depth. A log1p transformation is then applied to stabilize variance (raw counts follow a negative binomial distribution where variance grows with the mean).
+3. **Highly variable feature (HVF) selection** — most genes do not vary meaningfully across cells. Focusing on the 2,000–3,000 most variable genes retains biological signal while reducing noise and computation time.
+4. **PCA** — Principal Component Analysis compresses the high-dimensional gene expression space into a smaller set of components capturing the major axes of variation. Subsequent steps work in this reduced space.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -main-script target/nextflow/workflows/rna/rna_multisample/main.nf \
+  -revision 4.0.3 -latest -profile docker \
+  --id cohort_01 \
+  --input "results/sample_*_filtered.h5mu" \
+  --output cohort_01_multisample.h5mu \
+  --publish_dir results/
+```
+
+### Running the full pipeline in one command
+
+`process_samples` wraps `rna_singlesample`, `prot_singlesample`, concatenation, and `rna_multisample` into a single workflow, removing the need to chain steps manually:
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -main-script target/nextflow/workflows/multiomics/process_samples/main.nf \
+  -revision 4.0.3 -latest -profile docker \
+  --param_list samples.csv \
+  --publish_dir results/
+```
+
+For large cohorts, `process_batches` splits samples into groups, processes each group through multisample normalization in parallel, then merges results — reducing peak memory usage. Use `process_batches` directly when you already have per-sample filtered files and want to run the multisample steps at scale. See [Parameter lists](parameter_lists.qmd) for the `samples.csv` format.
+
+---
+
+:::{.callout-important}
+## Integration is a separate workflow
+
+The steps below describe a **separate Nextflow workflow** that takes the `process_samples` output as input. Integration is not part of `process_samples` — it must be run independently once per cohort.
+:::
+
+## Integration and batch correction
+
+Samples from different donors, sequencing runs, or library preparations will cluster by technical origin rather than biology if not corrected. **Batch correction** aligns the cell type clusters across batches without erasing real biological variation.
+
+### The dimensionality reduction chain
+
+Integration workflows run a fixed sequence of steps on top of the PCA produced by `process_samples`:
+
+1. **Batch correction** — adjusts the PCA embedding so that cells from different batches with the same biological identity overlap. Harmony operates directly in PCA space; scVI and totalVI learn a corrected latent space using a variational autoencoder.
+2. **Neighbor graph** — constructs a k-nearest-neighbor (kNN) graph in the corrected embedding space. Each cell is connected to its most similar neighbours. This graph is the basis for both clustering and UMAP.
+3. **Leiden clustering** — applies community detection to the neighbor graph. Cells that are densely connected form a cluster. The `--leiden_resolution` parameter controls granularity: higher values produce more, smaller clusters.
+4. **UMAP** — projects the neighbor graph into 2D for visualization. UMAP preserves local neighbourhood structure, so nearby cells in the plot are genuinely similar, but distances between clusters are not quantitatively meaningful.
+
+The corrected embedding (`obsm["X_pca_integrated"]`) is what downstream tools like label transfer and trajectory analysis use — not the UMAP coordinates.
+
+OpenPipelines provides separate integration workflows — one per method — each running this full chain:
+
+| Workflow | Method | When to use |
+|---|---|---|
+| `integration/harmony_leiden` | Harmony | Fast, good default for most datasets |
+| `integration/scvi_leiden` | scVI | Deep learning; handles complex batch structures, large datasets |
+| `integration/scanorama_leiden` | Scanorama | Datasets with partial cell type overlap across batches |
+| `integration/bbknn_leiden` | BBKNN | Batch-balanced neighbor graph; no corrected embedding |
+| `integration/totalvi_leiden` | totalVI | Multiomics (RNA + ADT / CITE-seq); corrects both modalities jointly |
+
+Example using Harmony (good starting point):
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -main-script target/nextflow/workflows/integration/harmony_leiden/main.nf \
+  -revision 4.0.3 -latest -profile docker \
+  --id cohort_01 \
+  --input cohort_01_multisample.h5mu \
+  --obs_covariates "sample_id" \
+  --leiden_resolution 1.0 \
+  --output cohort_01_integrated.h5mu \
+  --publish_dir results/
+```
+
+:::{.callout-note}
+`--obs_covariates` must match an existing `.obs` column that identifies the technical source of variation — typically the sample ID, batch, or donor. For multi-donor studies, using donor ID as the covariate is common.
+:::
+
+Example using scVI for a large or complex dataset:
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -main-script target/nextflow/workflows/integration/scvi_leiden/main.nf \
+  -revision 4.0.3 -latest -profile docker \
+  --id cohort_01 \
+  --input cohort_01_multisample.h5mu \
+  --obs_batch "sample_id" \
+  --leiden_resolution 1.0 \
+  --output cohort_01_integrated.h5mu \
+  --publish_dir results/
+```
+
+### Choosing an integration method
+
+There is no universally best method. A practical guide:
+
+- Start with **Harmony** — it is fast, interpretable, and works well for most datasets.
+- Use **scVI** when you have many samples (>20), strong batch effects, or need a probabilistic latent space for downstream analysis.
+- Use **totalVI** when you have matched RNA + ADT (CITE-seq) and want to correct both modalities jointly.
+- Use **Scanorama** when batches have different cell type compositions (e.g. different tissues).
+- **BBKNN** modifies only the neighbor graph and does not produce a corrected embedding — it is lighter but less flexible for downstream uses.
+
+## Using a parameters file
+
+For reproducibility, store all parameters in YAML:
+
+```yaml
+# params.yaml
+id: cohort_01
+input: cohort_01_multisample.h5mu
+output: cohort_01_integrated.h5mu
+obs_covariates: "sample_id"
+leiden_resolution: 1.0
+```
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -main-script target/nextflow/workflows/integration/harmony_leiden/main.nf \
+  -revision 4.0.3 -latest -profile docker \
+  -params-file params.yaml \
+  --publish_dir results/
+```
+
+## Output
+
+The integrated H5MU contains:
+
+| Slot | Content |
+|---|---|
+| `.obsm["X_pca_integrated"]` | Batch-corrected cell embedding |
+| `.obs["leiden"]` | Leiden cluster labels |
+| `.obsm["X_umap"]` | UMAP coordinates for visualization |
+| `.obsp["distances"]` / `.obsp["connectivities"]` | Neighbor graph |
+
+Clusters are numbered — they have no biological meaning yet. The next step, [cell type annotation](downstream.qmd), assigns biological labels.
+
+See the [Components reference](../components/) for the full argument list of each workflow.

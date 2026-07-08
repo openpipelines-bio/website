@@ -4,7 +4,7 @@ description: Setting up infrastructure
 order: 0
 ---
 
-Depending on whether you plan to run the OpenPipelines workflows locally or in the cloud
+OpenPipelines workflows run on Nextflow and Docker. This page covers what you need to install depending on whether you plan to run workflows locally or in the cloud.
 
 ## Starting workflows locally
 
@@ -54,6 +54,6 @@ nextflow run hello -with-docker
 
 
 
-## Using Nextflow Tower
+## Using Seqera Platform
 
-Nextflow Tower is a web-based user interface for running and monitoring Nextflow pipelines. If you are planning on using Nextflow Tower, a [compute environment](https://docs.seqera.io/platform/23.3.0/compute-envs/overview) will need to be set up.
+Seqera Platform, previously known as Nextflow Tower, is a web-based user interface for running and monitoring Nextflow pipelines. If you are planning on using Seqera Platform, a [compute environment](https://docs.seqera.io/platform/23.3.0/compute-envs/overview) will need to be set up.

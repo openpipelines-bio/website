@@ -13,14 +13,14 @@ The OpenPipelines code is hosted on GitHub. To start working on OpenPipelines, y
 ```bash
 git clone https://github.com/<YOUR USERNAME>/openpipeline.git
 cd openpipeline
-git remote add upstream https://github.com/openpipeline-bio/openpipeline.git
+git remote add upstream https://github.com/openpipelines-bio/openpipeline.git
 ```
 
 # SSH
 ```bash
 git clone git@github.com:<YOUR USERNAME>/openpipeline.git
 cd openpipeline
-git remote add upstream https://github.com/openpipeline-bio/openpipeline.git
+git remote add upstream https://github.com/openpipelines-bio/openpipeline.git
 ```
 
 :::

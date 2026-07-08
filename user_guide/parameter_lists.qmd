@@ -4,7 +4,7 @@ description: Passing multiple inputs to a workflow
 order: 15
 ---
 
-Using the [**Viash VDSL3 Nextflow platform**](https://viash.io/guide/nextflow_vdsl3/), an optional `--param_list` argument can be passed to OpenPipelines workflows. The `--param_list` argument enables passing multiple inputs to a workflow, resulting in a multi-event nextflow channel. 
+An optional `--param_list` argument can be passed to OpenPipelines workflows. The `--param_list` argument enables passing multiple inputs to a workflow, resulting in a multi-event nextflow channel. 
 
 # Event-specific and global parameters
 
@@ -35,8 +35,7 @@ will result in the following events being processed:
   * `id`: `foo`, `input`: `foo.txt`, `event_param`: `lorem`, `global_param`: `baz`
   * `id`: `bar`, `input`: `bar.txt`, `event_param`: `ipsum`, `global_param`: `baz`
 
-Note that event-sepcific parameters defined in the `param_list` will always overwrite global parameters. For example, 
-running
+Note that event-specific parameters defined in the `param_list` will always overwrite global parameters. For example, running
 
 ```bash
 nextflow run ... --param_list param_list.yaml --global_param baz
@@ -48,6 +47,7 @@ with the following `param_list.yaml`:
 $cat param_list.yaml
 - id: foo
   input: foo.txt
+  global_param: lorem
 - id: bar
   input: bar.txt
   global_param: ipsum
@@ -55,8 +55,8 @@ $cat param_list.yaml
 
 Will result in the following events being processed:
 
-* `id`: `foo`, `input`: `foo.txt`, `event_param`: `lorem`
-* `id`: `bar`, `input`: `bar.txt`, `event_param`: `ipsum`
+* `id`: `foo`, `input`: `foo.txt`, `global_param`: `lorem`
+* `id`: `bar`, `input`: `bar.txt`, `global_param`: `ipsum`
 
 # Other `param_list` file types
 
@@ -101,7 +101,7 @@ nextflow run ... --param_list param_list.csv
 
 # Passing `param_list` to Nextflow's `params-file`
 
-The `param_list` can also be passed via Nextflow's `params-file`, such that both the event-specific and global parameters are passed via a file. The following example shows how to use a `params-file` yamle file containing the `param_list`.
+The `param_list` can also be passed via Nextflow's `params-file`, such that both the event-specific and global parameters are passed via a file. The following example shows how to use a `params-file` yaml file containing the `param_list`.
 
 ```bash
 $ cat params-file.yaml
