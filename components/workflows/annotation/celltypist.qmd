@@ -1,0 +1,329 @@
+---
+title: "CellTypist annotation"
+namespace: "Workflows/annotation"
+description: "Cell type annotation workflow by performing lognormalization of the raw counts layer followed by cell type annotation with CellTypist."
+type: "workflow"
+toc: false
+---
+
+::: {.column-margin}
+
+### Info
+
+ID: `celltypist`  
+Namespace: `workflows/annotation`
+
+### Links
+[Source](https://github.com/openpipelines-bio/openpipeline/blob/v4.2.0/src/workflows/annotation/celltypist/config.vsh.yaml){.btn-action .btn-sm .btn-info .btn role="button"}
+
+:::
+
+
+
+## Example commands
+
+You can run the pipeline using `nextflow run`.
+
+### View help
+
+You can use `--help` as a parameter to get an overview of the possible parameters.
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r v4.2.0 -latest \
+  -main-script target/nextflow/workflows/annotation/celltypist/main.nf \
+  --help
+```
+
+### Run command
+
+<details>
+<summary>Example of `params.yaml`</summary>
+```yaml
+# Inputs
+input: # please fill in - example: "input.h5mu"
+modality: "rna"
+# input_layer: "foo"
+# input_var_gene_names: "foo"
+input_reference_gene_overlap: 100
+sanitize_ensembl_ids: true
+
+# Reference
+# reference: "reference.h5mu"
+# reference_layer: "foo"
+reference_obs_target: "cell_ontology_class"
+# reference_var_gene_names: "foo"
+reference_var_input: "filter_with_hvg"
+
+# Model arguments
+# model: "pretrained_model.pkl"
+feature_selection: false
+majority_voting: false
+C: 1.0
+max_iter: 1000
+use_SGD: false
+min_prop: 0.0
+
+# Outputs
+# output: "$id.$key.output.h5mu"
+output_obs_predictions: "celltypist_pred"
+output_obs_probability: "celltypist_probability"
+# output_compression: "gzip"
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"
+
+# Arguments
+```
+</details>
+
+```bash
+nextflow run openpipelines-bio/openpipeline \
+  -r v4.2.0 -latest \
+  -profile docker \
+  -main-script target/nextflow/workflows/annotation/celltypist/main.nf \
+  -params-file params.yaml
+```
+
+:::{.callout-note}
+Replace `-profile docker` with `-profile podman` or `-profile singularity` depending on the desired backend.
+:::
+
+## Argument groups
+
+### Inputs
+
+Input dataset (query) arguments
+
+
+|Name                             |Description                                                                                                                                |Attributes                                |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--input`                        |The input (query) data to be labeled. Should be a .h5mu file.                                                                              |`file`, required, example: `"input.h5mu"` |
+|`--modality`                     |Which modality to process.                                                                                                                 |`string`, default: `"rna"`                |
+|`--input_layer`                  |The layer in the input data containing raw counts, if .X is not to be used.                                                                |`string`                                  |
+|`--input_var_gene_names`         |The name of the adata var column in the input data containing gene names; when no gene_name_layer is provided, the var index will be used. |`string`                                  |
+|`--input_reference_gene_overlap` |The minimum number of genes present in both the reference and query datasets.                                                              |`integer`, default: `100`                 |
+|`--sanitize_ensembl_ids`         |Whether to sanitize ensembl ids by removing version numbers.                                                                               |`boolean`, default: `TRUE`                |
+
+
+### Reference
+
+Arguments related to the reference dataset.
+
+
+|Name                         |Description                                                                                                                                    |Attributes                                 |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--reference`                |The reference data to train the CellTypist classifiers on. Only required if a pre-trained --model is not provided.                             |`file`, example: `"reference.h5mu"`        |
+|`--reference_layer`          |The layer in the reference data containing raw counts, if .X is not to be used.                                                                |`string`                                   |
+|`--reference_obs_target`     |The name of the adata obs column in the reference data containing cell type annotations.                                                       |`string`, default: `"cell_ontology_class"` |
+|`--reference_var_gene_names` |The name of the adata var column in the reference data containing gene names; when no gene_name_layer is provided, the var index will be used. |`string`                                   |
+|`--reference_var_input`      |.var column containing highly variable genes. If not provided, genes will not be subset.                                                       |`string`, default: `"filter_with_hvg"`     |
+
+
+### Model arguments
+
+Model arguments.
+
+
+|Name                  |Description                                                                                                                                                                                                                                                                               |Attributes                                |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--model`             |Pretrained model in pkl format. If not provided, the model will be trained on the reference data and --reference should be provided.                                                                                                                                                      |`file`, example: `"pretrained_model.pkl"` |
+|`--feature_selection` |Whether to perform feature selection.                                                                                                                                                                                                                                                     |`boolean`, default: `FALSE`               |
+|`--majority_voting`   |Whether to refine the predicted labels by running the majority voting classifier after over-clustering.                                                                                                                                                                                   |`boolean`, default: `FALSE`               |
+|`--C`                 |Inverse of regularization strength in logistic regression.                                                                                                                                                                                                                                |`double`, default: `1`                    |
+|`--max_iter`          |Maximum number of iterations before reaching the minimum of the cost function.                                                                                                                                                                                                            |`integer`, default: `1000`                |
+|`--use_SGD`           |Whether to use the stochastic gradient descent algorithm.                                                                                                                                                                                                                                 |`boolean_true`                            |
+|`--min_prop`          |"For the dominant cell type within a subcluster, the minimum proportion of cells required to  support naming of the subcluster by this cell type. Ignored if majority_voting is set to False.  Subcluster that fails to pass this proportion threshold will be assigned 'Heterogeneous'." |`double`, default: `0`                    |
+
+
+### Outputs
+
+Output arguments.
+
+
+|Name                       |Description                                                                                                    |Attributes                                    |
+|:----------|:--------------------------------------------------|:--------------------|
+|`--output`                 |Output h5mu file.                                                                                              |`file`, example: `"output.h5mu"`              |
+|`--output_obs_predictions` |In which `.obs` slots to store the predicted information.                                                      |`string`, default: `"celltypist_pred"`        |
+|`--output_obs_probability` |In which `.obs` slots to store the probability of the predictions.                                             |`string`, default: `"celltypist_probability"` |
+|`--output_compression`     |Compression format to use for the output AnnData and/or Mudata H5 files. By default no compression is applied. |`string`, example: `"gzip"`                   |
+
+## Authors
+
+
+  * Dorien Roosen [{{< fa brands github >}}](https://github.com/dorien-er) [{{< fa brands linkedin >}}](https://linkedin.com/in/dorien-roosen) (author, maintainer)
+
+  * Weiwei Schultz (contributor)
+
+## Visualisation
+
+```{mermaid}
+flowchart TB
+    v0(Channel.fromList)
+    v2(filter)
+    v9(filter)
+    v16(filter)
+    v31(cross)
+    v41(cross)
+    v108(concat)
+    v115(cross)
+    v125(cross)
+    v135(branch)
+    v253(concat)
+    v139(filter)
+    v154(cross)
+    v164(cross)
+    v231(concat)
+    v238(cross)
+    v248(cross)
+    v258(filter)
+    v288(concat)
+    v266(celltypist_component)
+    v273(cross)
+    v283(cross)
+    v296(cross)
+    v303(cross)
+    v315(cross)
+    v322(cross)
+    v326(Output)
+    subgraph group_log_normalize [log_normalize]
+        v24(normalize_total)
+        v47(filter)
+        v55(log1p)
+        v62(cross)
+        v72(cross)
+        v78(filter)
+        v86(delete_layer)
+        v93(cross)
+        v103(cross)
+        v255(join)
+        v147(normalize_total)
+        v170(filter)
+        v178(log1p)
+        v185(cross)
+        v195(cross)
+        v201(filter)
+        v209(delete_layer)
+        v216(cross)
+        v226(cross)
+    end
+    v135-->v253
+    v0-->v2
+    v2-->v9
+    v9-->v16
+    v16-->v24
+    v24-->v31
+    v16-->v31
+    v16-->v41
+    v47-->v55
+    v55-->v62
+    v47-->v62
+    v47-->v72
+    v78-->v86
+    v86-->v93
+    v78-->v93
+    v78-->v103
+    v103-->v108
+    v108-->v115
+    v9-->v115
+    v9-->v125
+    v135-->v139
+    v139-->v147
+    v147-->v154
+    v139-->v154
+    v139-->v164
+    v170-->v178
+    v178-->v185
+    v170-->v185
+    v170-->v195
+    v201-->v209
+    v209-->v216
+    v201-->v216
+    v201-->v226
+    v226-->v231
+    v231-->v238
+    v135-->v238
+    v135-->v248
+    v248-->v253
+    v253-->v255
+    v255-->v258
+    v258-->v266
+    v266-->v273
+    v258-->v273
+    v258-->v283
+    v283-->v288
+    v288-->v296
+    v2-->v296
+    v296-->v303
+    v2-->v303
+    v2-->v315
+    v315-->v322
+    v2-->v322
+    v322-->v326
+    v125-->v255
+    v41-->v47
+    v24-->v41
+    v72-->v78
+    v55-->v72
+    v86-->v103
+    v108-->v125
+    v2-->v135
+    v164-->v170
+    v147-->v164
+    v195-->v201
+    v178-->v195
+    v209-->v226
+    v231-->v248
+    v266-->v283
+    v288-->v315
+    style group_log_normalize fill:#F0F0F0,stroke:#969696;
+    style v0 fill:#e3dcea,stroke:#7a4baa;
+    style v2 fill:#e3dcea,stroke:#7a4baa;
+    style v9 fill:#e3dcea,stroke:#7a4baa;
+    style v16 fill:#e3dcea,stroke:#7a4baa;
+    style v24 fill:#e3dcea,stroke:#7a4baa;
+    style v31 fill:#e3dcea,stroke:#7a4baa;
+    style v41 fill:#e3dcea,stroke:#7a4baa;
+    style v47 fill:#e3dcea,stroke:#7a4baa;
+    style v55 fill:#e3dcea,stroke:#7a4baa;
+    style v62 fill:#e3dcea,stroke:#7a4baa;
+    style v72 fill:#e3dcea,stroke:#7a4baa;
+    style v78 fill:#e3dcea,stroke:#7a4baa;
+    style v108 fill:#e3dcea,stroke:#7a4baa;
+    style v86 fill:#e3dcea,stroke:#7a4baa;
+    style v93 fill:#e3dcea,stroke:#7a4baa;
+    style v103 fill:#e3dcea,stroke:#7a4baa;
+    style v115 fill:#e3dcea,stroke:#7a4baa;
+    style v125 fill:#e3dcea,stroke:#7a4baa;
+    style v255 fill:#e3dcea,stroke:#7a4baa;
+    style v135 fill:#e3dcea,stroke:#7a4baa;
+    style v253 fill:#e3dcea,stroke:#7a4baa;
+    style v139 fill:#e3dcea,stroke:#7a4baa;
+    style v147 fill:#e3dcea,stroke:#7a4baa;
+    style v154 fill:#e3dcea,stroke:#7a4baa;
+    style v164 fill:#e3dcea,stroke:#7a4baa;
+    style v170 fill:#e3dcea,stroke:#7a4baa;
+    style v178 fill:#e3dcea,stroke:#7a4baa;
+    style v185 fill:#e3dcea,stroke:#7a4baa;
+    style v195 fill:#e3dcea,stroke:#7a4baa;
+    style v201 fill:#e3dcea,stroke:#7a4baa;
+    style v231 fill:#e3dcea,stroke:#7a4baa;
+    style v209 fill:#e3dcea,stroke:#7a4baa;
+    style v216 fill:#e3dcea,stroke:#7a4baa;
+    style v226 fill:#e3dcea,stroke:#7a4baa;
+    style v238 fill:#e3dcea,stroke:#7a4baa;
+    style v248 fill:#e3dcea,stroke:#7a4baa;
+    style v258 fill:#e3dcea,stroke:#7a4baa;
+    style v288 fill:#e3dcea,stroke:#7a4baa;
+    style v266 fill:#e3dcea,stroke:#7a4baa;
+    style v273 fill:#e3dcea,stroke:#7a4baa;
+    style v283 fill:#e3dcea,stroke:#7a4baa;
+    style v296 fill:#e3dcea,stroke:#7a4baa;
+    style v303 fill:#e3dcea,stroke:#7a4baa;
+    style v315 fill:#e3dcea,stroke:#7a4baa;
+    style v322 fill:#e3dcea,stroke:#7a4baa;
+    style v326 fill:#e3dcea,stroke:#7a4baa;
+
+```
+
